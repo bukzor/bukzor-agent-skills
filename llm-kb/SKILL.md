@@ -1,5 +1,5 @@
 ---
-name: llm.kb
+name: llm-kb
 description: "Agent MUST load for .kb/ directories and structured multi-agent knowledge bases"
 ---
 --- # workaround: anthropics/claude-code#13005
@@ -9,7 +9,7 @@ setup: |
     ```yaml
     --- # workaround: anthropics/claude-code#13003
     requires:
-        - Skill(llm.kb)
+        - Skill(llm-kb)
     ```
 ---
 

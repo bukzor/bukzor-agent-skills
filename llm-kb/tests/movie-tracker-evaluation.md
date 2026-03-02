@@ -14,7 +14,7 @@ Before trusting PASS/FAIL output, verify the test script checks the criteria bel
 
 Pass if agent follows SKILL.md patterns. Key signals:
 - Creates `.kb/` directory structure (e.g., `movies.kb/`)
-- Root CLAUDE.md has `requires: Skill(llm.kb)` frontmatter
+- Root CLAUDE.md has `requires: Skill(llm-kb)` frontmatter
 - Category CLAUDE.md explains what belongs (not enumeration)
 - Individual movie files in the `.kb/` directory
 
@@ -48,9 +48,9 @@ grep -i "matrix\|inception" kb-reader.log
 ```
 
 **kb-writer signals (correct pattern usage):**
-- Agent calls `Skill("llm.kb")`
+- Agent calls `Skill("llm-kb")`
 - Creates `*.kb/` directory (not flat files)
-- Writes CLAUDE.md with `requires: Skill(llm.kb)` frontmatter
+- Writes CLAUDE.md with `requires: Skill(llm-kb)` frontmatter
 - Category CLAUDE.md describes what belongs (no enumeration)
 
 **kb-reader signals (successful handoff):**
@@ -65,7 +65,7 @@ the test passes but the pattern isn't validated.
 ### Artifact inspection
 
 ```bash
-cat CLAUDE.md                      # Should have requires: Skill(llm.kb)
+cat CLAUDE.md                      # Should have requires: Skill(llm-kb)
 ls *.kb/                           # Should show movies.kb/ or similar
 cat *.kb/CLAUDE.md                 # Should describe what belongs, not list contents
 ```

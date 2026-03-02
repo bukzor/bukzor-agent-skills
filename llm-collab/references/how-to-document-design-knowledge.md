@@ -1,6 +1,6 @@
 ---
 requires:
-  - Skill(llm.kb)
+  - Skill(llm-kb)
 ---
 
 # How to Document Design Knowledge

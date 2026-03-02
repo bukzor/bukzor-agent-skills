@@ -23,8 +23,8 @@ fakehome="$tmp/home"
 setsid sh -c 'sleep 10800; rm -rf "$1"' - "$tmp" &  # 3 hours
 
 # Set up fake home with only the skill definition and credentials
-mkdir -p "$fakehome/.claude/skills/llm.kb"
-cp ~/.claude/skills/llm.kb/SKILL.md "$fakehome/.claude/skills/llm.kb/"
+mkdir -p "$fakehome/.claude/skills/llm-kb"
+cp ~/.claude/skills/llm-kb/SKILL.md "$fakehome/.claude/skills/llm-kb/"
 ln -s ~/.claude/.credentials.json "$fakehome/.claude/"
 
 # Set up working directory
@@ -50,16 +50,16 @@ echo "## kb-writer artifacts:"
 find . -type f -print0 |
   xargs -0 wc
 
-# Validate kb-writer created root CLAUDE.md with requires: ...llm.kb...
+# Validate kb-writer created root CLAUDE.md with requires: ...llm-kb...
 if [[ ! -f CLAUDE.md ]]; then
   echo "## kb-writer validation: ✗ FAIL (no root CLAUDE.md)"
   exit 1
 elif yq --front-matter=extract -o json CLAUDE.md |
-  jq '.requires | select(any(test("llm.kb")) | not) | null | halt_error(1)'
+  jq '.requires | select(any(test("llm-kb")) | not) | null | halt_error(1)'
 then
   echo "## kb-writer validation: ✓ PASS"
 else
-  echo "## kb-writer validation: ✗ FAIL (CLAUDE.md missing requires: ...llm.kb...)"
+  echo "## kb-writer validation: ✗ FAIL (CLAUDE.md missing requires: ...llm-kb...)"
   yq -o json CLAUDE.md
   exit 1
 fi

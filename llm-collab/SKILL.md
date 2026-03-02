@@ -1,6 +1,6 @@
 ---
 name: llm-collab
-description: "Agent MUST load for ADRs, devlogs, and multi-session documentation setup"
+description: "Agent MUST load when dealing with ADRs, devlogs, or multi-session documentation"
 ---
 --- # workaround: anthropics/claude-code#13005
 setup: |
