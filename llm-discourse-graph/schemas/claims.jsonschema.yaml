@@ -27,6 +27,11 @@ properties:
     description: When this was observed or collected, if empirical (ISO 8601)
     type: string
     format: date
+  depends:
+    description: Paths to nodes this claim depends on for context
+    type: array
+    items:
+      type: string
   tags:
     description: Topic tags for cross-referencing
     type: array

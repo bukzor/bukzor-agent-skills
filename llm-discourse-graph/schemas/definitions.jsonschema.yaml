@@ -32,6 +32,11 @@ properties:
     type: array
     items:
       type: string
+  depends:
+    description: Paths to nodes this definition depends on for context
+    type: array
+    items:
+      type: string
   tags:
     description: Topic tags for cross-referencing
     type: array

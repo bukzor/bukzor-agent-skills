@@ -33,6 +33,11 @@ properties:
     type: number
     minimum: 0
     maximum: 1
+  depends:
+    description: Paths to nodes this deduction depends on for context
+    type: array
+    items:
+      type: string
   tags:
     description: Topic tags for cross-referencing
     type: array

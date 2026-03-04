@@ -13,6 +13,16 @@ properties:
     type: array
     items:
       type: string
+  sources:
+    description: Paths to sources where this question was raised
+    type: array
+    items:
+      type: string
+  depends:
+    description: Paths to nodes this question depends on for context
+    type: array
+    items:
+      type: string
   tags:
     description: Topic tags for cross-referencing
     type: array

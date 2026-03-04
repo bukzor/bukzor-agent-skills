@@ -65,11 +65,13 @@ Resolution walks up ancestor scopes until a match is found, up to project root.
 - Hoisting is non-breaking
 - Local files shadow ancestors with the same name
 - Content lives at the narrowest scope containing all its uses
+- Prefer moving a node down over reaching in with explicit paths —
+  upward resolution handles outer references naturally
 
 ## Schemas
 
-Five `$COLLECTION.jsonschema.yaml` files at project root. Apply to all
-collections of that name at any depth. See `schemas/` in this skill directory.
+Five `$COLLECTION.jsonschema.yaml` files, placed alongside the collections
+they govern. See `schemas/` in this skill directory.
 
 ## Relations and metadata
 
@@ -79,14 +81,43 @@ each node. Questions derive their state from field presence: `resolved` means
 answered, `candidate-resolutions` means under investigation, neither means
 new/open. See the schemas for the complete field definitions.
 
+### The core wiring pattern
+
+Questions are answered by claims. Claims are supported by deductions.
+Deductions draw on other claims as premises.
+
+```
+question
+  candidate-resolutions: [claim]
+                           ↑ conclusion
+                         deduction
+                           premises: [claim, claim, ...]
+```
+
+- `candidate-resolutions` points to **claims**, not deductions
+- `conclusion` points to a **claim or deduction**, not a question
+- `depends` expresses "needs context from" without implying support or refutation
+
 ## Creating a discourse graph
 
-1. Create project root with CLAUDE.md declaring this skill
-2. Copy `$COLLECTION.jsonschema.yaml` schemas from `schemas/`
-3. Create collections as needed — start with `questions.kb/`
-4. Add CLAUDE.md to each collection directory
-5. Populate nodes as markdown files with YAML frontmatter
+1. Create a scope directory with CLAUDE.md declaring this skill
+2. Link or copy `$COLLECTION.jsonschema.yaml` schemas from `schemas/`
+3. Create collections as needed — start with `sources.kb/` and `questions.kb/`
+4. Populate nodes as markdown files with YAML frontmatter
+5. Wire questions to claims via `candidate-resolutions`, claims to
+   deductions via `conclusion`/`premises`
 6. Elaborate nodes into sub-scopes when they outgrow a single file
+
+### Decomposition workflow
+
+When extracting a discourse graph from a source document:
+
+1. **Source** — create the provenance node first
+2. **Questions** — identify the inquiries the source addresses
+3. **Claims + Deductions** — interleaved, not separate passes. Each claim
+   is either justified by a deduction or fundamental.
+4. **Wire** — link questions to their candidate-resolutions, add `depends`
+5. **Scope** — identify strictly inner questions and nest them
 
 ## Reading a discourse graph
 
