@@ -84,7 +84,7 @@ Create planning files via: `~/.claude/skills/llm-subtask/bin/llm-subtask-todo "T
 
 ## Integration: todo.md + todo.kb/
 
-Tier 2 (tactical) and Tier 3 (strategic) work together: <https:todo.md> contains both inline tasks and references to planning files in <https:todo.kb/>.
+Tier 2 (tactical) and Tier 3 (strategic) work together: <https:todo.md> is a single prioritized list containing both inline tasks and references to planning files in <https:todo.kb/>. The only permitted section break is `## Later` for deferred work.
 
 **Example pattern:**
 ```markdown
