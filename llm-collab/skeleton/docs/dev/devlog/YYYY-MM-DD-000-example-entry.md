@@ -1,4 +1,4 @@
-# Devlog: YYYY-MM-DD
+# Devlog: YYYY-MM-DD — TITLE
 
 ## Focus
 

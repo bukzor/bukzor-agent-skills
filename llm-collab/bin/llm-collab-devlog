@@ -89,6 +89,7 @@ if (( DRY_RUN )); then
 fi
 
 sed -e "s/YYYY-MM-DD/$DATE/g" \
+    -e "s/TITLE/$TITLE/g" \
     "$SKELETON/docs/dev/devlog/YYYY-MM-DD-000-example-entry.md" > "$FILE"
 
 echo >&2 "✅ Created"
