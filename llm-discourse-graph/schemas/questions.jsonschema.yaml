@@ -1,0 +1,20 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+description: >
+  Open inquiries that structure investigation. The entry point
+  for collaborative knowledge-building.
+type: object
+additionalProperties: false
+properties:
+  resolved:
+    description: Path to the claim that answers this question
+    type: string
+  candidate-resolutions:
+    description: Paths to claims being considered as potential answers
+    type: array
+    items:
+      type: string
+  tags:
+    description: Topic tags for cross-referencing
+    type: array
+    items:
+      type: string

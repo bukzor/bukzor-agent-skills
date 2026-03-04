@@ -1,0 +1,40 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+description: >
+  Structured inference connecting premises to a conclusion. Entailments
+  assert the conclusion follows; contradictions assert it is refuted.
+  The body text is the inferential narrative — why these premises
+  support or undermine the conclusion.
+type: object
+additionalProperties: false
+required:
+  - status
+  - conclusion
+properties:
+  status:
+    description: Epistemic standing of this deduction
+    type: string
+    enum: [asserted, contested, retracted]
+  kind:
+    description: Whether premises support or contradict the conclusion
+    type: string
+    enum: [entailment, contradiction]
+    default: entailment
+  conclusion:
+    description: Path to the claim or deduction these premises entail or contradict
+    type: string
+  premises:
+    description: Paths to claims serving as premises
+    type: array
+    items:
+      type: string
+  likelihood:
+    description: How likely this deduction is to be sound, 0-1 (default 1.0 — sound until told otherwise)
+    default: 1.0
+    type: number
+    minimum: 0
+    maximum: 1
+  tags:
+    description: Topic tags for cross-referencing
+    type: array
+    items:
+      type: string

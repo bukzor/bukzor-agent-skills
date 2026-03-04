@@ -1,0 +1,42 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+description: >
+  Provenance references — papers, reports, datasets, expert testimony.
+  Reusable across multiple evidence items. The body text summarizes
+  the source's relevance and key findings.
+type: object
+additionalProperties: false
+required:
+  - kind
+  - title
+properties:
+  kind:
+    description: Type of source material
+    type: string
+    enum: [paper, report, book, testimony, dataset, authority, article, standard]
+  title:
+    description: Title of the source
+    type: string
+  authors:
+    description: Author(s) of the source
+    type: array
+    items:
+      type: string
+  url:
+    description: URL where the source can be accessed
+    type: string
+    format: uri
+  date-published:
+    description: When the source was published (ISO 8601)
+    type: string
+    format: date
+  likelihood:
+    description: How likely this source is to be reliable, 0-1 (default 1.0 — trusted until told otherwise)
+    default: 1.0
+    type: number
+    minimum: 0
+    maximum: 1
+  tags:
+    description: Topic tags for cross-referencing
+    type: array
+    items:
+      type: string

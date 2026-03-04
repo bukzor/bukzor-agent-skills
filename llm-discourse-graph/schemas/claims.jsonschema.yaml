@@ -1,0 +1,34 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+description: >
+  Propositional assertions — the atomic units of the knowledge graph.
+  Covers both observations and hypotheses. The body text states the
+  claim and any relevant context or caveats.
+type: object
+additionalProperties: false
+required:
+  - status
+properties:
+  status:
+    description: Epistemic standing of this claim
+    type: string
+    enum: [asserted, contested, retracted]
+  likelihood:
+    description: How likely this claim is to be true, 0-1 (default 1.0 — certain until told otherwise)
+    default: 1.0
+    type: number
+    minimum: 0
+    maximum: 1
+  sources:
+    description: Paths to sources providing this claim (for observational/empirical claims)
+    type: array
+    items:
+      type: string
+  date-observed:
+    description: When this was observed or collected, if empirical (ISO 8601)
+    type: string
+    format: date
+  tags:
+    description: Topic tags for cross-referencing
+    type: array
+    items:
+      type: string
