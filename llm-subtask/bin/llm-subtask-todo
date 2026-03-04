@@ -72,7 +72,8 @@ if (( DRY_RUN )); then
   exit 0
 fi
 
-# Copy skeleton template
-cp "$SKELETON/todo.kb/YYYY-MM-DD-000-example-task.md" "$FILE"
+# Copy skeleton template with substitutions
+sed -e "s/Example Task Title/$TITLE/g" -e "s/YYYY-MM-DD/$DATE/g" \
+    "$SKELETON/todo.kb/YYYY-MM-DD-000-example-task.md" > "$FILE"
 
 echo >&2 "✅ Created"
