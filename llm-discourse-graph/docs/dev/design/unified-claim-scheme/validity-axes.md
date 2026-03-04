@@ -7,7 +7,7 @@ Three continuous axes for evaluating claims, collectively called
 
 | Axis | Range | Default | Domain |
 |---|---|---|---|
-| truth | 0–1 | 1 | Ontological — does this match reality? |
+| truth | 0–1 | 1 | Ontological — assessor's best estimate of correspondence to reality |
 | certainty | 0–1 | 1 | Epistemic — how confident? |
 | utility | -1–1 | 1 | Pragmatic — how valuable? |
 
@@ -66,3 +66,15 @@ Three challenge regions:
 - Pollock, rebutting vs undercutting defeaters — unified into correctness
 - Searle, direction of fit — basis for normativity axis
 - Bayesian epistemology — independence of credence and certainty
+
+## Q&A (2026-03-04 lane-mixing review)
+
+### Q: For experiments, do truth/certainty take on exact mathematical meaning?
+
+Truth/certainty are *informed by* statistical methods (p-values, confidence
+intervals) but are not mechanically determined by them. The framework
+stores the assessor's conclusion, not the methodology. A frequentist
+and a Bayesian may arrive at the same truth value via different paths —
+the schema is agnostic to the epistemological framework used. Statistical
+rigor improves the quality of the estimate; it doesn't change what the
+field represents.

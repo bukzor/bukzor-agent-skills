@@ -21,15 +21,40 @@ Former node types collapse into claims with different attribute profiles:
 Node type is emergent from the claim's attributes and graph position, never
 stored explicitly.
 
-### One structural relation: Parentage = Why/How
+### One structural relation: Parentage = Question/Answer
 
-The filesystem tree IS the primary inferential structure:
+Within this framework, parent/child relationships SHALL be considered
+question/answer relationships. The filesystem tree IS the primary
+inferential structure:
 
-- Walk UP the tree → "why does this exist?" (toward abstraction/motivation)
-- Walk DOWN → "how is this realized?" (toward concreteness/implementation)
+- Parent = a question (claim with unresolved referent)
+- Children = candidate answers
 
-Parent-child nesting via `$ITEM.kb/` expresses the primary why/how link.
-`why[]` in frontmatter expresses supplementary (non-primary) support.
+The question type varies by use case:
+
+| Use case | Parent question type | Children are... |
+|---|---|---|
+| Design knowledge | "How do we achieve X?" | Implementation approaches |
+| Forensic analysis | "Why did X happen?" | Hypotheses/causes |
+| Disagreement | "What should we do about X?" | Competing proposals |
+| Definition | "What is X?" | Competing/complementary definitions |
+| Categorization | "What Xs exist?" | Members |
+| Fact-finding | "What is true about X?" | Findings/observations |
+
+Directory names SHOULD spell out the question for disambiguation
+(e.g. `what-is-consciousness.kb/`, `why-did-server-crash.kb/`).
+Self-documenting names repay their verbosity in LLM-collaborative
+workflows where only names are visible (e.g. `ls -RF`, cross-session
+handoff, smaller models).
+
+`$NOUN.kb/` MAY be used as shorthand when the question type is
+obvious from context (implies "What $NOUNs exist?").
+
+The design tower is a restriction of this general scheme where all
+questions are required to be "how?"
+
+Parent-child nesting via `$ITEM.kb/` expresses the primary question/answer
+link. `why[]` in frontmatter expresses supplementary (non-primary) support.
 
 ### Validity: Three Axes
 
@@ -41,7 +66,7 @@ Our three axes:
 
 | Axis | Range | Default | Domain |
 |---|---|---|---|
-| truth | 0–1 | 1 | Ontological — does this match reality? |
+| truth | 0–1 | 1 | Ontological — assessor's best estimate of correspondence to reality |
 | certainty | 0–1 | 1 | Epistemic — how confident? |
 | utility | -1–1 | 1 | Pragmatic — how valuable? Negative = harmful |
 
@@ -252,8 +277,9 @@ Full survey: `unified-claim-scheme/epistemic-dimensions-prior-art.md`
 
 - Should `why[]` semantics be conjunctive (all premises jointly) or
   disjunctive (each independently sufficient)? Current default: conjunctive.
-- How to express contradiction without negation claims? Current approach:
-  positive-only, watch for friction.
+- ~~How to express contradiction without negation claims?~~ **Resolved:**
+  competing siblings under a shared question-parent, with per-party validity
+  expressing who endorses which position. No `contradicts[]` field needed.
 - How to contest reasoning specifically (not the conclusion)? Current
   approach: meta-claims about the justification, watch for friction.
 - Should the design tower's fixed layer vocabulary (mission/goals/
