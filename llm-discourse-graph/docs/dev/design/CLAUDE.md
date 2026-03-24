@@ -1,6 +1,6 @@
 --- # workaround: anthropics/claude-code#13003
 requires:
-    - Skill(llm-collab)/references/how-to-document-design-knowledge.md
+    - Skill(llm-design-kb)
 ---
 
 # Design Knowledge

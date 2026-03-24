@@ -97,7 +97,7 @@ references.kb/: [Categorized guides: file-types.kb/, guidelines.kb/, workflows.k
 
 **When to update:** After architectural ADRs, when onboarding reveals gaps.
 
-See `references/how-to-document-design-knowledge.md` for the full pattern.
+See `Skill(llm-design-kb)` for the full pattern.
 
 ## Frontmatter Directives
 
@@ -132,7 +132,7 @@ CLAUDE.md files use frontmatter to give agents operational instructions. These a
 - ADRs: <https:references.kb/file-types.kb/ADRs.md>
 - Devlogs: <https:references.kb/file-types.kb/devlog.md>
 - CLAUDE.md: <https:references.kb/file-types.kb/CLAUDE.md>
-- Design knowledge: <https:references/how-to-document-design-knowledge.md>
+- Design knowledge: `Skill(llm-design-kb)`
 - Browse all: <https:references.kb/file-types.kb/>
 
 **Common tasks:**
@@ -162,8 +162,8 @@ Browse <https:references.kb/> for categorized guides:
 - **guidelines.kb/** - How to write effective docs
 - **workflows.kb/** - How to use and maintain docs
 
-Standalone references:
-- **references/how-to-document-design-knowledge.md** - Living design documentation pattern
+Related skills:
+- **`Skill(llm-design-kb)`** — Living design documentation pattern (formerly in this skill's references)
 
 ## Success Indicators
 
