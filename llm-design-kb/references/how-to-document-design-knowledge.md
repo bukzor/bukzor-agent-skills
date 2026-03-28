@@ -87,6 +87,11 @@ Entries link upward via `why[]` frontmatter.
 - Key implementation details
 - Build/deploy considerations
 
+### 070-future-work.kb/
+
+- What ideas are deferred?
+- Good ideas not worth pursuing now
+
 ## Technical Policy
 
 Cross-cutting normative guidance. Lives at `docs/dev/technical-policy.kb/`.

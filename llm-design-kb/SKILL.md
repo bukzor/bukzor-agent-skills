@@ -30,8 +30,12 @@ Each layer answers a question that motivates the layer below:
 | `040-design.kb/` | How do we satisfy requirements? | components |
 | `050-components.kb/` | How do we implement the design? | deliverables |
 | `060-deliverables.kb/` | How do we build the components? | — |
+| `070-future-work.kb/` | What ideas are deferred? | — |
 
 All layers are optional. Create as needed.
+
+`070-future-work.kb/` captures ideas worth remembering but not worth pursuing
+now.
 
 Entries link upward via `why:` frontmatter — e.g. a requirement lists the
 goals it serves:
