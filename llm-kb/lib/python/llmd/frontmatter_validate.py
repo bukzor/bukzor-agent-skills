@@ -2,6 +2,7 @@
 # /// script
 # dependencies = [
 #   "pyyaml",
+#   "jsonschema",
 # ]
 # ///
 """
@@ -15,6 +16,8 @@ import yaml
 from pathlib import Path
 from dataclasses import dataclass
 import argparse
+
+from jsonschema import Draft202012Validator
 
 SUFFIX = '.kb'
 HIVE_PARTITION_MARKER = '='
@@ -119,55 +122,25 @@ def load_schema(schema_file):
 
 
 def validate_against_schema(data, schema):
-    """Simple validation against schema (basic checks)."""
+    """Validate frontmatter against a JSON Schema (Draft 2020-12).
+
+    Delegates to the `jsonschema` reference implementation so every
+    keyword in the spec is honored — pattern, minLength, minItems,
+    nested properties, items, additionalProperties, oneOf/anyOf/allOf,
+    if/then/else, $ref, and anything added in future drafts.
+    """
+    validator = Draft202012Validator(schema)
     errors = []
-
-    # Check required fields
-    required = schema.get('required', [])
-    for field in required:
-        if field not in data:
-            errors.append(f"Missing required field: {field}")
-
-    # Check property types if specified
-    properties = schema.get('properties', {})
-    for key, value in data.items():
-        if key in properties:
-            prop_schema = properties[key]
-
-            # Check type
-            if 'type' in prop_schema:
-                schema_type = prop_schema['type']
-                actual_type = type(value).__name__
-
-                # JSON Schema type -> Python type name(s)
-                type_map = {
-                    'string': ('str',),
-                    'array': ('list',),
-                    'object': ('dict',),
-                    'number': ('int', 'float'),
-                    'integer': ('int',),
-                    'boolean': ('bool',),
-                    'date': ('date',),
-                    'null': ('NoneType',),
-                }
-
-                # Normalize schema_type to tuple (handles type: [string, null])
-                if not isinstance(schema_type, list):
-                    schema_type = [schema_type]
-
-                # Build set of acceptable Python type names
-                expected = set()
-                for t in schema_type:
-                    expected.update(type_map.get(t, (t,)))
-
-                if actual_type not in expected:
-                    errors.append(f"Field '{key}': expected {sorted(expected)}, got {actual_type}")
-
-            # Check enum
-            if 'enum' in prop_schema:
-                if value not in prop_schema['enum']:
-                    errors.append(f"Field '{key}': '{value}' not in allowed values {prop_schema['enum']}")
-
+    for error in validator.iter_errors(data):
+        path_parts = []
+        for p in error.absolute_path:
+            if isinstance(p, int):
+                path_parts.append(f"[{p}]")
+            else:
+                path_parts.append(f".{p}" if path_parts else str(p))
+        path = "".join(path_parts)
+        prefix = f"{path}: " if path else ""
+        errors.append(f"{prefix}{error.message}")
     return errors
 
 
