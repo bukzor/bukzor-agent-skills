@@ -22,6 +22,13 @@
   - [x] Verify llm-collab-devlog script still works
   - [x] Run TESTING.md to verify bin/ scripts work with new paths
   - [x] Check other skill scripts for similar migration needs (none have docs/ refs)
+- [ ] Bug: bin/ scripts crash when agent passes path as positional arg
+  - llm-collab-devlog: sed error on slashes in path
+  - llm-collab-init: slugifies entire path into devlog filename
+  - Same root cause as llm-subtask scripts (see that skill's todo)
+- [ ] HACKING.md irrelevant for knowledge-base repos
+  - llm-collab-init creates contributor onboarding template
+  - For a .kb repo with no code, this is noise
 
 ## Later
 

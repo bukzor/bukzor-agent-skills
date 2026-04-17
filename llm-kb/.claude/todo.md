@@ -4,6 +4,8 @@
 - [x] Run movie-tracker test, evaluate against SKILL.md
 - [ ] Configure permissions via .claude/settings.json instead of --allowedTools
 - [x] Pivot to .kb naming (skill renamed llm.d → llm.kb)
+- [ ] .claude/ideas.kb/2026-04-17-000-design-process-for-new-kb-structures.md
+- [ ] .claude/ideas.kb/2026-04-17-001-codify-tables-lists-smell-as-kb-promotion-heuristic.md
 
 ## Later
 
