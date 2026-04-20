@@ -9,5 +9,6 @@
 
 ## Later
 
+- [ ] todo.kb/2026-01-02-000-complete-d-to-kb-rename.md (finish `.d → .kb` rename in `complete-example/`; promote ADR 2025-12-03-000 to Accepted) — related to prototype.chatfs harmonization
 - [ ] todo.kb/2025-12-04-000 (Claude enumerates contents despite explicit prohibition)
 - [ ] todo.kb/2026-02-09-000 (Schema reuse with $ref)

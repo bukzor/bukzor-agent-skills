@@ -41,5 +41,6 @@
   - [x] Add freshness hooks (session-end, ADR script)
   - [x] Remove stale file references from SKILL.md
   - [x] Update SKILL.md quick reference
+- [ ] todo.kb/2025-12-11-000-update-skeleton-to-match-docsdev-pattern-from-git-partial.md (define `milestones.kb/` pattern in skeleton; finish docs/dev/ migration checklist) — High/Medium; blocks prototype.chatfs `docs/dev/milestones.kb/` creation
 - [ ] todo.kb/2025-11-29-000 (devlog reevaluation - strategic) — Medium/High
 - [ ] todo.kb/2025-11-26-003 (clarify todo.md/todo.kb relationship in subtask skill docs)
