@@ -13,6 +13,18 @@ setup: |
     ```
 ---
 
+> **IMPERATIVE:**
+>
+> Your FIRST action when this skill loads MUST be:
+> `Bash("ls -RF SKILL.kb/must-read/")`. Then read every entry whose trigger
+> matches the work at hand.
+
+The must-read entries link to audits in `SKILL.kb/self-audit.kb/` and
+procedures in `SKILL.kb/procedures.kb/`; follow those links when triggers
+fire. When adding new kb content of your own, browsing
+`SKILL.kb/self-audit.kb/` directly is a cheap proactive check for relevant
+quality concerns.
+
 # llm.kb Pattern
 
 Create structured knowledge bases using `.kb/` directory collections. Frontmatter
@@ -81,8 +93,8 @@ Content discovery is `ls`. Never enumerate in CLAUDE.md.
 
 CLAUDE.md files use frontmatter to give agents operational instructions. These are **action triggers**, not passive metadata.
 
-- `requires:` — Read these files before acting in this directory.
-- `depends:` — Read when relevant.
+- `requires:` -- Read these files before acting in this directory.
+- `depends:` -- Read when relevant.
 
 ### Content Files ($ITEM.md in .kb/)
 
@@ -145,18 +157,50 @@ Poor fit:
 - One-time use
 - No structured metadata needed
 
+## Promotion Signals
+
+Promote a single `.md` to a `.kb/` directory when any of these signals is
+present:
+
+- Plural filename -- `patterns.md`, `providers.md`, `alternatives.md`. The
+  name signals a listing; the directory shape should follow.
+- Parallel sections of the same type -- multiple `##` or `###` headings
+  describing items of the same kind, even in prose form. Each section is one
+  item; they belong in a `.kb/` as separate files. This applies regardless of
+  whether the prose itself contains bullet lists.
+- Listing-heavy content -- most of the file is a numbered list, table, or
+  parallel enumeration of homogeneous items.
+- Per-item growth pressure -- each item wants its own paragraph, frontmatter,
+  or lifecycle (status, why:, last-updated), or any single item exceeds ~50
+  tokens of explanation.
+
+When you notice these, promote:
+
+1. `$name.md` → `$singular.kb/` directory (rename to singular).
+2. Each listed item → its own `.md` inside.
+3. The former file's non-listing prose → either `$singular.md` (summary at
+   parent scope) or `$singular.kb/CLAUDE.md` (maintenance guide for the new
+   collection).
+
+A fixed 2-4-item list of one-line entries is fine as prose. The signal is
+*growth pressure*, not the mere presence of a list. Bullet lists for
+short reference material (glossaries, shorthand) are also fine; the rule
+targets parallel descriptions of items, not all uses of list syntax.
+
 ## Creating a Collection
 
-1. **Ensure root CLAUDE.md** meets requirements (see Maintenance Guides above)
+When creating a `.kb` from scratch, **read `references/creating-a-new-kb.md`
+before writing files.** It contains the full procedure and the four quality
+passes (enumerate-and-categorize, persistence, per-file scope, schema
+potential). The summary procedure here is for orientation only:
+
+1. Ensure root CLAUDE.md meets requirements (see Maintenance Guides above)
 2. Identify homogeneous categories → `$CATEGORY.kb/` directories
 3. Design schemas for frontmatter → `$CATEGORY.jsonschema.yaml` (if using frontmatter)
 4. Create per-directory CLAUDE.md guides
 5. Create summary files (`$CATEGORY.md`) where they help
 6. Populate content files
-7. Validate with provided script (if using frontmatter)
-
-See `references/pattern-guide.md` for detailed explanation. See
-`references/complete-example.md` for real-world application.
+7. Validate with `bin/llm.kb-validate <path>`
 
 ## Reading Collections
 
@@ -174,7 +218,7 @@ searching one 500-line file.
 
 ## Tools Provided
 
-### bin/validate-frontmatter
+### bin/llm.kb-validate
 
 Purpose: catch frontmatter schema violations (error prevention).
 
@@ -184,20 +228,38 @@ schema mismatches.
 Usage:
 
 ```bash
-bin/validate-frontmatter                  # Validate current directory (default)
-bin/validate-frontmatter path/to/project  # Validate specific directory
-bin/validate-frontmatter category.kb/     # Validate one category
-bin/validate-frontmatter file.md          # Validate single file
+bin/llm.kb-validate                  # Validate current directory (default)
+bin/llm.kb-validate path/to/project  # Validate specific directory
+bin/llm.kb-validate category.kb/     # Validate one category
+bin/llm.kb-validate file.md          # Validate single file
 ```
 
 Recursively finds and validates `.kb/` directories. Auto-detects schemas. Skips CLAUDE.md files.
 
-Recommended: run `bin/validate-frontmatter` before committing changes.
+Recommended: run `bin/llm.kb-validate` before committing changes.
 
 ## References
 
+When creating a `.kb` from scratch, you must read
+`references/creating-a-new-kb.md` before writing files.
+
+Other references, load as relevant:
+
 - `references/pattern-guide.md` - Complete pattern explanation
 - `references/schema-design.md` - Schema design guidance
-- `references/complete-example.md` - Complete example (birthday party planning)
+- `references/complete-example.md` - Worked example (birthday party planning)
+- `references/splitting-large-docs.md` - Splitting heuristics
 
-Load as needed for detailed guidance.
+## Methodology kb (self-applied)
+
+`docs/dev/` contains pre-distilled methodology this skill applies to itself:
+
+- `procedures.kb/` -- step-by-step methods for recurring kb tasks
+- `case-studies.kb/` -- narratives from instructive failures
+- `concepts.kb/` -- structured definitions of recurring terms
+
+`ls -RF docs/dev/procedures.kb/` lists procedures by task-shaped filename
+(`post-mortem.md`, not `error-recovery-method.md`). Load one when its task
+matches the user's request. Cross-referenced sibling collections
+(`failure-modes.kb/`, `principles.kb/`, `glossary.kb/`) are seeded by
+procedures as they're run; consult those when procedure files reference them.

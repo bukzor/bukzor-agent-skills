@@ -67,7 +67,7 @@ Ran 36 trials (9 variants × 4 trials), then 20 more on "incomplete" variant.
 ### Root Cause Discovery
 
 **The instruction points to the wrong location.** `tail -n9999 CLAUDE.d/**/*.md` doesn't
-find movies — they're in `movies.kb/`, not `CLAUDE.d/`.
+find movies -- they're in `movies.kb/`, not `CLAUDE.d/`.
 
 Strong correlation between Phase 1 CLAUDE.md modification and Phase 2 success:
 
@@ -82,18 +82,18 @@ command only reads `CLAUDE.d/`, which lacks movie data.
 
 ### Implications
 
-1. **Instruction wording matters less than we thought** — success depends on whether
+1. Instruction wording matters less than we thought -- success depends on whether
    Phase 1 rewrites CLAUDE.md, not Phase 2 compliance
-2. **"incomplete" isn't toxic** — its 44% rate reflects the baseline: whether Phase 1
+2. "incomplete" isn't toxic -- its 44% rate reflects the baseline: whether Phase 1
    happens to add useful pointers
-3. **Bold formatting helps Phase 1** — possibly makes the agent more likely to
+3. Bold formatting helps Phase 1 -- possibly makes the agent more likely to
    thoughtfully set up the knowledge base
 
 ## Resolution (2025-12-18)
 
 ### Corrected Root Cause
 
-The Round 6 "Root Cause Discovery" was **partially wrong**:
+The Round 6 "Root Cause Discovery" was partially wrong:
 - Claimed: instruction points to wrong location (CLAUDE.d/ vs movies.kb/)
 - Actual: Phase 1 WAS creating `CLAUDE.d/llm-kb.md` which points to `.kb/` directories
 - Real issue: Phase 2 doesn't reliably execute `tail -n9999 CLAUDE.d/**/*.md`
@@ -121,9 +121,9 @@ This is more direct:
 
 ### Changes Made
 
-1. **SKILL.md**: Updated to recommend frontmatter instead of `CLAUDE.d/llm-kb.md`
-2. **Test CLAUDE.md**: Removed — Phase 1 now creates it with proper frontmatter
-3. **Test result**: Passed — Phase 1 created CLAUDE.md with `requires: Skill(llm.kb)`,
+1. SKILL.md: Updated to recommend frontmatter instead of `CLAUDE.d/llm-kb.md`
+2. Test CLAUDE.md: Removed -- Phase 1 now creates it with proper frontmatter
+3. Test result: Passed -- Phase 1 created CLAUDE.md with `requires: Skill(llm.kb)`,
    Phase 2 loaded skill and found movies
 
 ### Key Insight

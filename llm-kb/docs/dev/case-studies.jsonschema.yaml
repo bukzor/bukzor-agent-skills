@@ -1,0 +1,41 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+title: Case-study frontmatter
+description: |
+  Frontmatter for items in case-studies.kb/. Items are first-person incident
+  narratives; see concepts.kb/case-study.md for the concept.
+
+type: object
+required:
+  - date
+
+properties:
+  date:
+    type: string
+    pattern: '^\d{4}-\d{2}-\d{2}$'
+    description: ISO date of the incident the case-study narrates.
+  failure-modes:
+    type: array
+    items:
+      type: string
+    description: |
+      Provisional aliases of failure modes the writer perceived in the
+      incident. Reconciled to canonical aliases in failure-modes.kb/ via
+      procedures.kb/reconcile-case-study.md.
+  status:
+    default: raw
+    oneOf:
+      - const: raw
+        description: |
+          Captured only. No editorial pass touched the case-study.
+          Aliases in `failure-modes:` are the writer's perceptions
+          and may not match canonical names in failure-modes.kb/.
+      - const: reconciled
+        description: |
+          Every named alias canonicalized; every named failure-mode
+          has a canonical entry with mitigations and cross-refs;
+          all cross-references resolve.
+    description: |
+      Reconciliation lifecycle. Absent = `raw`. Named partial-states
+      will be added as conventions emerge.
+
+additionalProperties: false
