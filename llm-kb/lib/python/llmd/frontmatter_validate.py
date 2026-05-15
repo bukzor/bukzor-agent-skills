@@ -70,7 +70,9 @@ class ValidationResult:
 
 def validate_one_file(md_file, schema_override, depth):
     """Validate one file, yielding output. Skips non-data files."""
-    if md_file.name == 'CLAUDE.md':
+    # CLAUDE.md is a maintenance guide; dotfiles (e.g. .template.md) are
+    # meta-data conventions and not part of the .kb/ data corpus.
+    if md_file.name == 'CLAUDE.md' or md_file.name.startswith('.'):
         return
     errors = validate_file(md_file, schema_override)
     yield ValidationResult(depth, 'file', md_file.name, errors=tuple(errors))
