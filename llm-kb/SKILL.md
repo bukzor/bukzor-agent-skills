@@ -101,8 +101,8 @@ CLAUDE.md files use frontmatter to give agents operational instructions. These a
 Individual items within collections. Each file represents one thing (one tool,
 one decision, one task).
 
-- Markdown prose, optionally with YAML frontmatter
-- If frontmatter used, must conform to `$CATEGORY.jsonschema.yaml`
+- Markdown prose; structured data → frontmatter (schema when 3+ siblings share)
+- Frontmatter must conform to `$CATEGORY.jsonschema.yaml`
 
 Create when adding a new item to a collection. The file IS the item; there's no
 separate registry.
@@ -237,6 +237,8 @@ bin/llm.kb-validate file.md          # Validate single file
 Recursively finds and validates `.kb/` directories. Auto-detects schemas. Skips CLAUDE.md files.
 
 Recommended: run `bin/llm.kb-validate` before committing changes.
+
+"No schema found" for `ideas.kb`/`todo.kb`: copy from `llm-subtask/skeleton/.claude/`.
 
 ## References
 
