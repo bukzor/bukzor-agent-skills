@@ -43,21 +43,22 @@ Docs referencing `.d/`:
 
 ## Implementation Steps
 
-- [ ] Rename complete-example directories: `*.d/ → *.kb/`
-- [ ] Update complete-example/*.md files (references to .d/)
-- [ ] Update complete-example/*.jsonschema.yaml (descriptions)
-- [ ] Update complete-example/CLAUDE.md
-- [ ] Update references/pattern-guide.md
-- [ ] Update references/splitting-large-docs.md
-- [ ] Update references/complete-example.md
-- [ ] Update docs/documentation-conventions.md
-- [ ] Mark ADR 2025-12-03-000 as Accepted
+- [x] Rename complete-example directories: `*.d/ → *.kb/` (commit 799eb02, 2026-05-15)
+- [x] Update complete-example/*.md files (references to .d/)
+- [x] Update complete-example/*.jsonschema.yaml (descriptions)
+- [x] Update complete-example/CLAUDE.md
+- [x] Update references/complete-example.md
+- [x] Rename docs/dev/devlog/2025-12-10-...-instruction-optimization.{d → kb}/ (additional scope)
+- [ ] Update references/pattern-guide.md (8 mentions; line 5 "Unix `.d/`" historical analogy stays)
+- [ ] Update references/splitting-large-docs.md (5 mentions; title + body)
+- [ ] Update docs/documentation-conventions.md (1 mention, line 10 in code block)
+- [ ] Mark ADR 2025-12-03-000 as Accepted (status still "Proposed")
 - [ ] Verify: `grep -r '\.d/' .` shows only acceptable uses (CLAUDE.d/ pattern is separate)
 - [ ] Add auto-migrate step to scripts that read/write `.kb/` directories (like llm-collab-devlog does for docs/devlog → docs/dev/devlog)
 
 ## Success Criteria
 
-- [ ] No `.d/` directories in complete-example/
-- [ ] All docs reference `.kb/` pattern
+- [x] No `.d/` directories in complete-example/ (verified `find . -type d -name "*.d"` empty)
+- [ ] All docs reference `.kb/` pattern (15 references remain in references/ + docs/documentation-conventions.md)
 - [ ] ADR status is "Accepted"
-- [ ] SKILL.md examples use `.kb/`
+- [x] SKILL.md examples use `.kb/` (no `.d/` mentions in SKILL.md)
