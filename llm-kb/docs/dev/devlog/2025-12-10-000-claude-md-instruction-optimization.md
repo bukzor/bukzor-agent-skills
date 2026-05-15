@@ -1,7 +1,7 @@
 # 2025-12-10: CLAUDE.md Instruction Optimization
 
 Results: [.results.toon](./2025-12-10-000-claude-md-instruction-optimization.results.toon)
-Tools: [.d/](./2025-12-10-000-claude-md-instruction-optimization.d/)
+Tools: [.kb/](./2025-12-10-000-claude-md-instruction-optimization.kb/)
 
 ## Problem
 

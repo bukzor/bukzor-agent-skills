@@ -10,8 +10,8 @@ Decisions about the birthday cake:
 
 ## What Does NOT Belong
 
-- Other desserts (those go in parent `food.d/`)
-- Cake-cutting logistics (that's `timeline.d/`)
+- Other desserts (those go in parent `food.kb/`)
+- Cake-cutting logistics (that's `timeline.kb/`)
 - Bakery selection (decision already made: Sweet Dreams Bakery)
 
 ## Constraints

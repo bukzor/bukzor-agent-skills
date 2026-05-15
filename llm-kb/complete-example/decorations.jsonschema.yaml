@@ -1,5 +1,5 @@
 $schema: "http://json-schema.org/draft-07/schema#"
-description: Schema for decoration items in decorations.d/
+description: Schema for decoration items in decorations.kb/
 type: object
 additionalProperties: false
 required:

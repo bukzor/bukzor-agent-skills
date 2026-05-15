@@ -14,5 +14,5 @@ Ordering from Mario's Pizzeria (peanut-free kitchen).
 
 ## Alternatives Considered
 
-- **Hot dogs**: Rejected - harder to keep warm
+- Hot dogs: Rejected - harder to keep warm
 - ...

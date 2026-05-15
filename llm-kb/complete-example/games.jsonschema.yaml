@@ -1,5 +1,5 @@
 $schema: "http://json-schema.org/draft-07/schema#"
-description: Schema for party games in games.d/
+description: Schema for party games in games.kb/
 type: object
 additionalProperties: false
 required:

@@ -10,4 +10,4 @@ Chocolate cake with vanilla buttercream, dinosaur theme. $45 from Sweet Dreams B
 
 Peanut-free confirmed.
 
-See `cake.d/` for decision rationale on flavor, frosting, and decorations.
+See `cake.kb/` for decision rationale on flavor, frosting, and decorations.

@@ -11,6 +11,6 @@ Alex's best friend from school. Confirmed attending.
 
 ## Special Considerations
 
-- **Peanut allergy**: Affects all food choices
+- Peanut allergy: Affects all food choices
 - Parent (Mrs. Chen) offered to help with setup
 - Bringing a sleeping bag in case of sleepover extension

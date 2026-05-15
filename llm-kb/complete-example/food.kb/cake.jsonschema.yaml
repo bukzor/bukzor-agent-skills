@@ -1,5 +1,5 @@
 $schema: "http://json-schema.org/draft-07/schema#"
-description: Schema for cake decisions in cake.d/
+description: Schema for cake decisions in cake.kb/
 type: object
 additionalProperties: false
 required:

@@ -1,5 +1,5 @@
 $schema: "http://json-schema.org/draft-07/schema#"
-description: Schema for food items in food.d/
+description: Schema for food items in food.kb/
 type: object
 additionalProperties: false
 required:
@@ -14,5 +14,5 @@ properties:
     description: Allocated or spent amount in dollars
     type: number
   last-updated:
-    description: Required for summary files (e.g., cake.md summarizing cake.d/)
+    description: Required for summary files (e.g., cake.md summarizing cake.kb/)
     type: date

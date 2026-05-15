@@ -8,16 +8,16 @@ $200 total. Track spending via frontmatter `budget:` fields.
 
 ## Constraint
 
-All food must be peanut-free (see `guests.d/` for details).
+All food must be peanut-free (see `guests.kb/` for details).
 
 ## Navigation
 
 | Directory | Purpose |
 |-----------|---------|
-| `guests.d/` | Who's coming, allergies, contacts |
-| `food.d/` | Menu planning |
-| `games.d/` | Party activities |
-| `decorations.d/` | Visual setup |
-| `timeline.d/` | Day-of schedule |
+| `guests.kb/` | Who's coming, allergies, contacts |
+| `food.kb/` | Menu planning |
+| `games.kb/` | Party activities |
+| `decorations.kb/` | Visual setup |
+| `timeline.kb/` | Day-of schedule |
 
-Nested: `food.d/cake.d/` breaks out cake decisions; `food.d/cake.md` summarizes.
+Nested: `food.kb/cake.kb/` breaks out cake decisions; `food.kb/cake.md` summarizes.

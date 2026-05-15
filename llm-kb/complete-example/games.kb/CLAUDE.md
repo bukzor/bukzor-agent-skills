@@ -10,5 +10,5 @@ Party activities and games:
 
 ## What Does NOT Belong
 
-- Game scheduling (that's `timeline.d/activities.md`)
+- Game scheduling (that's `timeline.kb/activities.md`)
 - Prize purchases (shopping list, derived)

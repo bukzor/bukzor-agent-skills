@@ -8,4 +8,4 @@ Dinosaur theme with green/blue/orange palette, matching cake and Alex's interest
 
 Budget: $40 allocated across balloons, streamers, and table setup.
 
-See `decorations.d/` for individual items.
+See `decorations.kb/` for individual items.

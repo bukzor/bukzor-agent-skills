@@ -9,6 +9,6 @@ Individual decoration items:
 
 ## What Does NOT Belong
 
-- Setup timing (that's `timeline.d/setup.md`)
+- Setup timing (that's `timeline.kb/setup.md`)
 - Purchase lists (derived artifact)
 - Theme decisions (see `decorations.md` for current theme)

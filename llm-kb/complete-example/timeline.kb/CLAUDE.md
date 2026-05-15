@@ -9,8 +9,8 @@ Schedule and logistics for party day:
 
 ## What Does NOT Belong
 
-- Activity rules (those go in `games.d/`)
-- Food details (those go in `food.d/`)
+- Activity rules (those go in `games.kb/`)
+- Food details (those go in `food.kb/`)
 
 ## Time Blocks
 
