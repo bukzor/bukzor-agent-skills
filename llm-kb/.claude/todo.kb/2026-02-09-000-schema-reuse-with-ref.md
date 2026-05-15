@@ -24,7 +24,7 @@ llm.kb lacks support for reusable schema definitions. Projects with multiple `.k
 
 ## Current Situation
 
-- `references/schema-design.md` covers `oneOf`, constraints, evolution — no `$ref`
+- `references/schema-design.md` covers `oneOf`, constraints, evolution -- no `$ref`
 - `frontmatter_validate.py` does basic validation, doesn't resolve `$ref`
 - `complete-example/` shows duplication (status+budget in both decorations and food schemas)
 - No documented pattern for shared schema directory
@@ -113,3 +113,20 @@ Design for yaml-language-server compatibility:
 - [ ] Validator resolves file-relative `$ref`
 - [ ] `complete-example/` demonstrates the pattern
 - [ ] yaml-language-server works with the pattern (manual verification)
+
+## Drift surface (2026-05-15)
+
+The SKELETON-DEFAULT pattern (canonical schema in
+`llm-subtask/skeleton/.claude/`, hand-copied to each consuming skill's
+`.claude/`) now has three live copies of `ideas.jsonschema.yaml` and two
+of `todo.jsonschema.yaml`. Drift risk is real until `$ref` lands.
+Affected paths:
+
+- `llm-subtask/skeleton/.claude/ideas.jsonschema.yaml` (canonical)
+- `llm-subtask/skeleton/.claude/todo.jsonschema.yaml` (canonical)
+- `llm-kb/.claude/ideas.jsonschema.yaml` (copy)
+- `llm-subtask/.claude/ideas.jsonschema.yaml` (copy)
+- `llm-collab/.claude/todo.jsonschema.yaml` (copy)
+
+Resolution path: implement `$ref` resolution, then convert each copy to a
+single-line `$ref` pointer.

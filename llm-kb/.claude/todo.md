@@ -12,12 +12,19 @@
 - [x] references/creating-a-new-kb.md: new doc with plan + four quality passes
 - [x] SKILL.kb/ runtime infrastructure: triggers, 13 self-audits, shared procedures
 - [x] docs/dev/ methodology kb: case-study, concepts, post-mortem split into capture + reconcile
-- [ ] Run `docs/dev/procedures.kb/reconcile-case-study.md` on the seed case-study to populate `failure-modes.kb/`, `principles.kb/`, and extract `procedures.kb/scope-refactor.md`
-- [ ] Resolve `bin/llm.kb-validate` quirk: `SKILL.kb/SKILL.jsonschema.yaml` exists but isn't auto-matched to `SKILL.kb/self-audit.md` (1 warning)
+- [ ] todo.kb/2026-05-15-000-reconcile-seed-case-study-may-13-har-browse-rust-port.md
+- [x] Resolve `bin/llm.kb-validate` quirk: `SKILL.kb/SKILL.jsonschema.yaml` not auto-matched (moved schema to repo root)
 - [ ] Route `must-read/after/distilling-from-a-raw-source.md` through `run-self-audits.md` for the generic audit portion
+- [ ] Move `docs/dev/procedures.kb/reconcile-case-study.md` to `SKILL.kb/procedures.kb/` (consumer-facing parallel to post-mortem move)
+- [ ] Re-read SKILL.md after the recent rewrite; confirm the "No schema found → copy from skeleton" line still reads coherent in context
+- [ ] Verify `tests/` still pass after schema reshuffle, `.d → .kb` rename, and KbValidator extension
+- [ ] Devlog entry for this session (skeleton-default schema centralization, sessions.jsonschema migration)
+- [ ] Commit current working tree (CLEAN-KITCHEN)
 
 ## Later
 
 - [ ] todo.kb/2026-01-02-000-complete-d-to-kb-rename.md (finish `.d → .kb` rename in `complete-example/`; promote ADR 2025-12-03-000 to Accepted) -- related to prototype.chatfs harmonization
 - [ ] todo.kb/2025-12-04-000 (Claude enumerates contents despite explicit prohibition)
 - [ ] todo.kb/2026-02-09-000 (Schema reuse with $ref)
+- [ ] Decide `post-mortem.md` naming (capture-incident? learn-from-failure?) -- defer until a second case-study clarifies the modes
+- [ ] Extract `SKILL.kb/self-audit.kb/bloat.md`'s "Frame" stance into `principles.kb/` once that collection is seeded
