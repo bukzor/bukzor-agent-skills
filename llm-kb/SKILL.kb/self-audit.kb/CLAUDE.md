@@ -5,14 +5,26 @@ maintainers adding or revising audits.
 
 ## File shape
 
-Each audit file has these sections:
+Required core: **Goal**, **Procedure**, **Recovery**.
 
-- Goal -- one sentence stating what the audit's pass-state is.
-- Procedure -- one question, or two if a follow-up gates a branch.
-  Concrete signals beat abstract checks.
-- Recovery -- one or two direct actions per finding-type.
+- Goal -- one sentence stating the audit's pass-state.
+- Procedure -- one concrete question (or a small branch). Concrete
+  signals beat abstract checks.
+- Recovery -- direct actions per finding-type.
 
-Target ~15-25 lines. Run `bloat.md` after writing.
+Optional sections, when they earn their lines:
+
+- **Frame** (preface) -- evaluation lens or audience stance the
+  procedure presupposes.
+- **When to run** / **When to skip** -- if the audit doesn't apply
+  universally.
+- **Non-examples / Examples** -- when the rule has high
+  false-positive risk without exemplars.
+- **Related** -- adjacent audits or procedures that the action might
+  lead into.
+
+Length: as short as preserves clarity for the intended Claude reader.
+Run `bloat.md` after writing.
 
 ## Filename convention
 

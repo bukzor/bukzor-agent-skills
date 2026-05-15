@@ -1,28 +1,29 @@
 # Self-audit: bloat
 
-## Audience
+## Frame
 
-**The reader is Claude.** Don't talk down. Skip what Claude already
-knows: tool-flag semantics, common-usage commentary, generic
-programming concepts, restated definitions, moral framing
-("don't be sloppy"). Write as if briefing a peer.
+**The reader is Claude.** Bloat is anything Claude already knows or
+that targets the wrong audience for this file.
 
-**Identify *which* Claude.** Architectural notes ("X runs in a
-separate agent," "this could be extracted later," "currently
-overloaded with Y") belong in maintainer files, not in actor-facing
-triggers and procedures.
+- Skip tool-flag semantics, common-usage commentary, restated
+  definitions, moral framing ("don't be sloppy"). Brief a peer.
+- Identify *which* Claude. Architectural notes ("X runs in a
+  separate agent," "this could be extracted later") target a
+  maintainer; runtime triggers and procedures target the actor.
+  Misaddressed content is bloat at the wrong file even when it's
+  earning its keep at the right one.
 
 ## Goal
 
 Each file states its point in the fewest lines that preserve clarity
-for a Claude reader.
+for its intended Claude reader.
 
 ## Procedure
 
 For each file you just wrote or edited:
 
-> Could a Claude reader make the same correct decisions with fewer
-> lines?
+> Could a Claude reader at this file's audience make the same
+> correct decisions with fewer lines?
 
 Look specifically for:
 

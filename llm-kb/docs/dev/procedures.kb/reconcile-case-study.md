@@ -83,6 +83,7 @@ audits.
 
 ## Related
 
-- `post-mortem.md` -- the capture procedure that feeds this one.
+- `../../../SKILL.kb/procedures.kb/post-mortem.md` -- the capture
+  procedure that feeds this one.
 - `../../../SKILL.kb/procedures.kb/stub-missing-entry.md` -- cascade
   bounding.

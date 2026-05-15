@@ -23,8 +23,8 @@ the writer can produce in this session" is the standard -- not
 - Authoritative on: the narrative itself, and the verbatim user
   signals.
 - NOT authoritative on: failure-mode aliases, procedure shape,
-  principle phrasing. Those get reconciled in steps 3-4 of the
-  post-mortem procedure.
+  principle phrasing. Those get reconciled by
+  `../procedures.kb/reconcile-case-study.md`.
 
 Future readers should treat the case-study's perceived items as **seeds
 for re-distillation**, not as truth-of-record. The truth-of-record for
@@ -48,7 +48,7 @@ distilled items lives in the corresponding `.kb/` collections.
 
 ## See also
 
-- `../procedures.kb/post-mortem.md` -- the procedure that produces case-studies.
+- `../../../SKILL.kb/procedures.kb/post-mortem.md` -- the procedure that produces case-studies.
 
 TODO: expand with the distinguishing examples once we have a second
 case-study to compare against.

@@ -44,9 +44,10 @@ procedures.kb/, future principles.kb/, etc.) are *authoritative* for their
 respective content types. Case-studies cite distilled entries; case-studies do
 not override them.
 
-Capture (session → raw case-study) is `procedures.kb/post-mortem.md`.
-Reconciliation (raw → distilled) is `procedures.kb/reconcile-case-study.md`.
-The split runs in disjoint contexts: the capturing agent stops at `raw`;
+Capture (session → raw case-study) is the generic skill-level
+procedure `../../SKILL.kb/procedures.kb/post-mortem.md`. Reconciliation
+(raw → distilled) is `procedures.kb/reconcile-case-study.md`. The
+split runs in disjoint contexts: the capturing agent stops at `raw`;
 a fresh-context agent does the editorial pass.
 
 ## Filename discipline (cross-cutting)
@@ -80,8 +81,9 @@ everything." That's a fallback, not the design.
 ## See also
 
 - `../../SKILL.md` -- the `llm-kb` pattern itself.
-- `procedures.kb/post-mortem.md` -- captures session into a raw case-study.
-- `procedures.kb/reconcile-case-study.md` -- distills a raw case-study into
-  authoritative entries.
+- `../../SKILL.kb/procedures.kb/post-mortem.md` -- captures session
+  into a raw case-study (skill-level, used by any consumer).
+- `procedures.kb/reconcile-case-study.md` -- distills a raw case-study
+  into authoritative entries (skill-internal).
 - `case-studies.kb/2026-05-13-000-har-browse-rust-port-scope-refactor.md` --
   the seed case-study; the incident whose debrief produced this methodology kb.

@@ -13,7 +13,7 @@ context loss. Speed beats alignment.
 - After failed or partially-failed task with recurring failure mode.
 - User-requested debrief.
 - Context over 200k with reusable lessons (see
-  `../../../SKILL.kb/must-read/when/context-over-200k-tokens.md`).
+  `../must-read/when/context-over-200k-tokens.md`).
 
 ## Steps
 
@@ -37,11 +37,14 @@ context loss. Speed beats alignment.
 
 ## Outputs
 
-- `../case-studies.kb/$DATE-NNN-$SLUG.md` with frontmatter, narrative,
-  verbatim quotes. No `status:` field (absent = `raw`).
+- A file in the project's `case-studies.kb/` collection, named
+  `$DATE-NNN-$SLUG.md` (date of incident, zero-padded ordinal,
+  kebab-case slug). Contains frontmatter, narrative, verbatim quotes.
+  No `status:` field (absent = `raw`).
 
-Filename: `$DATE-NNN-$SLUG.md` (date of incident, zero-padded ordinal,
-kebab-case slug).
+If the project lacks a `case-studies.kb/`, create one — a single-entry
+collection is valid. Stub `case-studies.kb/CLAUDE.md` per the llm-kb
+pattern.
 
 ## What this prevents
 
@@ -49,6 +52,9 @@ Loss of verbatim signals to context decay.
 
 ## Related
 
-- `reconcile-case-study.md` -- the editorial pass that produces
-  distilled entries from this raw capture.
-- `../concepts.kb/case-study.md` -- concept definition.
+- The project's reconcile-case-study procedure -- the editorial pass
+  that produces distilled entries from this raw capture. (For this
+  skill's own methodology kb, see
+  `../../docs/dev/procedures.kb/reconcile-case-study.md`.)
+- The project's case-study concept definition. (Skill-internal:
+  `../../docs/dev/concepts.kb/case-study.md`.)

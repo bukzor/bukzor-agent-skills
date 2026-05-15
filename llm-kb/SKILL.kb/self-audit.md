@@ -1,5 +1,5 @@
 ---
-last-updated: 2026-05-13
+last-updated: "2026-05-13"
 ---
 
 # self-audit -- proactive quality checks for kb work

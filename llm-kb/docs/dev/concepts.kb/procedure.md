@@ -37,4 +37,5 @@ not technique labels.
 
 - `failure-mode.md` -- what procedures mitigate.
 - `principle.md` -- softer cousin.
-- `case-study.md` -- source of new procedures (distilled via post-mortem).
+- `case-study.md` -- source of new procedures (distilled via
+  `../procedures.kb/reconcile-case-study.md`).

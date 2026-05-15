@@ -36,7 +36,7 @@ eliminated-by: []
 
 ## See also
 
-- `../procedures.kb/post-mortem.md` -- the procedure that produces failure-mode entries.
+- `../procedures.kb/reconcile-case-study.md` -- the procedure that produces failure-mode entries.
 - `case-study.md` -- where failure-mode aliases are first perceived (provisional)
   before reconciliation to canonical form.
 

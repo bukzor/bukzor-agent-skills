@@ -1,7 +1,8 @@
 # Case-studies
 
-First-person incident narratives produced by `../procedures.kb/post-mortem.md`.
-See `../concepts.kb/case-study.md` for the concept.
+First-person incident narratives produced by
+`../../../SKILL.kb/procedures.kb/post-mortem.md`. See
+`../concepts.kb/case-study.md` for the concept.
 
 ## What belongs here
 
@@ -20,4 +21,4 @@ See `../concepts.kb/case-study.md` for the concept.
 Authoritative on the narrative itself and the verbatim user signals. NOT
 authoritative on the items it names (failure-mode aliases, principle
 phrasings, procedure shapes) -- those reconcile to the distilled collections
-via the post-mortem procedure.
+via `../procedures.kb/reconcile-case-study.md`.

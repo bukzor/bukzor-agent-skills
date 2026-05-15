@@ -16,4 +16,4 @@ If none apply, the session is execution-only. No action.
 
 ## Step 2: Capture
 
-If case-study-worthy: run `docs/dev/procedures.kb/post-mortem.md`.
+If case-study-worthy: run `../../procedures.kb/post-mortem.md`.
