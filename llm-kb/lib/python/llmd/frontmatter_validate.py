@@ -12,12 +12,33 @@ Prevents errors by catching schema violations early.
 """
 
 import sys
+import datetime
 import yaml
 from pathlib import Path
 from dataclasses import dataclass
 import argparse
 
 from jsonschema import Draft202012Validator
+from jsonschema.validators import extend
+
+
+def _is_date(_checker, instance):
+    return isinstance(instance, datetime.date) and not isinstance(instance, datetime.datetime)
+
+
+def _is_instant(_checker, instance):
+    return isinstance(instance, datetime.datetime) and instance.tzinfo is not None
+
+
+# YAML emits datetime.date and datetime.datetime natively; JSON Schema has no
+# matching types. `date` accepts a calendar day; `instant` accepts a tz-aware
+# point in time. Naive datetime is intentionally unaccepted — pick one.
+_TYPE_CHECKER = Draft202012Validator.TYPE_CHECKER.redefine_many({
+    "date": _is_date,
+    "instant": _is_instant,
+})
+
+KbValidator = extend(Draft202012Validator, type_checker=_TYPE_CHECKER)
 
 SUFFIX = '.kb'
 HIVE_PARTITION_MARKER = '='
@@ -129,7 +150,7 @@ def validate_against_schema(data, schema):
     nested properties, items, additionalProperties, oneOf/anyOf/allOf,
     if/then/else, $ref, and anything added in future drafts.
     """
-    validator = Draft202012Validator(schema)
+    validator = KbValidator(schema)
     errors = []
     for error in validator.iter_errors(data):
         path_parts = []
