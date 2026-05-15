@@ -1,12 +1,12 @@
 ---
 cost-benefit-sweh:
   timebox:
-    @value: 0.5
+    "@value": 0.5
     rationale: |
       Template already exists (just created). Need helper script (new-idea.sh)
       and SKILL.md documentation. ~30 min work.
   benefit-2w:
-    @value: 2.0
+    "@value": 2.0
     rationale: |
       Prevents "jump into great idea before I forget" context-switching during
       focused work. Just demonstrated: had cost-benefit-sweh idea mid-task,

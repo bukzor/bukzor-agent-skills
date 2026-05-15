@@ -1,14 +1,14 @@
 ---
 cost-benefit-sweh:
   timebox:
-    @value: 0.75
+    "@value": 0.75
     rationale: |
       Review actual devlog usage in claude-api (6 entries, 714 lines), identify
       what's valuable vs overhead, redesign template. Already used extensively
       but before subtask skill existed - system changed, template needs alignment.
       ~45 min work.
   benefit-2w:
-    @value: 1.0
+    "@value": 1.0
     rationale: |
       Template currently obsoleted by subtask skill introduction. Without
       redesign, each devlog session wastes ~10 min on redundant/unclear

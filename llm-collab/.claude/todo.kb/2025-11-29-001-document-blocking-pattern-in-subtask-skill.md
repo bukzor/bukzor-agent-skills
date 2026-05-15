@@ -1,13 +1,13 @@
 ---
 cost-benefit-sweh:
   timebox:
-    @value: 0.33
+    "@value": 0.33
     rationale: |
       Add section with examples to subtask skill. Confusion is fresh in
       working memory - explaining "what was confusing and why" is easy now,
       nearly impossible in 3 weeks. Should take ~20 min.
   benefit-2w:
-    @value: 1.5
+    "@value": 1.5
     rationale: |
       Prevents confusion that happened 3x this session. Will happen again
       for both me and Claude agents. Estimate ~15 min saved per occurrence,

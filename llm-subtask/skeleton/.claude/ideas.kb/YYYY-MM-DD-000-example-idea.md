@@ -2,12 +2,12 @@
 anthropic-skill-ownership: llm-subtask
 cost-benefit-sweh:
   timebox:
-    @value: 0.5  # SWE-hours (one SWEh ≈ 60 focused minutes)
+    "@value": 0.5  # SWE-hours (one SWEh ≈ 60 focused minutes)
     rationale: |
       TODO: How long is this idea worth exploring before deciding to
       promote (to todo.kb) or abandon?
   benefit-2w:
-    @value: 2.0  # or just: 2.0
+    "@value": 2.0  # or just: 2.0
     rationale: |
       TODO: If this idea proves out, how much time/value does it create
       over the next 2 weeks?
