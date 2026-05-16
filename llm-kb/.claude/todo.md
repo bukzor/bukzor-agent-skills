@@ -28,3 +28,4 @@
 - [ ] todo.kb/2026-02-09-000 (Schema reuse with $ref)
 - [ ] Decide `post-mortem.md` naming (capture-incident? learn-from-failure?) -- defer until a second case-study clarifies the modes
 - [ ] Extract `SKILL.kb/self-audit.kb/bloat.md`'s "Frame" stance into `principles.kb/` once that collection is seeded
+- [ ] Rename `SKILL.kb/must-read/` → `SKILL.kb/must-read.kb/` (user-handling) -- align with `Skill(llm-must-read-kb)` convention
