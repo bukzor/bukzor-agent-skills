@@ -36,9 +36,11 @@ grep -l "keyword" .claude/todo.kb/*.md
 
 ## File Structure
 
-All task files include ownership header:
-```xml
-<anthropic-skill-ownership llm-subtask />
+All task files include ownership in frontmatter:
+```yaml
+---
+managed-by: Skill(llm-subtask)
+---
 ```
 
 See `~/.claude/skills/llm-subtask/skeleton/.claude/todo.kb/` for template structure.

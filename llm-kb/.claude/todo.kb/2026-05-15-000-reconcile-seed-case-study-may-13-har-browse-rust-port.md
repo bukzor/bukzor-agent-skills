@@ -1,5 +1,18 @@
 ---
-anthropic-skill-ownership: llm-subtask
+managed-by: Skill(llm-subtask)
+cost-benefit-sweh:
+  timebox:
+    "@value": 2.0
+    rationale: |
+      Extract 7 failure modes + 7 principles, seed two new kbs, cross-link
+      and mark case-study reconciled. Beyond 2h you're polishing the new
+      kbs rather than promoting the case-study content; defer polish.
+  benefit-2w:
+    "@value": 1.0
+    rationale: |
+      Reference-grade artifacts; payoff is indirect (future lookups while
+      debugging similar failure modes). Estimate ~3-4 lookups over 2
+      weeks at ~15 min saved each = ~1h.
 ---
 
 # Reconcile seed case-study (May 13 har-browse rust-port)

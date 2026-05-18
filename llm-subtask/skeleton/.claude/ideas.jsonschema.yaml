@@ -37,6 +37,16 @@ definitions:
 
 type: object
 properties:
+  managed-by:
+    const: "Skill(llm-subtask)"
+    description: |
+      The skill whose conventions govern this file. Signals to cold-start
+      agents which skill to load before operating on the file.
+
+      The schema pins this to a single value because the schema itself is
+      skill-local — a different skill's files use a different schema with
+      its own const.
+
   cost-benefit-sweh:
     type: object
     description: |
@@ -83,4 +93,5 @@ properties:
     required: ["timebox", "benefit-2w"]
     additionalProperties: false
 
+required: ["managed-by"]
 additionalProperties: true

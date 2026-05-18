@@ -1,4 +1,19 @@
-<anthropic-skill-ownership llm-subtask />
+---
+managed-by: Skill(llm-subtask)
+cost-benefit-sweh:
+  timebox:
+    "@value": 4.0
+    rationale: |
+      File-level estimate for a 16-item rollup. Avg ~15 min/item = ~4h
+      cap. Exceeding this is the signal to split items into individual
+      todo.kb/ entries with per-item estimates.
+  benefit-2w:
+    "@value": 2.0
+    rationale: |
+      Mixed bag: skill-infra fixes (high daily payoff), broken-ref
+      cleanup (medium), and a few stale items. Average over 2 weeks
+      ≈ 2h saved.
+---
 
 - [x] Fix broken references to complete-example.md in SKILL.md (lines 84, 116)
 - [x] Run movie-tracker test, evaluate against SKILL.md

@@ -1,4 +1,20 @@
-<anthropic-skill-ownership llm-subtask />
+---
+managed-by: Skill(llm-subtask)
+cost-benefit-sweh:
+  timebox:
+    "@value": 1.5
+    rationale: |
+      Add schema-time validation + common-mistakes section + positive
+      framing for topic.md purpose. Beyond 1.5h, the validation is
+      over-engineered; ship something restrictive and tune later.
+  benefit-2w:
+    "@value": 1.5
+    rationale: |
+      Stops a recurring failure mode (Claude generating enumeration
+      indexes despite explicit prohibition). Saves ~10 min per
+      occurrence × frequent occurrences while building out kbs over
+      2 weeks.
+---
 
 # Claude Enumerates Contents Despite Explicit Prohibition
 
@@ -31,30 +47,30 @@ User had to explicitly request removal twice before Claude complied.
 
 ## Analysis: Why Claude Deviated
 
-1. **Example specificity vs. principle generality** — Examples used "tools";
+1. Example specificity vs. principle generality -- Examples used "tools";
    Claude pattern-matched on surface form, treating PRs/notifications as
    different domain where rule doesn't apply.
 
-2. **"Snapshot" mental exception** — Claude framed `prs.md` as "live snapshot"
+2. "Snapshot" mental exception -- Claude framed `prs.md` as "live snapshot"
    distinct from "documentation." Spurious distinction that felt meaningful.
 
-3. **`.d/` targeting** — Skill focuses on `.d/` contents. Claude read as "don't
+3. `.d/` targeting -- Skill focuses on `.d/` contents. Claude read as "don't
    enumerate inside `.d/`" not "don't enumerate anywhere."
 
-4. **Task framing override** — "persist your knowledge" activated "capture
+4. Task framing override -- "persist your knowledge" activated "capture
    everything concrete" mode. Vague pointers feel less like persisting.
 
-5. **Helpfulness bias** — Concrete lists feel more helpful than abstract
+5. Helpfulness bias -- Concrete lists feel more helpful than abstract
    pointers. Prohibition is a constraint against this default.
 
-6. **Temporal decay** — Skill loaded at start; by file-writing time, specific
+6. Temporal decay -- Skill loaded at start; by file-writing time, specific
    prohibition had lower activation than immediate goal.
 
 ## User's Clarification
 
 The intended pattern:
-- `topic.d/CLAUDE.md` — bare essentials to maintain topic.d as Claude
-- `topic.md` — overview (NOT index) to help decide whether to dive in
+- `topic.d/CLAUDE.md` -- bare essentials to maintain topic.d as Claude
+- `topic.md` -- overview (NOT index) to help decide whether to dive in
 - Index **must be** `ls topic.d/`
 
 ## Proposed Mitigations

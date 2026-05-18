@@ -1,12 +1,23 @@
-<anthropic-skill-ownership llm-subtask />
-
 ---
+managed-by: Skill(llm-subtask)
 required-reading:
   - ~/.claude/skills/llm.kb/docs/adr/2025-12-03-000-pivot-from-d-to-kb-naming-convention.md
   - ~/.claude/skills/llm.kb/SKILL.md
 suggested-reading:
   - ~/.claude/skills/llm.kb/references/pattern-guide.md
 related-effort: ~/repo/github.com/bukzor/prototype.chatfs/.claude/todo.kb/2026-01-02-000-harmonize-with-llm-skills.md
+cost-benefit-sweh:
+  timebox:
+    "@value": 1.0
+    rationale: |
+      Mostly docs updates + mark ADR Accepted. Mechanical. Beyond 1h,
+      scope crept beyond the original rename target.
+  benefit-2w:
+    "@value": 1.5
+    rationale: |
+      Clears stale ADR + unblocks part of llm-kb/.claude/todo.md.
+      Closing a months-old rename frees mental bandwidth and removes
+      contradictory examples in the complete-example/.
 ---
 
 # Complete .d → .kb Rename in llm.kb

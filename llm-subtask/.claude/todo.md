@@ -1,5 +1,5 @@
 ---
-anthropic-skill-ownership: llm-subtask
+managed-by: Skill(llm-subtask)
 ---
 
 - [ ] .claude/ideas.kb/2026-04-17-000-llm-subtask-init-ignores-path-argument-uses-cwd.md

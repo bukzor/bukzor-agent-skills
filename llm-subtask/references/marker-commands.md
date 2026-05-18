@@ -56,7 +56,7 @@ When assistant reads `.claude/todo.md`:
 
 **File creation:** If `.claude/todo.md` doesn't exist, `todo push:` creates it using `skeleton/.claude/todo.md` template via `bin/llm-subtask-init`.
 
-**Ownership:** All files include header `<anthropic-skill-ownership llm-subtask />` for clear ownership signaling.
+**Ownership:** All files include `managed-by: Skill(llm-subtask)` in frontmatter for clear ownership signaling. The schema pins this value via `const`, so write-time validation catches missing or typo'd markers.
 
 ### todo push: Implementation
 

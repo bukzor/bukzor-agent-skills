@@ -1,12 +1,24 @@
-<anthropic-skill-ownership llm-subtask />
-
 ---
+managed-by: Skill(llm-subtask)
 required-reading:
   - ~/.claude/skills/llm.kb/references/schema-design.md
   - ~/.claude/skills/llm.kb/lib/python/llmd/frontmatter_validate.py
 suggested-reading:
   - https://json-schema.org/understanding-json-schema/structuring.html
 related-effort: ~/.claude/skills/llm-collab/.claude/todo.kb/2026-02-09-000-design-kb-pattern-for-living-design-docs.md
+cost-benefit-sweh:
+  timebox:
+    "@value": 1.0
+    rationale: |
+      Pattern definition + a couple working examples. Beyond 1h you're
+      designing tooling; spike on real adoption first to learn what's
+      actually needed.
+  benefit-2w:
+    "@value": 1.0
+    rationale: |
+      Reduces schema duplication across kbs (esp. shared `why[]` field).
+      Adoption is gradual; expect ~1h saved through reduced copy-paste
+      and clearer cross-kb relationships.
 ---
 
 # Schema Reuse with $ref
