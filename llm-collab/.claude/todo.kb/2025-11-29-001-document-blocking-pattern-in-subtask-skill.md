@@ -12,6 +12,7 @@ cost-benefit-sweh:
       Prevents confusion that happened 3x this session. Will happen again
       for both me and Claude agents. Estimate ~15 min saved per occurrence,
       ~6 occurrences over 2 weeks = 90 min saved.
+status: done
 ---
 
 # Document blocking pattern in subtask skill
