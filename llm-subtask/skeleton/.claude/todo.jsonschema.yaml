@@ -7,7 +7,8 @@ description: |
   and "Is the cost of NOT doing this growing?"
 
   All time values use SWE-hours (SWEh) as units, roughly equivalent to story points.
-  One SWEh ≈ 60 minutes of focused software engineering work.
+  One SWEh ≈ 60 minutes of focused software engineering work
+    ≈ $100 USD when converting between time and dollar-denominated value.
 
 definitions:
   sweh-value:
@@ -146,8 +147,8 @@ properties:
           strategic V0 work). Adding this field gives them a place in the
           prioritization frame.
 
-          Example: 1.0 SWEh because "Ameriprise still pulls $458/mo ≈ ~1h
-          SWEh-equivalent of opportunity cost over 2 weeks until ACH
+          Example: 2.3 SWEh because "Ameriprise still pulls $458/mo ≈ $229/2w
+          of opportunity cost ÷ $100/SWEh until ACH
           revocation lands."
 
     required: ["timebox", "benefit-2w"]
