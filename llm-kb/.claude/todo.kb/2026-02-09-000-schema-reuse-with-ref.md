@@ -142,3 +142,63 @@ Affected paths:
 
 Resolution path: implement `$ref` resolution, then convert each copy to a
 single-line `$ref` pointer.
+
+## Decisions (2026-05-18)
+
+### URI scheme for cross-skill references: `agent-skill://`
+
+For `$ref` and any other path-resolving cross-skill reference, use:
+
+    agent-skill://<skill-name>/<path-within-skill>
+
+Examples:
+
+    $id:  agent-skill://llm-subtask/sweh.jsonschema.yaml
+    $ref: agent-skill://llm-subtask/sweh.jsonschema.yaml
+
+Rationale: anchors to Anthropic's **Agent Skills** open standard (released
+2025-12-18, spec at agentskills.io, repo at github.com/agentskills/agentskills;
+adopted by Microsoft VS Code/GitHub, OpenAI ChatGPT/Codex, Cursor, Goose,
+OpenCode). The "agent-skill" qualifier disambiguates from other meanings of
+"skill" (Alexa Skills, Semantic Kernel skills, etc.) and gives the URI scheme
+a stable normative referent.
+
+`Skill(<name>)` notation in human-facing fields like `managed-by:` stays as-is;
+URIs only apply where path resolution matters.
+
+### Architecture: stub-`$ref` first, data-side `$schema` later
+
+Two architectures considered for eliminating per-project schema duplication:
+
+- **A. Data-side `$schema`** — every todo.md frontmatter declares its schema
+  directly; per-project `.claude/<X>.jsonschema.yaml` files deleted entirely.
+  Maximum DRY, requires data-file migration and validator dispatch on `$schema`.
+- **B. Stub `$ref`** — each project keeps a 1-line `.claude/<X>.jsonschema.yaml`
+  that $refs the skill-owned source of truth. Editor tools (yaml-language-server)
+  discover it via existing globs; existing data files unchanged.
+
+**Decision: B first.** Strict improvement, no data-file migration, leverages
+existing tooling. A is a nice-to-have layer that doesn't preclude B.
+
+### Validator changes implied
+
+- On startup, walk `~/.claude/skills/*/` for `*.jsonschema.yaml`; load and index
+  by their declared `$id`.
+- When resolving `$ref` with scheme `agent-skill://`, do in-memory lookup by
+  `$id`. No network fetch.
+- Fallback if `$id` not found in index: filesystem path derived from authority
+  + path (`~/.claude/skills/<authority>/<path>`).
+
+### Open question reclassification
+
+The existing "Open Questions" section asked about remote `$ref` (http URLs)
+support. With `agent-skill://`, http resolution is no longer needed for the
+primary use case — skills resolve in-memory. Remote `$ref` becomes a separate
+future question, not a blocker.
+
+### Drift-surface update (today, 2026-05-18)
+
+Schema gained two optional fields today (`cost-of-delay-2w` on `cost-benefit-sweh`,
+and `confidence` on `sweh-value`). Each schema file grew from ~90 lines to ~140.
+Six copies × ~50 added lines = the dup tax visibly worsened. This is itself an
+urgency signal for re-rating this todo with the new `cost-of-delay-2w` field.
