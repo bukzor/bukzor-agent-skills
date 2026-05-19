@@ -20,9 +20,9 @@ definitions:
       for timebox values where explaining "why stop here?" helps future readers
       understand the break-even point.
 
-      An optional `confidence` annotation marks shaky/speculative estimates so
-      consumers know to re-rate before acting on them. Absence implies the
-      estimate is well-grounded.
+      An optional `confidence` annotation bands the trustworthiness of @value
+      as an SWEH estimate. Absence implies `unsure` — the humble default for
+      ratings that were not explicitly reasoned about.
     oneOf:
       - type: number
         minimum: 0
@@ -39,12 +39,29 @@ definitions:
             description: "Why this estimate? What assumptions or constraints apply?"
           confidence:
             type: string
-            enum: [high, medium, low]
+            enum: [hypothetical, tentative, unsure, confident, certain]
+            default: unsure
             description: |
-              Optional confidence in the @value estimate. Use when the estimate
-              is shaky, speculative, or based on weak priors. Absence implies
-              high confidence. Low-confidence ratings should be re-evaluated
-              before being used to make prioritization decisions.
+              Optional confidence band on @value as an SWEH estimate. Read as
+              the probability the true SWEH is within a factor of 2 of @value
+              (0.5×@value ≤ true ≤ 2×@value).
+
+              Absence implies `unsure` — the humble default for ratings that
+              were not explicitly reasoned about.
+
+              Bands (rough probability of being within 2× of true):
+
+              - hypothetical: ≤ 20%. Wouldn't be surprised if off by an
+                order of magnitude. First-pass placeholders.
+              - tentative: 20%–50%. More than a guess but coin-flip whether
+                @value drives the right decision.
+              - unsure: 50%–80%. Best guess from the rater's seat, not
+                measurement-backed. Default for unexamined ratings.
+              - confident: 80%–99%. Well-reasoned, defensible, would bet on it.
+              - certain: ≥ 99%. Measured, verified, or trivially deducible.
+
+              Low-confidence ratings (hypothetical, tentative) should be
+              re-evaluated before driving prioritization decisions.
         required: ["@value"]
         additionalProperties: false
 

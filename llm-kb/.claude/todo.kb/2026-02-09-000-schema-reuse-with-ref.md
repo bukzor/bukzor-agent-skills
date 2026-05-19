@@ -13,12 +13,28 @@ cost-benefit-sweh:
       Pattern definition + a couple working examples. Beyond 1h you're
       designing tooling; spike on real adoption first to learn what's
       actually needed.
+    confidence: unsure
   benefit-2w:
     "@value": 1.0
     rationale: |
       Reduces schema duplication across kbs (esp. shared `why[]` field).
       Adoption is gradual; expect ~1h saved through reduced copy-paste
       and clearer cross-kb relationships.
+    confidence: unsure
+  cost-of-delay-2w:
+    "@value": 1.5
+    rationale: |
+      Six copies of the SWEH schema (per `sweh-schema-source.md` in
+      homedir-archeology `reference.kb/`) hand-propagate every field
+      change. The 2026-05-18 expansion (`cost-of-delay-2w` +
+      `confidence`) added ~50 lines × 6 files = ~300 lines of new
+      duplicate text — the dup tax visibly worsened.
+
+      During the active backlog re-rate sweep, expect 2-4 schema edits
+      over 2 weeks. Each propagation costs ~0.2 SWEh of mechanical
+      copying plus drift-risk when a copy is missed. 1.5 SWEh budgets
+      ~3 events × 0.3 SWEh plus a forgotten-file tax.
+    confidence: unsure
 ---
 
 # Schema Reuse with $ref
