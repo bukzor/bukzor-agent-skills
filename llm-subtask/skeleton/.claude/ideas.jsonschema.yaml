@@ -3,7 +3,8 @@ title: Todo/Idea Task Metadata
 description: |
   Cost-benefit analysis frontmatter for todo.kb/ and ideas.kb/ task files.
 
-  Helps answer: "Should I keep working on this?" and "Is this worth doing?"
+  Helps answer: "Should I keep working on this?", "Is this worth doing?",
+  and "Is the cost of NOT doing this growing?"
 
   All time values use SWE-hours (SWEh) as units, roughly equivalent to story points.
   One SWEh ≈ 60 minutes of focused software engineering work.
@@ -18,6 +19,10 @@ definitions:
       The rationale form is recommended for non-obvious estimates, especially
       for timebox values where explaining "why stop here?" helps future readers
       understand the break-even point.
+
+      An optional `confidence` annotation marks shaky/speculative estimates so
+      consumers know to re-rate before acting on them. Absence implies the
+      estimate is well-grounded.
     oneOf:
       - type: number
         minimum: 0
@@ -32,6 +37,14 @@ definitions:
           rationale:
             type: string
             description: "Why this estimate? What assumptions or constraints apply?"
+          confidence:
+            type: string
+            enum: [high, medium, low]
+            description: |
+              Optional confidence in the @value estimate. Use when the estimate
+              is shaky, speculative, or based on weak priors. Absence implies
+              high confidence. Low-confidence ratings should be re-evaluated
+              before being used to make prioritization decisions.
         required: ["@value"]
         additionalProperties: false
 
@@ -89,6 +102,36 @@ properties:
 
           Example: 1.5 SWEh because "prevents confusion for me and Claude agents,
           estimate 15 min saved per occurrence × 6 occurrences = 90 min"
+
+      cost-of-delay-2w:
+        $ref: "#/definitions/sweh-value"
+        description: |
+          Expected cost (in SWEh) incurred over the next 2 weeks if the task
+          is NOT done. Optional; omit (or 0) when benefit-2w already captures
+          the full asymmetry of action vs. inaction.
+
+          Distinct from benefit-2w in that it measures downside / urgency, not
+          upside. Use when the harm of inaction is what makes the item pressing:
+
+          - Money / time bled while task remains undone (recurring fees,
+            ongoing ACH pulls, daily friction with no fix in sight)
+          - Decay of hot context on in-progress work (paused barrier work
+            costs re-orientation on resume)
+          - External deadlines (tax filings, ACH cycles, vesting windows)
+            translated to opportunity cost over the 2-week horizon
+          - Sunk-cost / momentum loss on multi-week efforts that stall
+
+          Priority can be ranked WSJF-style:
+            (benefit-2w + cost-of-delay-2w) / timebox
+
+          Items lacking SWEH ratings entirely often do so because their
+          urgency is dominated by cost-of-delay (e.g. financial migrations,
+          strategic V0 work). Adding this field gives them a place in the
+          prioritization frame.
+
+          Example: 1.0 SWEh because "Ameriprise still pulls $458/mo ≈ ~1h
+          SWEh-equivalent of opportunity cost over 2 weeks until ACH
+          revocation lands."
 
     required: ["timebox", "benefit-2w"]
     additionalProperties: false
