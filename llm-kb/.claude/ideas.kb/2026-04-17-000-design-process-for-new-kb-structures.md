@@ -16,7 +16,7 @@ The missing piece is a checklist or thought process for designing a new
 1. Inventory all information that needs persisting
 2. For each item: how will someone look for it? (read path)
 3. For each item: will someone reliably find and dedup when adding? (write path)
-4. Group by natural taxonomy — what's the same *type* of thing?
+4. Group by natural taxonomy -- what's the same *type* of thing?
 5. Check for table/list smell in any planned .md (→ promote to .kb/)
 6. Check for audience mismatch (→ maybe different repo/directory)
 7. Verify summary files accompany their .kb/ directories
