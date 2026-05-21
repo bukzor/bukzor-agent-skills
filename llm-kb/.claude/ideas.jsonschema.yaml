@@ -68,6 +68,57 @@ definitions:
 
 type: object
 properties:
+  managed-by:
+    const: "Skill(llm-subtask)"
+    description: |
+      The skill whose conventions govern this file. Signals to cold-start
+      agents which skill to load before operating on the file.
+
+      The schema pins this to a single value because the schema itself is
+      skill-local — a different skill's files use a different schema with
+      its own const.
+
+  status:
+    description: |
+      Lifecycle state of the file. Drives queue inclusion and template
+      handling. Absence is equivalent to `open` for backward compatibility
+      with files written before this field existed.
+    oneOf:
+      - const: open
+        description: |
+          Active task or idea, eligible for prioritization and execution.
+      - const: done
+        description: |
+          Completed task or absorbed idea, retained for historical reference
+          rather than future action.
+      - const: template
+        description: |
+          Skeleton file shipped under skeleton/ as an installable example;
+          must never be treated as an active task by tooling.
+
+  required-reading:
+    type: array
+    items:
+      type: string
+    description: |
+      Files an agent MUST read before acting on this task. Use absolute paths
+      (~ allowed) or repo-relative paths. Reserve for context that meaningfully
+      changes how the task is approached — not background reading.
+
+  suggested-reading:
+    type: array
+    items:
+      type: string
+    description: |
+      Files or URLs an agent may consult for additional context. Lower bar than
+      required-reading; safe to skip when context is already established.
+
+  related-effort:
+    type: string
+    description: |
+      Path to a related task, session, or design note tracked elsewhere.
+      Used to cross-link parallel work without duplicating its content.
+
   cost-benefit-sweh:
     type: object
     description: |
@@ -144,4 +195,5 @@ properties:
     required: ["timebox", "benefit-2w"]
     additionalProperties: false
 
-additionalProperties: true
+required: ["managed-by"]
+additionalProperties: false
