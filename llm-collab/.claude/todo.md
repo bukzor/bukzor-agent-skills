@@ -1,3 +1,30 @@
+---
+cost-benefit-sweh:
+  timebox:
+    "@value": 3.0
+    rationale: |
+      Residual of inline items only (child todo.kb files rated
+      separately). Two inline bugs/decisions: fix bin/ script arg-
+      passing crash (~1.5h, sed-escape on slashes + slugify path
+      collision), decide HACKING.md fate for kb-only repos (~0.5h
+      decision + ~1h refactor if removed). ~3h.
+    confidence: tentative
+  benefit-2w:
+    "@value": 0.5
+    rationale: |
+      Bug fix removes silent crash for any agent passing path as
+      positional. HACKING.md decision unsticks llm-collab-init UX
+      for kb repos. Modest QoL.
+    confidence: tentative
+  cost-of-delay-2w:
+    "@value": 0.2
+    rationale: |
+      bin/ script crash is currently silent — agents may not even
+      notice; same root cause flagged in llm-subtask, so it's a
+      flowing per-session tax across both skills.
+    confidence: tentative
+---
+
 - [x] todo.kb/2025-11-26-000 (destructure docs into references.kb/)
   - [x] Fix errors in must-read.d/before/creating-documentation.md
   - [x] Extract all content to references.kb/ (file-types, guidelines, workflows)

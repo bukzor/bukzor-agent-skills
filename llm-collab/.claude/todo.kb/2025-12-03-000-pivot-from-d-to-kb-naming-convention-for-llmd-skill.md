@@ -1,3 +1,27 @@
+---
+cost-benefit-sweh:
+  timebox:
+    "@value": 2.0
+    rationale: |
+      Most items checked; `.kb` adoption confirmed, validation works.
+      Residual: update must-read-before triggers, update skeleton
+      templates, test schema validation. ~2h finishing touches.
+    confidence: tentative
+  benefit-2w:
+    "@value": 0.5
+    rationale: |
+      Closes a multi-month rename initiative; unblocks downstream
+      cleanup in dependent repos. ~$50 of structural-cleanliness
+      value.
+    confidence: tentative
+  cost-of-delay-2w:
+    "@value": 0.1
+    rationale: |
+      Mostly done; remaining work doesn't block other items. Tax is
+      "still feels unfinished" — modest per-2w.
+    confidence: tentative
+---
+
 # Pivot from .d to .kb naming convention
 
 **Priority:** Medium

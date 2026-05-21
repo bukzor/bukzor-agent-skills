@@ -1,3 +1,26 @@
+---
+cost-benefit-sweh:
+  timebox:
+    "@value": 0.5
+    rationale: |
+      Single doc addition: integration section in subtask SKILL.md
+      with example pattern + checkbox vs non-checkbox explanation.
+      Self-classified Complexity: Low.
+    confidence: tentative
+  benefit-2w:
+    "@value": 0.3
+    rationale: |
+      Future agents stop misreading the relationship. Modest doc-
+      clarity win.
+    confidence: tentative
+  cost-of-delay-2w:
+    "@value": 0.1
+    rationale: |
+      Misunderstanding leaks across sessions where llm-subtask is
+      loaded. Small per-session cost, flowing.
+    confidence: tentative
+---
+
 # Clarify the relationship between todo.md and todo.kb in subtask skill
 
 **Priority:** Medium

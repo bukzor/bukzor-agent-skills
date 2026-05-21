@@ -6,6 +6,29 @@ required-reading:
 suggested-reading:
   - ~/.claude/skills/llm.kb/SKILL.md
 related-effort: ~/repo/github.com/bukzor/prototype.chatfs/.claude/todo.kb/2026-01-02-000-harmonize-with-llm-skills.md
+cost-benefit-sweh:
+  timebox:
+    "@value": 3.0
+    rationale: |
+      Move docs/, create design.kb/ skeleton, update init script,
+      update references.kb/ docs. Pending user sign-off on
+      tentative steps. Self-classified High priority, Medium
+      complexity. ~3h.
+    confidence: tentative
+  benefit-2w:
+    "@value": 0.5
+    rationale: |
+      Defines the `milestones.kb/` pattern in skeleton — unblocks
+      prototype.chatfs `docs/dev/milestones.kb/` creation. ~$50
+      of unblock-chain value.
+    confidence: tentative
+  cost-of-delay-2w:
+    "@value": 0.2
+    rationale: |
+      Self-classified "blocks prototype.chatfs milestones.kb
+      creation." Each 2w of delay keeps that downstream item
+      blocked too. Cross-repo gating.
+    confidence: tentative
 ---
 
 # Update skeleton to match docs/dev/ pattern from git-partial
