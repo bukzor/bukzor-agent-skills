@@ -14,6 +14,7 @@ cost-benefit-sweh:
       spent ~20 min on it immediately. With ideas.kb/, that's <2 min to capture.
       Expect dozens more ideas during hearts project. Each disruption costs
       ~15-20 min. Preventing 6-8 disruptions = 2 SWEh saved.
+status: done
 ---
 
 # Add ideas.kb/ pattern to llm-collab-docs skill with helper script

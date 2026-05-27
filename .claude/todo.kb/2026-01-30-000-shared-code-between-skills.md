@@ -1,5 +1,21 @@
 ---
 status: in-progress
+cost-benefit-sweh:
+  timebox:
+    '@value': 2
+    confidence: tentative
+    rationale: |
+      Investigate 2-3 alternatives (per-skill venv with project mode, --script + nearby pyproject.toml sources). Read uv docs, test cases per alternative, compare ergonomics. ~1.5-2.5 SWEh.
+  benefit-2w:
+    '@value': 0.5
+    confidence: tentative
+    rationale: |
+      Current [tool.uv.sources] inline works with downsides (verbose boilerplate per script, path duplication). Better solution removes per-script tax across many skills. Frontmatter still status:in-progress.
+  cost-of-delay-2w:
+    '@value': 0.1
+    confidence: tentative
+    rationale: |
+      Boilerplate cost is ongoing per new script. Small but real; no breakage if delayed.
 ---
 
 # Shared Code Between Skills

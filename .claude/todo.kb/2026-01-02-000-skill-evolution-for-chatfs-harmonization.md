@@ -1,3 +1,21 @@
+---
+cost-benefit-sweh:
+  timebox:
+    '@value': 0.1
+    confidence: confident
+    rationale: |
+      Coordination file. Inline work is two grep-checks + one upstream notification once both children land. Same shape as a pointer file with effectively no substance of its own.
+  benefit-2w:
+    '@value': 0
+    confidence: confident
+    rationale: |
+      Direct benefit is zero -- children (llm-collab/2025-12-11-000 and llm-kb/2026-01-02-000) carry all substantive payoff. This file is pure coordination; benefit cannot be realized in 2w independently of the children landing.
+  cost-of-delay-2w:
+    '@value': 0
+    confidence: confident
+    rationale: |
+      No decay; children carry their own urgency. Notification value is bounded by children landing, which is independent of this file.
+---
 <anthropic-skill-ownership llm-subtask />
 
 ---

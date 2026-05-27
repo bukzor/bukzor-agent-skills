@@ -1,3 +1,6 @@
+---
+status: done
+---
 # Design .kb pattern for living design documentation
 
 **Priority:** Medium

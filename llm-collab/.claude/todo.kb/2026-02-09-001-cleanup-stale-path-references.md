@@ -1,3 +1,6 @@
+---
+status: done
+---
 # Cleanup stale path references
 
 **Priority:** Medium

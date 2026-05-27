@@ -1,3 +1,18 @@
+---
+cost-benefit-sweh:
+  timebox:
+    '@value': 1
+    confidence: tentative
+    rationale: |
+      Design discussion, not implementation. Investigate whether the gap is real (milestones actually used vs stale templates), decide home (llm-subtask vs llm-collab vs new skill), sketch minimal pattern. ~1 SWEh discussion.
+  benefit-2w:
+    '@value': 0.5
+    confidence: tentative
+    rationale: |
+      Exploratory; benefit hinges on the gap being real. If real, fills a hole left by removed static templates. If not, the resolution is a short ADR-style 'intentionally omitted' note.
+closeout: 'Resolved 2026-05-26 via Skill(llm-kb)/migrations.kb/. The .kb cardinality classification (and default; .oneOf suffix for or-class) plus the marginal-timebox + effort/wallclock conventions answer all three open questions: (1) milestones ARE a real gap; (2) they live as a cardinality:and .kb pattern under llm-subtask; (3) minimal viable pattern is just a normal .kb whose entries are phases. The migrations.kb pattern itself proves the shape works.'
+status: done
+---
 # Milestone/Phase Planning Pattern Gap
 
 **Priority:** Low
