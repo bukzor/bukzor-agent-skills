@@ -17,3 +17,32 @@ properties:
     description: Explicit condition under which this idea becomes ready to pursue
     type: string
     minLength: 8
+  status:
+    description: |
+      Decision lifecycle of the deferred idea itself. Absent = `accepted`
+      (we considered it and chose to defer).
+      - `idea`: raw, sketched in passing
+      - `proposal`: articulated; would benefit from deeper consideration before trigger fires
+      - `accepted`: design is settled; only execution is deferred
+      - `rejected`: considered and decided not to pursue (kept for visible alternatives)
+      - `superseded`: was the deferred plan, now replaced; see `superseded-by:`
+    enum: [idea, proposal, accepted, rejected, superseded]
+    default: accepted
+  blocked-on:
+    description: |
+      What's needed to advance. Optional; meaningful for `idea` / `proposal`.
+      - `discussion`: human deliberation
+      - `information`: external facts (research, data, prior art)
+    enum: [discussion, information]
+  superseded-by:
+    description: Slug of the entry that replaces this one. Required when status is `superseded`.
+    type: string
+    pattern: "^[a-z0-9-]+$"
+allOf:
+  - if:
+      properties:
+        status:
+          const: superseded
+      required: [status]
+    then:
+      required: [superseded-by]

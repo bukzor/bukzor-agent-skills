@@ -12,3 +12,31 @@ properties:
     items:
       type: string
       pattern: "^[a-z0-9-]+$"
+  status:
+    description: |
+      Decision lifecycle. Absent = `accepted` (the default working position).
+      - `idea`: raw thought, possibly to be discarded
+      - `proposal`: worked out enough to engage with; under consideration
+      - `accepted`: decided; treat as ground truth
+      - `rejected`: considered and not adopted (kept for visible alternatives)
+      - `superseded`: was accepted, now replaced; see `superseded-by:`
+    enum: [idea, proposal, accepted, rejected, superseded]
+    default: accepted
+  blocked-on:
+    description: |
+      What's needed to advance. Optional; meaningful for `idea` / `proposal`.
+      - `discussion`: human deliberation
+      - `information`: external facts (research, data, prior art)
+    enum: [discussion, information]
+  superseded-by:
+    description: Slug of the entry that replaces this one. Required when status is `superseded`.
+    type: string
+    pattern: "^[a-z0-9-]+$"
+allOf:
+  - if:
+      properties:
+        status:
+          const: superseded
+      required: [status]
+    then:
+      required: [superseded-by]

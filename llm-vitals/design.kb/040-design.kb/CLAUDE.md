@@ -26,6 +26,24 @@ concepts that realize the requirements in `030-requirements.kb/`.
 Entries carry `why:` linking to motivating items in
 `030-requirements.kb/` (most common), or higher layers when appropriate.
 
+Optional `status:` field (default `accepted`) tracks decision lifecycle:
+
+- **idea**: raw thought; possibly to be discarded
+- **proposal**: worked out enough to engage with; under consideration
+- **accepted** (default; omit field): decided; treat as ground truth
+- **rejected**: considered and not adopted; kept for visible alternatives
+- **superseded**: replaced by another entry; carries `superseded-by:` slug
+
+Optional `blocked-on:` for `idea` / `proposal` entries:
+
+- **discussion**: human deliberation hasn't resolved
+- **information**: external facts missing (research, data, prior art)
+
+Body length is governed by **information available**, not by status —
+a `proposal` can be exhaustively researched (long body) while still
+undecided. `bloat` audit handles length; status governs decision state
+separately.
+
 ## When to Add / Read
 
 - **Add** when an architectural primitive, mechanism, or boundary
