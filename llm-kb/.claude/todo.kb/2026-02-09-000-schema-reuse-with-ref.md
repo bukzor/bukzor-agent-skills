@@ -163,24 +163,18 @@ single-line `$ref` pointer.
 
 ### URI scheme for cross-skill references: `agent-skill://`
 
-For `$ref` and any other path-resolving cross-skill reference, use:
+The scheme grammar, rationale, resolution contract, and scope evolution
+are recorded in the ADR
+`agent-skill://llm-kb/docs/adr/2026-05-18-000-agent-skill-uri-scheme.md`.
 
-    agent-skill://<skill-name>/<path-within-skill>
+The `$ref`/`$id` work below uses the path-bearing form
+`agent-skill://<skill-name>/<path-within-skill>`, e.g.
+`$ref: agent-skill://llm-subtask/sweh.jsonschema.yaml`.
 
-Examples:
-
-    $id:  agent-skill://llm-subtask/sweh.jsonschema.yaml
-    $ref: agent-skill://llm-subtask/sweh.jsonschema.yaml
-
-Rationale: anchors to Anthropic's **Agent Skills** open standard (released
-2025-12-18, spec at agentskills.io, repo at github.com/agentskills/agentskills;
-adopted by Microsoft VS Code/GitHub, OpenAI ChatGPT/Codex, Cursor, Goose,
-OpenCode). The "agent-skill" qualifier disambiguates from other meanings of
-"skill" (Alexa Skills, Semantic Kernel skills, etc.) and gives the URI scheme
-a stable normative referent.
-
-`Skill(<name>)` notation in human-facing fields like `managed-by:` stays as-is;
-URIs only apply where path resolution matters.
+(The 2026-05-18 stance that `Skill(<name>)` stays in human-facing fields
+was broadened 2026-05-27 -- all skill references now use the URI, swept by
+`agent-skill://llm-kb/migrations.kb/2026-05-27-000-skill-notation-to-agent-skill-uri.md`.
+See the ADR.)
 
 ### Architecture: stub-`$ref` first, data-side `$schema` later
 
