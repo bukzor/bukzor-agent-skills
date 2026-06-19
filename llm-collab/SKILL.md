@@ -9,7 +9,7 @@ setup: |
     ```yaml
     --- # workaround: anthropics/claude-code#13003
     depends:
-        - skills/llm-collab
+        - Skill(llm-collab)
     ```
 ---
 
@@ -101,10 +101,10 @@ See `Skill(llm-design-kb)` for the full pattern.
 
 ## Frontmatter Directives
 
-CLAUDE.md files use frontmatter to give agents operational instructions. These are **action triggers**, not passive metadata.
+CLAUDE.md and other agent-context markdown files use frontmatter to give agents operational instructions. These are **action triggers**, not passive metadata.
 
-- `requires:` — Read these files before acting in this directory.
-- `depends:` — Read when relevant.
+- `requires:` — all agents MUST read the listed files before acting on this file's content; failure to do so WILL result in task failure.
+- `depends:` — read when relevant.
 
 ## Adaptation Guidelines
 
