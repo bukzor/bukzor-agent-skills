@@ -134,3 +134,9 @@ grep -l "status: contested" claims.kb/*.md   # Find contested knowledge
 See `docs/dev/adr/` for decision records covering collection types, lexical
 scoping, elaboration conventions, terminology, similarity groups, and the
 open world assumption.
+
+## See also
+
+- `Skill(llm-design-kb)` — the **normative** companion (values, design rules,
+  requirements, goals). When content isn't truth-apt — *held/desired* rather
+  than *true/false* — it belongs in a design tower, not here. Cross-link the two.
