@@ -27,8 +27,7 @@ properties:
     format: uri
   date-published:
     description: When the source was published (ISO 8601)
-    type: string
-    format: date
+    type: date  # YAML parses ISO dates (2026-03-10) as date objects; see llm-kb schema-design
   likelihood:
     description: How likely this source is to be reliable, 0-1 (default 1.0 — trusted until told otherwise)
     default: 1.0

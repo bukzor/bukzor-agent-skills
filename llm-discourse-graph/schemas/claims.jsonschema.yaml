@@ -25,8 +25,7 @@ properties:
       type: string
   date-observed:
     description: When this was observed or collected, if empirical (ISO 8601)
-    type: string
-    format: date
+    type: date  # YAML parses ISO dates (2026-03-10) as date objects; see llm-kb schema-design
   depends:
     description: Paths to nodes this claim depends on for context
     type: array
