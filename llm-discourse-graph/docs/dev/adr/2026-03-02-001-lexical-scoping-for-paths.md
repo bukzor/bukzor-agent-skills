@@ -1,6 +1,7 @@
 ---
-status: accepted
+status: superseded
 date: 2026-03-02
+superseded-by: 2026-07-03-000-file-relative-paths.md
 ---
 
 # Lexical scoping for path resolution

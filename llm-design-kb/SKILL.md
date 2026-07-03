@@ -34,6 +34,13 @@ Each layer answers a question that motivates the layer below:
 
 All layers are optional. Create as needed.
 
+Auxiliary collections that don't occupy a why/how rung -- content
+relevant to the design but not itself motivated-by/motivating a
+numbered layer -- get an unnumbered `.kb/` (e.g. `use-cases.kb/`,
+`background.kb/`). Only number a collection if it actually sits in the
+why/how chain (something's `why:` points at it, and its own `why:`
+points at the layer above).
+
 `070-future-work.kb/` captures ideas worth remembering but not worth pursuing
 now.
 

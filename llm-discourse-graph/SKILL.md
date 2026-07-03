@@ -40,8 +40,11 @@ and where it comes from.
 ## Scoping and hierarchy
 
 Elaboration uses the standard `llm.kb` nesting convention: `$ITEM.kb/`
-as a sibling of `$ITEM.md`. Sub-scopes contain the same five collection
-types (only those needed). The project root is itself an implicit scope.
+as a sibling of `$ITEM.md`. A sub-scope may contain any of this skill's
+collection types (only those needed — none are mandatory, and a scope
+may have zero of a given type) plus project-specific auxiliary
+collections (e.g. `background.kb/`, `technical-policy.kb/` from
+`Skill(llm-design-kb)`). The project root is itself an implicit scope.
 
 ### When to elaborate
 
@@ -59,14 +62,18 @@ is answered), update the parent node's status and body accordingly.
 
 ## Path resolution
 
-Cross-references use collection-relative paths: `claims.kb/conways-law.md`.
-Resolution walks up ancestor scopes until a match is found, up to project root.
+Cross-references are plain file-relative paths, resolved exactly like any
+relative filesystem path from the referencing file's own directory (e.g.
+`../claims.kb/conways-law.md`). There is no collection-relative or
+ancestor-walking resolution — moving a file requires updating every path
+that points to it and every path it itself contains (see ADR
+`2026-07-03-000-file-relative-paths.md`, which supersedes the original
+lexical-scoping decision).
 
-- Hoisting is non-breaking
-- Local files shadow ancestors with the same name
-- Content lives at the narrowest scope containing all its uses
-- Prefer moving a node down over reaching in with explicit paths —
-  upward resolution handles outer references naturally
+- Content lives at the narrowest scope containing all its uses —
+  a placement judgment made once, not a mechanism to lean on
+- Prefer placing a node at the scope it's used from over reaching up
+  with a long `../../..` chain
 
 ## Schemas
 
