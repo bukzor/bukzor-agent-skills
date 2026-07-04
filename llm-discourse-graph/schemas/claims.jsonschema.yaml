@@ -19,7 +19,9 @@ properties:
     minimum: 0
     maximum: 1
   sources:
-    description: Paths to sources providing this claim (for observational/empirical claims)
+    description: >
+      Paths to sources providing this claim -- empirical provenance, or the
+      discussion participant who asserted it (kind user/assistant)
     type: array
     items:
       type: string

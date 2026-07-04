@@ -8,7 +8,8 @@ supersedes: 2026-03-02-001-lexical-scoping-for-paths.md
 
 ## Context
 
-ADR-001 decided on ancestor-walking path resolution, explicitly noting
+The lexical-scoping ADR (2026-03-02-001) decided on ancestor-walking
+path resolution, explicitly noting
 "Tooling must implement ancestor-walking resolution" as a consequence.
 No such tool was ever built. The only real enforcement is `llm-kb`'s
 cross-references self-audit, which checks that a written relative path
@@ -28,7 +29,7 @@ $referencing_file) && test -e $path` would find.
 
 - Hoisting is no longer non-breaking: moving a file requires updating
   every path that points to it and every path it itself contains. This
-  is the cost ADR-001 was explicitly trying to avoid, now accepted.
+  is the cost lexical scoping was explicitly trying to avoid, now accepted.
 - Shadowing (a local file silently overriding an ancestor of the same
   name) is no longer a real mechanism -- there was never tooling that
   implemented it, so nothing actually relied on it.

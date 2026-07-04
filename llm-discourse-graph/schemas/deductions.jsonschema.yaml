@@ -27,6 +27,13 @@ properties:
     type: array
     items:
       type: string
+  sources:
+    description: >
+      Paths to sources providing this deduction -- typically the discussion
+      participant who asserted the inference (kind user/assistant)
+    type: array
+    items:
+      type: string
   likelihood:
     description: How likely this deduction is to be sound, 0-1 (default 1.0 — sound until told otherwise)
     default: 1.0

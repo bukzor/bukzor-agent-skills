@@ -26,7 +26,7 @@ and where it comes from.
 | `questions.kb/` | Open inquiries that structure investigation |
 | `claims.kb/` | Propositional assertions — observed or hypothesized |
 | `deductions.kb/` | Structured inference — premises that entail or contradict a conclusion |
-| `sources.kb/` | Provenance references (papers, reports, testimony) |
+| `sources.kb/` | Provenance references (papers, reports, testimony, discussion participants) |
 | `definitions.kb/` | What terms mean — scope, boundaries, usage |
 
 ### When to use each
@@ -82,7 +82,8 @@ they govern. See `schemas/` in this skill directory.
 
 ## Relations and metadata
 
-Cross-references are paths in YAML frontmatter (`claims.kb/x.md`). Epistemic
+Cross-references are file-relative paths in YAML frontmatter
+(`../claims.kb/x.md`). Epistemic
 metadata (status, likelihood, kind) tracks the standing of
 each node. Questions derive their state from field presence: `resolved` means
 answered, `candidate-resolutions` means under investigation, neither means
@@ -138,8 +139,8 @@ grep -l "status: contested" claims.kb/*.md   # Find contested knowledge
 
 ## Design rationale
 
-See `docs/dev/adr/` for decision records covering collection types, lexical
-scoping, elaboration conventions, terminology, similarity groups, and the
+See `docs/dev/adr/` for decision records covering collection types, path
+resolution, elaboration conventions, terminology, similarity groups, and the
 open world assumption.
 
 ## See also

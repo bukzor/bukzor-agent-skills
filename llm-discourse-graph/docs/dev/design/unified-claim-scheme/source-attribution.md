@@ -55,9 +55,9 @@ logical structure (parentage = why/how); temporal order is reconstructable
 by sorting on source timestamps. Two independent orderings, cleanly
 separated.
 
-### Upward path resolution and sources
+### Shared sources and scope placement
 
-The "look in parent scope" convention means reparenting a source file
-to a broader scope is non-breaking for all inner references. A source
-shared across multiple sub-scopes naturally lives at their common
-ancestor — upward resolution finds it from anywhere below.
+A source shared across multiple sub-scopes lives at their common
+ancestor. References reach it via explicit `../` chains -- paths are
+file-relative (ADR `2026-07-03-000-file-relative-paths.md`), so
+reparenting a source means updating every reference to it.

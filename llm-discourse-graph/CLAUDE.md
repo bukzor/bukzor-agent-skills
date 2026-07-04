@@ -1,6 +1,6 @@
 --- # workaround: anthropics/claude-code#13003
 depends:
-    - skills/llm-collab
+    - Skill(llm-collab)
 ---
 
 # llm-discourse-graph — Development Guide
@@ -30,7 +30,7 @@ discourse graphs. Built on the `llm.kb` nesting convention.
 
 - Schemas use `additionalProperties: false` — strict field governance
 - `likelihood` fields use 0-1 scale, default 1.0 (certain until told otherwise)
-- Cross-references are collection-relative paths with lexical scoping
+- Cross-references are plain file-relative paths (no resolution layer)
 
 ## Testing
 

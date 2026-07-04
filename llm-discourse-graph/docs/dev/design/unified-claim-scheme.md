@@ -130,14 +130,10 @@ advisory.
 
 ### Path Resolution
 
-Cross-references use collection-relative paths. Resolution walks up
-ancestor scopes until a match is found (upward/lexical scoping).
-
-- Hoisting is non-breaking
-- Local files shadow ancestors
-- Content lives at the narrowest scope containing all its uses
-- "Move nodes down, don't reach in" — upward resolution handles outer
-  references naturally
+Cross-references are plain file-relative paths -- see ADR
+`2026-07-03-000-file-relative-paths.md`, which superseded lexical
+scoping. Content still lives at the narrowest scope containing all its
+uses, as a placement judgment rather than a resolution mechanism.
 
 ## Schemas
 

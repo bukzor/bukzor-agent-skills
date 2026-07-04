@@ -67,16 +67,11 @@ or in body text. Open question: whether this needs revisiting.
 
 ### Path resolution
 
-Cross-references use upward/lexical scoping — walk up ancestor scopes
-until a match is found.
-
-- Hoisting (moving a node to a broader scope) is non-breaking
-- Local files shadow ancestors with the same name
-- "Move nodes down, don't reach in" — inner scopes reference outer
-  nodes without explicit paths
-
-This convention proved robust during the vim config decomposition.
-Reparenting sources to broader/deeper scopes doesn't break references.
+Cross-references are plain file-relative paths -- see ADR
+`2026-07-03-000-file-relative-paths.md`, which superseded the
+upward/lexical scoping originally described here. Moving a node means
+updating every path to and from it; place nodes at the narrowest scope
+containing all their uses.
 
 ## Q&A (2026-03-04 lane-mixing review)
 
