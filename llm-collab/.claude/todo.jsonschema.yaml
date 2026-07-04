@@ -83,18 +83,55 @@ properties:
       Lifecycle state of the file. Drives queue inclusion and template
       handling. Absence is equivalent to `open` for backward compatibility
       with files written before this field existed.
+
+      Two tiers, both closed. Terminal values (done, abandoned, duplicate)
+      and the non-task marker `template` remove the file from the open
+      queue; non-terminal values (open, deferred, blocked, not-started)
+      all mean "open, with detail". Tooling treats an unknown value as
+      open and warns — fail-safe behavior, fail-loud detection.
+      Registering a new value means amending this schema and the
+      enumerator (claude-open-tasks-list) in lockstep; see task-archeology
+      decision.kb/status-vocabulary-two-tier.md. `in-progress` is
+      deliberately absent: session liveness belongs in sessions.kb, not
+      task frontmatter, because nothing transitions it back when a
+      session dies.
     oneOf:
       - const: open
         description: |
           Active task or idea, eligible for prioritization and execution.
+      - const: deferred
+        description: |
+          Open, deliberately parked for later; a low cost-of-delay-2w
+          rating should corroborate.
+      - const: blocked
+        description: |
+          Open, cannot proceed until an external dependency clears; body
+          should name the blocker.
+      - const: not-started
+        description: |
+          Open, no work artifacts exist yet.
       - const: done
         description: |
-          Completed task or absorbed idea, retained for historical reference
-          rather than future action.
+          Terminal: completed task or absorbed idea, retained for
+          historical reference rather than future action.
+      - const: abandoned
+        description: |
+          Terminal: deliberately not doing (WONTFIX); body should say why.
+      - const: duplicate
+        description: |
+          Terminal: tracked elsewhere; body should point to the survivor.
       - const: template
         description: |
           Skeleton file shipped under skeleton/ as an installable example;
           must never be treated as an active task by tooling.
+
+  closeout:
+    type: string
+    description: |
+      Resolution note for a completed item: when, where, and how it was
+      resolved. Optional; typically present on `status: done` entries to
+      record disposition (e.g. "Resolved 2026-05-26 via
+      Skill(llm-kb)/migrations.kb/").
 
   required-reading:
     type: array
