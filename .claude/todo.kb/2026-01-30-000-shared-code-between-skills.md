@@ -1,5 +1,4 @@
 ---
-status: in-progress
 cost-benefit-sweh:
   timebox:
     '@value': 2
