@@ -88,8 +88,9 @@ if (( DRY_RUN )); then
   exit 0
 fi
 
-sed -e "s/YYYY-MM-DD/$DATE/g" \
-    -e "s/TITLE/$TITLE/g" \
-    "$SKELETON/docs/dev/devlog/YYYY-MM-DD-000-example-entry.md" > "$FILE"
+CONTENT=$(<"$SKELETON/docs/dev/devlog/YYYY-MM-DD-000-example-entry.md")
+CONTENT=${CONTENT//YYYY-MM-DD/$DATE}
+CONTENT=${CONTENT//TITLE/$TITLE}
+printf '%s\n' "$CONTENT" > "$FILE"
 
 echo >&2 "✅ Created"

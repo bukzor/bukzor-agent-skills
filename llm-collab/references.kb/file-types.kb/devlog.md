@@ -1,5 +1,5 @@
 ---
-filename: docs/devlog/YYYY-MM-DD-NNN-slug.md
+filename: docs/dev/devlog/YYYY-MM-DD-NNN-slug.md
 audience: Future sessions
 purpose: Capture reasoning, principles, and conventions that diffs can't
 ---
@@ -24,5 +24,5 @@ purpose: Capture reasoning, principles, and conventions that diffs can't
 **Create via:** `llm-collab-devlog "Entry title"`
 
 **Templates:**
-- [skeleton/docs/devlog/YYYY-MM-DD-000-example-entry.md](../../skeleton/docs/devlog/YYYY-MM-DD-000-example-entry.md)
-- [skeleton/docs/devlog/CLAUDE.md](../../skeleton/docs/devlog/CLAUDE.md) - Directory guide
+- [skeleton/docs/dev/devlog/YYYY-MM-DD-000-example-entry.md](../../skeleton/docs/dev/devlog/YYYY-MM-DD-000-example-entry.md)
+- [skeleton/docs/dev/devlog/CLAUDE.md](../../skeleton/docs/dev/devlog/CLAUDE.md) - Directory guide

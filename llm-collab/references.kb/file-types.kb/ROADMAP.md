@@ -29,7 +29,7 @@ purpose: High-level project direction and milestone overview
 
 **Goal:** [What this milestone achieves]
 
-See [docs/milestones/01-milestone-name.md](docs/milestones/01-milestone-name.md) for details.
+See [docs/dev/milestones.kb/01-milestone-name.md](docs/dev/milestones.kb/01-milestone-name.md) for details.
 ```
 
 **Status values:**
@@ -37,8 +37,10 @@ See [docs/milestones/01-milestone-name.md](docs/milestones/01-milestone-name.md)
 - `In Progress` - Actively being worked on
 - `Complete` - All success criteria met
 
-**Relationship to milestones/:**
-ROADMAP.md is the index/summary; docs/milestones/ contains full breakdowns.
+**Relationship to milestones.kb/:**
+ROADMAP.md is the index/summary; docs/dev/milestones.kb/ contains full
+breakdowns (one file per milestone/phase — see ADR
+`2025-12-11-001-separate-user-facing-and-developer-facing-documentation.md`).
 Update ROADMAP.md when milestone status changes.
 
 **When to update:**

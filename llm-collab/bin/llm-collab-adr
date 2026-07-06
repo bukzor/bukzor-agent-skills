@@ -85,8 +85,10 @@ if (( DRY_RUN )); then
   exit 0
 fi
 
-sed -e "s/Example Decision Title/$TITLE/g" -e "s/YYYY-MM-DD/$DATE/g" \
-    "$SKELETON/docs/dev/adr/YYYY-MM-DD-000-example-decision.md" > "$FILE"
+CONTENT=$(<"$SKELETON/docs/dev/adr/YYYY-MM-DD-000-example-decision.md")
+CONTENT=${CONTENT//"Example Decision Title"/$TITLE}
+CONTENT=${CONTENT//YYYY-MM-DD/$DATE}
+printf '%s\n' "$CONTENT" > "$FILE"
 
 echo >&2 "✅ Created"
 

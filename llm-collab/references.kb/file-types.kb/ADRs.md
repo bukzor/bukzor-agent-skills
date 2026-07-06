@@ -1,5 +1,5 @@
 ---
-filename: docs/adr/YYYY-MM-DD-NNN-title.md
+filename: docs/dev/adr/YYYY-MM-DD-NNN-title.md
 audience: Developers, future sessions
 purpose: Record significant design decisions with context and rationale
 ---
@@ -16,7 +16,7 @@ purpose: Record significant design decisions with context and rationale
 
 **Structure:**
 ```
-docs/adr/
+docs/dev/adr/
 ├── 2025-12-02-000-skill-ownership-header.md
 ├── 2025-12-02-001-cross-skill-referencing.md
 └── ...
@@ -40,8 +40,8 @@ docs/adr/
 - `Superseded` - Replaced by another ADR
 - `Deprecated` - No longer applies
 
-**Script:** `scripts/new-adr.sh "Decision title"` creates a new ADR with template.
+**Create via:** `llm-collab-adr "Decision title"`
 
 **Integration:**
-- Reference from HACKING.md: "See [docs/adr/](docs/adr/) for architecture decisions"
+- Reference from HACKING.md: "See [docs/dev/adr/](docs/dev/adr/) for architecture decisions"
 - Link specific ADRs when explaining design choices in code comments or docs

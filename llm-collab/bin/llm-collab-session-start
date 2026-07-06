@@ -52,8 +52,8 @@ if [ -d .claude/todo.kb ]; then
 fi
 
 # Read latest devlog
-if [ -d docs/devlog ]; then
-  LAST_LOG=$(find docs/devlog -maxdepth 1 -name '*.md' -print0 | xargs -r0 ls -1t | sed -n '/README/d; 1p')
+if [ -d docs/dev/devlog ]; then
+  LAST_LOG=$(find docs/dev/devlog -maxdepth 1 -name '*.md' ! -name CLAUDE.md -print0 | xargs -r0 ls -1t | sed -n '1p')
   if [ -n "$LAST_LOG" ]; then
     echo "=== Latest Devlog: $(basename "$LAST_LOG") ==="
     cat "$LAST_LOG"
@@ -62,8 +62,8 @@ if [ -d docs/devlog ]; then
 fi
 
 # Show recent ADRs
-if [ -d docs/adr ]; then
-  ADR_FILES=$(find docs/adr -maxdepth 1 -name '*.md' -print0 | xargs -r0 ls -1t | sed -n '/README/d; 1,3p')
+if [ -d docs/dev/adr ]; then
+  ADR_FILES=$(find docs/dev/adr -maxdepth 1 -name '*.md' ! -name CLAUDE.md -print0 | xargs -r0 ls -1t | sed -n '1,3p')
   if [ -n "$ADR_FILES" ]; then
     echo "=== Recent ADRs ==="
     echo "$ADR_FILES" | while read -r adr; do
@@ -77,6 +77,6 @@ fi
 echo "✅ Session context loaded"
 echo ""
 echo "Quick commands:"
-echo "  - Create TODO: $HERE/new-todo.sh \"Task title\""
-echo "  - Create ADR: $HERE/new-adr.sh \"Decision title\""
-echo "  - Create devlog: $HERE/new-devlog.sh"
+echo "  - Create TODO: llm-subtask-todo \"Task title\""
+echo "  - Create ADR: llm-collab-adr \"Decision title\""
+echo "  - Create devlog: llm-collab-devlog"

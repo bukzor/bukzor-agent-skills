@@ -139,3 +139,66 @@ Related work:
 - Already updated devlog/README.md → devlog/CLAUDE.md with workaround frontmatter
 - Already removed static "Recent Entries" sections (ls as source of truth)
 - git-partial repo now uses this pattern successfully
+
+## Progress (2026-07-06)
+
+The bulk of "Implementation Steps" was already done by an earlier,
+unlogged pass — verified against the actual skeleton on disk, not just
+this file's checklist (which had drifted stale and understated
+reality):
+
+- `docs/dev/{adr,devlog,design,technical-policy.kb}/` all exist;
+  `docs/architecture/`, `docs/milestones/`, and the old monolithic
+  `design-rationale.md`/`technical-design.md`/`development-plan.md`
+  files are already gone.
+- `llm-collab-init` already creates the `docs/dev/` structure and
+  self-migrates `docs/adr` → `docs/dev/adr`, `docs/devlog` →
+  `docs/dev/devlog` for existing projects.
+- Design docs landed as `docs/dev/design/` (plain, not `design.kb/`
+  as this file proposed) plus a separate `docs/dev/technical-policy.kb/`
+  — a finer split than originally planned, superseding the "Create
+  design.kb/ skeleton template" step.
+
+What was genuinely still broken — three places never updated when the
+`docs/dev/` move happened, found by tracing what `llm-collab-init`
+actually creates against what other files assume:
+- `bin/llm-collab-session-start` read from the pre-migration
+  `docs/adr`/`docs/devlog` paths, so on any already-migrated project
+  (i.e. every project `llm-collab-init` produces today) it silently
+  showed no devlog/ADR context at all. Its own "Quick commands" output
+  also named nonexistent scripts (`new-adr.sh` etc.) instead of the
+  real `llm-collab-adr`/`llm-collab-devlog`/`llm-subtask-todo`. Fixed;
+  verified end-to-end with a fresh `llm-collab-init` + `llm-collab-session-start`
+  run — latest devlog now correctly surfaces.
+- `references.kb/file-types.kb/ADRs.md` and `devlog.md` still declared
+  `docs/adr/`/`docs/devlog/` in frontmatter and a since-removed
+  `scripts/new-adr.sh`; `devlog.md`'s template links pointed at the
+  pre-migration skeleton path. Fixed.
+- `skeleton/docs/dev/devlog/README.md` was stale leftover cruft (static
+  "Recent Entries: None yet") contradicting the CLAUDE.md-is-canonical,
+  ls-is-source-of-truth convention this file's own Notes section says
+  was already adopted — no sibling dir (`adr/`, `design/`,
+  `technical-policy.kb/`) has one, and `TESTING.md`'s skeleton
+  integrity check never expected it. Deleted.
+
+## Progress (2026-07-06, continued) — `docs/milestones/` reference resolved
+
+Corrected the earlier note above: the milestones location was **not**
+actually an open pattern question — the ADR
+(`docs/dev/adr/2025-12-11-001-separate-user-facing-and-developer-facing-documentation.md`)
+and the `llm-kb` migration entry
+(`llm-kb/migrations.kb/2025-12-11-000-docs-dev-separation-with-auto-migration.md`)
+already both name the target consistently: `docs/dev/milestones.kb/`,
+parallel to `design.kb/`. The only thing stale was
+`references.kb/file-types.kb/ROADMAP.md`, which still pointed at the
+pre-decision `docs/milestones/`. Fixed (path + heading updated to
+`docs/dev/milestones.kb/`, with a citation to the ADR).
+
+**Still genuinely open:** unlike `design/` and `technical-policy.kb/`,
+no `skeleton/docs/dev/milestones.kb/` directory or `CLAUDE.md` template
+has ever been built, and `llm-collab-init` doesn't create or migrate
+one. The *destination path* is now settled and documented everywhere
+consistently; *building the skeleton template + init wiring* is
+separate, real implementation work — not done in this pass. Also still
+open: the `complete-example/`-style example-update step (this todo has
+none, but see the parallel llm-kb rename todo).

@@ -99,6 +99,33 @@ rm -rf "$tmpdir"
 - `docs/dev/design/CLAUDE.md`
 <!-- TODO: ideas.kb not yet implemented (see todo.kb/2025-11-26-001) -->
 
+## Title-With-Slash Regression Test
+
+`llm-collab-adr`/`llm-collab-devlog` used to build the entry from the
+template via `sed -e "s/TITLE/$TITLE/g"` — a title containing `/`
+collided with sed's delimiter and failed with `sed: unknown option to
+'s'`, leaving a 0-byte entry file. Fixed by using bash parameter
+expansion (`${var//a/b}`) instead of `sed`. Regression check:
+
+```bash
+tmpdir=$(mktemp -d)
+cd "$tmpdir"
+~/.claude/skills/llm-collab/bin/llm-collab-init . >/dev/null
+
+~/.claude/skills/llm-collab/bin/llm-collab-devlog "Fix docs/dev migration drift"
+echo "--- devlog exit: $? ---"
+~/.claude/skills/llm-collab/bin/llm-collab-adr "Decision with a slash/in it"
+echo "--- adr exit: $? ---"
+
+find docs/dev/{devlog,adr} -newer CLAUDE.md -name '*.md' ! -name CLAUDE.md -size +0c \
+  && echo "✓ non-empty entries created" || echo "✗ entry creation failed"
+
+cd -
+rm -rf "$tmpdir"
+```
+
+**Expected:** Both exit codes 0, both entry files non-empty.
+
 ## Script Path Audit
 
 Grep scripts for hardcoded paths and verify they match skeleton:
