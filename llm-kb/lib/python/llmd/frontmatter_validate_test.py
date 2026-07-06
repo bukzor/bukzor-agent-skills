@@ -3,7 +3,7 @@
 
 import pytest
 
-from llmd import frontmatter_validate as fv
+from . import frontmatter_validate as fv
 
 # TODO: Add unit tests for:
 # - Union types: type: [string, null] should accept both str and NoneType

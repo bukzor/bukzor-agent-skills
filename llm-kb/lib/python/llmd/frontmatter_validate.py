@@ -102,6 +102,8 @@ class ValidationResult:
                 for error in self.errors:
                     lines.append(f"    {indent}{error}")
                 return "\n".join(lines)
+            case _:
+                raise AssertionError(self.kind)
 
 
 def validate_one_file(md_file, schema_override, depth):
