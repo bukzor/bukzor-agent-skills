@@ -1,1 +1,25 @@
-../lib/python/llmd/frontmatter_validate.py
+#!/bin/bash
+set -euo pipefail
+shopt -s failglob
+export DEBUG="${DEBUG:-0}"
+
+onerror() {
+  error="$?"
+  echo >&2 "ERROR($error)"
+  exit "$error"
+}
+trap onerror ERR
+
+# Runs frontmatter_validate as a real module (`python -m`), not as a
+# parentless script -- gives it a correct __package__ so its own
+# package-relative imports (`from .types import ...`) just work, no
+# dual-mode import bootstrap needed in the module itself.
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if (( DEBUG > 0 )); then
+  set -x
+fi
+
+cd "$here/.."
+exec env PYTHONPATH="lib/python${PYTHONPATH:+:$PYTHONPATH}" \
+  uv run python -m llmd.frontmatter_validate "$@"

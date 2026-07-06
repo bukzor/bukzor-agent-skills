@@ -41,53 +41,65 @@ is flagged Unknown regardless of what's done with its return value,
 since the diagnostic attaches to the import statement itself, not any
 downstream expression.
 
-### `types.py` renamed to `_json_types.py`
+### `bin/llm.kb-validate` becomes a launcher script, not a symlink to the module
 
-**Rationale:** `bin/llm.kb-validate` is a symlink to
-`frontmatter_validate.py` (per `docs/adr/2025-12-09-003`), run standalone
-via `uv run --script` with no parent package. That path requires
-inserting the module's own directory onto `sys.path`, at which point a
-module literally named `types.py` would shadow the stdlib `types` module
-for every other import in the process. Not a hypothetical: several
-dependencies (e.g. `dataclasses`) reference `types` internally.
+**Problem:** `frontmatter_validate.py` gained internal sibling imports
+(`from ._jsonschema_adapter import ...`, `from .types import ...`) this
+session. `bin/llm.kb-validate` was a symlink straight to that file (per
+`docs/adr/2025-12-09-003`), so running it executed the module directly
+as `__main__` with no parent package -- its own relative imports raised
+`ImportError`.
 
-### Dual-mode import via `if TYPE_CHECKING: ... else: try/except`
+**Decision:** `bin/llm.kb-validate` is now a small bash launcher
+(replacing the symlink) that runs the module properly, as a real module:
 
-**Rationale:** `frontmatter_validate.py` and `_jsonschema_adapter.py`
-both need to work two ways: imported as `llmd.frontmatter_validate` (pytest,
-other package consumers) and run standalone as `bin/llm.kb-validate`
-(`__name__ == '__main__'`, no parent package — plain relative imports
-raise `ImportError`). The runtime fix is an unremarkable
-try-relative-except-sys.path-bootstrap. The type-checking wrinkle:
-`basedpyright`'s `reportImplicitRelativeImport` flags the bare
-(non-relative) import in the except-fallback as *always* wrong, since it
-can't know that branch only executes in the no-package case. Wrapping the
-whole thing in `if TYPE_CHECKING: <relative-only> else: <try/except>`
-gives the checker the accurate (relative) view for type purposes while
-the real dual-mode logic runs unanalyzed at runtime — confirmed empirically
-that `basedpyright` does not lint inside the `TYPE_CHECKING`-false branch.
+```bash
+cd "$here/.."
+exec env PYTHONPATH="lib/python${PYTHONPATH:+:$PYTHONPATH}" \
+  uv run python -m llmd.frontmatter_validate "$@"
+```
+
+`python -m llmd.frontmatter_validate` gives the module a correct
+`__package__` (`llmd`), so every relative import inside it -- and inside
+`_jsonschema_adapter.py`, which it imports -- just works, no
+special-casing anywhere in the package's own source. `frontmatter_validate.py`
+lost its `uv run --script` shebang and PEP 723 header (dead weight now
+that nothing executes it directly; `llm-kb/pyproject.toml` already
+declares the same deps and `uv run` picks them up from cwd) and its
+executable bit, and gained a docstring note not to run it directly.
+
+**Alternatives considered:** patch around the symlink at the Python
+level -- `try: <relative import> except ImportError: <sys.path
+bootstrap + absolute import>` inside `frontmatter_validate.py` itself,
+guarded by `if TYPE_CHECKING:` so `basedpyright`'s
+`reportImplicitRelativeImport` wouldn't flag the fallback branch.
+Rejected: it solves the symlink's problem by complicating the module
+instead of fixing the actual cause (running a package member as a
+parentless script), and a bootstrap that inserts a module's own
+directory onto `sys.path` for a bare import is one bad neighbor away
+from shadowing a same-named stdlib module. `python -m` sidesteps the
+entire class of problem for free.
 
 ## Conventions Established
 
 - **Ill-typed third-party boundary → its own small adapter module,** named
   for the library it wraps (`_jsonschema_adapter.py`), leading-underscore
   since it's an internal implementation seam, not public API.
-- **Never name a sibling module after a stdlib module** (`types.py` →
-  `_json_types.py`) when that module might ever be imported off a
-  directly-inserted `sys.path` entry, even if today's import graph makes
-  it seem safe.
-- **`bin/` symlink scripts that gain internal sibling imports** need the
-  `TYPE_CHECKING`-guarded dual-mode import pattern above, not just a bare
-  try/except — otherwise the standalone-execution branch fails pyright's
-  relative-import check even though it's correct at runtime.
+- **A `bin/` entry point for a package member is a launcher, not a
+  symlink to the member itself**, the moment that member has internal
+  sibling imports. `python -m pkg.module` (or the equivalent
+  `runpy.run_module`) gives correct `__package__` for free; patching the
+  module to tolerate being run parentless solves the wrong end of the
+  problem.
 
 ## Verification
 
 - `basedpyright` (repo root, whole tree): 0 errors, 0 warnings, 0 notes.
 - `uv run pytest lib/python/llmd/frontmatter_validate_test.py`: 4 passed.
-- `uv run bin/llm.kb-validate .` (standalone symlink path): 65 files,
-  0 errors — matches pre-refactor baseline, confirming the dual-mode
-  import fix didn't just satisfy the type checker but actually works.
+- `bin/llm.kb-validate .`, both from `llm-kb/` and from an unrelated cwd
+  via absolute path: matches the pre-refactor baseline (0 errors across
+  every real `.kb/` file).
+- `shellcheck bin/llm.kb-validate`: clean.
 
 ## Filed
 

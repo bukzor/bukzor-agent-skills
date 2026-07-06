@@ -156,7 +156,7 @@ Design for yaml-language-server compatibility:
 
 ## Success Criteria
 
-- [ ] `references/schema-reuse.md` exists and is comprehensive
+- [x] `references/schema-reuse.md` exists and is comprehensive
 - [x] Validator resolves file-relative `$ref`
 - [ ] `complete-example/` demonstrates the pattern
 - [ ] yaml-language-server works with the pattern (manual verification)

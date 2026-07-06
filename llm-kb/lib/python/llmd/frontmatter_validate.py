@@ -1,14 +1,11 @@
-#!/usr/bin/env -S uv run --script
-# /// script
-# dependencies = [
-#   "pyyaml",
-#   "jsonschema",
-# ]
-# ///
 """
 Validate frontmatter in markdown files against JSON schemas.
 
 Prevents errors by catching schema violations early.
+
+Run via `bin/llm.kb-validate` (`python -m llmd.frontmatter_validate` under
+the hood) -- not directly -- so this module always has a real parent
+package and its own relative imports below just work.
 """
 
 import argparse
@@ -17,23 +14,14 @@ import sys
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass
 from pathlib import Path
-from typing import TYPE_CHECKING, cast, override
+from typing import cast, override
 
 import yaml
 from referencing import Registry, Resource
 from referencing.jsonschema import DRAFT202012, Schema, SchemaRegistry
 
-if TYPE_CHECKING:
-    from ._jsonschema_adapter import iter_schema_errors
-    from ._json_types import JsonObj, JsonValue
-else:
-    try:
-        from ._jsonschema_adapter import iter_schema_errors
-        from ._json_types import JsonObj, JsonValue
-    except ImportError:  # run standalone via a bin/ symlink -- no parent package
-        sys.path.insert(0, str(Path(__file__).resolve().parent))
-        from _jsonschema_adapter import iter_schema_errors
-        from _json_types import JsonObj, JsonValue
+from ._jsonschema_adapter import iter_schema_errors
+from .types import JsonObj, JsonValue
 
 SKILL_URI_SCHEME = 'skill://'
 FILE_URI_SCHEME = 'file://'

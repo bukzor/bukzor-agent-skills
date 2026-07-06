@@ -10,22 +10,12 @@ as a result, so nothing outside it ever sees an Unknown propagate in.
 """
 
 import datetime
-from typing import TYPE_CHECKING
 
 from jsonschema import Draft202012Validator, TypeChecker
 from jsonschema.validators import extend
 from referencing.jsonschema import SchemaRegistry
 
-if TYPE_CHECKING:
-    from ._json_types import JsonObj, JsonValue
-else:
-    try:
-        from ._json_types import JsonObj, JsonValue
-    except ImportError:  # run standalone via a bin/ symlink -- no parent package
-        import sys
-        from pathlib import Path
-        sys.path.insert(0, str(Path(__file__).resolve().parent))
-        from _json_types import JsonObj, JsonValue
+from .types import JsonObj, JsonValue
 
 
 def _is_date(_checker: TypeChecker, instance: object) -> bool:

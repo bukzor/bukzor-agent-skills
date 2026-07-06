@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 from . import frontmatter_validate as fv
-from ._json_types import JsonObj
+from .types import JsonObj
 
 # TODO: Add unit tests for:
 # - Union types: type: [string, null] should accept both str and NoneType
