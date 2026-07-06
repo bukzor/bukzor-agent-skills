@@ -11,48 +11,42 @@ Validate frontmatter in markdown files against JSON schemas.
 Prevents errors by catching schema violations early.
 """
 
-import sys
-import datetime
-import functools
-import yaml
-from pathlib import Path
-from dataclasses import dataclass
 import argparse
+import functools
+import sys
+from collections.abc import Iterable, Iterator
+from dataclasses import dataclass
+from pathlib import Path
+from typing import TYPE_CHECKING, cast, override
 
-from jsonschema import Draft202012Validator
-from jsonschema.validators import extend
+import yaml
 from referencing import Registry, Resource
-from referencing.jsonschema import DRAFT202012
+from referencing.jsonschema import DRAFT202012, Schema, SchemaRegistry
 
-
-def _is_date(_checker, instance):
-    return isinstance(instance, datetime.date) and not isinstance(instance, datetime.datetime)
-
-
-def _is_instant(_checker, instance):
-    return isinstance(instance, datetime.datetime) and instance.tzinfo is not None
-
-
-# YAML emits datetime.date and datetime.datetime natively; JSON Schema has no
-# matching types. `date` accepts a calendar day; `instant` accepts a tz-aware
-# point in time. Naive datetime is intentionally unaccepted — pick one.
-_TYPE_CHECKER = Draft202012Validator.TYPE_CHECKER.redefine_many({
-    "date": _is_date,
-    "instant": _is_instant,
-})
+if TYPE_CHECKING:
+    from ._jsonschema_adapter import iter_schema_errors
+    from ._json_types import JsonObj, JsonValue
+else:
+    try:
+        from ._jsonschema_adapter import iter_schema_errors
+        from ._json_types import JsonObj, JsonValue
+    except ImportError:  # run standalone via a bin/ symlink -- no parent package
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from _jsonschema_adapter import iter_schema_errors
+        from _json_types import JsonObj, JsonValue
 
 SKILL_URI_SCHEME = 'skill://'
 FILE_URI_SCHEME = 'file://'
 SKILLS_HOME = Path.home() / '.claude' / 'skills'
 
 
-def _resource_from_path(schema_path):
-    contents = yaml.safe_load(schema_path.read_text())
+def _resource_from_path(schema_path: Path) -> Resource[Schema]:
+    contents = cast(Schema, yaml.safe_load(schema_path.read_text()))
     return Resource.from_contents(contents, default_specification=DRAFT202012)
 
 
 @functools.lru_cache(maxsize=None)
-def _retrieve_schema(uri):
+def _retrieve_schema(uri: str) -> Resource[Schema]:
     """Resolve a schema `$ref` URI to a Resource.
 
     In-memory, filesystem-backed: no network fetch.
@@ -72,9 +66,12 @@ def _retrieve_schema(uri):
         raise ValueError(f"Unsupported $ref scheme (expected {SKILL_URI_SCHEME} or {FILE_URI_SCHEME}...): {uri}")
 
 
-_REGISTRY = Registry(retrieve=_retrieve_schema)
+def clear_schema_cache() -> None:
+    """Clear cached schema-retrieval results. Tests need this for isolation between fixtures."""
+    _retrieve_schema.cache_clear()
 
-KbValidator = extend(Draft202012Validator, type_checker=_TYPE_CHECKER)
+
+_REGISTRY: SchemaRegistry = Registry(retrieve=_retrieve_schema)
 
 SUFFIX = '.kb'
 HIVE_PARTITION_MARKER = '='
@@ -88,10 +85,11 @@ class ValidationResult:
     text: str
     errors: tuple[str, ...] = ()
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return not self.errors
 
-    def __str__(self):
+    @override
+    def __str__(self) -> str:
         indent = "    " * self.depth
         match self.kind:
             case 'dir':
@@ -106,7 +104,7 @@ class ValidationResult:
                 raise AssertionError(self.kind)
 
 
-def validate_one_file(md_file, schema_override, depth):
+def validate_one_file(md_file: Path, schema_override: Path | None, depth: int) -> Iterator[ValidationResult]:
     """Validate one file, yielding output. Skips non-data files."""
     # CLAUDE.md is a maintenance guide; dotfiles (e.g. .template.md) are
     # meta-data conventions and not part of the .kb/ data corpus.
@@ -116,9 +114,9 @@ def validate_one_file(md_file, schema_override, depth):
     yield ValidationResult(depth, 'file', md_file.name, errors=tuple(errors))
 
 
-def without_children(paths):
+def without_children(paths: Iterable[Path]) -> Iterator[Path]:
     """Yield paths, skipping any that are children of already-yielded paths."""
-    seen = set()
+    seen: set[Path] = set()
     for p in sorted(paths):
         if any(parent in seen for parent in p.parents):
             continue
@@ -127,17 +125,17 @@ def without_children(paths):
             seen.add(p)
 
 
-def is_kb_dir(path):
+def is_kb_dir(path: Path) -> bool:
     """Check if directory is a .kb/ or hive partition."""
     return path.is_dir() and (path.name.endswith(SUFFIX) or HIVE_PARTITION_MARKER in path.name)
 
 
-def kb_subdirs(path):
+def kb_subdirs(path: Path) -> list[Path]:
     """Get .kb/ and hive partition subdirectories."""
     return [d for d in sorted(path.iterdir()) if is_kb_dir(d)]
 
 
-def validate_paths(paths, schema_override=None, depth=0):
+def validate_paths(paths: Iterator[Path], schema_override: Path | None = None, depth: int = 0) -> Iterator[ValidationResult]:
     """Recursively validate paths, yielding ValidationResult objects."""
     for path in paths:
         p = Path(path)
@@ -148,7 +146,7 @@ def validate_paths(paths, schema_override=None, depth=0):
             for md_file in sorted(p.glob('*.md')):
                 yield from validate_one_file(md_file, schema_override, depth + 1)
 
-            yield from validate_paths(kb_subdirs(p), schema_override, depth + 1)
+            yield from validate_paths(iter(kb_subdirs(p)), schema_override, depth + 1)
 
         elif p.is_dir():
             yield from validate_paths(without_children(p.glob(f'**/*{SUFFIX}')), schema_override, depth)
@@ -157,7 +155,7 @@ def validate_paths(paths, schema_override=None, depth=0):
             yield from validate_one_file(p, schema_override, depth)
 
 
-def extract_frontmatter(md_file):
+def extract_frontmatter(md_file: Path) -> str | None:
     """Extract YAML frontmatter from markdown file."""
     content = md_file.read_text()
 
@@ -172,7 +170,7 @@ def extract_frontmatter(md_file):
     return parts[1]
 
 
-def load_schema(schema_file):
+def load_schema(schema_file: Path) -> JsonObj | None:
     """Load JSON schema from YAML file.
 
     Injects a `file://` `$id` (the schema's own absolute path) when the
@@ -181,7 +179,7 @@ def load_schema(schema_file):
     """
     try:
         with open(schema_file) as f:
-            schema = yaml.safe_load(f)
+            schema = cast(JsonObj | None, yaml.safe_load(f))
     except Exception as e:
         print(f"Error loading schema: {e}", file=sys.stderr)
         return None
@@ -190,7 +188,7 @@ def load_schema(schema_file):
     return schema
 
 
-def validate_against_schema(data, schema):
+def validate_against_schema(data: JsonValue, schema: JsonObj) -> list[str]:
     """Validate frontmatter against a JSON Schema (Draft 2020-12).
 
     Delegates to the `jsonschema` reference implementation so every
@@ -198,22 +196,10 @@ def validate_against_schema(data, schema):
     nested properties, items, additionalProperties, oneOf/anyOf/allOf,
     if/then/else, $ref, and anything added in future drafts.
     """
-    validator = KbValidator(schema, registry=_REGISTRY)
-    errors = []
-    for error in validator.iter_errors(data):
-        path_parts = []
-        for p in error.absolute_path:
-            if isinstance(p, int):
-                path_parts.append(f"[{p}]")
-            else:
-                path_parts.append(f".{p}" if path_parts else str(p))
-        path = "".join(path_parts)
-        prefix = f"{path}: " if path else ""
-        errors.append(f"{prefix}{error.message}")
-    return errors
+    return iter_schema_errors(schema, data, _REGISTRY)
 
 
-def validate_file(md_file, schema_override=None):
+def validate_file(md_file: Path, schema_override: Path | None = None) -> list[str]:
     """Validate a single markdown file. Returns list of errors."""
     if not md_file.exists():
         return ["File not found"]
@@ -223,7 +209,7 @@ def validate_file(md_file, schema_override=None):
         return []
 
     try:
-        data = yaml.safe_load(frontmatter_yaml)
+        data = cast(JsonValue, yaml.safe_load(frontmatter_yaml))
     except yaml.YAMLError as e:
         return [f"Invalid YAML: {e}"]
 
@@ -248,18 +234,20 @@ def validate_file(md_file, schema_override=None):
     return validate_against_schema(data, schema)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description='Validate markdown frontmatter against JSON schema'
     )
-    parser.add_argument('paths', nargs='*', default=['.'], help=f'Markdown files, {SUFFIX}/ directories, or directories containing {SUFFIX}/ subdirectories (default: .)')
-    parser.add_argument('--schema', help='Schema file (auto-detected if not provided)')
+    _ = parser.add_argument('paths', nargs='*', default=['.'], help=f'Markdown files, {SUFFIX}/ directories, or directories containing {SUFFIX}/ subdirectories (default: .)')
+    _ = parser.add_argument('--schema', help='Schema file (auto-detected if not provided)')
 
     args = parser.parse_args()
+    paths = cast(list[str], args.paths)
+    schema_arg = cast(str | None, args.schema)
 
     file_count = 0
     error_count = 0
-    for result in validate_paths(args.paths, args.schema):
+    for result in validate_paths((Path(p) for p in paths), Path(schema_arg) if schema_arg else None):
         print(result)
         if result.kind == 'file':
             file_count += 1
