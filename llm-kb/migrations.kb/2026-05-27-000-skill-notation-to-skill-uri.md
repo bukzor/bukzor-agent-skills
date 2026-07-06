@@ -2,7 +2,7 @@
 status: planning
 scope: |
   Every textual `Skill(<name>)` reference in the user's tree, rewritten to
-  the no-path agent-skill URI `agent-skill://<name>`. Two trees:
+  the no-path skill URI `skill://<name>`. Two trees:
 
   - bukzor-agent-skills repo: ~79 files (~115 occurrences as of
     2026-05-27). Both frontmatter directives (`requires:`, `depends:`,
@@ -21,34 +21,34 @@ scope: |
   (tool-invocation syntax quoting a string argument, not the bare
   reference notation) -- flag those case-by-case.
 why: |
-  The `agent-skill://` URI scheme, its rationale, and its scope evolution
+  The `skill://` URI scheme, its rationale, and its scope evolution
   are recorded in the ADR
-  `agent-skill://llm-kb/docs/adr/2026-05-18-000-agent-skill-uri-scheme.md`.
+  `skill://llm-kb/docs/adr/2026-05-18-000-agent-skill-uri-scheme.md`.
   The scheme replaces the bespoke `Skill(<name>)` notation with a
   resolvable URI anchored to Anthropic's Agent Skills standard.
 
   This migration is the transformation that implements the 2026-05-27
   broadened scope: rewrite every existing `Skill(<name>)` occurrence to
-  the no-path form `agent-skill://<name>`. The path-bearing `$ref` form
+  the no-path form `skill://<name>`. The path-bearing `$ref` form
   (skill-owned files in jsonschema) is separate work, tracked in
   related-todo.
 related-todo: ~/.claude/skills/llm-kb/.claude/todo.kb/2026-02-09-000-schema-reuse-with-ref.md
 related-session: ~/.claude/sessions.kb/apply-migrations-kb-backlog.md
 ---
 
-# Replace `Skill(<name>)` notation with `agent-skill://<name>` URIs
+# Replace `Skill(<name>)` notation with `skill://<name>` URIs
 
 ## The notation
 
 The scheme -- grammar, rationale, resolution contract, scope evolution --
 is defined in the ADR
-`agent-skill://llm-kb/docs/adr/2026-05-18-000-agent-skill-uri-scheme.md`.
+`skill://llm-kb/docs/adr/2026-05-18-000-agent-skill-uri-scheme.md`.
 
 This migration handles only the **no-path** form, which denotes the skill
 itself and is the one-to-one replacement for `Skill(<name>)`:
 
-    Skill(llm-kb)        ->  agent-skill://llm-kb
-    Skill(llm-subtask)   ->  agent-skill://llm-subtask
+    Skill(llm-kb)        ->  skill://llm-kb
+    Skill(llm-subtask)   ->  skill://llm-subtask
 
 ## What gets replaced
 
@@ -76,11 +76,11 @@ together with it, or skill-loading silently stops:
 1. The interpretation convention -- whatever teaches agents that a
    dependency directive means "load it" (the must-read `before/lazy-loading/`
    entries, this skill's pattern docs, the user's CLAUDE.md shorthand) must
-   state that the no-path `agent-skill://<name>` form is the load directive,
+   state that the no-path `skill://<name>` form is the load directive,
    equivalent to the old `Skill(<name>)`.
 2. Each SKILL.md `setup:` block -- it currently emits
    `depends: - Skill(<name>)` as the copy-paste downstream projects use.
-   It must emit `depends: - agent-skill://<name>` so new projects adopt the
+   It must emit `depends: - skill://<name>` so new projects adopt the
    URI form rather than re-seeding the old notation.
 
 If the bulk sweep runs before these convention updates land, swept
@@ -95,7 +95,7 @@ A `validate.sh` greps for `Skill\([a-z0-9_-]+\)` across the repo and the
 `*/.claude/projects/`, and `*/trash/`; emits `<path>:<line>:<content>`.
 
 The transform is mechanically simple --
-`Skill\(([a-z0-9_-]+)\)` -> `agent-skill://\1` -- and a guarded
+`Skill\(([a-z0-9_-]+)\)` -> `skill://\1` -- and a guarded
 `migrate.sh` is feasible, but the `Skill("<name>")` exclusion needs
 per-context judgment, so a semi-automated workflow (validate, review,
 rewrite where every hit is the bare form) is the safe default. When those
@@ -105,7 +105,7 @@ see the cleanup task in the apply-migrations session.
 
 ## Idempotency
 
-`agent-skill://<name>` does not match `Skill\(...\)`, so re-running the
+`skill://<name>` does not match `Skill\(...\)`, so re-running the
 transform on already-converted text is a no-op.
 
 ## A recurring validator is appropriate
@@ -119,7 +119,7 @@ replacement is done.
 
 ## Relationship to the `$ref` work
 
-The path-bearing form (`agent-skill://llm-kb/foo.jsonschema.yaml` in
+The path-bearing form (`skill://llm-kb/foo.jsonschema.yaml` in
 jsonschema `$ref`/`$id`, plus the validator's in-memory `$id` index and
 filesystem fallback) is designed and tracked in related-todo
 (`schema-reuse-with-ref.md`). That work is independent of this notation

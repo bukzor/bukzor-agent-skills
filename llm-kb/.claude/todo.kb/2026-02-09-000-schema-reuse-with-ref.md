@@ -161,20 +161,20 @@ single-line `$ref` pointer.
 
 ## Decisions (2026-05-18)
 
-### URI scheme for cross-skill references: `agent-skill://`
+### URI scheme for cross-skill references: `skill://`
 
 The scheme grammar, rationale, resolution contract, and scope evolution
 are recorded in the ADR
-`agent-skill://llm-kb/docs/adr/2026-05-18-000-agent-skill-uri-scheme.md`.
+`skill://llm-kb/docs/adr/2026-05-18-000-skill-uri-scheme.md`.
 
 The `$ref`/`$id` work below uses the path-bearing form
-`agent-skill://<skill-name>/<path-within-skill>`, e.g.
-`$ref: agent-skill://llm-subtask/sweh.jsonschema.yaml`.
+`skill://<skill-name>/<path-within-skill>`, e.g.
+`$ref: skill://llm-subtask/sweh.jsonschema.yaml`.
 
 (The 2026-05-18 stance that `Skill(<name>)` stays in human-facing fields
 was broadened 2026-05-27 -- all skill references now use the URI, swept by
-`agent-skill://llm-kb/migrations.kb/2026-05-27-000-skill-notation-to-agent-skill-uri.md`.
-See the ADR.)
+`skill://llm-kb/migrations.kb/2026-05-27-000-skill-notation-to-skill-uri.md`.
+Renamed 2026-07-05 from `agent-skill://` to `skill://` -- see the ADR.)
 
 ### Architecture: stub-`$ref` first, data-side `$schema` later
 
@@ -194,7 +194,7 @@ existing tooling. A is a nice-to-have layer that doesn't preclude B.
 
 - On startup, walk `~/.claude/skills/*/` for `*.jsonschema.yaml`; load and index
   by their declared `$id`.
-- When resolving `$ref` with scheme `agent-skill://`, do in-memory lookup by
+- When resolving `$ref` with scheme `skill://`, do in-memory lookup by
   `$id`. No network fetch.
 - Fallback if `$id` not found in index: filesystem path derived from authority
   + path (`~/.claude/skills/<authority>/<path>`).
@@ -202,7 +202,7 @@ existing tooling. A is a nice-to-have layer that doesn't preclude B.
 ### Open question reclassification
 
 The existing "Open Questions" section asked about remote `$ref` (http URLs)
-support. With `agent-skill://`, http resolution is no longer needed for the
+support. With `skill://`, http resolution is no longer needed for the
 primary use case — skills resolve in-memory. Remote `$ref` becomes a separate
 future question, not a blocker.
 

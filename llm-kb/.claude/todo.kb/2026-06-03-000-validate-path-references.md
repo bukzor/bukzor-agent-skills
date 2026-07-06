@@ -30,7 +30,7 @@ skill was renamed `llm-kb`.
 
 1. **Custom jsonschema type for frontmatter** -- a way to denote
    "path that must exist, resolved file-relative" (also `~` and
-   `agent-skill://` forms). Schema annotation (e.g. a shared
+   `skill://` forms). Schema annotation (e.g. a shared
    definition or `format:`) + enforcement in
    `lib/python/llmd/frontmatter_validate.py` / `bin/llm.kb-validate`.
 2. **Body-markdown checker** -- find path-like references in prose
@@ -41,6 +41,6 @@ skill was renamed `llm-kb`.
 ## Open Questions
 
 - Resolution bases: file-relative vs `~` vs repo-root vs
-  `agent-skill://` -- one annotation or several?
+  `skill://` -- one annotation or several?
 - Deliverable 2: lint-with-allowlist, or only check delimited forms
   (markdown links, code spans that look like paths)?
