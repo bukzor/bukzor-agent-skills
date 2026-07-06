@@ -42,26 +42,37 @@ _TYPE_CHECKER = Draft202012Validator.TYPE_CHECKER.redefine_many({
 })
 
 SKILL_URI_SCHEME = 'skill://'
+FILE_URI_SCHEME = 'file://'
 SKILLS_HOME = Path.home() / '.claude' / 'skills'
 
 
-@functools.lru_cache(maxsize=None)
-def _retrieve_skill(uri):
-    """Resolve `skill://<skill>/<path>` to a schema Resource.
-
-    In-memory, filesystem-backed: no network fetch. `<skill>` resolves via
-    `~/.claude/skills/<skill>/`, which is a symlink farm onto this repo, so
-    this also transparently resolves same-repo cross-skill refs.
-    """
-    if not uri.startswith(SKILL_URI_SCHEME):
-        raise ValueError(f"Unsupported $ref scheme (expected {SKILL_URI_SCHEME}...): {uri}")
-    skill, _, rel_path = uri[len(SKILL_URI_SCHEME):].partition('/')
-    schema_path = SKILLS_HOME / skill / rel_path
+def _resource_from_path(schema_path):
     contents = yaml.safe_load(schema_path.read_text())
     return Resource.from_contents(contents, default_specification=DRAFT202012)
 
 
-_REGISTRY = Registry(retrieve=_retrieve_skill)
+@functools.lru_cache(maxsize=None)
+def _retrieve_schema(uri):
+    """Resolve a schema `$ref` URI to a Resource.
+
+    In-memory, filesystem-backed: no network fetch.
+
+    - `skill://<skill>/<path>` resolves via `~/.claude/skills/<skill>/`,
+      which is a symlink farm onto this repo, so this also transparently
+      resolves same-repo cross-skill refs.
+    - `file://<path>` is what a file-relative `$ref` resolves to, since
+      `load_schema` gives every loaded schema a `file://` `$id` as a base.
+    """
+    if uri.startswith(SKILL_URI_SCHEME):
+        skill, _, rel_path = uri[len(SKILL_URI_SCHEME):].partition('/')
+        return _resource_from_path(SKILLS_HOME / skill / rel_path)
+    elif uri.startswith(FILE_URI_SCHEME):
+        return _resource_from_path(Path(uri[len(FILE_URI_SCHEME):]))
+    else:
+        raise ValueError(f"Unsupported $ref scheme (expected {SKILL_URI_SCHEME} or {FILE_URI_SCHEME}...): {uri}")
+
+
+_REGISTRY = Registry(retrieve=_retrieve_schema)
 
 KbValidator = extend(Draft202012Validator, type_checker=_TYPE_CHECKER)
 
@@ -160,13 +171,21 @@ def extract_frontmatter(md_file):
 
 
 def load_schema(schema_file):
-    """Load JSON schema from YAML file."""
+    """Load JSON schema from YAML file.
+
+    Injects a `file://` `$id` (the schema's own absolute path) when the
+    schema doesn't declare one, giving file-relative `$ref`s a base URI
+    to resolve against.
+    """
     try:
         with open(schema_file) as f:
-            return yaml.safe_load(f)
+            schema = yaml.safe_load(f)
     except Exception as e:
         print(f"Error loading schema: {e}", file=sys.stderr)
         return None
+    if schema is not None and '$id' not in schema:
+        schema['$id'] = Path(schema_file).resolve().as_uri()
+    return schema
 
 
 def validate_against_schema(data, schema):

@@ -12,8 +12,8 @@ from llmd import frontmatter_validate as fv
 
 
 @pytest.fixture(autouse=True)
-def _clear_skill_retrieval_cache():
-    fv._retrieve_skill.cache_clear()
+def _clear_schema_retrieval_cache():
+    fv._retrieve_schema.cache_clear()
 
 
 def _write_shared_schema(skills_home):
@@ -55,3 +55,25 @@ class DescribeSkillRefResolution:
         errors = fv.validate_against_schema({"why": "not-a-list"}, schema)
 
         assert errors, "expected the ref target's type constraint to produce an error"
+
+
+class DescribeFileRelativeRefResolution:
+    def it_resolves_a_ref_to_a_sibling_schema_file(self, tmp_path):
+        (tmp_path / "common.yaml").write_text(
+            "definitions:\n"
+            "  why:\n"
+            "    type: array\n"
+            "    items: {type: string}\n"
+        )
+        schema_path = tmp_path / "goals.jsonschema.yaml"
+        schema_path.write_text(
+            "type: object\n"
+            "properties:\n"
+            "  why:\n"
+            "    $ref: common.yaml#/definitions/why\n"
+        )
+
+        schema = fv.load_schema(schema_path)
+        errors = fv.validate_against_schema({"why": ["parent-a"]}, schema)
+
+        assert errors == []

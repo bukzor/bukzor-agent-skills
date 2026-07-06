@@ -116,12 +116,12 @@ Design for yaml-language-server compatibility:
 
 ### Validator Enhancement
 
-- [ ] Add `$ref` resolution to `frontmatter_validate.py`
-  - [ ] Resolve file-relative paths
+- [x] Add `$ref` resolution to `frontmatter_validate.py`
+  - [x] Resolve file-relative paths
   - [x] Support `#/definitions/...` fragment syntax (via `referencing`'s
         default `Registry` behavior, no custom code needed)
   - [x] Cache loaded schemas to avoid re-parsing (`lru_cache` on
-        `_retrieve_skill`)
+        `_retrieve_schema`)
 - [x] Add tests for `$ref` resolution
 - [ ] Handle circular reference detection (or document as unsupported)
 
@@ -140,7 +140,7 @@ Design for yaml-language-server compatibility:
 ## Success Criteria
 
 - [ ] `references/schema-reuse.md` exists and is comprehensive
-- [ ] Validator resolves file-relative `$ref`
+- [x] Validator resolves file-relative `$ref`
 - [ ] `complete-example/` demonstrates the pattern
 - [ ] yaml-language-server works with the pattern (manual verification)
 
@@ -299,3 +299,19 @@ loaded schema a base URI to resolve *against*:
 Not yet implemented — reproduction and root-cause only. Next session should
 red-green this the same way: write the failing file-relative test above,
 add the `$id`-injection + `file://` retrieval, confirm green.
+
+## Progress (2026-07-05, continued)
+
+Implemented per the plan above: `load_schema()` now injects a `file://`
+`$id` (the schema's own absolute path) when one isn't already declared;
+`_retrieve_skill()` was renamed `_retrieve_schema()` and dispatches on URI
+scheme (`skill://` vs `file://`) rather than only handling `skill://`.
+Red-green confirmed — the file-relative test
+(`DescribeFileRelativeRefResolution`) failed with exactly the predicted
+`Unresolvable: common.yaml#/definitions/why` error before the fix, passed
+after. Full suite (3 tests) green; `bin/llm.kb-validate .` against the
+real repo still reports 0 errors across all 65 files (no regression).
+
+Still open: circular-ref handling, `references/schema-reuse.md`,
+`complete-example/` refactor. Those three are independent of each other —
+any can go next.
