@@ -9,7 +9,7 @@ setup: |
     ```yaml
     --- # workaround: anthropics/claude-code#13003
     depends:
-        - skills/llm-design-kb
+        - Skill(llm-design-kb)
     ```
 ---
 
@@ -44,8 +44,11 @@ points at the layer above).
 `070-future-work.kb/` captures ideas worth remembering but not worth pursuing
 now.
 
-Entries link upward via `why:` frontmatter — e.g. a requirement lists the
-goals it serves:
+Entries link via `why:` frontmatter to their motivation — usually a
+higher layer (e.g. a requirement lists the goals it serves), or a
+same-layer entry when the motivating concept naturally lives at the
+same layer and promoting it would introduce hierarchy with no other
+content.
 
 ```yaml
 ---
@@ -53,6 +56,26 @@ why:
   - site-agnostic-capture
 ---
 ```
+
+## Alternatives Considered
+
+Design entries often surface the options weighed at decision time. Three
+shapes, in order of growth:
+
+- **Inline "Why not X".** Short bolded-phrase paragraphs under the chosen
+  approach. Works for 1-3 alternatives with brief rationale.
+- **Parallel list.** A numbered or tabled enumeration of alternatives, with
+  selection stated outside the listing (or in a sibling entry). Works for
+  design-space surveys where several options stay on the table.
+- **Sub-kb.** When alternatives accrue per-item content, metadata, or
+  lifecycle, promote the entry to a `.kb/` per `Skill(llm-kb)` promotion
+  signals. Each alternative becomes its own file; selection can live in
+  entry frontmatter or be called out in the sub-kb's CLAUDE.md / summary file.
+
+Forward-facing: the design entry describes what the system *is*. Alternatives
+are a footnote on the design space, not a historical log. If extensive
+rationale or historicity matters, write an ADR instead
+(see `Skill(llm-collab)`).
 
 ## Maintenance
 
@@ -71,6 +94,9 @@ After any session that changes code or design understanding in a project with
    references. Follow chains to verify they connect back to goals/mission.
 5. **Fix, don't flag.** Rectify stale docs directly. Only ask the user when
    the correction requires a design decision.
+6. **Promote listing entries.** An entry with a plural filename or
+   listing-heavy content (e.g. `patterns.md`, `alternatives.md`) wants to
+   become a sub-`.kb/`. See `Skill(llm-kb)` promotion signals.
 
 ## References
 
