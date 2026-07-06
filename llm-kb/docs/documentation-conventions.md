@@ -7,7 +7,7 @@ Meta-decisions about how llm.kb documentation is written.
 Use all-caps, dollar-signed metavariables for placeholders:
 
 ```
-$CATEGORY.d/
+$CATEGORY.kb/
 $CATEGORY.md
 $CATEGORY.jsonschema.yaml
 $ITEM.md
@@ -19,7 +19,7 @@ or `README.md`.
 
 ## Dashes
 
-Use double-dash (`--`) over emdash (`—`). Easier to type, renders consistently.
+Use double-dash (`--`) over emdash (`--`). Easier to type, renders consistently.
 
 ## Bold
 
@@ -31,8 +31,8 @@ This attempts to use bolding to create list items. This one is particularly
 noxious as a markdown formatter will reflow this as a single paragraph.
 
 ```
-**Root CLAUDE.md**: Common principles
-**Per-directory CLAUDE.md**: Category-specific guidance
+Root CLAUDE.md: Common principles
+Per-directory CLAUDE.md: Category-specific guidance
 ```
 
 Corrected:
@@ -45,7 +45,7 @@ Corrected:
 This simply doesn't need bolding.
 
 ```markdown
-**Purpose**: Catch schema violations.
+Purpose: Catch schema violations.
 ```
 
 Right:
@@ -56,7 +56,7 @@ Purpose: catch schema violations.
 This attempts to use bolding as a section header.
 
 ```
-**Good fit**:
+Good fit:
 
 Lorem ipsum ...
 ```

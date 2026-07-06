@@ -60,16 +60,16 @@ Docs referencing `.d/`:
 - [x] Update complete-example/CLAUDE.md
 - [x] Update references/complete-example.md
 - [x] Rename docs/dev/devlog/2025-12-10-...-instruction-optimization.{d → kb}/ (additional scope)
-- [ ] Update references/pattern-guide.md (8 mentions; line 5 "Unix `.d/`" historical analogy stays)
-- [ ] Update references/splitting-large-docs.md (5 mentions; title + body)
-- [ ] Update docs/documentation-conventions.md (1 mention, line 10 in code block)
-- [ ] Mark ADR 2025-12-03-000 as Accepted (status still "Proposed")
-- [ ] Verify: `grep -r '\.d/' .` shows only acceptable uses (CLAUDE.d/ pattern is separate)
-- [ ] Add auto-migrate step to scripts that read/write `.kb/` directories (like llm-collab-devlog does for docs/devlog → docs/dev/devlog)
+- [x] Update references/pattern-guide.md (8 mentions; line 5 "Unix `.d/`" historical analogy stays)
+- [x] Update references/splitting-large-docs.md (5 mentions; title + body)
+- [x] Update docs/documentation-conventions.md (1 mention, line 10 in code block)
+- [x] Mark ADR 2025-12-03-000 as Accepted (status still "Proposed")
+- [x] Verify: `grep -r '\.d/' .` shows only acceptable uses (CLAUDE.d/ pattern is separate)
+- [ ] Add auto-migrate step to scripts that read/write `.kb/` directories (like llm-collab-devlog does for docs/devlog → docs/dev/devlog) -- deferred: no concrete target script exists in llm-kb itself (only bin/llm.kb-validate, a symlinked validator with no stale-path migration to do); this needs a cross-skill scope decision, not a quick doc fix
 
 ## Success Criteria
 
 - [x] No `.d/` directories in complete-example/ (verified `find . -type d -name "*.d"` empty)
-- [ ] All docs reference `.kb/` pattern (15 references remain in references/ + docs/documentation-conventions.md)
-- [ ] ADR status is "Accepted"
+- [x] All docs reference `.kb/` pattern (15 references remain in references/ + docs/documentation-conventions.md)
+- [x] ADR status is "Accepted"
 - [x] SKILL.md examples use `.kb/` (no `.d/` mentions in SKILL.md)

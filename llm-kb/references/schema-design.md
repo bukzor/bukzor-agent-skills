@@ -36,8 +36,8 @@ additionalProperties: false  # Strict validation recommended
 
 ## Evolution
 
-- **Add optional fields**: Safe
-- **Add required fields**: Must update all existing files
-- **Change enums**: May break files
+- Add optional fields: Safe
+- Add required fields: Must update all existing files
+- Change enums: May break files
 
 Start minimal, expand as useful fields emerge.

@@ -1,7 +1,7 @@
 # Pivot from .d to .kb naming convention
 
 **Date:** 2025-12-03
-**Status:** Proposed
+**Status:** Accepted
 
 ## Context
 
@@ -36,16 +36,16 @@ Invariant: Upon finding `X.kb/` directory, check for `X.jsonschema.yaml` sibling
 ## Alternatives Considered
 
 ### `@X/` prefix
-- **Pros:** Very terse (1 char), visually distinctive
-- **Cons:** Unusual for directories, slight shell quoting concerns
+- Pros: Very terse (1 char), visually distinctive
+- Cons: Unusual for directories, slight shell quoting concerns
 
 ### `.hive/` suffix
-- **Pros:** Evokes collective intelligence metaphor
-- **Cons:** 5 chars, less conventional
+- Pros: Evokes collective intelligence metaphor
+- Cons: 5 chars, less conventional
 
 ### `.llm` suffix
-- **Pros:** Clear meaning
-- **Cons:** Implies LLM ownership; we want 50/50 human/assistant collaboration
+- Pros: Clear meaning
+- Cons: Implies LLM ownership; we want 50/50 human/assistant collaboration
 
 ## Consequences
 

@@ -12,7 +12,7 @@ Manual test scenarios for validating llm.kb skill behavior.
 ## Adding Scenarios
 
 Each scenario is a directory containing:
-- `CLAUDE.md` — Task prompt + evaluation criteria
-- `.claude/` — Optional scenario-specific configuration
+- `CLAUDE.md` -- Task prompt + evaluation criteria
+- `.claude/` -- Optional scenario-specific configuration
 
 Scenarios should test specific failure modes or edge cases of the llm.kb pattern.

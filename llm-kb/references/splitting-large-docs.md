@@ -1,16 +1,16 @@
-# Splitting Large Documents into .d/ Structure
+# Splitting Large Documents into .kb/ Structure
 
-**Read when:** You have a large document that needs to be split into homogeneous `.d/` categories.
+**Read when:** You have a large document that needs to be split into homogeneous `.kb/` categories.
 
 ## Successive Subtraction Technique
 
-A practical method for factoring large documents into focused `.d/` categories:
+A practical method for factoring large documents into focused `.kb/` categories:
 
-1. **Pick one obvious/helpful category** - Choose the most clear-cut homogeneous type
-2. **Extract it** - Either actually create the files, or think through what would be extracted
-3. **Examine the remainder** - Look at what's left
-4. **Repeat** - Pick the next most obvious category from what remains
-5. **Continue until complete** - Keep subtracting categories until the entire doc is factored
+1. Pick one obvious/helpful category - Choose the most clear-cut homogeneous type
+2. Extract it - Either actually create the files, or think through what would be extracted
+3. Examine the remainder - Look at what's left
+4. Repeat - Pick the next most obvious category from what remains
+5. Continue until complete - Keep subtracting categories until the entire doc is factored
 
 ## Why This Works
 
@@ -26,7 +26,7 @@ A practical method for factoring large documents into focused `.d/` categories:
 
 780-line creating-documentation.md:
 
-**Round 1:** Extract file-types.d/ (README, HACKING, CLAUDE, design-rationale, etc.)
+**Round 1:** Extract file-types.kb/ (README, HACKING, CLAUDE, design-rationale, etc.)
 - Each describes a doc file type with: audience, must/should/shouldn't contain, template
 - Clearly homogeneous
 
@@ -40,8 +40,8 @@ A practical method for factoring large documents into focused `.d/` categories:
 
 **Thought experiment acceptable:** Don't have to actually create files in each round - can think through "what would be extracted" before committing.
 
-**Templates go to skeleton/:** If extracted content includes templates, move them to appropriate `skeleton/` paths, not into `.d/` documentation.
+**Templates go to skeleton/:** If extracted content includes templates, move them to appropriate `skeleton/` paths, not into `.kb/` documentation.
 
 **Document as you go:** Update task tracking with progress through rounds.
 
-**Don't force it:** If remainder doesn't naturally factor into more categories, reconsider if `.d/` structure is needed for what's left.
+**Don't force it:** If remainder doesn't naturally factor into more categories, reconsider if `.kb/` structure is needed for what's left.

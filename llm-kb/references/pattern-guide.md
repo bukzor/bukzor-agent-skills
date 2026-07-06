@@ -7,37 +7,37 @@ Unix `.d/` directories (e.g., `/etc/cron.d/`, `systemd/system.d/`) applied to LL
 ## Key Components
 
 ### CLAUDE.md Files (Non-Obvious)
-**Root CLAUDE.md**: Common principles pushed up from per-directory guides
-**Per-directory CLAUDE.md**: Category-specific creation/maintenance guidance
+Root CLAUDE.md: Common principles pushed up from per-directory guides
+Per-directory CLAUDE.md: Category-specific creation/maintenance guidance
 
-**Purpose**: Future agents maintain the collection without rediscovering patterns.
+Purpose: Future agents maintain the collection without rediscovering patterns.
 
-**Include**: Templates, quality guidelines, when to create/update files.
+Include: Templates, quality guidelines, when to create/update files.
 
 ### Overview Files (x.md) (Non-Obvious)
-**Purpose**: Help readers decide whether to explore `x.d/` in detail.
+Purpose: Help readers decide whether to explore `x.kb/` in detail.
 
-**Critical**: Never enumerate directory contents - point to directory instead.
+Critical: Never enumerate directory contents - point to directory instead.
 
 ❌ "Files include: item1, item2, item3"
-✅ "Browse category.d/ for individual items"
+✅ "Browse category.kb/ for individual items"
 
 ### File Size
-**Typical**: 200-600 words per file
-**Reference docs**: Can be 800-1500 words when comprehensive coverage is the point
+Typical: 200-600 words per file
+Reference docs: Can be 800-1500 words when comprehensive coverage is the point
 
 ## Non-Standard Principles (The Point)
 
 ### No Enumeration (Counterintuitive)
-**Never list directory contents in documentation** - directory listing is source of truth.
+Never list directory contents in documentation - directory listing is source of truth.
 
-**Why**: `ls` stays current, documentation becomes stale instantly.
+Why: `ls` stays current, documentation becomes stale instantly.
 
 ### CLAUDE.md for Agents (Unique)
 Help future agents maintain without rediscovering patterns. Include templates, guidelines, and quality standards.
 
 ### Progressive Disclosure
-Overview (`x.md`) → Detail (`x.d/*.md`) → Cross-references.
+Overview (`x.md`) → Detail (`x.kb/*.md`) → Cross-references.
 
 LLMs load what they need, nothing more.
 
@@ -66,7 +66,7 @@ LLMs load what they need, nothing more.
 ### 1. Identify Categories
 What homogeneous groups exist?
 
-**Example**: AI coding tools project
+Example: AI coding tools project
 - Tools (8 profiles)
 - Features (3 comparisons)
 - Providers (3 support docs)
@@ -74,12 +74,12 @@ What homogeneous groups exist?
 - Workflows (1 guide)
 - Comparisons (2 decision docs)
 
-Each category becomes a `.d/` directory.
+Each category becomes a `.kb/` directory.
 
 ### 2. Design Schemas
 What structured data matters for each category?
 
-**Example**: Tool profiles need
+Example: Tool profiles need
 - name, developer, license (required)
 - repository, language (optional)
 - type, interface (required)
@@ -88,7 +88,7 @@ Create `category.jsonschema.yaml` with these fields.
 
 ### 3. Create Directory Structure
 ```bash
-mkdir -p {category1.d,category2.d,category3.d}
+mkdir -p {category1.kb,category2.kb,category3.kb}
 ```
 
 ### 4. Write Schemas
@@ -97,19 +97,19 @@ Create `category1.jsonschema.yaml`, etc.
 Use JSON Schema Draft 07 format in YAML.
 
 ### 5. Create CLAUDE.md Files
-**Root**: Common principles (small files, schemas, cross-refs, etc.)
+Root: Common principles (small files, schemas, cross-refs, etc.)
 
-**Per-category**: Specific guidance for that category
+Per-category: Specific guidance for that category
 
 ### 6. Create Overview Files (where helpful)
 Write `category1.md` when a summary helps readers decide whether to dive into
-`category1.d/`.
+`category1.kb/`.
 
 ### 7. Populate Content
 Create individual files following schemas.
 
 ### 8. Add README.md (only when needed)
-Navigation hub, only when a plain directory contains multiple `.d/` collections.
+Navigation hub, only when a plain directory contains multiple `.kb/` collections.
 
 ### 9. Validate
 Run validation script on all files.
@@ -130,7 +130,7 @@ Run validation script on all files.
 4. Re-validate
 
 ### Adding Categories
-1. Create new `.d/` directory
+1. Create new `.kb/` directory
 2. Design schema (`category.jsonschema.yaml`)
 3. Write CLAUDE.md for category
 4. Write overview (`category.md`) if helpful
@@ -139,7 +139,7 @@ Run validation script on all files.
 
 ## Anti-Patterns
 
-**Don't**:
+Don't:
 - ❌ Enumerate directory contents in docs
 - ❌ Create files >1000 words (split instead)
 - ❌ Duplicate information across files
@@ -147,7 +147,7 @@ Run validation script on all files.
 - ❌ Forget cross-references
 - ❌ Mix topics in single file
 
-**Do**:
+Do:
 - ✅ Keep files focused
 - ✅ Link generously
 - ✅ Validate regularly
@@ -156,19 +156,19 @@ Run validation script on all files.
 
 ## Benefits
 
-**For LLMs**:
+For LLMs:
 - Efficient selective loading
 - Clear structure and metadata
 - Easy to navigate
 - Validated consistency
 
-**For Humans**:
+For Humans:
 - Progressive disclosure
 - Clear organization
 - Easy to browse
 - Cross-referenced
 
-**For Maintenance**:
+For Maintenance:
 - CLAUDE.md guides future agents
 - Schemas prevent errors
 - Small files easier to update
@@ -176,19 +176,19 @@ Run validation script on all files.
 
 ## Comparison to Alternatives
 
-**vs Single Large Docs**:
+vs Single Large Docs:
 - ✅ Better token efficiency
 - ✅ Easier maintenance
 - ✅ More structured
 - ⚠️ More overhead for small projects
 
-**vs Unstructured Markdown**:
+vs Unstructured Markdown:
 - ✅ Validation catches errors
 - ✅ Metadata enables tooling
 - ✅ Clearer organization
 - ⚠️ Requires schema design
 
-**vs Database**:
+vs Database:
 - ✅ Human-readable
 - ✅ Git-friendly
 - ✅ Simple tooling
@@ -196,13 +196,13 @@ Run validation script on all files.
 
 ## When to Use
 
-**Good fit**:
+Good fit:
 - Multiple categories of related information
 - Structure aids understanding
 - Future maintenance expected
 - LLM will consume frequently
 
-**Poor fit**:
+Poor fit:
 - Single simple document suffices
 - No structured data needed
 - One-time use
