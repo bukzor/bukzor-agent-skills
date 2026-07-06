@@ -23,6 +23,9 @@ cost-benefit-sweh:
 - [x] ADR: skill and script naming conventions (consolidated bin/, subcommand form, skill naming)
 - [x] ADR: lib/python/{libname}/ for testable Python with symlinks
 - [x] Rename llm.d → llm.kb
-- [ ] Reconsider claude-style slug script behavior with `.` and `/` chars; fix preexisting filenames if changed
+- [x] Reconsider claude-style slug script behavior with `.` and `/` chars; fix preexisting filenames if changed
+      -- real algorithm reverse-engineered from `~/.claude/projects/` naming
+      (see `bin/claude-slug`); `~/bin/claude-path` and 4 title-slug scripts
+      (llm-collab-adr/devlog, llm-subtask-idea/todo) now delegate to it
 - [x] todo.kb/2025-12-11-000-complete-entangled-commit-separation-for-naming-refactor.md (deleted)
 - [x] ADR: unify directory naming to .kb (docs/dev/adr/2025-12-11-001--unify-directory-naming-to-kb-suffix.md)

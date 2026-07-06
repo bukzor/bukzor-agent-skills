@@ -79,7 +79,7 @@ else
 fi
 
 # Create slug from title
-SLUG=$(echo "$TITLE" | tr ' ' '-' | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]-')
+SLUG=$("$HERE/../../bin/claude-slug" "$TITLE")
 FILE="docs/dev/devlog/$DATE-$NUM-$SLUG.md"
 
 echo "$FILE"

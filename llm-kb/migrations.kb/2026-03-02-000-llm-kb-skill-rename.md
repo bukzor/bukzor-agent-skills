@@ -37,7 +37,7 @@ references in OTHER repos were not swept.
 - `private.bukzor-llc/.claude/settings.local.json` (hardcoded `complete-example` exploration path)
 - `scratch.vim-work/CLAUDE.md`
 - `prototype.chatfs/.claude/todo.kb/2026-01-02-002-apply-skill-conventions-post-evolution.md`
-- `bukzor-agent-skills/llm-collab/.claude/todo.kb/2025-12-11-000-update-skeleton-to-match-docsdev-pattern-from-git-partial.md`
+- `bukzor-agent-skills/llm-collab/.claude/todo.kb/2025-12-11-000-Update-skeleton-to-match-docs-dev--pattern-from-git-partial.md`
 - `bukzor-agent-skills/llm-kb/.claude/todo.kb/2026-01-02-000-complete-d-to-kb-rename.md` (the skill's own todo!)
 
 ## Algorithm

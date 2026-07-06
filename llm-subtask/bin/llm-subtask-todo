@@ -63,7 +63,7 @@ else
 fi
 
 # Create slug from title
-SLUG=$(echo "$TITLE" | tr ' ' '-' | tr '[:upper:]' '[:lower:]' | tr -cd '[:alnum:]-')
+SLUG=$("$SCRIPT_DIR/../../bin/claude-slug" "$TITLE")
 FILE=".claude/todo.kb/$DATE-$NUM-$SLUG.md"
 
 echo "$FILE"

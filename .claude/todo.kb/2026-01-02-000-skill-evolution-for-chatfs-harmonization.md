@@ -38,7 +38,7 @@ prototype.chatfs wants to adopt llm-* skill conventions, but the skills themselv
 
 **Recommended order:** llm-collab first (makes llm.kb rename patterns clearer)
 
-1. [ ] [llm-collab: Update skeleton](../../llm-collab/.claude/todo.kb/2025-12-11-000-update-skeleton-to-match-docsdev-pattern-from-git-partial.md)
+1. [ ] [llm-collab: Update skeleton](../../llm-collab/.claude/todo.kb/2025-12-11-000-Update-skeleton-to-match-docs-dev--pattern-from-git-partial.md)
 2. [ ] [llm.kb: Complete .d → .kb rename](../../llm-kb/.claude/todo.kb/2026-01-02-000-complete-d-to-kb-rename.md)
 
 ## Verification
