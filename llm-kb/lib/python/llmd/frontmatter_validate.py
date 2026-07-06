@@ -13,6 +13,7 @@ Prevents errors by catching schema violations early.
 
 import sys
 import datetime
+import functools
 import yaml
 from pathlib import Path
 from dataclasses import dataclass
@@ -20,6 +21,8 @@ import argparse
 
 from jsonschema import Draft202012Validator
 from jsonschema.validators import extend
+from referencing import Registry, Resource
+from referencing.jsonschema import DRAFT202012
 
 
 def _is_date(_checker, instance):
@@ -37,6 +40,28 @@ _TYPE_CHECKER = Draft202012Validator.TYPE_CHECKER.redefine_many({
     "date": _is_date,
     "instant": _is_instant,
 })
+
+SKILL_URI_SCHEME = 'skill://'
+SKILLS_HOME = Path.home() / '.claude' / 'skills'
+
+
+@functools.lru_cache(maxsize=None)
+def _retrieve_skill(uri):
+    """Resolve `skill://<skill>/<path>` to a schema Resource.
+
+    In-memory, filesystem-backed: no network fetch. `<skill>` resolves via
+    `~/.claude/skills/<skill>/`, which is a symlink farm onto this repo, so
+    this also transparently resolves same-repo cross-skill refs.
+    """
+    if not uri.startswith(SKILL_URI_SCHEME):
+        raise ValueError(f"Unsupported $ref scheme (expected {SKILL_URI_SCHEME}...): {uri}")
+    skill, _, rel_path = uri[len(SKILL_URI_SCHEME):].partition('/')
+    schema_path = SKILLS_HOME / skill / rel_path
+    contents = yaml.safe_load(schema_path.read_text())
+    return Resource.from_contents(contents, default_specification=DRAFT202012)
+
+
+_REGISTRY = Registry(retrieve=_retrieve_skill)
 
 KbValidator = extend(Draft202012Validator, type_checker=_TYPE_CHECKER)
 
@@ -152,7 +177,7 @@ def validate_against_schema(data, schema):
     nested properties, items, additionalProperties, oneOf/anyOf/allOf,
     if/then/else, $ref, and anything added in future drafts.
     """
-    validator = KbValidator(schema)
+    validator = KbValidator(schema, registry=_REGISTRY)
     errors = []
     for error in validator.iter_errors(data):
         path_parts = []

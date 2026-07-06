@@ -1,0 +1,18 @@
+[project]
+name = "llm-kb"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+  "pyyaml>=6.0",
+  "jsonschema>=4.23",
+  "referencing>=0.35",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.4.2",
+]
+
+[tool.pytest.ini_options]
+python_classes = ["Describe*", "When*", "Test*"]
+python_functions = ["it_*", "test_*"]
