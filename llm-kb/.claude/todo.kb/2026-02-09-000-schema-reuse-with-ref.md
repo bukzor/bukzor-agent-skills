@@ -262,3 +262,40 @@ Still open: file-relative `$ref` (only `skill://` resolves today; a bare
 `../foo.yaml` or `./foo.yaml#/definitions/x` next to a schema is untested),
 circular-ref handling, `references/schema-reuse.md`, `complete-example/`
 refactor.
+
+### File-relative `$ref`: confirmed gap, fix identified (2026-07-05)
+
+Reproduced the failure directly: a schema with
+`$ref: "../jsonschema/common.yaml#/definitions/why"`, loaded and validated
+via the real `validate_against_schema`, raises
+
+    _WrappedReferencingError: Unresolvable: ../jsonschema/common.yaml#/definitions/why
+
+**Fragment resolution (`#/definitions/...`) itself is free** — `referencing`
+does RFC 3986 relative-URI resolution (`urljoin` against a base) and
+JSON-Pointer fragments natively, confirmed with a synthetic `file://`
+example outside the validator. The gap is that our validator never gives a
+loaded schema a base URI to resolve *against*:
+
+1. `load_schema()` just `yaml.safe_load`s the path — no `$id`, so
+   `self._base_uri == ''`. `urljoin('', '../jsonschema/common.yaml')`
+   yields the same bare relative string, which nothing knows how to fetch.
+2. `_retrieve_skill()` only handles `skill://` URIs (raises `ValueError`
+   otherwise) — even with a base URI, a resolved `file://...` URI wouldn't
+   be retrievable.
+
+**Fix, two small additions, same TDD pattern as the `skill://` work:**
+
+- In `load_schema()` (or just before validating), inject
+  `$id: <absolute file:// URI of the schema's own path>` when the loaded
+  dict doesn't already declare one — gives relative refs a base to resolve
+  against.
+- Extend the retrieve callback to also handle `file://` URIs (read straight
+  off disk), since a resolved relative ref comes back as an absolute
+  `file://...` URI via `urljoin`. Likely cleanest as one retrieve function
+  dispatching on URI scheme (`skill://` vs `file://`) rather than two
+  separate registries.
+
+Not yet implemented — reproduction and root-cause only. Next session should
+red-green this the same way: write the failing file-relative test above,
+add the `$id`-injection + `file://` retrieval, confirm green.
