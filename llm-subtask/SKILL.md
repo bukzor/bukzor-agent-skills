@@ -9,7 +9,7 @@ setup: |
     ```yaml
     --- # workaround: anthropics/claude-code#13003
     depends:
-    - skills/llm-subtask
+    - Skill(llm-subtask)
     ```
 
     And include a "Current Work" section pointing to the todo system:
@@ -81,6 +81,35 @@ Mostly notional, only reified on demand.
 ### Strategic (Tier 3)
 
 Create planning files via: `~/.claude/skills/llm-subtask/bin/llm-subtask-todo "Task title"`
+
+## `- [ ]` Is Load-Bearing — Never Use Bare `-` for Tasks
+
+The inventory pipeline (`~/bin/claude-open-tasks-list`) keys off `- [ ]`
+exactly. A bare `-` bullet is **invisible** to backlog enumeration — it
+will not appear in `task-list.md`, will not be rated by `wsjf-rank`, and
+will be silently lost when the work needs to compete for time.
+
+This applies in every location the inventory scans:
+
+- `*/.claude/todo.md`
+- `*/.claude/sessions.kb/*.md`
+- `CLAUDE.*Task*.md`
+- (`todo.kb/` and `todo.d/` use "existence is signal" — files there
+  count regardless of bullets — but their **inline** items still need
+  `[ ]` to be enumerated.)
+
+**Rule:** any line you intend to track as work uses `- [ ]`.
+**Anti-rule:** never use `-` for a task. Use prose, full sentences, or
+nested narrative when the content is not a task.
+
+**Why this matters:** real work has surfaced weeks late because someone
+wrote `- pick an oss project` instead of `- [ ] pick an oss project`.
+The line was real, the bullet was wrong, the work was invisible to every
+sweep that ran in between.
+
+**Audit:** when reviewing a file for tasks, search for `^ *- [^[]` —
+those are non-task bullets. Convert to `- [ ]` if they're work; rewrite
+as prose if they're not.
 
 ## Integration: todo.md + todo.kb/
 
