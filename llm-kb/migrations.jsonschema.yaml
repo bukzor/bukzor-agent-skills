@@ -1,0 +1,97 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Migration entry frontmatter
+description: |
+  Frontmatter schema for entries in migrations.kb/. Each entry records one
+  schema or convention migration -- a decision plus a transformation plus a
+  scope plus a status, captured in a re-runnable shape. See migrations.kb's
+  CLAUDE.md for what belongs and the full status/kind vocabularies.
+
+type: object
+required: [status, scope, why]
+additionalProperties: false
+
+properties:
+  status:
+    type: string
+    enum: [tentative, planning, started, in-progress, complete, verified, archival]
+    description: |
+      Linear lifecycle stage. Choose the most-advanced stage that is true.
+
+      - tentative: idea floated; entry may be a stub, certainly no scripts.
+      - planning: entry written, decision recorded; scripts may exist but
+        have not run.
+      - started: first execution; small subset applied to verify approach.
+      - in-progress: substantially applying; multiple sweeps done, more to do.
+      - complete: fully applied within declared scope; no known residual.
+      - verified: complete AND a recent audit (e.g. validate.sh clean)
+        confirms no drift.
+      - archival: kept for history; the rule no longer applies (superseded,
+        abandoned, or fully absorbed into something else).
+
+  kind:
+    type: string
+    enum: [one-shot, recurring]
+    description: |
+      Orthogonal to status. Omit for the default `one-shot` (finishes;
+      reaches complete then maybe verified). `recurring` never
+      one-shot-finishes -- its validate.sh runs forever to flag drift, and
+      may still be complete/verified in the sense "rule and validator are
+      in place."
+
+  scope:
+    type: string
+    description: |
+      What the migration touches: the files, fields, or directories in its
+      blast radius, plus explicit exclusions. A scope matching zero files in
+      some subtree applies vacuously (a no-op under and/all evaluation), not
+      a third class.
+
+  why:
+    type: string
+    description: |
+      Rationale: the problem the migration solves and why this shape.
+
+  originating-commits:
+    type: array
+    items:
+      type: string
+    description: |
+      Commits that first applied some or all of this migration. Each item is
+      a commit hash, optionally followed by an inline `# repo, date: subject`
+      comment.
+
+  verified-by:
+    type: string
+    description: |
+      Evidence backing a `verified` status: the drift check that was run and
+      its result (e.g. a find/grep returning zero matches, with a date).
+
+  depends-on:
+    type: array
+    items:
+      type: string
+    description: |
+      Sibling migration entries (filenames within this collection) that must
+      be applied before this one. E.g. an effort/wallclock split depends on
+      the time-period nesting that creates the nested shape it edits.
+
+  supersedes:
+    type: array
+    items:
+      type: string
+    description: |
+      Sibling migration entries (filenames) this one replaces. The superseded
+      entries become `archival`. Reserved; listed as a core relation field in
+      CLAUDE.md.
+
+  related-todo:
+    type: string
+    description: |
+      Path to a todo.kb entry tracking related or follow-on work -- e.g. a
+      longer-term fix that would supersede this migration when it lands.
+
+  related-session:
+    type: string
+    description: |
+      Path to a sessions.kb entry for the working session that drove or
+      tracks this migration.

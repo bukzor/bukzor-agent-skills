@@ -90,3 +90,28 @@ bundle, not a kb-class collection — no `CLAUDE.md`, no nested entries.
 This mirrors the `$NAME.md + $NAME.kb/` promotion pattern but uses a
 non-`.kb` sibling because the directory holds executables, not
 knowledge entries.
+
+## Working the backlog
+
+The open backlog is every entry whose `status` is not
+`complete`/`verified`. List them:
+
+```sh
+md-frontmatter ~/.claude/skills/llm-kb/migrations.kb/*.md \
+  | jq -r 'select(.["@value"].status as $s
+      | ["tentative","planning","started","in-progress"] | index($s))
+      | "\(.["@value"].status)\t\(.path)"' | sort
+```
+
+Apply one entry:
+
+1. Read the entry for scope, rationale, and any `depends-on`.
+2. Run its `validate.sh` (read-only) to see the live residual.
+3. Apply: run `migrate.sh` where present, else follow the entry's
+   manual recipe. Re-running is safe (idempotency is required).
+4. Re-run `validate.sh`; advance `status` to the most-advanced true
+   stage.
+
+Respect `depends-on`: an entry that edits a shape another migration
+creates must run after it (e.g. effort-vs-wallclock-split depends on
+time-period-nesting). Apply in dependency order.

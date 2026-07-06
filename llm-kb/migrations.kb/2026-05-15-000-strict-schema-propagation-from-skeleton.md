@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: verified
 scope: |
   Every skill's `.claude/` directory should hold byte-identical copies
   of the `todo.jsonschema.yaml` and `ideas.jsonschema.yaml` files from
@@ -8,7 +8,7 @@ scope: |
   omit, but presence implies byte-equality.
 originating-commits:
   - 6a2c361   # 2026-05-15: llm-{kb,subtask,collab}: centralize idea/todo schemas on llm-subtask skeleton
-  - 7612398   # 2026-05-21: llm-{subtask,collab,kb}/.claude: propagate strict schema (byte-identical to skeleton)
+  - "7612398" # 2026-05-21: llm-{subtask,collab,kb}/.claude: propagate strict schema (byte-identical to skeleton)
   - 3bea19d   # 2026-05-21: todo.kb/schema-reuse-with-ref: drift surface — six byte-identical copies
 why: |
   The todo and ideas frontmatter schemas serve as write-time
@@ -22,8 +22,8 @@ why: |
   ($ref-based de-duplication, separate scope) lands.
 
   Originating commits propagated the schemas to llm-subtask, llm-kb,
-  llm-collab. Other skills (llm-must-read-kb, llm-design-kb,
-  claude-realignment, etc.) are still incomplete.
+  llm-collab. Completed 2026-05-27: the remaining authoring copies were
+  propagated and the todo schema gained an optional `closeout:` field.
 related-todo: ~/.claude/skills/llm-kb/.claude/todo.kb/2026-02-09-000-schema-reuse-with-ref.md
 ---
 
@@ -34,13 +34,16 @@ related-todo: ~/.claude/skills/llm-kb/.claude/todo.kb/2026-02-09-000-schema-reus
 `diff` from `llm-subtask/skeleton/.claude/{todo,ideas}.jsonschema.yaml`
 against each skill's `.claude/`:
 
-**Missing schema files:**
+**Missing schema files (snapshot; resolved 2026-05-27):**
 
-- `llm-collab/.claude/ideas.jsonschema.yaml`
-- `llm-must-read-kb/.claude/todo.jsonschema.yaml`
-- `llm-must-read-kb/.claude/ideas.jsonschema.yaml`
+- `llm-collab/.claude/ideas.jsonschema.yaml` -- propagated
+- `llm-must-read-kb/.claude/todo.jsonschema.yaml` -- propagated
+- `llm-must-read-kb/.claude/ideas.jsonschema.yaml` -- false positive:
+  llm-must-read-kb authors no ideas (no `ideas.kb`/`ideas.md`), so the
+  omission is legitimate. `validate.sh` now gates MISSING on the skill
+  actually authoring the category.
 - `llm-subtask/.claude/todo.jsonschema.yaml` (the skill that owns the
-  schema!)
+  schema!) -- propagated
 
 **Byte-divergent schema files:** none currently detected in present
 copies (good — propagation was correct where applied).
@@ -76,7 +79,15 @@ copies become one-line pointers. That's tracked separately at
 (currently WSJF #1 by exec_score) and would supersede this migration
 when it lands.
 
-## Why "applying" not "applied"
+## Completion 2026-05-27
 
-Four missing schema files across the skill tree; one of them is in
-the schema-owning skill itself.
+`migrate.sh` propagated the three genuinely-missing copies; the fourth
+MISSING was a validator false positive (gated out, above). The todo
+schema gained an optional `closeout:` string -- propagated byte-equal
+to all four authoring copies. `validate.sh` now reports clean (no
+MISSING, no DIFFER), so the byte-equality invariant holds tree-wide.
+
+Note: the invariant is drift-prone (any future edit to one copy
+reopens it). Treat `validate.sh` as a recurring check until the
+schema-reuse-with-ref migration collapses the copies to `$ref`
+pointers.

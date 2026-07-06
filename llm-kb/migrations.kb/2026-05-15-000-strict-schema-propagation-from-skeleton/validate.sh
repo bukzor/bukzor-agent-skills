@@ -19,8 +19,13 @@ for skill_claude in "$SKILLS_ROOT"/*/.claude; do
     src="$SKEL/$schema"
     dst="$skill_claude/$schema"
     [[ -f "$src" ]] || continue
+    category="${schema%%.*}"   # todo | ideas
     if [[ ! -f "$dst" ]]; then
-      printf 'MISSING %s\n' "$dst"
+      # MISSING is only drift when the skill actually authors this
+      # category. A consumer-only skill legitimately omits the schema.
+      if [[ -d "$skill_claude/$category.kb" || -f "$skill_claude/$category.md" ]]; then
+        printf 'MISSING %s\n' "$dst"
+      fi
     elif ! diff -q "$src" "$dst" >/dev/null 2>&1; then
       printf 'DIFFER  %s\n' "$dst"
     fi
