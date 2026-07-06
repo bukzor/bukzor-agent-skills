@@ -1,4 +1,5 @@
 ---
+managed-by: Skill(llm-subtask)
 status: done
 ---
 # Design .kb pattern for living design documentation

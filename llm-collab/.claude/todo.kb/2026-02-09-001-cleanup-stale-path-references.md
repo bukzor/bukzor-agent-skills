@@ -1,4 +1,5 @@
 ---
+managed-by: Skill(llm-subtask)
 status: done
 ---
 # Cleanup stale path references
