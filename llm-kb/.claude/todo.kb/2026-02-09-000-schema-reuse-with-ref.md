@@ -1,8 +1,8 @@
 ---
 managed-by: Skill(llm-subtask)
 required-reading:
-  - ~/.claude/skills/llm.kb/references/schema-design.md
-  - ~/.claude/skills/llm.kb/lib/python/llmd/frontmatter_validate.py
+  - ~/.claude/skills/llm-kb/references/schema-design.md
+  - ~/.claude/skills/llm-kb/lib/python/llmd/frontmatter_validate.py
 suggested-reading:
   - https://json-schema.org/understanding-json-schema/structuring.html
 related-effort: ~/.claude/skills/llm-collab/.claude/todo.kb/2026-02-09-000-design-kb-pattern-for-living-design-docs.md

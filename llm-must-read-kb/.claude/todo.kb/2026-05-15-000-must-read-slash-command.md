@@ -1,4 +1,19 @@
-<anthropic-skill-ownership llm-subtask />
+---
+managed-by: Skill(llm-subtask)
+cost-benefit-sweh:
+  timebox:
+    "@value": 1.5
+    rationale: |
+      Parse free-text + infer scope + write trigger file via shared
+      procedure (from .claude/todo.md). Beyond 1.5h, the parsing is
+      getting clever; defer to manual creation.
+  benefit-2w:
+    "@value": 1.0
+    rationale: |
+      Ergonomic for trigger creation; estimate ~5 uses/week × ~5 min
+      saved per use vs manual path = ~1h over 2 weeks. Blocked on
+      create-new-trigger.md procedure landing first.
+---
 
 # /must-read slash command
 
