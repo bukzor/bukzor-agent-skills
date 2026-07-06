@@ -101,11 +101,13 @@ entire class of problem for free.
   every real `.kb/` file).
 - `shellcheck bin/llm.kb-validate`: clean.
 
-## Filed
+## Follow-up
 
-Upstream PR against typeshed (or jsonschema directly) to fix the stale
-bundled stub's `_JsonParameter`/`extend()` gaps: tracked in
+Todo filed to eventually submit an upstream PR against typeshed (or
+jsonschema directly) fixing the stale bundled stub's
+`_JsonParameter`/`extend()` gaps:
 `.claude/todo.kb/2026-07-05-001-upstream-jsonschema-typeshed-stub-fix.md`.
+Not filed yet -- this session only wrote the todo.
 
 ## References
 
@@ -113,4 +115,5 @@ bundled stub's `_JsonParameter`/`extend()` gaps: tracked in
   earlier work (file-relative `$ref`) that motivated touching this file
   again for the typing pass.
 - `docs/adr/2025-12-09-003-lib-python-pattern-for-testable-skill-scripts.md`
-  — the `bin/` symlink convention this session had to preserve.
+  — the `bin/` symlink convention this session moved `bin/llm.kb-validate`
+  away from, once the module it pointed at gained internal sibling imports.
