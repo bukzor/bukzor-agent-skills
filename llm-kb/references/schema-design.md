@@ -34,6 +34,12 @@ date:
 additionalProperties: false  # Strict validation recommended
 ```
 
+## Reuse Across Files
+
+Sharing a definition (or a whole schema) across multiple `.jsonschema.yaml`
+files is a separate concern from single-file design -- see
+`references/schema-reuse.md` for the `$ref` patterns.
+
 ## Evolution
 
 - Add optional fields: Safe

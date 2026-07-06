@@ -1,0 +1,173 @@
+# Schema Reuse with `$ref`
+
+## Default: one reusable unit per file, whole-file `$ref`
+
+When a schema fragment is shared across files, give it its own file and
+`$ref` the whole thing -- no `definitions:` wrapper, no `#/...` fragment:
+
+```yaml
+# why.jsonschema.yaml
+description: Links to parent items in abstraction stack
+type: array
+items: {type: string}
+```
+
+```yaml
+# goals.jsonschema.yaml
+type: object
+properties:
+  why:
+    $ref: "why.jsonschema.yaml"
+  title:
+    type: string
+```
+
+Prefer this over co-locating several reusable pieces as named entries under
+one shared `definitions:` file. Whole-file `$ref` means adding a new shared
+definition is a new file, not an edit to a file other consumers also
+depend on -- fewer merge conflicts when multiple agents touch schemas
+concurrently, and a `git log` on the file is the history of that one
+definition, not an interleaving of unrelated ones.
+
+This also covers reusing a whole category schema, not just one field --
+e.g. a project whose `todo.jsonschema.yaml` is *entirely* someone else's
+canonical schema is a one-line stub:
+
+```yaml
+$ref: "skill://llm-subtask/skeleton/.claude/todo.jsonschema.yaml"
+```
+
+Real examples: `llm-kb/.claude/todo.jsonschema.yaml`,
+`llm-collab/.claude/todo.jsonschema.yaml`,
+`llm-subtask/.claude/ideas.jsonschema.yaml` -- all one-line stubs pointing at
+`llm-subtask/skeleton/.claude/{todo,ideas}.jsonschema.yaml`, the canonical
+source. Editing the canonical file changes validation everywhere in one
+place; no propagation, no drift.
+
+## Two ways to point at the file
+
+### File-relative (same project)
+
+`$ref: "why.jsonschema.yaml"`, resolved relative to the `$ref`-ing file's
+own location -- `../jsonschema/why.jsonschema.yaml` and
+`./why.jsonschema.yaml` both work the same way. This is RFC 3986
+relative-reference resolution against the schema's base URI.
+
+`frontmatter_validate.py`'s `load_schema()` makes this possible: it injects
+a `file://<absolute path>` `$id` into every loaded schema that doesn't
+already declare one. Without a base URI, a bare relative string like
+`why.jsonschema.yaml` has nothing to resolve against and raises
+`Unresolvable`. `_retrieve_schema()` then serves the resolved `file://...`
+URI straight off disk.
+
+Use this for reuse *within* a project.
+
+**Directory placement:** put shared files in a `jsonschema/` subdirectory at
+the level encompassing all their consumers -- not next to any one of them,
+which would misleadingly imply that consumer owns it. Name each file for
+what it defines, not for its role (`why.jsonschema.yaml`, not
+`common.jsonschema.yaml` -- "common" says nothing about content, same
+failure mode as `misc`):
+
+```
+docs/dev/
+├── jsonschema/
+│   └── why.jsonschema.yaml           # shared `why:` definition
+├── design/
+│   ├── 020-goals.jsonschema.yaml     # $ref: ../jsonschema/why.jsonschema.yaml
+│   └── 030-requirements.jsonschema.yaml
+└── technical-policy.jsonschema.yaml  # $ref: jsonschema/why.jsonschema.yaml
+```
+
+This is the prescribed placement, not a description of existing usage --
+file-relative `$ref` only started resolving with this session's fix, so no
+project has grown into this shape yet. Follow it from the first schema
+split rather than waiting for one to accumulate organically.
+
+### `skill://` (across skills)
+
+`$ref: "skill://llm-subtask/why.jsonschema.yaml"` -- authority is the skill
+name, path is the file within that skill's root. Resolved in-memory via
+`~/.claude/skills/<skill>/<path>` (a symlink farm onto this repo, so it also
+transparently resolves same-repo cross-skill refs). No network fetch either
+way. See the ADR (`llm-kb/docs/adr/2026-05-18-000-skill-uri-scheme.md`) for
+the scheme's full rationale.
+
+Use this when the shared definition is owned by a *different* skill.
+
+## Fragments: only for reusing one entry out of a topically-cohesive file
+
+Sometimes several definitions genuinely belong in one file because the file
+*is* the topic, not a junk drawer -- an `animals.jsonschema.yaml` holding
+`mammal` and `bird` as animal classes, say:
+
+```yaml
+# animals.jsonschema.yaml
+definitions:
+  mammal:
+    type: object
+    properties:
+      legs: {const: 4}
+      fur: {const: true}
+  bird:
+    type: object
+    properties:
+      legs: {const: 2}
+      feathers: {const: true}
+```
+
+A petting-zoo schema wants specific animals, not the taxonomy file itself,
+so it points at one entry each:
+
+```yaml
+# petting-zoo.jsonschema.yaml
+type: object
+properties:
+  goat:
+    $ref: "animals.jsonschema.yaml#/definitions/mammal"
+  chicken:
+    $ref: "animals.jsonschema.yaml#/definitions/bird"
+```
+
+The `#/definitions/<name>` fragment is a standard JSON Pointer; `referencing`
+(the library `frontmatter_validate.py` uses) resolves it natively, no custom
+code needed.
+
+The test to apply before reaching for this over one-file-per-definition:
+would splitting `mammal` and `bird` into their own files lose something?
+Here, yes -- they're two entries in one real taxonomy, not two unrelated
+things sharing a file of convenience. If you can't articulate what the
+grouping *is* beyond "things schemas share," it's the junk-drawer pattern
+in disguise -- split it instead (see "Default" above).
+
+A real (less kindergarten) instance of the same shape: `sweh-value` lives
+in `llm-subtask/skeleton/.claude/todo.jsonschema.yaml`'s `definitions:`
+alongside `status`, `managed-by`, etc. -- all entries in one cohesive
+"todo/idea task metadata" schema, reused elsewhere via
+`$ref: "skill://llm-subtask/skeleton/.claude/todo.jsonschema.yaml#/definitions/sweh-value"`.
+
+## yaml-language-server compatibility
+
+Partial, not full. A generic YAML/JSON-Schema tool (yaml-language-server,
+IDE plugins) resolves plain file-relative `$ref`s out of the box -- it
+already treats a schema file's own location as the implicit base URI, the
+same behavior our `$id` injection gives `frontmatter_validate.py`.
+
+`skill://` is a custom scheme that only `frontmatter_validate.py`'s
+`_retrieve_schema()` understands. A generic tool sees an unresolvable URI
+and either errors or silently gives up on validating through that `$ref` --
+there is no editor-side resolver for it today. Prefer file-relative `$ref`
+when editor-time validation matters more than avoiding a project-local copy;
+use `skill://` (or the stub-file pattern) when eliminating duplication
+matters more.
+
+## Circular `$ref`
+
+Two schema files that `$ref` each other (a genuine cycle in the schema
+graph) validate correctly, with no special handling. `referencing` resolves
+`$ref` lazily, per validated instance node, rather than eagerly flattening
+the schema graph -- a cycle among schema *files* is harmless as long as the
+*instance data* is finite, which JSON/YAML instance data always is. Verified
+directly against `frontmatter_validate.py`'s real validation path; see the
+"Circular-ref finding" entry in
+`llm-kb/.claude/todo.kb/2026-02-09-000-schema-reuse-with-ref.md`.

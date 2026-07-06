@@ -106,13 +106,29 @@ Design for yaml-language-server compatibility:
 
 ### Documentation
 
-- [ ] Add `references/schema-reuse.md` covering:
-  - `$ref` syntax and file-relative paths
-  - `definitions` block for reusable fragments
-  - Directory placement pattern (`jsonschema/` at encompassing level)
-  - yaml-language-server compatibility
-- [ ] Update `references/schema-design.md` to reference new doc
-- [ ] Add cross-reference in SKILL.md references section
+- [x] Add `references/schema-reuse.md` covering:
+  - [x] `$ref` syntax and file-relative paths
+  - [x] Default pattern reframed per review: one reusable unit per file,
+        whole-file `$ref` (no fragment) -- better for cooperative agents,
+        since adding a shared definition is a new file rather than an
+        edit to a `definitions:` file other consumers also depend on.
+        `definitions:` + fragment is documented as the exception, for
+        reusing one entry out of a file that's topically cohesive on
+        its own (kindergarten example: `animals.jsonschema.yaml` with
+        `mammal`/`bird`; real example: `sweh-value` inside
+        `llm-subtask/skeleton/.claude/todo.jsonschema.yaml`) --
+        explicitly not for junk-drawer grouping (rejected "common"/
+        "shared-defs" naming twice during review for exactly that smell)
+  - [x] Directory placement (`jsonschema/` subdirectory at the level
+        encompassing all consumers) -- prescribed as the pattern to
+        follow, not described as existing usage: file-relative `$ref`
+        only started resolving this session, so nothing has grown into
+        this shape yet
+  - [x] yaml-language-server compatibility -- documented as partial:
+        file-relative works out of the box, `skill://` does not (no
+        generic resolver understands the scheme)
+- [x] Update `references/schema-design.md` to reference new doc
+- [x] Add cross-reference in SKILL.md references section
 
 ### Validator Enhancement
 

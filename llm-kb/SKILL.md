@@ -249,6 +249,7 @@ Other references, load as relevant:
 
 - `references/pattern-guide.md` - Complete pattern explanation
 - `references/schema-design.md` - Schema design guidance
+- `references/schema-reuse.md` - Sharing schema fields/files via `$ref`
 - `references/complete-example.md` - Worked example (birthday party planning)
 - `references/splitting-large-docs.md` - Splitting heuristics
 
