@@ -30,8 +30,8 @@ Based on the skill's functionality. Tells consumers how to integrate.
 `llm-collab/CLAUDE.md`:
 ```yaml
 depends:
-    - skills/llm-subtask  # has todo.md, todo.d/
-    - skills/llm-collab   # has docs/adr/ (self-ref valid)
+    - Skill(llm-subtask)  # has todo.md, todo.d/
+    - Skill(llm-collab)   # has docs/adr/ (self-ref valid)
 ```
 
 `llm-collab/SKILL.md`:
@@ -39,7 +39,7 @@ depends:
 setup: |
     Projects using this skill should add to CLAUDE.md:
     depends:
-        - skills/llm-collab
+        - Skill(llm-collab)
 ```
 
 ## Consequences

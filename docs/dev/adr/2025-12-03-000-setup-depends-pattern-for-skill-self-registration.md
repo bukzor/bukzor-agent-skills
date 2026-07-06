@@ -26,7 +26,7 @@ setup: |
 
     ```yaml
     depends:
-        - skills/skillname
+        - Skill(skillname)
     ```
 ---
 ```
@@ -35,8 +35,8 @@ setup: |
 # In project CLAUDE.md
 --- # workaround: anthropics/claude-code#13003
 depends:
-    - skills/llm-collab
-    - skills/llm-subtask
+    - Skill(llm-collab)
+    - Skill(llm-subtask)
 ---
 ```
 
