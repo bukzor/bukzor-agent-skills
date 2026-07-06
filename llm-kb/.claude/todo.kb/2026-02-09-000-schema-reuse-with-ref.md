@@ -117,10 +117,12 @@ Design for yaml-language-server compatibility:
 ### Validator Enhancement
 
 - [ ] Add `$ref` resolution to `frontmatter_validate.py`
-  - Resolve file-relative paths
-  - Support `#/definitions/...` fragment syntax
-  - Cache loaded schemas to avoid re-parsing
-- [ ] Add tests for `$ref` resolution
+  - [ ] Resolve file-relative paths
+  - [x] Support `#/definitions/...` fragment syntax (via `referencing`'s
+        default `Registry` behavior, no custom code needed)
+  - [x] Cache loaded schemas to avoid re-parsing (`lru_cache` on
+        `_retrieve_skill`)
+- [x] Add tests for `$ref` resolution
 - [ ] Handle circular reference detection (or document as unsupported)
 
 ### Example Update
@@ -234,3 +236,29 @@ Inventory diverges from the 2026-05-15 list: that section enumerated five
 paths, omitting `llm-kb/.claude/todo.jsonschema.yaml` (which has lived in
 the repo since `6a2c361`, the original centralization commit). The actual
 count was six all along; today's session updated all six in lockstep.
+
+## Progress (2026-07-05)
+
+Wired the `skill://` resolver (`_retrieve_skill`/`_REGISTRY`, drafted in an
+earlier uncommitted pass) into `KbValidator` by passing `registry=_REGISTRY`
+in `validate_against_schema`. Proven red-green with a new pytest suite
+(`frontmatter_validate_test.py`, `DescribeSkillRefResolution`) — first
+observed `referencing.exceptions.Unresolvable` before the wiring, then green
+after. `llm-kb/pyproject.toml` + `uv.lock` added so the skill has its own
+pytest-capable venv (none existed before).
+
+Converted all seven downstream stub copies to real one-line `$ref`s at the
+skeleton (skeleton files themselves untouched, still canonical):
+
+- `todo.jsonschema.yaml`: llm-kb, llm-collab, llm-subtask, llm-must-read-kb
+- `ideas.jsonschema.yaml`: llm-kb, llm-collab, llm-subtask
+
+Each conversion verified against real `.claude/{todo,ideas}.kb/` data
+(0 errors) before moving to the next, and against a deliberately-broken
+frontmatter file (confirmed the stub still rejects bad data, not just
+passing everything silently).
+
+Still open: file-relative `$ref` (only `skill://` resolves today; a bare
+`../foo.yaml` or `./foo.yaml#/definitions/x` next to a schema is untested),
+circular-ref handling, `references/schema-reuse.md`, `complete-example/`
+refactor.
