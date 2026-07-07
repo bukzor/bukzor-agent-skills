@@ -20,6 +20,19 @@ if (( DEBUG > 0 )); then
   set -x
 fi
 
+# Absolutize path args before the cd below, so they keep resolving
+# against the caller's cwd rather than the skill directory.
+args=()
+if (( $# == 0 )); then
+  set -- "$PWD"
+fi
+for arg in "$@"; do
+  if [[ -e "$arg" ]]; then
+    arg="$(realpath "$arg")"
+  fi
+  args+=("$arg")
+done
+
 cd "$here/.."
 exec env PYTHONPATH="lib/python${PYTHONPATH:+:$PYTHONPATH}" \
-  uv run python -m llmd.frontmatter_validate "$@"
+  uv run python -m llmd.frontmatter_validate "${args[@]}"
