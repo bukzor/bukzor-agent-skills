@@ -77,6 +77,40 @@ are a footnote on the design space, not a historical log. If extensive
 rationale or historicity matters, write an ADR instead
 (see `Skill(llm-collab)`).
 
+## Doc-Driven Development
+
+Design docs lead implementation as often as they trail it -- writing the doc
+first is cheaper, higher-level, and easier to review than tests are under TDD.
+A behavior-describing doc therefore carries two kinds of prose, demarcated:
+
+- **Undecorated prose is descriptive** -- shipped, verifiable behavior. A
+  mismatch with ground truth is a doc bug: fix it.
+- **`> [!TODO]` blocks are normative** -- decided (or sought) behavior not yet
+  implemented. A mismatch with ground truth is the point: implement toward it,
+  never "correct" it to match the code.
+
+```markdown
+> [!TODO]
+> The island rule is `***`; lands with a `divider()` change plus
+> regenerated goldens.
+```
+
+Write a decided block as declarative future-state prose ("The rule is X"),
+not an imperative task ("Switch to X"): landing it is then pure markup
+removal — the prose is already the descriptive sentence. An open question
+reads as `Sought: ...` and resolves into a decided block or descriptive
+prose.
+
+The marker is GFM-alert-shaped but nonstandard: GitHub renders it as a plain
+blockquote containing the literal `[!TODO]` -- acceptable, since browsers are
+a tertiary consumer and the fallback is legible. Grep `[!TODO]` to enumerate a
+doc's unimplemented surface. When the behavior lands, remove the callout
+markup (or the whole block, if surrounding prose already says it).
+
+Layers 010-030 are aspirational by nature and need no marker; the convention
+applies where prose could be mistaken for a claim about current behavior
+(040 and below, technical-policy, contract docs).
+
 ## Maintenance
 
 After any session that changes code or design understanding in a project with
@@ -85,7 +119,9 @@ After any session that changes code or design understanding in a project with
 1. **Find affected docs.** Which design.kb files relate to what changed this
    session? Read each one.
 2. **Check claims against ground truth.** Look for stale assertions — things
-   that were true when written but no longer are.
+   that were true when written but no longer are. `> [!TODO]` blocks are
+   normative, never stale; instead, unwrap any whose behavior landed this
+   session.
 3. **Capture new concepts.** Did discussion surface goals, requirements, or
    components that aren't documented? Create entries in the appropriate
    collection.

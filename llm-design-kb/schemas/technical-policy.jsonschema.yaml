@@ -32,6 +32,14 @@ properties:
     type: array
     items:
       type: string
+  source:
+    description: >
+      Provenance: paths to primary-source content (conversation transcripts,
+      extracted docs) this policy derives from, or "user (<name>)" when
+      ratified directly in conversation rather than distilled from a transcript.
+    type: array
+    items:
+      type: string
   tags:
     description: Topic tags for cross-referencing.
     type: array
