@@ -368,9 +368,13 @@ stubbed; 19 MISSING schemas stubbed across 12 downstream projects;
 NO-REF judgment. Data nonconformance surfaced by the new stubs:
 `todo.kb/2026-07-07-000-Downstream-todo-ideas-frontmatter-conformance-sweep.md`.
 
-- [ ] Sweep `schemas/` -> `jsonschema/` in llm-discourse-graph and
+- [x] Sweep `schemas/` -> `jsonschema/` in llm-discourse-graph and
       llm-design-kb (directory-name uniformity for skill-published
-      schemas; see the migration entry's Follow-on section)
+      schemas; see the migration entry's Follow-on section) -- done
+      2026-07-08; "jsonschema" chosen over "schema" deliberately: exact
+      match with the `.jsonschema.yaml` suffix (one greppable token),
+      names the technology, mass noun. One live consumer repointed:
+      prototype.chatfs `docs/dev/technical-policy.jsonschema.yaml`.
 
 ## Circular-ref finding (2026-07-05, experiment)
 

@@ -7,7 +7,7 @@ depends:
 
 ## Quick Reference
 
-**Adding a collection type:** Requires a new schema in `schemas/`, updates to SKILL.md, and an ADR. → See [HACKING.md](HACKING.md)
+**Adding a collection type:** Requires a new schema in `jsonschema/`, updates to SKILL.md, and an ADR. → See [HACKING.md](HACKING.md)
 
 **Understanding the five collections:** Questions, claims, deductions, sources, definitions. → See [SKILL.md](SKILL.md)
 
@@ -17,13 +17,13 @@ depends:
 
 A Claude Code skill defining a file-per-node epistemic knowledge graph format.
 No runtime code — the deliverable is documentation (SKILL.md) and schemas
-(`schemas/*.jsonschema.yaml`) that teach agents how to create and maintain
+(`jsonschema/*.jsonschema.yaml`) that teach agents how to create and maintain
 discourse graphs. Built on the `llm.kb` nesting convention.
 
 ## Key Files
 
 - `SKILL.md` — The skill itself; loaded when agents use discourse graphs
-- `schemas/*.jsonschema.yaml` — Five JSON Schemas governing frontmatter
+- `jsonschema/*.jsonschema.yaml` — Five JSON Schemas governing frontmatter
 - `docs/dev/adr/` — Design decisions (collection types, scoping, terminology)
 
 ## Conventions

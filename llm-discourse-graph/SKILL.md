@@ -78,7 +78,7 @@ lexical-scoping decision).
 ## Schemas
 
 Five `$COLLECTION.jsonschema.yaml` files, placed alongside the collections
-they govern. See `schemas/` in this skill directory.
+they govern. See `jsonschema/` in this skill directory.
 
 ## Relations and metadata
 
@@ -109,7 +109,7 @@ question
 ## Creating a discourse graph
 
 1. Create a scope directory with CLAUDE.md declaring this skill
-2. Link or copy `$COLLECTION.jsonschema.yaml` schemas from `schemas/`
+2. Link or copy `$COLLECTION.jsonschema.yaml` schemas from `jsonschema/`
 3. Create collections as needed — start with `sources.kb/` and `questions.kb/`
 4. Populate nodes as markdown files with YAML frontmatter
 5. Wire questions to claims via `candidate-resolutions`, claims to
