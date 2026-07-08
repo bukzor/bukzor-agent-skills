@@ -109,7 +109,7 @@ Sometimes several definitions genuinely belong in one file because the file
 
 ```yaml
 # animals.jsonschema.yaml
-definitions:
+$defs:
   mammal:
     type: object
     properties:
@@ -130,12 +130,12 @@ so it points at one entry each:
 type: object
 properties:
   goat:
-    $ref: "animals.jsonschema.yaml#/definitions/mammal"
+    $ref: "animals.jsonschema.yaml#/$defs/mammal"
   chicken:
-    $ref: "animals.jsonschema.yaml#/definitions/bird"
+    $ref: "animals.jsonschema.yaml#/$defs/bird"
 ```
 
-The `#/definitions/<name>` fragment is a standard JSON Pointer; `referencing`
+The `#/$defs/<name>` fragment is a standard JSON Pointer; `referencing`
 (the library `frontmatter_validate.py` uses) resolves it natively, no custom
 code needed.
 
@@ -147,10 +147,63 @@ grouping *is* beyond "things schemas share," it's the junk-drawer pattern
 in disguise -- split it instead (see "Default" above).
 
 A real (less kindergarten) instance of the same shape: `sweh-value` lives
-in `llm-subtask/jsonschema/todo.jsonschema.yaml`'s `definitions:`
-alongside `status`, `managed-by`, etc. -- all entries in one cohesive
-"todo/idea task metadata" schema, reused elsewhere via
-`$ref: "skill://llm-subtask/jsonschema/todo.jsonschema.yaml#/definitions/sweh-value"`.
+in `llm-subtask/jsonschema/todo.jsonschema.yaml`'s `$defs:` -- an entry in
+one cohesive "todo/idea task metadata" schema, addressable as
+`$ref: "skill://llm-subtask/jsonschema/todo.jsonschema.yaml#/$defs/sweh-value"`.
+
+## Extending a canonical schema: strict root, open `#base`
+
+A canonical schema publishes *two* entry points from one file, with zero
+duplication -- the strict root is built from the open base by conjunction:
+
+```yaml
+# canonical.jsonschema.yaml
+$schema: https://json-schema.org/draft/2020-12/schema
+$defs:
+  base:
+    $anchor: base
+    type: object
+    properties: { ... }        # all the content, no closure
+    required: [ ... ]
+$ref: "#/$defs/base"
+unevaluatedProperties: false   # the strictness, stated once
+```
+
+Consumers choose an entry point, and the choice is legible in their
+`$ref`:
+
+```yaml
+# exact conformance (the default; the usual one-line stub)
+$ref: "canonical.jsonschema.yaml"
+```
+
+```yaml
+# extension: base + local fields, closed locally
+$ref: "canonical.jsonschema.yaml#base"
+properties:
+  project-field: {type: string}
+unevaluatedProperties: false
+```
+
+Why this shape works (all verified by experiment against the real
+validator, 2026-07-08; recorded in
+`llm-kb/migrations.kb/2026-05-15-000-schema-propagation-from-canonical.md`):
+
+- Under Draft 2020-12, `$ref` + sibling keywords is *conjunction* -- an
+  extender can add fields or narrow constraints, never loosen. (Under
+  draft-07, siblings of `$ref` are silently *ignored* -- the strict root
+  would be dead text. This convention requires the 2020-12 dialect.)
+- `additionalProperties: false` can't see through `$ref`, so it would
+  reject even the canonical's own fields when used beside one;
+  `unevaluatedProperties: false` sees across `$ref`, which is what lets
+  both the strict root and extenders close over inherited fields.
+- The strict entry point is closed *in the canonical*, not in each stub --
+  a stub can't forget its closure, and plain stubs stay one `$ref` line.
+- `#base` is a Draft 2020-12 `$anchor`; the JSON-Pointer form
+  `#/$defs/base` resolves identically. Both work file-relative and
+  through `skill://`.
+
+Canonical instances: `llm-subtask/jsonschema/{todo,ideas}.jsonschema.yaml`.
 
 ## yaml-language-server compatibility
 
@@ -171,8 +224,14 @@ What *does* work everywhere is the yaml-language-server modeline, first
 line of any `*.jsonschema.yaml` (canonical or stub):
 
 ```yaml
-# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
 ```
+
+Declare the meta-schema matching the keywords the file uses: canonicals
+and extenders use 2020-12 keywords (`$anchor`, `unevaluatedProperties`),
+so they declare 2020-12; a plain one-line stub uses only `$ref`, identical
+in every dialect, so it keeps draft-07 -- which currently gets better
+editor support.
 
 It declares the schema *of the file itself* -- the JSON-Schema meta-schema --
 so editing schema files gets keyword completion and validation. This is

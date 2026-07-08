@@ -1,5 +1,5 @@
-# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
-$schema: http://json-schema.org/draft-07/schema#
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: https://json-schema.org/draft/2020-12/schema
 title: Todo/Idea Task Metadata
 description: |
   Cost-benefit analysis frontmatter for todo.kb/ and ideas.kb/ task files.
@@ -11,7 +11,7 @@ description: |
   One SWEh ≈ 60 minutes of focused software engineering work
     ≈ $100 USD when converting between time and dollar-denominated value.
 
-definitions:
+$defs:
   sweh-value:
     description: |
       Time investment measured in SWE-hours. Can be specified as:
@@ -67,171 +67,180 @@ definitions:
         required: ["@value"]
         additionalProperties: false
 
-type: object
-properties:
-  managed-by:
-    const: "Skill(llm-subtask)"
+  base:
+    $anchor: base
     description: |
-      The skill whose conventions govern this file. Signals to cold-start
-      agents which skill to load before operating on the file.
-
-      The schema pins this to a single value because the schema itself is
-      skill-local — a different skill's files use a different schema with
-      its own const.
-
-  status:
-    description: |
-      Lifecycle state of the file. Drives queue inclusion and template
-      handling. Absence is equivalent to `open` for backward compatibility
-      with files written before this field existed.
-
-      Two tiers, both closed. Terminal values (done, abandoned, duplicate)
-      and the non-task marker `template` remove the file from the open
-      queue; non-terminal values (open, deferred, blocked, not-started)
-      all mean "open, with detail". Tooling treats an unknown value as
-      open and warns — fail-safe behavior, fail-loud detection.
-      Registering a new value means amending this schema and the
-      enumerator (claude-open-tasks-list) in lockstep; see task-archeology
-      decision.kb/status-vocabulary-two-tier.md. `in-progress` is
-      deliberately absent: session liveness belongs in sessions.kb, not
-      task frontmatter, because nothing transitions it back when a
-      session dies.
-    oneOf:
-      - const: open
-        description: |
-          Active task or idea, eligible for prioritization and execution.
-      - const: deferred
-        description: |
-          Open, deliberately parked for later; a low cost-of-delay-2w
-          rating should corroborate.
-      - const: blocked
-        description: |
-          Open, cannot proceed until an external dependency clears; body
-          should name the blocker.
-      - const: not-started
-        description: |
-          Open, no work artifacts exist yet.
-      - const: done
-        description: |
-          Terminal: completed task or absorbed idea, retained for
-          historical reference rather than future action.
-      - const: abandoned
-        description: |
-          Terminal: deliberately not doing (WONTFIX); body should say why.
-      - const: duplicate
-        description: |
-          Terminal: tracked elsewhere; body should point to the survivor.
-      - const: template
-        description: |
-          Skeleton file shipped under skeleton/ as an installable example;
-          must never be treated as an active task by tooling.
-
-  closeout:
-    type: string
-    description: |
-      Resolution note for a completed item: when, where, and how it was
-      resolved. Optional; typically present on `status: done` entries to
-      record disposition (e.g. "Resolved 2026-05-26 via
-      Skill(llm-kb)/migrations.kb/").
-
-  required-reading:
-    type: array
-    items:
-      type: string
-    description: |
-      Files an agent MUST read before acting on this task. Use absolute paths
-      (~ allowed) or repo-relative paths. Reserve for context that meaningfully
-      changes how the task is approached — not background reading.
-
-  suggested-reading:
-    type: array
-    items:
-      type: string
-    description: |
-      Files or URLs an agent may consult for additional context. Lower bar than
-      required-reading; safe to skip when context is already established.
-
-  related-effort:
-    type: string
-    description: |
-      Path to a related task, session, or design note tracked elsewhere.
-      Used to cross-link parallel work without duplicating its content.
-
-  cost-benefit-sweh:
+      The extensible base schema: everything but the closure. Consumers
+      that add fields $ref this anchor and close themselves with
+      `unevaluatedProperties: false`; exact-conformance consumers $ref
+      the document root, which is this base plus closure.
     type: object
-    description: |
-      Cost-benefit analysis for task prioritization and timebox decisions.
-
-      Answers two critical questions:
-      1. When should I stop working on this? (timebox)
-      2. How much time does completing this save/generate? (benefit-2w)
     properties:
-      timebox:
-        $ref: "#/definitions/sweh-value"
+      managed-by:
+        const: "Skill(llm-subtask)"
         description: |
-          Break-even point: maximum time worth investing before diminishing returns.
+          The skill whose conventions govern this file. Signals to cold-start
+          agents which skill to load before operating on the file.
 
-          This is NOT an estimate of how long the task takes. It's the point where
-          you should stop and reassess, even if incomplete. Answers: "At what point
-          does continuing to work on this stop being worth it?"
+          The schema pins this to a single value because the schema itself is
+          skill-local — a different skill's files use a different schema with
+          its own const.
 
-          Rationale should explain: What constraints limit the value? What makes
-          this the break-even threshold?
-
-          Example: timebox 0.5 SWEh (30 min) because "confusion happened 3x this
-          session; while context is fresh should take ~30 min to document clearly.
-          Beyond that, diminishing returns on clarity vs time spent."
-
-      benefit-2w:
-        $ref: "#/definitions/sweh-value"
+      status:
         description: |
-          Expected time savings over next 2 weeks if task is completed successfully.
+          Lifecycle state of the file. Drives queue inclusion and template
+          handling. Absence is equivalent to `open` for backward compatibility
+          with files written before this field existed.
 
-          Measures return on investment. Can be specified as simple number when
-          obvious (e.g., "saves 1 hour" → 1) or with rationale for non-obvious
-          benefits or assumptions.
+          Two tiers, both closed. Terminal values (done, abandoned, duplicate)
+          and the non-task marker `template` remove the file from the open
+          queue; non-terminal values (open, deferred, blocked, not-started)
+          all mean "open, with detail". Tooling treats an unknown value as
+          open and warns — fail-safe behavior, fail-loud detection.
+          Registering a new value means amending this schema and the
+          enumerator (claude-open-tasks-list) in lockstep; see task-archeology
+          decision.kb/status-vocabulary-two-tier.md. `in-progress` is
+          deliberately absent: session liveness belongs in sessions.kb, not
+          task frontmatter, because nothing transitions it back when a
+          session dies.
+        oneOf:
+          - const: open
+            description: |
+              Active task or idea, eligible for prioritization and execution.
+          - const: deferred
+            description: |
+              Open, deliberately parked for later; a low cost-of-delay-2w
+              rating should corroborate.
+          - const: blocked
+            description: |
+              Open, cannot proceed until an external dependency clears; body
+              should name the blocker.
+          - const: not-started
+            description: |
+              Open, no work artifacts exist yet.
+          - const: done
+            description: |
+              Terminal: completed task or absorbed idea, retained for
+              historical reference rather than future action.
+          - const: abandoned
+            description: |
+              Terminal: deliberately not doing (WONTFIX); body should say why.
+          - const: duplicate
+            description: |
+              Terminal: tracked elsewhere; body should point to the survivor.
+          - const: template
+            description: |
+              Skeleton file shipped under skeleton/ as an installable example;
+              must never be treated as an active task by tooling.
 
-          Consider:
-          - Direct time savings (automation, preventing repeated work)
-          - Reduced cognitive load (clearer docs, better tools)
-          - Avoided future debugging/confusion
-          - Multiplier effects (helps multiple people/sessions)
-
-          Example: 1.5 SWEh because "prevents confusion for me and Claude agents,
-          estimate 15 min saved per occurrence × 6 occurrences = 90 min"
-
-      cost-of-delay-2w:
-        $ref: "#/definitions/sweh-value"
+      closeout:
+        type: string
         description: |
-          Expected cost (in SWEh) incurred over the next 2 weeks if the task
-          is NOT done. Optional; omit (or 0) when benefit-2w already captures
-          the full asymmetry of action vs. inaction.
+          Resolution note for a completed item: when, where, and how it was
+          resolved. Optional; typically present on `status: done` entries to
+          record disposition (e.g. "Resolved 2026-05-26 via
+          Skill(llm-kb)/migrations.kb/").
 
-          Distinct from benefit-2w in that it measures downside / urgency, not
-          upside. Use when the harm of inaction is what makes the item pressing:
+      required-reading:
+        type: array
+        items:
+          type: string
+        description: |
+          Files an agent MUST read before acting on this task. Use absolute paths
+          (~ allowed) or repo-relative paths. Reserve for context that meaningfully
+          changes how the task is approached — not background reading.
 
-          - Money / time bled while task remains undone (recurring fees,
-            ongoing ACH pulls, daily friction with no fix in sight)
-          - Decay of hot context on in-progress work (paused barrier work
-            costs re-orientation on resume)
-          - External deadlines (tax filings, ACH cycles, vesting windows)
-            translated to opportunity cost over the 2-week horizon
-          - Sunk-cost / momentum loss on multi-week efforts that stall
+      suggested-reading:
+        type: array
+        items:
+          type: string
+        description: |
+          Files or URLs an agent may consult for additional context. Lower bar than
+          required-reading; safe to skip when context is already established.
 
-          Priority can be ranked WSJF-style:
-            (benefit-2w + cost-of-delay-2w) / timebox
+      related-effort:
+        type: string
+        description: |
+          Path to a related task, session, or design note tracked elsewhere.
+          Used to cross-link parallel work without duplicating its content.
 
-          Items lacking SWEH ratings entirely often do so because their
-          urgency is dominated by cost-of-delay (e.g. financial migrations,
-          strategic V0 work). Adding this field gives them a place in the
-          prioritization frame.
+      cost-benefit-sweh:
+        type: object
+        description: |
+          Cost-benefit analysis for task prioritization and timebox decisions.
 
-          Example: 2.3 SWEh because "Ameriprise still pulls $458/mo ≈ $229/2w
-          of opportunity cost ÷ $100/SWEh until ACH
-          revocation lands."
+          Answers two critical questions:
+          1. When should I stop working on this? (timebox)
+          2. How much time does completing this save/generate? (benefit-2w)
+        properties:
+          timebox:
+            $ref: "#/$defs/sweh-value"
+            description: |
+              Break-even point: maximum time worth investing before diminishing returns.
 
-    required: ["timebox", "benefit-2w"]
-    additionalProperties: false
+              This is NOT an estimate of how long the task takes. It's the point where
+              you should stop and reassess, even if incomplete. Answers: "At what point
+              does continuing to work on this stop being worth it?"
 
-required: ["managed-by"]
-additionalProperties: false
+              Rationale should explain: What constraints limit the value? What makes
+              this the break-even threshold?
+
+              Example: timebox 0.5 SWEh (30 min) because "confusion happened 3x this
+              session; while context is fresh should take ~30 min to document clearly.
+              Beyond that, diminishing returns on clarity vs time spent."
+
+          benefit-2w:
+            $ref: "#/$defs/sweh-value"
+            description: |
+              Expected time savings over next 2 weeks if task is completed successfully.
+
+              Measures return on investment. Can be specified as simple number when
+              obvious (e.g., "saves 1 hour" → 1) or with rationale for non-obvious
+              benefits or assumptions.
+
+              Consider:
+              - Direct time savings (automation, preventing repeated work)
+              - Reduced cognitive load (clearer docs, better tools)
+              - Avoided future debugging/confusion
+              - Multiplier effects (helps multiple people/sessions)
+
+              Example: 1.5 SWEh because "prevents confusion for me and Claude agents,
+              estimate 15 min saved per occurrence × 6 occurrences = 90 min"
+
+          cost-of-delay-2w:
+            $ref: "#/$defs/sweh-value"
+            description: |
+              Expected cost (in SWEh) incurred over the next 2 weeks if the task
+              is NOT done. Optional; omit (or 0) when benefit-2w already captures
+              the full asymmetry of action vs. inaction.
+
+              Distinct from benefit-2w in that it measures downside / urgency, not
+              upside. Use when the harm of inaction is what makes the item pressing:
+
+              - Money / time bled while task remains undone (recurring fees,
+                ongoing ACH pulls, daily friction with no fix in sight)
+              - Decay of hot context on in-progress work (paused barrier work
+                costs re-orientation on resume)
+              - External deadlines (tax filings, ACH cycles, vesting windows)
+                translated to opportunity cost over the 2-week horizon
+              - Sunk-cost / momentum loss on multi-week efforts that stall
+
+              Priority can be ranked WSJF-style:
+                (benefit-2w + cost-of-delay-2w) / timebox
+
+              Items lacking SWEH ratings entirely often do so because their
+              urgency is dominated by cost-of-delay (e.g. financial migrations,
+              strategic V0 work). Adding this field gives them a place in the
+              prioritization frame.
+
+              Example: 2.3 SWEh because "Ameriprise still pulls $458/mo ≈ $229/2w
+              of opportunity cost ÷ $100/SWEh until ACH
+              revocation lands."
+
+        required: ["timebox", "benefit-2w"]
+        additionalProperties: false
+
+    required: ["managed-by"]
+
+$ref: "#/$defs/base"
+unevaluatedProperties: false

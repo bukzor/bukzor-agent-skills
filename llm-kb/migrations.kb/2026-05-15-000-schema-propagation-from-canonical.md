@@ -133,13 +133,20 @@ guard, with the invariant relaxed from byte-equality to
 - **Extension on top is allowed.** Semantics verified by scratch
   experiment against the real validator, 2026-07-07: under Draft
   2020-12, `$ref` + sibling keywords is *conjunction*, not override --
-  consumers can add fields or narrow constraints, never loosen. Adding
-  fields additionally requires canonical cooperation: today's
-  `additionalProperties: false` in the canonical rejects unknown
-  fields even through conjunction. The verified recipe, when the
-  first real extension shows up: canonical drops
-  `additionalProperties: false`; stubs and extenders close themselves
-  with `unevaluatedProperties: false` (which sees across `$ref`).
+  consumers can add fields or narrow constraints, never loosen.
+  Implemented 2026-07-08 as the two-entry-point convention: each
+  canonical publishes a strict root (`$ref: "#/$defs/base"` +
+  `unevaluatedProperties: false` -- what the unchanged one-line stubs
+  get) and an open `#base` anchor. An extender is
+  `$ref: "skill://llm-subtask/jsonschema/<category>.jsonschema.yaml#base"`
+  plus its own `properties:` and `unevaluatedProperties: false` --
+  purely local, no canonical edit, no coordination. Verified 2026-07-08
+  end-to-end through llm.kb-validate: strict stub still rejects unknown
+  fields; extender accepts its declared field, rejects junk, still
+  can't loosen; both `#base` ($anchor) and `#/$defs/base` (pointer)
+  resolve file-relative and through `skill://`. Required the 2020-12
+  dialect bump in the canonicals (under draft-07, `$ref` siblings are
+  ignored -- the strict root would be dead text).
 - **Omission is not allowed.** A consumer that wants "almost the
   canonical contract" extends/narrows on top of the `$ref`, keeping
   the delta explicit; one that wants a different contract renames its
