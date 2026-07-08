@@ -34,15 +34,21 @@ e.g. a project whose `todo.jsonschema.yaml` is *entirely* someone else's
 canonical schema is a one-line stub:
 
 ```yaml
-$ref: "skill://llm-subtask/skeleton/.claude/todo.jsonschema.yaml"
+$ref: "skill://llm-subtask/jsonschema/todo.jsonschema.yaml"
 ```
 
 Real examples: `llm-kb/.claude/todo.jsonschema.yaml`,
 `llm-collab/.claude/todo.jsonschema.yaml`,
 `llm-subtask/.claude/ideas.jsonschema.yaml` -- all one-line stubs pointing at
-`llm-subtask/skeleton/.claude/{todo,ideas}.jsonschema.yaml`, the canonical
+`llm-subtask/jsonschema/{todo,ideas}.jsonschema.yaml`, the canonical
 source. Editing the canonical file changes validation everywhere in one
 place; no propagation, no drift.
+
+Canonical schemas live in a `jsonschema/` directory at the *skill root*,
+never inside a `skeleton/` -- skeleton contents get copied into projects, and
+a copied full schema is a snapshot that drifts. The skeleton holds the same
+one-line stub, so a project initialized from it is live-linked to the
+canonical schema from day one.
 
 ## Two ways to point at the file
 
@@ -141,10 +147,10 @@ grouping *is* beyond "things schemas share," it's the junk-drawer pattern
 in disguise -- split it instead (see "Default" above).
 
 A real (less kindergarten) instance of the same shape: `sweh-value` lives
-in `llm-subtask/skeleton/.claude/todo.jsonschema.yaml`'s `definitions:`
+in `llm-subtask/jsonschema/todo.jsonschema.yaml`'s `definitions:`
 alongside `status`, `managed-by`, etc. -- all entries in one cohesive
 "todo/idea task metadata" schema, reused elsewhere via
-`$ref: "skill://llm-subtask/skeleton/.claude/todo.jsonschema.yaml#/definitions/sweh-value"`.
+`$ref: "skill://llm-subtask/jsonschema/todo.jsonschema.yaml#/definitions/sweh-value"`.
 
 ## yaml-language-server compatibility
 
@@ -160,6 +166,19 @@ there is no editor-side resolver for it today. Prefer file-relative `$ref`
 when editor-time validation matters more than avoiding a project-local copy;
 use `skill://` (or the stub-file pattern) when eliminating duplication
 matters more.
+
+What *does* work everywhere is the yaml-language-server modeline, first
+line of any `*.jsonschema.yaml` (canonical or stub):
+
+```yaml
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+```
+
+It declares the schema *of the file itself* -- the JSON-Schema meta-schema --
+so editing schema files gets keyword completion and validation. This is
+orthogonal to the `$schema:` keyword inside the document (which declares the
+dialect to validators) and to `$ref` resolution: the modeline can't make an
+editor follow `skill://`.
 
 ## Circular `$ref`
 

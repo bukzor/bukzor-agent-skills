@@ -1,1 +1,2 @@
-$ref: "skill://llm-subtask/skeleton/.claude/ideas.jsonschema.yaml"
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+$ref: "skill://llm-subtask/jsonschema/ideas.jsonschema.yaml"

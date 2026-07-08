@@ -56,9 +56,9 @@ The user reviews each flagged leg and assigns an honest band.
   rated items, or concrete blocking relationships.
 - `certain` (~95%): re-runnable check confirms the number.
 
-See `bukzor-agent-skills/llm-subtask/skeleton/.claude/todo.jsonschema.yaml`
-for the canonical vocabulary (and watch migration 008's drift if the
-skeleton-vs-skill propagation is incomplete).
+See `bukzor-agent-skills/llm-subtask/jsonschema/todo.jsonschema.yaml`
+for the canonical vocabulary (propagation drift is no longer a concern:
+all copies are now `$ref` stubs onto that file).
 
 ## Idempotency
 
