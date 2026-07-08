@@ -13,6 +13,15 @@ cost-benefit-sweh:
       slug. No daily savings beyond avoiding one-off ugly names.
 ---
 
+Repo-level list. Skill-scoped work lives in each skill's own
+`.claude/todo.md`; the breadcrumbs below point at every open list.
+
+- [ ] llm-kb/.claude/todo.md
+- [ ] llm-collab/.claude/todo.md
+- [ ] llm-subtask/.claude/todo.md
+- [ ] llm-must-read-kb/.claude/todo.md
+- [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
+- [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [x] Create skill `llm-must-read-kb/` (was drafted as `must-read-d`) to
       document the trigger-dir convention (`before/`, `after/`, `when/`).
       Two homes still inconsistent: `~/.claude/must-read.d/` (personal —

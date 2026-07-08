@@ -41,6 +41,10 @@ cost-benefit-sweh:
 - [ ] Guidance on which repo owns a todo in multi-repo setups
   - Financial todo started in bukzor-llc, belonged in evan-family
   - Skill doc has no advice for cross-repo task ownership
+  - Data point (2026-07-07, bukzor-agent-skills): monorepo with per-skill
+    lists adopted breadcrumb checkboxes — root todo.md points at each
+    subpath todo.md; session entries point at briefs; details never
+    duplicated upward
 
 ## Later
 
