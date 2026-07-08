@@ -15,7 +15,7 @@ cost-benefit-sweh:
       ≈ 2h saved.
 ---
 
-- [~] todo.kb/2026-02-09-000 (Schema reuse with $ref) — all success criteria met; one follow-on left (sweep `schemas/` -> `jsonschema/` in llm-discourse-graph, llm-design-kb)
+- [x] todo.kb/2026-02-09-000 (Schema reuse with $ref) — all success criteria met; `schemas/` -> `jsonschema/` sweep landed (e309103)
 - [x] Fix broken references to complete-example.md in SKILL.md (lines 84, 116)
 - [x] Run movie-tracker test, evaluate against SKILL.md
 - [ ] Configure permissions via .claude/settings.json instead of --allowedTools
@@ -33,9 +33,9 @@ cost-benefit-sweh:
 - [ ] Route `must-read/after/distilling-from-a-raw-source.md` through `run-self-audits.md` for the generic audit portion
 - [ ] Move `docs/dev/procedures.kb/reconcile-case-study.md` to `SKILL.kb/procedures.kb/` (consumer-facing parallel to post-mortem move)
 - [ ] Re-read SKILL.md after the recent rewrite; confirm the "No schema found → copy from skeleton" line still reads coherent in context
-- [ ] Verify `tests/` still pass after schema reshuffle, `.d → .kb` rename, and KbValidator extension
+- [x] Verify `tests/` still pass after schema reshuffle, `.d → .kb` rename, and KbValidator extension — 4 pass from repo root and from llm-kb/ (pytest ini_options hoisted to workspace root; bare `pytest` at root had silently collected 0 tests)
 - [ ] Devlog entry for this session (skeleton-default schema centralization, sessions.jsonschema migration)
-- [ ] Commit current working tree (CLEAN-KITCHEN)
+- [x] Commit current working tree (CLEAN-KITCHEN)
 
 ## Later
 

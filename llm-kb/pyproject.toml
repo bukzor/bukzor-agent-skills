@@ -12,7 +12,3 @@ dependencies = [
 dev = [
   "pytest>=8.4.2",
 ]
-
-[tool.pytest.ini_options]
-python_classes = ["Describe*", "When*", "Test*"]
-python_functions = ["it_*", "test_*"]

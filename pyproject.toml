@@ -15,6 +15,10 @@ basedpyright-as-pyright = { path = "../basedpyright-as-pyright" }
 [tool.uv.workspace]
 members = ["llm-kb"]
 
+[tool.pytest.ini_options]
+python_classes = ["Describe*", "When*", "Test*"]
+python_functions = ["it_*", "test_*"]
+
 [tool.pyright]
 exclude = [
     "**/node_modules",
