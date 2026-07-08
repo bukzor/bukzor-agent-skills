@@ -194,11 +194,12 @@ parallel to `design.kb/`. The only thing stale was
 pre-decision `docs/milestones/`. Fixed (path + heading updated to
 `docs/dev/milestones.kb/`, with a citation to the ADR).
 
-**Still genuinely open:** unlike `design/` and `technical-policy.kb/`,
-no `skeleton/docs/dev/milestones.kb/` directory or `CLAUDE.md` template
-has ever been built, and `llm-collab-init` doesn't create or migrate
-one. The *destination path* is now settled and documented everywhere
-consistently; *building the skeleton template + init wiring* is
-separate, real implementation work — not done in this pass. Also still
-open: the `complete-example/`-style example-update step (this todo has
-none, but see the parallel llm-kb rename todo).
+**Still genuinely open** — unlike `design/` and `technical-policy.kb/`,
+no milestones.kb skeleton exists yet. The *destination path* is settled
+and documented everywhere consistently; what remains is implementation:
+
+- [ ] Build `skeleton/docs/dev/milestones.kb/` template (`CLAUDE.md`)
+      + `llm-collab-init` wiring (create on init, migrate existing)
+- [ ] `complete-example/`-style example-update step (this todo defined
+      none; see the parallel llm-kb rename todo,
+      `llm-kb/.claude/todo.kb/2026-01-02-000-complete-d-to-kb-rename.md`)
