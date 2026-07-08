@@ -1,5 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
+status: done
 required-reading:
   - ~/.claude/skills/llm-kb/references/schema-design.md
   - ~/.claude/skills/llm-kb/lib/python/llmd/frontmatter_validate.py
