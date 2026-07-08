@@ -15,6 +15,7 @@ cost-benefit-sweh:
       ≈ 2h saved.
 ---
 
+- [~] todo.kb/2026-02-09-000 (Schema reuse with $ref) — all success criteria met; one follow-on left (sweep `schemas/` -> `jsonschema/` in llm-discourse-graph, llm-design-kb)
 - [x] Fix broken references to complete-example.md in SKILL.md (lines 84, 116)
 - [x] Run movie-tracker test, evaluate against SKILL.md
 - [ ] Configure permissions via .claude/settings.json instead of --allowedTools
@@ -40,7 +41,6 @@ cost-benefit-sweh:
 
 - [ ] todo.kb/2026-01-02-000-complete-d-to-kb-rename.md (finish `.d → .kb` rename in `complete-example/`; promote ADR 2025-12-03-000 to Accepted) -- related to prototype.chatfs harmonization
 - [ ] todo.kb/2025-12-04-000 (Claude enumerates contents despite explicit prohibition)
-- [ ] todo.kb/2026-02-09-000 (Schema reuse with $ref)
 - [ ] todo.kb/2026-06-03-000 (Validate path references -- frontmatter schema type + body checker)
 - [ ] Decide `post-mortem.md` naming (capture-incident? learn-from-failure?) -- defer until a second case-study clarifies the modes
 - [ ] Extract `SKILL.kb/self-audit.kb/bloat.md`'s "Frame" stance into `principles.kb/` once that collection is seeded

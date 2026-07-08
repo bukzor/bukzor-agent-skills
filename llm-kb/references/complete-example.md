@@ -34,6 +34,13 @@ Summary files for overview: `decorations.md` summarizes theme and budget
 without diving into individual items. Unlike `cake.md` (which is also a
 `food.kb/` member), `decorations.md` sits at the root as a pure overview.
 
+Schema reuse via `$ref`: `decorations.jsonschema.yaml` and
+`food.jsonschema.yaml` both need a `status`/`budget` pair; `food.kb/cake.jsonschema.yaml`
+needs `status` alone. Rather than duplicate those field definitions,
+all three `$ref` shared files in `jsonschema/` (`jsonschema/status.jsonschema.yaml`,
+`jsonschema/budget.jsonschema.yaml`) -- file-relative, no fragment. See
+`references/schema-reuse.md` for the general pattern.
+
 ## Exploring
 
 ```bash
