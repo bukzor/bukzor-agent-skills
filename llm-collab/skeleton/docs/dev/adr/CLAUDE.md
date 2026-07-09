@@ -25,4 +25,4 @@ Each ADR documents:
 
 ## Creating ADRs
 
-Use: `llm-collab-adr "Decision title"`
+Use: `llm-collab-adr --title "Decision title"`

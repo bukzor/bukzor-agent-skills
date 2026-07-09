@@ -21,7 +21,7 @@ purpose: Capture reasoning, principles, and conventions that diffs can't
 - `NNN` - Auto-incrementing 3-digit sequence (000, 001, ...)
 - `slug` - Lowercase hyphenated title (e.g., `claude-md-instruction-optimization`)
 
-**Create via:** `llm-collab-devlog "Entry title"`
+**Create via:** `llm-collab-devlog --title "Entry title"` (add `-C <dir>` to target another directory)
 
 **Templates:**
 - [skeleton/docs/dev/devlog/YYYY-MM-DD-000-example-entry.md](../../skeleton/docs/dev/devlog/YYYY-MM-DD-000-example-entry.md)

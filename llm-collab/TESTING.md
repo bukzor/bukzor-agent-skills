@@ -27,7 +27,7 @@ If a script fails but these tests didn't catch it, TESTING.md is incomplete.
 ```bash
 cd ~/.claude/skills/llm-collab
 tmpdir=$(mktemp -d)
-bin/llm-collab-init "$tmpdir"
+bin/llm-collab-init -C "$tmpdir"
 echo "Exit code: $?"
 ls -la "$tmpdir"/docs/dev/
 rm -rf "$tmpdir"
@@ -68,16 +68,16 @@ test -f skeleton/docs/dev/adr/YYYY-MM-DD-000-example-decision.md && echo "✓ ad
 tmpdir=$(mktemp -d)
 cd "$tmpdir"
 
-# 1. Initialize
-~/.claude/skills/llm-collab/bin/llm-collab-init .
+# 1. Initialize (already cd'd into tmpdir; -C defaults to ".")
+~/.claude/skills/llm-collab/bin/llm-collab-init
 echo "--- init exit: $? ---"
 
 # 2. Create devlog entry
-~/.claude/skills/llm-collab/bin/llm-collab-devlog "Test entry"
+~/.claude/skills/llm-collab/bin/llm-collab-devlog --title "Test entry"
 echo "--- devlog exit: $? ---"
 
 # 3. Create ADR
-~/.claude/skills/llm-collab/bin/llm-collab-adr "Test decision"
+~/.claude/skills/llm-collab/bin/llm-collab-adr --title "Test decision"
 echo "--- adr exit: $? ---"
 
 # TODO: llm-collab-idea not yet implemented (see todo.kb/2025-11-26-001)
@@ -110,11 +110,11 @@ expansion (`${var//a/b}`) instead of `sed`. Regression check:
 ```bash
 tmpdir=$(mktemp -d)
 cd "$tmpdir"
-~/.claude/skills/llm-collab/bin/llm-collab-init . >/dev/null
+~/.claude/skills/llm-collab/bin/llm-collab-init >/dev/null
 
-~/.claude/skills/llm-collab/bin/llm-collab-devlog "Fix docs/dev migration drift"
+~/.claude/skills/llm-collab/bin/llm-collab-devlog --title "Fix docs/dev migration drift"
 echo "--- devlog exit: $? ---"
-~/.claude/skills/llm-collab/bin/llm-collab-adr "Decision with a slash/in it"
+~/.claude/skills/llm-collab/bin/llm-collab-adr --title "Decision with a slash/in it"
 echo "--- adr exit: $? ---"
 
 find docs/dev/{devlog,adr} -newer CLAUDE.md -name '*.md' ! -name CLAUDE.md -size +0c \
@@ -125,6 +125,37 @@ rm -rf "$tmpdir"
 ```
 
 **Expected:** Both exit codes 0, both entry files non-empty.
+
+## Positional-Argument Rejection Test
+
+The former CWD-implicit interface let a caller pass a target directory
+as a bare positional; the script silently ignored it (init) or baked
+it into the title (creators). Fixed by requiring `-C <dir>` for the
+target and `-m|--title <title>` for the title — no positionals
+accepted anywhere. Regression check:
+
+```bash
+tmpdir=$(mktemp -d)
+
+# init: bare positional path (the original incident pattern) must
+# error, not silently write into CWD
+~/.claude/skills/llm-collab/bin/llm-collab-init "$tmpdir"
+echo "--- init w/ positional path exit (expect 1): $? ---"
+
+# creator: old-style bare positional title must error, not get created
+~/.claude/skills/llm-collab/bin/llm-collab-devlog -C "$tmpdir" "Old style title"
+echo "--- devlog w/ positional title exit (expect 1): $? ---"
+
+# -C targets another directory without cd
+~/.claude/skills/llm-collab/bin/llm-collab-init -C "$tmpdir" >/dev/null
+~/.claude/skills/llm-collab/bin/llm-collab-adr -C "$tmpdir" --title "Cross-dir decision"
+echo "--- adr via -C exit (expect 0): $? ---"
+
+rm -rf "$tmpdir"
+```
+
+**Expected:** First two exit 1 with a usage hint on stderr and no file
+created; the `-C` case exits 0 and creates the ADR under `$tmpdir`, not CWD.
 
 ## Script Path Audit
 

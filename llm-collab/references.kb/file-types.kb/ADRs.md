@@ -40,7 +40,7 @@ docs/dev/adr/
 - `Superseded` - Replaced by another ADR
 - `Deprecated` - No longer applies
 
-**Create via:** `llm-collab-adr "Decision title"`
+**Create via:** `llm-collab-adr --title "Decision title"` (add `-C <dir>` to target another directory)
 
 **Integration:**
 - Reference from HACKING.md: "See [docs/dev/adr/](docs/dev/adr/) for architecture decisions"

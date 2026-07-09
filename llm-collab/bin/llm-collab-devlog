@@ -14,32 +14,51 @@ if (( ${DEBUG:-0} > 0 )); then
   set -x
 fi
 
-# Locate skeleton directory
+# Locate skeleton directory (before any -C cd, so a relative $0 still resolves)
 HERE="$(cd "$(dirname "$0")"; pwd)"
 SKILL_DIR="$(cd "$HERE/.." && pwd)"
 SKELETON="$SKILL_DIR/skeleton"
 
+DIR="."
 DRY_RUN=0
+TITLE=""
+TITLE_SET=0
 usage() {
-  echo >&2 "Usage: llm-collab-devlog [-n|--dry-run] \"Entry title\""
-  echo >&2 "       DATE=YYYY-MM-DD llm-collab-devlog \"Entry title\"  (for backdating)"
+  echo >&2 "Usage: llm-collab-devlog [-C <dir>] [-n|--dry-run] --title <title>"
+  echo >&2 "       DATE=YYYY-MM-DD llm-collab-devlog ... --title <title>  (for backdating)"
+  echo >&2 "       -C <dir>:      run as if invoked from <dir> (default: .)"
+  echo >&2 "       --title:       entry title (required)"
   echo >&2 "       -n, --dry-run: print path without creating file"
 }
 
-while [[ "${1:-}" == -* ]]; do
+while [[ $# -gt 0 ]]; do
   case "$1" in
     -h|--help) usage; exit 0 ;;
     -n|--dry-run) DRY_RUN=1; shift ;;
-    *) echo >&2 "Unknown option: $1"; exit 1 ;;
+    -C)
+      [ -n "${2:-}" ] || { echo >&2 "Error: -C requires an argument"; usage; exit 1; }
+      DIR="$2"; shift 2 ;;
+    --title)
+      [ -n "${2:-}" ] || { echo >&2 "Error: --title requires an argument"; usage; exit 1; }
+      TITLE="$2"; TITLE_SET=1; shift 2 ;;
+    -*) echo >&2 "Unknown option: $1"; usage; exit 1 ;;
+    *)
+      echo >&2 "Error: unexpected argument '$1' -- positional args are not accepted"
+      echo >&2 "       did you mean: -C '$1'  or  --title '$1' ?"
+      usage; exit 1 ;;
   esac
 done
 
-if [ -z "${1:-}" ]; then
+if (( ! TITLE_SET )); then
   usage
   exit 1
 fi
 
-TITLE="$*"
+if [ ! -d "$DIR" ]; then
+  echo >&2 "Error: -C target '$DIR' is not a directory"
+  exit 1
+fi
+cd "$DIR"
 
 # Migrate old location to new location if needed
 if [ -d "docs/devlog" ]; then

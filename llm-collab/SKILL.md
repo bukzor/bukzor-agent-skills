@@ -141,13 +141,16 @@ CLAUDE.md and other agent-context markdown files use frontmatter to give agents 
 ~/.claude/skills/llm-collab/bin/llm-collab-session-start
 
 # Document a significant decision
-~/.claude/skills/llm-collab/bin/llm-collab-adr "Decision title"
+~/.claude/skills/llm-collab/bin/llm-collab-adr --title "Decision title"
 
 # Record what happened this session
-~/.claude/skills/llm-collab/bin/llm-collab-devlog
+~/.claude/skills/llm-collab/bin/llm-collab-devlog --title "Entry title"
 
 # Backdate an entry (works with any date-based script)
-DATE=2025-11-19 ~/.claude/skills/llm-collab/bin/llm-collab-adr "Decision title"
+DATE=2025-11-19 ~/.claude/skills/llm-collab/bin/llm-collab-adr --title "Decision title"
+
+# Run from another directory without cd
+~/.claude/skills/llm-collab/bin/llm-collab-adr -C /path/to/project --title "Decision title"
 
 # Set up docs for new project
 ~/.claude/skills/llm-collab/bin/llm-collab-init

@@ -96,7 +96,7 @@ subtask pop:
 └── 2025-11-25-001-fix-authentication-bug.md
 ```
 
-**Creation:** `~/.claude/skills/llm-subtask/bin/llm-subtask-todo "Task title"`
+**Creation:** `~/.claude/skills/llm-subtask/bin/llm-subtask-todo --title "Task title"`
 
 **File structure:** Each file contains:
 - Problem statement and context

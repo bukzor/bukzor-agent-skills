@@ -22,10 +22,10 @@ Create a TODO file when:
 
 ```bash
 # Create new TODO (copies skeleton template)
-~/.claude/skills/llm-subtask/bin/llm-subtask-todo "Task title"
+~/.claude/skills/llm-subtask/bin/llm-subtask-todo --title "Task title"
 
 # Backdate a TODO
-DATE=2025-11-25 ~/.claude/skills/llm-subtask/bin/llm-subtask-todo "Task title"
+DATE=2025-11-25 ~/.claude/skills/llm-subtask/bin/llm-subtask-todo --title "Task title"
 
 # List all TODOs
 ls -1t .claude/todo.kb/*.md

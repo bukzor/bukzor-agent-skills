@@ -14,26 +14,36 @@ if (( ${DEBUG:-0} > 0 )); then
   set -x
 fi
 
-usage() {
-  echo >&2 "Usage: llm-collab-init [PROJECT_ROOT]"
-  echo >&2 "       Initialize LLM-collaborative documentation structure"
-  echo >&2 "       PROJECT_ROOT defaults to current directory"
-}
-
-while [[ "${1:-}" == -* ]]; do
-  case "$1" in
-    -h|--help) usage; exit 0 ;;
-    *) echo >&2 "Unknown option: $1"; exit 1 ;;
-  esac
-done
-
-PROJECT_ROOT=${1:-.}
-cd "$PROJECT_ROOT"
-
-# Locate skeleton directory
+# Locate skeleton directory (before any -C cd, so a relative $0 still resolves)
 HERE="$(cd "$(dirname "$0")"; pwd)"
 SKILL_DIR="$(cd "$HERE/.." && pwd)"
 SKELETON="$SKILL_DIR/skeleton"
+
+DIR="."
+usage() {
+  echo >&2 "Usage: llm-collab-init [-C <dir>]"
+  echo >&2 "       Initialize LLM-collaborative documentation structure"
+  echo >&2 "       -C <dir>: run as if invoked from <dir> (default: .)"
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help) usage; exit 0 ;;
+    -C)
+      [ -n "${2:-}" ] || { echo >&2 "Error: -C requires an argument"; usage; exit 1; }
+      DIR="$2"; shift 2 ;;
+    -*) echo >&2 "Unknown option: $1"; usage; exit 1 ;;
+    *)
+      echo >&2 "Error: unexpected argument '$1' -- positional args are not accepted; use -C '$1'"
+      usage; exit 1 ;;
+  esac
+done
+
+if [ ! -d "$DIR" ]; then
+  echo >&2 "Error: -C target '$DIR' is not a directory"
+  exit 1
+fi
+cd "$DIR"
 
 echo "🚀 Initializing LLM-collaborative documentation structure..."
 
@@ -115,7 +125,7 @@ echo "✅ Helper scripts available at: $SKILL_DIR/bin/"
 # Create first devlog entry (only for brand-new projects)
 # After migration, check for any existing entries (old or new naming format)
 if ! find docs/dev/devlog -maxdepth 1 -type f -name "*.md" ! -name "CLAUDE.md" ! -name "README.md" | grep -q .; then
-  "$HERE/llm-collab-devlog" "Project initialization"
+  "$HERE/llm-collab-devlog" --title "Project initialization"
   echo "✅ Created first devlog entry"
 fi
 
@@ -124,5 +134,5 @@ echo "🎉 Documentation structure initialized!"
 echo ""
 echo "Next steps:"
 echo "  1. Edit CLAUDE.md with project-specific guidance"
-echo "  2. Create ADRs: llm-collab-adr \"Your decision\""
-echo "  3. Create devlogs: llm-collab-devlog"
+echo "  2. Create ADRs: llm-collab-adr --title \"Your decision\""
+echo "  3. Create devlogs: llm-collab-devlog --title \"Your entry\""

@@ -14,19 +14,31 @@ if (( ${DEBUG:-0} > 0 )); then
   set -x
 fi
 
+DIR="."
 usage() {
-  echo >&2 "Usage: llm-collab-session-start"
+  echo >&2 "Usage: llm-collab-session-start [-C <dir>]"
   echo >&2 "       Read key files for session orientation"
+  echo >&2 "       -C <dir>: run as if invoked from <dir> (default: .)"
 }
 
-while [[ "${1:-}" == -* ]]; do
+while [[ $# -gt 0 ]]; do
   case "$1" in
     -h|--help) usage; exit 0 ;;
-    *) echo >&2 "Unknown option: $1"; exit 1 ;;
+    -C)
+      [ -n "${2:-}" ] || { echo >&2 "Error: -C requires an argument"; usage; exit 1; }
+      DIR="$2"; shift 2 ;;
+    -*) echo >&2 "Unknown option: $1"; usage; exit 1 ;;
+    *)
+      echo >&2 "Error: unexpected argument '$1' -- positional args are not accepted; use -C '$1'"
+      usage; exit 1 ;;
   esac
 done
 
-HERE="$(cd "$(dirname "$0")"; pwd)"
+if [ ! -d "$DIR" ]; then
+  echo >&2 "Error: -C target '$DIR' is not a directory"
+  exit 1
+fi
+cd "$DIR"
 
 echo "📖 Reading session context..."
 echo ""
@@ -77,6 +89,6 @@ fi
 echo "✅ Session context loaded"
 echo ""
 echo "Quick commands:"
-echo "  - Create TODO: llm-subtask-todo \"Task title\""
-echo "  - Create ADR: llm-collab-adr \"Decision title\""
-echo "  - Create devlog: llm-collab-devlog"
+echo "  - Create TODO: llm-subtask-todo --title \"Task title\""
+echo "  - Create ADR: llm-collab-adr --title \"Decision title\""
+echo "  - Create devlog: llm-collab-devlog --title \"Entry title\""

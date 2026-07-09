@@ -80,7 +80,7 @@ Mostly notional, only reified on demand.
 
 ### Strategic (Tier 3)
 
-Create planning files via: `~/.claude/skills/llm-subtask/bin/llm-subtask-todo "Task title"`
+Create planning files via: `~/.claude/skills/llm-subtask/bin/llm-subtask-todo --title "Task title"` (add `-C <dir>` to target another directory without `cd`)
 
 ## `- [ ]` Is Load-Bearing — Never Use Bare `-` for Tasks
 
@@ -189,7 +189,7 @@ Suggest `todo clear` when `[x]` items outnumber `[ ]` items in todo.md.
 - `todo.kb/` = committed work, will be done
 - `ideas.kb/` = speculative, might never happen
 
-**Create ideas via:** `~/.claude/skills/llm-subtask/bin/llm-subtask-idea "Idea title"`
+**Create ideas via:** `~/.claude/skills/llm-subtask/bin/llm-subtask-idea --title "Idea title"`
 
 ## References
 

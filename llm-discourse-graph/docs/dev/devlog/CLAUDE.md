@@ -23,4 +23,4 @@ Devlogs capture what diffs can't — reasoning, principles, conventions:
 
 ## Creating Entries
 
-Use: `llm-collab-devlog "Entry title"`
+Use: `llm-collab-devlog --title "Entry title"`
