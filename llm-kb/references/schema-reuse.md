@@ -96,7 +96,7 @@ split rather than waiting for one to accumulate organically.
 name, path is the file within that skill's root. Resolved in-memory via
 `~/.claude/skills/<skill>/<path>` (a symlink farm onto this repo, so it also
 transparently resolves same-repo cross-skill refs). No network fetch either
-way. See the ADR (`llm-kb/docs/adr/2026-05-18-000-skill-uri-scheme.md`) for
+way. See the ADR (`llm-kb/docs/dev/adr/2026-05-18-000-skill-uri-scheme.md`) for
 the scheme's full rationale.
 
 Use this when the shared definition is owned by a *different* skill.
