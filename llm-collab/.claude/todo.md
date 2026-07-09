@@ -50,10 +50,10 @@ cost-benefit-sweh:
   - [x] Verify llm-collab-devlog script still works
   - [x] Run TESTING.md to verify bin/ scripts work with new paths
   - [x] Check other skill scripts for similar migration needs (none have docs/ refs)
-- [ ] Bug: bin/ scripts crash when agent passes path as positional arg
-  - llm-collab-devlog: sed error on slashes in path
-  - llm-collab-init: slugifies entire path into devlog filename
-  - Same root cause as llm-subtask scripts (see that skill's todo)
+- [x] Bug: bin/ scripts crash when agent passes path as positional arg
+  - Fixed via strict `-C <dir>`/`--title <title>` grammar, no positionals
+    accepted anywhere; see docs/dev/adr/2026-07-09-000-Strict--C---title-grammar-for-bin--script-args.md
+    (commit 6b2b9aa)
 - [ ] HACKING.md irrelevant for knowledge-base repos
   - llm-collab-init creates contributor onboarding template
   - For a .kb repo with no code, this is noise

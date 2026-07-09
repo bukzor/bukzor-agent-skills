@@ -26,8 +26,6 @@ cost-benefit-sweh:
     confidence: tentative
 ---
 
-- [ ] .claude/ideas.kb/2026-04-17-000-llm-subtask-init-ignores-path-argument-uses-cwd.md
-  - All bin/ scripts use CWD, agent naturally passes paths → mangled filenames or wrong repo
 - [ ] todo.kb AND ideas.kb templates too boilerplate-heavy
   - Agent had to read 43 lines of placeholder then overwrite entirely
   - Simpler skeleton: title + frontmatter + blank sections, no [placeholder text]
