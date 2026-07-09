@@ -59,6 +59,26 @@ class DescribeSkillRefResolution:
 
         assert errors, "expected the ref target's type constraint to produce an error"
 
+    def it_resolves_a_file_relative_ref_inside_a_skill_owned_stub(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+        monkeypatch.setattr(fv, "SKILLS_HOME", tmp_path)
+        skill_dir = tmp_path / "common-skill"
+        _ = skill_dir.mkdir()
+        _ = (skill_dir / "todo.jsonschema.yaml").write_text("""\
+type: array
+items: {type: string}
+""")
+        _ = (skill_dir / "stub.jsonschema.yaml").write_text("$ref: todo.jsonschema.yaml\n")
+        schema: JsonObj = {
+            "type": "object",
+            "properties": {
+                "todo": {"$ref": "skill://common-skill/stub.jsonschema.yaml"},
+            },
+        }
+
+        errors = fv.validate_against_schema({"todo": ["a", "b"]}, schema)
+
+        assert errors == []
+
 
 class DescribeFileRelativeRefResolution:
     def it_resolves_a_whole_file_ref_to_a_sibling_schema(self, tmp_path: Path):

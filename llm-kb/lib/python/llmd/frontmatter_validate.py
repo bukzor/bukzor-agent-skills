@@ -11,6 +11,7 @@ package and its own relative imports below just work.
 import argparse
 import functools
 import sys
+import urllib.parse
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass
 from pathlib import Path
@@ -26,6 +27,13 @@ from .types import JsonObj, JsonValue
 SKILL_URI_SCHEME = 'skill://'
 FILE_URI_SCHEME = 'file://'
 SKILLS_HOME = Path.home() / '.claude' / 'skills'
+
+# urljoin only resolves a relative $ref against schemes it knows are
+# hierarchical. Without this, a file-relative $ref inside a schema fetched
+# via skill:// (e.g. `todo.jsonschema.yaml`) doesn't join onto the skill://
+# base -- it passes through unchanged and fails to resolve.
+urllib.parse.uses_relative.append('skill')
+urllib.parse.uses_netloc.append('skill')
 
 
 def _resource_from_path(schema_path: Path) -> Resource[Schema]:
