@@ -26,6 +26,9 @@ cost-benefit-sweh:
     confidence: tentative
 ---
 
+- [ ] Batch the three SKILL.md/skeleton UX-flow items below into one pass
+  (same class of fix, each a small per-session tax; do together rather
+  than as three separate touches — 2026-07-09 forward-looking review)
 - [ ] todo.kb AND ideas.kb templates too boilerplate-heavy
   - Agent had to read 43 lines of placeholder then overwrite entirely
   - Simpler skeleton: title + frontmatter + blank sections, no [placeholder text]
