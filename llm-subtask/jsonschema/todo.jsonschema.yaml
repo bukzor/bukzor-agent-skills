@@ -164,6 +164,20 @@ $defs:
           Path to a related task, session, or design note tracked elsewhere.
           Used to cross-link parallel work without duplicating its content.
 
+      blocked-by:
+        type: array
+        items:
+          type: string
+        description: |
+          Hard prerequisites: tasks that must land before this one can
+          proceed. Recorded on the blocked (waiting) task; pairs with
+          `status: blocked`, which marks a task blocked while this names what
+          blocks it. Reference form matches the reading fields -- a same-kb
+          sibling filename, or a path (~ allowed, or repo-relative). For a
+          soft, non-blocking link use `related-effort`; for parent/subtask
+          decomposition, nest the subtask under the parent's `<stem>.kb/`
+          sub-collection rather than naming a relation here.
+
       cost-benefit-sweh:
         type: object
         description: |

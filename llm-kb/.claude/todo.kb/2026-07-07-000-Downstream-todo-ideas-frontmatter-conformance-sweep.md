@@ -55,7 +55,10 @@ Failing, by flavor:
   `supersedes-question-from`) -- decide per field: rename to a canonical
   field, drop, or extend the canonical schema (see the extension recipe
   in the migration entry):
-  - [ ] prototype.chatfs `todo.kb/2026-01-02-002, 2026-05-16-{000,001}`
+  - [x] prototype.chatfs `todo.kb/2026-01-02-002, 2026-05-16-{000,001}`
+        (2026-07-09: `depends`/`depends-on` -> canonical `blocked-by` field
+        added to the llm-subtask base; `parent` -> sub-kb nesting;
+        `supersedes-question-from` -> chatfs-local `#base` extender)
 - `cost-benefit-sweh` rejected by the canonical *ideas* schema --
   investigate: likely the flat pre-time-period-nesting shape:
   - [ ] ideation.physical-musings `ideas.kb/2026-07-03-000-*.md`
