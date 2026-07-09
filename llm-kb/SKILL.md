@@ -133,6 +133,24 @@ signal "this is a collection, use `ls` for contents."
 Example: `tools.kb/` contains tool profiles; `features.kb/` contains feature
 comparisons.
 
+## Recognizing the Shape
+
+The pattern is defined by its end state, not by how content arrives.
+Wherever several same-type items share a parent -- parallel sections in
+one file, an ad hoc directory, scattered loose files, or a newly-noticed
+category -- that end state is a `.kb/` collection: one file per item,
+`$CATEGORY.kb/` naming, sibling `$CATEGORY.md`/`.jsonschema.yaml` where
+they'd help.
+
+Recognize non-canonical instances by the same shape, regardless of
+starting form: a directory of homogeneous items missing the `.kb`
+suffix, a sibling pointer file, or the parent scope's naming convention
+(a date-prefixed sibling in `todo.kb/` implies the promoted collection
+keeps that prefix) is this pattern in the wrong shape. Bring it into
+shape the same way you'd promote a flat file -- growth-signal checklist
+and mechanical steps: `SKILL.kb/self-audit.kb/promotion-signals.md`,
+`SKILL.kb/procedures.kb/promote-to-collection.md`.
+
 ## Naming
 
 Applies to `$CATEGORY` and `$ITEM` identifiers (directory and file names).
@@ -156,36 +174,6 @@ Poor fit:
 - Simple flat information (single README suffices)
 - One-time use
 - No structured metadata needed
-
-## Promotion Signals
-
-Promote a single `.md` to a `.kb/` directory when any of these signals is
-present:
-
-- Plural filename -- `patterns.md`, `providers.md`, `alternatives.md`. The
-  name signals a listing; the directory shape should follow.
-- Parallel sections of the same type -- multiple `##` or `###` headings
-  describing items of the same kind, even in prose form. Each section is one
-  item; they belong in a `.kb/` as separate files. This applies regardless of
-  whether the prose itself contains bullet lists.
-- Listing-heavy content -- most of the file is a numbered list, table, or
-  parallel enumeration of homogeneous items.
-- Per-item growth pressure -- each item wants its own paragraph, frontmatter,
-  or lifecycle (status, why:, last-updated), or any single item exceeds ~50
-  tokens of explanation.
-
-When you notice these, promote:
-
-1. `$name.md` → `$singular.kb/` directory (rename to singular).
-2. Each listed item → its own `.md` inside.
-3. The former file's non-listing prose → either `$singular.md` (summary at
-   parent scope) or `$singular.kb/CLAUDE.md` (maintenance guide for the new
-   collection).
-
-A fixed 2-4-item list of one-line entries is fine as prose. The signal is
-*growth pressure*, not the mere presence of a list. Bullet lists for
-short reference material (glossaries, shorthand) are also fine; the rule
-targets parallel descriptions of items, not all uses of list syntax.
 
 ## Creating a Collection
 
