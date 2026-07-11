@@ -58,7 +58,10 @@ frontmatter references to other nodes is the normal case.
 ### Roll-up
 
 The parent node IS the summary. When a sub-scope resolves (e.g. a question
-is answered), update the parent node's status and body accordingly.
+is answered), update the parent node's status and body accordingly -- this
+is the discourse-graph instance of `Skill(llm-kb)`'s general "Decision
+Points" pattern (`$ITEM.md` + `$ITEM.kb/`); see that skill for the full
+keep-as-background vs. clean-up-entirely lifecycle once resolved.
 
 ## Path resolution
 

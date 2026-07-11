@@ -133,6 +133,24 @@ signal "this is a collection, use `ls` for contents."
 Example: `tools.kb/` contains tool profiles; `features.kb/` contains feature
 comparisons.
 
+### Decision Points ($ITEM.md + $ITEM.kb/)
+
+A single open question or decision can itself be elaborated: `$ITEM.md`
+poses the question, `$ITEM.kb/` holds one file per candidate answer or
+option (same shape as any other collection -- one file per item).
+
+When the decision closes, rewrite `$ITEM.md` to state the resolution and
+why, rather than leaving it as a bare question. Then choose per option's
+ongoing value:
+
+- keep `$ITEM.kb/` as background context, if the rejected alternatives are
+  worth remembering why they lost
+- clean it up entirely, if the options stop mattering once decided
+
+Either way, `$ITEM.md` should stand alone as the answer -- a reader
+shouldn't need `$ITEM.kb/` to know what was decided, only to know why an
+alternative wasn't picked.
+
 ## Recognizing the Shape
 
 The pattern is defined by its end state, not by how content arrives.
