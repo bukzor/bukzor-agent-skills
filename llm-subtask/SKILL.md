@@ -82,10 +82,12 @@ Mostly notional, only reified on demand.
 
 Create planning files via: `~/.claude/skills/llm-subtask/bin/llm-subtask-todo --title "Task title"` (add `-C <dir>` to target another directory without `cd`)
 
-## `- [ ]` Is Load-Bearing — Never Use Bare `-` for Tasks
+## The Checkbox Is Load-Bearing — Never Use Bare `-` for Tasks
 
-The inventory pipeline (`~/bin/claude-open-tasks-list`) keys off `- [ ]`
-exactly. A bare `-` bullet is **invisible** to backlog enumeration — it
+The inventory pipeline (`~/bin/claude-open-tasks-list`) keys off the
+`- [<char>]` checkbox syntax — brackets present, any status character
+(` `, `x`, `~`, ...) — not specifically an empty box. A bare `-` bullet
+with no brackets at all is **invisible** to backlog enumeration — it
 will not appear in `task-list.md`, will not be rated by `wsjf-rank`, and
 will be silently lost when the work needs to compete for time.
 
@@ -96,11 +98,13 @@ This applies in every location the inventory scans:
 - `CLAUDE.*Task*.md`
 - (`todo.kb/` and `todo.d/` use "existence is signal" — files there
   count regardless of bullets — but their **inline** items still need
-  `[ ]` to be enumerated.)
+  brackets to be enumerated.)
 
-**Rule:** any line you intend to track as work uses `- [ ]`.
-**Anti-rule:** never use `-` for a task. Use prose, full sentences, or
-nested narrative when the content is not a task.
+**Rule:** any line you intend to track as work uses a bracketed status —
+`- [ ]` not started, `- [~]` in progress, `- [x]` done (see "Example:
+subtask list" below for the full status-indicator set).
+**Anti-rule:** never use bare `-` for a task. Use prose, full sentences,
+or nested narrative when the content is not a task.
 
 **Why this matters:** real work has surfaced weeks late because someone
 wrote `- pick an oss project` instead of `- [ ] pick an oss project`.
@@ -108,8 +112,8 @@ The line was real, the bullet was wrong, the work was invisible to every
 sweep that ran in between.
 
 **Audit:** when reviewing a file for tasks, search for `^ *- [^[]` —
-those are non-task bullets. Convert to `- [ ]` if they're work; rewrite
-as prose if they're not.
+those are non-task bullets (no brackets at all). Convert to a bracketed
+status if they're work; rewrite as prose if they're not.
 
 ## Integration: todo.md + todo.kb/
 
