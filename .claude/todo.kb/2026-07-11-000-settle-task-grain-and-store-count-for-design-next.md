@@ -37,9 +37,33 @@ working set; capture-a-tangent-in-one-line-without-taking-it). The
 spec now allows applications to specialize the synthesis relation;
 the task domain should be designed as its flagship user.
 
-Related unresolved: fate of the rating system (sweh / wsjf /
-task-list.md) — pending operator's read-side answer (do rankings
-drive session choice?).
+**Resolved 2026-07-11:** rating system is a real consumer, not
+landfill. Operator confirmed `task-list.wsjf.toon`
+(`~/repo/github.com/bukzor/2026-05-19--task-archeology/`) informed
+the decision to focus the schema-reuse `$ref` work under `llm-kb`
+(matches commit `042f698`, "refresh: backlog snapshot after
+schema-reuse-with-ref closeout"). Not landfill — but operator flagged
+the *framing*, not just the fact, as wrong: treat `wsjf-rank`/
+task-archeology as a **case study**, not the primary use case that
+dictates task-genre schema. The durable commitment is narrower and
+more general — *extensions like it* must be possible and supportable,
+not that its specific vocabulary (`sweh`, `timebox`, `benefit_2w`,
+`cod_2w`, `execute_score`) becomes canonical.
+
+That the extension already lives as a **separate repo** consuming
+other repos' `todo.md`/`todo.kb/` via sidecar `cost-benefit-sweh`
+frontmatter is itself the working existence proof of "supportable
+without core absorption" — evidence for keeping the task genre's own
+schema minimal, not for growing it toward wsjf's shape.
+
+Open question this reframes rather than closes:
+`070-future-work.kb/structured-query.md`'s trigger ("third occurrence
+of ls/grep failing") — does "supportable" mean the core engine
+eventually grows `kb query`, or does it mean the core stays minimal
+(stable frontmatter, stable cross-repo file conventions, stable
+naming) and ranking-shaped needs stay externally-built forever, as
+task-archeology already demonstrates works? Don't resolve this
+inline; it's part of the T3 session.
 
 ## Proposed Solution
 
