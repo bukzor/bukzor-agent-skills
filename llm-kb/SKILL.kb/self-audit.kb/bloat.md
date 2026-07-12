@@ -32,6 +32,9 @@ Look specifically for:
   unix usage, restated definitions, "X is bad because Y").
 - Audience mismatch: notes meant for a reader other than this
   file's audience.
+- Contrast scaffolding: "X, not Y" / "X rather than Y" where Y was
+  never a live option — state X plainly. One deliberate contrast can
+  earn its line; scattered ones are reflex.
 - "What this is not" sections defending against misuse the
   procedure doesn't actually invite.
 - Example menus where one in-line example would suffice.
