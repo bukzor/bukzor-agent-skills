@@ -210,5 +210,5 @@ Poor fit:
 
 ## Tool Support
 
-**Validation** (prevents errors):
+Validation (prevents errors):
 - `bin/validate-frontmatter` - Check schema compliance recursively
