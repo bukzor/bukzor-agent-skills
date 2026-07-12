@@ -138,3 +138,6 @@ After any session that changes code or design understanding in a project with
 
 - `references/how-to-document-design-knowledge.md` — Full creation guidance,
   relationship to ADRs/devlogs/CLAUDE.md, background.kb and technical-policy.kb
+- `principles.kb/` — reusable rules for authoring design.kb content
+  well, distinct from any one project's own goals/requirements. Read
+  before or during a design.kb authoring session.
