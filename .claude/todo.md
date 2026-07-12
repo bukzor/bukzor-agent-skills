@@ -20,6 +20,27 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] llm-collab/.claude/todo.md
 - [ ] llm-subtask/.claude/todo.md
 - [ ] llm-must-read-kb/.claude/todo.md
+- [ ] .claude/todo.kb/2026-07-11-000-settle-task-grain-and-store-count-for-design-next.md
+- [ ] Rework function-grouped design-next entries (five-layer-stack, kb-engine,
+      plugin-delivery) against the designed-for-deletion goal (domain grouping;
+      DRY-within-unit mechanisms open — yaml-compiles-to-all-four was existence
+      proof only)
+- [ ] Land "kb class" renames (confirmed 2026-07-11): five-layer-stack layer 2
+      "Genres" → "Classes"; genre-*.md → class-*.md; sweep "genre" wording
+      across design-next.kb; define kb class ("an application of llm-kb";
+      composition/citation, never subclassing; prior art: application profile)
+- [ ] Rename "summary" → "synthesis" everywhere: llm-kb SKILL.md summary-file
+      sections, self-audit.kb/summary-file-value.md (file + wording), any
+      remaining "summary file" refs in skills/tower (kb-spec.md already done)
+- [ ] Discuss design-next.kb/040-design.kb/references-are-structured-data.md
+      (status: proposal) — label grammar, hardened-label registry, depends:
+      migration
+- [ ] Run the session-log residue test (design-next): after design/tasks/
+      incidents absorb their parts, can any session-narrative class name its
+      read-back? Decides devlog's v2 fate (genre-record session-log sub-type)
+- [ ] llm-design-kb/principles.kb charter: contents outgrew "design.kb
+      authoring" scope (evaluate-uses-independently, test-the-residue) —
+      widen CLAUDE.md charter or rehome (user rated rehoming tier-4)
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [x] Create skill `llm-must-read-kb/` (was drafted as `must-read-d`) to
