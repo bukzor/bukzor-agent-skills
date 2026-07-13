@@ -17,9 +17,19 @@ Repo-level list. Skill-scoped work lives in each skill's own
   - [ ] ANY STRONG MODEL, FRESH CONTEXT (subagent or separate session;
         reviewer gets the tower + drafts, not the drafting session's
         narrative): adversarial review of the drafts, targeting the brief's
-        three Open Questions. Operator ratifies decision 3 (class-local
+        Open Questions. Operator ratifies decision 3 (class-local
         code = consumer status)
   - [ ] Land: apply review verdicts, commit, update the brief
+- [ ] Rewrite design-next.kb/040-design.kb/decisions-are-settled-questions.md
+      to cite the spec's synthesis-file element instead of restating it: keep
+      only the four decision-specific claims (no decision-record class;
+      git-log + reviewed: provenance; merge-conflict-as-feature; replaces
+      v1's dated decision logs), and fix the dangling "supersedes the
+      decision sub-type" sentence. Survives T2 untouched — safe any time
+- [ ] Align llm-design-kb's why: guidance (slug examples) with the
+      2026-07-13 decision that why: values are file-relative path
+      references — or explicitly scope that decision to design-next.kb;
+      operator call
 - [ ] .claude/todo.kb/2026-07-11-000-settle-task-grain-and-store-count-for-design-next.md
 - [ ] T4: trigger-subsystem design session (llm-must-read-kb's successor):
       runtime-neutral condition vocabulary + compilation model for

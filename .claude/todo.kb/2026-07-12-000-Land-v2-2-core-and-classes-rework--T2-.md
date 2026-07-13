@@ -73,9 +73,8 @@ entries are not yet written.
 
 ## Open Questions — targets for the review pass
 
-Three spots where this session's consensus formed fastest and
-deserves a skeptic (advocate/skeptic/arbiter or a framing-free
-session):
+Spots where consensus formed fastest and deserves a skeptic
+(advocate/skeptic/arbiter or a framing-free session):
 
 - Teaching collapse (class conventions page = SKILL.md = delivered
   teaching) — proposed unilaterally by the agent, never discussed.
@@ -84,6 +83,13 @@ session):
   declarative-check expressiveness is unproven.
 - Decision 3 unconfirmed: class-local code = consumer status (stable
   formats in, no engine hooks) — task-archeology stance generalized.
+- thin-skills' three-named-skill enumeration (kb / epistemic /
+  "attention") — same agent-proposed-unilaterally pattern as teaching
+  collapse; surfaced 2026-07-13 when the operator didn't recognize
+  "attention skill" from a plain read of the committed baseline.
+  Check whether class-package.md (which folds thin-skills in) still
+  needs named skill instances at all, or can defer instance-naming to
+  build time.
 
 ## Success Criteria
 
