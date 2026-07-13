@@ -1,6 +1,6 @@
 ---
 why:
-  - filesystem-as-database
+  - ../030-requirements.kb/filesystem-as-database.md
 trigger: Third occurrence of an orientation question that ls/grep one-liners cannot answer cleanly.
 ---
 

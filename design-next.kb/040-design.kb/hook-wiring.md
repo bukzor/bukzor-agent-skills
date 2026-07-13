@@ -1,7 +1,7 @@
 ---
 why:
-  - action-triggers-enforced-deterministically
-  - validators-outlive-migrations
+  - ../030-requirements.kb/action-triggers-enforced-deterministically.md
+  - ../030-requirements.kb/validators-outlive-migrations.md
 ---
 
 # Hook Wiring

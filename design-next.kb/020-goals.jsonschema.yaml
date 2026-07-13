@@ -6,9 +6,12 @@ required:
   - why
 properties:
   why:
-    description: Motivating items in the layer above (mission). Use slug 'mission' for the single mission .md.
-    type: array
-    minItems: 1
-    items:
-      type: string
-      pattern: "^[a-z0-9-]+$"
+    $ref: "jsonschema/why.jsonschema.yaml"
+  status:
+    $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/status"
+  blocked-on:
+    $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/blocked-on"
+  superseded-by:
+    $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/superseded-by"
+allOf:
+  - $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/superseded-requires-superseded-by"

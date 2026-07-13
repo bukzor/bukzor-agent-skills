@@ -27,8 +27,9 @@ cross-cutting policy.
 
 ## Frontmatter
 
-`why:` references requirement slugs from `../030-requirements.kb/`
-(or a same-layer slug where the motivation lives at this level).
+`why:` lists file-relative paths of motivating requirements
+(`../030-requirements.kb/<requirement>.md`, or a same-layer entry
+where the motivation lives at this level).
 `status: proposal` + `blocked-on: discussion` marks entries awaiting
 an operator decision.
 

@@ -13,14 +13,14 @@ skills, plugins) instead of prose emphasis.
 
 **Design-only.** Nothing here is implemented; the v1 skills
 (`llm-kb`, `llm-collab`, etc.) remain the shipped system. Where this
-tower contradicts a v1 ADR, the tower is the forward position and the
-conflict is flagged with `status: proposal`.
+tower contradicts a v1 ADR, the tower is the forward position;
+entries not yet operator-ratified carry `status: proposal`.
 
 ## Layered Structure
 
 Per `Skill(llm-design-kb)`. Entries carry `why:` frontmatter linking
-to their motivation; order prefixes are stripped in slugs
-(`010-mission` → `mission`).
+to their motivation by file-relative path
+(e.g. `../010-mission.md`).
 
 - `010-mission.md` — what problem, who benefits
 - `020-goals.kb/` — how we accomplish the mission

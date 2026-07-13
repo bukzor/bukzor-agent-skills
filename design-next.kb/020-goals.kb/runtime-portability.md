@@ -1,6 +1,6 @@
 ---
 why:
-  - mission
+  - ../010-mission.md
 ---
 
 # Runtime Portability
@@ -17,4 +17,5 @@ own primitives over bespoke ones. The tension resolves by *layer*,
 not by choosing one goal over the other: native-first governs
 mechanism choice **within** layer 3 (delivery); runtime-portability
 governs what's allowed to live **above** layer 3. See
-`coupling-is-layer-3-only.md` for the checkable form of that boundary.
+`../030-requirements.kb/coupling-is-layer-3-only.md` for the checkable
+form of that boundary.

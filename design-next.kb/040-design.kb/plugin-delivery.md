@@ -1,7 +1,7 @@
 ---
 why:
-  - degrade-gracefully
-  - action-triggers-enforced-deterministically
+  - ../030-requirements.kb/degrade-gracefully.md
+  - ../030-requirements.kb/action-triggers-enforced-deterministically.md
 ---
 
 # Layer 3, Claude Code Adapter: Plugin Delivery

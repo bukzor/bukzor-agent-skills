@@ -6,37 +6,12 @@ required:
   - why
 properties:
   why:
-    description: Motivating requirement slugs from 030-requirements.kb/ (or same-layer slugs when appropriate)
-    type: array
-    minItems: 1
-    items:
-      type: string
-      pattern: "^[a-z0-9-]+$"
+    $ref: "jsonschema/why.jsonschema.yaml"
   status:
-    description: |
-      Decision lifecycle. Absent = `accepted` (the default working position).
-      - `idea`: raw thought, possibly to be discarded
-      - `proposal`: worked out enough to engage with; under consideration
-      - `accepted`: decided; treat as ground truth
-      - `rejected`: considered and not adopted (kept for visible alternatives)
-      - `superseded`: was accepted, now replaced; see `superseded-by:`
-    enum: [idea, proposal, accepted, rejected, superseded]
-    default: accepted
+    $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/status"
   blocked-on:
-    description: |
-      What's needed to advance. Optional; meaningful for `idea` / `proposal`.
-      - `discussion`: human deliberation
-      - `information`: external facts (research, data, prior art)
-    enum: [discussion, information]
+    $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/blocked-on"
   superseded-by:
-    description: Slug of the entry that replaces this one. Required when status is `superseded`.
-    type: string
-    pattern: "^[a-z0-9-]+$"
+    $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/superseded-by"
 allOf:
-  - if:
-      properties:
-        status:
-          const: superseded
-      required: [status]
-    then:
-      required: [superseded-by]
+  - $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/superseded-requires-superseded-by"

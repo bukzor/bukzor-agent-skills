@@ -1,6 +1,6 @@
 ---
 why:
-  - runtime-portability
+  - ../020-goals.kb/runtime-portability.md
 ---
 
 # Coupling Is Layer-3-Only

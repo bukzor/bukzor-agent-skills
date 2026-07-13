@@ -1,7 +1,7 @@
 ---
 why:
-  - token-economy
-  - session-continuity
+  - ../020-goals.kb/token-economy.md
+  - ../020-goals.kb/session-continuity.md
 ---
 
 # Filesystem as Database

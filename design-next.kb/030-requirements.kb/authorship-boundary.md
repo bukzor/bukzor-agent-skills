@@ -1,7 +1,7 @@
 ---
 why:
-  - session-continuity
-  - self-application
+  - ../020-goals.kb/session-continuity.md
+  - ../020-goals.kb/self-application.md
 ---
 
 # Authorship Boundary

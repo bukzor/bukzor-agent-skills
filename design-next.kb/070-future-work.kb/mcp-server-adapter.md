@@ -1,6 +1,6 @@
 ---
 why:
-  - runtime-portability
+  - ../020-goals.kb/runtime-portability.md
 trigger: Engine core (new/validate/promote/doctor) has landed and a second runtime (OpenCode, a raw API loop, Claude.ai via connectors, etc.) is in active personal use.
 ---
 

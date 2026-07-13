@@ -1,7 +1,7 @@
 ---
 why:
-  - filesystem-as-database
-  - validators-outlive-migrations
+  - ../030-requirements.kb/filesystem-as-database.md
+  - ../030-requirements.kb/validators-outlive-migrations.md
 status: proposal
 blocked-on: discussion
 ---

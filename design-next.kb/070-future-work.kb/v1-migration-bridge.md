@@ -1,6 +1,6 @@
 ---
 why:
-  - single-source-improvement
+  - ../020-goals.kb/single-source-improvement.md
 trigger: Operator green-lights the v2 build.
 ---
 

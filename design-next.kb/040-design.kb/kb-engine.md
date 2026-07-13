@@ -1,7 +1,7 @@
 ---
 why:
-  - procedures-are-tools
-  - validators-outlive-migrations
+  - ../030-requirements.kb/procedures-are-tools.md
+  - ../030-requirements.kb/validators-outlive-migrations.md
 ---
 
 # Layer 1: The kb Engine

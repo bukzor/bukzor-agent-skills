@@ -1,6 +1,6 @@
 ---
 why:
-  - coupling-is-layer-3-only
+  - ../030-requirements.kb/coupling-is-layer-3-only.md
 ---
 
 # Delivery Contract
@@ -39,6 +39,7 @@ around its own tool-execution loop, whether or not it calls the result
   `../070-future-work.kb/mcp-server-adapter.md`.
 
 Genres and requirements name only the verbs (per
-`coupling-is-layer-3-only.md`); adapters name the mechanism. A second
+`../030-requirements.kb/coupling-is-layer-3-only.md`); adapters name
+the mechanism. A second
 adapter is added by implementing these three verbs for a new runtime,
 never by rewriting layers 0–2.

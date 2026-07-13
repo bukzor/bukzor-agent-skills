@@ -1,7 +1,7 @@
 ---
 why:
-  - mechanism-over-exhortation
-  - single-source-improvement
+  - ../020-goals.kb/mechanism-over-exhortation.md
+  - ../020-goals.kb/single-source-improvement.md
 ---
 
 # Validators Outlive Migrations

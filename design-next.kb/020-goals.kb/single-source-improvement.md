@@ -1,6 +1,6 @@
 ---
 why:
-  - mission
+  - ../010-mission.md
 ---
 
 # Single-Source Improvement

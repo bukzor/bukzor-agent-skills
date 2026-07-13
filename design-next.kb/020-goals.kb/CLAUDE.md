@@ -20,7 +20,8 @@ mostly a v1 lesson-learned promoted to a commitment.
 
 ## Frontmatter
 
-Each entry's `why:` references the mission slug `mission`.
+Each entry's `why:` references the mission by file-relative path
+(`../010-mission.md`).
 
 ## When to Add / Read
 

@@ -1,7 +1,7 @@
 ---
 why:
-  - token-economy
-  - mechanism-over-exhortation
+  - ../020-goals.kb/token-economy.md
+  - ../020-goals.kb/mechanism-over-exhortation.md
 ---
 
 # Judgment Triggers Remain Scannable

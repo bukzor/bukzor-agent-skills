@@ -1,6 +1,6 @@
 ---
 why:
-  - mechanism-over-exhortation
+  - ../020-goals.kb/mechanism-over-exhortation.md
 ---
 
 # Action Triggers Are Enforced Deterministically

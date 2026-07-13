@@ -21,7 +21,8 @@ could pass or fail it.
 
 ## Frontmatter
 
-Each entry's `why:` references goal slugs from `../020-goals.kb/`.
+Each entry's `why:` lists file-relative paths of motivating goals
+(`../020-goals.kb/<goal>.md`).
 
 ## When to Add / Read
 

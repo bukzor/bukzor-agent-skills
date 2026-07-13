@@ -1,6 +1,6 @@
 ---
 why:
-  - single-source-improvement
+  - ../020-goals.kb/single-source-improvement.md
 ---
 
 # Spec Cited, Never Restated

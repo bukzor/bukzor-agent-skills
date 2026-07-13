@@ -1,7 +1,7 @@
 ---
 why:
-  - session-continuity
-  - authorship-boundary
+  - ../020-goals.kb/session-continuity.md
+  - ../030-requirements.kb/authorship-boundary.md
 trigger: Engine core (new/validate/promote/doctor) has landed and is in daily use.
 ---
 

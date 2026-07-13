@@ -1,8 +1,8 @@
 ---
 why:
-  - spec-cited-never-restated
-  - filesystem-as-database
-  - dated-records-are-primitive
+  - ../030-requirements.kb/spec-cited-never-restated.md
+  - ../030-requirements.kb/filesystem-as-database.md
+  - ../030-requirements.kb/dated-records-are-primitive.md
 ---
 
 # Layer 0: The kb Spec

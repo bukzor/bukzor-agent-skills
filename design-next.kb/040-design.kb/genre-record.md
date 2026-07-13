@@ -1,6 +1,6 @@
 ---
 why:
-  - dated-records-are-primitive
+  - ../030-requirements.kb/dated-records-are-primitive.md
 ---
 
 # Genre: Record

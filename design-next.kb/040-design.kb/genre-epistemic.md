@@ -1,6 +1,6 @@
 ---
 why:
-  - spec-cited-never-restated
+  - ../030-requirements.kb/spec-cited-never-restated.md
 ---
 
 # Genre: Design & Discourse

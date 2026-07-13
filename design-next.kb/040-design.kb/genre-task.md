@@ -1,7 +1,7 @@
 ---
 why:
-  - filesystem-as-database
-  - dated-records-are-primitive
+  - ../030-requirements.kb/filesystem-as-database.md
+  - ../030-requirements.kb/dated-records-are-primitive.md
 ---
 
 # Genre: Task

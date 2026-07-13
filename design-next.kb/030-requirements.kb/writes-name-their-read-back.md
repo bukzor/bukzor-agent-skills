@@ -1,6 +1,6 @@
 ---
 why:
-  - write-economy
+  - ../020-goals.kb/write-economy.md
 ---
 
 # Writes Name Their Read-Back

@@ -1,7 +1,7 @@
 ---
 why:
-  - action-triggers-enforced-deterministically
-  - judgment-triggers-remain-scannable
+  - ../030-requirements.kb/action-triggers-enforced-deterministically.md
+  - ../030-requirements.kb/judgment-triggers-remain-scannable.md
 ---
 
 # Genre: Trigger

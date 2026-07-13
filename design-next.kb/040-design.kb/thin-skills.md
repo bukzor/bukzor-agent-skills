@@ -1,7 +1,7 @@
 ---
 why:
-  - procedures-are-tools
-  - degrade-gracefully
+  - ../030-requirements.kb/procedures-are-tools.md
+  - ../030-requirements.kb/degrade-gracefully.md
 ---
 
 # Thin Skills
@@ -32,5 +32,6 @@ The base SKILL.md fields (name, description, body) are the actual
 portable layer — the agentskills.io open standard, adopted across
 ~26 vendors. Claude Code's `paths:`-gated activation is a proprietary
 enhancement; its fallback, description-only matching, is
-simultaneously the within-CC degradation path (`degrade-gracefully.md`)
-and the cross-runtime floor every other adapter gets by default.
+simultaneously the within-CC degradation path
+(`../030-requirements.kb/degrade-gracefully.md`) and the cross-runtime
+floor every other adapter gets by default.

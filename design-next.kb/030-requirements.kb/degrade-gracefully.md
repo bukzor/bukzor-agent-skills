@@ -1,7 +1,7 @@
 ---
 why:
-  - native-first
-  - runtime-portability
+  - ../020-goals.kb/native-first.md
+  - ../020-goals.kb/runtime-portability.md
 ---
 
 # Degrade Gracefully

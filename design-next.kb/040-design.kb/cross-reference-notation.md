@@ -1,6 +1,6 @@
 ---
 why:
-  - degrade-gracefully
+  - ../030-requirements.kb/degrade-gracefully.md
 ---
 
 # Cross-Reference Notation
@@ -20,8 +20,8 @@ independent questions that must not be evaluated as one:
   coupling: it needs no platform support, only the engine, which is
   portable by construction. Kept as the single source of truth for
   schema reuse — the alternative (vendoring schema copies into every
-  project) is exactly the duplication `single-source-improvement.md`
-  exists to prevent.
+  project) is exactly the duplication
+  `../020-goals.kb/single-source-improvement.md` exists to prevent.
 - **Across skills, load-directive** (`skill://llm-subtask` meaning
   "load this skill", replacing bare `Skill(<name>)`): genuinely
   runtime-coupled — "load a skill" is a Claude-Code-shaped concept

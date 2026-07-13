@@ -1,7 +1,7 @@
 ---
 why:
-  - session-continuity
-  - single-source-improvement
+  - ../020-goals.kb/session-continuity.md
+  - ../020-goals.kb/single-source-improvement.md
 ---
 
 # Dated Records Are Primitive

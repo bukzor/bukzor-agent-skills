@@ -1,6 +1,6 @@
 ---
 why:
-  - native-first
+  - ../020-goals.kb/native-first.md
 trigger: The plugin has been stable in the operator's own daily use for a month.
 ---
 

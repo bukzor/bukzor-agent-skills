@@ -1,7 +1,7 @@
 ---
 why:
-  - writes-name-their-read-back
-  - kb-spec
+  - ../030-requirements.kb/writes-name-their-read-back.md
+  - ../040-design.kb/kb-spec.md
 ---
 
 # Decisions Are Settled Questions

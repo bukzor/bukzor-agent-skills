@@ -20,8 +20,8 @@ when each becomes worth pursuing.
 
 ## Frontmatter
 
-`why:` may reference slugs from any earlier layer; `trigger:` is
-required.
+`why:` may reference any earlier layer by file-relative path;
+`trigger:` is required.
 
 ## When to Add / Read
 

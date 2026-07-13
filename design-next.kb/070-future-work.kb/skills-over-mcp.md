@@ -1,6 +1,6 @@
 ---
 why:
-  - native-first
+  - ../020-goals.kb/native-first.md
 trigger: SEP-2640 merges into the MCP spec, or Claude Code ships native skills-over-MCP support.
 ---
 

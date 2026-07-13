@@ -1,7 +1,7 @@
 ---
 why:
-  - authorship-boundary
-  - filesystem-as-database
+  - ../030-requirements.kb/authorship-boundary.md
+  - ../030-requirements.kb/filesystem-as-database.md
 ---
 
 # Memory Policy
