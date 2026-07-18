@@ -6,7 +6,7 @@ depends:
 # Design Layer
 
 How we satisfy the requirements: the five-layer stack (spec, engine,
-genres, delivery, instances) and its boundary decisions. Start with
+classes, delivery, instances) and its boundary decisions. Start with
 `five-layer-stack.md`; everything else elaborates one layer or one
 cross-cutting policy.
 

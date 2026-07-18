@@ -3,9 +3,9 @@ why:
   - ../030-requirements.kb/spec-cited-never-restated.md
 ---
 
-# Genre: Design & Discourse
+# Class: Design & Discourse
 
-Two genres, kept deliberately separate, sharing one Layer-0 primitive
+Two classes, kept deliberately separate, sharing one Layer-0 primitive
 (`kb-spec.md`'s "linked node"): one file per node, typed frontmatter
 edges, elaboration via sibling `.kb/`, roll-up to the parent on
 resolution.

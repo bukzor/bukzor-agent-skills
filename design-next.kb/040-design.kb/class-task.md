@@ -4,7 +4,7 @@ why:
   - ../030-requirements.kb/dated-records-are-primitive.md
 ---
 
-# Genre: Task
+# Class: Task
 
 Work items and their lifecycle: tactical checklists, strategic
 briefs, speculative ideas, session notes. Carries v1's proven
@@ -19,6 +19,6 @@ contracts as schema-level rules rather than prose warnings:
   checklist line → brief file), with the engine defaulting to lighter
   tiers — v1 agents defaulted heavyweight.
 
-Session notes (v1 `sessions.kb/`) are this genre's cross-repo
+Session notes (v1 `sessions.kb/`) are this class's cross-repo
 instance: planned/in-flight/recently-done lines of work, one `ls`
 away, deleted when absorbed.

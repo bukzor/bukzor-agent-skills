@@ -38,7 +38,7 @@ around its own tool-execution loop, whether or not it calls the result
   to make the engine itself reachable from any adapter — see
   `../070-future-work.kb/mcp-server-adapter.md`.
 
-Genres and requirements name only the verbs (per
+Classes and requirements name only the verbs (per
 `../030-requirements.kb/coupling-is-layer-3-only.md`); adapters name
 the mechanism. A second
 adapter is added by implementing these three verbs for a new runtime,

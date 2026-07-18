@@ -24,6 +24,6 @@ Division of native primitives by job:
   active under `**/*.kb/**`).
 - **Commands** — operator-invoked verbs (`/checkin`, `/session-end`).
 
-**Why not per-genre plugins:** the genres share the spec and engine;
+**Why not per-class plugins:** the classes share the spec and engine;
 separate plugins would reintroduce version skew between them — the
 exact v1 disease.

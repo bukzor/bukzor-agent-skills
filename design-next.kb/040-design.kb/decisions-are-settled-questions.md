@@ -27,6 +27,6 @@ answering the same question collide loudly at the file grain —
 semantic contention surfaced where it happened, instead of coexisting
 as dated records a later reader must notice and temporally resolve.
 
-Supersedes the decision sub-type of `genre-record.md` (v1 ADR): its
+Supersedes the decision sub-type of `class-record.md` (v1 ADR): its
 read-back moment — the next time the question arises — is exactly
 where a topical node is found and a dated pile is not.

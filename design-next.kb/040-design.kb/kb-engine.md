@@ -8,7 +8,7 @@ why:
 
 One CLI, `kb`, implementing the spec:
 
-- `kb new <genre> --title …` — genre-aware generators (one slug
+- `kb new <class> --title …` — class-aware generators (one slug
   implementation, one template mechanism; absorbs v1's eight
   `bin/` scripts).
 - `kb init` — stand up a project's directories (absorbs the v1

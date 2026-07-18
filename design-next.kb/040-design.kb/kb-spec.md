@@ -23,7 +23,7 @@ no procedures, no behavior, no teaching:
 - **Linked node**: one entry is one node; typed frontmatter arrays
   declare edges to other nodes by cross-reference path; elaboration
   is a sibling `$name.kb/`, whose synthesis file is the node itself.
-  One shape, many edge vocabularies — see `genre-epistemic.md`.
+  One shape, many edge vocabularies — see `class-epistemic.md`.
 - **Cross-references**: see `cross-reference-notation.md`.
 - **Directives**: `requires:` frontmatter lists files that must be
   read before acting on the bearer's content — the only load
@@ -32,4 +32,4 @@ no procedures, no behavior, no teaching:
 
 Everything downstream cites the spec by section; the spec never
 appears restated in a skill, rule, or CLAUDE.md. A meta-schema
-validates genre schemas so genres extend the spec without forking it.
+validates class schemas so classes extend the spec without forking it.

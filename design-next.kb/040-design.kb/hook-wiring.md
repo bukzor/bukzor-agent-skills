@@ -26,5 +26,5 @@ The standing hooks, each replacing a v1 exhortation:
 - **PostToolUse** on kb writes → `kb validate` the touched
   collection, surfacing drift at edit time rather than review time.
 
-Compiled from trigger-genre sources (see `genre-trigger.md`); hook
+Compiled from trigger-class sources (see `class-trigger.md`); hook
 payloads are generated, never hand-maintained in JSON.

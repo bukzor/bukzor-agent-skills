@@ -6,14 +6,14 @@ managed-by: Skill(llm-subtask)
 
 **Priority:** Medium
 **Complexity:** High
-**Context:** `design-next.kb/040-design.kb/genre-task.md`; tracked as
+**Context:** `design-next.kb/040-design.kb/class-task.md`; tracked as
 "T3" in the 2026-07-10/11 design sessions
 
 ## Problem Statement
 
 The task domain's design was deferred mid-discussion: v1 collapsed
 three independent axes into store choice, and neither v2.0
-(`genre-task.md`) nor the v2.1 session resolved the right factoring.
+(`class-task.md`) nor the v2.1 session resolved the right factoring.
 Needs a dedicated session; too large to settle as a side thread.
 
 ## Current Situation
@@ -69,7 +69,7 @@ inline; it's part of the T3 session.
 
 Dedicated design session against design-next.kb: settle the three
 axes, then record outcomes as design entries (and gut/replace
-`genre-task.md` accordingly).
+`class-task.md` accordingly).
 
 ## Implementation Steps
 
@@ -77,7 +77,7 @@ axes, then record outcomes as design entries (and gut/replace
 - [ ] Settle atom grain (line vs file, and when each)
 - [ ] Settle horizon representation (metadata vs tiers vs stores)
 - [ ] Settle scope/store layout (global vs per-repo + enumeration)
-- [ ] Record decisions in design-next.kb; update `genre-task.md`
+- [ ] Record decisions in design-next.kb; update `class-task.md`
 
 ## Open Questions
 
@@ -89,7 +89,7 @@ axes, then record outcomes as design entries (and gut/replace
 ## Success Criteria
 
 - [ ] All three axes have decided design-next entries (why-linked)
-- [ ] genre-task.md no longer contradicts the decisions
+- [ ] class-task.md no longer contradicts the decisions
 
 ## Notes
 

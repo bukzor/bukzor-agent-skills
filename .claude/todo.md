@@ -7,7 +7,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
 
 - [ ] T2/v2.2: land the core-and-classes rework of design-next.kb — brief:
       .claude/todo.kb/2026-07-12-000-Land-v2-2-core-and-classes-rework--T2-.md
-  - [ ] HAIKU (mechanical, confirmed 2026-07-11): genre→class rename sweep
+  - [x] HAIKU (mechanical, confirmed 2026-07-11): genre→class rename sweep
         in design-next.kb — genre-*.md → class-*.md; "genre"/"Genres"
         wording → "class"/"Classes" throughout (incl. five-layer-stack
         table); fix all cross-references to the renamed files
@@ -45,7 +45,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       migration
 - [ ] Run the session-log residue test (design-next): after design/tasks/
       incidents absorb their parts, can any session-narrative class name its
-      read-back? Decides devlog's v2 fate (genre-record session-log sub-type)
+      read-back? Decides devlog's v2 fate (class-record session-log sub-type)
 - [ ] llm-design-kb/principles.kb charter: contents outgrew "design.kb
       authoring" scope (evaluate-uses-independently, test-the-residue) —
       widen CLAUDE.md charter or rehome (user rated rehoming tier-4)

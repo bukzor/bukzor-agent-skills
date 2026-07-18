@@ -30,7 +30,7 @@ to their motivation by file-relative path
 
 ## What Belongs Here
 
-- The v2 layering: spec, engine, genres, delivery, instances
+- The v2 layering: spec, engine, classes, delivery, instances
 - Boundary decisions (what is a hook vs a skill vs a rule vs data)
 - Lessons-learned from v1 recast as goals/requirements
 - Deferred ideas with trigger conditions

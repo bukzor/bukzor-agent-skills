@@ -17,7 +17,7 @@ it is that runtime's own interception point. See
 `coupling-is-layer-3-only.md` for the general rule this entry's title
 and body both hold to.
 
-Checkable: enumerate the trigger genre; every action-shaped entry has
+Checkable: enumerate the trigger class; every action-shaped entry has
 enforcement wiring in *some* adapter, and the prose copy exists only
 as that wiring's payload — never as a freestanding exhortation the
 model must remember unprompted.

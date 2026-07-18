@@ -14,12 +14,12 @@ activation with description matching kept as fallback:
   the engine can't make: what's homogeneous, what deserves a schema,
   when a summary file pays.
 - **epistemic** (paths: `**/design*.kb/**`, discourse dirs) — the
-  why-chain and claim-graph judgment: which of the two node genres
+  why-chain and claim-graph judgment: which of the two node classes
   (design vs. discourse) a new entry belongs in, layer/type placement
   within it, cross-linking between the two, when to elaborate vs roll
   up.
 - **attention** — task-tier selection, session-note judgment,
-  check-in verbs; the operator-facing surface of the task genre.
+  check-in verbs; the operator-facing surface of the task class.
 
 Each stays near ~300 words of *recognition* content — the
 `claude-realignment` skill is the v1 proof that a tight, single-job

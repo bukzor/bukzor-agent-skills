@@ -6,7 +6,7 @@ why:
 # Self-Application
 
 The system runs on itself: its own design lives in its design tower,
-its own records in its record genre, its own tasks in its task genre.
+its own records in its record class, its own tasks in its task class.
 Dogfooding is the test suite — a convention the system cannot follow
 itself is a convention that will fail its consumers.
 

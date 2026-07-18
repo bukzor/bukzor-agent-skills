@@ -12,6 +12,6 @@ spec level, and every dated collection (session logs, tasks,
 incidents, migrations) is an instance of it.
 
 Checkable: one definition of the dated-record convention exists;
-generators for every dated genre share one implementation. V1
+generators for every dated class share one implementation. V1
 reinvented this six times (adr, devlog, todo.kb, ideas.kb,
 migrations.kb, case-studies.kb).

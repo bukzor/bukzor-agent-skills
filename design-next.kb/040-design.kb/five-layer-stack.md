@@ -12,7 +12,7 @@ The system is five layers; each concern lives in exactly one.
 |---|---|---|
 | 0 Spec | what the formats *are* | one RFC + JSON Schemas |
 | 1 Engine | mechanical behavior | one CLI (`kb`) |
-| 2 Genres | per-domain conventions | schema + ~1 page each |
+| 2 Classes | per-domain conventions | schema + ~1 page each |
 | 3 Delivery | activation + enforcement | a contract + swappable adapter |
 | 4 Instances | actual knowledge/work | data directories |
 
@@ -28,13 +28,13 @@ per skill. The stack inverts this: definitions live once in the spec,
 behavior once in the engine, activation once in the plugin manifest.
 
 Where v1 pieces land: `llm-kb` splits into layers 0–2; `llm-collab`
-dissolves (devlog becomes a record genre, decisions become settled
+dissolves (devlog becomes a record class, decisions become settled
 questions per `decisions-are-settled-questions.md`, scripts become
 engine commands, skeleton becomes `kb init`); `llm-design-kb` and
-`llm-discourse-graph` become the design and discourse genres,
+`llm-discourse-graph` become the design and discourse classes,
 kept separate but sharing the spec's linked-node primitive
-(`genre-epistemic.md`); `llm-must-read-kb` becomes the trigger genre;
-`llm-subtask` becomes the task genre plus hook wiring; `llm-vitals`,
+(`class-epistemic.md`); `llm-must-read-kb` becomes the trigger class;
+`llm-subtask` becomes the task class plus hook wiring; `llm-vitals`,
 `sessions.kb`, and the personal must-read bank are instances;
 `claude-realignment` and `llm-chat-librarian` remain standalone (a
 judgment skill and a deferred engine feature, respectively).

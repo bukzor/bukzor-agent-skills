@@ -4,7 +4,7 @@ why:
   - ../030-requirements.kb/judgment-triggers-remain-scannable.md
 ---
 
-# Genre: Trigger
+# Class: Trigger
 
 Conditional directives, partitioned by whether the condition is
 machine-detectable:
