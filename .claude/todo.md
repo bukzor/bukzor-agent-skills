@@ -14,12 +14,15 @@ Repo-level list. Skill-scoped work lives in each skill's own
   - [x] FABLE: draft the rework per the brief (030 additions + coupling
         rename; 040 reworks per the blast-radius classification; CLAUDE.md
         sweeps). Drafts only — no landing commit yet
-  - [ ] ANY STRONG MODEL, FRESH CONTEXT (subagent or separate session;
+  - [x] ANY STRONG MODEL, FRESH CONTEXT (subagent or separate session;
         reviewer gets the tower + drafts, not the drafting session's
         narrative): adversarial review of the drafts, targeting the brief's
-        Open Questions. Operator ratifies decision 3 (class-local
-        code = consumer status)
-  - [ ] Land: apply review verdicts, commit, update the brief
+        Open Questions. Verdict: land with fixes; all four open questions
+        correctly stayed open. Decision 3 still awaits operator
+        ratification (not asserted either way in the drafts, so not a
+        landing blocker) — see brief's Open Questions
+  - [x] Land: apply review verdicts (F1-F5, see commit 41af622), commit,
+        update the brief
 - [ ] Rewrite design-next.kb/040-design.kb/decisions-are-settled-questions.md
       to cite the spec's synthesis-file element instead of restating it: keep
       only the four decision-specific claims (no decision-record class;

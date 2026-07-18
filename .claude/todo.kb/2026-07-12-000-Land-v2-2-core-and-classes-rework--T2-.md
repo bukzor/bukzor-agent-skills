@@ -62,14 +62,20 @@ entries are not yet written.
 
 ## Implementation Steps
 
-- [ ] Haiku genre→class sweep (todo.md; mechanical, blocks the rest)
-- [ ] Draft 030 additions + coupling rename
-- [ ] Draft 040 reworks per classification above
-- [ ] CLAUDE.md sweeps (design-next.kb/ + 040-design.kb/)
-- [ ] Adversarial review of the drafts in a fresh context (subagent or
+- [x] Haiku genre→class sweep (todo.md; mechanical, blocks the rest)
+- [x] Draft 030 additions + coupling rename
+- [x] Draft 040 reworks per classification above
+- [x] CLAUDE.md sweeps (design-next.kb/ + 040-design.kb/)
+- [x] Adversarial review of the drafts in a fresh context (subagent or
       separate session — reviewer gets the tower + drafts, never the
-      drafting session's narrative), targeting the Open Questions below
-- [ ] Land: apply review verdicts, commit, update this brief
+      drafting session's narrative), targeting the Open Questions below.
+      Verdict: land with fixes. Five defects found (F1-F5, all fixed);
+      all four Open Questions below correctly stayed open, none
+      quietly resolved.
+- [x] Land: apply review verdicts, commit, update this brief. Commits:
+      78aed25 (phase 1: rename sweep), b2b92ba (phase 2: drafts),
+      95663f2 (status: proposal tagging), 41af622 (phase 3: review
+      fixes F1-F5)
 
 ## Open Questions — targets for the review pass
 
@@ -83,6 +89,9 @@ Spots where consensus formed fastest and deserves a skeptic
   declarative-check expressiveness is unproven.
 - Decision 3 unconfirmed: class-local code = consumer status (stable
   formats in, no engine hooks) — task-archeology stance generalized.
+  Review confirmed the drafts assert this neither way, so it's not a
+  landing blocker — still awaits explicit operator ratification
+  whenever the question next matters.
 - thin-skills' three-named-skill enumeration (kb / epistemic /
   "attention") — same agent-proposed-unilaterally pattern as teaching
   collapse; surfaced 2026-07-13 when the operator didn't recognize
@@ -93,11 +102,16 @@ Spots where consensus formed fastest and deserves a skeptic
 
 ## Success Criteria
 
-- [ ] Every 040 entry matches its classification; no entry outside
+- [x] Every 040 entry matches its classification; no entry outside
       adapter/trigger-subsystem scope names a runtime mechanism
-- [ ] designed-for-deletion has a checkable 030 requirement and
-      inbound why: references
-- [ ] Drafts survive the adversarial pass on the three named spots
+      (coupling-is-adapter-only.md's checkable tightened to say this
+      precisely — see F3/F4 in commit 41af622)
+- [x] designed-for-deletion has a checkable 030 requirement and
+      inbound why: references (classes-detach-cleanly.md)
+- [x] Drafts survive the adversarial pass on the four named spots
+      (three named at brief-writing time, a fourth — thin-skills'
+      enumeration — added 2026-07-13; all four reviewed, none
+      quietly resolved)
 
 ## Notes
 
