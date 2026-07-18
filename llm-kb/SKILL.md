@@ -31,16 +31,16 @@ Create structured knowledge bases using `.kb/` directory collections. Frontmatte
 is optional, but if used, requires schema validation to prevent drift. Use when
 organizing facts, tasks, or information for efficient LLM access across multiple
 agents. Key principles: small focused files, CLAUDE.md for maintenance guidance
-(never enumeration), summary files only when they add value beyond `ls`.
+(never enumeration), synthesis files only when they add value beyond `ls`.
 
 ## Anatomy
 
 ```
 $PROJECT/
 ├── CLAUDE.md ──────────────────── maintenance guide (root)
-├── README.md ──────────────────── summary file (root scope)
+├── README.md ──────────────────── synthesis file (root scope)
 ├── $CATEGORY.jsonschema.yaml ─── schema
-├── $CATEGORY.md ───────────────── summary file (category scope)
+├── $CATEGORY.md ───────────────── synthesis file (category scope)
 ├── $CATEGORY.kb/
 │   ├── CLAUDE.md ──────────────── maintenance guide (category)
 │   ├── $ITEM.md ───────────────── content file
@@ -49,12 +49,12 @@ $PROJECT/
 │       └── $ITEM.md ───────────── content file
 ```
 
-### Summary Files (README.md, $CATEGORY.md)
+### Synthesis Files (README.md, $CATEGORY.md)
 
-Summarize a scope to help readers decide whether to dive deeper.
+Roll up a scope to help readers decide whether to dive deeper.
 
 - README.md -- root scope (the whole project or multiple `.kb/` collections)
-- $CATEGORY.md -- category scope (summarizes `$CATEGORY.kb/`)
+- $CATEGORY.md -- category scope (rolls up `$CATEGORY.kb/`)
 
 May describe themes, patterns, or even list contents -- whatever helps readers
 avoid reading the directory. Omit when trivial (few items); `ls` suffices.
@@ -204,7 +204,7 @@ potential). The summary procedure here is for orientation only:
 2. Identify homogeneous categories → `$CATEGORY.kb/` directories
 3. Design schemas for frontmatter → `$CATEGORY.jsonschema.yaml` (if using frontmatter)
 4. Create per-directory CLAUDE.md guides
-5. Create summary files (`$CATEGORY.md`) where they help
+5. Create synthesis files (`$CATEGORY.md`) where they help
 6. Populate content files
 7. Validate with `bin/llm.kb-validate <path>`
 
