@@ -23,7 +23,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
         landing blocker) — see brief's Open Questions
   - [x] Land: apply review verdicts (F1-F5, see commit 41af622), commit,
         update the brief
-- [ ] Rewrite design-next.kb/040-design.kb/decisions-are-settled-questions.md
+- [x] Rewrite design-next.kb/040-design.kb/decisions-are-settled-questions.md
       to cite the spec's synthesis-file element instead of restating it: keep
       only the four decision-specific claims (no decision-record class;
       git-log + reviewed: provenance; merge-conflict-as-feature; replaces
