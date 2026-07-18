@@ -25,12 +25,14 @@ to their motivation by file-relative path
 - `010-mission.md` — what problem, who benefits
 - `020-goals.kb/` — how we accomplish the mission
 - `030-requirements.kb/` — how we validate goals are achieved
-- `040-design.kb/` — how we satisfy requirements (the five-layer stack)
+- `040-design.kb/` — how we satisfy requirements (the core and its
+  classes)
 - `070-future-work.kb/` — deferred ideas with explicit triggers
 
 ## What Belongs Here
 
-- The v2 layering: spec, engine, classes, delivery, instances
+- The core-and-classes kinds: spec, engine, class, data — see
+  `040-design.kb/core-and-classes.md`
 - Boundary decisions (what is a hook vs a skill vs a rule vs data)
 - Lessons-learned from v1 recast as goals/requirements
 - Deferred ideas with trigger conditions

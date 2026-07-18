@@ -11,7 +11,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
         in design-next.kb — genre-*.md → class-*.md; "genre"/"Genres"
         wording → "class"/"Classes" throughout (incl. five-layer-stack
         table); fix all cross-references to the renamed files
-  - [ ] FABLE: draft the rework per the brief (030 additions + coupling
+  - [x] FABLE: draft the rework per the brief (030 additions + coupling
         rename; 040 reworks per the blast-radius classification; CLAUDE.md
         sweeps). Drafts only — no landing commit yet
   - [ ] ANY STRONG MODEL, FRESH CONTEXT (subagent or separate session;

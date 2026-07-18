@@ -5,7 +5,7 @@ why:
 
 # Class: Design & Discourse
 
-Two classes, kept deliberately separate, sharing one Layer-0 primitive
+Two classes, kept deliberately separate, sharing one spec primitive
 (`kb-spec.md`'s "linked node"): one file per node, typed frontmatter
 edges, elaboration via sibling `.kb/`, roll-up to the parent on
 resolution.

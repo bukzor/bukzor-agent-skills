@@ -19,5 +19,5 @@ platform.
 
 This governs mechanism choice within a given runtime, not which
 runtime to depend on — see `runtime-portability.md` for the companion
-goal and `../030-requirements.kb/coupling-is-layer-3-only.md` for how
+goal and `../030-requirements.kb/coupling-is-adapter-only.md` for how
 the two compose without conflict.

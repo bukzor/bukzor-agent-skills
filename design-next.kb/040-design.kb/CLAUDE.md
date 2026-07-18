@@ -5,10 +5,10 @@ depends:
 
 # Design Layer
 
-How we satisfy the requirements: the five-layer stack (spec, engine,
-classes, delivery, instances) and its boundary decisions. Start with
-`five-layer-stack.md`; everything else elaborates one layer or one
-cross-cutting policy.
+How we satisfy the requirements: a thin core (spec, engine) plus
+detachable classes, and the boundary decisions around them. Start
+with `core-and-classes.md`; everything else elaborates one kind or
+one cross-cutting policy.
 
 ## What Belongs Here
 

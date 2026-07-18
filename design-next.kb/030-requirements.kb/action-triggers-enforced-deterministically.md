@@ -10,12 +10,12 @@ enforced by whatever deterministic gating or context-injection
 mechanism the active runtime provides — matched on the action itself,
 delivered without depending on the model choosing to consult a file.
 The requirement names the effect, not the mechanism: under Claude
-Code that mechanism is hooks (see
-`../040-design.kb/hook-wiring.md`, the Claude Code adapter of
-`../040-design.kb/delivery-contract.md`); under a different runtime
-it is that runtime's own interception point. See
-`coupling-is-layer-3-only.md` for the general rule this entry's title
-and body both hold to.
+Code that mechanism happens to be hooks; under a different runtime it
+is that runtime's own interception point. Which mechanism, and how a
+trigger compiles to it, is the trigger subsystem's design surface,
+not this requirement's — see `../040-design.kb/delivery-boundary.md`.
+See `coupling-is-adapter-only.md` for the general rule this entry's
+title and body both hold to.
 
 Checkable: enumerate the trigger class; every action-shaped entry has
 enforcement wiring in *some* adapter, and the prose copy exists only
