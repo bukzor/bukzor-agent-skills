@@ -44,16 +44,16 @@ points at the layer above).
 `070-future-work.kb/` captures ideas worth remembering but not worth pursuing
 now.
 
-Entries link via `why:` frontmatter to their motivation — usually a
-higher layer (e.g. a requirement lists the goals it serves), or a
-same-layer entry when the motivating concept naturally lives at the
-same layer and promoting it would introduce hierarchy with no other
-content.
+Entries link via `why:` frontmatter to their motivation — a list of
+file-relative path references, usually to a higher layer (e.g. a
+requirement lists the goals it serves), or to a same-layer entry when
+the motivating concept naturally lives at the same layer and promoting
+it would introduce hierarchy with no other content.
 
 ```yaml
 ---
 why:
-  - site-agnostic-capture
+  - ../020-goals.kb/site-agnostic-capture.md
 ---
 ```
 
