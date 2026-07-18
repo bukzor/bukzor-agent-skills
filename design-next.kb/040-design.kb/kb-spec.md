@@ -5,7 +5,7 @@ why:
   - ../030-requirements.kb/dated-records-are-primitive.md
 ---
 
-# Layer 0: The kb Spec
+# The kb Spec
 
 A short RFC plus schemas defining the file format and nothing else —
 no procedures, no behavior, no teaching:
