@@ -5,7 +5,7 @@ managed-by: Skill(llm-subtask)
 Repo-level list. Skill-scoped work lives in each skill's own
 `.claude/todo.md`; the breadcrumbs below point at every open list.
 
-- [ ] T2/v2.2: land the core-and-classes rework of design-next.kb — brief:
+- [x] T2/v2.2: land the core-and-classes rework of design-next.kb — brief:
       .claude/todo.kb/2026-07-12-000-Land-v2-2-core-and-classes-rework--T2-.md
   - [x] HAIKU (mechanical, confirmed 2026-07-11): genre→class rename sweep
         in design-next.kb — genre-*.md → class-*.md; "genre"/"Genres"
