@@ -14,7 +14,7 @@ Nested decomposition: `food.kb/cake.kb/` demonstrates when a subcategory
 warrants its own directory. Cake decisions (flavor, frosting, decorations) are
 independent concerns that would clutter the parent directory.
 
-Summary sibling for nested directories: `food.kb/cake.md` summarizes
+Synthesis sibling for nested directories: `food.kb/cake.md` rolls up
 `food.kb/cake.kb/` in a form suitable as a `food.kb/` member. It uses the same
 frontmatter schema as `main-dishes.md` and `snacks.md`, so someone reading
 `food.kb/` sees cake at the appropriate level without diving into `cake.kb/`.
@@ -30,7 +30,7 @@ Schemas document frontmatter: Each `.jsonschema.yaml` file includes
 `description:` entries that explain what each field means. Agents read the
 schema to understand the data model, not redundant documentation in CLAUDE.md.
 
-Summary files for overview: `decorations.md` summarizes theme and budget
+Synthesis files for overview: `decorations.md` rolls up theme and budget
 without diving into individual items. Unlike `cake.md` (which is also a
 `food.kb/` member), `decorations.md` sits at the root as a pure overview.
 

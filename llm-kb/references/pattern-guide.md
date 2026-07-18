@@ -102,7 +102,7 @@ Root: Common principles (small files, schemas, cross-refs, etc.)
 Per-category: Specific guidance for that category
 
 ### 6. Create Overview Files (where helpful)
-Write `category1.md` when a summary helps readers decide whether to dive into
+Write `category1.md` when a synthesis file helps readers decide whether to dive into
 `category1.kb/`.
 
 ### 7. Populate Content

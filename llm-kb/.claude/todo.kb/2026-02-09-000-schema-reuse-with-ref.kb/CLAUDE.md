@@ -2,7 +2,7 @@
 
 Dated progress entries, decisions, and experiment findings from the
 schema-reuse-with-$ref effort (`../2026-02-09-000-schema-reuse-with-ref.md`,
-which summarizes this collection at a high level).
+which rolls up this collection at a high level).
 
 ## What belongs here
 

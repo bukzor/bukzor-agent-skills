@@ -19,7 +19,7 @@ The missing piece is a checklist or thought process for designing a new
 4. Group by natural taxonomy -- what's the same *type* of thing?
 5. Check for table/list smell in any planned .md (→ promote to .kb/)
 6. Check for audience mismatch (→ maybe different repo/directory)
-7. Verify summary files accompany their .kb/ directories
+7. Verify synthesis files accompany their .kb/ directories
 
 This process should live in the skill doc, probably in the "Creating a
 Collection" section or as a new "Designing a Knowledge Base" section.

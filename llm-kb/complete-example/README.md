@@ -20,4 +20,4 @@ All food must be peanut-free (see `guests.kb/` for details).
 | `decorations.kb/` | Visual setup |
 | `timeline.kb/` | Day-of schedule |
 
-Nested: `food.kb/cake.kb/` breaks out cake decisions; `food.kb/cake.md` summarizes.
+Nested: `food.kb/cake.kb/` breaks out cake decisions; `food.kb/cake.md` rolls it up.

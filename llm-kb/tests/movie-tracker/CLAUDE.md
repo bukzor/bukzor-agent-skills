@@ -6,7 +6,7 @@ Watched: The Matrix, Inception.
 Watchlist: Oppenheimer, Tenet.
 
 Organize by status (watched vs watchlist) and include a way to capture notes on
-each film. Add summary files only where they'd help beyond `ls`.
+each film. Add synthesis files only where they'd help beyond `ls`.
 
 ## Steps
 

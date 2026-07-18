@@ -39,7 +39,7 @@ Findings addressed, not deferred.
 | `../self-audit.kb/claudemd-completeness.md` | a `CLAUDE.md` was touched |
 | `../self-audit.kb/enumeration-completeness.md` | a collection was created or extended |
 | `../self-audit.kb/schema-potential.md` | a touched `.kb/` has 2+ items |
-| `../self-audit.kb/summary-file-value.md` | a `$CATEGORY.md` was touched |
+| `../self-audit.kb/synthesis-file-value.md` | a `$CATEGORY.md` was touched |
 
 ## Tier 3 — situational
 

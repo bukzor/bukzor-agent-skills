@@ -70,7 +70,7 @@ shapes, in order of growth:
 - **Sub-kb.** When alternatives accrue per-item content, metadata, or
   lifecycle, promote the entry to a `.kb/` per `Skill(llm-kb)` promotion
   signals. Each alternative becomes its own file; selection can live in
-  entry frontmatter or be called out in the sub-kb's CLAUDE.md / summary file.
+  entry frontmatter or be called out in the sub-kb's CLAUDE.md / synthesis file.
 
 Forward-facing: the design entry describes what the system *is*. Alternatives
 are a footnote on the design space, not a historical log. If extensive

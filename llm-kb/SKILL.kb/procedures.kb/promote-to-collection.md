@@ -9,7 +9,7 @@ and `../self-audit.kb/promotion-signals.md`.
 2. `mkdir $singular.kb/`.
 3. Each parallel section → `$singular.kb/$item-slug.md`. Preserve
    content verbatim; cleanup after.
-4. Non-listing prose → `$singular.md` (parent summary) or
+4. Non-listing prose → `$singular.md` (parent synthesis file) or
    `$singular.kb/CLAUDE.md` (rules).
 5. Write `$singular.kb/CLAUDE.md` if absent. Rules: what belongs,
    what doesn't, when to add.

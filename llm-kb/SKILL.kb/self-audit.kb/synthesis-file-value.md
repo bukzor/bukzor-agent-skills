@@ -1,4 +1,4 @@
-# Self-audit: summary-file value
+# Self-audit: synthesis-file value
 
 ## Goal
 

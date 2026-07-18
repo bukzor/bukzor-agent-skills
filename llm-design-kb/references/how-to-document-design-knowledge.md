@@ -13,7 +13,7 @@ more distilled than raw ADRs/devlogs, optimized for reference.
 ```
 docs/dev/
 ├── background.kb/               # Foundational context other layers assume
-├── design.md                    # Summary of design/
+├── design.md                    # Synthesis of design/
 ├── design/
 │   ├── CLAUDE.md                # Breadcrumb to this document
 │   ├── 010-mission.kb/
@@ -22,7 +22,7 @@ docs/dev/
 │   ├── 040-design.kb/
 │   ├── 050-components.kb/
 │   └── 060-deliverables.kb/
-├── technical-policy.md          # Summary of technical-policy.kb/
+├── technical-policy.md          # Synthesis of technical-policy.kb/
 └── technical-policy.kb/
 ```
 

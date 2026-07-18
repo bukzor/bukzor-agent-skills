@@ -5,7 +5,7 @@ why:
 
 # Spec Cited, Never Restated
 
-Format rules — what a collection is, entry anatomy, naming, summary
+Format rules — what a collection is, entry anatomy, naming, synthesis
 and maintenance-file semantics — live in exactly one spec document
 plus its schemas. Every other artifact (skills, rules, CLAUDE.md
 files, teaching material) cites the spec; none restates it.

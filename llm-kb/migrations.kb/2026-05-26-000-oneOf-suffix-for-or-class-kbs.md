@@ -40,8 +40,8 @@ Signals (in order of strength):
    "which one is chosen" / contains "chosen / rejected / selected"
    vocabulary.
 2. **Strong (+3):** The parent same-stem `.md` has `**Answer.**`,
-   `## Why this one`, or `## Resolution` — the shape of a summary file
-   that picks among alternatives.
+   `## Why this one`, or `## Resolution` — the shape of a synthesis
+   file that picks among alternatives.
 3. **Medium (+2):** Entries carry status frontmatter `chosen | rejected
    | selected | considered`.
 4. **Weak (+1):** Small entry count (2–6) — alternative sets are

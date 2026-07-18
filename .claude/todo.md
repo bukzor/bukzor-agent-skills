@@ -21,7 +21,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
         correctly stayed open. Decision 3 still awaits operator
         ratification (not asserted either way in the drafts, so not a
         landing blocker) — see brief's Open Questions
-  - [x] Land: apply review verdicts (F1-F5, see commit 41af622), commit,
+  - [x] Land: apply review verdicts (F1-F5, see commit 9d80ded), commit,
         update the brief
 - [x] Rewrite design-next.kb/040-design.kb/decisions-are-settled-questions.md
       to cite the spec's synthesis-file element instead of restating it: keep
@@ -40,7 +40,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       triggers→kb-spec citation for bank format, packaging verdict (peer
       standard vs package in the suite — needs a real triggers-without-kb
       consumer to justify peer)
-- [ ] Rename "summary" → "synthesis" everywhere: llm-kb SKILL.md summary-file
+- [x] Rename "summary" → "synthesis" everywhere: llm-kb SKILL.md summary-file
       sections, self-audit.kb/summary-file-value.md (file + wording), any
       remaining "summary file" refs in skills/tower (kb-spec.md already done)
 - [ ] Discuss design-next.kb/040-design.kb/references-are-structured-data.md
