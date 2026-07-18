@@ -3,6 +3,7 @@ why:
   - ../030-requirements.kb/procedures-are-tools.md
   - ../030-requirements.kb/degrade-gracefully.md
   - ../030-requirements.kb/classes-detach-cleanly.md
+status: proposal
 ---
 
 # Class Package

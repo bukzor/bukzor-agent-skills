@@ -1,6 +1,7 @@
 ---
 why:
   - ../030-requirements.kb/coupling-is-adapter-only.md
+status: proposal
 ---
 
 # Delivery Boundary

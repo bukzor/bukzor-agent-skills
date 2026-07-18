@@ -1,6 +1,7 @@
 ---
 why:
   - ../030-requirements.kb/degrade-gracefully.md
+status: proposal
 ---
 
 # Cross-Reference Notation

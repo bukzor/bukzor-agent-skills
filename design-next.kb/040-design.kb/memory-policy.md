@@ -2,6 +2,7 @@
 why:
   - ../030-requirements.kb/authorship-boundary.md
   - ../030-requirements.kb/filesystem-as-database.md
+status: proposal
 ---
 
 # Memory Policy

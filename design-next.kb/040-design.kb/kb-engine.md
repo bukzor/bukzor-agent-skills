@@ -3,6 +3,7 @@ why:
   - ../030-requirements.kb/procedures-are-tools.md
   - ../030-requirements.kb/validators-outlive-migrations.md
   - ../030-requirements.kb/classes-detach-cleanly.md
+status: proposal
 ---
 
 # The kb Engine
