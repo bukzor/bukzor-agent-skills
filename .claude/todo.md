@@ -43,12 +43,23 @@ Repo-level list. Skill-scoped work lives in each skill's own
         — settled 2026-07-19: all three axes recorded in class-task.md
         (+ two 070 entries); sessions.kb dated-prefix sweep scheduled
         in that repo's reconcile-sessions-kb-schema-drift session
-  - [ ] T4: trigger-subsystem design session (llm-must-read-kb's successor):
-        runtime-neutral condition vocabulary + compilation model for
-        action-shaped triggers (risk: hooks-in-disguise), one-way
-        triggers→kb-spec citation for bank format, packaging verdict (peer
-        standard vs package in the suite — needs a real triggers-without-kb
-        consumer to justify peer)
+  - [x] T4: trigger-subsystem design session (llm-must-read-kb's successor)
+        — settled 2026-07-19: packaging is in-suite (triggers depend on
+        llm-kb, no triggers-without-kb consumer exists); condition
+        vocabulary is three neutral kinds (command/path pattern,
+        lifecycle point) plus a floor-noticeable admission test;
+        compilation rejected in favor of interpretation (per-runtime
+        shims read trigger files at fire time — staleness structurally
+        impossible, coverage report replaces `kb doctor`); bank format
+        stays one authoring format, enforcement varies by detectability;
+        task↔trigger boundary resolved via a shared wake-condition
+        grammar. Recorded in new skill `llm-triggers/design.kb/`
+        (design-next.kb cites down rather than restating); journey ADR:
+        docs/dev/adr/2026-07-19-001-Trigger-subsystem-condition-vocabulary-and-interpretation-model--T4-.md.
+        Left open in llm-triggers/design.kb/: several status:proposal
+        entries and [!QUESTION] blocks (elaboration-frontmatter field
+        names, per-cell sweep semantics, exact hook-event bindings) —
+        folded into the tower-wide proposal-ratification sweep below
     - [x] T4 input, inherited from the retired
           integrate-sessions-kb-into-llm-subtask taskfile: test
           whether skill-bundled commands
@@ -72,8 +83,8 @@ Repo-level list. Skill-scoped work lives in each skill's own
           promotion — no pointer) or stays generic; asymmetry is already
           specified in Horizon-and-priority + task-synthesis-drift-check
   - [ ] Ratify (or reject) the tower's `status: proposal` entries and
-        `[!QUESTION]` blocks — enumerate:
-        grep -rn 'status: proposal\|!QUESTION' design-next.kb
+        `[!QUESTION]` blocks — enumerate (now spans two towers post-T4):
+        grep -rn 'status: proposal\|!QUESTION' design-next.kb llm-triggers/design.kb
   - [ ] Extend ~/bin/claude-open-tasks-list to the decision grammars — brief:
         .claude/todo.kb/2026-07-19-000-Extend-claude-open-tasks-list-to-the-decision-grammars.md
 - [x] Rename "summary" → "synthesis" everywhere: llm-kb SKILL.md summary-file
