@@ -49,12 +49,28 @@ Repo-level list. Skill-scoped work lives in each skill's own
         triggers→kb-spec citation for bank format, packaging verdict (peer
         standard vs package in the suite — needs a real triggers-without-kb
         consumer to justify peer)
-    - [ ] T4 input, inherited from the retired
+    - [x] T4 input, inherited from the retired
           integrate-sessions-kb-into-llm-subtask taskfile: test
           whether skill-bundled commands
           (`~/.claude/skills/<skill>/commands/<name>.md`) resolve as
           top-level `/<name>` — bears on the adapter-side packaging
-          of delivery machinery
+          of delivery machinery. Tested 2026-07-19 (scratch skill +
+          `claude -p` probes): they do NOT resolve, neither as
+          `/<name>` nor `/<skill>:<name>`; the skill itself IS a
+          top-level `/<skill>` command (commands/skills merged per
+          docs); only plugins bundle multiple commands (namespaced
+          `/<plugin>:<name>`)
+  - [ ] Goals-level review: settle the ecosystem-goals framing (mission's
+        three jobs: durable knowledge / attention / convention enforcement),
+        then assess v2.2 against it — session 2026-07-19 opened this;
+        Claude's framing delivered, operator reaction pending. Open points:
+        where llm-vitals / llm-chat-librarian / claude-realignment sit
+        (fourth job: introspection/health?); is one-operator a permanent
+        assumption?
+    - [ ] while there: decide whether class-task.md's elaboration step 2
+          notes the option-pair asymmetry (an option's line retires on
+          promotion — no pointer) or stays generic; asymmetry is already
+          specified in Horizon-and-priority + task-synthesis-drift-check
   - [ ] Ratify (or reject) the tower's `status: proposal` entries and
         `[!QUESTION]` blocks — enumerate:
         grep -rn 'status: proposal\|!QUESTION' design-next.kb
