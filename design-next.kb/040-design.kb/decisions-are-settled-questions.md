@@ -9,8 +9,8 @@ why:
 A decision is not an event to log but a question that reached an
 answer, open and settled being two lifecycle stages of the spec's
 synthesis-file element (`kb-spec.md`). No class-record sub-type
-shadows this: `class-record.md` lists session log, incident, and
-migration, and decisions are deliberately absent from it.
+shadows this: `class-record.md` lists incident and migration, and
+decisions are deliberately absent from it.
 
 Event history is version control's job: "when did we decide" is the
 node's git log. Where provenance must be model-visible or
