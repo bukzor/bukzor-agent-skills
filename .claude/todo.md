@@ -73,11 +73,13 @@ Repo-level list. Skill-scoped work lives in each skill's own
           `/<plugin>:<name>`)
   - [ ] Goals-level review: settle the ecosystem-goals framing (mission's
         three jobs: durable knowledge / attention / convention enforcement),
-        then assess v2.2 against it — session 2026-07-19 opened this;
-        Claude's framing delivered, operator reaction pending. Open points:
-        where llm-vitals / llm-chat-librarian / claude-realignment sit
-        (fourth job: introspection/health?); is one-operator a permanent
-        assumption?
+        then assess v2.2 against it — framing ratified 2026-07-19: three
+        jobs stand; llm-vitals / llm-chat-librarian / claude-realignment
+        are supported consumers of stable conventions (task-archeology
+        precedent), not a fourth job; one-operator stipulated as a
+        two-way door with a first-share tripwire
+        (design-next.kb/070-future-work.kb/multi-operator.md).
+        Remaining: the v2.2-against-goals assessment itself
     - [x] while there: decide whether class-task.md's elaboration step 2
           notes the option-pair asymmetry (an option's line retires on
           promotion — no pointer) or stays generic. Resolved 2026-07-19
