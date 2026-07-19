@@ -30,8 +30,9 @@ one cross-cutting policy.
 `why:` lists file-relative paths of motivating requirements
 (`../030-requirements.kb/<requirement>.md`, or a same-layer entry
 where the motivation lives at this level).
-`status: proposal` + `blocked-on: discussion` marks entries awaiting
-an operator decision.
+Open-item markers per `../CLAUDE.md`; `blocked-on: discussion`
+additionally marks a `status: proposal` entry that needs a
+discussion before it can be ratified.
 
 ## When to Add / Read
 

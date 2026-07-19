@@ -73,25 +73,49 @@ axes, then record outcomes as design entries (and gut/replace
 
 ## Implementation Steps
 
-- [ ] Operator answers the rating-system read-side question
-- [ ] Settle atom grain (line vs file, and when each)
-- [ ] Settle horizon representation (metadata vs tiers vs stores)
-- [ ] Settle scope/store layout (global vs per-repo + enumeration)
-- [ ] Record decisions in design-next.kb; update `class-task.md`
+- [x] Operator answers the rating-system read-side question (see
+      "Resolved 2026-07-11" above; residual "supportable" question is
+      in-session material, not a prerequisite)
+- [x] Settle atom grain (line vs file, and when each) — ratified
+      2026-07-19: gradual elaboration (line → file → task kb),
+      self-similar task tree; recorded in class-task.md
+- [x] Settle horizon representation (metadata vs tiers vs stores) —
+      ratified 2026-07-19: horizon = the working set's total order;
+      `## Later` retires — the obligation/option split is
+      structural, each contract a full synthesis pair
+      (`todo.md`/`todo.kb/`, `ideas.md`/`ideas.kb/`); recorded in
+      class-task.md
+- [x] Settle scope/store layout (global vs per-repo + enumeration) —
+      ratified 2026-07-19: per-project instances canonical
+      ("project" defined: ownership, not git boundaries); sessions.kb
+      = the class instanced at operator scope, per-machine and `cwd:`
+      as defined conventions; dated-prefix normalization scheduled in
+      `~/.claude/sessions.kb/penguin/reconcile-sessions-kb-schema-drift.md`
+- [x] Record decisions in design-next.kb; update `class-task.md`
 
 ## Open Questions
 
 - Does `- [ ]` machine-enumerability survive if grain moves toward
   whole files? (existence-is-signal vs line contract)
+  — Resolved 2026-07-19: yes; enumeration is the union of bracketed
+  lines and collection files, pointer lines deduplicated
 - Is sessions.kb a task-domain instance or its own thing once todo.md
   is a synthesis?
+  — Resolved 2026-07-19: an ordinary task-class instance at operator
+  scope (class-task.md, Scope)
 
 ## Success Criteria
 
-- [ ] All three axes have decided design-next entries (why-linked)
-- [ ] class-task.md no longer contradicts the decisions
+- [x] All three axes have decided design-next entries (why-linked)
+- [x] class-task.md no longer contradicts the decisions
 
 ## Notes
 
 Solutions floated in-session were proof-of-existence, not normative
 (operator's explicit caveat) — re-derive at discussion time.
+
+"Supportable" resolved 2026-07-19: minimal-core-forever. The core's
+commitment is stable conventions (frontmatter, naming, layout);
+ranking/query needs stay externally built (task-archeology proves it
+works); `kb query` remains behind `structured-query.md`'s
+three-occurrence trigger — unchanged, not eliminated.

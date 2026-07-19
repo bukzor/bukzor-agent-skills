@@ -29,6 +29,16 @@ to their motivation by file-relative path
   classes)
 - `070-future-work.kb/` — deferred ideas with explicit triggers
 
+## Open-Item Markers
+
+Four grammars, by what unblocks the item:
+
+- `status: proposal` (frontmatter) — awaits operator ratification
+- `> [!QUESTION] <one-line title>` (body) — awaits evidence or a
+  decision, at sub-entry grain (`Skill(llm-design-kb)`)
+- `trigger:` (070 frontmatter) — awaits a stated external condition
+- `- [ ]` (`.claude/todo.md`, `todo.kb/`) — awaits labor
+
 ## What Belongs Here
 
 - The core-and-classes kinds: spec, engine, class, data — see

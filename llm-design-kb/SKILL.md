@@ -85,27 +85,42 @@ A behavior-describing doc therefore carries two kinds of prose, demarcated:
 
 - **Undecorated prose is descriptive** -- shipped, verifiable behavior. A
   mismatch with ground truth is a doc bug: fix it.
-- **`> [!TODO]` blocks are normative** -- decided (or sought) behavior not yet
+- **`> [!TODO]` blocks are normative** -- decided behavior not yet
   implemented. A mismatch with ground truth is the point: implement toward it,
   never "correct" it to match the code.
+- **`> [!QUESTION]` blocks are open** -- undecided behavior or design. Never
+  implement one: an agent that builds an open question has shipped an
+  unratified guess.
+
+Both markers take a one-line title after the bracket -- a reminder at
+checkbox-line grain, so a bare grep reads like a todo list:
 
 ```markdown
-> [!TODO]
+> [!TODO] island rule becomes `***`
 > The island rule is `***`; lands with a `divider()` change plus
 > regenerated goldens.
+
+> [!QUESTION] is the island rule `***` or `---`?
+> Pandoc accepts both; settles on checking what our other renderers
+> accept.
 ```
 
 Write a decided block as declarative future-state prose ("The rule is X"),
 not an imperative task ("Switch to X"): landing it is then pure markup
-removal — the prose is already the descriptive sentence. An open question
-reads as `Sought: ...` and resolves into a decided block or descriptive
-prose.
+removal — the prose is already the descriptive sentence. Write a question's
+body to name what would settle it (operator ratification, prototype
+evidence, prior art); it resolves by marker swap to a decided `[!TODO]`,
+directly to descriptive prose, or by deletion.
 
-The marker is GFM-alert-shaped but nonstandard: GitHub renders it as a plain
-blockquote containing the literal `[!TODO]` -- acceptable, since browsers are
-a tertiary consumer and the fallback is legible. Grep `[!TODO]` to enumerate a
-doc's unimplemented surface. When the behavior lands, remove the callout
-markup (or the whole block, if surrounding prose already says it).
+The markers are Obsidian-callout-shaped (prior art: Obsidian's built-in
+`[!todo]` and `[!question]` types); GitHub renders them as plain blockquotes
+containing the literal bracket text -- acceptable, since browsers are a
+tertiary consumer and the fallback is legible. Grep `[!TODO]` to enumerate a
+doc's unimplemented surface, `[!QUESTION]` its undecided surface. The
+terminal state of both is unmarked prose: when behavior lands or a question
+settles, remove the callout markup (or the whole block, if surrounding prose
+already says it). There is no `[!DONE]` or `[!ANSWER]` -- markers flag
+deviation from ground truth, and a closed item's record is git.
 
 Layers 010-030 are aspirational by nature and need no marker; the convention
 applies where prose could be mistaken for a claim about current behavior
@@ -119,9 +134,10 @@ After any session that changes code or design understanding in a project with
 1. **Find affected docs.** Which design.kb files relate to what changed this
    session? Read each one.
 2. **Check claims against ground truth.** Look for stale assertions — things
-   that were true when written but no longer are. `> [!TODO]` blocks are
-   normative, never stale; instead, unwrap any whose behavior landed this
-   session.
+   that were true when written but no longer are. `> [!TODO]` and
+   `> [!QUESTION]` blocks are normative/open, never stale; instead, unwrap
+   any TODO whose behavior landed this session, and resolve any QUESTION
+   that settled.
 3. **Capture new concepts.** Did discussion surface goals, requirements, or
    components that aren't documented? Create entries in the appropriate
    collection.

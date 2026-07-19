@@ -12,3 +12,13 @@ Before rendering a verdict on any mechanism, enumerate its actual
 uses first. If they have different coupling, cost, or risk profiles,
 they need different decisions, stated separately, even if the
 mechanism's name stays singular.
+
+The bundle isn't always two uses of one mechanism; sometimes it is
+several questions wearing one artifact's costume. A store choice
+that encodes weight, urgency, and commitment at once is three
+decisions presenting as one ("which directory does this belong
+in?"); a catch-all section holding both deferred obligations and
+uncommitted ideas is two contracts presenting as one heading. The
+move is the same: enumerate what the bundle actually carries, then
+give each axis its own verdict — unbundled axes usually turn out to
+want different carriers, not just different answers.

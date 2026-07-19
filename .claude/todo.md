@@ -36,13 +36,30 @@ Repo-level list. Skill-scoped work lives in each skill's own
       its own why.jsonschema.yaml analog (technical-policy.jsonschema.yaml)
       already treated why: as untyped path strings, so only the SKILL.md
       teaching example was stale
-- [ ] .claude/todo.kb/2026-07-11-000-settle-task-grain-and-store-count-for-design-next.md
-- [ ] T4: trigger-subsystem design session (llm-must-read-kb's successor):
-      runtime-neutral condition vocabulary + compilation model for
-      action-shaped triggers (risk: hooks-in-disguise), one-way
-      triggers→kb-spec citation for bank format, packaging verdict (peer
-      standard vs package in the suite — needs a real triggers-without-kb
-      consumer to justify peer)
+- [ ] Green-light the v2 build — the gate that fires the trigger in
+      design-next.kb/070-future-work.kb/v1-migration-bridge.md; blocked on
+      the children:
+  - [x] (T3) .claude/todo.kb/2026-07-11-000-settle-task-grain-and-store-count-for-design-next.md
+        — settled 2026-07-19: all three axes recorded in class-task.md
+        (+ two 070 entries); sessions.kb dated-prefix sweep scheduled
+        in that repo's reconcile-sessions-kb-schema-drift session
+  - [ ] T4: trigger-subsystem design session (llm-must-read-kb's successor):
+        runtime-neutral condition vocabulary + compilation model for
+        action-shaped triggers (risk: hooks-in-disguise), one-way
+        triggers→kb-spec citation for bank format, packaging verdict (peer
+        standard vs package in the suite — needs a real triggers-without-kb
+        consumer to justify peer)
+    - [ ] T4 input, inherited from the retired
+          integrate-sessions-kb-into-llm-subtask taskfile: test
+          whether skill-bundled commands
+          (`~/.claude/skills/<skill>/commands/<name>.md`) resolve as
+          top-level `/<name>` — bears on the adapter-side packaging
+          of delivery machinery
+  - [ ] Ratify (or reject) the tower's `status: proposal` entries and
+        `[!QUESTION]` blocks — enumerate:
+        grep -rn 'status: proposal\|!QUESTION' design-next.kb
+  - [ ] Extend ~/bin/claude-open-tasks-list to the decision grammars — brief:
+        .claude/todo.kb/2026-07-19-000-Extend-claude-open-tasks-list-to-the-decision-grammars.md
 - [x] Rename "summary" → "synthesis" everywhere: llm-kb SKILL.md summary-file
       sections, self-audit.kb/summary-file-value.md (file + wording), any
       remaining "summary file" refs in skills/tower (kb-spec.md already done)
@@ -67,7 +84,8 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] llm-kb/.claude/todo.md
-- [ ] llm-collab/.claude/todo.md
+- [ ] llm-collab/.claude/todo.md (v2 dissolves llm-collab — weigh new
+      investment against core-and-classes.md before spending)
 - [ ] llm-subtask/.claude/todo.md
 - [ ] llm-must-read-kb/.claude/todo.md
 - [x] Create skill `llm-must-read-kb/` (was drafted as `must-read-d`) to

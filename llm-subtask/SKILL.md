@@ -125,7 +125,7 @@ status if they're work; rewrite as prose if they're not.
 
 ## Integration: todo.md + todo.kb/
 
-Tier 2 (tactical) and Tier 3 (strategic) work together: <https:todo.md> is a single prioritized list containing both inline tasks and references to planning files in <https:todo.kb/>. The only permitted section break is `## Later` for deferred work.
+Tier 2 (tactical) and Tier 3 (strategic) work together: <https:todo.md> is a single prioritized list containing both inline tasks and references to planning files in <https:todo.kb/>. The only permitted section break is `## Later`, and it is a commitment boundary, not a priority bucket: lines below it are uncommitted might-never items (the line-grain form of `ideas.kb/` — see Ideas Pattern), which sweeps may surface but must never nag. Low-priority *committed* work doesn't go there — it just sits lower in the list.
 
 **Example pattern:**
 ```markdown

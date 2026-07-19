@@ -45,15 +45,14 @@ every `kb` surface simultaneously
 `kb new <gone-class>` fail on an ordinary lookup miss rather than a
 crash once the package is gone.
 
-> [!TODO]
-> Sought: whether declarative checks loaded as data are expressive
-> enough for the full `kb doctor` battery and for `kb new`'s
-> class-aware generation, or whether some checks need code the
-> engine can't safely load from a class package at runtime. Flagged
-> for the adversarial review pass, not resolved here — if the
-> ceiling is real, the discovery contract needs an escape hatch
-> (e.g. a narrow, sandboxed check-script convention) without
-> reopening engine→class source coupling.
+> [!QUESTION] are declarative checks expressive enough for doctor + new?
+> Whether checks loaded as data cover the full `kb doctor` battery
+> and `kb new`'s class-aware generation, or some checks need code the
+> engine can't safely load from a class package at runtime. Settles
+> on prototype evidence — if the ceiling is real, the discovery
+> contract needs an escape hatch (e.g. a narrow, sandboxed
+> check-script convention) without reopening engine→class source
+> coupling.
 
 The engine is where shared improvement concentrates: a slug fix, a
 naming change, a new audit lands once. Agents are taught to

@@ -45,23 +45,26 @@ sibling class. That's the mechanism that keeps
 `classes-detach-cleanly.md` true: removing one class package can
 never strand another that quietly subclassed it.
 
-> [!TODO]
-> Sought (teaching collapse): whether a class's conventions page *is*
-> the delivered teaching artifact (e.g. a Claude Code SKILL.md body,
-> verbatim) or compiles to one through a separate step. Treating them
-> as identical was proposed unilaterally in an earlier session and
-> never tested against a second adapter. Flagged for the adversarial
-> review pass, not resolved here.
+> [!QUESTION] is the conventions page itself the delivered teaching?
+> Whether a class's conventions page *is* the delivered teaching
+> artifact (e.g. a Claude Code SKILL.md body, verbatim) or compiles
+> to one through a separate step. Treating them as identical was
+> proposed unilaterally in an earlier session; settles on testing
+> against a second adapter.
 
-> [!TODO]
-> Sought (instance naming): the prior thin-skills content (now folded
-> into this entry) asserted exactly three teaching skills (kb /
-> epistemic / attention) cutting across class boundaries, rather than
-> one conventions page per class package (the mapping this entry
-> describes above). That three-skill enumeration is not reasserted
-> here — it was agent-proposed and untested, and the operator didn't
-> recognize "attention skill" from a plain read of the committed
-> baseline when it surfaced. Whether teaching consolidates cross-class
-> (the prior three-skill shape), stays one-per-class-package (this
-> entry's default shape), or lands somewhere between, is open; defer
-> instance-naming to build time rather than deciding it here.
+> [!QUESTION] does class-local code have plain consumer status?
+> Whether class-local code — templates aside, e.g. a check script —
+> is a plain consumer: stable formats in, no engine hooks.
+> Generalizes the task-archeology stance (T2 brief, decision 3).
+> This entry asserts it neither way; settles on operator
+> ratification whenever the question next matters.
+
+> [!QUESTION] does teaching consolidate cross-class, or stay per-package?
+> The prior thin-skills content (now folded into this entry) asserted
+> exactly three teaching skills (kb / epistemic / attention) cutting
+> across class boundaries, rather than one conventions page per class
+> package (the mapping this entry describes above). That enumeration
+> was agent-proposed and untested — the operator didn't recognize
+> "attention skill" from a plain read of the committed baseline.
+> Settles at build time; defer instance-naming rather than deciding
+> here.
