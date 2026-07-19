@@ -53,8 +53,9 @@ Horizon is the obligations' total order, nothing else: "far out" is
 "near the bottom" — no horizon field, no named buckets. The ordering
 is the content; that is why a working set is not "merely a listing"
 (`ls` is the index; the order is not). Deferral gated on a condition
-(a date, "after X ships") is trigger-shaped, not far-horizon; the
-task/trigger boundary is a T4 question.
+(a date, "after X ships") is trigger-shaped, not far-horizon: a
+deferred task names its wake condition in frontmatter, per
+`../../llm-triggers/design.kb/040-design.kb/task-deferral.md`.
 
 The option pool has no standing order — options are consulted, not
 scheduled. Pointer lines carry exactly this asymmetry: a pointer

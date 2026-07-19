@@ -37,8 +37,10 @@ Dependency rules:
 - **spec → anything**: disallowed — the spec cites nothing
   downstream.
 
-Delivery and trigger machinery sit outside all four kinds, on the
-adapter side of `delivery-boundary.md`.
+Delivery machinery — interpreter shims — sits outside all four
+kinds, on the adapter side of `delivery-boundary.md`; the trigger
+subsystem's runtime-neutral content (condition vocabulary, bank
+format) is ordinary class-side material.
 
 V1's unit was the vertical silo: each skill bundled its own spec
 prose, scripts, procedures, teaching, and self-documentation — which
@@ -56,7 +58,9 @@ commands, skeleton becomes `kb init`); `llm-design-kb` and
 `llm-discourse-graph` become the design and discourse classes, kept
 separate but sharing
 the spec's linked-node primitive (`class-epistemic.md`);
-`llm-must-read-kb` becomes the trigger class; `llm-subtask` becomes
+`llm-must-read-kb` becomes the trigger class (successor seeded as
+`llm-triggers/`, whose `design.kb/` owns the subsystem specifics);
+`llm-subtask` becomes
 the task class, its enforcement wiring moving to the adapter side of
 `delivery-boundary.md`; `llm-vitals`, `sessions.kb`, and the personal
 must-read bank are data; `claude-realignment` and
