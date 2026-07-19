@@ -30,9 +30,30 @@ cost-benefit-sweh:
 - [x] docs/dev/ methodology kb: case-study, concepts, post-mortem split into capture + reconcile
 - [ ] todo.kb/2026-05-15-000-reconcile-seed-case-study-may-13-har-browse-rust-port.md
 - [x] Resolve `bin/llm.kb-validate` quirk: `SKILL.kb/SKILL.jsonschema.yaml` not auto-matched (moved schema to repo root)
-- [ ] Route `must-read/after/distilling-from-a-raw-source.md` through `run-self-audits.md` for the generic audit portion
-- [ ] Move `docs/dev/procedures.kb/reconcile-case-study.md` to `SKILL.kb/procedures.kb/` (consumer-facing parallel to post-mortem move)
-- [ ] Re-read SKILL.md after the recent rewrite; confirm the "No schema found → copy from skeleton" line still reads coherent in context
+- [x] Route `must-read/after/distilling-from-a-raw-source.md` through `run-self-audits.md` for the generic audit portion —
+      split the file into "Distilling-specific actions" (alias
+      back-link, completeness-vs-source, cross-link siblings) and a
+      new "Generic audits" section citing `run-self-audits.md`
+      instead of inlining just the cross-references self-audit
+- [ ] ~~Move `docs/dev/procedures.kb/reconcile-case-study.md` to `SKILL.kb/procedures.kb/` (consumer-facing parallel to post-mortem move)~~ —
+      premise checked against history (commit `577702a`, "SKILL.kb
+      refactor; move post-mortem to consumer-facing") and found wrong:
+      that commit deliberately generalized post-mortem.md while
+      *keeping* reconcile-case-study.md skill-internal, because
+      reconcile operates on llm-kb's own specific distillation
+      taxonomy (failure-modes.kb/procedures.kb/principles.kb/
+      concepts.kb/glossary.kb), not a generic consumer shape the way
+      raw case-study capture is. No move performed. Leaving open as a
+      real question rather than closing mechanically: does a generic
+      consumer-facing reconcile procedure make sense as a *separate*
+      new file (not a move of this one), or does the taxonomy stay
+      skill-specific by design? Operator call.
+- [x] Re-read SKILL.md after the recent rewrite; confirm the "No schema found → copy from skeleton" line still reads coherent in context —
+      verified: sits under `bin/llm.kb-validate` usage docs as a
+      recovery line for that tool's "No schema found" output;
+      `llm-subtask/skeleton/.claude/` does contain
+      `todo.jsonschema.yaml`/`ideas.jsonschema.yaml`. Coherent, no
+      change needed
 - [x] Verify `tests/` still pass after schema reshuffle, `.d → .kb` rename, and KbValidator extension — 4 pass from repo root and from llm-kb/ (pytest ini_options hoisted to workspace root; bare `pytest` at root had silently collected 0 tests)
 - [ ] Devlog entry for this session (skeleton-default schema centralization, sessions.jsonschema migration)
 - [x] Commit current working tree (CLEAN-KITCHEN)
