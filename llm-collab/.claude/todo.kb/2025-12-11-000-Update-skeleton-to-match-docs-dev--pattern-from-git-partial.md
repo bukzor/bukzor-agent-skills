@@ -203,3 +203,14 @@ and documented everywhere consistently; what remains is implementation:
 - [ ] `complete-example/`-style example-update step (this todo defined
       none; see the parallel llm-kb rename todo,
       `llm-kb/.claude/todo.kb/2026-01-02-000-complete-d-to-kb-rename.md`)
+
+## Scoping pass (2026-07-19)
+
+Checked whether `llm-design-kb` (new skill, didn't exist when this
+todo was filed) already covers the `milestones.kb/` pattern this item
+wants, per the 2026-07-18 session log's speculation. It does not:
+`llm-design-kb` is scoped to `design.kb/` only (goals/requirements/
+design/decisions), no `milestones.kb/` concept anywhere in it. Not
+superseded — this item is still needed as originally scoped. The
+"⚠️ user sign-off" gate on Implementation Steps still stands; not
+executing the restructuring itself this pass.
