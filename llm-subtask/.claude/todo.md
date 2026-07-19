@@ -26,26 +26,20 @@ cost-benefit-sweh:
     confidence: tentative
 ---
 
-- [ ] Batch the three SKILL.md/skeleton UX-flow items below into one pass
+- [x] Batch the three SKILL.md/skeleton UX-flow items below into one pass
   (same class of fix, each a small per-session tax; do together rather
-  than as three separate touches — 2026-07-09 forward-looking review)
-- [ ] todo.kb AND ideas.kb templates too boilerplate-heavy
-  - Agent had to read 43 lines of placeholder then overwrite entirely
-  - Simpler skeleton: title + frontmatter + blank sections, no [placeholder text]
-  - ideas.kb template same problem — affects both llm-subtask and llm-collab
-- [ ] Tier selection guidance too weak — agent defaults to heavyweight
-  - Filed 10 individual ideas.kb entries when todo.md bullets were the right call
-  - User had to correct: "this is very heavyweight, just use bullets"
-  - Skill describes four tiers but doesn't push hard enough toward the lightest sufficient tier
-  - Proposed heuristic: "batch of related lightweight feedback → todo.md bullets, not ideas.kb files"
-  - policy note: "you may give additional detail via sub-bullets in todo.md"
-- [ ] Guidance on which repo owns a todo in multi-repo setups
-  - Financial todo started in bukzor-llc, belonged in evan-family
-  - Skill doc has no advice for cross-repo task ownership
-  - Data point (2026-07-07, bukzor-agent-skills): monorepo with per-skill
-    lists adopted breadcrumb checkboxes — root todo.md points at each
-    subpath todo.md; session entries point at briefs; details never
-    duplicated upward
+  than as three separate touches — 2026-07-09 forward-looking review).
+  Done 2026-07-19, all three below:
+  - [x] todo.kb AND ideas.kb templates too boilerplate-heavy — trimmed
+        both skeleton examples to title + frontmatter + blank sections,
+        no bracketed placeholder prose; also fixed ideas.kb example
+        missing `status: template` (todo.kb example already had it)
+  - [x] Tier selection guidance too weak — added a "default to lightest
+        tier" paragraph right after the four-tier list in SKILL.md, with
+        the proposed heuristic and sub-bullet policy note
+  - [x] Guidance on which repo owns a todo in multi-repo setups — new
+        "Cross-Repo Ownership" section in SKILL.md, citing the
+        breadcrumb-checkbox pattern
 
 ## Later
 

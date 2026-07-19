@@ -35,6 +35,14 @@ Four-tier task decomposition (finest to coarsest):
 
 Use when breaking down complex work, coordinating across sessions, or transitioning between tiers.
 
+**Default to the lightest tier that fits.** A batch of related lightweight
+feedback is `.claude/todo.md` bullets (sub-bullets carry extra detail), not
+one `ideas.kb/` file per item — reserve `ideas.kb/`/`todo.kb/` for work that
+genuinely needs its own file (multi-step, its own frontmatter/tracking, or
+outlives a single session). If you're about to file several `ideas.kb/`
+entries in one pass for what's really one topic, that's a todo.md bullet
+list instead.
+
 ## Overview
 
 **Audience:** Both humans and LLMs during work sessions
@@ -127,6 +135,15 @@ Tier 2 (tactical) and Tier 3 (strategic) work together: <https:todo.md> is a sin
   - [ ] Check REI sale section
 - [ ] Schedule first climbing session
 ```
+
+## Cross-Repo Ownership
+
+A todo belongs to the repo whose work it tracks, not the repo you happened to
+be in when it came up (e.g. a todo raised while working in repo A but about
+repo B's work belongs in repo B). In a monorepo of sub-projects, use
+breadcrumb checkboxes: the root `todo.md` points at each subpath's
+`todo.md`/`todo.kb/` entry; details live at the pointed-to location, never
+duplicated upward.
 
 ## Nesting: Goal-First
 

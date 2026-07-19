@@ -1,41 +1,26 @@
 ---
 managed-by: Skill(llm-subtask)
+status: template
 cost-benefit-sweh:
   timebox:
-    "@value": 0.5  # SWE-hours (one SWEh ≈ 60 focused minutes)
-    rationale: |
-      TODO: How long is this idea worth exploring before deciding to
-      promote (to todo.kb) or abandon?
+    "@value": 0.5  # SWEh worth exploring before promoting or abandoning
   benefit-2w:
-    "@value": 2.0  # or just: 2.0
-    rationale: |
-      TODO: If this idea proves out, how much time/value does it create
-      over the next 2 weeks?
+    "@value": 2.0  # SWEh value created over 2w if this pans out
 ---
 
-# Example Idea Title
+# Idea Title
 
 ## The Idea
 
-[What's the core concept? What problem might it solve?]
-
 ## Potential Benefits
-
-- [Benefit 1]
-- [Benefit 2]
 
 ## Open Questions / Unknowns
 
-- [What needs to be figured out?]
-- [What are the risks or downsides?]
-
 ## Exploration Notes
-
-[Space for thinking through the idea, sketches, links to related concepts]
 
 ## Next Steps (if pursuing)
 
-- [ ] [What would you do first to validate/explore this?]
+- [ ]
 
 ## Lifecycle
 
