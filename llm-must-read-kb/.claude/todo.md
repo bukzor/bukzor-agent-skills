@@ -15,5 +15,6 @@ cost-benefit-sweh:
       returns trigger-creation ergonomics.
 ---
 
-- [ ] Write `references/create-new-trigger.md` (canonical trigger-file creation procedure; blocker for the slash command)
-- [ ] todo.kb/2026-05-15-000-must-read-slash-command.md
+- [x] Write `references/create-new-trigger.md` (canonical trigger-file creation procedure; blocker for the slash command)
+- [ ] todo.kb/2026-05-15-000-must-read-slash-command.md — blocker cleared
+      (procedure now exists); command itself still unbuilt
