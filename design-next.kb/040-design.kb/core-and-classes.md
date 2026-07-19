@@ -48,11 +48,13 @@ the spec, behavior once in the engine, a domain's conventions once in
 its package.
 
 Where v1 pieces land: `llm-kb` splits into the spec and the engine;
-`llm-collab` dissolves (devlog becomes a record class sub-type,
-decisions become settled questions per
-`decisions-are-settled-questions.md`, scripts become engine commands,
-skeleton becomes `kb init`); `llm-design-kb` and `llm-discourse-graph`
-become the design and discourse classes, kept separate but sharing
+`llm-collab` dissolves (devlog does not survive as a record class
+sub-type — the residue test found its content already better-homed
+elsewhere, see `class-record.md` — decisions become settled questions
+per `decisions-are-settled-questions.md`, scripts become engine
+commands, skeleton becomes `kb init`); `llm-design-kb` and
+`llm-discourse-graph` become the design and discourse classes, kept
+separate but sharing
 the spec's linked-node primitive (`class-epistemic.md`);
 `llm-must-read-kb` becomes the trigger class; `llm-subtask` becomes
 the task class, its enforcement wiring moving to the adapter side of

@@ -53,9 +53,14 @@ Repo-level list. Skill-scoped work lives in each skill's own
       is the record). `blocked-on: discussion` cleared; still
       `status: proposal` like the rest of the untouched tower — the
       `depends:` migration itself is unbuilt, deferred to when v2 lands
-- [ ] Run the session-log residue test (design-next): after design/tasks/
+- [x] Run the session-log residue test (design-next): after design/tasks/
       incidents absorb their parts, can any session-narrative class name its
-      read-back? Decides devlog's v2 fate (class-record session-log sub-type)
+      read-back? Decides devlog's v2 fate (class-record session-log sub-type).
+      Resolved 2026-07-18: cut. Skimmed 3 real devlog entries — every
+      section (narrative-of-failure, decisions/alternatives, conventions
+      established, open items) already better-homed in incident/design/
+      principles-procedures/task; no residue, no nameable read-back moment.
+      Updated class-record.md and core-and-classes.md accordingly
 - [ ] llm-design-kb/principles.kb charter: contents outgrew "design.kb
       authoring" scope (evaluate-uses-independently, test-the-residue) —
       widen CLAUDE.md charter or rehome (user rated rehoming tier-4)
