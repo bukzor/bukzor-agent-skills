@@ -46,9 +46,13 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [x] Rename "summary" → "synthesis" everywhere: llm-kb SKILL.md summary-file
       sections, self-audit.kb/summary-file-value.md (file + wording), any
       remaining "summary file" refs in skills/tower (kb-spec.md already done)
-- [ ] Discuss design-next.kb/040-design.kb/references-are-structured-data.md
+- [x] Discuss design-next.kb/040-design.kb/references-are-structured-data.md
       (status: proposal) — label grammar, hardened-label registry, depends:
-      migration
+      migration. Resolved 2026-07-18: kebab-slug labels (not free strings);
+      no separate hardened-label registry (the promoted key's schema entry
+      is the record). `blocked-on: discussion` cleared; still
+      `status: proposal` like the rest of the untouched tower — the
+      `depends:` migration itself is unbuilt, deferred to when v2 lands
 - [ ] Run the session-log residue test (design-next): after design/tasks/
       incidents absorb their parts, can any session-narrative class name its
       read-back? Decides devlog's v2 fate (class-record session-log sub-type)
