@@ -74,7 +74,7 @@ entries are not yet written.
       quietly resolved.
 - [x] Land: apply review verdicts, commit, update this brief. Commits:
       78aed25 (phase 1: rename sweep), b2b92ba (phase 2: drafts),
-      95663f2 (status: proposal tagging), 41af622 (phase 3: review
+      323c3ac (status: proposal tagging), 9d80ded (phase 3: review
       fixes F1-F5)
 
 ## Open Questions — targets for the review pass
@@ -105,7 +105,7 @@ Spots where consensus formed fastest and deserves a skeptic
 - [x] Every 040 entry matches its classification; no entry outside
       adapter/trigger-subsystem scope names a runtime mechanism
       (coupling-is-adapter-only.md's checkable tightened to say this
-      precisely — see F3/F4 in commit 41af622)
+      precisely — see F3/F4 in commit 9d80ded)
 - [x] designed-for-deletion has a checkable 030 requirement and
       inbound why: references (classes-detach-cleanly.md)
 - [x] Drafts survive the adversarial pass on the four named spots
