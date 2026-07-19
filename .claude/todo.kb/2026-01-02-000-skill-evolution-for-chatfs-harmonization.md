@@ -40,7 +40,10 @@ prototype.chatfs wants to adopt llm-* skill conventions, but the skills themselv
 **Recommended order:** llm-collab first (makes llm.kb rename patterns clearer)
 
 1. [ ] [llm-collab: Update skeleton](../../llm-collab/.claude/todo.kb/2025-12-11-000-Update-skeleton-to-match-docs-dev--pattern-from-git-partial.md)
-2. [ ] [llm.kb: Complete .d → .kb rename](../../llm-kb/.claude/todo.kb/2026-01-02-000-complete-d-to-kb-rename.md)
+2. [x] [llm.kb: Complete .d → .kb rename](../../llm-kb/.claude/todo.kb/2026-01-02-000-complete-d-to-kb-rename.md) —
+       verified 2026-07-18: no `.d/` dirs remain in complete-example/, ADR
+       2025-12-03-000 is Accepted. One sub-item stayed deliberately
+       deferred (auto-migrate step; no concrete target script).
 
 ## Verification
 
