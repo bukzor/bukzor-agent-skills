@@ -149,3 +149,31 @@ apparent dilemma was several questions wearing one costume.
   (the brief, now closed);
   `llm-design-kb/principles.kb/evaluate-uses-independently.md` (the
   maneuver, strengthened with this session's instances)
+
+## Addendum (2026-07-19, later the same day)
+
+Two operator corrections to the option pair, triangulating a rule
+this ADR recorded wrongly:
+
+- The Journey's "pointer lines earned a rationale" bullet kept a
+  pre-symmetry holdover: "`ideas.md` carries no pointer lines"
+  should have retired when the option pool became a full synthesis
+  pair. References into `ideas.kb/` are welcome in the roll-up.
+- The correction is not mirror-symmetry either: `ideas.md` carries
+  no `- [ ]` list at all — with no total order on options, there is
+  nothing for a checkbox or a per-entry line mandate to mean. A
+  per-open-entry pointer rule would have made the synthesis an
+  index, which the spec forbids (`ls` is the index); `todo.md`'s
+  completeness comes from the invisible-work rule — an
+  obligation-contract property, not a pair property.
+
+Net: symmetry is at the pair level (same relation, same elaboration
+steps); the syntheses specialize differently — ordered, complete
+checklist vs unordered, non-exhaustive roll-up. A mechanism
+improvement falls out: `- [ ]` means obligation wherever it
+appears, so line-grain contract dispatch needs no filename check,
+and a checkbox in `ideas.md` is mechanically detectable
+miscategorization. Corrected: `class-task.md`,
+`task-synthesis-drift-check.md`; the queued elaboration-step-2
+question dissolves (generic wording, retention semantics per
+contract).

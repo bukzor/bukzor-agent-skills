@@ -78,10 +78,15 @@ Repo-level list. Skill-scoped work lives in each skill's own
         where llm-vitals / llm-chat-librarian / claude-realignment sit
         (fourth job: introspection/health?); is one-operator a permanent
         assumption?
-    - [ ] while there: decide whether class-task.md's elaboration step 2
+    - [x] while there: decide whether class-task.md's elaboration step 2
           notes the option-pair asymmetry (an option's line retires on
-          promotion — no pointer) or stays generic; asymmetry is already
-          specified in Horizon-and-priority + task-synthesis-drift-check
+          promotion — no pointer) or stays generic. Resolved 2026-07-19
+          (operator corrections): pair-level symmetry, synthesis-level
+          specialization — ideas.md is an unordered, non-exhaustive
+          roll-up (no `- [ ]` list, no per-entry mandate; references
+          welcome); step 2 stays generic ("pointer, in place");
+          class-task.md, task-synthesis-drift-check.md, and the T3 ADR
+          (addendum) updated
   - [ ] Ratify (or reject) the tower's `status: proposal` entries and
         `[!QUESTION]` blocks — enumerate (now spans two towers post-T4):
         grep -rn 'status: proposal\|!QUESTION' design-next.kb llm-triggers/design.kb

@@ -10,8 +10,11 @@ A task-class doctor check that a working set and its collection
 agree: every pointer line resolves to an entry, every open entry has
 a working-set line (an absent one is invisible work — the v1 failure
 mode), and line status does not contradict entry state. The option
-pair inverts the middle rule: `ideas.md` must carry *no* pointer
-lines (`ls ideas.kb/` is the option index).
+pair keeps only the first rule (any reference into `ideas.kb/` must
+resolve) plus a form rule: no checkboxes in `ideas.md` — a `- [ ]`
+there is a miscategorized obligation. No completeness rule exists:
+a synthesis is never its collection's index, and forgetting options
+is valid.
 
 Deferred: the pointer convention is pure data today, and v1 ran for
 months on hand-maintained consistency. Evidence the check will

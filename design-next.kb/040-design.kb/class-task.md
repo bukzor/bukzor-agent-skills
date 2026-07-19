@@ -13,11 +13,13 @@ elaboration need, never a store choice. The gradual-elaboration plan
 grows each task only as the work demands — starting from no durable
 write at all (a task may live and die in conversation):
 
-1. **Line** — `- [ ]` in a working set. Cheapest durable capture:
-   one line takes note of a tangent without taking the tangent.
+1. **Line** — a line in its contract's synthesis (`- [ ]` in the
+   working set; a plain bullet in the option pool). Cheapest durable
+   capture: one line takes note of a tangent without taking the
+   tangent.
 2. **File** — a collection entry, when the task outgrows its line
    (multi-step, own frontmatter, outlives a session). The line
-   becomes the entry's pointer in the working set.
+   becomes the entry's pointer, in place.
 3. **Task kb** — a sibling `$slug.kb/` elaborating the entry, whose
    synthesis file is the task itself.
 
@@ -40,12 +42,14 @@ minimized to what the work requires.
   schedule.
 
 Each contract is a full synthesis pair — the spec's one-to-one
-`$name.md` : `$name.kb/` relation — so contract-awareness in
-tooling is filename dispatch, and no section break exists: v1's
-`## Later` retires into `ideas.md`, its one real job having been to
-hold the option pool. Crossing the contract boundary is orthogonal
-to elaboration weight — a line moves between synthesis files; a
-file moves between collections.
+`$name.md` : `$name.kb/` relation — and no section break exists:
+v1's `## Later` retires into `ideas.md`, its one real job having
+been to hold the option pool. Contract-awareness in tooling is the
+line form at line grain (`- [ ]` means obligation wherever it
+appears — see Schema-level rules) and filename dispatch at
+collection grain. Crossing the contract boundary is orthogonal to
+elaboration weight — a line moves between synthesis files, gaining
+or losing its checkbox; a file moves between collections.
 
 ## Horizon and priority
 
@@ -58,13 +62,18 @@ deferred task names its wake condition in frontmatter, per
 `../../llm-triggers/design.kb/040-design.kb/task-deferral.md`.
 
 The option pool has no standing order — options are consulted, not
-scheduled. Pointer lines carry exactly this asymmetry: a pointer
-line holds its entry's position in the total order, so `todo.md`
-carries one per open entry while `ideas.md` carries none —
-`ls ideas.kb/` is the whole option index, and `ideas.md` holds only
-line-grain options. Neither synthesis decays into "merely a
-listing." The options' priority signal is ratings-driven batch
-reevaluation (commit / retire / keep), the read-side that
+scheduled. Contract symmetry is at the pair level (same relation,
+same elaboration steps); the syntheses specialize differently.
+`todo.md` is the working set: a `- [ ]` checklist, complete over
+open entries (an absent line is invisible work), its order the
+content as above. `ideas.md` is the pool's roll-up: prose or plain
+bullets — one-line pitches, pointers into `ideas.kb/` where they
+earn their place — with no checkboxes (nothing for one to mean),
+no order semantics, and no completeness mandate: a synthesis is
+never its collection's index (`kb-spec.md`), `ls ideas.kb/` is that
+index, and forgetting is a valid end state. The options' priority
+signal is ratings-driven batch reevaluation (commit / retire /
+keep), the read-side that
 `../070-future-work.kb/task-priority-frontmatter.md` serves; v1's
 wsjf metrics originated in the ideas.kb schema for exactly this.
 That entry also holds the deferred frontmatter successor to hand
@@ -117,15 +126,20 @@ repository root.
 
 V1's proven ones, plus the elaboration plan's own:
 
-- `- [ ]` is the only task-shaped line; enumeration sweeps key off it
-  exactly. The doctor check for bare-`-` task bullets makes the v1
-  "invisible work" failure mechanically detectable.
+- `- [ ]` is the only task-shaped line, and it means obligation
+  wherever it appears; enumeration sweeps key off it exactly. Two
+  doctor checks fall out: a bare-`-` task bullet in a working set is
+  the v1 "invisible work" failure, and a checkbox in an option
+  synthesis is a miscategorized obligation — both mechanically
+  detectable.
 - Existence-is-signal: a file in a task collection counts regardless
   of its bullets.
 - Enumeration is the union of bracketed lines in synthesis files
   and files in task collections; a pointer line is its entry's
-  working-set presence, not a second task. Sweeps are
-  contract-aware by filename dispatch — `todo` pairs nag, `ideas`
-  pairs never do: everything is enumerable, only obligations nag.
+  synthesis-file presence, not a second task. Contract dispatch is
+  the bracket at line grain and the filename at collection grain:
+  everything nag-worthy is exactly enumerable, and only obligations
+  nag. Line-grain options are the one loose spot (plain bullets) —
+  their read-back is the wholesale reevaluation pass, not a sweep.
 - The engine defaults to the lightest sufficient step — v1 evidence
   says agents default heavyweight.
