@@ -164,7 +164,8 @@ Recognize non-canonical instances by the same shape, regardless of
 starting form: a directory of homogeneous items missing the `.kb`
 suffix, a sibling pointer file, or the parent scope's naming convention
 (a date-prefixed sibling in `todo.kb/` implies the promoted collection
-keeps that prefix) is this pattern in the wrong shape. Bring it into
+keeps that prefix -- `references/dated-slug-filename.md`) is this
+pattern in the wrong shape. Bring it into
 shape the same way you'd promote a flat file -- growth-signal checklist
 and mechanical steps: `SKILL.kb/self-audit.kb/promotion-signals.md`,
 `SKILL.kb/procedures.kb/promote-to-collection.md`.
@@ -177,6 +178,8 @@ Applies to `$CATEGORY` and `$ITEM` identifiers (directory and file names).
 - Be descriptive -- agent must know roughly the content from the filename
 - Prepend digits if inherently ordered (e.g., `001-setup.md`, `002-config.md`)
 - Zero-pad to twice the digits you expect to need
+- Dated items (events): `YYYY-MM-DD-NNN-slug.md` -- see
+  `references/dated-slug-filename.md`
 
 ## When to Use
 
@@ -258,6 +261,7 @@ Other references, load as relevant:
 - `references/schema-reuse.md` - Sharing schema fields/files via `$ref`
 - `references/complete-example.md` - Worked example (birthday party planning)
 - `references/splitting-large-docs.md` - Splitting heuristics
+- `references/dated-slug-filename.md` - `$DATE-NNN-slug.md` naming, used by any dated collection
 
 ## Methodology kb (self-applied)
 
