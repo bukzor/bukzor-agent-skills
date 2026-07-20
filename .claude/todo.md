@@ -80,6 +80,13 @@ Repo-level list. Skill-scoped work lives in each skill's own
         two-way door with a first-share tripwire
         (design-next.kb/070-future-work.kb/multi-operator.md).
         Remaining: the v2.2-against-goals assessment itself
+    - [ ] write the two edits ratified in-conversation 2026-07-19:
+          new goal 020-goals.kb/machine-legibility.md (stores legible
+          to programs with no agent in the loop — stable frontmatter/
+          naming/layout as the commitment; why:-link it from
+          030-requirements.kb/filesystem-as-database.md) and sharpen
+          mission job 1 (durable knowledge includes questions and
+          claims still in flight, not only settled state)
     - [x] while there: decide whether class-task.md's elaboration step 2
           notes the option-pair asymmetry (an option's line retires on
           promotion — no pointer) or stays generic. Resolved 2026-07-19
