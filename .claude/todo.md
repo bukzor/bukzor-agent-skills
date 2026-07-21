@@ -71,7 +71,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
           top-level `/<skill>` command (commands/skills merged per
           docs); only plugins bundle multiple commands (namespaced
           `/<plugin>:<name>`)
-  - [ ] Goals-level review: settle the ecosystem-goals framing (mission's
+  - [x] Goals-level review: settle the ecosystem-goals framing (mission's
         three jobs: durable knowledge / attention / convention enforcement),
         then assess v2.2 against it — framing ratified 2026-07-19: three
         jobs stand; llm-vitals / llm-chat-librarian / claude-realignment
@@ -79,7 +79,18 @@ Repo-level list. Skill-scoped work lives in each skill's own
         precedent), not a fourth job; one-operator stipulated as a
         two-way door with a first-share tripwire
         (design-next.kb/070-future-work.kb/multi-operator.md).
-        Remaining: the v2.2-against-goals assessment itself
+        Assessment delivered 2026-07-20: durable-knowledge and
+        enforcement jobs covered by committed design; attention's
+        "gone stale" clause was the one gap — closed at
+        goals/requirements grain this session: use-case inventory
+        seeded (llm-triggers/design.kb/use-cases.kb/, 14 entries),
+        wake-conditions-are-noticed requirement + sweep entry
+        drafted status: proposal, trigger-desc amended (recurrence
+        TBD, evaluation-state TBD, evaluability rule), class-trigger
+        extended with the wake-shaped third kind (re-proposed). "Policy"
+        dissolved into trigger instances (parameters as instance
+        data + judgment body) — no policy concept in the design.
+        Residue rides the proposal-ratification sweep below
     - [ ] write the two edits ratified in-conversation 2026-07-19:
           new goal 020-goals.kb/machine-legibility.md (stores legible
           to programs with no agent in the loop — stable frontmatter/

@@ -38,6 +38,35 @@ with an assigned meaning:
 Remaining cells are documented as unassigned, not schema-forbidden;
 each gains a meaning (or a constraint) when a consumer needs it.
 
+Recurrence — "every two weeks", cron-shaped schedules — is an
+anticipated desc type with no assigned form yet: every recorded
+cadence in the use-case inventory (`../use-cases.kb/`) needs it, and
+prose is its only spelling today.
+
+> [!QUESTION] recurrence notation
+> Candidate spellings: ISO 8601 repeating intervals / durations, or
+> crontab expressions. Deliberately undefined until the first sweep
+> consumer forces the choice.
+
+## Evaluability
+
+Every trigger-desc is either **cheap to evaluate** — a low-context
+agent on a fresh checkout on a fresh machine can decide it, ideally
+via a sub-millisecond script — or **explicitly judgment-only**;
+nothing in between. A desc that references unrecorded state (an
+occurrence count nobody tallies) is a defect: restate it over
+observable state, record the state where the desc can name it, or
+mark it judgment-only with eyes open
+(`../use-cases.kb/occurrence-counted-conditions.md`).
+
+> [!QUESTION] where does evaluation state live?
+> Recurring descs need "when was this last evaluated" to be
+> decidable, and file mtime is ruled out — incidental edits pollute
+> it. Operator strawman (tentative, fully TBD): recurring descs
+> carry a last-evaluated attribute written by the sweep — to be
+> weighed against the frontmatter churn per-evaluation writes would
+> put in every diff. Settles when the first sweep consumer is built.
+
 Prior art, independently converged:
 `../../../llm-vitals/design.kb/070-future-work.kb/wake-conditions.md`
 proposed a `wake:` field with an event / calendar / threshold / reflection taxonomy —

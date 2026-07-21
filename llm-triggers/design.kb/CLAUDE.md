@@ -24,6 +24,8 @@ design-next.kb.
 - `010-mission.md` — what problem, who benefits
 - `040-design.kb/` — the subsystem design (other layers absent until
   needed; the governing goals and requirements are design-next.kb's)
+- `use-cases.kb/` — wake-shaped attention needs the design must
+  satisfice (auxiliary, unnumbered per `Skill(llm-design-kb)`)
 
 ## Open-Item Markers
 
