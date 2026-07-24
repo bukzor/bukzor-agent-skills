@@ -1,0 +1,21 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+$schema: "http://json-schema.org/draft-07/schema#"
+description: >
+  Criteria for conversational notation design. Body text states the
+  criterion; frontmatter carries its ledger identity and standing.
+type: object
+additionalProperties: false
+required:
+  - shorthand
+  - status
+properties:
+  shorthand:
+    description: Stable ledger label — names the locus, not the conclusion
+    type: string
+    pattern: "^[A-Z]{2,5}$"
+  status:
+    description: >-
+      Epistemic standing: stipulated = warranted by fiat;
+      open = asserted, undischarged
+    type: string
+    enum: [stipulated, open]
