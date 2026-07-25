@@ -70,6 +70,12 @@ the collection complete. The validator catches frontmatter schema
 violations and structural issues -- manual auditing here wastes tokens and
 misses real problems.
 
+`bin/llm.kb-validate` doesn't yet check that cross-references (`why:`,
+`depends:`, dot-slash-prefixed relative prose links) resolve to real files --
+run `bin/llm.kb-validate-links <path>` alongside it for that, until the
+check lands in `bin/llm.kb-validate` proper
+(`.claude/todo.kb/2026-06-03-000-validate-path-references.md`).
+
 ## When in doubt
 
 If you're uncertain whether something belongs as a flat `.md` or as a

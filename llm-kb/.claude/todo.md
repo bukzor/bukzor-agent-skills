@@ -63,8 +63,9 @@ cost-benefit-sweh:
 - [ ] todo.kb/2026-07-13-000-cross-kb-cooperation-conventions.md (cross-kb references, symlink conventions, maintenance-traversal scope; llm-design-kb layer-crossing rider) -- consumer: prototype.chatfs graduation, proceeding on interim conventions meanwhile
 - [ ] todo.kb/2026-01-02-000-complete-d-to-kb-rename.md (finish `.d → .kb` rename in `complete-example/`; promote ADR 2025-12-03-000 to Accepted) -- related to prototype.chatfs harmonization
 - [ ] todo.kb/2025-12-04-000 (Claude enumerates contents despite explicit prohibition)
-- [ ] todo.kb/2026-06-03-000 (Validate path references -- frontmatter schema type; prototype at 2026-06-03-000-validate-path-references.prototype/)
+- [ ] todo.kb/2026-06-03-000 (Validate path references -- frontmatter schema type; link-check script promoted to `bin/llm.kb-validate-links`, still not folded into `bin/llm.kb-validate` proper)
   - [ ] todo.kb/2026-07-09-000 (Body-markdown path-link checker -- blocked on the above)
+  - [ ] todo.kb/2026-07-25-000 (Test coverage for `llm.kb-validate-links` -- zero tests for the new `--strict`/`--lax` modes and whitespace heuristic)
 - [ ] Decide `post-mortem.md` naming (capture-incident? learn-from-failure?) -- defer until a second case-study clarifies the modes
 - [ ] Extract `SKILL.kb/self-audit.kb/bloat.md`'s "Frame" stance into `principles.kb/` once that collection is seeded
 - [ ] Rename `SKILL.kb/must-read/` → `SKILL.kb/must-read.kb/` (user-handling) -- align with `Skill(llm-must-read-kb)` convention

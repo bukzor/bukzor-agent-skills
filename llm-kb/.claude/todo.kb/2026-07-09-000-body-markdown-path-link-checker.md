@@ -27,26 +27,42 @@ kb body prose is full of path-like references ("see
 `path`-typed fields are validated (the related-effort file), body
 prose is the remaining rot surface.
 
-## Prototype
+## Existing script
 
-`../../2026-06-03-000-validate-path-references.prototype/validate_links.py`'s
-`body_links()` already does a rough cut: regex `` `(\.\.?/[^`]+\.md)` ``
-over backtick-wrapped relative markdown links, resolved file-relative
-and checked with `.is_file()`. Covers the easy case (delimited,
-explicit relative paths); does not attempt bare-mention or
-non-code-span references.
+`../../bin/llm.kb-validate-links`'s `body_links()` scans every
+backtick-wrapped span and gates each with a shared `_is_path_shaped()`
+heuristic (2026-07-23), now offering two modes:
+
+- `--strict` (default): only `./`/`../`-prefixed spans count -- the
+  original delimited-forms-only behavior.
+- `--lax`: also nominates spans that end with `/`, contain `.kb/`, or
+  end with `.md`, even unprefixed -- more recall, more false positives.
+
+Still does not attempt bare-mention (non-code-span) references or
+`[text](link)` markdown link syntax.
 
 ## Open Questions
 
-- Lint-with-allowlist, or only check delimited forms (markdown links,
-  code spans that look like paths)? Prototype currently does the
-  latter only.
+- ~~Lint-with-allowlist, or only check delimited forms?~~ Resolved
+  2026-07-23 via the `--strict`/`--lax` split above -- both exist now,
+  selectable per invocation rather than a single fixed choice.
 - Forward-reference false positives: a link to a planned-but-not-yet-
   created file (e.g. a deliverable a later step creates) reports as
   broken even though it's intentional. Accept as real signal ("go
-  create it"), or add a way to mark a known-forward-reference?
+  create it"), or add a way to mark a known-forward-reference? Live
+  example: `docs/dev/CLAUDE.md`'s "Planned but not yet seeded"
+  collections (`glossary.kb/`, `principles.kb/`, `failure-modes.kb/`
+  mentions) currently fail `--strict` -- 6 files, confirmed 2026-07-23.
+- New false-positive class found 2026-07-23: ellipsis-truncated
+  illustrative paths in prose, e.g. `` `../jsonschema/...` `` in
+  `.claude/todo.kb/2026-02-09-000-schema-reuse-with-ref.kb/2026-07-07-001-complete-example-refactor-yaml-lsp-verification.md`
+  -- legitimate prose, not a bug, but `--strict` flags it (starts with
+  `../`). Not fixed; same "is this a real reference" ambiguity as the
+  forward-reference question above.
 - What counts as a reference at all -- code spans, `[text](link)`
-  markdown links, bare mentions in prose?
+  markdown links, bare mentions in prose? `--lax`'s shape heuristics
+  are a partial answer for code spans; markdown-link-syntax and bare
+  mentions are still unaddressed.
 
 ## Success Criteria
 

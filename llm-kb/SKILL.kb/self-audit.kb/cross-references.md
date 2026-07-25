@@ -1,9 +1,9 @@
 # Self-audit: cross-references
 
-Every relative reference in a kb file -- prose paths like `../foo.md`,
-frontmatter paths like `mitigated-by: ../bar.md`, `see-also:` links --
-must resolve to an existing file. This audit catches dangling references
-before they're committed.
+Every relative reference in a kb file -- prose paths like a relative
+`foo.md` mention, frontmatter paths like `mitigated-by:`, `see-also:`
+links -- must resolve to an existing file. This audit catches dangling
+references before they're committed.
 
 ## Goal
 
@@ -12,10 +12,20 @@ missing files do not.
 
 ## Procedure
 
-For each file you touched, scan for:
+Run `../../bin/llm.kb-validate-links <path>`
+first -- it mechanically checks known frontmatter link fields (`why`,
+`depends`, `source`, `sources`, `candidate-resolutions`, `conclusion`,
+`premises`, `resolved`) and backtick-wrapped, dot-slash-prefixed relative
+body links. Not wired into `bin/llm.kb-validate` yet -- see
+`../../.claude/todo.kb/2026-06-03-000-validate-path-references.md` for
+status.
 
-- Markdown prose links: `[text](path)` and bare paths in prose.
-- Frontmatter paths: anything that looks like a relative path (e.g.
+The script only catches `../`/`./`-prefixed backtick paths in known fields.
+For each file you touched, additionally scan by hand for what it misses:
+
+- Bare relative paths without a `./`/`../` prefix (e.g. `foo.kb/bar.md`).
+- Markdown link syntax: `[text](path)`.
+- Frontmatter paths in fields other than the ones listed above (e.g.
   `mitigated-by:`, `see-also:`, `eliminated-by:`).
 
 For each found path, verify the target exists.

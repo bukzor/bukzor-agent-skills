@@ -29,20 +29,22 @@ skill was renamed `llm-kb`.
 **Follow-on:** `2026-07-09-000-body-markdown-path-link-checker.md`
 covers prose links; blocked on this file's deliverable landing first.
 
-**Prototype exists (2026-07-09):**
-`../../2026-06-03-000-validate-path-references.prototype/validate_links.py`
-(+ sibling `README.md`) -- built ad hoc during the Abby's Craft
-`design.kb/` breakdown, colocated by date-slug but kept outside
-`todo.kb/` since it's code, not a markdown planning doc. Already does
-file-relative existence checks for both frontmatter link fields
-(`why`, `depends`, `source`, `sources`, `candidate-resolutions`,
+**Script exists, promoted to `bin/` (2026-07-23):** `../../bin/llm.kb-validate-links`
+-- built ad hoc during the Abby's Craft `design.kb/` breakdown
+(2026-07-09), then moved out of a `*.prototype/` dir into `bin/` since
+agents shouldn't be pointed at scratch-labeled paths from load-bearing
+instructions (see `docs/dev/devlog/2026-07-23-000-promote-validate-links-prototype-to-bin.md`).
+Already does file-relative existence checks for both frontmatter link
+fields (`why`, `depends`, `source`, `sources`, `candidate-resolutions`,
 `conclusion`, `premises`, `resolved`) and backtick-wrapped body links
 -- i.e. a rough cut of this file's deliverable *and* the follow-on's,
 but as a standalone script duplicating `extract_frontmatter`, not a
-jsonschema type/format and not wired into `bin/llm.kb-validate`. Its
-README has a 3-step integration plan (docs mention → fold into
-`frontmatter_validate.py` → handle forward-reference false positives).
-This changes the deliverable from "design from scratch" to
+jsonschema type/format and not wired into `bin/llm.kb-validate`. Step 1
+of the original 3-step integration plan (docs mention → fold into
+`frontmatter_validate.py` → handle forward-reference false positives)
+is done (`references/creating-a-new-kb.md`,
+`SKILL.kb/self-audit.kb/cross-references.md` both point at it now).
+This changes the remaining deliverable from "design from scratch" to
 "integrate/generalize this script."
 
 ## Deliverable
