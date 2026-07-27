@@ -57,7 +57,7 @@ than a sigil carries:
 | `asserted` | believed sound — the default when unmarked |
 | `stipulated` | warranted by fiat (agreement or decree), not evidence; conclusions built on it inherit it as a premise |
 | `certified(CHECK)` | discharged; CHECK names the re-runnable verification |
-| `retracted` | withdrawn; supersession counts (last wins) |
+| `retracted` | withdrawn with nothing in its place — prefer revision (below) |
 
 Sigils compress these: `!` covers certified and fiat-warranted, bare
 is asserted, and `?` needs no verbose form — open is open. Fiat
@@ -76,6 +76,12 @@ Policy:
   conclusion whose support vanished.
 - **Last wins.** Restating a label supersedes its prior versions; the
   ledger is the surviving union over the whole chat.
+- **Prefer revision.** Re-define the claim: restating it is how a claim
+  changes. Retract only what goes away with nothing in its place —
+  delete the line and let the medium keep the record (in a file, the
+  `-` of the git diff is the sigil). Where a retraction must stay
+  visible in place, strike the label through — `~~AX~~: claim text`;
+  `grep AX` still finds it.
 
 ## Commands
 
@@ -92,8 +98,7 @@ trigger, not a user request:
   mark `certified(CHECK)`
 - `claim flush` — end-of-context extraction (below)
 
-Always render the ledger in a code fence — `<-` and `(ROUTE)` get mangled
-as markdown/HTML otherwise.
+Render the ledger as a list, one claim per line, in ASCII (`<-`).
 
 ## Flush
 
@@ -101,7 +106,7 @@ At session end, under context pressure, or on `claim flush` — serialize
 claims *with their statuses*; a summary of conclusions is not a substitute
 (it strips exactly the standing this ledger exists to preserve):
 
-1. Render the full surviving ledger, code-fenced.
+1. Render the full surviving ledger.
 2. Open claims still carrying weight → `- [ ] discharge XY: ROUTE` in
    `.claude/todo.md`, naming the route now — brackets are load-bearing
    (`Skill(llm-subtask)`).
