@@ -11,7 +11,7 @@ description: "Conversational claim ledger. Agent MUST load on `claim *` marker c
 When claims churn, start labeling:
 
 * LC: we Label our Claims
-* SG: trailing Sigils mark standing -- bare asserted, ? open, ! warranted
+* SG: trailing Sigils mark standing -- bare asserted, ? open, + agent fiat, ! warranted
 * XY <- LC! SG?: entailment, each premise's standing visible in place
 
 Policy:
@@ -36,11 +36,17 @@ prefix, so `grep XY` finds `XY`, `XY?`, `XY!`, and every reference:
 |---|---|
 | bare | asserted — believed sound, unadjudicated |
 | `?` | open — proposed, contested, or not yet stood behind |
+| `+` | agent fiat — the agent settled an underdetermined point on the user's own subject; full warrant, revocable on sight |
 | `!` | warranted — adjudicated by fiat, or certified by check |
 
 Sigils go wherever the label goes: `XY <- AB! CD?` shows the premises'
 warrant-mix exactly where weight is placed on them. `?` is the honest
 out — finish the line now, upgrade in place when the judgment lands.
+
+`?` and `+` are the two that want the user's eye, and they want
+opposite things: `?` an answer, `+` a veto. One scan finds both —
+`grep -nE '[A-Z_][?+]'` — which is the point of spending a glyph on
+agent fiat rather than folding it into `!`.
 
 ## Statuses
 
@@ -59,9 +65,10 @@ than a sigil carries:
 | `certified(CHECK)` | discharged; CHECK names the re-runnable verification |
 | `retracted` | withdrawn with nothing in its place — prefer revision (below) |
 
-Sigils compress these: `!` covers certified and fiat-warranted, bare
-is asserted, and `?` needs no verbose form — open is open. Fiat
-warrant and check warrant propagate alike: withdraw the stipulation or
+Sigils compress these: `!` covers certified and fiat-warranted, `+`
+narrows to fiat the agent held itself (so it says what `-- authority:
+assistant` would), bare is asserted, and `?` needs no verbose form —
+open is open. Fiat warrant and check warrant propagate alike: withdraw the stipulation or
 invalidate the check, and retraction propagation applies downstream.
 
 Policy:
@@ -91,7 +98,8 @@ trigger, not a user request:
 
 - `claim list` — render the surviving ledger
 - `claim: TEXT` or `claim XY: TEXT` — add a claim
-- `claim accept: XY` — adjudicate warranted, the operator's call; mark `XY!`
+- `claim accept: XY` — adjudicate warranted, the operator's call; mark `XY!`,
+  which is also how a `+` graduates
 - `claim contest: XY` — reopen; mark `XY?`
 - `claim retract: XY` — retract and propagate
 - `claim certify: XY` — name an executable check, run it; on success
