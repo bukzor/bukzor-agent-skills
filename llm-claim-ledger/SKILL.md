@@ -10,16 +10,15 @@ description: "Conversational claim ledger. Agent MUST load on `claim *` marker c
 
 When claims churn, start labeling:
 
-* LC: we Label our Claims
-* SG: trailing Sigils mark standing -- bare asserted, ? open, + agent fiat, ! warranted
-* XY <- LC! SG?: entailment, each premise's standing visible in place
+* LC!: we Label our Claims with short mnemonics, so `grep LC` finds every mention
+* SG?: trailing Sigils mark standing (bare asserted, ? open, + agent fiat, ! warranted)
+* AR <- LC! SG?: an ARrow names premises; each keeps its sigil, so support shows where weight is placed
 
 Policy:
 
-1. Labels: short mnemonics.
-2. Claim set: union over chat, last wins.
-3. Every claim, both parties: sound, open, or retracted. Open claims are debt, priced by what rests on them.
-4. Governance is one line over labels: `claim accept: SG`
+1. Claim set: union over chat, last wins.
+2. Every claim, both parties: sound, open, or retracted. Open claims are debt, priced by what rests on them.
+3. Governance is one line over labels: `claim accept: SG` marks it `SG!`
 
 <!-- /Core -->
 
