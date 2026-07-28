@@ -3,12 +3,12 @@ depends:
     - Skill(llm-claim-ledger)
 ---
 
-# design.kb -- maintenance guide
+# design.ledger.kb -- maintenance guide
 
 The design of this notation, kept as a claim ledger in the notation
 itself. One theory per collection, one claim per file, label and
-standing in frontmatter. `../design.md` is the reader's entry point and
-carries the poset.
+standing in frontmatter. `../design.ledger.md` is the reader's entry
+point and carries the poset.
 
 ## What belongs here
 

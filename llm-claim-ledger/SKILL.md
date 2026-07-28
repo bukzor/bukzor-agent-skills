@@ -93,4 +93,4 @@ something outside it lands.
 Render a ledger as a list, one claim per line, in ASCII (`<-`).
 
 Why the notation is shaped this way, and where to argue with it:
-`design.md`.
+`design.ledger.md`.

@@ -7,7 +7,7 @@ directory.
 
 Single audience, and it is narrow — an agent with a ledger in front of
 it and something to do to it. Write for that reader only. The reasoning
-behind these rules lives in `../design.kb/`, and mixing the two here
+behind these rules lives in `../design.ledger.kb/`, and mixing the two here
 costs the operator tokens they cannot skip.
 
 ## What belongs here
@@ -19,13 +19,13 @@ belongs here rather than in `SKILL.md`.
 Directives, not claims. These files carry no frontmatter — no `label:`,
 no `standing:`. A directive has no standing to contest; the decision it
 implements does, and that decision is a claim in
-`../design.kb/notation.kb/`.
+`../design.ledger.kb/notation.kb/`.
 
 ## What does NOT belong here
 
 - Notation a reader must decode in place — sigils, statuses, arrows,
   strikethrough -> `SKILL.md`. That is vocabulary, not lookup.
-- Why a rule is the way it is -> `../design.kb/`. A sentence of
+- Why a rule is the way it is -> `../design.ledger.kb/`. A sentence of
   rationale is fine where it makes the rule memorable; an argument is
   not, and a rule that needs one is under-stated.
 

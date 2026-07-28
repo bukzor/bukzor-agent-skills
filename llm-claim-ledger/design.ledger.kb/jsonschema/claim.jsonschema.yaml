@@ -4,7 +4,8 @@ title: design-ledger claim frontmatter
 description: >
   One claim per file. The body states the claim and its reasons;
   frontmatter carries the ledger label and the standing. Shared by every
-  theory in design.kb/ — the theories differ in ontology, not in shape.
+  theory in design.ledger.kb/ — the theories differ in ontology, not in
+  shape.
 type: object
 additionalProperties: false
 required:

@@ -4,7 +4,7 @@ last-updated: "2026-07-28"
 
 # The design, as a ledger
 
-`design.kb/` records what this skill commits to, in the notation the
+`design.ledger.kb/` records what this skill commits to, in the notation the
 skill teaches: one claim per file, carrying its label and its standing.
 `SKILL.md` and `SKILL.kb/` are the manual; this is the reasoning behind
 the manual, and the place to argue with it.
@@ -43,8 +43,8 @@ own; that is `good-smells.md`. The rest fit in `ls`.
 ## Standing
 
 ```bash
-grep -rl 'standing: open' design.kb/   # asserted, unadjudicated
-grep -rl 'standing: fiat' design.kb/   # settled by an agent — revocable on sight
+grep -rl 'standing: open' design.ledger.kb/  # asserted, unadjudicated
+grep -rl 'standing: fiat' design.ledger.kb/  # agent-settled, revocable
 ```
 
 Most of `good-smells.kb/` is `open`: it was extracted from a single
