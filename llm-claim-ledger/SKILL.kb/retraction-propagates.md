@@ -1,8 +1,3 @@
----
-label: RP
-standing: warranted
----
-
 # Retraction Propagates
 
 On retracting `AB`, revisit every claim with `AB` as premise: re-derive

@@ -1,8 +1,3 @@
----
-label: OB
-standing: warranted
----
-
 # Obligation Is Implicit
 
 Open claims need no debt declaration: each is obligated exactly to the

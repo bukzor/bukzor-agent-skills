@@ -1,8 +1,3 @@
----
-label: FL
-standing: warranted
----
-
 # Flush
 
 At session end, under context pressure, or on `claim flush` — serialize

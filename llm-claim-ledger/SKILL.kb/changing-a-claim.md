@@ -1,8 +1,3 @@
----
-label: RV
-standing: warranted
----
-
 # Changing a Claim
 
 **Last wins.** Restating a label supersedes its prior versions; the
@@ -13,5 +8,9 @@ Retract only what goes away with nothing in its place — delete the line
 and let the medium keep the record (in a file, the `-` of the git diff
 is the sigil). Where a retraction must stay visible in place, strike the
 label through — `~~AX~~: claim text`; `grep AX` still finds it.
+
+A `+` is revoked the same way: any later stipulation on the same
+subject supersedes it, and the user owes no justification for making
+one (`name-the-judge.md`).
 
 Either way the dependents get swept: `retraction-propagates.md`.

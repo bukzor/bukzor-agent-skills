@@ -1,8 +1,3 @@
----
-label: TH
-standing: warranted
----
-
 # Theories
 
 Once a ledger outgrows one readable list, group it — by vocabulary, not

@@ -86,4 +86,11 @@ file each, headed by the theories it stands on and the vocabulary its
 claims may use. A claim's theory is fixed by the words its text needs,
 not by the turn that produced it: `SKILL.kb/theories.md`.
 
+A closed ring — `AB <- CD` and `CD <- AB` — is mutual support, which is
+no support at all. Nothing rejects it at entry; the ring stays `?` until
+something outside it lands.
+
 Render a ledger as a list, one claim per line, in ASCII (`<-`).
+
+Why the notation is shaped this way, and where to argue with it:
+`design.md`.

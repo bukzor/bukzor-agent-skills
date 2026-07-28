@@ -1,8 +1,3 @@
----
-label: EL
-standing: warranted
----
-
 # Elaborate Lazily
 
 Everything past the core block is optional until its occasion arrives:

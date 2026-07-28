@@ -1,10 +1,10 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema
 $schema: "http://json-schema.org/draft-07/schema#"
-title: SKILL.kb/ entry frontmatter
+title: design-ledger claim frontmatter
 description: >
-  Rules for using the ledger, one per file. Body states the rule;
-  frontmatter carries its ledger label and standing — this skill
-  governed by itself.
+  One claim per file. The body states the claim and its reasons;
+  frontmatter carries the ledger label and the standing. Shared by every
+  theory in design.kb/ — the theories differ in ontology, not in shape.
 type: object
 additionalProperties: false
 required:
@@ -13,11 +13,10 @@ required:
 properties:
   label:
     description: >-
-      Stable ledger label — greppable, unique within the skill. Any
-      width: two letters where the set is small and fixed, a full
-      SCREAMING_SNAKE locus where the reader needs telling.
+      Stable ledger label — names the locus of contention, not the
+      current conclusion, so it survives revision
     type: string
-    pattern: "^[A-Z][A-Z0-9_]{1,15}$"
+    pattern: "^[A-Z]{2,5}$"
   standing:
     description: >-
       The sigil, spelled out: asserted (bare) | open (?) |

@@ -1,8 +1,3 @@
----
-label: CMD
-standing: warranted
----
-
 # Commands
 
 Marker commands (see `Skill(llm-subtask)` references/marker-commands.md);
