@@ -49,6 +49,14 @@ Sigils go wherever the label goes: `XY <- AB! CD?` shows the premises'
 warrant-mix exactly where weight is placed on them. `?` is the honest
 out — finish the line now, upgrade in place when the judgment lands.
 
+A sigil records residual choice, never mere agreement. The admission
+test: accepting every premise, is anything left to decide? If nothing
+is, the claim is a derivation and stays bare no matter who has endorsed
+it — its standing is computed from its premises, and a hand-authored
+mark is a stored copy of that computation, free to drift. A `+` on a
+worked consequence asks the user to veto arithmetic; a `!` on one buries
+the judgments that were actually made.
+
 `?` and `+` are the two that want the user's eye, and they want
 opposite things: `?` an answer, `+` a veto. One scan finds both —
 `grep -nE '[A-Z_][?+]'` — which is the point of spending a glyph on
