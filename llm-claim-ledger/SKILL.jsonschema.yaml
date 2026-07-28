@@ -12,9 +12,12 @@ required:
   - standing
 properties:
   label:
-    description: Stable ledger label — greppable, unique within the skill
+    description: >-
+      Stable ledger label — greppable, unique within the skill. Any
+      width: two letters where the set is small and fixed, a full
+      SCREAMING_SNAKE locus where the reader needs telling.
     type: string
-    pattern: "^[A-Z]{2,5}$"
+    pattern: "^[A-Z][A-Z0-9_]{1,15}$"
   standing:
     description: >-
       The sigil, spelled out: asserted (bare) | open (?) |

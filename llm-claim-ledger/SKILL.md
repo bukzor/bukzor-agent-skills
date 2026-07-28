@@ -8,17 +8,19 @@ description: "Conversational claim ledger. Agent MUST load on `claim *` marker c
 
 ## Claim Ledger
 
-When claims churn, start labeling:
+When claims churn, label them. A label names the locus, a trailing sigil
+carries standing (bare asserted, ? open, + agent fiat, ! warranted), and
+`<-` names what the claim rests on:
 
-* LC!: we Label our Claims with short mnemonics, so `grep LC` finds every mention
-* SG?: trailing Sigils mark standing (bare asserted, ? open, + agent fiat, ! warranted)
-* AR <- LC! SG?: an ARrow names premises; each keeps its sigil, so support shows where weight is placed
+* PARSER!: the crash is in the parser, reproduced on a minimal input
+* MULTIBYTE?: it fires only on multibyte input (three samples, no counterexample)
+* DECODER <- PARSER! MULTIBYTE?: so the fix belongs in the decoder, not the parser
 
 Policy:
 
 1. Claim set: union over chat, last wins.
 2. Every claim, both parties: sound, open, or retracted. Open claims are debt, priced by what rests on them.
-3. Governance is one line over labels: `claim accept: SG` marks it `SG!`
+3. Governance is one line over labels: `claim accept: MULTIBYTE` marks it `MULTIBYTE!`
 
 <!-- /Core -->
 
