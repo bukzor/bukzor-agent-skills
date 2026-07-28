@@ -1,5 +1,5 @@
 ---
-label: CE
+label: ENTRY_COST
 standing: open
 ---
 

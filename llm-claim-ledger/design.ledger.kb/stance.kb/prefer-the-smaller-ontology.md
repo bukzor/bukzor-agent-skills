@@ -1,5 +1,5 @@
 ---
-label: PAR
+label: PARSIMONY
 standing: fiat
 ---
 

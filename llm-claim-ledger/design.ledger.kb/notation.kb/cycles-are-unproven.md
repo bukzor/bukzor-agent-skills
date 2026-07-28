@@ -1,5 +1,5 @@
 ---
-label: CY
+label: LEAST_FIX
 standing: fiat
 ---
 

@@ -1,5 +1,5 @@
 ---
-label: INV
+label: INVARIANT
 standing: warranted
 ---
 

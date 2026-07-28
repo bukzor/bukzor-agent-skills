@@ -1,5 +1,5 @@
 ---
-label: ACT
+label: REGRESS_ACT
 standing: fiat
 ---
 

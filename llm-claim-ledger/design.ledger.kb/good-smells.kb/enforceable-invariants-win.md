@@ -1,5 +1,5 @@
 ---
-label: EI
+label: ENFORCEABLE
 standing: open
 ---
 
@@ -13,5 +13,5 @@ upward" stood unviolated on paper through a whole ledger's history while
 substrate vocabulary in every line. The same discipline restated as
 vocabulary — "a claim uses only the words its group admits" — is one
 `grep` away, and found violations in files edited the day it was written.
-DM asks that the notation reward the dumbest consumer; this asks the same
+DUMB_MEDIA asks that the notation reward the dumbest consumer; this asks
 of its rules.

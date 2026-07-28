@@ -1,5 +1,5 @@
 ---
-label: NM
+label: NAME_LOCUS
 standing: open
 ---
 

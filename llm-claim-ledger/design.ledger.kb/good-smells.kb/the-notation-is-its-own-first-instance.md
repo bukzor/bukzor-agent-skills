@@ -1,5 +1,5 @@
 ---
-label: IMG
+label: IMAGE
 standing: fiat
 ---
 

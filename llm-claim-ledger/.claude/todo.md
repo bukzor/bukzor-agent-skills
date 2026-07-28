@@ -12,5 +12,5 @@
       IBIS, argument-mapping, ADR) and run it through; adjudicate the
       criteria that discriminate, retract the ones nothing could fail
 - [ ] Verify the sigil set (`?`/`!`/`+`) against the derivation chat once
-      captured/exported — DM's rejected `'` sigil suggests there may
-      have been a fuller set (e.g. superseded/retracted)
+      captured/exported — DUMB_MEDIA's rejected `'` sigil suggests there
+      may have been a fuller set (e.g. superseded/retracted)

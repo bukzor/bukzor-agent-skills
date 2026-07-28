@@ -1,5 +1,5 @@
 ---
-label: DM
+label: DUMB_MEDIA
 standing: open
 ---
 

@@ -1,5 +1,5 @@
 ---
-label: SV
+label: STANDING
 standing: open
 ---
 

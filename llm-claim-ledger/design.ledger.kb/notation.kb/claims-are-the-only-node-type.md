@@ -1,5 +1,5 @@
 ---
-label: ONE
+label: CLAIMS_ONLY
 standing: fiat
 ---
 

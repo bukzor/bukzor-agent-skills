@@ -1,5 +1,5 @@
 ---
-label: UO
+label: DEFERRAL
 standing: warranted
 ---
 

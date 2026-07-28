@@ -1,5 +1,5 @@
 ---
-label: BF
+label: BARE_FORM
 standing: open
 ---
 

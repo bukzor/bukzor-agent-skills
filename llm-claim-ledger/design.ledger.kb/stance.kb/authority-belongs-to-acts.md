@@ -1,5 +1,5 @@
 ---
-label: AUTH
+label: AUTHOR_ACTS
 standing: fiat
 ---
 

@@ -1,5 +1,5 @@
 ---
-label: DS
+label: DEMO
 standing: open
 ---
 

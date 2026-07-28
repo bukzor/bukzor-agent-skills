@@ -1,5 +1,5 @@
 ---
-label: OUT
+label: OUTLIVES
 standing: warranted
 ---
 

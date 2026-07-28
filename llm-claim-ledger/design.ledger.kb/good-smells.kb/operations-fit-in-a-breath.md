@@ -1,5 +1,5 @@
 ---
-label: SA
+label: OP_SIZE
 standing: open
 ---
 

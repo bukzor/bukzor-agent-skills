@@ -1,5 +1,5 @@
 ---
-label: STP
+label: STIPULATION
 standing: fiat
 ---
 

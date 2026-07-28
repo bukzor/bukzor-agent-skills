@@ -1,5 +1,5 @@
 ---
-label: ARW
+label: ARROWS
 standing: warranted
 ---
 

@@ -1,5 +1,5 @@
 ---
-label: WC
+label: WRITING
 standing: warranted
 ---
 
