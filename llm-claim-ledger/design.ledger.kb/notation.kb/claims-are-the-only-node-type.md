@@ -1,6 +1,6 @@
 ---
 label: CLAIMS_ONLY
-standing: fiat
+standing: warranted
 ---
 
 # Claims Are the Only Node Type
@@ -20,3 +20,7 @@ costs no writer anything.
 The cost of a second type is paid at entry, before the writer knows
 which type they are writing — which is the worst moment to charge, and
 the reason a single type is worth some awkwardness at the edges.
+
+Certified by review 089 in `prototype.personal-reasoning-management`,
+the mechanized rung, whose `CLAIMS_ONLY` is this same commitment; the
+certification transports because the content is shared.

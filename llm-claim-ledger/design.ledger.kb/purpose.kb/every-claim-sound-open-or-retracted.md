@@ -1,5 +1,5 @@
 ---
-label: INVARIANT
+label: TRICHOTOMY
 standing: warranted
 ---
 
