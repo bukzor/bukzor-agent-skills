@@ -1,6 +1,6 @@
 ---
-shorthand: NM
-status: open
+label: NM
+standing: open
 ---
 
 # Names Outlive Contents

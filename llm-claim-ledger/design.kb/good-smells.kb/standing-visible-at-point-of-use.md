@@ -1,6 +1,6 @@
 ---
-shorthand: SV
-status: open
+label: SV
+standing: open
 ---
 
 # Standing Visible at Point of Use

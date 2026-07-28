@@ -23,9 +23,14 @@ Policy:
 
 <!-- /Core -->
 
-Everything below elaborates the core. Elaborate lazily: bare labels first;
-sigils once standing starts to matter; verbose statuses once routes and
-checks matter; flush only at a context boundary.
+The core block alone runs in chat-only environments; typed claim kernels
+and proof-transport systems are harder rungs of the same ladder, and the
+invariant holds at every rung — every claim sound, open, or retracted.
+
+The rest of this file is what it takes to *read* a ledger. Everything
+past reading is one file per rule in `SKILL.kb/`, each named for its own
+trigger: `ls SKILL.kb/` is the index, and you read the ones whose names
+match the work.
 
 ## Sigils
 
@@ -63,70 +68,21 @@ than a sigil carries:
 | `asserted` | believed sound — the default when unmarked |
 | `stipulated` | warranted by fiat (agreement or decree), not evidence; conclusions built on it inherit it as a premise |
 | `certified(CHECK)` | discharged; CHECK names the re-runnable verification |
-| `retracted` | withdrawn with nothing in its place — prefer revision (below) |
+| `retracted` | withdrawn with nothing in its place |
 
 Sigils compress these: `!` covers certified and fiat-warranted, `+`
 narrows to fiat the agent held itself (so it says what `-- authority:
 assistant` would), bare is asserted, and `?` needs no verbose form —
-open is open. Fiat warrant and check warrant propagate alike: withdraw the stipulation or
-invalidate the check, and retraction propagation applies downstream.
+open is open.
 
-Policy:
+## Two shapes you'll meet
 
-- **Obligation is implicit.** Open claims need no debt declaration:
-  each is obligated exactly to the extent conclusions rest on it, and
-  the warrant-mix at point of use (`ZZ <- XY?`) shows where that is.
-  Name routes at discharge or flush; never demand them at entry.
-- **Retraction propagates.** On retracting `AB`, revisit every claim with
-  `AB` as premise: re-derive it, retract it in turn, or restate it without
-  the lost support. Tell the user what changed. Never silently keep a
-  conclusion whose support vanished.
-- **Last wins.** Restating a label supersedes its prior versions; the
-  ledger is the surviving union over the whole chat.
-- **Prefer revision.** Re-define the claim: restating it is how a claim
-  changes. Retract only what goes away with nothing in its place —
-  delete the line and let the medium keep the record (in a file, the
-  `-` of the git diff is the sigil). Where a retraction must stay
-  visible in place, strike the label through — `~~AX~~: claim text`;
-  `grep AX` still finds it.
+A struck-through label — `~~AX~~: claim text` — is a retraction left
+visible in place; `grep AX` still finds it.
 
-## Commands
+A ledger too large for one readable list is split into **theories**, one
+file each, headed by the theories it stands on and the vocabulary its
+claims may use. A claim's theory is fixed by the words its text needs,
+not by the turn that produced it: `SKILL.kb/theories.md`.
 
-Marker commands (see `Skill(llm-subtask)` references/marker-commands.md);
-also act on your own initiative — the core's "when claims churn" is the
-trigger, not a user request:
-
-- `claim list` — render the surviving ledger
-- `claim: TEXT` or `claim XY: TEXT` — add a claim
-- `claim accept: XY` — adjudicate warranted, the operator's call; mark `XY!`,
-  which is also how a `+` graduates
-- `claim contest: XY` — reopen; mark `XY?`
-- `claim retract: XY` — retract and propagate
-- `claim certify: XY` — name an executable check, run it; on success
-  mark `certified(CHECK)`
-- `claim flush` — end-of-context extraction (below)
-
-Render the ledger as a list, one claim per line, in ASCII (`<-`).
-
-## Flush
-
-At session end, under context pressure, or on `claim flush` — serialize
-claims *with their statuses*; a summary of conclusions is not a substitute
-(it strips exactly the standing this ledger exists to preserve):
-
-1. Render the full surviving ledger.
-2. Open claims still carrying weight → `- [ ] discharge XY: ROUTE` in
-   `.claude/todo.md`, naming the route now — brackets are load-bearing
-   (`Skill(llm-subtask)`).
-3. Claims worth keeping across sessions → `claims.kb/` nodes
-   (`Skill(llm-discourse-graph)`); certified ones include enough check
-   output to re-run.
-4. Artifacts addressed to a fresh context (prompts, task files) carry
-   obligations as instructions to verify, never as facts to inherit.
-
-## Background
-
-The semi-formal rung of a ladder: the core block alone runs in chat-only
-environments; typed claim kernels and proof-transport systems are harder
-rungs elsewhere. Same invariant throughout: every claim sound, open,
-or retracted.
+Render a ledger as a list, one claim per line, in ASCII (`<-`).

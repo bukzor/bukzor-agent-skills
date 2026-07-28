@@ -1,6 +1,6 @@
 ---
-shorthand: BF
-status: open
+label: BF
+standing: open
 ---
 
 # Bare Form Stays Legal

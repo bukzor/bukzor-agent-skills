@@ -1,6 +1,6 @@
 ---
-shorthand: UO
-status: stipulated
+label: UO
+standing: warranted
 ---
 
 # No Forced Early Decisions

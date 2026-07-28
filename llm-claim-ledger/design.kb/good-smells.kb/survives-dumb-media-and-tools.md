@@ -1,6 +1,6 @@
 ---
-shorthand: DM
-status: open
+label: DM
+standing: open
 ---
 
 # Survives Dumb Media and Dumb Tools

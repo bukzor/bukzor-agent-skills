@@ -1,6 +1,6 @@
 ---
-shorthand: SA
-status: open
+label: SA
+standing: open
 ---
 
 # Meta-Operations Fit in a Breath

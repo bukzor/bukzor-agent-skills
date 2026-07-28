@@ -1,6 +1,6 @@
 ---
-shorthand: DS
-status: open
+label: DS
+standing: open
 ---
 
 # The Demo Is the Spec

@@ -1,6 +1,6 @@
 ---
-shorthand: CE
-status: open
+label: CE
+standing: open
 ---
 
 # Cheap Entry, Expensive Promotion

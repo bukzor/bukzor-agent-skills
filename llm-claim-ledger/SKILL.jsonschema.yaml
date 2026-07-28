@@ -1,8 +1,10 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema
 $schema: "http://json-schema.org/draft-07/schema#"
+title: SKILL.kb/ entry frontmatter
 description: >
-  Criteria for conversational notation design. Body text states the
-  criterion; frontmatter carries its ledger label and standing.
+  Rules for using the ledger, one per file. Body states the rule;
+  frontmatter carries its ledger label and standing — this skill
+  governed by itself.
 type: object
 additionalProperties: false
 required:
@@ -10,7 +12,7 @@ required:
   - standing
 properties:
   label:
-    description: Stable ledger label — names the locus, not the conclusion
+    description: Stable ledger label — greppable, unique within the skill
     type: string
     pattern: "^[A-Z]{2,5}$"
   standing:

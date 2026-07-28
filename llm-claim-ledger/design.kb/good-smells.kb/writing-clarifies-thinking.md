@@ -1,6 +1,6 @@
 ---
-shorthand: WC
-status: stipulated
+label: WC
+standing: warranted
 ---
 
 # Writing Clarifies Thinking
