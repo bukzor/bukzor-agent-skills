@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Tests for validate_frontmatter.py"""
 
+import datetime
 from pathlib import Path
 
 import pytest
@@ -58,6 +59,24 @@ class DescribeSkillRefResolution:
         errors = fv.validate_against_schema({"why": "not-a-list"}, schema)
 
         assert errors, "expected the ref target's type constraint to produce an error"
+
+    def it_keeps_custom_types_when_the_ref_target_declares_a_dialect(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+        # An in-body `$schema` would otherwise make jsonschema evolve() to
+        # that dialect's stock validator mid-ref, losing `date`/`instant`.
+        monkeypatch.setattr(fv, "SKILLS_HOME", tmp_path)
+        skill_dir = tmp_path / "common-skill"
+        _ = skill_dir.mkdir()
+        _ = (skill_dir / "dated.jsonschema.yaml").write_text("""\
+$schema: "http://json-schema.org/draft-07/schema#"
+type: object
+properties:
+  last-updated: {type: date}
+""")
+        schema: JsonObj = {"$ref": "skill://common-skill/dated.jsonschema.yaml"}
+
+        errors = fv.validate_against_schema({"last-updated": datetime.date(2026, 3, 10)}, schema)
+
+        assert errors == []
 
     def it_resolves_a_file_relative_ref_inside_a_skill_owned_stub(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         monkeypatch.setattr(fv, "SKILLS_HOME", tmp_path)

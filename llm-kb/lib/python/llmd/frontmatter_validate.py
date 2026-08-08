@@ -38,6 +38,13 @@ urllib.parse.uses_netloc.append('skill')
 
 def _resource_from_path(schema_path: Path) -> Resource[Schema]:
     contents = cast(Schema, yaml.safe_load(schema_path.read_text()))
+    if isinstance(contents, dict):
+        # llmd validates all schemas under its one extended dialect (see
+        # _jsonschema_adapter); an in-body `$schema` is editor-facing only.
+        # If left in, jsonschema evolve()s to that dialect's stock validator
+        # when a $ref crosses into this resource, dropping the custom
+        # `date`/`instant` types (UnknownType crash).
+        contents.pop('$schema', None)
     return Resource.from_contents(contents, default_specification=DRAFT202012)
 
 
