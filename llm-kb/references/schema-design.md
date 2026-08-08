@@ -34,6 +34,12 @@ date:
 additionalProperties: false  # Strict validation recommended
 ```
 
+`type: date` (and `type: instant`, tz-aware datetime) are llmd dialect
+extensions, not stock JSON Schema. A schema using them must either declare
+`$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"` or declare no
+`$schema` at all (absent means the llmd dialect). Under a stock dialect
+declaration these types are unknown, and validation reports the schema bug.
+
 ## Reuse Across Files
 
 Sharing a definition (or a whole schema) across multiple `.jsonschema.yaml`

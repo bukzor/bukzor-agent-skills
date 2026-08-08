@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema
-$schema: "http://json-schema.org/draft-07/schema#"
+$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"
 description: >
   Provenance references — papers, reports, datasets, expert testimony, or
   a live discussion participant. Reusable across multiple claims/deductions

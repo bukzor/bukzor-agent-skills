@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from . import frontmatter_validate as fv
+from ._jsonschema_adapter import DIALECT_URI
 from .types import JsonObj
 
 # TODO: Add unit tests for:
@@ -60,9 +61,26 @@ class DescribeSkillRefResolution:
 
         assert errors, "expected the ref target's type constraint to produce an error"
 
-    def it_keeps_custom_types_when_the_ref_target_declares_a_dialect(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
-        # An in-body `$schema` would otherwise make jsonschema evolve() to
-        # that dialect's stock validator mid-ref, losing `date`/`instant`.
+    def it_keeps_extension_types_when_the_ref_target_declares_the_llmd_dialect(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+        monkeypatch.setattr(fv, "SKILLS_HOME", tmp_path)
+        skill_dir = tmp_path / "common-skill"
+        _ = skill_dir.mkdir()
+        _ = (skill_dir / "dated.jsonschema.yaml").write_text(f"""\
+$schema: "{DIALECT_URI}"
+type: object
+properties:
+  last-updated: {{type: date}}
+""")
+        schema: JsonObj = {"$ref": "skill://common-skill/dated.jsonschema.yaml"}
+
+        errors = fv.validate_against_schema({"last-updated": datetime.date(2026, 3, 10)}, schema)
+
+        assert errors == []
+
+    def it_reports_a_schema_bug_when_extension_types_hide_under_a_stock_dialect(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
+        # `type: date` is not draft-07; evolve() honestly hands the ref
+        # target to the stock draft-07 validator, and the resulting
+        # UnknownType must surface as a legible error, not a crash.
         monkeypatch.setattr(fv, "SKILLS_HOME", tmp_path)
         skill_dir = tmp_path / "common-skill"
         _ = skill_dir.mkdir()
@@ -76,7 +94,18 @@ properties:
 
         errors = fv.validate_against_schema({"last-updated": datetime.date(2026, 3, 10)}, schema)
 
-        assert errors == []
+        assert len(errors) == 1
+        assert "'date'" in errors[0]
+        assert DIALECT_URI in errors[0]
+
+    def it_rejects_an_unknown_dialect_legibly(self):
+        schema: JsonObj = {"$schema": "urn:no-such-dialect", "type": "object"}
+
+        errors = fv.validate_against_schema({}, schema)
+
+        assert len(errors) == 1
+        assert "urn:no-such-dialect" in errors[0]
+        assert DIALECT_URI in errors[0]
 
     def it_resolves_a_file_relative_ref_inside_a_skill_owned_stub(self, tmp_path: Path, monkeypatch: pytest.MonkeyPatch):
         monkeypatch.setattr(fv, "SKILLS_HOME", tmp_path)

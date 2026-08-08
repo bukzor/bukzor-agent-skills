@@ -237,7 +237,11 @@ It declares the schema *of the file itself* -- the JSON-Schema meta-schema --
 so editing schema files gets keyword completion and validation. This is
 orthogonal to the `$schema:` keyword inside the document (which declares the
 dialect to validators) and to `$ref` resolution: the modeline can't make an
-editor follow `skill://`.
+editor follow `skill://`. In particular, a schema using the llmd extension
+types (`type: date`, `type: instant`) keeps a stock meta-schema in its
+modeline but declares
+`$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"` in the
+document body (see schema-design.md).
 
 ## Circular `$ref`
 

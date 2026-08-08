@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema
-$schema: "http://json-schema.org/draft-07/schema#"
+$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"
 description: >
   Propositional assertions — the atomic units of the knowledge graph.
   Covers both observations and hypotheses. The body text states the

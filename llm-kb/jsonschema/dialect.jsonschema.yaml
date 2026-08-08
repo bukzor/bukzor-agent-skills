@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$id: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"
+title: "llmd dialect: JSON Schema 2020-12 plus YAML-native scalar types"
+description: >
+  The dialect llmd validates frontmatter under: every 2020-12 keyword,
+  plus two primitive types for scalars yaml.safe_load emits natively --
+  `date` (datetime.date; a calendar day) and `instant` (a tz-aware
+  datetime.datetime). A naive datetime matches neither: pick one.
+
+  A schema using these types must declare this dialect --
+  `$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"` --
+  or declare no $schema at all (absent means this dialect). Under a
+  stock dialect, `date`/`instant` are honestly unknown types and
+  validation reports the schema bug.
+
+  This $id is the dialect's identity; the URI resolves through the same
+  skill:// retriever that serves schema $refs. Structural validation of
+  schemas against this meta-schema is intentionally not implemented, so
+  as a schema it accepts everything.

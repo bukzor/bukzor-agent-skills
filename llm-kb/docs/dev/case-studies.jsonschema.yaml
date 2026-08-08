@@ -1,4 +1,4 @@
-$schema: "http://json-schema.org/draft-07/schema#"
+$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"
 title: Case-study frontmatter
 description: |
   Frontmatter for items in case-studies.kb/. Items are first-person incident

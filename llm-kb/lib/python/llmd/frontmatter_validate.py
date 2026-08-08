@@ -19,9 +19,9 @@ from typing import cast, override
 
 import yaml
 from referencing import Registry, Resource
-from referencing.jsonschema import DRAFT202012, Schema, SchemaRegistry
+from referencing.jsonschema import DRAFT202012, Schema, SchemaRegistry, UnknownDialect, specification_with
 
-from ._jsonschema_adapter import iter_schema_errors
+from ._jsonschema_adapter import DIALECT_URI, iter_schema_errors
 from .types import JsonObj, JsonValue
 
 SKILL_URI_SCHEME = 'skill://'
@@ -38,13 +38,22 @@ urllib.parse.uses_netloc.append('skill')
 
 def _resource_from_path(schema_path: Path) -> Resource[Schema]:
     contents = cast(Schema, yaml.safe_load(schema_path.read_text()))
-    if isinstance(contents, dict):
-        # llmd validates all schemas under its one extended dialect (see
-        # _jsonschema_adapter); an in-body `$schema` is editor-facing only.
-        # If left in, jsonschema evolve()s to that dialect's stock validator
-        # when a $ref crosses into this resource, dropping the custom
-        # `date`/`instant` types (UnknownType crash).
-        contents.pop('$schema', None)
+    dialect = contents.get('$schema') if isinstance(contents, dict) else None
+    if dialect == DIALECT_URI:
+        # The referencing library can't know custom dialect URIs, so the llmd
+        # dialect's 2020-12 referencing semantics are stated explicitly.
+        # (Validator selection is separate: _jsonschema_adapter registers the
+        # dialect so evolve() picks the llmd validator on $ref crossings.)
+        return DRAFT202012.create_resource(contents)
+    if isinstance(dialect, str):
+        # Explicit lookup rather than from_contents(): its detect() silently
+        # falls back to the default on an unknown dialect, and a dialect
+        # nobody implements should be a loud schema bug, not a guess.
+        try:
+            specification = specification_with(dialect)
+        except UnknownDialect as e:
+            raise ValueError(f"{schema_path}: unknown $schema dialect {dialect!r}; expected {DIALECT_URI} or a standard JSON Schema dialect") from e
+        return specification.create_resource(contents)
     return Resource.from_contents(contents, default_specification=DRAFT202012)
 
 

@@ -8,6 +8,7 @@ from referencing.jsonschema import SchemaRegistry
 class Validator(Protocol):
     TYPE_CHECKER: ClassVar[TypeChecker]
     FORMAT_CHECKER: ClassVar[FormatChecker]
+    META_SCHEMA: ClassVar[Mapping[str, object]]
 
     def __init__(
         self,

@@ -1,4 +1,4 @@
-from collections.abc import Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 
 from jsonschema import FormatChecker, TypeChecker
 from jsonschema.protocols import Validator
@@ -10,3 +10,8 @@ def extend(
     type_checker: TypeChecker | None = ...,
     format_checker: FormatChecker | None = ...,
 ) -> type[Validator]: ...
+def validates(version: str) -> Callable[[type[Validator]], type[Validator]]: ...
+def validator_for(
+    schema: Mapping[str, object] | bool,
+    default: type[Validator] | None = ...,
+) -> type[Validator] | None: ...
