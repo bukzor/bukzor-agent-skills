@@ -20,6 +20,7 @@ python_classes = ["Describe*", "When*", "Test*"]
 python_functions = ["it_*", "test_*"]
 
 [tool.pyright]
+stubPath = "typings"
 exclude = [
     "**/node_modules",
     "**/__pycache__",
