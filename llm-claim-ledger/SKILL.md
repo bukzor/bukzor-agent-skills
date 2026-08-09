@@ -103,9 +103,12 @@ revision to it.
 - **Conservativity** -- a later theory never lowers a prior's standing.
   Where it seems to, the prior was wrong; fix it there.
 
-You want a second theory when one word list stops serving every claim --
-never because the list of claims got long. Twenty claims over two
-vocabularies want this; a hundred over one do not.
+You want a second theory when more than one theory leans on the same
+subsection of an existing one -- break that subsection out as their
+shared prior -- or when the split would leave most parts easier to
+read and reason about: shorter ontology, shorter arrows, claims
+arguing in one vocabulary instead of two. Never because the list of
+claims got long.
 
 Auxiliary theories, naming, and words that recur across theories:
 `SKILL.kb/theories.md`.

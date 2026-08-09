@@ -6,17 +6,14 @@ Example of a poset: `stance` (acts, authors) → `ledger` (claims, verdicts,
 hashes) → `host` (engines, kernels) → `world` (Lean4, mathlib, version
 numbers).
 
-## Auxiliary theories — split for the reader
+## Auxiliary theories
 
-When one theory's claims keep leaning on a cluster of vocabulary that is
-not really theirs -- background mathematics, shared machinery, a recurring
-sub-argument -- pull the cluster into its own prior. An **auxiliary
-theory** is legitimate even when nobody contests it in isolation; its
-claims may all stand bare. The test is whether the citing theory reads
-simpler afterward: shorter ontology, shorter arrows, claims that argue in
-one vocabulary instead of two. The same move works at sub-theory grain.
-This starts from the reader's cost rather than from a dispute, but it is
-ordinary prior-declaration either way.
+The split triggers are in `SKILL.md`. What they license: an **auxiliary
+theory** -- background mathematics, shared machinery, a recurring
+sub-argument pulled out as a prior -- is legitimate even when nobody
+contests it in isolation; its claims may all stand bare. The trigger is
+the reader's cost, not a dispute, and the same move works at sub-theory
+grain.
 
 ## Naming
 
