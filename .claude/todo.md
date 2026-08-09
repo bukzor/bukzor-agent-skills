@@ -136,6 +136,20 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
+- [ ] Decide the single-sigil seam (strata.ledger): STANCE (user, 32b1a76)
+      rules that a one-place "the standing" is a category error the schema
+      must not encode, yet claim frontmatter holds exactly one `standing:`
+      sigil. Lawful today because the sigil names its judge (a one-entry
+      verdict map) and CONTINUUM names the un-quotiented escape valve
+      (llm-discourse-graph). Goes live the first time two assessors
+      disagree about one claim -- then: multi-assessor frontmatter, or
+      port that claim to the discourse-graph presentation
+- [ ] Enforce claim-label prefix-freedom by tooling: the rule lives only
+      in claim.jsonschema.yaml description text (attention-grade); the
+      2026-08-09 enforcement was a hand-check of 53 labels. Cross-file
+      rule, so per-file schema can't hold it -- candidate homes:
+      llm-claim-ledger-kb/bin/ (beside the ledger-graph lints) or
+      llm-kb/bin/llm.kb-validate
 - [ ] llm-claim-ledger/.claude/todo.md
 - [ ] llm-kb/.claude/todo.md
 - [ ] llm-collab/.claude/todo.md (v2 dissolves llm-collab — weigh new

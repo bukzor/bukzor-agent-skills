@@ -5,6 +5,7 @@ why:
   - ../view.kb/a-cache-is-lawful-iff-the-triangle-commutes.md
   - ../view.kb/staleness-is-debt-not-error.md
   - ../view.kb/refresh-policy-is-a-choice-of-derivative.md
+  - ../view.kb/always-fresh-is-impossible.md
 ---
 
 # What Does a Derived Document Promise?
@@ -15,7 +16,8 @@ maintaining one worth more than recomputing it?
 
 Half settled: it promises `view(fold(acts))` as of its stamp --
 fresh, maintained, or stale-with-a-stamp -- and the only sin is
-reading stale as fresh. Residue, open on purpose: which regime pays
-for which view turns on empirical constants -- recompute cost, edit
+reading stale as fresh. Always-fresh is now priced out by theorem,
+not preference. Residue, open on purpose: which regime pays for
+which view turns on empirical constants -- recompute cost, edit
 rate, damage done by staleness -- that are facts of practice, not
 theorems.
