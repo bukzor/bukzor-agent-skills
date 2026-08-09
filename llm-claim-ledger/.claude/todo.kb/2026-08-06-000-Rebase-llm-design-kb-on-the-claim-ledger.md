@@ -35,7 +35,7 @@ maintenance affordances (schemas, validation, self-audit passes).
   entries; `~~struck~~` ↔ "why not X" notes.
 - The tower's one genuinely new layer is requirements
   (operator-verifiable properties between goals and design).
-- `arrows-are-motivation` semantics is identical to design-kb's `why:`
+- `writing-or-reading-an-arrow` semantics is identical to design-kb's `why:`
   — hence `why` (not `premises`) as the frontmatter field name.
 
 ## Decisions ratified (2026-08-06, conversational)
@@ -68,7 +68,7 @@ maintenance affordances (schemas, validation, self-audit passes).
   - [ ] re-run every `certified(CHECK)`
   - [ ] reconcile frontmatter standing vs prose sigils (no drift)
 - [ ] Write the footnote-provenance convention into `SKILL.kb/` (new
-      entry beside `name-the-judge.md`) and demo it in
+      entry beside `must-read.kb/before/signing-a-claim.md`) and demo it in
       `design.ledger.kb/`
 - [ ] Promote file-per-claim conventions into SKILL.kb: theory-header
       file + one prose claim per file (prior art:

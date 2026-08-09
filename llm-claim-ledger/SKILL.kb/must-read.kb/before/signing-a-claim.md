@@ -1,4 +1,4 @@
-# Name the Judge
+# Before Signing a Claim
 
 The sigil signs the judge; anything finer names the judge in a status
 -- `-- certified(pytest 8.2: 041 passed)`, `-- authority: RFC 9110`.
@@ -11,4 +11,4 @@ identity is "the linter" is not re-runnable.
 
 Never accept your own output. `claim accept:` is the user's call --
 sign your own judgments `+` and let them stand until the user rules
-(`stipulate-what-you-notice.md`).
+(`../when/you-notice-an-underdetermined-choice.md`).

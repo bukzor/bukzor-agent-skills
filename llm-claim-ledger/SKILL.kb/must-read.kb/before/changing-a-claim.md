@@ -1,4 +1,4 @@
-# Changing a Claim
+# Before Changing a Claim
 
 **Last wins.** Restating a label supersedes its prior versions; the
 ledger is the surviving union over the whole chat.
@@ -18,6 +18,6 @@ version: the medium keeps the history, but the reader was not there.
 
 A `+` is revoked the same way: any later stipulation on the same
 subject supersedes it, and the user owes no justification for making
-one (`name-the-judge.md`).
+one (`signing-a-claim.md`).
 
-Either way the dependents get swept: `retraction-propagates.md`.
+Either way the dependents get swept: `../after/retracting-a-claim.md`.

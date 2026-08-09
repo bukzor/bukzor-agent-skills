@@ -1,4 +1,4 @@
-# Emitting a Partial Ledger
+# Before Emitting a Partial Ledger
 
 Union-last-wins makes every render a patch: restating a claim
 supersedes it, and unmentioned claims stand. So you need not render

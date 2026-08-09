@@ -1,5 +1,6 @@
-# Obligation Is Implicit
+# When Tempted to Demand a Proof Route
 
+**Obligation is implicit.**
 Open claims need no debt declaration: each is obligated exactly to the
 extent conclusions rest on it, and the warrant-mix at point of use
 (`ZZ <- XY?`) shows where that is.

@@ -1,4 +1,4 @@
-# Write for a Fresh Reader
+# Before Writing a Claim
 
 Write each claim for an agent with no memory of the conversation that
 produced it. The line is done when that reader can act on it without

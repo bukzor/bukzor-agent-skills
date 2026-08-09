@@ -1,9 +1,9 @@
-# Flush
+# When the Context or Session Is Ending
 
 At session end, under context pressure, or on `claim flush` — serialize
 claims *with their standing*; a summary of conclusions is not a substitute
 (it strips exactly the standing this ledger exists to preserve). The
-receiving side of this operation is `importing-claims.md`.
+receiving side of this operation is `../before/importing-claims.md`.
 
 1. Render the full surviving ledger.
 2. Open claims still carrying weight → `- [ ] discharge XY: ROUTE` in

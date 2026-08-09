@@ -1,4 +1,4 @@
-# Stipulate What You Notice
+# When You Notice an Underdetermined Choice
 
 Noticing an underdetermined choice is what gives you authority over it.
 Settle it, sign it `+`, and keep going -- do not spend a turn asking. A
@@ -14,7 +14,7 @@ stood behind, not everything that lacks a proof.
 
 Two things this does not license:
 
-- **Not self-acceptance.** `+` is not `!` (`name-the-judge.md`); it is
+- **Not self-acceptance.** `+` is not `!` (`../before/signing-a-claim.md`); it is
   the record of a judgment still waiting for the one judge who can
   confirm it.
 - **Not silence about real forks.** Where the choice turns on something

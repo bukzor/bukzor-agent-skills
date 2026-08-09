@@ -31,9 +31,17 @@ and proof-transport systems are harder rungs of the same ladder, and the
 invariant holds at every rung -- every claim sound, open, or retracted.
 
 The rest of this file is what it takes to *read* a ledger. Everything
-past reading is one file per rule in `SKILL.kb/`, each named for its own
-trigger: `ls SKILL.kb/` is the index, and you read the ones whose names
-match the work.
+past reading is one file per rule in `SKILL.kb/must-read.kb/`.
+
+> **IMPERATIVE:**
+>
+> Your FIRST action when this skill loads MUST be:
+> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+>
+> That listing is an index of triggers: each filename names the occasion to
+> read it. Walk it while planning, before ANY action, and read every entry
+> whose trigger matches the work at hand — `before/` entries must be read
+> *before* the action they name, not alongside it.
 
 ## Sigils
 

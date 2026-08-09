@@ -1,6 +1,6 @@
-# Importing Claims
+# Before Importing Claims
 
-The mirror of `flush.md`: claims arriving from outside the chat -- a
+The mirror of `../when/the-context-or-session-is-ending.md`: claims arriving from outside the chat -- a
 summary, a task file, another agent's report, your own prior session.
 
 A conclusion that arrives without its argument enters as the

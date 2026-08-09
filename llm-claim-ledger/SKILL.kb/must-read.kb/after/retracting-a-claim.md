@@ -1,4 +1,4 @@
-# Retraction Propagates
+# After Retracting a Claim
 
 On retracting `AB`, revisit every claim with `AB` as premise: re-derive
 it, retract it in turn, or restate it without the lost support. Tell the

@@ -12,9 +12,15 @@ costs the operator tokens they cannot skip.
 
 ## What belongs here
 
-An operation, a propagation obligation, or a writing discipline: things
-an agent *does*. If a reader can decode a ledger line without it, it
-belongs here rather than in `SKILL.md`.
+`must-read.kb/` — an operation, a propagation obligation, or a writing
+discipline: things an agent *does*, each filed under the juncture that
+fires it. Format and naming are `Skill(llm-must-read-kb)`. If a reader
+can decode a ledger line without it, it belongs there rather than in
+`SKILL.md`.
+
+Beside the bank, only vocabulary a *reader* needs and `SKILL.md` links
+directly — `theories.md` is the sole instance, and a second one wants
+justifying.
 
 Directives, not claims. These files carry no frontmatter — no `label:`,
 no `standing:`. A directive has no standing to contest; the decision it
@@ -31,10 +37,10 @@ implements does, and that decision is a claim in
 
 ## Filenames name their own trigger
 
-`SKILL.md` does not enumerate this directory; it says `ls SKILL.kb/`.
-That only works if each filename says when to come read it —
-`retraction-propagates.md`, `changing-a-claim.md`. A name that states
-the topic but not the occasion is a name that never fires.
-
-The one exception is a term a *reader* needs, `theories.md`, which
-`SKILL.md` links directly.
+`SKILL.md` does not enumerate this directory; it says
+`ls -RF SKILL.kb/must-read.kb/`. That only works if each filename, read
+together with its juncture directory, says when to come read it —
+`after/retracting-a-claim.md`, `before/changing-a-claim.md`. A name that
+states the topic but not the occasion is a name that never fires, and a
+thesis is not an occasion: put the thesis in the body's lead sentence
+and spend the filename on the trigger.
