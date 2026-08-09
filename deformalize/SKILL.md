@@ -57,6 +57,3 @@ modules, real test suite), name its tests after the claims they
 witness, and wire the source's `verify:` lines to them. Promotion is
 itself an escalation of enforcement grade, and expect that
 escalation to find another round of cracks -- budget for it.
-
-This skill names no worked instances: instances cite the skill,
-never the reverse (see `/formalize`).

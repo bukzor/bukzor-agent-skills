@@ -66,8 +66,3 @@ code cannot inherit the prose's blind spots -- and adjudicate every
 mismatch it reports. Claims a witness exercises get `verify:` lines;
 what stays unwitnessed is the ledger's stated proof debt, not a
 secret.
-
-This skill names no worked instances: instances cite the skill
-(`depends:` frontmatter, provenance notes), never the reverse -- a
-skill that names its exemplars contaminates every blind or
-independent re-run of itself.
