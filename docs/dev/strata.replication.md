@@ -6,25 +6,44 @@ last-updated: "2026-08-09"
 
 A blind re-derivation of `strata.ledger.kb/`, run as a conversation.
 `strata.replication.kb/` holds the turns: one pasteable prompt per
-file, numbered in send order. Open a fresh session at the repo root and
-send them in order, waiting for a real answer each time.
+file, numbered in send order. Open a fresh session at the repo root
+and send them in order, waiting for a real answer each time; each
+file's operator note says when to send it, what a miss looks like,
+and (where the original run had a stubborn failure) carries a repair
+paste to send only on that miss.
 
 The point is an independent second draft, not a rubber stamp. Two
-accounts that agree are evidence; one that disagrees is worth more than
-another pass by the ledger's own author.
+accounts that agree by different routes are evidence; one that
+disagrees is worth more than another pass by the ledger's own author.
 
-## The arc
+## The arc, and the keys it operationalizes
 
-`010` is the original ask, verbatim, plus the reading list and the
-blind. `020`-`070` are the prods the original run needed, promoted to
-opening conditions and given a bar to clear: every structure must name
-its carrier, laws, smallest instance, and falsifier, and `060` freezes
-the account as a claim ledger *before* the blind lifts. `080` reveals
-the existing answer and asks for a ruling on every disagreement; `090`
-asks for defeats against it.
+The original run succeeded because of five things, each of which it
+found mid-course; the turns build them in from the start.
+
+1. **The telos came last but organized everything.** The retention
+   question -- what survives a "good idea" -- arrived mid-run, and the
+   ledger reorganized around it. `010` states it up front as the
+   fitness function: a structure earns its place by what it lets us
+   keep.
+2. **Intuition picked the target.** The generative step was someone
+   pointing at one line of survey and saying *this feels like a
+   structure*. `020` makes the agent nominate its own itches, fan out
+   cheap conjectures past its first idea, then kill its own weak ones.
+3. **Two failure modes ate turns.** Flattening (claims about only the
+   most generic engine) and literature name-dropping (citation as a
+   substitute for exhibition). `010`'s bar and `030`'s shape prevent
+   them; `020` keeps a repair paste for the stubborn one.
+4. **The account got honest when it had to run.** The executable-model
+   comparison surfaced a missing premise and an import-graph hole.
+   `040` demands the witness before the reveal instead of after.
+5. **Commitment makes comparison meaningful.** `050` freezes the
+   account as a chat ledger and `060` adds bets -- which claims will
+   survive, where the held answer will win -- before `070` lifts the
+   blind and demands rulings, and `080` demands defeats.
 
 Numbers leave room between them; the operator improvises as needed and
-files a turn only if the next run would need it too.
+files a turn (or a repair) only if the next run would need it too.
 
 ## The blind
 
@@ -35,7 +54,7 @@ files a turn only if the next run would need it too.
 the agent to confess contamination rather than hide it: a labeled
 contaminated run is still readable, an unlabeled one is not.
 
-An agent that reads `080`'s file list early has broken the run. If you
+An agent that reads `070`'s file list early has broken the run. If you
 hand over this whole directory instead of pasting turn by turn, expect
 that.
 
@@ -45,14 +64,17 @@ Defeats land as edits to the claims they defeat -- the git diff is the
 strikethrough (`Skill(llm-claim-ledger-kb)`). Agreements are worth
 recording only where the two runs reached the same claim by different
 routes; that is evidence about the claim, and belongs in its `why:`.
-The run itself belongs in `devlog/`.
+Graded bets say something about the *procedure* -- systematic misses
+mean a turn needs sharpening, here. The run itself belongs in
+`devlog/`.
 
 ## Provenance
 
 The original: session `6b0cdfea-0afd-4539-8d78-4fffd9fd462c` under
 `~/.claude/projects/-home-bukzor-repo-github-com-bukzor-bukzor-agent-skills/`
 (`python3 -m bukzor.claude.branch_list` walks it). Each turn's
-frontmatter carries the line it reproduces, or `new`. It reached the
-ledger in one long conversation, and every bar in `020`-`070` was a
-mid-course correction there rather than an opening condition -- which
-is the one thing this replication deliberately changes.
+frontmatter lists the original lines it distills; `origin: []` marks a
+turn the original never had. The collection's first commit is the
+faithful reproduction -- nine turns mirroring the original's order,
+corrections included as sent; the current form front-loads what those
+corrections taught.
