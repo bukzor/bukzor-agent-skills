@@ -7,7 +7,9 @@ from pathlib import Path
 SRC = Path(__file__).parent.parent / "src" / "engine_tower"
 
 # the poset, mirrored BY HAND from the Theories table of
-# docs/dev/strata.ledger.md -- update both together; a module may
+# docs/dev/strata.ledger.md, restricted to code-bearing theories --
+# non-code theories (purpose, fleet, question) and their prior edges
+# are dropped; update both together; a module may
 # import only from the downward closure of its declared priors
 PRIORS: dict[str, frozenset[str]] = {
     "fixpoint": frozenset(),

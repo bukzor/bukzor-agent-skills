@@ -2,9 +2,10 @@
 
 Mechanized witnesses for the engine-tower claim ledger
 (`../../strata.ledger.md`). One module per code-bearing theory --
-`tower` lives as the test suite's poset check; `fleet` and `question`
-stay out of the code by design. A module imports only from its
-declared priors,
+`tower` lives as the test suite's poset check; `purpose`, `fleet`,
+and `question` stay out of the code by design (regime requirements
+and proper nouns have no computational content). A module imports
+only from its declared priors,
 and `tests/test_tower.py` enforces it -- the tower's own discipline
 applied to the tower's code.
 

@@ -3,6 +3,7 @@ label: OBLIGATION
 standing: open
 why:
   - ../genre.kb/one-sort-buys-conservativity-for-free.md
+  - ../genre.kb/higher-sorts-are-definitional.md
 ---
 
 # What Remains to Prove
@@ -13,8 +14,9 @@ evidence, and really is confined -- extension evidence concluding only
 on its own entries. The format is now stated executably and
 conservativity holds on tested instances -- tooling grade, per the
 ledger's `verify:` commands. What remains is the theorem at proof
-grade: monotone growth plus confined conclusions implies
-conservativity, for the stated format, over every instance. The
-statement is small --
-a status poset, an operator format, one theorem -- and is the natural
-first target for whichever proof assistant the fleet procures.
+grade, in its general form: any extension by defined sorts with
+confined, monotone rules is conservative -- the definitional-extension
+metatheorem, one proof covering every genre at once. The statement is
+still small -- a status poset, an operator format, a translation
+discipline, one theorem -- and is the natural first target for
+whichever proof assistant the fleet procures.

@@ -1,6 +1,6 @@
 ---
 label: ASYMMETRY
-standing: agent
+standing: bare
 why:
   - standing-is-computed-not-stored.md
   - ../fixpoint.kb/warm-start-is-sound-upward.md

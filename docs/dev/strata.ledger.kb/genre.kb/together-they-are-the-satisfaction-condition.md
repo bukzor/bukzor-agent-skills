@@ -1,6 +1,7 @@
 ---
 label: SATISFACTION
-standing: agent
+standing: bare
+authority: "Goguen & Burstall, institutions -- the satisfaction condition"
 why:
   - confinement-is-the-syntactic-half.md
   - conservativity-is-the-semantic-half.md

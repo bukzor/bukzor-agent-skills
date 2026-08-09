@@ -24,3 +24,7 @@ import-plus-constraints.
 Convergence this dense is the porting-survival measure ACS itself
 prescribes, applied to the tower: the strongest warrant available
 short of the formal proof OBLIGATION asks for.
+
+PRMS is a historical artifact, likely to evaporate; the convergence
+stands as recorded testimony, not as a live reference -- readers
+should not expect the artifact.

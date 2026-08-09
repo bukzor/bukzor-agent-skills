@@ -18,10 +18,13 @@ confinement -- extension evidence concludes only on the genre's own
 entries -- keeps it from rising. Monotonicity alone is not enough:
 the unconfined counterexample in the verify suite breaks conservation
 with a single appended row. Together they give conservativity by
-construction, no proof per genre. Give
-each genre its own node sort instead, and the operator becomes
-genre-indexed: conservativity degrades from a free theorem into a
-per-genre proof obligation.
+construction, no proof per genre.
+
+The tiers (higher-sorts-are-definitional.md): the base keeps one
+primitive sort; defined sorts above it ride free, covered by the
+same one-two punch; only a primitive new sort -- no down-translation,
+rules reaching old entries -- degrades conservativity from a free
+theorem into a per-genre proof obligation.
 
 This is the mathematical content of the single-sorted-base ruling:
 not parsimony for its own sake, but where the proof burden lands.

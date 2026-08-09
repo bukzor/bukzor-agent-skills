@@ -3,9 +3,10 @@
 The epistemic stratum: statuses, evidence, and the operator whose
 fixpoint is what anything's standing *is*.
 
-- `prior:` reference, view, fixpoint
+- `prior:` reference, view, fixpoint, purpose
 - `ontology:` status, claim, evidence, warrant, certificate, checker,
-  verdict, fiat, ruling, retraction, defeat, standing
+  verdict, fiat, ruling, retraction, defeat, standing, assessor,
+  party, stance, quotient
 - `defeated by:` a second node sort in the base, or standing stored
   as ground truth rather than computed
 

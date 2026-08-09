@@ -1,6 +1,6 @@
 ---
 label: WEIGHT
-standing: agent
+standing: bare
 why:
   - reachability-is-a-least-fixpoint.md
 verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_reference.py -k "semiring or provenance"

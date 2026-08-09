@@ -1,6 +1,6 @@
 ---
 label: DEFEAT
-standing: agent
+standing: user
 why:
   - evidence-induces-a-monotone-operator.md
   - ../fixpoint.kb/nonmonotone-operators-approximate-on-intervals.md

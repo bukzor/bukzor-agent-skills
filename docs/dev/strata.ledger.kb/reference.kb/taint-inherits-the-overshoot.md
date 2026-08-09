@@ -1,6 +1,6 @@
 ---
 label: TAINT
-standing: agent
+standing: bare
 why:
   - reachability-is-a-least-fixpoint.md
   - ../fixpoint.kb/downward-revision-overshoots.md

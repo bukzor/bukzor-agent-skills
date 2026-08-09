@@ -23,8 +23,10 @@ The whole tower, quotiented to one sentence and three laws.
 change is judged by what it forces to re-project.**
 
 The invariant (`history`): an act is attributed and appended, never
-edited. Everything derived from acts obeys three laws:
+edited. Everything derived from acts obeys four laws:
 
+- **Regime** (`purpose`): the corpus outgrows any reader and entry
+  stays near free; every law below is subject to that arithmetic.
 - **Economics** (`view`, `standing`, `fixpoint`): a projection is
   fresh, maintained, or stale-with-a-stamp; the only sin is reading
   stale as fresh. `record` and `reference` are the legibility
@@ -47,7 +49,10 @@ Claims are grouped by the vocabulary they need (`Skill(llm-claim-ledger)`,
 `SKILL.kb/theories.md`). Two are auxiliary -- `fixpoint` holds shared
 background mathematics so that `reference` and `standing` can argue in
 one sentence each, and `view` holds the derived-value machinery that
-`standing` and `protocol` both lean on.
+`standing` and `protocol` both lean on. A second root, `purpose`,
+holds the operating regime -- the user's requirements about scale,
+capture, and representational duty -- which `view`, `standing`,
+`genre`, and `protocol` cite.
 
 The spine, with auxiliaries feeding in:
 
@@ -57,18 +62,20 @@ history ──► record ──► reference ──► standing ──► genre 
     └──► view ─────────────┼─────────────┼──┘                 │         ▼
     │        └──► protocol ┼─────────────┼────────────────────┘     question
 fixpoint ──────────────────┴─────────────┘
+purpose ───► view, standing, genre, protocol
 ```
 
 | Theory | Priors | Holds | Defeated by |
 |---|---|---|---|
 | `fixpoint` | -- | background order theory: lfp, warm-start, overshoot, approximation | a misstatement of settled mathematics |
+| `purpose` | -- | the operating regime: unbounded growth, near-zero entry, representation of disagreement | a corpus small enough to re-read |
 | `history` | -- | the store as a word of updates; state as its fold | a substrate that forgets its past |
-| `view` | history | derived values, the commuting triangle, staleness as debt | a reader that can afford to recompute every read |
+| `view` | history, purpose | derived values, the commuting triangle, staleness as debt | a reader that can afford to recompute every read |
 | `record` | history | schemas, typing, migration as transport | a fleet that abandons frontmatter typing |
 | `reference` | record, fixpoint | quivers, reachability, cones, weights | references a machine cannot enumerate |
-| `standing` | reference, view, fixpoint | the status poset, the evidence operator, computed standing | a second node sort in the base |
-| `genre` | standing | confinement, conservativity, the satisfaction condition | a genre that must re-legislate a prior to exist |
-| `protocol` | history, view | trigger banks as monitors; enforcement grades | a runtime that enforces every rule natively |
+| `standing` | reference, view, fixpoint, purpose | the status poset, the evidence operator, computed standing | a second node sort in the base |
+| `genre` | standing, purpose | confinement, conservativity, the satisfaction condition | a genre that must re-legislate a prior to exist |
+| `protocol` | history, view, purpose | trigger banks as monitors; enforcement grades | a runtime that enforces every rule natively |
 | `tower` | genre, protocol | the strata as their own theory poset; self-application | a lower engine needing a higher vocabulary |
 | `fleet` | tower | proper nouns: where v1 skills and prototypes sit | any named system changing |
 | `question` | fleet | the driving design problems: as wrestled, as posed, what settles each | the user disavowing a question, or one the tower cannot decompose |
@@ -76,10 +83,13 @@ fixpoint ──────────────────┴────�
 `fleet` is the throwaway theory; `question` is the historical one --
 the design problems the ledger was bought to settle, with their open
 residues, `question.md` the stamped synthesis. Theorems stand `bare`
-(`fixpoint`, plus `REACH`); `OBLIGATION` stands `open` -- the one
-claim awaiting an answer. Everything else is signed `+`: the agent's
-judgment, veto invited, silence is consent -- a resting state, not a
-queue awaiting signatures (`Skill(llm-claim-ledger)`, PROVISIONAL).
+(`fixpoint`, plus `REACH`, `FRESH_COST`, `TAINT`, `WEIGHT`,
+`ASYMMETRY`, `SATISFACTION`); `OBLIGATION` stands `open` -- the one
+claim awaiting an answer. The regime (`purpose`) and the claims the
+user ruled in the 2026-08-09 act review stand `user`. Everything
+else is signed `+`: the agent's judgment, veto invited, silence is
+consent -- a resting state, not a queue awaiting signatures
+(`Skill(llm-claim-ledger)`, PROVISIONAL).
 
 ## Verify
 
@@ -104,4 +114,6 @@ grep -rA4 '^why:' docs/dev/strata.ledger.kb/*.kb/*.md       # the warrant graph
 Distilled 2026-08-09 from a formalization conversation over this repo,
 `ideation.epistemics`, `prototype.personal-reasoning-management`, and
 `prototype.llm-stet`; correspondences with those systems live in
-`fleet.kb/`, not restated elsewhere.
+`fleet.kb/`, not restated elsewhere. Restructured the same day after
+the user's act review: `purpose` root added, the assessor law filed,
+theorem-shaped claims moved to `bare`, explicit rulings to `user`.

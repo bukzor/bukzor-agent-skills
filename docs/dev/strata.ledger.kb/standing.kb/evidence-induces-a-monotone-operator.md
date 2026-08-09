@@ -17,3 +17,11 @@ rule grants a status once every premise stands at or above a
 threshold; descent enters only as a recorded fiat or as removal of
 evidence, never as a rule's conclusion. So long as defeat is absent,
 the operator is monotone.
+
+Support and defeat are separate calculi. Counter-evidence is not
+negative support: an observation against a claim is evidence *for*
+an attack on it, and attacks are computed in the contest calculus
+(defeat-is-evidence-for-an-approximator.md), never as descent inside
+this one. Mixing them -- rule-based demotion -- would make the
+answer depend on processing order; the separation keeps support
+canonical and contests canonical, each in its own fixpoint.

@@ -1,6 +1,6 @@
 ---
 label: CONFINE
-standing: agent
+standing: user
 verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_genre.py
 ---
 

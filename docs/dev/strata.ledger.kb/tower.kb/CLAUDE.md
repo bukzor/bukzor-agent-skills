@@ -3,7 +3,8 @@
 The capstone: what the strata form when you look at them together.
 
 - `prior:` genre, protocol
-- `ontology:` stratum, tower, seam, stratification, self-application
+- `ontology:` stratum, tower, seam, stratification, self-application,
+  trace
 - `defeated by:` a lower engine needing a higher vocabulary -- one
   genuine upward reach and the stratification claim is dead
 
