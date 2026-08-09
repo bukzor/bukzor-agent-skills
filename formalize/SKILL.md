@@ -61,8 +61,14 @@ citation is not an exhibit.
 
 ## Verification
 
-Hand the result to `/deformalize` -- ideally a fresh session, so the
-code cannot inherit the prose's blind spots -- and adjudicate every
-mismatch it reports. Claims a witness exercises get `verify:` lines;
-what stays unwitnessed is the ledger's stated proof debt, not a
-secret.
+A formalization is checked by deformalizing it, and the checker must
+not share the author's context: an author re-reading its own account
+cannot distinguish what the text says from what it meant, so the gaps
+the conversation fills in silently go unfound. Fresh context is the
+mechanism, not a nicety.
+
+This needs no second command from the operator: spawn a fresh agent
+(not a context-inheriting fork) given only the artifact and
+`/deformalize`, then adjudicate every mismatch it reports. Claims a
+witness exercises get `verify:` lines; what stays unwitnessed is the
+ledger's stated proof debt, not a secret.
