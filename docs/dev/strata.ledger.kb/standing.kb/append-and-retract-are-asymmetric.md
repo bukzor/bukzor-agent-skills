@@ -5,6 +5,7 @@ why:
   - standing-is-computed-not-stored.md
   - ../fixpoint.kb/warm-start-is-sound-upward.md
   - ../fixpoint.kb/downward-revision-overshoots.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "warm_start or retraction"
 ---
 
 # Append and Retract Are Asymmetric

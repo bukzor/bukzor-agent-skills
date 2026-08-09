@@ -4,6 +4,7 @@ standing: agent
 why:
   - confinement-is-the-syntactic-half.md
   - conservativity-is-the-semantic-half.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_genre.py
 ---
 
 # Together They Are the Satisfaction Condition

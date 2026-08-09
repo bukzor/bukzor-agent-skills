@@ -3,6 +3,7 @@ label: MIGRATE
 standing: agent
 why:
   - validation-is-a-typing-map.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_record.py::test_rename_migration_lands_in_the_target_fiber
 ---
 
 # Migration Is Transport Along a Schema Morphism

@@ -1,6 +1,7 @@
 ---
 label: STATUS
 standing: agent
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_the_fibered_top_has_no_join
 ---
 
 # Status Is a Poset with a Fibered Top

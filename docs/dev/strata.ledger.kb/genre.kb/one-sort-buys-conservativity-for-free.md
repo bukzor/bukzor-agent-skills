@@ -4,6 +4,7 @@ standing: agent
 why:
   - conservativity-is-the-semantic-half.md
   - ../standing.kb/evidence-induces-a-monotone-operator.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_genre.py::test_a_confined_extension_conserves_core_standing
 ---
 
 # One Sort Buys Conservativity for Free

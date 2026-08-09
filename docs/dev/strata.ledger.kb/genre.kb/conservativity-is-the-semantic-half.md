@@ -3,6 +3,7 @@ label: CONSERVE
 standing: agent
 why:
   - ../standing.kb/standing-is-computed-not-stored.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_genre.py::test_a_confined_extension_conserves_core_standing
 ---
 
 # Conservativity Is the Semantic Half

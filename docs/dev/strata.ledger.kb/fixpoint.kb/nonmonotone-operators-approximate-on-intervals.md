@@ -2,6 +2,7 @@
 label: APPROX
 standing: bare
 authority: "approximation fixpoint theory (Denecker, Marek, Truszczynski); Strass 2013 for the argumentation instance"
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k grounded
 ---
 
 # Nonmonotone Operators Approximate on Intervals

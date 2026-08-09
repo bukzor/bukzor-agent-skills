@@ -9,8 +9,9 @@ why:
 
 The free-conservativity argument assumes the evidence operator's rule
 format really is fixed below the genres and really is monotone in
-added evidence. That is exactly the unproved spot: state the
-ascent/descent rule format precisely and prove conservativity for it.
-The statement is small -- a status poset, an operator format, one
-theorem -- and is the natural first target for whichever proof
-assistant the fleet procures.
+added evidence. The format is now stated executably and conservativity
+holds on tested instances -- tooling grade, per the ledger's `verify:`
+commands. What remains is the theorem at proof grade: conservativity
+for the stated format, over every instance. The statement is small --
+a status poset, an operator format, one theorem -- and is the natural
+first target for whichever proof assistant the fleet procures.

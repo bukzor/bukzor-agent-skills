@@ -75,6 +75,16 @@ fixpoint ──────────────────┴────�
 plus `REACH`); `OBLIGATION` stands `open`; everything else is signed
 `+` pending rulings.
 
+## Verify
+
+`verify:` commands run from the repo root; they exercise
+`design-incubators/engine_tower/`, the tower as a uv project -- one
+module per theory, one test per witnessed claim, plus a test that
+the module import graph respects the poset above. These are instance
+witnesses at tooling grade: they check the phenomenon on a smallest
+instance, not the theorem, so they move no standing to `bare` --
+OBLIGATION names the proof-grade step.
+
 ## Scans
 
 ```bash

@@ -4,6 +4,7 @@ standing: agent
 why:
   - ../genre.kb/confinement-is-the-syntactic-half.md
   - ../genre.kb/conservativity-is-the-semantic-half.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_tower.py::test_imports_respect_the_poset
 ---
 
 # The Engine Tower Is a Theory Poset

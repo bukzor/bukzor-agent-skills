@@ -5,6 +5,7 @@ why:
   - evidence-induces-a-monotone-operator.md
   - ../fixpoint.kb/monotone-operators-have-least-fixpoints.md
   - ../view.kb/a-cache-is-lawful-iff-the-triangle-commutes.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_retraction_gap_keeps_the_ring
 ---
 
 # Standing Is Computed, Not Stored

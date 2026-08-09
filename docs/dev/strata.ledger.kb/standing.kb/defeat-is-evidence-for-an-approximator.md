@@ -4,6 +4,7 @@ standing: agent
 why:
   - evidence-induces-a-monotone-operator.md
   - ../fixpoint.kb/nonmonotone-operators-approximate-on-intervals.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "grounded or ruling"
 ---
 
 # Defeat Is Evidence for an Approximator

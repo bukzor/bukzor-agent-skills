@@ -3,6 +3,7 @@ label: WARM_START
 standing: bare
 why:
   - monotone-operators-have-least-fixpoints.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_warm_start_from_old_fixpoint_matches_cold
 ---
 
 # Warm-Start Is Sound Upward

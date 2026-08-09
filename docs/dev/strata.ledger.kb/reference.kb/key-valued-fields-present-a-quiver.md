@@ -3,6 +3,7 @@ label: QUIVER
 standing: agent
 why:
   - ../record.kb/validation-is-a-typing-map.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_reference.py::test_ref_fields_present_a_quiver
 ---
 
 # Key-Valued Fields Present a Quiver

@@ -4,6 +4,7 @@ standing: bare
 why:
   - key-valued-fields-present-a-quiver.md
   - ../fixpoint.kb/monotone-operators-have-least-fixpoints.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_reference.py::test_reachability_is_a_least_fixpoint
 ---
 
 # Reachability Is a Least Fixpoint

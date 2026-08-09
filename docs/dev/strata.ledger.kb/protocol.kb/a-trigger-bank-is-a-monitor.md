@@ -3,6 +3,7 @@ label: MONITOR
 standing: agent
 why:
   - ../history.kb/state-is-a-fold.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_protocol.py
 ---
 
 # A Trigger Bank Is a Monitor

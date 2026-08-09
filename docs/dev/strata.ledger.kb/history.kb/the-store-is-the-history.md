@@ -1,6 +1,7 @@
 ---
 label: WORD
 standing: agent
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_history.py::test_any_prefix_is_queryable
 ---
 
 # The Store Is the History

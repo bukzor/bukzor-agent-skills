@@ -3,6 +3,7 @@ label: FOLD
 standing: agent
 why:
   - the-store-is-the-history.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_history.py::test_state_is_a_monoid_action
 ---
 
 # State Is a Fold
