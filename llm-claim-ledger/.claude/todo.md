@@ -1,5 +1,12 @@
 # TODO
 
+- [ ] Wire design.ledger.kb's `why:` edges: 27 claims carry only 3
+      `why:` edges -- ccomps reports 25 components (found 2026-08-09 by
+      the new llm-claim-ledger-kb/bin/llm.ledger-graph; its SKILL.md
+      names arrows-in-prose-not-frontmatter as the failure the file
+      form exists to prevent). The support structure exists in the
+      bodies; move it into frontmatter so the graph tools and the
+      "ledger gains lint" leg below have something to check
 - [ ] .claude/todo.kb/2026-08-06-000-Rebase-llm-design-kb-on-the-claim-ledger.md
       — the plan: llm-design-kb becomes a discipline over the ledger;
       ledger gains lint, footnote provenance, file-per-claim + self-audit
