@@ -49,7 +49,8 @@ found mid-course; the turns build them in from the start.
    `090` stages the act-grain walkthrough -- each cluster of claims
    presented as the decision it amounts to, with alternatives and the
    fallout of rejecting -- whose original reply's amendments seeded
-   the purpose root and the assessor law.
+   the purpose root and the assessor law. Since distilled into
+   `/vetoes`.
 
 Numbers leave room between them; the operator improvises as needed and
 files a turn (or a repair) only if the next run would need it too.

@@ -16,7 +16,8 @@ walkthrough was superseded by the acts version, which is what worked.
 Budget real time for your reply -- the original's took an hour, and
 its amendments, not its confirmations, became the purpose root and
 the assessor law. A miss looks like a file-by-file slog, or acts with
-no fallout stated.
+no fallout stated. This turn has since been distilled into
+`Skill(vetoes)`.
 
 ````
 The ledger now holds a stack of claims signed `+` -- agent judgment, my veto invited, silence is consent. Silence won't do this once: we exercise the vetoes now.
