@@ -72,6 +72,23 @@ and keeps the note so anyone can re-run CHECK. `retracted` withdraws
 with nothing in its place. The signatures need no verbose form: the
 sigil is the record.
 
+## Commands
+
+Marker commands (`Skill(llm-subtask)`); also act on your own initiative —
+the core's "when claims churn" is the trigger, not a user request.
+
+- `claim list` — render the surviving ledger
+- `claim: TEXT` or `claim XY: TEXT` — add a claim
+- `claim accept: XY` — the user's ruling; re-sign `XY!`, with a clause of
+  grounds — also how a `+` graduates
+- `claim contest: XY` — reopen; mark `XY?`
+- `claim retract: XY` — retract and propagate
+- `claim certify: XY` — name an executable check, run it; on success the
+  claim goes bare, suffixed `-- certified(CHECK)`
+- `claim flush` — end-of-context extraction
+
+The last three each have a rule in the bank; `ls` it rather than guessing.
+
 ## Two shapes you'll meet
 
 A struck-through label -- `~~AX~~: claim text` -- is a retraction left
