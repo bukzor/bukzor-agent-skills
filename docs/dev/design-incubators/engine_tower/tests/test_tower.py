@@ -35,12 +35,15 @@ def internal_imports(module: str) -> frozenset[str]:
     tree = ast.parse((SRC / f"{module}.py").read_text())
     found: set[str] = set()
     for node in ast.walk(tree):
-        if isinstance(node, ast.ImportFrom) and node.module:
-            parts = node.module.split(".")
-            if parts[0] == "engine_tower":
-                found.add(parts[1])
-            elif node.level:  # relative import
-                found.add(parts[0])
+        if isinstance(node, ast.ImportFrom):
+            if node.module:
+                parts = node.module.split(".")
+                if parts[0] == "engine_tower":
+                    found.add(parts[1])
+                elif node.level:  # from .sibling import name
+                    found.add(parts[0])
+            elif node.level:  # from . import sibling
+                found.update(alias.name for alias in node.names)
         elif isinstance(node, ast.Import):
             for alias in node.names:
                 parts = alias.name.split(".")
