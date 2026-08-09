@@ -41,14 +41,34 @@ the ruling), when intervening work dissolved it (the thing it
 decided no longer exists, or a settled claim fixes its answer), or
 when evidence you can fetch yourself settles it without user
 judgment. Close each kill with its citation -- a silent drop is a
-ruling you minted -- and open the walkthrough with the tally: swept
-N, the record settled M, K remain. Expect most opens to die here;
-that is the pass working. When in doubt whether the record shows a
-ruling, it doesn't: present the open.
+ruling you minted. When in doubt whether the record shows a ruling,
+it doesn't: the open survives to the next pass.
+
+## Ground the rest yourself
+
+An open is rarely act-shaped through and through. Factor each
+survivor by the kind of content it carries. *Fact*: provable or
+checkable without anyone's judgment -- ground it yourself, and mint
+whatever supporting material the grounding needs (the missing
+citation, the sub-claim carrying the warrant, the runnable check): a
+fact needs a warrant, not a fiat. *Adequacy*: "this account matches
+our practice" -- empirical; attach the check that would show it
+false and let it rest there, because a signature adds nothing a
+witness didn't. *Act*: "we shall do it this way" -- a stipulation
+nothing external can ground. Only that residue needs the user, and
+it is usually the minor bit of the open it came from. One further
+reduction: an act that restates a ruling the user already made
+elsewhere is not a new decision but a scope question -- does that
+ruling bind here too? Presenting a fact for ratification spends the
+scarcest resource in the system on something that never needed it.
+
+Open the walkthrough with the whole tally: swept N, the record
+settled M, grounding dissolved the mass of the rest, K act-shaped
+decisions remain.
 
 ## Act grain
 
-Group the survivors into acts -- the handful of real decisions,
+Group the residue into acts -- the handful of real decisions,
 never the item-by-item inventory. An act is a cluster of items that
 stand or fall together because they implement one choice; the test:
 the user could reject the act wholesale and the rejection would mean
