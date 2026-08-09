@@ -46,7 +46,7 @@ This section is itself a projection of the ledger below, stamped
 ## Theories
 
 Claims are grouped by the vocabulary they need (`Skill(llm-claim-ledger)`,
-`SKILL.kb/theories.md`). Two are auxiliary -- `fixpoint` holds shared
+§ Theories). Two are auxiliary -- `fixpoint` holds shared
 background mathematics so that `reference` and `standing` can argue in
 one sentence each, and `view` holds the derived-value machinery that
 `standing` and `protocol` both lean on. A second root, `purpose`,

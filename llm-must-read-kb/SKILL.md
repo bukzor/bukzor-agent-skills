@@ -258,6 +258,13 @@ Poor fit:
 - Living design knowledge → use `design.kb/` (`Skill(llm-design-kb)`).
 - Always-applicable rules → inline in CLAUDE.md; trigger banks add
   overhead the agent must traverse every plan.
+- **Anything needed to recognize the trigger** → inline it. A trigger
+  cannot gate the knowledge that fires it: a command table filed under
+  `when/the-user-issues-a-command.md` reaches only agents who already
+  know the commands exist. Vocabulary, notation, and command names are
+  recognition; file them where they load unconditionally. Banks hold
+  what an agent *does* once it knows where it is, never what tells it
+  where it is.
 
 ## Relationship to `Skill(llm-kb)`
 

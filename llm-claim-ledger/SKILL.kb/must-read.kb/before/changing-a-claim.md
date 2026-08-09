@@ -10,7 +10,7 @@ is the sigil). Where a retraction must stay visible in place, strike the
 label through — `~~AX~~: claim text`; `grep AX` still finds it.
 
 **Rulings carry grounds.** An acceptance is a judgment like any other:
-one clause of why -- `claim accept: XY -- cheap to reverse, proceed` --
+one clause of why -- `claim accept XY -- cheap to reverse, proceed` --
 keeps a pragmatic ruling from reading as a verification.
 
 **A reversal cites what it reverses** when anything rested on the old

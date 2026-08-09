@@ -30,7 +30,7 @@ collection is a manual, not a theory.
 ## Filing a new claim
 
 Placement is fixed by vocabulary, not by topic
-(`../SKILL.kb/theories.md`): a claim goes in the earliest theory whose
+(`Skill(llm-claim-ledger)` § Theories): a claim goes in the earliest theory whose
 ontology — its own plus its priors' — admits every word the claim needs.
 If no theory admits them, either the claim is using a word loosely, or
 some theory's ontology is understated and should be widened on purpose.

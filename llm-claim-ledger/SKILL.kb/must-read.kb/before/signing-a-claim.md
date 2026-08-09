@@ -9,6 +9,6 @@ The judge's name carries its version wherever the verdict could turn on
 it: `certified(CHECK)` promises a *re-runnable* check, and a check whose
 identity is "the linter" is not re-runnable.
 
-Never accept your own output. `claim accept:` is the user's call --
+Never accept your own output. `claim accept` is the user's call --
 sign your own judgments `+` and let them stand until the user rules
 (`../when/you-notice-an-underdetermined-choice.md`).

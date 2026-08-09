@@ -22,7 +22,7 @@ Policy:
 
 1. Claim set: union over chat, last wins.
 2. Every claim, both parties: sound, open, or retracted. Open claims are debt, priced by what rests on them.
-3. Governance is one line over labels: `claim accept: MULTIBYTE` re-signs it `MULTIBYTE!`
+3. Governance is one line over labels: `claim accept MULTIBYTE` re-signs it `MULTIBYTE!`
 
 <!-- /Core -->
 
@@ -30,8 +30,9 @@ The core block alone runs in chat-only environments; typed claim kernels
 and proof-transport systems are harder rungs of the same ladder, and the
 invariant holds at every rung -- every claim sound, open, or retracted.
 
-The rest of this file is what it takes to *read* a ledger. Everything
-past reading is one file per rule in `SKILL.kb/must-read.kb/`.
+The rest of this file is what it takes to read a ledger and to name an
+operation on one. What each operation *obliges* is a file apiece in
+`SKILL.kb/must-read.kb/`.
 
 > **IMPERATIVE:**
 >
@@ -45,68 +46,82 @@ past reading is one file per rule in `SKILL.kb/must-read.kb/`.
 
 ## Sigils
 
-The sigil trails the label, so the label stays a greppable prefix:
-`grep XY` finds `XY`, `XY?`, `XY!`, and every reference. Sigils go
-wherever the label goes: `XY <- AB! CD?` shows the warrant-mix exactly
-where weight is placed on it.
+The sigil trails the label, so the label stays a greppable prefix: `grep
+XY` finds `XY`, `XY?`, `XY!`, and every reference. Sigils travel with the
+label -- `XY <- AB! CD?` shows the warrant-mix exactly where weight rests
+on it.
 
-Four marks exhaust the space -- no judge needed, user, agent, no judge
-yet. A signature records residual choice: if accepting every premise
-settles the claim, nothing was left to decide, and the claim stays
-bare -- its standing rides its premises. Unsure whether a judgment
-crept in? Sign it `+`: a needless signature invites a needless veto,
-but a false bare hides a judge.
+Four marks exhaust the space. A signature records *residual choice*: if
+accepting every premise settles the claim, nothing was left to decide and
+it stays bare, standing on its premises. Unsure whether a judgment crept
+in? Sign `+` -- a needless signature invites a needless veto, but a false
+bare hides a judge.
 
-`?` and `+` both want the user's eye, and want opposite things -- `?`
-an answer, `+` a veto. One scan finds both: `grep -nE '[A-Z_][?+]'`.
+`?` and `+` both want the user's eye, for opposite things -- an answer, a
+veto. One scan finds both: `grep -nE '[A-Z_][?+]'`.
 
-## Statuses
+## Arrows
+
+`<-` names what a claim rests on. It is motivation, not entailment: it
+says the writer had those claims in view, and nothing checks that the
+conclusion follows. A closed ring -- `AB <- CD` and `CD <- AB` -- is
+mutual support, which is no support at all; nothing rejects it at entry,
+and the ring stays `?` until something outside it lands.
+
+## Statuses and retraction
 
 A sigil sometimes needs one more word; suffix the line:
 
     * XY: claim text                  -- certified(CHECK)
 
-`certified(CHECK)` names the re-runnable check that discharged the
-claim. A certified claim goes **bare** -- the check made it a fact --
-and keeps the note so anyone can re-run CHECK. `retracted` withdraws
-with nothing in its place. The signatures need no verbose form: the
-sigil is the record.
+`certified(CHECK)` names the re-runnable check that discharged the claim.
+A certified claim goes **bare** -- the check made it a fact -- and keeps
+the note so anyone can re-run CHECK. Retraction withdraws with nothing in
+its place and stays visible where it stood: `~~XY~~: claim text`, so `grep
+XY` still finds it. The signatures need no verbose form; the sigil is the
+record.
+
+## Theories
+
+`<-` tracks support; **theories** track vocabulary. When a claim cannot be
+read without words some other group of claims had to introduce, that group
+is a **prior** -- declare it, and the ledger becomes a poset of theories
+instead of one list. Split on vocabularies, never on length: twenty claims
+over two vocabularies want this, a hundred over one do not.
+
+A theory opens with a **defining claim** -- the label names the theory,
+the text states its **ontology** (the words its claims may use), its `<-`
+names its priors. The theory's standing is that claim's standing, and
+widening the ontology is a revision to it.
+
+- **Confinement** -- a claim uses only its own ontology plus its priors'.
+  This is what fixes placement, and it greps: a word a theory does not
+  admit is either a misplaced claim or an understated ontology.
+- **Conservativity** -- a later theory never lowers a prior's standing.
+  Where it seems to, the prior was wrong; fix it there.
+
+Auxiliary theories, naming, and words that recur across theories:
+`SKILL.kb/theories.md`.
 
 ## Commands
 
-Marker commands (`Skill(llm-subtask)`); also act on your own initiative —
+Marker commands (`Skill(llm-subtask)`); also act on your own initiative --
 the core's "when claims churn" is the trigger, not a user request.
 
-- `claim list` — render the surviving ledger
-- `claim: TEXT` or `claim XY: TEXT` — add a claim
-- `claim accept: XY` — the user's ruling; re-sign `XY!`, with a clause of
-  grounds — also how a `+` graduates
-- `claim contest: XY` — reopen; mark `XY?`
-- `claim retract: XY` — retract and propagate
-- `claim certify: XY` — name an executable check, run it; on success the
+- `claim list` -- render the surviving ledger
+- `claim add XY: TEXT` -- add a claim; the colon survives here alone,
+  because what follows it *is* the claim line
+- `claim accept XY` -- the user's ruling; re-sign `XY!`, with a clause of
+  grounds -- also how a `+` graduates
+- `claim contest XY` -- reopen; mark `XY?`
+- `claim retract XY` -- retract and propagate
+- `claim certify XY` -- name an executable check, run it; on success the
   claim goes bare, suffixed `-- certified(CHECK)`
-- `claim flush` — end-of-context extraction
+- `claim flush` -- end-of-context extraction
 
-The last three each have a rule in the bank; `ls` it rather than guessing.
+Render a ledger as a list, one claim per line, in ASCII (`<-`). The last
+three commands each carry a rule in the bank; `ls` it rather than guessing.
 
-## Two shapes you'll meet
-
-A struck-through label -- `~~AX~~: claim text` -- is a retraction left
-visible in place; `grep AX` still finds it.
-
-A ledger too large for one readable list is split into **theories**,
-each opened by a defining claim whose `<-` names the theories it
-stands on -- so reading one starts at its imports, which carry the
-vocabulary its claims are written in. A claim's theory is fixed by the
-words its text needs, not by the turn that produced it:
-`SKILL.kb/theories.md`.
-
-A closed ring -- `AB <- CD` and `CD <- AB` -- is mutual support, which
-is no support at all. Nothing rejects it at entry; the ring stays `?`
-until something outside it lands.
-
-Render a ledger as a list, one claim per line, in ASCII (`<-`).
-
-A ledger kept as files -- one claim per file, standing in frontmatter
--- is `Skill(llm-claim-ledger-kb)`. Why the notation is shaped this
-way, and where to argue with it: `design.ledger.md`.
+A ledger kept as files -- one claim per file, standing in frontmatter --
+is `Skill(llm-claim-ledger-kb)`. Why the notation is shaped this way, and
+where to argue with it: `design.ledger.md`.

@@ -18,7 +18,7 @@ is still aimed at the right thing.
 Claims are grouped by the vocabulary they need, not the topic they
 touch. Each collection is a **theory**: a fixed ontology, a declared
 prior whose ontology it also admits, and a stated defeater. A claim may
-use only the words its theory admits (`SKILL.kb/theories.md`).
+use only the words its theory admits (`Skill(llm-claim-ledger)` § Theories).
 
 ```
 stance ──► purpose ──► good-smells ──► notation

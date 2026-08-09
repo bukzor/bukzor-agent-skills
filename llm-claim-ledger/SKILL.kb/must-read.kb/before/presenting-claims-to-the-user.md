@@ -7,7 +7,7 @@ consent, so never render `+` claims as "pending", "awaiting ruling",
 or a sign-off queue.
 
 Before presenting any ask, check it still needs a judge. A checkable
-claim belongs bare and certified (`claim certify:`);
+claim belongs bare and certified (`claim certify`);
 one that follows from its premises belongs bare over its `<-`. A
 signature on a fact records a false judge and spends user authority
 on nothing -- approval-seeking wearing the ledger's clothes. The asks
