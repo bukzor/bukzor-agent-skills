@@ -83,22 +83,29 @@ record.
 
 ## Theories
 
-`<-` tracks support; **theories** track vocabulary. When a claim cannot be
-read without words some other group of claims had to introduce, that group
-is a **prior** -- declare it, and the ledger becomes a poset of theories
-instead of one list. Split on vocabularies, never on length: twenty claims
-over two vocabularies want this, a hundred over one do not.
+`<-` tracks support -- what a claim rests on. Theories track **sense** --
+what a claim cannot be read without. The two are independent: a claim can
+rest on another without borrowing a word from it, and can borrow a word
+without resting on it.
 
-A theory opens with a **defining claim** -- the label names the theory,
-the text states its **ontology** (the words its claims may use), its `<-`
-names its priors. The theory's standing is that claim's standing, and
-widening the ontology is a revision to it.
+A **theory** is a stipulated word list -- its **ontology** -- together
+with the claims confined to that list. It opens with a **defining claim**:
+the label names the theory, the text states the ontology, its `<-` names
+the **priors**, the theories whose words it also admits. The list comes
+first and the grouping follows from it -- a claim belongs to the earliest
+theory whose ontology admits every word its text needs. The theory's
+standing is the defining claim's standing, and widening the ontology is a
+revision to it.
 
 - **Confinement** -- a claim uses only its own ontology plus its priors'.
-  This is what fixes placement, and it greps: a word a theory does not
-  admit is either a misplaced claim or an understated ontology.
+  It greps: a word a theory does not admit is either a misplaced claim or
+  an understated ontology.
 - **Conservativity** -- a later theory never lowers a prior's standing.
   Where it seems to, the prior was wrong; fix it there.
+
+You want a second theory when one word list stops serving every claim --
+never because the list of claims got long. Twenty claims over two
+vocabularies want this; a hundred over one do not.
 
 Auxiliary theories, naming, and words that recur across theories:
 `SKILL.kb/theories.md`.
