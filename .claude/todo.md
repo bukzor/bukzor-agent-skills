@@ -135,6 +135,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       widen CLAUDE.md charter or rehome (user rated rehoming tier-4)
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
+- [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
 - [ ] llm-claim-ledger/.claude/todo.md
 - [ ] llm-kb/.claude/todo.md
 - [ ] llm-collab/.claude/todo.md (v2 dissolves llm-collab — weigh new
