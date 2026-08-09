@@ -1,6 +1,6 @@
 ---
 name: formalize
-description: "Slash-command: /formalize <paths> -- distill the ideas at paths into a claim ledger of named theories. Agent MUST load on /formalize, or when asked to find the mathematical structure in a body of informal work."
+description: "Agent MUST load when asked to find the mathematical structure in a body of informal work, to distill designs/prose/schemas into theories of claims, or to test whether a named structure (category, lattice, monad) actually holds of the data."
 ---
 
 # /formalize \<paths\>

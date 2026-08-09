@@ -1,6 +1,6 @@
 ---
 name: deformalize
-description: "Slash-command: /deformalize <paths> -- render the formal content at paths as plain runnable Python, formal bits internal, that the reader can poke with a stick. Agent MUST load on /deformalize, or when asked to make dense formal material concrete/executable."
+description: "Agent MUST load when asked to make dense formal material (a claim ledger, a mathematical text, a theory write-up) concrete, executable, or plain enough to poke with a stick, or to check such an account against runnable code."
 ---
 
 # /deformalize \<paths\>
