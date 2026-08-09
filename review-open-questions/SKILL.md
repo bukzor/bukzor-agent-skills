@@ -15,8 +15,9 @@ rulings on the record. Scope defaults to the current stretch of work.
 
 ## One law: the cheapest competent court
 
-Two courts can settle an open: everything cheaper than the owner --
-the record, a check, a witness -- and the owner. Every open is settled
+Call anything that can settle an open a **court**. There are two:
+everything cheaper than the owner -- the record, a check, a witness --
+and the owner themself. Every open is settled
 in the cheapest court competent to settle it, and a settlement from
 the wrong court is void both ways: a fact ratified by the owner
 records a false judge; a stipulation defaulted by an agent is a veto
@@ -41,7 +42,9 @@ So before presenting anything, exhaust the cheap court:
 What survives every cheaper court is the owner's jurisdiction:
 stipulations -- value choices, scope, one-way doors -- usually the
 minor residue of the opens they came from. Expect most of the batch to settle here.
-One or two survivors don't want this skill: ask inline.
+However small the residue, it still wants the walkthrough: long work
+accretes vocabulary the owner never adopted, and the rebuild into
+plain language is half the product.
 
 ## The owner's court
 
@@ -62,7 +65,7 @@ Then one numbered section per decision -- heading short, assertive,
 quotable, the skeleton of the reply you want back:
 
 1. **The priors:** what the owner must know to rule, rebuilt in
-   place, assuming nothing retained.
+   place, in plain words, assuming nothing retained.
 2. **The decision:** one or two plain sentences -- the things it
    touches, not the abstractions it instantiates; where it merely
    codifies existing practice, say so. Say what silence does.
@@ -72,6 +75,8 @@ quotable, the skeleton of the reply you want back:
    "recurs forever" vs "nothing today, because"; for a question, the
    fallout of each live answer. Name the decisions that lean on this
    one.
+5. **Your recommendation**, stated plainly, with its rationale -- a
+   survey with no position makes the owner do your job.
 
 Argue against yourself in place -- the caveat favoring an amendment,
 the law with no police yet -- inside the section, not after the
@@ -85,9 +90,8 @@ amendments, counter-questions, missing decisions, better warrants --
 so the reply channel must admit the unanticipated. Never a menu,
 never AskUserQuestion: option boxes cap the reply at your own
 imagination, and a walkthrough tuned for easy yeses has failed even
-when it gets them. End open-ended -- "rule in any form you like:
-accept 1-8; accept all but 6, argue 6; per-item amendments" -- and
-say concretely what you will do with the ruling.
+when it gets them. End open-ended, saying concretely what you will do
+with the ruling.
 
 ## The reply is a new sweep
 
