@@ -6,7 +6,8 @@ from pathlib import Path
 
 SRC = Path(__file__).parent.parent / "src" / "engine_tower"
 
-# the poset, mirrored from the ledger's theory table; a module may
+# the poset, mirrored BY HAND from the Theories table of
+# docs/dev/strata.ledger.md -- update both together; a module may
 # import only from the downward closure of its declared priors
 PRIORS: dict[str, frozenset[str]] = {
     "fixpoint": frozenset(),

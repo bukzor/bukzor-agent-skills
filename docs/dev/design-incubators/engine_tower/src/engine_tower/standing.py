@@ -11,7 +11,6 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 
 from engine_tower.fixpoint import iterate
-from engine_tower.reference import Edge
 
 _STATUS_NAMES = {0: "described", 1: "stipulated", 2: "obligated"}
 
@@ -72,6 +71,7 @@ class Evidence:
 THRESHOLD = STIPULATED  # premises must stand at least here to support ascent
 
 type Standing = Mapping[str, Status]  # a point of L^E
+type Attack = tuple[str, str]  # (attacker, target) -- defeat evidence, not a reference edge
 
 
 def phi(
@@ -98,7 +98,7 @@ def standing(evidence: frozenset[Evidence], entries: frozenset[str]) -> Standing
 
 def grounded(
     nodes: frozenset[str],
-    attacks: frozenset[Edge],  # (attacker, target)
+    attacks: frozenset[Attack],
     rulings: Mapping[str, bool] | None = None,
 ) -> tuple[frozenset[str], frozenset[str]]:
     """Defeat breaks Phi's monotonicity; the repair runs the

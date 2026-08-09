@@ -9,9 +9,16 @@ their own node sorts and it becomes a per-genre proof obligation.
 [CONFINE, CONSERVE, SATISFACTION, FREE_CONSERVE]
 """
 
-from engine_tower.standing import Standing
+from engine_tower.standing import Evidence, Standing
 
 
 def restrict(x: Standing, entries: frozenset[str]) -> Standing:
     """The reduct M'|_W: forget the extension's entries.  [CONSERVE]"""
     return {e: s for e, s in x.items() if e in entries}
+
+
+def confined(extension: frozenset[Evidence], own_entries: frozenset[str]) -> bool:
+    """The syntactic half, as a predicate: extension evidence
+    concludes only on the genre's own entries.  Premises may cite
+    anything.  [CONFINE]"""
+    return all(ev.entry in own_entries for ev in extension)
