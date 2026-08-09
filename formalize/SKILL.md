@@ -7,8 +7,7 @@ description: "Slash-command: /formalize <paths> -- distill the ideas at paths in
 
 Take the ideas represented at the paths and produce their formal
 account: a well-factored set of theories-of-claims, filed per
-`Skill(llm-claim-ledger-kb)`. The dual command is `/deformalize`; a
-formalization is not done until the two have met (see Verification).
+`Skill(llm-claim-ledger-kb)`.
 
 ## Why, before how
 
@@ -58,17 +57,3 @@ citation is not an exhibit.
    sub-theories are encouraged wherever one lets a citing theory
    argue in one sentence. The questions from step 5 are themselves a
    theory. The entry-point `.md` carries the poset and the picture.
-
-## Verification
-
-A formalization is checked by deformalizing it, and the checker must
-not share the author's context: an author re-reading its own account
-cannot distinguish what the text says from what it meant, so the gaps
-the conversation fills in silently go unfound. Fresh context is the
-mechanism, not a nicety.
-
-This needs no second command from the operator: spawn a fresh agent
-(not a context-inheriting fork) given only the artifact and
-`/deformalize`, then adjudicate every mismatch it reports. Claims a
-witness exercises get `verify:` lines; what stays unwitnessed is the
-ledger's stated proof debt, not a secret.

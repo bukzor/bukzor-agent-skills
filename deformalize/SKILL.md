@@ -8,8 +8,7 @@ description: "Slash-command: /deformalize <paths> -- render the formal content a
 Take the formal content at the paths -- a claim ledger, a dense
 mathematical text, a theory write-up -- and produce its plain-old-code
 representation: runnable Python the owner can read and poke with a
-stick, with the formal vocabulary demoted to internal detail. The
-dual command is `/formalize`.
+stick, with the formal vocabulary demoted to internal detail.
 
 This is not a port; it is a probe. Reification is where a formal
 account's slid-over seams surface, so what the code breaks in the
