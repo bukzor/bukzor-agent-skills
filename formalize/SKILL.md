@@ -57,6 +57,3 @@ citation is not an exhibit.
    sub-theories are encouraged wherever one lets a citing theory
    argue in one sentence. The questions from step 5 are themselves a
    theory. The entry-point `.md` carries the poset and the picture.
-7. **Present the decisions.** Filing claims signed on the owner's
-   behalf accumulates judgment calls; walk them through for ruling:
-   `Skill(review-open-questions)`.

@@ -47,9 +47,6 @@ is a finding destroyed. Expect the strict-reading failures to be the
 valuable ones: a demo that only passes under a weaker premise has
 found the source's missing premise.
 
-The source edits this step accumulates are the owner's decisions to
-make; present them for ruling: `Skill(review-open-questions)`.
-
 ## Lifecycle
 
 Draft in `trash/` -- it is a sketch until it survives the review

@@ -40,9 +40,8 @@ So before presenting anything, exhaust the cheap court:
 
 What survives every cheaper court is the owner's jurisdiction:
 stipulations -- value choices, scope, one-way doors -- usually the
-minor residue of the opens they came from. Expect collapse (the
-incident that taught this went 27 -> 8). One or two survivors don't
-want this skill: ask inline.
+minor residue of the opens they came from. Expect most of the batch to settle here.
+One or two survivors don't want this skill: ask inline.
 
 ## The owner's court
 
@@ -119,10 +118,3 @@ amended plan, compactly; execute on go.
 Rulings land in whatever register the work already keeps: claim-ledger
 signings (`Skill(llm-claim-ledger)`: accepted claims re-sign `!`),
 file edits, an ADR, a todo entry. The skill assumes none.
-
-Distilled 2026-08-09 from a ruling session over the strata ledger,
-merged with a parallel distillation of the same turn
-(list-open-questions, superseded by this file); rewritten from the
-two-courts picture the pair implied. The
-factoring rule stands at personal scope:
-`~/.claude/must-read.kb/before/asking-the-user-to-approve-or-ratify.md`.
