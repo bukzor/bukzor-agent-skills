@@ -1,0 +1,150 @@
+#!/bin/bash
+# Run a command and file its output as an append-only evidence capture,
+# paired with the re-runnable .sh that produced it.
+
+set -euo pipefail
+
+onerror() {
+  error="$?"
+  echo >&2 "ERROR($error)"
+  exit "$error"
+}
+trap onerror ERR
+
+if (( ${DEBUG:-0} > 0 )); then
+  set -x
+fi
+
+DIR="."
+DRY_RUN=0
+TITLE=""
+TITLE_SET=0
+usage() {
+  echo >&2 "Usage: incident-forensics-capture [-C <dir>] [-n|--dry-run] --title <title> -- <command>..."
+  echo >&2 "       DATE=YYYY-MM-DD incident-forensics-capture ...  (for backdating)"
+  echo >&2 "       -C <dir>:      kb root holding evidence.kb/ (default: .)"
+  echo >&2 "       --title:       what this capture shows (required)"
+  echo >&2 "       -n, --dry-run: print paths without running or creating"
+  echo >&2 "Pipelines and redirection: -- bash -c 'a | b'"
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help) usage; exit 0 ;;
+    -n|--dry-run) DRY_RUN=1; shift ;;
+    -C)
+      [ -n "${2:-}" ] || { echo >&2 "Error: -C requires an argument"; usage; exit 1; }
+      DIR="$2"; shift 2 ;;
+    --title)
+      [ -n "${2:-}" ] || { echo >&2 "Error: --title requires an argument"; usage; exit 1; }
+      TITLE="$2"; TITLE_SET=1; shift 2 ;;
+    --) shift; break ;;
+    -*) echo >&2 "Unknown option: $1"; usage; exit 1 ;;
+    *)
+      echo >&2 "Error: unexpected argument '$1' -- the command goes after '--'"
+      usage; exit 1 ;;
+  esac
+done
+
+if (( ! TITLE_SET )) || [ $# -eq 0 ]; then
+  usage
+  exit 1
+fi
+
+if [ ! -d "$DIR" ]; then
+  echo >&2 "Error: -C target '$DIR' is not a directory"
+  exit 1
+fi
+cd "$DIR"
+
+if [ ! -d "evidence.kb" ]; then
+  echo >&2 "Error: evidence.kb/ not found in $PWD"
+  echo >&2 "Start the investigation kb first: see Skill(incident-forensics)"
+  exit 1
+fi
+
+DATE=${DATE:-$(date +%Y-%m-%d)}
+LAST=$(find evidence.kb -maxdepth 1 -name "$DATE-*.md" | sort | tail -n1)
+
+if [ -z "$LAST" ]; then
+  NUM="000"
+else
+  NUM=$(basename "$LAST" | sed -E "s/^$DATE-([0-9]{3})-.*/\1/")
+  if ! [[ "$NUM" =~ ^[0-9]+$ ]]; then
+    NUM="-1"
+  fi
+  NUM=$(printf "%03d" $((10#$NUM + 1)))
+fi
+
+SLUG=$(printf '%s' "$TITLE" | tr '[:upper:]' '[:lower:]' |
+  sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//')
+STEM="$DATE-$NUM-$SLUG"
+METHOD="evidence.kb/$STEM.sh"
+CAPTURE="evidence.kb/$STEM.md"
+
+echo "$CAPTURE"
+echo "$METHOD"
+
+if (( DRY_RUN )); then
+  exit 0
+fi
+
+# The command line, quoted so the .sh reproduces it exactly. @Q rather
+# than %q: uniformly single-quoted stays readable when the command
+# itself contains quotes and metacharacters.
+COMMAND=${*@Q}
+
+{
+  echo "#!/bin/sh"
+  echo "# Method for $STEM.md -- re-runnable, and fair game to improve in place"
+  echo "# (unlike the capture, which is append-only)."
+  echo "$COMMAND"
+} > "$METHOD"
+chmod +x "$METHOD"
+
+# Buffered beside the capture, not in /tmp: a partial buffer left by a
+# crash is recoverable where the investigator is already looking.
+OUT="evidence.kb/.$STEM.out"
+trap 'rm -f "$OUT"' EXIT
+STATUS=0
+sh "$METHOD" > "$OUT" 2>&1 || STATUS=$?
+
+if [ "$(stat -c%s "$OUT")" -gt 1048576 ]; then
+  echo >&2 "⚠️  capture exceeds 1MiB -- consider filtering the command"
+fi
+
+# Fence must outlast any backtick run in what it wraps.
+BACKTICKS=$(awk '{
+  while (match($0, /`+/)) {
+    if (RLENGTH > m) m = RLENGTH
+    $0 = substr($0, RSTART + RLENGTH)
+  }
+} END { print m+0 }' <(printf '%s\n' "$COMMAND") "$OUT")
+if (( BACKTICKS >= 3 )); then
+  FENCE=$(printf '`%.0s' $(seq $((BACKTICKS + 1))))
+else
+  FENCE='```'
+fi
+
+{
+  echo "---"
+  echo "captured: \"$DATE\""   # quoted: the schema wants a string, not a YAML date
+  echo "method: ./$STEM.sh"
+  echo "---"
+  echo
+  echo "# $TITLE"
+  echo
+  echo "${FENCE}sh"
+  echo "$COMMAND"
+  echo "$FENCE"
+  if (( STATUS != 0 )); then
+    echo
+    echo "Exited $STATUS."
+  fi
+  echo
+  echo "$FENCE"
+  cat "$OUT"
+  echo "$FENCE"
+} > "$CAPTURE"
+
+echo >&2 "✅ Captured"
