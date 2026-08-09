@@ -6,9 +6,8 @@ blind: true
 
 # 040 -- The executable witness
 
-The honesty pass: this is `/deformalize` applied to the agent's own
-account -- but the paste stays self-contained, because the skill file
-names the answer and would break the blind. In the original, the
+The honesty pass: `/deformalize` applied to the agent's own account,
+its procedure inlined so the paste stands alone. In the original, the
 witness surfaced a missing premise and an import-graph hole.
 Expensive; skip only if the session is short. A miss looks like tests
 that restate definitions instead of checking laws, or mismatches

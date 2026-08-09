@@ -58,9 +58,8 @@ contaminated run is still readable, an unlabeled one is not.
 
 An agent that reads `070`'s file list early has broken the run. If you
 hand over this whole directory instead of pasting turn by turn, expect
-that. The `formalize/` and `deformalize/` skills are inside the blind
-too -- both name the strata exemplars -- which is why the pastes
-inline their procedures instead of invoking them.
+that. The pastes inline the procedures they need instead of invoking
+skills -- nothing a blind agent loads may be able to name the answer.
 
 ## What to do with the result
 

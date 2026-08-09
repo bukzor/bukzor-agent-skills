@@ -111,7 +111,9 @@ grep -rA4 '^why:' docs/dev/strata.ledger.kb/*.kb/*.md       # the warrant graph
 
 ## Provenance
 
-Distilled 2026-08-09 from a formalization conversation over this repo,
+A worked instance of `/formalize`, verified by `/deformalize` (the
+incubator below); those skills postdate and were distilled from this
+run. Distilled 2026-08-09 from a formalization conversation over this repo,
 `ideation.epistemics`, `prototype.personal-reasoning-management`, and
 `prototype.llm-stet`; correspondences with those systems live in
 `fleet.kb/`, not restated elsewhere. Restructured the same day after

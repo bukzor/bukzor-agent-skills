@@ -67,11 +67,7 @@ mismatch it reports. Claims a witness exercises get `verify:` lines;
 what stays unwitnessed is the ledger's stated proof debt, not a
 secret.
 
-## Exemplar
-
-`docs/dev/strata.ledger.md` (+ `.kb/`) in this repo: distilled from a
-run of exactly this procedure over the skill ecosystem; the prods the
-original run needed are front-loaded above. Its executable
-counterpart is `docs/dev/design-incubators/engine_tower/`, and
-`docs/dev/strata.replication.md` is the same procedure staged as a
-blind study.
+This skill names no worked instances: instances cite the skill
+(`depends:` frontmatter, provenance notes), never the reverse -- a
+skill that names its exemplars contaminates every blind or
+independent re-run of itself.

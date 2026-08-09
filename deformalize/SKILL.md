@@ -53,18 +53,10 @@ found the source's missing premise.
 Draft in `trash/` -- it is a sketch until it survives the review
 step. But a `verify:` target cannot live in scratch: if the witness
 earns keeping, promote it to a real project home (pyproject, real
-modules, real test suite; e.g. a `design-incubators/` entry), name
-its tests after the claims they witness, and wire the source's
-`verify:` lines to them. Promotion is itself an escalation of
-enforcement grade, and historically that escalation finds another
-round of cracks -- budget for it.
+modules, real test suite), name its tests after the claims they
+witness, and wire the source's `verify:` lines to them. Promotion is
+itself an escalation of enforcement grade, and expect that
+escalation to find another round of cracks -- budget for it.
 
-## Exemplar
-
-`docs/dev/design-incubators/engine_tower/` in this repo: born as a
-paste of dense mathematics into a fresh session ("help me parse
-through it... sketch it into python, perhaps?"), drafted as
-`trash/engine_tower.py`, and promoted once it proved load-bearing.
-The review step found, among others, a fixpoint theorem cited on a
-non-lattice and a conservativity claim missing its confinement
-premise -- both now claims in `docs/dev/strata.ledger.kb/`.
+This skill names no worked instances: instances cite the skill,
+never the reverse (see `/formalize`).
