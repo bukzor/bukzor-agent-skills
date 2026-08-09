@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+$schema: "http://json-schema.org/draft-07/schema#"
+title: strata.replication prompt frontmatter
+description: >
+  Files in strata.replication.kb/ are pasteable conversation turns,
+  numbered in send order. The frontmatter says where the turn came
+  from and whether the blind is still on when it is sent.
+type: object
+additionalProperties: false
+required:
+  - origin
+  - blind
+properties:
+  origin:
+    description: >
+      Provenance -- `<session-prefix>:<line>` locating the turn this
+      one reproduces, in the JSONL under ~/.claude/projects/, or
+      `new` for a turn the original run never had.
+    type: string
+    pattern: "^([0-9a-f]{8}:\\d+|new)$"
+  blind:
+    description: >
+      Whether the existing answer is still hidden from the agent when
+      this turn is sent. Exactly one file flips it to false.
+    type: boolean
