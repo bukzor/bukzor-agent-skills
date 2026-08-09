@@ -27,11 +27,17 @@ hit. Use the tools below; they decode first.
 | `claude-jsonl-path DIR`                       | the projects/ dir holding a cwd's sessions                   |
 | `claude-jsonl-display < FILE`                 | render a transcript readably (`-to-log` writes it beside)    |
 
-Library behind them: `bukzor.claude.{session,search,inventory,tree,
-format_short,branch_extract}` under `~/lib/pythonpath` -- import it
-rather than re-parsing when a question needs custom analysis. Every
-module is doctested; run one with `python3 -m bukzor.claude.MODULE
---doctest`.
+Library behind them: `claude_code_archeology.{session,search,inventory,
+tree,format_short,branch_extract}` -- import it rather than re-parsing
+when a question needs custom analysis:
+
+```sh
+uv run --project ~/repo/github.com/bukzor/bukzor-tools python - <<'PY'
+from claude_code_archeology import session
+PY
+```
+
+Every module is doctested; `uv run pytest` in that repo runs them.
 
 ## Format facts that bite
 
