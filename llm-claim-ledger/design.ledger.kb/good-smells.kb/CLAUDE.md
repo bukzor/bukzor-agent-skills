@@ -30,5 +30,5 @@ without them is really a decision (`../notation.kb/`).
 
 `open` is the honest default: most of these were extracted from a single
 design conversation and have never been tested against a second
-notation. `warranted` means someone adjudicated it, not that it reads
+notation. `user` means the user adjudicated it, not that it reads
 convincingly.

@@ -1,6 +1,6 @@
 ---
 label: STIP
-standing: fiat
+standing: agent
 ---
 
 # Stipulation Is a Legal Stop

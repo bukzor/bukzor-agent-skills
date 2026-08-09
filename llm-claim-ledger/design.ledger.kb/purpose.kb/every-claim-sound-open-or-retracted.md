@@ -1,6 +1,6 @@
 ---
 label: TRICHOTOMY
-standing: warranted
+standing: user
 ---
 
 # Every Claim Sound, Open, or Retracted

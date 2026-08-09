@@ -1,6 +1,6 @@
 ---
 label: DEFERRAL
-standing: warranted
+standing: user
 ---
 
 # No Forced Early Decisions

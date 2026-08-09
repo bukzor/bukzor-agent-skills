@@ -1,5 +1,5 @@
 ---
-last-updated: "2026-07-28"
+last-updated: "2026-08-08"
 ---
 
 # The design, as a ledger
@@ -43,11 +43,12 @@ own; that is `good-smells.md`. The rest fit in `ls`.
 ## Standing
 
 ```bash
-grep -rl 'standing: open' design.ledger.kb/  # asserted, unadjudicated
-grep -rl 'standing: fiat' design.ledger.kb/  # agent-settled, revocable
+grep -rl 'standing: open' design.ledger.kb/   # nobody has stood behind it
+grep -rl 'standing: agent' design.ledger.kb/  # agent-signed, veto invited
 ```
 
-Most of `good-smells.kb/` is `open`: it was extracted from a single
-design conversation and has never been tested against a second notation.
-The `fiat` set is the one worth a periodic scan, since each entry is a
-judgment made on the user's behalf that the user may never have read.
+Most of `good-smells.kb/` is `open`: extracted from a single design
+conversation, and only partially exercised by the one second instance
+so far (prototype.llm-stet, 2026-08-08). The `agent` set is the one
+worth a periodic scan, since each entry is a judgment made on the
+user's behalf that the user may never have read.

@@ -1,6 +1,6 @@
 ---
 label: RUNG
-standing: fiat
+standing: agent
 ---
 
 # One Rung of a Ladder

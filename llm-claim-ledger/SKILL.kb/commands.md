@@ -6,10 +6,10 @@ trigger, not a user request:
 
 - `claim list` — render the surviving ledger
 - `claim: TEXT` or `claim XY: TEXT` — add a claim
-- `claim accept: XY` — adjudicate warranted, the operator's call; mark `XY!`,
-  which is also how a `+` graduates
+- `claim accept: XY` — the user's ruling; re-sign `XY!`, with a clause
+  of grounds (`changing-a-claim.md`) — also how a `+` graduates
 - `claim contest: XY` — reopen; mark `XY?`
 - `claim retract: XY` — retract and propagate (`retraction-propagates.md`)
 - `claim certify: XY` — name an executable check, run it; on success
-  mark `certified(CHECK)`
+  the claim goes bare, suffixed `-- certified(CHECK)`
 - `claim flush` — end-of-context extraction (`flush.md`)

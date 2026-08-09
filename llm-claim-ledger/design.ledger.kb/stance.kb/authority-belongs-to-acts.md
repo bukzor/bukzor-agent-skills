@@ -1,6 +1,6 @@
 ---
 label: AUTHOR_ACTS
-standing: fiat
+standing: agent
 ---
 
 # Authority Belongs to Acts

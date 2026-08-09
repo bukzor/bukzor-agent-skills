@@ -1,6 +1,6 @@
 ---
 label: CLAIMS_ONLY
-standing: warranted
+standing: user
 ---
 
 # Claims Are the Only Node Type

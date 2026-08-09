@@ -1,5 +1,5 @@
 ---
-last-updated: "2026-07-28"
+last-updated: "2026-08-08"
 ---
 
 # Good Smells — criteria for conversational notation design
@@ -7,8 +7,7 @@ last-updated: "2026-07-28"
 Meta-criteria for judging claim-ledger-style notations, including this
 skill's own. Each criterion is one file in `good-smells.kb/`, carrying
 its ledger `label` and `standing` in frontmatter — the sigils spelled
-out, so `warranted` = warranted by fiat or check, `open` = asserted and
-awaiting adjudication.
+out, naming who signed: `user`, `agent`, or `open` for no one yet.
 
 Two poles organize the set: the notation should elicit every judgment
 the writer can make now, while demanding none they can't make yet. The

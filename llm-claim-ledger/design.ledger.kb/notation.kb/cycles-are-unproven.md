@@ -1,6 +1,6 @@
 ---
 label: LEAST_FIX
-standing: fiat
+standing: agent
 ---
 
 # Cycles Are Unproven

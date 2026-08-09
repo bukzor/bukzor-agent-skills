@@ -1,12 +1,13 @@
 ---
 label: PROVISIONAL
-standing: warranted
+standing: user
 ---
 
 # Agent Fiat Gets Its Own Sigil
 
-`+` is spent on a distinction `!` could have absorbed: a judgment the
-agent made on the user's behalf, as against one the user made.
+`+` is spent on a distinction `!` could have absorbed: the sigil signs
+the judge (the-sigil-signs-the-judge.md), and the agent's signature is
+kept distinct from the user's.
 
 It survives ../stance.kb/prefer-the-smaller-ontology.md because the two
 want opposite responses. `?` asks the user for an answer; `+` asks for a

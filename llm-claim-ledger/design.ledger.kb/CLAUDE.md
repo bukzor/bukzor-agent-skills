@@ -23,7 +23,7 @@ nothing about them is contestable in the way a claim is, and dressing
 one in `label:`/`standing:` frontmatter produces a claim-shaped file
 that says nothing about its own standing.
 
-The tell is the standing field. If the honest value is `warranted` for
+The tell is the standing field. If the honest value is `user` for
 every file in a collection, the field is carrying no information and the
 collection is a manual, not a theory.
 

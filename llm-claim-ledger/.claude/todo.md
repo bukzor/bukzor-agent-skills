@@ -1,5 +1,14 @@
 # TODO
 
+- [ ] .claude/todo.kb/2026-08-06-000-Rebase-llm-design-kb-on-the-claim-ledger.md
+      — the plan: llm-design-kb becomes a discipline over the ledger;
+      ledger gains lint, footnote provenance, file-per-claim + self-audit
+      conventions; all legs (including other-scope ones) tracked there
+- [ ] .claude/todo.kb/2026-08-08-000-Helper-command-family-bin-llm-claim-ledger.md
+      — requirements for `bin/llm-claim-ledger-*` (shared parser, lint,
+      attention, poset, replay + provenance-map convention), distilled
+      from the prototype.llm-stet serialization audit; details the
+      rebase plan's "ledger gains lint" leg
 - [ ] USER: re-paste the SKILL.md Core block into claude.ai preferences
       (verbatim-shared; pending since 2026-07-24 — the `+` sigil, the
       governance line, the open-claims policy, and a worked example in

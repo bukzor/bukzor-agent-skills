@@ -1,6 +1,6 @@
 ---
 label: PARSIMONY
-standing: fiat
+standing: agent
 ---
 
 # Prefer the Smaller Ontology

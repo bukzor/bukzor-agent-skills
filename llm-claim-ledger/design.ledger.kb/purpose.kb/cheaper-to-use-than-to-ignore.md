@@ -1,6 +1,6 @@
 ---
 label: CHEAP
-standing: fiat
+standing: agent
 ---
 
 # Cheaper to Use Than to Ignore

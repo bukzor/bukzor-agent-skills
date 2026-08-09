@@ -1,6 +1,6 @@
 ---
 label: FRESH_READER
-standing: warranted
+standing: user
 ---
 
 # The Reader Was Not There

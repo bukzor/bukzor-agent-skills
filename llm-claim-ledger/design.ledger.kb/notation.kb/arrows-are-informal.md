@@ -1,6 +1,6 @@
 ---
 label: ARROWS
-standing: warranted
+standing: user
 ---
 
 # Arrows Are Informal

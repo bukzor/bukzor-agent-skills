@@ -1,6 +1,6 @@
 ---
 label: IMAGE
-standing: fiat
+standing: agent
 ---
 
 # The Notation Is Its Own First Instance

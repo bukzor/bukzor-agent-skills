@@ -1,6 +1,6 @@
 ---
 label: SELF_CONTAINED
-standing: warranted
+standing: user
 ---
 
 # A Line Needs No External Lookup

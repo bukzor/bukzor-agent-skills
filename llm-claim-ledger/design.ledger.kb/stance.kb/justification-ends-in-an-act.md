@@ -1,6 +1,6 @@
 ---
 label: REGRESS_ACT
-standing: fiat
+standing: agent
 ---
 
 # Justification Ends in an Act
