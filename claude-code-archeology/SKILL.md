@@ -1,0 +1,85 @@
+---
+name: claude-code-archeology
+description: "Agent MUST load on /claude-code-archeology, when a question is about what happened in a past Claude Code session (what was tried, decided, or lost), when recovering sessions after a crash or freeze, or before parsing anything under ~/.claude/projects."
+---
+
+# Claude Code archeology
+
+`~/.claude/projects/*/*.jsonl` is the only durable record of most work
+done here. It answers questions nothing else can -- what was tried and
+abandoned, what a command printed before the machine froze, what was
+decided in a conversation that ended without a commit. Treat it as a
+primary source.
+
+Never `grep` the raw JSONL. It matches JSON-escaped text, misses
+anything split across content blocks, and prints a 4000-column line on a
+hit. Use the tools below; they decode first.
+
+## The tools
+
+| command                                     | answers                                                     |
+| ------------------------------------------- | ----------------------------------------------------------- |
+| `claude-search PATTERN [--role talk] [--all]` | which session discussed this, with snippets                  |
+| `claude-inventory [--days N] [--sh]`          | what was I working on; `--sh` emits resume commands          |
+| `claude-branch-list FILE [--branches-only]`   | the file's tree, marking real rewind points                  |
+| `claude-branch-extract`                       | linearize one branch into a new resumable JSONL              |
+| `claude-jsonl-cwd FILE`                       | the directory a session ran in (needed to resume it)         |
+| `claude-jsonl-path DIR`                       | the projects/ dir holding a cwd's sessions                   |
+| `claude-jsonl-display < FILE`                 | render a transcript readably (`-to-log` writes it beside)    |
+
+Library behind them: `bukzor.claude.{session,search,inventory,tree,
+format_short,branch_extract}` under `~/lib/pythonpath` -- import it
+rather than re-parsing when a question needs custom analysis. Every
+module is doctested; run one with `python3 -m bukzor.claude.MODULE
+--doctest`.
+
+## Format facts that bite
+
+- **The file is a tree, not a log.** Records carry `uuid` and
+  `parentUuid`; a rewind writes new records as *siblings* of the old
+  continuation. `--resume` walks back from the newest record only, so
+  abandoned branches are invisible in the UI but fully present in the
+  file. That's where "we tried that and it didn't work" lives.
+- **The `projects/<slug>/` name is not invertible.** The slug maps both
+  `/` and `.` to `-`, so `prototype.chatfs/docs` and
+  `prototype-chatfs-docs` collide. Read `cwd` from the records
+  (`claude-jsonl-cwd`); never decode the directory name. Last value
+  wins, since resuming from elsewhere rewrites it.
+- **`type: user` is not "the user typed this".** Tool results are stored
+  as user records. Distinguishing them (`role_of`, `is_user_text`) is
+  what makes "what did I actually ask for" answerable.
+- **Sidechain files are subagent transcripts.** They carry
+  `isSidechain: true` and are not independently resumable -- searching
+  them is right, offering `--resume` on one is not.
+- **User-role text is often harness-injected**: compaction summaries,
+  skill preambles, command wrappers, `[Request interrupted...]`. Filter
+  it before drawing conclusions about what a person said.
+- Files are append-only, so a frozen or killed session loses nothing but
+  the in-flight turn. A crashed write can leave one malformed line;
+  parse defensively rather than failing the whole file.
+
+## Recovery after a crash or freeze
+
+1. `claude-inventory --days 2 --sh` -- every resumable session, newest
+   first, as paste-ready `(cd DIR && claude --resume ID)` commands.
+2. Hand the list to the user, who resumes what still matters. Don't
+   resume anything yourself.
+3. When a session's useful work is on an abandoned branch,
+   `claude-branch-list` it and extract the branch rather than hunting
+   through the live chain.
+
+## Mining a session for evidence
+
+When the transcript is evidence about an incident rather than work to
+resume, file it like any other perishable source -- capture the extract
+into the investigation's `evidence.kb/`, don't re-read the JSONL at
+every question. See `Skill(incident-forensics)`.
+
+Two habits keep this honest:
+
+- Quote what the record says, and cite `file:line` (the tools print line
+  numbers for exactly this). A transcript is a record of what was
+  *claimed* at the time, which is not the same as what was true.
+- A session's own summary of itself -- compaction summaries, `ai-title`
+  records -- is a lossy secondary source. Check it against the records
+  it summarizes before repeating it.
