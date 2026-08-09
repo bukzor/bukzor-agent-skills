@@ -59,4 +59,4 @@ citation is not an exhibit.
    theory. The entry-point `.md` carries the poset and the picture.
 7. **Present the decisions.** Filing claims signed on the owner's
    behalf accumulates judgment calls; walk them through for ruling:
-   `Skill(decision-review)`.
+   `Skill(review-open-questions)`.

@@ -25,7 +25,7 @@ hour, and its amendments, not its confirmations, became the purpose
 root and the assessor law. A miss looks like signatures requested
 for provable or checkable claims, a file-by-file slog, or acts with
 no fallout stated. This turn has since been distilled into
-`Skill(list-open-questions)`.
+`Skill(review-open-questions)`.
 
 ````
 The ledger now holds a stack of claims signed `+` -- agent judgment, my veto invited, silence is consent. Silence won't do this once: we exercise the vetoes now.

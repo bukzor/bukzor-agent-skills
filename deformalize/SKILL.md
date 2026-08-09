@@ -48,7 +48,7 @@ valuable ones: a demo that only passes under a weaker premise has
 found the source's missing premise.
 
 The source edits this step accumulates are the owner's decisions to
-make; present them for ruling: `Skill(decision-review)`.
+make; present them for ruling: `Skill(review-open-questions)`.
 
 ## Lifecycle
 

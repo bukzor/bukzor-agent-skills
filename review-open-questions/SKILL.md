@@ -1,9 +1,9 @@
 ---
-name: decision-review
-description: "Agent MUST load before presenting a batch of accumulated judgment calls, approvals, or pending decisions for the user's ruling; when asked to walk through the decisions, open vetoes, or open questions in a body of work; or when a reply of rulings (confirmations, rejections, amendments) needs adjudicating and filing."
+name: review-open-questions
+description: "Agent MUST load before presenting a batch of accumulated judgment calls, approvals, or pending decisions for the user's ruling; when asked to walk through the open questions, vetoes, or decisions in a body of work; when delegated work is about to calcify (merge, promotion, publication) carrying judgment calls no user has ruled on; or when a reply of rulings (confirmations, rejections, amendments) needs adjudicating and filing."
 ---
 
-# /decision-review [scope]
+# /review-open-questions [scope]
 
 An **open** is anything still awaiting the owner's input. Its species
 is what silence does: an open *veto* has a default -- the agent chose,
@@ -120,8 +120,9 @@ Rulings land in whatever register the work already keeps: claim-ledger
 signings (`Skill(llm-claim-ledger)`: accepted claims re-sign `!`),
 file edits, an ADR, a todo entry. The skill assumes none.
 
-Distilled 2026-08-09 from a ruling session over the strata ledger and
-from `Skill(list-open-questions)`'s parallel distillation of the same
-turn; rewritten from the two-courts picture the pair implied. The
+Distilled 2026-08-09 from a ruling session over the strata ledger,
+merged with a parallel distillation of the same turn
+(list-open-questions, superseded by this file); rewritten from the
+two-courts picture the pair implied. The
 factoring rule stands at personal scope:
 `~/.claude/must-read.kb/before/asking-the-user-to-approve-or-ratify.md`.
