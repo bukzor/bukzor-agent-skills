@@ -18,7 +18,7 @@ disagrees is worth more than another pass by the ledger's own author.
 
 ## The arc, and the keys it operationalizes
 
-The original run succeeded because of five things, each of which it
+The original run succeeded because of six things, each of which it
 found mid-course; the turns build them in from the start.
 
 1. **The telos came last but organized everything.** The retention
@@ -43,6 +43,13 @@ found mid-course; the turns build them in from the start.
    account as a chat ledger and `060` adds bets -- which claims will
    survive, where the held answer will win -- before `070` lifts the
    blind and demands rulings, and `080` demands defeats.
+6. **The user-assessor layer is a scripted turn, not a residual.**
+   Agent-signed claims stay `+` until the operator exercises the
+   invited vetoes, and no agent can mint `standing: user` on its own.
+   `090` stages the act-grain walkthrough -- each cluster of claims
+   presented as the decision it amounts to, with alternatives and the
+   fallout of rejecting -- whose original reply's amendments seeded
+   the purpose root and the assessor law.
 
 Numbers leave room between them; the operator improvises as needed and
 files a turn (or a repair) only if the next run would need it too.
