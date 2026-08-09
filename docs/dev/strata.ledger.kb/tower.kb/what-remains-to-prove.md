@@ -8,10 +8,13 @@ why:
 # What Remains to Prove
 
 The free-conservativity argument assumes the evidence operator's rule
-format really is fixed below the genres and really is monotone in
-added evidence. The format is now stated executably and conservativity
-holds on tested instances -- tooling grade, per the ledger's `verify:`
-commands. What remains is the theorem at proof grade: conservativity
-for the stated format, over every instance. The statement is small --
+format really is fixed below the genres, really is monotone in added
+evidence, and really is confined -- extension evidence concluding only
+on its own entries. The format is now stated executably and
+conservativity holds on tested instances -- tooling grade, per the
+ledger's `verify:` commands. What remains is the theorem at proof
+grade: monotone growth plus confined conclusions implies
+conservativity, for the stated format, over every instance. The
+statement is small --
 a status poset, an operator format, one theorem -- and is the natural
 first target for whichever proof assistant the fleet procures.
