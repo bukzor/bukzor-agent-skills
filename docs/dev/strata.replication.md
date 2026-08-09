@@ -36,7 +36,9 @@ found mid-course; the turns build them in from the start.
    them; `020` keeps a repair paste for the stubborn one.
 4. **The account got honest when it had to run.** The executable-model
    comparison surfaced a missing premise and an import-graph hole.
-   `040` demands the witness before the reveal instead of after.
+   `040` demands the witness before the reveal instead of after, and
+   adjudicates witness-vs-account mismatches in both directions --
+   `/deformalize`'s review step, inlined to protect the blind.
 5. **Commitment makes comparison meaningful.** `050` freezes the
    account as a chat ledger and `060` adds bets -- which claims will
    survive, where the held answer will win -- before `070` lifts the
@@ -56,7 +58,9 @@ contaminated run is still readable, an unlabeled one is not.
 
 An agent that reads `070`'s file list early has broken the run. If you
 hand over this whole directory instead of pasting turn by turn, expect
-that.
+that. The `formalize/` and `deformalize/` skills are inside the blind
+too -- both name the strata exemplars -- which is why the pastes
+inline their procedures instead of invoking them.
 
 ## What to do with the result
 
