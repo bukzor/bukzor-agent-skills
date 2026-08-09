@@ -144,12 +144,22 @@ Repo-level list. Skill-scoped work lives in each skill's own
       (llm-discourse-graph). Goes live the first time two assessors
       disagree about one claim -- then: multi-assessor frontmatter, or
       port that claim to the discourse-graph presentation
+- [ ] Decide whether strata.ledger.kb's transitively-implied `prior:`
+      entries are meant: `tred` drops five of eighteen (purpose->genre,
+      purpose->standing, purpose->protocol, history->protocol,
+      fixpoint->standing), each reachable through `view` or `reference`.
+      Either the header cites vocabulary it uses directly -- legitimate,
+      and the drawing is just a Hasse view -- or it inherited an edge it
+      never needed. Surfaced 2026-08-09 by bin/llm.ledger-graph
+  - [ ] Then: strata.ledger.md's hand-drawn ASCII spine is derivable from
+        the same `prior:` headers, so it is now a view with no stamp and
+        no computer -- regenerate it, stamp it, or say why it stays hand-cut
 - [ ] Enforce claim-label prefix-freedom by tooling: the rule lives only
       in claim.jsonschema.yaml description text (attention-grade); the
       2026-08-09 enforcement was a hand-check of 53 labels. Cross-file
       rule, so per-file schema can't hold it -- candidate homes:
-      llm-claim-ledger-kb/bin/ (beside the ledger-graph lints) or
-      llm-kb/bin/llm.kb-validate
+      llm-claim-ledger-kb/bin/ (now exists, holds llm.ledger-dot and the
+      dangling/ccomps/acyclic lints) or llm-kb/bin/llm.kb-validate
 - [ ] llm-claim-ledger/.claude/todo.md
 - [ ] llm-kb/.claude/todo.md
 - [ ] llm-collab/.claude/todo.md (v2 dissolves llm-collab — weigh new
