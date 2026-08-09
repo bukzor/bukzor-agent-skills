@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+$schema: "http://json-schema.org/draft-07/schema#"
+title: strata.ledger synthesis frontmatter
+description: >
+  Loose .md files in strata.ledger.kb/ are theory syntheses: stamped
+  views over one theory's claims. The stamp is the view law applied
+  to the ledger itself -- a cache is lawful iff it says what revision
+  it derives from. Claims live one level down, in $THEORY.kb/, under
+  jsonschema/claim.jsonschema.yaml.
+type: object
+additionalProperties: false
+required:
+  - last-updated
+properties:
+  last-updated:
+    description: The stamp -- the date this view was last derived.
+    type: string
+    pattern: "^\\d{4}-\\d{2}-\\d{2}$"

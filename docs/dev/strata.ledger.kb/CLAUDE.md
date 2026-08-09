@@ -23,7 +23,8 @@ Design decisions for particular tools or skills -> `design-next.kb/`.
 Instructions for using ledgers or kbs -> the skills' `SKILL.kb/`.
 Correspondence with named external systems belongs only in `fleet.kb/`
 -- every other theory stays proper-noun-free so it survives those
-systems changing.
+systems changing. (`question.kb/` excepted: its proper nouns are
+past-tense provenance, which no future change reaches.)
 
 ## Filing a new claim
 

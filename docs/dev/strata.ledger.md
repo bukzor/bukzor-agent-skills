@@ -10,9 +10,10 @@ derived over the fixpoints of the one below. `strata.ledger.kb/` holds
 the model as a claim ledger (`Skill(llm-claim-ledger-kb)`): one claim
 per file, label and standing in frontmatter, one theory per collection.
 
-Read `tower.kb/` for the punchline, `fleet.kb/` for where the v1
-skills and prior prototypes sit in it. Argue with a claim by editing
-its file; the git diff is the strikethrough.
+Read `question.md` for what it was all bought to settle, `tower.kb/`
+for the punchline, `fleet.kb/` for where the v1 skills and prior
+prototypes sit in it. Argue with a claim by editing its file; the git
+diff is the strikethrough.
 
 ## The picture
 
@@ -52,9 +53,9 @@ The spine, with auxiliaries feeding in:
 
 ```
 history ──► record ──► reference ──► standing ──► genre ──► tower ──► fleet
-    │                      ▲             ▲  ▲                 ▲
-    └──► view ─────────────┼─────────────┼──┘                 │
-    │        └──► protocol ┼─────────────┼────────────────────┘
+    │                      ▲             ▲  ▲                 ▲         │
+    └──► view ─────────────┼─────────────┼──┘                 │         ▼
+    │        └──► protocol ┼─────────────┼────────────────────┘     question
 fixpoint ──────────────────┴─────────────┘
 ```
 
@@ -70,10 +71,15 @@ fixpoint ──────────────────┴────�
 | `protocol` | history, view | trigger banks as monitors; enforcement grades | a runtime that enforces every rule natively |
 | `tower` | genre, protocol | the strata as their own theory poset; self-application | a lower engine needing a higher vocabulary |
 | `fleet` | tower | proper nouns: where v1 skills and prototypes sit | any named system changing |
+| `question` | fleet | the driving design problems: as wrestled, as posed, what settles each | the user disavowing a question, or one the tower cannot decompose |
 
-`fleet` is the throwaway theory. Theorems stand `bare` (`fixpoint`,
-plus `REACH`); `OBLIGATION` stands `open`; everything else is signed
-`+` pending rulings.
+`fleet` is the throwaway theory; `question` is the historical one --
+the design problems the ledger was bought to settle, with their open
+residues, `question.md` the stamped synthesis. Theorems stand `bare`
+(`fixpoint`, plus `REACH`); `OBLIGATION` stands `open` -- the one
+claim awaiting an answer. Everything else is signed `+`: the agent's
+judgment, veto invited, silence is consent -- a resting state, not a
+queue awaiting signatures (`Skill(llm-claim-ledger)`, PROVISIONAL).
 
 ## Verify
 
