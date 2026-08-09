@@ -1,0 +1,16 @@
+---
+label: COMPUTED
+standing: agent
+why:
+  - evidence-induces-a-monotone-operator.md
+  - ../fixpoint.kb/monotone-operators-have-least-fixpoints.md
+  - ../view.kb/a-cache-is-lawful-iff-the-triangle-commutes.md
+---
+
+# Standing Is Computed, Not Stored
+
+An entry's standing is *defined* as its value in the least fixpoint
+of the evidence operator -- grounded support only, nothing standing on
+itself. Any written standing is therefore a cache of a view, owing
+the commuting triangle like every other cache: stamped, regenerable,
+never read stale as truth.
