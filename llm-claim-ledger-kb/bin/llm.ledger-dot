@@ -1,0 +1,266 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = ["pyyaml"]
+# ///
+"""Emit graphviz DOT for a claim ledger kept as files.
+
+Two graphs of the same ledger: `--level theory` draws the theory poset
+from the collections' `prior:` headers; `--level claim` draws every
+claim, clustered by theory, with its `why:` arrows. Arrows point the
+way support flows -- from the prior claim to the one that rests on it
+-- so the drawing reads in the same direction as the ledger's own
+`<name>.ledger.md` spine.
+
+A `why:` target that names no claim file is drawn red and reported on
+stderr; that is the one lint this tool owes its reader.
+"""
+
+import argparse
+import os
+import re
+import sys
+import textwrap
+from collections.abc import Mapping
+from dataclasses import dataclass
+from pathlib import Path
+from typing import cast
+
+import yaml
+
+# The sigil each standing spells out, and the ink it earns. `bare`
+# needs no judge, so it gets the default ink; the rest name a judge.
+SIGIL = {"bare": "", "open": "?", "agent": "+", "user": "!"}
+COLOR = {"bare": "gray20", "open": "gray55", "agent": "#1f78b4", "user": "#33a02c"}
+
+
+@dataclass(frozen=True)
+class Claim:
+    id: str  # `<theory>/<stem>` -- ledger-wide identity
+    theory: str
+    stem: str
+    label: str
+    standing: str
+    why: tuple[str, ...]  # claim ids, resolved from file-relative paths
+    url: str  # the claim file, so a drawn node is a way in
+    gist: str  # opening paragraph, for the hover
+
+
+@dataclass(frozen=True)
+class Theory:
+    name: str
+    priors: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class Ledger:
+    name: str
+    theories: tuple[Theory, ...]
+    claims: tuple[Claim, ...]
+
+
+def claim_id(path: Path) -> str:
+    """`<theory>/<stem>`, with `..` segments of a `why:` path collapsed."""
+    clean = Path(os.path.normpath(path))
+    return f"{clean.parent.name.removesuffix('.kb')}/{clean.stem}"
+
+
+def split_frontmatter(text: str) -> tuple[Mapping[str, object], str]:
+    """The frontmatter mapping, and the body that follows it."""
+    match = re.match(r"---\n(.*?)\n---\n", text, re.DOTALL)
+    assert match is not None, text[:200]
+    loaded = cast(Mapping[str, object], yaml.safe_load(match.group(1)))
+    assert isinstance(loaded, dict), loaded
+    return loaded, text[match.end() :]
+
+
+def first_paragraph(body: str) -> str:
+    """The claim itself: the paragraph after the title, whitespace collapsed."""
+    blocks = (block.strip() for block in body.split("\n\n"))
+    paragraphs = (block for block in blocks if block and not block.startswith("#"))
+    return " ".join(next(paragraphs, "").split())
+
+
+def parse_header_bullet(text: str, key: str) -> str:
+    """The `- ``key:`` ...` theory-header bullet, continuation lines joined."""
+    match = re.search(
+        rf"^- `{key}:`(.*?)(?=^- `|\n\n|\Z)", text, re.MULTILINE | re.DOTALL
+    )
+    assert match is not None, (key, text[:200])
+    return " ".join(match.group(1).split())
+
+
+def parse_priors(value: str) -> tuple[str, ...]:
+    """Theory names cited as priors; every spelling of "none" yields none."""
+    names = (item.strip(" `-–—") for item in value.split(","))
+    return tuple(name.removesuffix(".kb") for name in names if name and name != "none")
+
+
+def read_claim(path: Path) -> Claim:
+    front, body = split_frontmatter(path.read_text())
+    label, standing, why = front["label"], front["standing"], front.get("why", [])
+    assert isinstance(label, str), label
+    assert isinstance(standing, str) and standing in SIGIL, standing
+    assert isinstance(why, list), why
+    return Claim(
+        id=claim_id(path),
+        theory=path.parent.name.removesuffix(".kb"),
+        stem=path.stem,
+        label=label,
+        standing=standing,
+        why=tuple(
+            claim_id(path.parent / str(entry)) for entry in cast(list[object], why)
+        ),
+        url=path.resolve().as_uri(),
+        gist=first_paragraph(body),
+    )
+
+
+def read_ledger(root: Path) -> Ledger:
+    theories: list[Theory] = []
+    claims: list[Claim] = []
+    for kb in sorted(root.glob("*.kb")):
+        priors = parse_priors(parse_header_bullet((kb / "CLAUDE.md").read_text(), "prior"))
+        theories.append(Theory(name=kb.name.removesuffix(".kb"), priors=priors))
+        claims.extend(read_claim(md) for md in sorted(kb.glob("*.md")) if md.name != "CLAUDE.md")
+    assert theories, root
+    return Ledger(
+        name=root.name.removesuffix(".ledger.kb"),
+        theories=tuple(theories),
+        claims=tuple(claims),
+    )
+
+
+def dangling(ledger: Ledger) -> tuple[str, ...]:
+    """Cited claim ids that no file defines."""
+    known = {claim.id for claim in ledger.claims}
+    cited = {prior for claim in ledger.claims for prior in claim.why}
+    return tuple(sorted(cited - known))
+
+
+def escape(text: str) -> str:
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def node_label(claim: Claim) -> str:
+    """The ledger label over the file name read back as the sentence it is."""
+    said = escape(f'"{claim.stem.replace("-", " ")}"')
+    lines = "<BR/>".join(textwrap.wrap(said, 26))
+    return f"<<B>{escape(claim.label)}{SIGIL[claim.standing]}</B><BR/><I>{lines}</I>>"
+
+
+def dot_theories(ledger: Ledger, rankdir: str) -> str:
+    counts = {theory.name: 0 for theory in ledger.theories}
+    for claim in ledger.claims:
+        counts[claim.theory] += 1
+    lines = [
+        f'digraph "{ledger.name}" {{',
+        f"  rankdir={rankdir};",
+        '  node [shape=box, style=rounded, fontname="Helvetica"];',
+    ]
+    lines += [
+        f'  "{theory.name}" [label="{theory.name}.kb\\n{counts[theory.name]} claims"];'
+        for theory in ledger.theories
+    ]
+    lines += [
+        f'  "{prior}" -> "{theory.name}";'
+        for theory in ledger.theories
+        for prior in theory.priors
+    ]
+    return "\n".join(lines + ["}"])
+
+
+def node_tooltip(claim: Claim) -> str:
+    """The claim's own words, wrapped -- an SVG `title`, so hovering reads it."""
+    lines = (line.replace("\\", "\\\\").replace('"', '\\"') for line in textwrap.wrap(claim.gist, 64))
+    return "\\n".join(lines)
+
+
+def dot_legend() -> list[str]:
+    """A key to the sigils and their ink, as the graph's own label: a legend
+    that is a node competes with the claims for a rank and a column."""
+    gloss = {
+        "bare": "no judge needed",
+        "open": "no one's yet",
+        "agent": "the agent's call",
+        "user": "the user's call",
+    }
+    cells = "".join(
+        f'<TD BORDER="1" COLOR="{COLOR[standing]}"><B>LABEL{SIGIL[standing]}</B><BR/><I>{why}</I></TD>'
+        for standing, why in gloss.items()
+    )
+    table = "".join(
+        [
+            '<TABLE BORDER="0" CELLSPACING="6" CELLPADDING="4">',
+            '<TR><TD ALIGN="LEFT"><B>legend</B><BR/><I>standing</I></TD>',
+            cells,
+            "</TR></TABLE>",
+        ]
+    )
+    return [f'  labelloc="t"; labeljust="l"; label=<{table}>;']
+
+
+def dot_claims(ledger: Ledger, rankdir: str) -> str:
+    lines = [
+        f'digraph "{ledger.name}" {{',
+        f"  rankdir={rankdir};",
+        "  newrank=true;",
+        '  node [shape=box, style=rounded, fontname="Helvetica", fontsize=10];',
+        '  graph [fontname="Helvetica", labeljust=l];',
+    ]
+    lines += dot_legend()  # first, so it lands leftmost on the rank it pins to
+    for theory in ledger.theories:
+        lines.append(f'  subgraph "cluster_{theory.name}" {{')
+        lines.append(f'    label="{theory.name}.kb"; color=gray75; style=rounded;')
+        lines += [
+            f'    "{claim.id}" [label={node_label(claim)}, color="{COLOR[claim.standing]}", URL="{claim.url}", tooltip="{node_tooltip(claim)}"];'
+            for claim in ledger.claims
+            if claim.theory == theory.name
+        ]
+        lines.append("  }")
+    lines += [
+        f'  "{missing}" [label="{missing}\\n(missing)", color=red, style=dashed];'
+        for missing in dangling(ledger)
+    ]
+    # Within a theory the arrows are the argument; across theories they
+    # are the tower's shape -- drawn thinner. The distinction rides on
+    # penwidth, not color, because `edgepaint` owns color downstream.
+    lines += [
+        f'  "{prior}" -> "{claim.id}";'
+        if prior.split("/")[0] == claim.theory
+        else f'  "{prior}" -> "{claim.id}" [penwidth=0.5];'
+        for claim in ledger.claims
+        for prior in claim.why
+    ]
+    return "\n".join(lines + ["}"])
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    _ = parser.add_argument("ledger", type=Path, help="a `*.ledger.kb/` directory")
+    _ = parser.add_argument("--level", choices=("claim", "theory"), default="claim")
+    _ = parser.add_argument(
+        "--rankdir",
+        choices=("LR", "TB"),
+        help="flow direction; default TB for claims, LR for theories",
+    )
+    args = parser.parse_args()
+    root = cast(Path, args.ledger)
+    level = cast(str, args.level)
+    rankdir = cast(str | None, args.rankdir)
+
+    ledger = read_ledger(root)
+    for missing in dangling(ledger):
+        print(f"{root}: dangling why: reference: {missing}", file=sys.stderr)
+    if level == "claim":
+        print(dot_claims(ledger, rankdir or "TB"))
+    elif level == "theory":
+        print(dot_theories(ledger, rankdir or "LR"))
+    else:
+        raise AssertionError(level)
+
+
+if __name__ == "__main__":
+    main()

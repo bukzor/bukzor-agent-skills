@@ -1,6 +1,6 @@
 ---
 name: llm-claim-ledger-kb
-description: "Claim ledger kept as files. Agent MUST load when reading or maintaining a *.ledger.kb/ directory, or when asked to persist a claim ledger to disk. The notation itself is Skill(llm-claim-ledger)."
+description: "Claim ledger kept as files. Agent MUST load when reading or maintaining a *.ledger.kb/ directory, when asked to persist a claim ledger to disk, or when asked to draw, graph, or check the integrity of one. The notation itself is Skill(llm-claim-ledger)."
 ---
 
 # llm-claim-ledger-kb
@@ -39,6 +39,53 @@ encouraged, not exceptional.
 
 Worked instance: `../llm-claim-ledger/design.ledger.kb/` -- the
 notation's own design, kept in this form.
+
+## Tools provided
+
+Paths are relative to this skill's directory.
+
+### bin/llm.ledger-graph
+
+Purpose: see the shape of the argument, and catch the three ways a
+file-per-claim ledger rots silently -- a `why:` that points nowhere,
+claims that never joined the graph, a citation cycle.
+
+Recommended: run it after any rename, and before committing a batch
+of new claims. Reading a ledger you did not write, run it first.
+
+```bash
+bin/llm.ledger-graph <name>.ledger.kb                 # every claim, clustered by theory
+bin/llm.ledger-graph <name>.ledger.kb --level theory  # the poset of collections alone
+```
+
+It renders an SVG under `$TMPDIR/ledger-graphs/<date>/` and prints
+the path, leaving the `.dot` beside it. `bin/llm.ledger-dot` is the
+emitter underneath, if you want the DOT on stdout.
+
+Arrows point the way support flows, so the drawing reads in the same
+direction as the `<name>.ledger.md` spine. A node is its label over
+its file name read back as the sentence it is; the border is
+standing; an arrow crossing out of its theory is drawn thin. In a
+browser the nodes are live -- hover for the claim's opening
+paragraph, click to open the file.
+
+The pipeline is `tred | dot | edgepaint | neato -n2`. `tred` makes it
+a Hasse diagram: an arrow the drawing already implies by a path is
+dropped, at both levels. Read the drops -- each is a citation of
+something already inherited, and whether that directness was meant is
+a question for the header or the claim. `edgepaint` recolors crossing
+edges so a long reach across the tower stays traceable; it owns
+`color`, which is why standing rides on the node and reach rides on
+penwidth.
+
+The lints ride along. A `why:` target naming no claim file is drawn
+red and reported on stderr. `ccomps` and `acyclic` print component
+count and cycle check: a ledger whose claims arrive as dust rather
+than one component has its arrows in prose, not in `why:`, and is
+the failure this skill exists to prevent. The two ledgers in this
+repo read as the two ends of that scale -- a fully wired one comes
+back a single component, and `../llm-claim-ledger/design.ledger.kb/`
+came back 25 components across 27 claims.
 
 ## What this is not
 
