@@ -13,7 +13,7 @@ context loss. Speed beats alignment.
 - After failed or partially-failed task with recurring failure mode.
 - User-requested debrief.
 - Context over 200k with reusable lessons (see
-  `../must-read/when/context-over-200k-tokens.md`).
+  `../must-read.kb/when/context-over-200k-tokens.md`).
 
 ## Steps
 

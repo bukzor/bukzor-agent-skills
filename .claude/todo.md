@@ -168,9 +168,10 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] llm-must-read-kb/.claude/todo.md
 - [x] Create skill `llm-must-read-kb/` (was drafted as `must-read-d`) to
       document the trigger-dir convention (`before/`, `after/`, `when/`).
-      Two homes still inconsistent: `~/.claude/must-read.d/` (personal —
-      rename plan filed at `~/.claude/CLAUDE.rename-must-read-d-to-must-read-kb.Task.md`)
-      and `llm-kb/SKILL.kb/must-read/` (skill-level — user handling).
+      All homes now consistent on `must-read.kb/`: personal
+      (`~/.claude/must-read.kb/`) and skill-level (`llm-kb/`,
+      `llm-claim-ledger/`), each SKILL.md carrying the skill-scope
+      Required Reading stanza.
 - [x] Create ADR for skill design criteria (setup:, action-based triggers, depends:)
 - [x] Refine load triggers for llm.kb and llm-subtask skills
 - [x] ADR: skill and script naming conventions (consolidated bin/, subcommand form, skill naming)

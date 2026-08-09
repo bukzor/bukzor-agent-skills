@@ -2,11 +2,6 @@
 
 Sweep `../self-audit.kb/` with urgency tiers.
 
-## When invoked
-
-- `../must-read/after/creating-or-editing-kb-files.md`
-- `../must-read/before/marking-kb-work-done.md`
-
 Skip an audit only when its applicability condition doesn't match.
 
 ## Loading the audits

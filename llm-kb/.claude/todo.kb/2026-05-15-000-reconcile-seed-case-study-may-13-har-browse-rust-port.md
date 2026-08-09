@@ -62,7 +62,7 @@ case-study. That procedure's steps drive the work below.
     `status: reconciled`
 - [ ] Cross-link failure-modes to procedures (mitigated-by) and to principles
 - [ ] After distillation: run
-    `SKILL.kb/must-read/after/distilling-from-a-raw-source.md` audits
+    `SKILL.kb/must-read.kb/after/distilling-from-a-raw-source.md` audits
 
 ## Open Questions
 

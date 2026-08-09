@@ -73,7 +73,7 @@ via explicit cross-references. This works as long as:
 2. Each procedure declares what it prevents (frontmatter cross-refs to
    failure-modes.kb/).
 3. Concepts are stubbed on first mention, so cross-references always resolve
-   (per `../../SKILL.kb/must-read/when/introducing-a-novel-term.md`).
+   (per `../../SKILL.kb/must-read.kb/when/introducing-a-novel-term.md`).
 
 When any of these slips, the discovery model degrades to "agent reads
 everything." That's a fallback, not the design.

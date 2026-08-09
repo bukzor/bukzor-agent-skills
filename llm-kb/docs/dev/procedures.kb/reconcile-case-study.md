@@ -72,7 +72,7 @@ has a canonical entry with mitigations and cross-refs. Set
 
 ## After completing
 
-Run `../../../SKILL.kb/must-read/after/distilling-from-a-raw-source.md`
+Run `../../../SKILL.kb/must-read.kb/after/distilling-from-a-raw-source.md`
 audits.
 
 ## What this prevents

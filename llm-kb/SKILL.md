@@ -16,8 +16,12 @@ setup: |
 > **IMPERATIVE:**
 >
 > Your FIRST action when this skill loads MUST be:
-> `Bash("ls -RF SKILL.kb/must-read/")`. Then read every entry whose trigger
-> matches the work at hand.
+> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+>
+> That listing is an index of triggers: each filename names the occasion to
+> read it. Walk it while planning, before ANY action, and read every entry
+> whose trigger matches the work at hand — `before/` entries must be read
+> *before* the action they name, not alongside it.
 
 The must-read entries link to audits in `SKILL.kb/self-audit.kb/` and
 procedures in `SKILL.kb/procedures.kb/`; follow those links when triggers

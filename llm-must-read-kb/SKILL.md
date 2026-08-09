@@ -159,7 +159,7 @@ deserve its own file, factor it out:
 
 ```
 SKILL.kb/
-├── must-read/
+├── must-read.kb/
 │   ├── before/marking-kb-work-done.md   ─ "run the validation pass"
 │   └── after/creating-or-editing-kb-files.md  ─ "run the audit pass"
 └── procedures.kb/
@@ -186,11 +186,6 @@ The pattern installs at three scopes:
 All three coexist; each scope ships its own `must-read.kb/`. The agent
 scans every reachable one during planning. Same-named triggers across
 scopes are not deduplicated — each trigger file is independent.
-
-> **Open question (deferred):** the existing personal home is
-> `~/.claude/must-read.d/` and the existing skill-level home is
-> `SKILL.kb/must-read/` (no `.kb` suffix). Migration to
-> `must-read.kb/` is pending; this skill prescribes the target name.
 
 ## Adoption
 
@@ -222,6 +217,29 @@ While planning, before taking ANY action:
 `$PATH` is whichever scope's `must-read.kb/` this CLAUDE.md governs.
 For a personal home, hardcode the absolute path. For a project or
 skill home, the relative path suffices.
+
+### Skill scope
+
+A skill has no host CLAUDE.md in the consumer's context — its `SKILL.md`
+*is* what loads. So the stanza goes in the `SKILL.md` body, near the top,
+and its cadence is skill-load rather than session-start. The canonical
+text, verbatim:
+
+```markdown
+> **IMPERATIVE:**
+>
+> Your FIRST action when this skill loads MUST be:
+> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+>
+> That listing is an index of triggers: each filename names the occasion to
+> read it. Walk it while planning, before ANY action, and read every entry
+> whose trigger matches the work at hand — `before/` entries must be read
+> *before* the action they name, not alongside it.
+```
+
+Ship it in every skill that carries a bank; a bank nothing points at is a
+bank nothing reads. The skill's own `CLAUDE.md` governs maintainers, not
+consumers, and is not a substitute.
 
 ## When to Use
 

@@ -1,6 +1,6 @@
 # procedures.kb -- shared multi-step methods
 
-Procedures invoked by `../must-read/` triggers or by hand when the
+Procedures invoked by `../must-read.kb/` triggers or by hand when the
 situation calls for them. Multi-step methods that change state.
 
 ## What belongs here

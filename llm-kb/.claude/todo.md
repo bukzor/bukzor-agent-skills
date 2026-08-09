@@ -70,4 +70,4 @@ cost-benefit-sweh:
 - [ ] Synthesis-freshness check (fold into `bin/llm.kb-validate` or sibling): warn when a synthesis file's `last-updated` predates substantive changes to its collection -- field case 2026-08-08: `prototype.llm-stet/docs/dev/design.md` carries a hand-drawn poset diagram + open-claims list over `design.kb/`, and nothing catches drift; `last-updated` is currently write-only metadata. Field case 2026-08-09: `bukzor-agent-skills/docs/dev/strata.ledger.kb/question.md` went stale same-day (purpose restructure 32b1a76 changed what three rows should cite) while its date-grain stamp stayed "current" -- the check needs commit-grain, not date-grain
 - [ ] Decide `post-mortem.md` naming (capture-incident? learn-from-failure?) -- defer until a second case-study clarifies the modes
 - [ ] Extract `SKILL.kb/self-audit.kb/bloat.md`'s "Frame" stance into `principles.kb/` once that collection is seeded
-- [ ] Rename `SKILL.kb/must-read/` → `SKILL.kb/must-read.kb/` (user-handling) -- align with `Skill(llm-must-read-kb)` convention
+- [x] Rename `SKILL.kb/must-read/` → `SKILL.kb/must-read.kb/` -- align with `Skill(llm-must-read-kb)` convention

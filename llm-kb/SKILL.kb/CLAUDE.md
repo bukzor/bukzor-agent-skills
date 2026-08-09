@@ -2,7 +2,7 @@
 
 This directory holds the skill's runtime directives for consumers. The
 SKILL.md `IMPERATIVE` block at the project root tells consumers to
-`ls -RF SKILL.kb/must-read/` on skill load.
+`ls -RF SKILL.kb/must-read.kb/` on skill load.
 
 Maintainer's job: keep the must-read triggers, audits, and procedures
 organized so an agent reaching this directory at runtime finds the right
@@ -10,7 +10,7 @@ file fast.
 
 ## What belongs here
 
-- `must-read/` -- trigger-bound directives, partitioned by when they fire.
+- `must-read.kb/` -- trigger-bound directives, partitioned by when they fire.
 - `procedures.kb/` -- multi-step methods invoked when the situation
   calls for them.
 - `self-audit.kb/` -- proactive quality checks. One question, one
@@ -24,19 +24,12 @@ file fast.
 
 ## Subdirectory conventions
 
-### must-read/
+### must-read.kb/
 
-Mirrors the personal `~/.claude/must-read.d/` convention.
-
-- `before/<situation>.md` -- read **and** complete prescribed actions
-  before the named action. Hard precondition.
-- `after/<situation>.md` -- read at completion of the named action.
-- `when/<situation>.md` -- read when the situational match fires
-  mid-task.
-
-Filenames are situation slugs naming what triggers the read. Each file
-states the trigger and points at one or more procedures or audits for
-the method.
+The skill-scope trigger bank. Format, juncture semantics, and naming are
+`Skill(llm-must-read-kb)`; don't restate them here. Local rule only: each
+file states its trigger and points at one or more procedures or audits
+for the method.
 
 ### procedures.kb/ vs self-audit.kb/
 
