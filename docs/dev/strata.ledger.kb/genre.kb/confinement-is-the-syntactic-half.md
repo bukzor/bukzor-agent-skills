@@ -1,6 +1,7 @@
 ---
 label: CONFINE
 standing: agent
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_genre.py
 ---
 
 # Confinement Is the Syntactic Half

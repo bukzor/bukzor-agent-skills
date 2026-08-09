@@ -2,6 +2,7 @@
 label: KNASTER
 standing: bare
 authority: "Knaster-Tarski fixpoint theorem"
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_fixpoint.py::test_iteration_from_bottom_computes_the_least_fixpoint
 ---
 
 # Monotone Operators Have Least Fixpoints

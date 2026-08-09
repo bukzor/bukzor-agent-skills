@@ -4,6 +4,7 @@ standing: agent
 why:
   - the-engine-tower-is-a-theory-poset.md
   - ../genre.kb/together-they-are-the-satisfaction-condition.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_tower.py::test_imports_respect_the_poset
 ---
 
 # One Structure, Twice

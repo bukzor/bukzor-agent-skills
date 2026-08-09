@@ -3,7 +3,7 @@ label: OVERSHOOT
 standing: bare
 why:
   - warm-start-is-sound-upward.md
-verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_retraction_gap_keeps_the_ring
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_fixpoint.py::test_downward_revision_overshoots
 ---
 
 # Downward Revision Overshoots
