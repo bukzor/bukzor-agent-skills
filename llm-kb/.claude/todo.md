@@ -57,6 +57,7 @@ cost-benefit-sweh:
 - [x] Verify `tests/` still pass after schema reshuffle, `.d → .kb` rename, and KbValidator extension — 4 pass from repo root and from llm-kb/ (pytest ini_options hoisted to workspace root; bare `pytest` at root had silently collected 0 tests)
 - [ ] Devlog entry for this session (skeleton-default schema centralization, sessions.jsonschema migration)
 - [x] Commit current working tree (CLEAN-KITCHEN)
+- [ ] Pin pyright for member-cwd runs: llm-kb declares no basedpyright dep, so `uv run pyright` from llm-kb/ falls through to ambient PATH (2026-08-08 field case: resolved to prototype.chatfs's venv shim — same basedpyright version by luck). Add basedpyright-as-pyright to llm-kb's dev group (workspace source lives at root pyproject) or document root-only invocation. The config side is already cwd-safe (fd492ad pins stubPath)
 
 ## Later
 
@@ -66,6 +67,7 @@ cost-benefit-sweh:
 - [ ] todo.kb/2026-06-03-000 (Validate path references -- frontmatter schema type; link-check script promoted to `bin/llm.kb-validate-links`, still not folded into `bin/llm.kb-validate` proper)
   - [ ] todo.kb/2026-07-09-000 (Body-markdown path-link checker -- blocked on the above)
   - [ ] todo.kb/2026-07-25-000 (Test coverage for `llm.kb-validate-links` -- zero tests for the new `--strict`/`--lax` modes and whitespace heuristic)
+- [ ] Synthesis-freshness check (fold into `bin/llm.kb-validate` or sibling): warn when a synthesis file's `last-updated` predates substantive changes to its collection -- field case 2026-08-08: `prototype.llm-stet/docs/dev/design.md` carries a hand-drawn poset diagram + open-claims list over `design.kb/`, and nothing catches drift; `last-updated` is currently write-only metadata
 - [ ] Decide `post-mortem.md` naming (capture-incident? learn-from-failure?) -- defer until a second case-study clarifies the modes
 - [ ] Extract `SKILL.kb/self-audit.kb/bloat.md`'s "Frame" stance into `principles.kb/` once that collection is seeded
 - [ ] Rename `SKILL.kb/must-read/` → `SKILL.kb/must-read.kb/` (user-handling) -- align with `Skill(llm-must-read-kb)` convention
