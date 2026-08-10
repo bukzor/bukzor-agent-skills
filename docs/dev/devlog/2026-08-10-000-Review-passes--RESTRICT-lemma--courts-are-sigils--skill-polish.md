@@ -124,6 +124,15 @@ sister repos (`prototype.personal-reasoning-management`'s
 `design.ledger.kb/`, `corpus/ledger.kb/`) are a separate pass, not
 done here. Full ruling: `docs/dev/adr/2026-08-10-000-Adopt-the-claims-kb-suffix--rename-the-ledger-skills.md`.
 (Commits `03f6254`, `879de9a`, `00721a9`.)
+Same-day addendum: the PRMS pass ran (its commits `672b30b`,
+`fe14264`, `4b37c00`, `dbe34e6`) — `design.ledger.*` →
+`design.claims.*`, the skill-name sweep, and the `requires:` line
+re-triaged to `Skill(llm-claims-kb)` — but `corpus/ledger.kb/`
+stayed: it is a Lean-generator theory source, not a ledger artifact
+(the dir stem becomes the identifier `Frame.ledger`, and
+`Gen/Main.lean`'s `validLabel` admits no dots), so "ledger" there
+names the theory — concept language, like `Ledger.lean`. Record in
+PRMS's `.claude/todo.md` (it keeps no devlog).
 
 While in `llm-claims-kb/SKILL.md`: added `SKILL.kb/self-audit.kb/`,
 four ledger-specific rot audits (standing honesty, graph health,
