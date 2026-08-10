@@ -40,6 +40,18 @@ encouraged, not exceptional.
 Worked instance: `../llm-claim-ledger/design.ledger.kb/` -- the
 notation's own design, kept in this form.
 
+## Claim bodies
+
+The body is cold text -- read to argue with, not on every load -- so
+shape it for extraction and for veto, not for brevity:
+
+- the commitment first, in one or two quotable sentences;
+- enumerations as parallel bullets, never a semicolon chain -- a
+  ruling points at a bullet;
+- argument after the commitment, its declined alternative named;
+- at most one aphorism; cites inline where the weight rests,
+  mirrored in `why:`.
+
 ## Tools provided
 
 Paths are relative to this skill's directory.

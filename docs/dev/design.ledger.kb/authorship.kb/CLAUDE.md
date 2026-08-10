@@ -6,8 +6,8 @@ asymmetry that a skill is written once and paid for on every load.
 
 - `prior:` none -- root theory
 - `ontology:` skill, SKILL.md, description, name, author, invoker,
-  operator, instance, exemplar, peer, substrate, load, retrieval,
-  trigger, composition, token, blind
+  operator, instance, exemplar, peer, substrate, load, tier,
+  retrieval, trigger, composition, token, blind
 - `defeated by:` a skill format with per-audience channels (an
   author-facing file beside the invoker-facing body), or a harness
   whose retrieval consults neither names nor descriptions -- either
