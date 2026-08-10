@@ -11,14 +11,14 @@ verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/
 
 # One Sort Buys Conservativity for Free
 
-Keep one sort of node, and the evidence operator's rule format is
+Keep one sort in the base, and the evidence operator's rule format is
 fixed once, below every genre. A genre extension can then only add
 vocabulary and evidence, and each direction of conservativity is held
 by one property: monotone growth keeps old standing from falling, and
 confinement -- extension evidence concludes only on the genre's own
 entries -- keeps it from rising. Monotonicity alone is not enough:
 the unconfined counterexample in the verify suite breaks conservation
-with a single appended row. Together they give conservativity by
+with a single appended instance. Together they give conservativity by
 construction, no proof per genre. Underneath, the two properties meet
 in one lemma: confinement makes the extended operator triangular over
 the prior's entries, and triangular operators restrict

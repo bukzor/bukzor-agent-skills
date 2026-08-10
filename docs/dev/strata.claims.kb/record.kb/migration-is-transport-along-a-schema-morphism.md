@@ -11,8 +11,9 @@ verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/
 Schemas and their changes form a category: renames are isomorphisms,
 splits and merges are morphisms with known shapes. A migration should
 be *recorded* as the schema morphism and *executed* as the transport
-of instances along it -- the universal lift, which is mechanical once
-the morphism is stated. A migration log is then a diagram of schemas,
+of instances along it -- the universal lift, mechanical once the
+morphism is stated (witnessed for renames; splits and merges still
+owe theirs). A migration log is then a diagram of schemas,
 and the instance history is required to be a lift of that diagram.
 
 Consequence: migration scripts that restate the transport by hand are

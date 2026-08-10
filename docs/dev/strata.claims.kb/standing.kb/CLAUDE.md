@@ -7,8 +7,8 @@ fixpoint is what anything's standing *is*.
 - `ontology:` status, claim, evidence, warrant, certificate, checker,
   verdict, fiat, ruling, retraction, defeat, standing, assessor,
   party, stance, quotient
-- `defeated by:` a second node sort in the base, or standing stored
-  as ground truth rather than computed
+- `defeated by:` a base holding anything besides claims, or standing
+  stored as ground truth rather than computed
 
 ## What belongs here
 
