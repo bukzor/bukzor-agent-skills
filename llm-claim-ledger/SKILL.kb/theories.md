@@ -1,6 +1,6 @@
 # Theories — elaboration
 
-What a theory is, and the two laws, are in `SKILL.md`. This is the rest.
+What a theory is, and its laws, are in `SKILL.md`. This is the rest.
 
 Example of a poset: `stance` (acts, authors) → `ledger` (claims, verdicts,
 hashes) → `host` (engines, kernels) → `world` (Lean4, mathlib, version

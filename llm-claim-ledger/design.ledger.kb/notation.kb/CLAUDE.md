@@ -5,7 +5,8 @@ it declined. This is the theory `../../SKILL.kb/` is the manual for.
 
 - `prior:` `good-smells.kb`
 - `ontology:` label, sigil, status, standing, premise, arrow, node type,
-  warrant, stipulation, judge, signature, check, entry, scan
+  warrant, stipulation, veto, judge, signature, check, entry, scan,
+  theory, ontology, prior, defeater
 - `defeated by:` an inference relation cheap enough to check at entry
 
 ## What belongs here

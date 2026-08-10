@@ -1,5 +1,5 @@
 ---
-last-updated: "2026-08-08"
+last-updated: "2026-08-10"
 ---
 
 # The design, as a ledger
