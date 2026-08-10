@@ -5,9 +5,10 @@ maintenance economics reduces to. Exists so `reference` and `standing`
 can cite one label instead of restating a proof sketch.
 
 - `prior:` -- none
-- `ontology:` poset, lattice, completeness, monotone operator,
-  iteration, fixpoint (least/greatest), pre-/post-fixed point,
-  approximation, interval, precision
+- `ontology:` poset, lattice, completeness, product, coordinate,
+  monotone operator, triangular, iteration, fixpoint (least/greatest),
+  pre-/post-fixed point, restriction, approximation, interval,
+  precision
 - `defeated by:` a misstatement of settled mathematics -- fixed by
   restating, not by argument
 

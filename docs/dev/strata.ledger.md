@@ -1,5 +1,5 @@
 ---
-last-updated: "2026-08-09"
+last-updated: "2026-08-10"
 ---
 
 # The strata, as a ledger
@@ -67,7 +67,7 @@ purpose ───► view, standing, genre, protocol
 
 | Theory | Priors | Holds | Defeated by |
 |---|---|---|---|
-| `fixpoint` | -- | background order theory: lfp, warm-start, overshoot, approximation | a misstatement of settled mathematics |
+| `fixpoint` | -- | background order theory: lfp, warm-start, overshoot, approximation, triangular restriction | a misstatement of settled mathematics |
 | `purpose` | -- | the operating regime: unbounded growth, near-zero entry, representation of disagreement | a corpus small enough to re-read |
 | `history` | -- | the store as a word of updates; state as its fold | a substrate that forgets its past |
 | `view` | history, purpose | derived values, the commuting triangle, staleness as debt | a reader that can afford to recompute every read |

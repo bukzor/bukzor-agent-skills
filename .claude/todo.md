@@ -154,6 +154,12 @@ Repo-level list. Skill-scoped work lives in each skill's own
   - [ ] Then: strata.ledger.md's hand-drawn ASCII spine is derivable from
         the same `prior:` headers, so it is now a view with no stamp and
         no computer -- regenerate it, stamp it, or say why it stays hand-cut
+- [ ] Witness test for RESTRICT
+      (strata.ledger.kb/fixpoint.kb/triangular-operators-restrict.md):
+      a triangular operator on a two-lattice product whose first
+      coordinate's lfp equals the lfp computed on the first lattice
+      alone; wire `verify:` once it exists (bare standing needs no
+      test, but the incubator witnesses every other fixpoint claim)
 - [ ] Enforce claim-label prefix-freedom by tooling: the rule lives only
       in claim.jsonschema.yaml description text (attention-grade); the
       2026-08-09 enforcement was a hand-check of 53 labels. Cross-file

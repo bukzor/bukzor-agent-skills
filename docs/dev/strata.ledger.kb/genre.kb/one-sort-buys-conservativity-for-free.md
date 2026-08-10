@@ -5,6 +5,7 @@ why:
   - conservativity-is-the-semantic-half.md
   - confinement-is-the-syntactic-half.md
   - ../standing.kb/evidence-induces-a-monotone-operator.md
+  - ../fixpoint.kb/triangular-operators-restrict.md
 verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_genre.py
 ---
 
@@ -18,7 +19,12 @@ confinement -- extension evidence concludes only on the genre's own
 entries -- keeps it from rising. Monotonicity alone is not enough:
 the unconfined counterexample in the verify suite breaks conservation
 with a single appended row. Together they give conservativity by
-construction, no proof per genre.
+construction, no proof per genre. Underneath, the two properties meet
+in one lemma: confinement makes the extended operator triangular over
+the prior's entries, and triangular operators restrict
+(`../fixpoint.kb/triangular-operators-restrict.md`) -- both
+directions in one stroke, with monotonicity supplying the least
+fixpoints the identity is about.
 
 The tiers (higher-sorts-are-definitional.md): the base keeps one
 primitive sort; defined sorts above it ride free, covered by the
