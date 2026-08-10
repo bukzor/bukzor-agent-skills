@@ -15,15 +15,15 @@ rulings on the record. Scope defaults to the current stretch of work.
 
 ## One law: the cheapest competent court
 
-Call anything that can settle an open a **court**. There are two:
-everything cheaper than the owner -- the record, a check, a witness --
-and the owner themself. Every open is settled
-in the cheapest court competent to settle it, and a settlement from
-the wrong court is void both ways: a fact ratified by the owner
-records a false judge; a stipulation defaulted by an agent is a veto
-still waiting, not a ruling.
+Call anything that can settle an open a **court**, and order the
+courts by cost: the record, a check, a witness, and dearest of all
+the owner. Every open is settled in the cheapest court competent to
+settle it, and a settlement from the wrong court is void both ways:
+a fact ratified by the owner records a false judge; a stipulation
+defaulted by an agent is a veto still waiting, not a ruling.
 
-So before presenting anything, exhaust the cheap court:
+So before presenting anything, exhaust the cheap courts -- expect
+them to settle most of the batch:
 
 - **By the record.** Open lists rot, so test against the record, not
   your memory of it: the owner already ruled (cite it), intervening
@@ -41,10 +41,10 @@ So before presenting anything, exhaust the cheap court:
 
 What survives every cheaper court is the owner's jurisdiction:
 stipulations -- value choices, scope, one-way doors -- usually the
-minor residue of the opens they came from. Expect most of the batch to settle here.
-However small the residue, it still wants the walkthrough: long work
-accretes vocabulary the owner never adopted, and the rebuild into
-plain language is half the product.
+minor residue of the opens they came from. However small the
+residue, it still wants the walkthrough: long work accretes
+vocabulary the owner never adopted, and the rebuild into plain
+language is half the product.
 
 ## The owner's court
 
