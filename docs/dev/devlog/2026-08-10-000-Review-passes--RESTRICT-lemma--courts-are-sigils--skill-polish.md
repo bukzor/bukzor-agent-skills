@@ -58,6 +58,25 @@ ontology widened to "the skills of this repo". (Commit `51f82bf`.)
 operator's first instinct; rejected on vocabulary (QUARANTINE), not
 on topic.
 
+### llm-claim-ledger's own ledger caught up with its manual
+
+**Rationale:** the user observed the session's clarity concentrated on
+llm-claim-ledger while the records landed elsewhere. Diagnosis: the
+manual (`SKILL.md`, `SKILL.kb/`) was already current — rulings landed
+there as they happened — but `design.ledger.kb/` lagged, and
+notation.kb's charter says decisions live there, instructions in
+SKILL.kb. Filed SPLIT (user; the 2026-08-09 split-trigger ruling,
+previously manual-only, with the rejected count-trigger on record) and
+PLACEMENT (agent; the cheapest-judge law proper-noun-free — the
+generator behind the sigil aphorisms, and the ledger-side face of
+what fleet.kb/COURTS aligns). Widened notation.kb's ontology with
+words its standing claims already used (theory, ontology, prior,
+defeater, veto) — the ENFORCEABLE failure mode caught in the
+ENFORCEABLE claim's own collection. (Commit `0a79876`.)
+**Alternatives considered:** enriching SKILL.md with the reasoning —
+rejected; the manual's audience pays for reasoning it doesn't need,
+and the aphorisms already carry the operational content.
+
 ## Conventions Established
 
 - A skill and a notation that present the same structure get a
@@ -75,13 +94,15 @@ on topic.
 - Prose nits awaiting veto: FREE_CONSERVE says "row" (record's word
   is "instance"); "node" appears in standing/genre defeaters but no
   ontology admits it; MIGRATE's "mechanical once the morphism is
-  stated" is fully true only for renames; claim-ledger core's "the
-  two laws" vs SATISFACTION's better "two halves of one law".
+  stated" is fully true only for renames. (The fourth nit, "the two
+  laws", fixed in `0a79876`.)
 - Witness test for RESTRICT — filed in `.claude/todo.md`.
 
 ## References
 
-- Commits: `bfc9966`, `5ce167e`, `aaaaa65`, `51f82bf`
+- Commits: `bfc9966`, `5ce167e`, `aaaaa65`, `51f82bf`, `0a79876`
 - `docs/dev/strata.ledger.kb/fixpoint.kb/triangular-operators-restrict.md`
 - `docs/dev/strata.ledger.kb/fleet.kb/the-courts-are-the-sigils.md`
+- `llm-claim-ledger/design.ledger.kb/notation.kb/settle-at-the-cheapest-judge.md`
+- `llm-claim-ledger/design.ledger.kb/notation.kb/a-theory-splits-on-cost-not-count.md`
 - `docs/dev/devlog/2026-08-09-*.md` — the prior arc this continues
