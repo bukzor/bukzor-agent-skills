@@ -1,0 +1,101 @@
+---
+name: llm-claims-kb
+description: "Claim ledger kept as files. Agent MUST load when reading or maintaining a *.claims.kb/ directory, when asked to persist a claim ledger to disk, or when asked to draw, graph, or check the integrity of one. The notation itself is Skill(llm-claims)."
+---
+
+# llm-claims-kb
+
+The file form of a claim ledger. The notation -- labels, sigils,
+arrows, policy, governance -- is `Skill(llm-claims)` and is not
+restated here; this skill maps it onto a directory.
+
+## The mapping
+
+| In chat | On disk |
+|---|---|
+| one claim, one line | one claim, one file (`kebab-case.md`, named in prose) |
+| label + sigil | `label:` + `standing:` frontmatter, the sigil spelled out: `bare`, `open` (`?`), `agent` (`+`), `user` (`!`) |
+| `<-` arrows | `why:` -- file-relative paths; never a copied sigil, standing lives at the definition site |
+| `-- certified(CHECK)` | `verify:` |
+| restating a label | editing the file; the git diff's `-` is the strikethrough |
+| a theory | a collection (`<theory>.kb/`); its defining claim is the header of the collection's `CLAUDE.md` (`prior:`, `ontology:`, `defeated by:`) |
+| `claim list` | `ls`; the standing scan is `grep -rH '^standing:' *.kb/` |
+
+Schema: `jsonschema/claim.jsonschema.yaml`. Link or copy it next to
+each ledger and `$ref` it from a per-collection schema.
+
+A claims.kb is a `.kb`: `Skill(llm-kb)`'s audits and maintenance
+rules apply to it wholesale. The audits in `SKILL.kb/self-audit.kb/`
+here are the ledger-specific additions, not replacements.
+
+## Layout
+
+`<name>.claims.md` is the entry point: the theory poset, the scan
+commands, what each theory holds and what defeats it. One directory
+per theory under `<name>.claims.kb/`, each carrying its `CLAUDE.md`
+theory header.
+
+On disk a theory costs a directory and a header, so the
+split-for-the-reader move (`SKILL.kb/theories.md` in
+`Skill(llm-claims)`) is even cheaper here than in chat:
+auxiliary theories that simplify a citing theory's claims are
+encouraged, not exceptional.
+
+Worked instance: `../llm-claims/design.claims.kb/` -- the
+notation's own design, kept in this form.
+
+## Claim bodies
+
+The body is cold text -- read to argue with, not on every load -- so
+shape it for extraction and for veto, not for brevity:
+
+- the commitment first, in one or two quotable sentences;
+- enumerations as parallel bullets, never a semicolon chain -- a
+  ruling points at a bullet;
+- argument after the commitment, its declined alternative named;
+- at most one aphorism; cites inline where the weight rests,
+  mirrored in `why:`.
+
+## Renames
+
+A label, filename, or theory is load-bearing at every reference.
+Renaming one: `git mv` the file (both paths in the commit), sweep
+every `why:` and prose reference in live files -- historical records
+(devlogs, ADRs) keep the old name as provenance -- then re-run
+`bin/llm.claims-graph` and the schema validation before committing.
+
+## Tools provided
+
+Paths are relative to this skill's directory.
+
+### bin/llm.claims-graph
+
+Purpose: see the shape of the argument, and catch the three ways a
+file-per-claim ledger rots silently -- a `why:` that points nowhere,
+claims that never joined the graph, a citation cycle.
+
+Recommended: run it after any rename, and before committing a batch
+of new claims. Reading a ledger you did not write, run it first.
+
+```bash
+bin/llm.claims-graph <name>.claims.kb                 # every claim, clustered by theory
+bin/llm.claims-graph <name>.claims.kb --level theory  # the poset of collections alone
+```
+
+It renders an SVG under `$TMPDIR/ledger-graphs/<date>/` and prints
+the path, leaving the `.dot` beside it. `bin/llm.claims-dot` is the
+emitter underneath, if you want the DOT on stdout.
+
+How to read the drawing, and the rots it catches:
+`SKILL.kb/self-audit.kb/graph-health.md`.
+
+## What this is not
+
+`Skill(llm-discourse-graph)` also keeps claims in files: a bare
+`claims.kb/` beside `questions.kb/`, `sources.kb/`, and two more --
+five node types tracking belief across a project. This skill is one
+node type deep and standing-first: `label:` and `standing:` in every
+file, `why:` arrows, one theory per collection. Meeting a claims
+directory, tell them apart by shape, not name: sibling node-type
+collections mean the discourse graph; frontmatter standing and
+theory headers mean a ledger.
