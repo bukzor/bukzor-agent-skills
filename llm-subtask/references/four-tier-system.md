@@ -31,24 +31,24 @@ Assistant: [doesn't resume previous work, keeps working on PDF rotation until re
 **Commands:**
 - `subtask list:` - Agent enumerates pending work from context
 - `subtask prepend: DESC` - Shift priority to new work stream
-- `subtask push: DESC` - Add subtask to working memory
+- `subtask append: DESC` - Add subtask to working memory
 - `subtask pop:` - Complete current subtask
 
 **Example:**
 ```
 User: "Refactor the auth module"
 Assistant: [recognizes multi-step work]
-subtask push: Extract authentication logic
-subtask push: Create new auth service class
-subtask push: Update imports
-subtask push: Run tests
+subtask append: Extract authentication logic
+subtask append: Create new auth service class
+subtask append: Update imports
+subtask append: Run tests
 
 [works on first item]
 subtask pop:
 [works on second item]
 ```
 
-**When conversation ends:** Important incomplete items promoted via `todo push:` to tactical tier.
+**When conversation ends:** Important incomplete items promoted via `todo append:` to tactical tier.
 
 ## Tier 2: Tactical Todos
 
@@ -66,7 +66,7 @@ subtask pop:
 ```
 
 **Commands:**
-- `todo push: DESC` - Append `- [ ] DESC`
+- `todo append: DESC` - Append `- [ ] DESC`
 - `todo pop:` - Mark first `[ ]` as `[x]`
 - `todo list:` - Display file contents
 - `todo clear:` - Remove completed `[x]` items
@@ -118,8 +118,8 @@ subtask pop:
 | Need | Tier | Tool |
 |------|------|------|
 | Answer question before resuming | 0: Conversational | Pattern |
-| Track work in current conversation | 1: Ephemeral | `subtask push:`/`pop:` |
-| Remember across conversations | 2: Tactical | `todo push:` |
+| Track work in current conversation | 1: Ephemeral | `subtask append:`/`pop:` |
+| Remember across conversations | 2: Tactical | `todo append:` |
 | Plan complex multi-session work | 3: Strategic | `bin/llm-subtask-todo` |
 
 ## Promotion Flow
@@ -127,7 +127,7 @@ subtask pop:
 Work naturally flows from fine → coarse grain as importance/complexity increases:
 
 1. **Ephemeral work** during conversation
-2. Conversation ending? Important items → `todo push:` (tactical)
+2. Conversation ending? Important items → `todo append:` (tactical)
 3. Tactical item needs planning? → `bin/llm-subtask-todo` (strategic)
 
 Demotion also occurs:

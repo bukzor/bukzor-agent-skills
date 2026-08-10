@@ -54,7 +54,7 @@ Use only `todo` commands for all tiers (no `subtask` namespace).
 **Counter-argument considered:**
 - Everything IS subtask decomposition at different durability
 - Unified namespace reduces mental translation overhead
-- Operations encode tier (push/pop/list vs new)
+- Operations encode tier (append/pop/list vs new)
 
 **Final decision:** Use both namespaces:
 - `subtask` commands: ephemeral operations
@@ -94,7 +94,7 @@ Store ephemeral subtasks in `.claude/session.md`.
 - SKILL.md provides tier selection guide
 - Agent proactively suggests `subtask save:` at session end
 - References document marker pattern clearly
-- Unified verbs across namespaces (push/pop/list)
+- Unified verbs across namespaces (append/pop/list)
 
 ## Implementation Notes
 

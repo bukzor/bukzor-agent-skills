@@ -44,7 +44,7 @@ Always use Read/Edit tools explicitly.
 
 ### Alternative 3: Marker Commands
 
-Embed commands in files/context: `todo push: Description`
+Embed commands in files/context: `todo append: Description`
 
 **Accepted because:**
 - Zero-token overhead (processed during file read)
@@ -62,9 +62,9 @@ Format: `<namespace> <verb>: [argument]`
 
 Examples:
 - `subtask list:` (no argument)
-- `subtask push: Fix the bug` (with argument)
+- `subtask append: Fix the bug` (with argument)
 - `todo pop:` (no argument)
-- `todo push: Update docs` (with argument)
+- `todo append: Update docs` (with argument)
 
 ### Processing
 
@@ -81,13 +81,13 @@ Examples:
 ### Recognition Rules
 
 Assistant recognizes markers in:
-1. Direct user messages: `"todo push: Fix bug"`
+1. Direct user messages: `"todo append: Fix bug"`
 2. File contents during Read
 3. Script output (e.g., `session-start.sh` outputs `subtask load:`)
 
 Distinguish command vs discussion by context:
-- Command: `todo push: Fix bug` (imperative)
-- Discussion: `You could use "todo push: Fix bug"` (descriptive)
+- Command: `todo append: Fix bug` (imperative)
+- Discussion: `You could use "todo append: Fix bug"` (descriptive)
 
 ## Consequences
 
@@ -121,11 +121,11 @@ Distinguish command vs discussion by context:
 **Ephemeral (in-context):**
 - `subtask list:` - enumerate from conversation
 - `subtask prepend:` - priority shift
-- `subtask push: DESC` - add to working memory
+- `subtask append: DESC` - add to working memory
 - `subtask pop:` - complete current
 
 **Persistent (file-based):**
-- `todo push: DESC` - append `- [ ] DESC` to `.claude/todo.md`
+- `todo append: DESC` - append `- [ ] DESC` to `.claude/todo.md`
 - `todo pop:` - mark first `[ ]` as `[x]`
 - `todo list:` - display entire file
 - `todo clear:` - remove all `[x]` lines

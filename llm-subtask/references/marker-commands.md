@@ -12,7 +12,7 @@ Assistant: [uses TodoWrite tool]
 
 **Marker pattern:**
 ```
-File contains: "todo push: Fix the bug"
+File contains: "todo append: Fix the bug"
 Assistant reads file → recognizes marker → takes action (appends to .claude/todo.md)
 ```
 
@@ -24,7 +24,7 @@ Assistant reads file → recognizes marker → takes action (appends to .claude/
 
 **Git-visible:** Changes appear in `git diff`, user gets automatic notification.
 
-**Natural language:** Markers read like English ("todo push: Fix bug") rather than tool syntax.
+**Natural language:** Markers read like English ("todo append: Fix bug") rather than tool syntax.
 
 ## Marker Types
 
@@ -34,7 +34,7 @@ When assistant encounters these in conversation history or working memory:
 
 - `subtask list:` - Enumerate pending ephemeral subtasks
 - `subtask prepend: DESC` - Shift priority to DESC
-- `subtask push: DESC` - Add DESC to ephemeral working memory
+- `subtask append: DESC` - Add DESC to ephemeral working memory, behind all current work. Chat-local: do **not** write it to `.claude/todo.md` -- that's `todo append:`
 - `subtask pop:` - Complete current ephemeral subtask
 
 **Processing:** Assistant recognizes marker in conversation context, updates internal working memory.
@@ -45,7 +45,7 @@ When assistant encounters these in conversation history or working memory:
 
 When assistant reads `.claude/todo.md`:
 
-- `todo push: DESC` - Append `- [ ] DESC` to end of file
+- `todo append: DESC` - Append `- [ ] DESC` to end of file
 - `todo pop:` - Find first `- [ ]`, change to `- [x]`
 - `todo list:` - Display entire file contents
 - `todo clear:` - Remove all `- [x]` lines
@@ -54,13 +54,13 @@ When assistant reads `.claude/todo.md`:
 
 **Persistence:** Changes written to `.claude/todo.md`, committed via git.
 
-**File creation:** If `.claude/todo.md` doesn't exist, `todo push:` creates it using `skeleton/.claude/todo.md` template via `bin/llm-subtask-init`.
+**File creation:** If `.claude/todo.md` doesn't exist, `todo append:` creates it using `skeleton/.claude/todo.md` template via `bin/llm-subtask-init`.
 
 **Ownership:** All files include `managed-by: Skill(llm-subtask)` in frontmatter for clear ownership signaling. The schema pins this value via `const`, so write-time validation catches missing or typo'd markers.
 
-### todo push: Implementation
+### todo append: Implementation
 
-When agent encounters `todo push: DESC`:
+When agent encounters `todo append: DESC`:
 
 1. **Ensure file exists:** Run `~/.claude/skills/llm-subtask/bin/llm-subtask-init` (idempotent, prints path)
 2. **Append task:** Edit the file to append `- [ ] DESC` before "## Later" section (or at end if no Later section)
@@ -84,7 +84,7 @@ Markers solve all these issues.
 
 Assistant should recognize markers in:
 
-1. **User messages:** `"Please subtask push: Refactor auth"`
+1. **User messages:** `"Please subtask append: Refactor auth"`
 2. **File contents:** `.claude/todo.md` contains marker
 3. **Conversation history:** Previous marker references
 4. **Session scripts:** `session-start.sh` outputs `subtask load:`
@@ -93,12 +93,12 @@ Assistant should recognize markers in:
 
 **Marker form (triggers action):**
 ```
-todo push: Fix the bug
+todo append: Fix the bug
 ```
 
 **Statement form (just talking about it):**
 ```
-You could use "todo push: Fix the bug" to add it
+You could use "todo append: Fix the bug" to add it
 ```
 
 Context determines interpretation. When user says marker phrase directly, treat as command. When discussing the system, treat as example.
@@ -133,7 +133,7 @@ Want context on any of these?
 **Action:**
 1. Review ephemeral subtasks from conversation
 2. Categorize each with user:
-   - Tactical → `todo push:` to `.claude/todo.md`
+   - Tactical → `todo append:` to `.claude/todo.md`
    - Strategic → `bin/llm-subtask-todo` creates planning file
    - Trivial → abandon
 3. Execute appropriate persistence operation

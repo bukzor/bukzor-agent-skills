@@ -62,7 +62,7 @@ list instead.
 Mostly notional, only reified on demand.
 
 - `subtask prepend` -- Signal priority shift, refocus on new work stream
-- `subtask push` -- Append a subtask to the queue
+- `subtask append` -- Queue a subtask *behind all current work*; chat-local, nothing written to a file
 - `subtask pop` -- Mark current subtask complete
 - `subtask list` -- Enumerate pending work from conversation context
 
@@ -76,7 +76,7 @@ Mostly notional, only reified on demand.
     2. items with subtasks → `todo.kb/` (strategic); all others → `todo.md` (tactical)
     3. confirm with user before abandoning anything
 - `session end` -- Run `bin/session-end` script
-- `todo push` -- Append a task
+- `todo append` -- Append a task
 - `todo pop` -- Mark the current task (should be first) as complete
 - `todo list` -- Read and display `.claude/todo.md`
 - `todo clear`
@@ -184,7 +184,7 @@ Example output:
 
 **Uncommitted [x] markers are unverified claims.** Check `git status` — if todo.md has uncommitted changes, verify completed items before trusting them.
 
-**During:** Work with ephemeral subtasks (`subtask push`/`pop`/`prepend`/`list`)
+**During:** Work with ephemeral subtasks (`subtask append`/`pop`/`prepend`/`list`)
 
 **End:** `subtask save` + update devlog (load llm-collab skill for devlog conventions)
 
