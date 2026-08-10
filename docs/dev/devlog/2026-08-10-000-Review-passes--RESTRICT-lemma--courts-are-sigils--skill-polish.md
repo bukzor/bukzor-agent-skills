@@ -139,6 +139,26 @@ the skill pair — rejected, it would leave the skill's own
 collections off the convention its sibling skill (`llm-kb`)
 established two months earlier.
 
+### Claim-shape and trigger-bank sweeps
+
+**Rationale:** the three wordiest claims — IMAGE, PROVISIONAL, CHEAP —
+reshaped per the Claim bodies directive: commitment first, cases as
+parallel bullets, declined alternative named. Two arrow decisions rode
+along, both settled by the schema's own `why:` definition ("claims
+whose collapse would make you revisit this one"): PROVISIONAL's
+premise cite (SIGNATURE) mirrored into `why:`, while CHEAP's
+good-smells cites stayed prose — good-smells holds `prior:
+purpose.kb`, so an arrow from purpose into good-smells would invert
+the poset. PROVISIONAL is user-standing; the reshape keeps its
+commitment's force verbatim and awaits veto. (Commit `a5cf601`;
+graph 9→10 edges, 21→20 components, still acyclic.)
+The recognition-vs-action sweep of the three trigger banks (llm-kb's,
+llm-claims', `~/.claude/must-read.kb`) found the naming discipline
+healthy — occasions, temptations, and acts-you-know-you're-in, not
+remedies — with one candidate below the act threshold, filed under
+Open Questions. Rename fallout in `~/.claude` closed: the one live
+`llm-claim-ledger` reference fixed (its repo's commit `c4a8f9c`).
+
 ## Conventions Established
 
 - A skill and a notation that present the same structure get a
@@ -159,11 +179,17 @@ established two months earlier.
   stated" is fully true only for renames. (The fourth nit, "the two
   laws", fixed in `0a79876`.)
 - Witness test for RESTRICT — filed in `.claude/todo.md`.
+- `when/deciding-how-much-notation-to-use.md` names the deliberation,
+  not the moment: the reader most at risk — mid-reach for another
+  layer of notation — doesn't know they're deciding anything, while a
+  temptation-shaped name (cf. `tempted-to-demand-a-proof-route.md`)
+  would catch them. The current name still catches the planner, so
+  the rename (plus its reference sweep) awaits a ruling.
 
 ## References
 
 - Commits: `bfc9966`, `5ce167e`, `aaaaa65`, `51f82bf`, `0a79876`,
-  `03f6254`, `879de9a`, `00721a9`
+  `03f6254`, `879de9a`, `00721a9`, `ca7af32`, `a5cf601`
 - `docs/dev/strata.ledger.kb/fixpoint.kb/triangular-operators-restrict.md`
 - `docs/dev/strata.ledger.kb/fleet.kb/the-courts-are-the-sigils.md`
 - `llm-claim-ledger/design.ledger.kb/notation.kb/settle-at-the-cheapest-judge.md`

@@ -166,6 +166,10 @@ Repo-level list. Skill-scoped work lives in each skill's own
       rule, so per-file schema can't hold it -- candidate homes:
       llm-claims-kb/bin/ (now exists, holds llm.claims-dot and the
       dangling/ccomps/acyclic lints) or llm-kb/bin/llm.kb-validate
+- [ ] USER: hand-copy llm-claims/SKILL.md's Core block into claude.ai
+      preferences — the two are kept verbatim-identical and the block's
+      wording changed during the 2026-08-09/10 polish (the .claims.kb
+      rename itself left it byte-identical)
 - [ ] llm-claims/.claude/todo.md
 - [ ] llm-kb/.claude/todo.md
 - [ ] llm-collab/.claude/todo.md (v2 dissolves llm-collab — weigh new
