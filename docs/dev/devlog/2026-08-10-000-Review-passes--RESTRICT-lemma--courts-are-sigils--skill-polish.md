@@ -204,11 +204,14 @@ since the opaque wall gated the decisions the owner came to make.
   placement; escalation changes grade, never meaning" (FLOOR, the
   wrong-court voidance, instance-witnesses-move-no-standing). One
   instance short of a tower claim, by the zero-one-many discipline.
-- Prose nits awaiting veto: FREE_CONSERVE says "row" (record's word
-  is "instance"); "node" appears in standing/genre defeaters but no
-  ontology admits it; MIGRATE's "mechanical once the morphism is
-  stated" is fully true only for renames. (The fourth nit, "the two
-  laws", fixed in `0a79876`.)
+- ~~Prose nits awaiting veto~~ dissolved by the 2026-08-10 review
+  sweep: "row" and "node" no longer appear anywhere in
+  `strata.claims.kb/` (`grep -rn '\brow\b\|\bnode\b'` is empty —
+  intervening edits fixed them), and MIGRATE already qualifies
+  itself: "mechanical once the morphism is stated (witnessed for
+  renames; splits and merges still owe theirs)", with `verify:`
+  witnessing the rename case. (The fourth nit, "the two laws", was
+  fixed in `0a79876`.)
 - Witness test for RESTRICT — filed in `.claude/todo.md`.
 - `when/deciding-how-much-notation-to-use.md` names the deliberation,
   not the moment: the reader most at risk — mid-reach for another
