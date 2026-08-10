@@ -100,6 +100,45 @@ instruction in the manual, stated once each. (Commit `14310b8`.)
 **Alternatives considered:** a good-smells claim for the shape —
 deferred; one conversation old, let it survive a second application.
 
+### llm-claim-ledger[-kb] renamed to llm-claims[-kb]; .claims.kb suffix adopted
+
+**Rationale:** the ledger skill pair predated `Skill(llm-kb)`'s `.kb`
+convention and was never brought under it — every `.ledger.kb`
+collection named nothing about its containing skill. Renamed
+`llm-claim-ledger` → `llm-claims`, `llm-claim-ledger-kb` →
+`llm-claims-kb` (the X/X-kb pairing forces both), and every
+`*.ledger.kb/`, `*.ledger.md`, `*.ledger.jsonschema.yaml` in the repo
+to `.claims.kb`/`.claims.md`/`.claims.jsonschema.yaml`, plus the two
+graph tools (`llm.ledger-graph` → `llm.claims-graph`,
+`llm.ledger-dot` → `llm.claims-dot`). Sought symmetry:
+`llm-kb : .kb :: llm-claims-kb : .claims.kb`. Accepted cost: the
+ledger form now shares the bare word "claims.kb" with
+`llm-discourse-graph`'s node-type collection; mitigated by the
+ledger form never appearing bare (always stem-prefixed) and by
+`llm-claims-kb/SKILL.md`'s "What this is not" disambiguating by
+shape (sibling node-type collections vs. `standing:`-and-theory
+frontmatter) rather than by word. The concept name "claim ledger"
+stays in prose throughout — only artifact names moved. Historical
+records (this devlog, other ADRs) keep the old names as provenance;
+sister repos (`prototype.personal-reasoning-management`'s
+`design.ledger.kb/`, `corpus/ledger.kb/`) are a separate pass, not
+done here. Full ruling: `docs/dev/adr/2026-08-10-000-Adopt-the-claims-kb-suffix--rename-the-ledger-skills.md`.
+(Commits `03f6254`, `879de9a`, `00721a9`.)
+
+While in `llm-claims-kb/SKILL.md`: added `SKILL.kb/self-audit.kb/`,
+four ledger-specific rot audits (standing honesty, graph health,
+confinement, stamp freshness) that cite `Skill(llm-kb)`'s own
+`.kb`-generic audits by reference rather than copying them, plus a
+line stating a claims.kb inherits every `llm-kb` audit wholesale.
+The tool docs for `bin/llm.claims-graph` were thinned to
+purpose/usage/output, with the how-to-read-the-drawing prose moved
+to `self-audit.kb/graph-health.md` where the audit-file genre wants
+it, leaving one pointer line behind.
+**Alternatives considered:** keeping `.ledger.kb` and renaming only
+the skill pair — rejected, it would leave the skill's own
+collections off the convention its sibling skill (`llm-kb`)
+established two months earlier.
+
 ## Conventions Established
 
 - A skill and a notation that present the same structure get a
@@ -123,9 +162,12 @@ deferred; one conversation old, let it survive a second application.
 
 ## References
 
-- Commits: `bfc9966`, `5ce167e`, `aaaaa65`, `51f82bf`, `0a79876`
+- Commits: `bfc9966`, `5ce167e`, `aaaaa65`, `51f82bf`, `0a79876`,
+  `03f6254`, `879de9a`, `00721a9`
 - `docs/dev/strata.ledger.kb/fixpoint.kb/triangular-operators-restrict.md`
 - `docs/dev/strata.ledger.kb/fleet.kb/the-courts-are-the-sigils.md`
 - `llm-claim-ledger/design.ledger.kb/notation.kb/settle-at-the-cheapest-judge.md`
 - `llm-claim-ledger/design.ledger.kb/notation.kb/a-theory-splits-on-cost-not-count.md`
 - `docs/dev/devlog/2026-08-09-*.md` — the prior arc this continues
+- `docs/dev/adr/2026-08-10-000-Adopt-the-claims-kb-suffix--rename-the-ledger-skills.md`
+- `llm-claims-kb/SKILL.kb/self-audit.kb/`
