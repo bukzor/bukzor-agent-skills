@@ -1,7 +1,7 @@
 [project]
 name = "engine-tower"
 version = "0.1.0"
-description = "Mechanized witnesses for the engine-tower claim ledger (docs/dev/strata.ledger.md)"
+description = "Mechanized witnesses for the engine-tower claim ledger (docs/dev/strata.claims.md)"
 requires-python = ">=3.12"
 dependencies = []
 

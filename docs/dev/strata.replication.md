@@ -4,7 +4,7 @@ last-updated: "2026-08-09"
 
 # Strata, replicated
 
-A blind re-derivation of `strata.ledger.kb/`, run as a conversation.
+A blind re-derivation of `strata.claims.kb/`, run as a conversation.
 `strata.replication.kb/` holds the turns: one pasteable prompt per
 file, numbered in send order. Open a fresh session at the repo root
 and send them in order, waiting for a real answer each time; each
@@ -72,7 +72,7 @@ skills -- nothing a blind agent loads may be able to name the answer.
 ## What to do with the result
 
 Defeats land as edits to the claims they defeat -- the git diff is the
-strikethrough (`Skill(llm-claim-ledger-kb)`). Agreements are worth
+strikethrough (`Skill(llm-claims-kb)`). Agreements are worth
 recording only where the two runs reached the same claim by different
 routes; that is evidence about the claim, and belongs in its `why:`.
 Graded bets say something about the *procedure* -- systematic misses

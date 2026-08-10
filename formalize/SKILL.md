@@ -7,7 +7,7 @@ description: "Agent MUST load when asked to find the mathematical structure in a
 
 Take the ideas represented at the paths and produce their formal
 account: a well-factored set of theories-of-claims, filed per
-`Skill(llm-claim-ledger-kb)`.
+`Skill(llm-claims-kb)`.
 
 ## Why, before how
 
@@ -51,7 +51,7 @@ citation is not an exhibit.
    each stated twice, as experienced and as well-posed (often
    different questions; the difference is a finding) -- then which
    claims settle each, and what residue stays open.
-6. **File it** per `Skill(llm-claim-ledger-kb)`: one claim per file,
+6. **File it** per `Skill(llm-claims-kb)`: one claim per file,
    theories named (never numbered), each collection's `CLAUDE.md`
    carrying `prior:`/`ontology:`/`defeated by:`. Auxiliary and
    sub-theories are encouraged wherever one lets a citing theory

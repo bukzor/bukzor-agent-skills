@@ -1,0 +1,50 @@
+#!/bin/bash
+# Render a claim ledger to SVG: llm.claims-dot | tred | dot | edgepaint | neato.
+# Usage: llm.claims-graph <name>.claims.kb [--level theory|claim] [--rankdir LR|TB]
+set -euo pipefail
+shopt -s failglob
+umask 022
+export DEBUG="${DEBUG:-0}"
+
+onerror() {
+  error="$?"
+  echo >&2 "ERROR($error)"
+  exit "$error"
+}
+trap onerror ERR
+
+here="$(dirname -- "$(readlink -f -- "$0")")"
+ledger="$1"
+shift 1
+name="$(basename -- "$ledger")"
+# the flags pick which graph, so they belong in the filename
+suffix="$(printf '%s' "$*" | tr -cs 'A-Za-z0-9' '-')"
+suffix="${suffix#-}"
+name="$name${suffix:+.${suffix%-}}"
+out="${TMPDIR:-/tmp}/ledger-graphs/$(date +%F)"
+
+if (( DEBUG > 0 )); then
+  set -x
+fi
+
+mkdir -p "$out"
+
+"$here"/llm.claims-dot "$ledger" "$@" > "$out/$name.dot"
+
+# tred first: the drawing is a Hasse view, so a citation the path already
+# implies is dropped. edgepaint needs a laid-out graph, and neato -n2
+# renders that layout without recomputing it.
+tred < "$out/$name.dot" |
+  dot -Granksep=0.4 -Gnodesep=0.25 |
+  edgepaint --lightness=0,70 |
+  neato -n2 -Tsvg \
+  > "$out/$name.svg" \
+;
+
+ls -ld "$out/$name".*
+
+: metadata -- how many components, and whether the arrows are acyclic
+( ccomps -sv < "$out/$name.dot" > /dev/null || : "ccomps exits on a disconnected graph: $?" )
+( acyclic -nv < "$out/$name.dot" || : "acyclic exits nonzero iff the ledger cites in a cycle: $?" )
+
+: Now have a look at "file://$out/$name.svg"

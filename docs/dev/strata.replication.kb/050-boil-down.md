@@ -24,5 +24,5 @@ I want two artifacts, both here in chat -- no repo writes:
 
 1. The one-page picture. State what you compartmentalized away and what each abstraction costs; a simplification that drops a real obligation is a bug wearing a nice outfit.
 
-2. The account as a claim ledger, per Skill(llm-claim-ledger): one claim per line, a label per claim, `<-` naming what each rests on, a sigil naming the judge. Group the claims into named theories -- names, not numbers -- each opened by a defining claim whose `<-` names the theories it stands on. Add auxiliary and sub-theories wherever one lets another theory argue in one sentence. The picture should restate itself over those labels.
+2. The account as a claim ledger, per Skill(llm-claims): one claim per line, a label per claim, `<-` naming what each rests on, a sigil naming the judge. Group the claims into named theories -- names, not numbers -- each opened by a defining claim whose `<-` names the theories it stands on. Add auxiliary and sub-theories wherever one lets another theory argue in one sentence. The picture should restate itself over those labels.
 ````

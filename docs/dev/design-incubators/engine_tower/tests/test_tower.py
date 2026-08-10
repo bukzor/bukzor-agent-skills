@@ -1,5 +1,5 @@
 """The tower applied to its own code: module imports respect the
-theory poset of ../../../strata.ledger.md.  [STRATA]"""
+theory poset of ../../../strata.claims.md.  [STRATA]"""
 
 import ast
 from pathlib import Path
@@ -7,7 +7,7 @@ from pathlib import Path
 SRC = Path(__file__).parent.parent / "src" / "engine_tower"
 
 # the poset, mirrored BY HAND from the Theories table of
-# docs/dev/strata.ledger.md, restricted to code-bearing theories --
+# docs/dev/strata.claims.md, restricted to code-bearing theories --
 # non-code theories (purpose, fleet, question) and their prior edges
 # are dropped; update both together; a module may
 # import only from the downward closure of its declared priors

@@ -136,7 +136,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
-- [ ] Decide the single-sigil seam (strata.ledger): STANCE (user, 32b1a76)
+- [ ] Decide the single-sigil seam (strata.claims): STANCE (user, 32b1a76)
       rules that a one-place "the standing" is a category error the schema
       must not encode, yet claim frontmatter holds exactly one `standing:`
       sigil. Lawful today because the sigil names its judge (a one-entry
@@ -144,18 +144,18 @@ Repo-level list. Skill-scoped work lives in each skill's own
       (llm-discourse-graph). Goes live the first time two assessors
       disagree about one claim -- then: multi-assessor frontmatter, or
       port that claim to the discourse-graph presentation
-- [ ] Decide whether strata.ledger.kb's transitively-implied `prior:`
+- [ ] Decide whether strata.claims.kb's transitively-implied `prior:`
       entries are meant: `tred` drops five of eighteen (purpose->genre,
       purpose->standing, purpose->protocol, history->protocol,
       fixpoint->standing), each reachable through `view` or `reference`.
       Either the header cites vocabulary it uses directly -- legitimate,
       and the drawing is just a Hasse view -- or it inherited an edge it
-      never needed. Surfaced 2026-08-09 by bin/llm.ledger-graph
-  - [ ] Then: strata.ledger.md's hand-drawn ASCII spine is derivable from
+      never needed. Surfaced 2026-08-09 by bin/llm.claims-graph
+  - [ ] Then: strata.claims.md's hand-drawn ASCII spine is derivable from
         the same `prior:` headers, so it is now a view with no stamp and
         no computer -- regenerate it, stamp it, or say why it stays hand-cut
 - [ ] Witness test for RESTRICT
-      (strata.ledger.kb/fixpoint.kb/triangular-operators-restrict.md):
+      (strata.claims.kb/fixpoint.kb/triangular-operators-restrict.md):
       a triangular operator on a two-lattice product whose first
       coordinate's lfp equals the lfp computed on the first lattice
       alone; wire `verify:` once it exists (bare standing needs no
@@ -164,9 +164,9 @@ Repo-level list. Skill-scoped work lives in each skill's own
       in claim.jsonschema.yaml description text (attention-grade); the
       2026-08-09 enforcement was a hand-check of 53 labels. Cross-file
       rule, so per-file schema can't hold it -- candidate homes:
-      llm-claim-ledger-kb/bin/ (now exists, holds llm.ledger-dot and the
+      llm-claims-kb/bin/ (now exists, holds llm.claims-dot and the
       dangling/ccomps/acyclic lints) or llm-kb/bin/llm.kb-validate
-- [ ] llm-claim-ledger/.claude/todo.md
+- [ ] llm-claims/.claude/todo.md
 - [ ] llm-kb/.claude/todo.md
 - [ ] llm-collab/.claude/todo.md (v2 dissolves llm-collab — weigh new
       investment against core-and-classes.md before spending)
@@ -176,7 +176,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       document the trigger-dir convention (`before/`, `after/`, `when/`).
       All homes now consistent on `must-read.kb/`: personal
       (`~/.claude/must-read.kb/`) and skill-level (`llm-kb/`,
-      `llm-claim-ledger/`), each SKILL.md carrying the skill-scope
+      `llm-claims/`), each SKILL.md carrying the skill-scope
       Required Reading stanza.
 - [x] Create ADR for skill design criteria (setup:, action-based triggers, depends:)
 - [x] Refine load triggers for llm.kb and llm-subtask skills

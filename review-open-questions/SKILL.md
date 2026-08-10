@@ -120,5 +120,5 @@ amended plan, compactly; execute on go.
 ## Registers
 
 Rulings land in whatever register the work already keeps: claim-ledger
-signings (`Skill(llm-claim-ledger)`: accepted claims re-sign `!`),
+signings (`Skill(llm-claims)`: accepted claims re-sign `!`),
 file edits, an ADR, a todo entry. The skill assumes none.
