@@ -5,7 +5,7 @@ sit in the tower. Every other theory stays abstract so that changes
 to these systems land only here.
 
 - `prior:` tower
-- `ontology:` the named systems -- the llm-* skills of this repo,
+- `ontology:` the named systems -- the skills of this repo,
   `design-next.kb/`, PRMS
   (`prototype.personal-reasoning-management`), ACS
   (`ideation.epistemics`), llm-stet (`prototype.llm-stet`), and their
