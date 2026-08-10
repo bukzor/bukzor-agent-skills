@@ -41,11 +41,14 @@ Every module is doctested; `uv run pytest` in that repo runs them.
 
 ## Format facts that bite
 
-- **The file is a tree, not a log.** Records carry `uuid` and
+- **The file is a forest, not a log.** Records carry `uuid` and
   `parentUuid`; a rewind writes new records as *siblings* of the old
-  continuation. `--resume` walks back from the newest record only, so
-  abandoned branches are invisible in the UI but fully present in the
-  file. That's where "we tried that and it didn't work" lives.
+  continuation, and each compaction starts a new root (its
+  `compact_boundary` record has no parent). `--resume` and the rewind
+  picker walk back from the newest record only, so abandoned branches
+  and every pre-compaction era are unreachable in the UI -- extraction
+  is the only way back -- but fully present in the file. That's where
+  "we tried that and it didn't work" lives.
 - **The `projects/<slug>/` name is not invertible.** The slug maps both
   `/` and `.` to `-`, so `prototype.chatfs/docs` and
   `prototype-chatfs-docs` collide. Read `cwd` from the records
