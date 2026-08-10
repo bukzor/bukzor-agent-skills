@@ -168,6 +168,28 @@ remedies — with one candidate below the act threshold, filed under
 Open Questions. Rename fallout in `~/.claude` closed: the one live
 `llm-claim-ledger` reference fixed (its repo's commit `c4a8f9c`).
 
+### review-open-questions: a kill must be auditable from its entry
+
+**Rationale:** the first full-scale live run (19 opens) produced a
+kill list the owner reported as "entirely opaque ... I have no
+confidence" — correct work, illegible presentation. Root cause: the
+skill ordered empty-context rebuilding for the decision sections but
+never for the kills, so the agent priced the kill list as cold text —
+codenames and hash-citations — when the walkthrough is the hottest
+text there is (the ruling depends on it); TIERS misapplied to its own
+review instrument. Fix, on the owner's direction ("plain language,
+made concrete more than one way"): a kill-presentation law — each
+kill concrete twice, the open in the owner's words plus the
+settlement's evidence in place (ruling quoted, check's result shown,
+change inlined); "a hash or a path is an address, not evidence"; an
+unauditable kill is void like any wrong-court settlement and returns
+to the batch. The kill list also moved below the decisions — audit
+trail, not payload. The superseded "close every kill with its
+citation" clause was subtracted.
+**Alternatives considered:** keeping kills above the tally-adjacent
+position with better prose — rejected; placement was half the tax,
+since the opaque wall gated the decisions the owner came to make.
+
 ## Conventions Established
 
 - A skill and a notation that present the same structure get a

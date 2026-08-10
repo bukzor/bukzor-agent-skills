@@ -29,15 +29,26 @@ them to settle most of the batch:
   your memory of it: the owner already ruled (cite it), intervening
   work dissolved it, or an existing ruling covers it -- then the real
   question is scope, "does that ruling bind here too?", and is
-  presented as such. Close every kill with its citation: a silent
-  drop is a ruling you minted. In doubt whether the record shows a
-  ruling? It doesn't; the open survives.
+  presented as such. A silent drop is a ruling you minted. In doubt
+  whether the record shows a ruling? It doesn't; the open survives.
 - **By check.** Provable or fetchable without judgment: ground it
   yourself, minting what the grounding needs -- the citation, the
   sub-claim, the runnable check. A fact needs a warrant, not a fiat.
 - **By witness.** "This reading fits reality" is empirical: attach
   the diff, verify command, or quote, and let it rest under standing
   veto; a signature adds nothing a witness didn't.
+
+A kill is presented, not just performed: the owner audits the sweep
+only through the kill list, and their context is empty there too.
+One entry per kill, concrete twice over -- first the open in plain
+words, as the owner would meet it (what was at stake, what they
+would have been asked), never the codename the work coined for it;
+then the settlement legible in place: the ruling's operative words
+quoted, the check's one-line result shown, the change inlined as
+before/after. The register citation rides along, but a hash or a
+path is an address, not evidence -- the entry must convince by
+itself. A kill the owner cannot verify from its own entry is void
+like any wrong-court settlement: it returns to the batch.
 
 What survives every cheaper court is the owner's jurisdiction:
 stipulations -- value choices, scope, one-way doors -- usually the
@@ -59,7 +70,9 @@ skimming, which is why the opens are open. Spend accordingly:
   costume of consent.
 - **Order by priors**, each section leaning only on those before it.
 - **Open with the tally:** swept N, the record settled M, grounding
-  dissolved most of the rest, K decisions remain.
+  dissolved most of the rest, K decisions remain. The kill list
+  itself goes below the decisions: it is audit trail, not payload,
+  and must not stand between the owner and the rulings.
 
 Then one numbered section per decision -- heading short, assertive,
 quotable, the skeleton of the reply you want back:
@@ -80,8 +93,9 @@ quotable, the skeleton of the reply you want back:
 
 Argue against yourself in place -- the caveat favoring an amendment,
 the law with no police yet -- inside the section, not after the
-ruling. Below the sections, list the leftovers that are NOT decisions,
-each with why: unforced, a work item, a fact already stated.
+ruling. Below the sections come the audit lists: the kills, then the
+leftovers that are NOT decisions, each with why: unforced, a work
+item, a fact already stated.
 
 ## The close is uncapped
 
