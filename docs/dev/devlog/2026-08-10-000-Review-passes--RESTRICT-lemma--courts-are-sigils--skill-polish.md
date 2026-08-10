@@ -85,6 +85,21 @@ cases as parallel bullets, argument subordinated.
 rejected; the manual's audience pays for reasoning it doesn't need,
 and the aphorisms already carry the operational content.
 
+### Documentation-optimization doctrine persisted
+
+**Rationale:** the PLACEMENT correction surfaced a general doctrine
+worth keeping: text is priced by load frequency, and each tier has
+its own objective — hot text (core blocks, descriptions) minimizes
+recurring tokens, per-invocation text optimizes the invoker's next
+action, cold text (design ledgers, ADRs, devlogs) optimizes for
+extraction and veto-addressability, where brevity is the wrong
+objective. Filed as `authorship.kb/TIERS` (agent, refining
+LOAD_COST), with the claim-body shape as a "Claim bodies" directive
+in llm-claim-ledger-kb's manual — decision in the ledger,
+instruction in the manual, stated once each. (Commit `14310b8`.)
+**Alternatives considered:** a good-smells claim for the shape —
+deferred; one conversation old, let it survive a second application.
+
 ## Conventions Established
 
 - A skill and a notation that present the same structure get a
