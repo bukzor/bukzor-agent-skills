@@ -103,7 +103,7 @@ revision to it.
 - **Conservativity** -- a later theory never lowers a prior's standing.
   Where it seems to, the prior was wrong; fix it there.
 
-You want a second theory when more than one theory leans on the same
+You want a new theory when more than one theory leans on the same
 subsection of an existing one -- break that subsection out as their
 shared prior -- or when the split would leave most parts easier to
 read and reason about: shorter ontology, shorter arrows, claims
