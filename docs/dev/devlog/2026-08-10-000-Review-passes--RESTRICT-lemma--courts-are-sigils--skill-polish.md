@@ -73,6 +73,14 @@ what fleet.kb/COURTS aligns). Widened notation.kb's ontology with
 words its standing claims already used (theory, ontology, prior,
 defeater, veto) — the ENFORCEABLE failure mode caught in the
 ENFORCEABLE claim's own collection. (Commit `0a79876`.)
+Revised same day on the user's correction: the cost accounting ran
+backward -- `!` records a judgment already sunk, so a correct `!`
+only reduces cost and its duty is being honored, while every `+`
+issues new debt against the user's next scan, warrant being the
+question the writer signs. Standing raised to `user`; the mismatch
+bills and the declined alternative remain agent prose. Also the
+occasion for a claim-shape ruling request: quotable commitment first,
+cases as parallel bullets, argument subordinated.
 **Alternatives considered:** enriching SKILL.md with the reasoning —
 rejected; the manual's audience pays for reasoning it doesn't need,
 and the aphorisms already carry the operational content.

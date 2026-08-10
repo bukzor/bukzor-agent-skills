@@ -1,33 +1,48 @@
 ---
 label: PLACEMENT
-standing: agent
+standing: user
+authority: user ruling, 2026-08-10, the marks' cost accounting
 why:
     - the-sigil-signs-the-judge.md
     - stipulation-is-a-legal-stop.md
+    - ../good-smells.kb/cheap-entry-expensive-promotion.md
     - ../purpose.kb/cheaper-to-use-than-to-ignore.md
 ---
 
 # Settle at the Cheapest Judge
 
-The four marks name judges in order of cost: bare spends no judgment
-at all -- a check, or the claim's own premises, settles it; `+`
-spends the agent's judgment and invites one veto; `!` spends the
-user's, the dearest judgment in the system; `?` is judgment still
-owed. The rule is minimal placement: every claim settles at the
-cheapest judge competent to settle it, and the sigil records where it
-settled (the-sigil-signs-the-judge.md). Competence is residual
-choice: where accepting the premises settles the claim, nothing is
-left to judge and bare is the only honest mark.
+An unsettled claim goes to the cheapest judge competent to settle it,
+and the sigil is the receipt (the-sigil-signs-the-judge.md).
+Competence is residual choice: if accepting the premises settles the
+claim, nothing is left to judge, and bare is the only honest mark.
 
-A misplacement is void in both directions, not merely wasteful.
-Settled too dear, the record names a false judge -- a signature on a
-checkable fact adds nothing the check didn't, and invites a veto
-nobody needed. Settled too cheap, a judgment hides -- a false bare
-conceals its judge, and a stipulation the agent defaulted is a veto
-still waiting, not a ruling (stipulation-is-a-legal-stop.md).
+What each mark does to the system's costs:
 
-The declined alternative is maximal placement -- when unsure,
-escalate. It reads as the safe direction and is not: it spends the
-dearest judgment on claims a check could settle, and the crowd of
-needless requests is exactly what buries the stipulations the user
-alone can rule on (../purpose.kb/cheaper-to-use-than-to-ignore.md).
+- **bare** -- settled by check or premises. No judgment spent, none
+  owed.
+- **`!`** -- the user's ruling: the dearest judgment there is, and
+  already sunk. Recording it banks it -- every later use cites it
+  free -- so a correct `!` only reduces cost, and the one duty it
+  creates is to be honored, not re-tried.
+- **`+`** -- the agent's judgment: debt newly issued. Every `+` joins
+  the user's next scan, where it must be closed out -- refactored
+  away, corrected to bare, or ruled `!`. A `+` always adds cost;
+  whether that cost is warranted is exactly the judgment the writer
+  is signing.
+- **`?`** -- judgment owed, no default. Dearer than `+`: silence
+  discharges nothing.
+
+Each mismatch of mark and truth carries its own bill:
+
+- a false bare hides the liability, and hidden debt is the kind no
+  scan can price
+  (../good-smells.kb/cheap-entry-expensive-promotion.md);
+- a needless `+` issues debt for what a check could have closed;
+- an unrecorded `!` re-convenes the dearest judge for a judgment
+  already paid for.
+
+The declined alternative is "when unsure, escalate." It reads safe
+and is not: it issues the most debt, and the crowd of needless items
+is what buries the stipulations only the user can rule on
+(stipulation-is-a-legal-stop.md,
+../purpose.kb/cheaper-to-use-than-to-ignore.md).
