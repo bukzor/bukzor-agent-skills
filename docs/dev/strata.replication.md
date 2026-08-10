@@ -57,10 +57,15 @@ files a turn (or a repair) only if the next run would need it too.
 
 ## The blind
 
-`010` tells the agent not to open `strata.*`,
-`design-incubators/engine_tower/`, `devlog/2026-08-09-*`,
+`010` tells the agent not to open `strata.*`, `design.claims.*`,
+`design-incubators/engine_tower/`, `devlog/`, `adr/`,
 `.claude/todo*`, or `trash/`, and not to `git log` this repo's
-2026-08-09 commits -- every one of them leaks the answer. It also asks
+commits from 2026-08-09 on -- every one of them leaks the answer.
+The 2026-08-10 run taught the wide net: date-pinning the exclusions
+failed, because the answer's vocabulary kept spreading into
+later-dated files (a devlog *title* leaked "engine tower" and
+"courts are sigils" to that run's subject via a bare `ls`), so
+whole directories are out, listings included. It also asks
 the agent to confess contamination rather than hide it: a labeled
 contaminated run is still readable, an unlabeled one is not.
 

@@ -30,7 +30,7 @@ The data: the root skill is ./llm-kb; `ls */SKILL.md` is the index. Read each sk
 
 Delegate the breadth if that's cheaper.
 
-One standing constraint: a finished answer to all of this already exists in this repo, and you must not see it until I say so. Don't open docs/dev/strata.*, docs/dev/design-incubators/engine_tower/, docs/dev/devlog/2026-08-09-*, .claude/todo.md, .claude/todo.kb/2026-08-09-*, or trash/; don't `git log` or `git show` anything dated 2026-08-09. If any of it lands in your context anyway, say so immediately -- a labeled contamination is recoverable, a hidden one poisons the run.
+One standing constraint: a finished answer to all of this already exists in this repo, and you must not see it until I say so. Don't open docs/dev/strata.*, docs/dev/design.claims.*, docs/dev/design-incubators/engine_tower/, docs/dev/devlog/, docs/dev/adr/, .claude/todo.md, .claude/todo.kb/2026-08-09-*, or trash/; don't `git log` or `git show` anything dated 2026-08-09 or later. Don't even `ls` the excluded directories -- their filenames alone name the answer. If any of it lands in your context anyway, say so immediately -- a labeled contamination is recoverable, a hidden one poisons the run.
 
 First deliverable: report what you found -- the recurring shapes, the tensions, the places that itch -- before you theorize. Intuition first; justification comes later.
 ````
