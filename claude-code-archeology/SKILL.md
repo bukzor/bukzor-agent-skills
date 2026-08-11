@@ -94,6 +94,15 @@ subagent, its agent definition. Re-asking without rewinding is not the
 same experiment: the first answer stays in context, and what comes back
 is a revision of it.
 
+**A subagent is not rewound by rewinding its caller.** Its transcript is
+a separate append-only file, bound to the spawning tool-use by
+`subagents/agent-<id>.meta.json` and resumed through its `agentId`, and
+the file-history records backing `/rewind` cover the repo only, never
+`~/.claude/projects`. So a caller cut plus a re-sent turn reaches a
+subagent that remembers everything. Cut both files, or -- better for
+anything you may want to replay -- run the other side as its own session
+and drive it with `SendMessage`.
+
 ## Recovery after a crash or freeze
 
 1. `claude-inventory --days 2 --sh` -- every resumable session, newest

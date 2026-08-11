@@ -106,14 +106,21 @@ subject was reading when it answered N. A run that commits only at the
 end has no middle to return to, which is how the first run lost its
 critique turn.
 
-Rewinding the *subject* is separate, and re-sending a turn is not it:
-its first answer stays in its context and what comes back is a revision
-of that answer, not a second draft. Cut the transcript instead --
-`claude-branch-extract <subject.jsonl> <uuid> --at --as-session <worktree>`,
-per `Skill(claude-code-archeology)` -- which yields a resumable session
-ending at the last good reply. Note what a promoted subagent loses: its
-agent definition, hence its model and effort, which the operator must
-restore by hand when resuming.
+Rewinding the *conversations* is two cuts, because a run has two
+participants and neither rewind reaches the other. Start with the
+operator's: it holds every reply and every verdict, so an operator who
+has read a spoiled answer will grade the replacement against it. Cut it
+at the record that delivered the last good reply --
+`claude-branch-extract <operator.jsonl> <uuid> --at`, per
+`Skill(claude-code-archeology)`. Then the subject's, which the operator
+cut does not touch: re-sending a turn is not a rewind either, since its
+first answer stays in its context and what comes back is a revision.
+
+Run the subject as its own session rather than a subagent and both cuts
+are ordinary. A subagent costs an extra step and loses something in it:
+its transcript lives under the operator's session, so it needs
+`--as-session <worktree>` to become resumable, and it comes back without
+its agent definition -- model and effort must be restored by hand.
 
 ## What to do with the result
 
