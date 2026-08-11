@@ -1,6 +1,7 @@
 ---
 label: TIERS
-standing: agent
+standing: user
+authority: user ruling, 2026-08-10, review-sweep acceptance ("claim accept TIERS!")
 why:
     - the-invoker-pays-for-every-token.md
     - skill-md-addresses-invokers.md

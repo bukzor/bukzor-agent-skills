@@ -1,4 +1,4 @@
-# When Deciding How Much Notation to Use
+# When Reaching for Another Layer of Notation
 
 Everything past the core block is optional until its occasion arrives:
 
