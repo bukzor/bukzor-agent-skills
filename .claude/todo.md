@@ -166,6 +166,14 @@ Repo-level list. Skill-scoped work lives in each skill's own
       rule, so per-file schema can't hold it -- candidate homes:
       llm-claims-kb/bin/ (now exists, holds llm.claims-dot and the
       dangling/ccomps/acyclic lints) or llm-kb/bin/llm.kb-validate
+- [ ] llm-claims-kb has no story for non-claim (evidence) collections
+      inside a ledger: PRMS `design.claims.kb/world.kb/` (substrate
+      assessments, frontmatter-free by design) crashes
+      `llm.claims-dot`'s `split_frontmatter`, and the manual is silent
+      on whether such collections are legal. Candidates: an exemption
+      marker in the collection's CLAUDE.md, a collection `kind:`, or
+      claims-only discipline stated in the manual. Counterpart item in
+      `prototype.personal-reasoning-management/.claude/todo.md`
 - [ ] Task 5 of the 2026-08-09/10 review arc (user-deferred, twice):
       future planning for the claims/strata corpus — next steps, potential
       endpoints, brief monetization discussion. Pure conversation; pick up
