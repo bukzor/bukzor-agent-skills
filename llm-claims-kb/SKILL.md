@@ -18,8 +18,9 @@ restated here; this skill maps it onto a directory.
 | `<-` arrows | `why:` -- file-relative paths; never a copied sigil, standing lives at the definition site |
 | `-- certified(CHECK)` | `verify:` |
 | restating a label | editing the file; the git diff's `-` is the strikethrough |
-| a theory | a collection (`<theory>.kb/`); its defining claim is the header of the collection's `CLAUDE.md` (`prior:`, `ontology:`, `defeated by:`) |
-| `claim list` | `ls`; the standing scan is `grep -rH '^standing:' *.kb/` |
+| a theory | a claim like any other -- `<theory>.md`, carrying `ontology:` and `defeated-by:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
+| indentation | the tree: what a `.kb/` holds is nested under the claim naming it, at any depth |
+| `claim list` | `ls`; the standing scan is `grep -rH '^standing:' <name>.claims.kb/`, recursive so theories answer too |
 
 Schema: `jsonschema/claim.jsonschema.yaml`. Link or copy it next to
 each ledger and `$ref` it from a per-collection schema.
@@ -30,10 +31,12 @@ here are the ledger-specific additions, not replacements.
 
 ## Layout
 
-`<name>.claims.md` is the entry point: the theory poset, the scan
-commands, what each theory holds and what defeats it. One directory
-per theory under `<name>.claims.kb/`, each carrying its `CLAUDE.md`
-theory header.
+One rule, every level: `X.md` beside `X.kb/` defines that theory, `X.md`
+alone is a claim of the theory it sits in. So `<name>.claims.md` is the
+ledger's own defining claim -- and its entry point, carrying the poset
+and the scan commands -- and a theory holds theories the same way it
+holds claims, without limit. Each `CLAUDE.md` keeps only what a claim
+cannot: where a new file goes.
 
 On disk a theory costs a directory and a header, so the
 split-for-the-reader move (`SKILL.kb/theories.md` in
@@ -104,15 +107,14 @@ bin/llm-claims-kb-flatten <name>.claims.kb            # the ledger, as one text
 Every structural thing the directory carries comes back as notation:
 `standing:` as the trailing sigil, `why:` as `<-` arrows whose
 targets wear their own sigils, `verify:` as `-- certified(CHECK)`,
-each theory header as the defining claim its collection opens with,
-and prose cites of claim files as the labels those files carry.
-Theories come out in `prior:` order, claims in `why:` order within a
-theory.
+the tree as indentation, and prose cites of claim files as the labels
+those files carry. Siblings come in `why:` order, so a claim's
+premises are above it as well as outside it.
 
-Two things do not survive the trip, and the tool says so on stderr:
-a `why:` that resolves to no claim, and two labels `grep` cannot
-tell apart -- once the paths are gone, labels are the only handle
-the reader has.
+Three things do not survive the trip, and the tool says so on stderr:
+a `why:` that resolves to no claim, a theory with no defining claim or
+no ontology, and two labels `grep` cannot tell apart -- once the paths
+are gone, labels are the only handle the reader has.
 
 ## What this is not
 
@@ -120,7 +122,7 @@ the reader has.
 `claims.kb/` beside `questions.kb/`, `sources.kb/`, and two more --
 five node types tracking belief across a project. This skill is one
 node type deep and standing-first: `label:` and `standing:` in every
-file, `why:` arrows, one theory per collection. Meeting a claims
-directory, tell them apart by shape, not name: sibling node-type
-collections mean the discourse graph; frontmatter standing and
-theory headers mean a ledger.
+file, `why:` arrows, a claim file naming every collection. Meeting a
+claims directory, tell them apart by shape, not name: sibling node-type
+collections mean the discourse graph; frontmatter standing and a `.md`
+beside every `.kb/` mean a ledger.

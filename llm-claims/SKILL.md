@@ -89,17 +89,31 @@ rest on another without borrowing a word from it, and can borrow a word
 without resting on it.
 
 A **theory** is a stipulated word list -- its **ontology** -- together
-with the claims confined to that list. It opens with a **defining claim**:
-the label names the theory, the text states the ontology, its `<-` names
-the **priors**, the theories whose words it also admits. The list comes
-first and the grouping follows from it -- a claim belongs to the earliest
-theory whose ontology admits every word its text needs. The theory's
-standing is the defining claim's standing, and widening the ontology is a
-revision to it.
+with the claims confined to that list. It is no second kind of thing: it
+is a claim, whose text states the ontology and whose `<-` names the
+**priors**, the theories whose words it also admits. What is confined to
+it is written **under** it, indented:
 
-- **Confinement** -- a claim uses only its own ontology plus its priors'.
-  It greps: a word a theory does not admit is either a misplaced claim or
-  an understated ontology.
+* DESIGN+: what this skill commits to -- ontology: skill, manual, design
+  * STANCE+: a regress stops at an act -- ontology: regress, act, author, judgment
+    * AUTHOR_ACTS+: authority is a property of acts, not of propositions
+  * PURPOSE+ <- STANCE+: one invariant, at a cost a chat will pay -- ontology: ledger, claim, cost
+    * CHEAP+: the ledger competes with keeping no ledger, not with a better notation
+
+Indentation is sense; `<-` is support. A claim reads in every word
+stipulated above it, so containment needs no arrow to say so, and a prior
+is what you cite when the words you need are *beside* you rather than
+above. The shape repeats at every depth and nests without limit -- the
+flat list is just the case where nothing nests.
+
+The list comes first and the grouping follows from it: a claim belongs to
+the outermost theory whose ontology admits every word its text needs.
+A theory's standing is its defining claim's standing, and widening the
+ontology is a revision to it.
+
+- **Confinement** -- a claim uses only the words admitted above it plus
+  its priors'. It greps: a word no ontology on the path admits is either
+  a misplaced claim or an understated ontology.
 - **Conservativity** -- a later theory never lowers a prior's standing.
   Where it seems to, the prior was wrong; fix it there.
 
@@ -129,8 +143,9 @@ the core's "when claims churn" is the trigger, not a user request.
   claim goes bare, suffixed `-- certified(CHECK)`
 - `claim flush` -- end-of-context extraction
 
-Render a ledger as a list, one claim per line, in ASCII (`<-`). The last
-three commands each carry a rule in the bank; `ls` it rather than guessing.
+Render a ledger as one nested list, one claim per line, in ASCII (`<-`).
+The last three commands each carry a rule in the bank; `ls` it rather
+than guessing.
 
 A ledger kept as files -- one claim per file, standing in frontmatter --
 is `Skill(llm-claims-kb)`. Why the notation is shaped this way, and

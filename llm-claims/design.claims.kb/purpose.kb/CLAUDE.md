@@ -1,14 +1,5 @@
 # purpose.kb -- maintenance guide
 
-What the notation is for: the invariant it exists to hold, the cost it
-has to beat, and where it sits among stricter and looser alternatives.
-
-- `prior:` `stance.kb`
-- `ontology:` ledger, claim, invariant, party, cost, adoption, rung,
-  reader, context, notation
-- `defeated by:` a different competitor — a setting where the ledger is
-  chosen against a better notation rather than against keeping none
-
 ## What belongs here
 
 A goal, and the constraint it places on the design. This is the

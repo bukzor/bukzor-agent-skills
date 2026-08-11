@@ -1,4 +1,15 @@
 ---
+label: DESIGN
+standing: agent
+ontology:
+  - skill
+  - manual
+  - design
+  - decision
+  - chat
+  - agent
+  - user
+defeated-by: a design that is not this notation's -- a second skill's commitments filed here
 last-updated: "2026-08-10"
 ---
 
@@ -16,9 +27,13 @@ is still aimed at the right thing.
 ## Theories
 
 Claims are grouped by the vocabulary they need, not the topic they
-touch. Each collection is a **theory**: a fixed ontology, a declared
-prior whose ontology it also admits, and a stated defeater. A claim may
-use only the words its theory admits (`Skill(llm-claims)` § Theories).
+touch. Each collection is a **theory**, defined by the claim file
+beside it -- `stance.md` defines `stance.kb/` -- which stipulates the
+ontology, names the priors in its `why:`, and states the defeater. A
+claim may use only the words its theory admits, its priors' and this
+file's among them (`Skill(llm-claims)` § Theories). This file is that
+shape one level up: the ledger is itself a theory, and nests the same
+way at any depth.
 
 ```
 stance ──► purpose ──► good-smells ──► notation
@@ -37,8 +52,9 @@ rather than restating it. `notation` is the theory most likely to be
 wrong, and the only one `SKILL.kb/` is downstream of — a change there is
 a change to the manual.
 
-`good-smells.kb/` is the only one large enough to want a roll-up of its
-own; that is `good-smells.md`. The rest fit in `ls`.
+`good-smells.kb/` is the only one large enough to want a roll-up as
+well; `good-smells.md` carries it under the defining claim, stamped.
+The rest fit in `ls`.
 
 ## Standing
 

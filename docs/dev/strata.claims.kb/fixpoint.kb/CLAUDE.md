@@ -1,17 +1,5 @@
 # fixpoint.kb -- maintenance guide
 
-Auxiliary theory: the background order theory every stratum's
-maintenance economics reduces to. Exists so `reference` and `standing`
-can cite one label instead of restating a proof sketch.
-
-- `prior:` -- none
-- `ontology:` poset, lattice, completeness, product, coordinate,
-  monotone operator, triangular, iteration, fixpoint (least/greatest),
-  pre-/post-fixed point, restriction, approximation, interval,
-  precision
-- `defeated by:` a misstatement of settled mathematics -- fixed by
-  restating, not by argument
-
 ## What belongs here
 
 A theorem of order theory the tower leans on, stated so a downstream

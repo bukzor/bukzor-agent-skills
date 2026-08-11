@@ -1,15 +1,5 @@
 # good-smells.kb -- maintenance guide
 
-One criterion per file: a property a claim notation should have, stated
-so that any candidate design — not only this one — can be judged against
-it. `../good-smells.md` rolls the set up.
-
-- `prior:` `purpose.kb`
-- `ontology:` notation, design, criterion, invariant, writer, reader,
-  consumer, tool, cost, entry, token, medium, rendering, demo, migration
-- `defeated by:` a change in who uses the notation — a ledger written
-  and read by tools, where entry cost and rendering hazards both vanish
-
 ## What belongs here
 
 A property by which one notation can be judged better than another,

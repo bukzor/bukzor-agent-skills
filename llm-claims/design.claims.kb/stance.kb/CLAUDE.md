@@ -1,13 +1,5 @@
 # stance.kb -- maintenance guide
 
-The posture everything else stands on: what terminates a regress, and
-what a distinction has to earn. Prior to every other theory; cites none.
-
-- `prior:` — none
-- `ontology:` regress, act, author, authority, judgment, oracle,
-  distinction, ontology, cost
-- `defeated by:` a stopping point that is a truth rather than an act
-
 ## What belongs here
 
 A commitment that would still hold if this notation were thrown away and

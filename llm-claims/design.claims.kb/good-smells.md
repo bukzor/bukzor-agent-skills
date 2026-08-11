@@ -1,13 +1,35 @@
 ---
+label: GOOD_SMELLS
+standing: agent
+why:
+  - purpose.md
+ontology:
+  - notation
+  - design
+  - criterion
+  - invariant
+  - writer
+  - reader
+  - consumer
+  - tool
+  - cost
+  - entry
+  - token
+  - medium
+  - rendering
+  - demo
+  - migration
+defeated-by: a change in who uses the notation -- a ledger written and read by tools, where entry cost and rendering hazards both vanish
 last-updated: "2026-08-08"
 ---
 
 # Good Smells — criteria for conversational notation design
 
-Meta-criteria for judging claim-ledger-style notations, including this
-skill's own. Each criterion is one file in `good-smells.kb/`, carrying
-its ledger `label` and `standing` in frontmatter — the sigils spelled
-out, naming who signed: `user`, `agent`, or `open` for no one yet.
+A design decision is answerable to a criterion stated before it and
+independently of it: a property any claim notation should have, this
+skill's own included. One criterion per file in `good-smells.kb/`,
+each carrying its own `label` and `standing`; the decisions that answer
+to them are `notation.md`'s.
 
 Two poles organize the set: the notation should elicit every judgment
 the writer can make now, while demanding none they can't make yet. The

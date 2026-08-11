@@ -1,4 +1,14 @@
 ---
+label: ENGINE
+standing: agent
+ontology:
+  - stratum
+  - tower
+  - regime
+  - economics
+  - extension
+  - enforcement
+defeated-by: a lower engine needing a higher vocabulary
 last-updated: "2026-08-10"
 ---
 
@@ -65,21 +75,6 @@ fixpoint ──────────────────┴────�
 purpose ───► view, standing, genre, protocol
 ```
 
-| Theory | Priors | Holds | Defeated by |
-|---|---|---|---|
-| `fixpoint` | -- | background order theory: lfp, warm-start, overshoot, approximation, triangular restriction | a misstatement of settled mathematics |
-| `purpose` | -- | the operating regime: unbounded growth, near-zero entry, representation of disagreement | a corpus small enough to re-read |
-| `history` | -- | the store as a word of updates; state as its fold | a substrate that forgets its past |
-| `view` | history, purpose | derived values, the commuting triangle, staleness as debt | a reader that can afford to recompute every read |
-| `record` | history | schemas, typing, migration as transport | a fleet that abandons frontmatter typing |
-| `reference` | record, fixpoint | quivers, reachability, cones, weights | references a machine cannot enumerate |
-| `standing` | reference, view, fixpoint, purpose | the status poset, the evidence operator, computed standing | a second node sort in the base |
-| `genre` | standing, purpose | confinement, conservativity, the satisfaction condition | a genre that must re-legislate a prior to exist |
-| `protocol` | history, view, purpose | trigger banks as monitors; enforcement grades | a runtime that enforces every rule natively |
-| `tower` | genre, protocol | the strata as their own theory poset; self-application | a lower engine needing a higher vocabulary |
-| `fleet` | tower | proper nouns: where v1 skills and prototypes sit | any named system changing |
-| `question` | fleet | the driving design problems: as wrestled, as posed, what settles each | the user disavowing a question, or one the tower cannot decompose |
-
 `fleet` is the throwaway theory; `question` is the historical one --
 the design problems the ledger was bought to settle, with their open
 residues, `question.md` the stamped synthesis. Theorems stand `bare`
@@ -104,9 +99,9 @@ OBLIGATION names the proof-grade step.
 ## Scans
 
 ```bash
-grep -rH '^standing:' docs/dev/strata.claims.kb/*.kb/       # the ledger at a glance
-grep -rH '^standing: open' docs/dev/strata.claims.kb/*.kb/  # what wants an answer
-grep -rA4 '^why:' docs/dev/strata.claims.kb/*.kb/*.md       # the warrant graph
+grep -rH '^standing:' docs/dev/strata.claims.kb/       # the ledger at a glance
+grep -rH '^standing: open' docs/dev/strata.claims.kb/  # what wants an answer
+grep -rA4 '^why:' docs/dev/strata.claims.kb/          # the warrant graph
 ```
 
 ## Provenance

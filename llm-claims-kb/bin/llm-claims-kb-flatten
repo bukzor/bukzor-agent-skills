@@ -5,22 +5,22 @@
 # ///
 """Flatten a file-per-claim ledger to the one-line-per-claim chat form.
 
-The output is one block of text to paste into claude.ai, where there are no
+The output is one nested list to paste into claude.ai, where there are no
 files to walk and `Skill(llm-claims)`'s core notation is the whole system:
 `* LABEL <- PRIOR PRIOR: text`, sigils trailing. Everything the directory
 carries structurally comes back as notation -- `standing:` as the sigil,
 `why:` as the arrows, each target's sigil computed at the reference site so
 the warrant-mix shows where the weight rests, `verify:` as
-`-- certified(CHECK)`, and each theory header as the defining claim its
-collection opens with.
+`-- certified(CHECK)`, and the tree as indentation, each theory's claims
+written under the claim that defines it.
 
-Ordered so support precedes what rests on it: theories by `prior:`, claims by
-`why:` within a theory. The whole ledger is rendered, never a slice of one --
-a partial render would read as the ledger's full state and silently retract
+Siblings come in support order, so a line's premises stand above it as well
+as outside it. The whole ledger is rendered, never a slice of one -- a
+partial render would read as the ledger's full state and silently retract
 what it omitted.
 
 Lints, on stderr: a `why:` pointing nowhere, two labels `grep` cannot tell
-apart, a theory with no header to define it.
+apart, a theory with no defining claim or no ontology.
 """
 
 import argparse
@@ -32,10 +32,10 @@ from itertools import combinations
 from pathlib import Path
 from typing import cast
 
-from llm_claims_kb import SIGIL, Claim, Ledger, Theory, dangling, read_ledger
+from llm_claims_kb import SIGIL, Claim, Ledger, Theory, claim_id, dangling, read_ledger
 
 # A claim file as a claim body cites one: `foo.md`, `../bar.kb/foo.md`.
-CITE = re.compile(r"(?:\.\./)*(?:([a-z0-9-]+)\.kb/)?([a-z0-9-]+)\.md")
+CITE = re.compile(r"(?:\.\./)*(?:[a-z0-9-]+\.kb/)?[a-z0-9-]+\.md")
 
 # Enough notation to act on the paste without the skill loaded: a ledger's
 # own FRESH_READER and SELF_CONTAINED claims apply to the ledger's transport
@@ -44,14 +44,11 @@ LEGEND = (
     "Notation (`Skill(llm-claims)`): one claim per line; `LABEL` names the locus"
     " of contention, a trailing sigil signs the judge -- `!` the user's call,"
     " `+` the agent's (veto invited), `?` no one's yet, bare means none is"
-    " needed; `<-` names what the claim rests on. Union over the chat, last"
-    " wins."
+    " needed; `<-` names what the claim rests on. Indentation nests: a claim"
+    " reads in every word stipulated above it, and a claim stipulating an"
+    " `ontology:` is a theory -- what is indented under it is confined to"
+    " those words. Union over the chat, last wins."
 )
-
-
-def theory_label(name: str) -> str:
-    """A collection's name as a ledger label -- what its claims cite it by."""
-    return name.upper().replace("-", "_")
 
 
 def in_support_order(deps: Mapping[str, tuple[str, ...]]) -> tuple[str, ...]:
@@ -79,43 +76,75 @@ def arrows(why: Iterable[str], labels: Mapping[str, str]) -> str:
     return f" <- {cited}" if cited else ""
 
 
-def theory_line(theory: Theory, labels: Mapping[str, str]) -> str:
-    """A theory's defining claim: the ontology is the text, the priors the arrows."""
-    ontology = (
-        f"theory of {theory.ontology}"
-        if theory.ontology
-        else "theory; ontology not recorded"
-    )
-    defeater = f" -- defeated by {theory.defeater}" if theory.defeater else ""
-    return f"* {theory_label(theory.name)}{arrows(theory.priors, labels)}: {ontology}{defeater}"
-
-
-def relabel(text: str, theory: str, labels: Mapping[str, str]) -> str:
+def relabel(text: str, claim: Claim, root: Path, labels: Mapping[str, str]) -> str:
     """Prose cites of claim files, read back as labels: the paste has no files.
 
     A cite naming no claim of this ledger is left as written -- it points at
     something outside, and a filename says more there than nothing does.
     """
     return CITE.sub(
-        lambda cite: labels.get(f"{cite[1] or theory}/{cite[2]}", cite[0]), text
+        lambda cite: labels.get(claim_id(root, claim.path.parent / cite[0]), cite[0]),
+        text,
     )
 
 
-def claim_line(claim: Claim, labels: Mapping[str, str]) -> str:
-    """One claim, one line -- the sigil on the label, the notes suffixed."""
-    notes = [f"certified({claim.verify})"] if claim.verify else []
+def claim_line(claim: Claim, root: Path, labels: Mapping[str, str]) -> str:
+    """One claim, one line without its bullet -- the caller owns the indent.
+
+    A defining claim differs only in what it has to suffix: the word list it
+    stipulates, and what would retire the theory whole.
+    """
+    notes = [f"ontology: {', '.join(claim.ontology)}"] if claim.ontology else []
+    notes += [f"defeated by {claim.defeater}"] if claim.defeater else []
+    notes += [f"certified({claim.verify})"] if claim.verify else []
     notes += [f"authority: {claim.authority}"] if claim.authority else []
     suffix = "".join(f" -- {note}" for note in notes)
-    gist = relabel(claim.gist, claim.theory, labels)
-    return f"* {labels[claim.id]}{arrows(claim.why, labels)}: {gist}{suffix}"
+    gist = relabel(claim.gist, claim, root, labels)
+    return f"{labels[claim.id]}{arrows(claim.why, labels)}: {gist}{suffix}"
+
+
+def theory_block(
+    theory: Theory, ledger: Ledger, labels: Mapping[str, str], depth: int = 0
+) -> list[str]:
+    """A theory and everything under it, as one nested list.
+
+    Indentation is containment: a nested line reads in every word stipulated
+    above it, which is what made the defining claim a claim in the first
+    place. Siblings come in support order, so a line's premises are above it
+    as well as outside it.
+    """
+    inside = {
+        child.name: child for child in ledger.theories if child.container == theory.name
+    }
+    claims = {claim.id: claim for claim in theory.claims}
+    opening = (
+        claim_line(theory.defining, ledger.origin, labels)
+        if theory.defining
+        else f"{theory.label}?: no defining claim -- `{theory.name}.md` is unwritten"
+    )
+    lines = ["  " * depth + f"* {opening}"]
+    for item in in_support_order(
+        {claim.id: claim.why for claim in theory.claims}
+        | {name: child.priors for name, child in inside.items()}
+    ):
+        lines += (
+            theory_block(inside[item], ledger, labels, depth + 1)
+            if item in inside
+            else [
+                "  " * (depth + 1)
+                + f"* {claim_line(claims[item], ledger.origin, labels)}"
+            ]
+        )
+    return lines
 
 
 def labels_of(ledger: Ledger) -> Mapping[str, str]:
-    """What each claim and theory is cited as: its label, wearing its sigil."""
-    return {
-        **{theory.name: theory_label(theory.name) for theory in ledger.theories},
-        **{claim.id: claim.label + SIGIL[claim.standing] for claim in ledger.claims},
-    }
+    """What each claim is cited as: its label, wearing its sigil.
+
+    Theories need no entry of their own -- a theory is cited by citing the
+    claim that defines it, and that claim is in here like any other.
+    """
+    return {claim.id: claim.label + SIGIL[claim.standing] for claim in ledger.claims}
 
 
 def lints(ledger: Ledger) -> tuple[str, ...]:
@@ -127,14 +156,15 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
     """
     found = [f"dangling why: reference: {missing}" for missing in dangling(ledger)]
     found += [
-        f"theory {theory.name}.kb has no `ontology:` header; its defining claim says nothing"
+        (
+            f"theory {theory.name}.kb has no defining claim: write {theory.name}.md"
+            if theory.defining is None
+            else f"theory {theory.name}.kb stipulates no `ontology:`; nothing confines its claims"
+        )
         for theory in ledger.theories
-        if theory.ontology is None
+        if theory.defining is None or not theory.ontology
     ]
-    names = sorted(
-        [theory_label(theory.name) for theory in ledger.theories]
-        + [claim.label for claim in ledger.claims]
-    )
+    names = sorted(claim.label for claim in ledger.claims)
     found += [
         (
             f"label {one} is defined twice"
@@ -152,30 +182,19 @@ def counted(number: int, singular: str, plural: str) -> str:
 
 
 def flatten(ledger: Ledger, source: Path) -> str:
-    labels = labels_of(ledger)
-    by_theory = {theory.name: theory for theory in ledger.theories}
+    """The whole ledger as one nested list, outermost theory first."""
+    confined = sum(len(theory.claims) for theory in ledger.theories)
     lines = [
         f"# {ledger.name} -- claim ledger",
         "",
-        f"{counted(len(ledger.claims), 'claim', 'claims')} in"
+        f"{counted(confined, 'claim', 'claims')} in"
         f" {counted(len(ledger.theories), 'theory', 'theories')}, from"
         f" `{source}` as of {date.today().isoformat()}.",
         "",
         LEGEND,
         "",
+        *theory_block(ledger.theories[0], ledger, labels_of(ledger)),
     ]
-    for name in in_support_order(
-        {theory.name: theory.priors for theory in ledger.theories}
-    ):
-        claims = {claim.id: claim for claim in ledger.claims if claim.theory == name}
-        lines.append(theory_line(by_theory[name], labels))
-        lines += [
-            claim_line(claims[claim_id], labels)
-            for claim_id in in_support_order(
-                {claim.id: claim.why for claim in claims.values()}
-            )
-        ]
-        lines.append("")
     return "\n".join(lines).strip() + "\n"
 
 

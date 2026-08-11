@@ -1,15 +1,26 @@
 ---
+label: QUESTION
+standing: agent
+why:
+  - fleet.md
+ontology:
+  - question
+  - posing
+  - wrestling
+  - settlement
+  - dissolution
+  - residue
+defeated-by: the user disavowing a question, or a driving question the tower cannot decompose
 last-updated: "2026-08-09"
 ---
 
-# The questions
+# The questions -- driving problems the tower was bought to settle
 
-What the ledger was bought to settle: the core design problems, one
-claim each in `question.kb/` -- historically the seed of everything
-downstream, logically the top of the poset, since stating what
-decomposes a question takes the whole tower's vocabulary. Three were
-ill-posed as experienced (IDENTITY, SEMANTICS, FRAGMENTATION); their
-settlement was mostly re-posing.
+The core design problems the ledger resolves: historically first --
+everything downstream is their decomposition; logically last --
+stating what decomposes a question takes the whole tower's vocabulary.
+Three were ill-posed as experienced (IDENTITY, SEMANTICS,
+FRAGMENTATION); their settlement was mostly re-posing.
 
 | The question | Decomposed by | Open residue |
 |---|---|---|

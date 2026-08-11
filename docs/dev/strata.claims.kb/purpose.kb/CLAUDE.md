@@ -1,15 +1,5 @@
 # purpose.kb -- maintenance guide
 
-The regime root: what the corpus must withstand and deliver, stated
-without proper nouns. The other theories' laws answer to these
-requirements; several cite them as priors.
-
-- `prior:` -- none
-- `ontology:` corpus, reader, growth, work, review, entry, capture,
-  world, disagreement
-- `defeated by:` a corpus small enough for one reader to re-read --
-  bounded growth dissolves every requirement here
-
 ## What belongs here
 
 An operating-regime requirement: a property of the corpus's scale,

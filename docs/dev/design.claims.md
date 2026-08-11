@@ -1,4 +1,15 @@
 ---
+label: FLEET_DESIGN
+standing: agent
+ontology:
+  - fleet
+  - repo
+  - skill
+  - claim
+  - ledger
+  - ruling
+  - ADR
+defeated-by: a commitment that binds one skill only -- it belongs in that skill's own ledger, not here
 last-updated: "2026-08-09"
 ---
 
@@ -18,13 +29,9 @@ ruling has an ADR cites it as `authority:`.
 
 ## Theories
 
-One so far, a root:
-
-- **`authorship.kb/`** -- how any skill here is written: audiences,
-  names, coupling, citation discipline. Priced against LOAD_COST: a
-  skill is written once and paid for on every load. Defeated by a
-  skill format with per-audience channels, or retrieval that consults
-  neither names nor descriptions.
+One so far, a root: `authorship.md`, defining `authorship.kb/`. Each
+theory is the claim file beside its collection, so `ls` is the index
+and nothing here needs to restate it.
 
 Roots are roots: claims here connect where a warrant is real, and
 stay disconnected where it is not.
@@ -32,6 +39,6 @@ stay disconnected where it is not.
 ## Scans
 
 ```bash
-grep -rH '^standing:' docs/dev/design.claims.kb/*.kb/   # who signed what
+grep -rH '^standing:' docs/dev/design.claims.kb/     # who signed what
 llm-claims-kb/bin/llm-claims-kb-graph docs/dev/design.claims.kb  # shape + lints
 ```

@@ -6,8 +6,8 @@
 """Emit graphviz DOT for a claim ledger kept as files.
 
 Two graphs of the same ledger: `--level theory` draws the theory poset
-from the collections' `prior:` headers; `--level claim` draws every
-claim, clustered by theory, with its `why:` arrows. Arrows point the
+from the defining claims' `why:`; `--level claim` draws every claim,
+clustered by theory, with its `why:` arrows. Arrows point the
 way support flows -- from the prior claim to the one that rests on it
 -- so the drawing reads in the same direction as the ledger's own
 `<name>.claims.md` spine.
@@ -22,7 +22,7 @@ import textwrap
 from pathlib import Path
 from typing import cast
 
-from llm_claims_kb import SIGIL, Claim, Ledger, dangling, read_ledger
+from llm_claims_kb import SIGIL, Claim, Ledger, Theory, dangling, read_ledger
 
 # The ink each standing earns. `bare` needs no judge, so it gets the
 # default ink; the rest name a judge.
@@ -40,30 +40,44 @@ def node_label(claim: Claim) -> str:
     return f"<<B>{escape(claim.label)}{SIGIL[claim.standing]}</B><BR/><I>{lines}</I>>"
 
 
+def theory_node(theory: Theory) -> str:
+    """A theory as its defining claim: the label wears the sigil that claim signed."""
+    said = f"{theory.label}{SIGIL[theory.standing]}"
+    return (
+        f'  "{theory.name}" [label="{said}\\n{theory.stem}.kb\\n{len(theory.claims)} claims"'
+        f', color="{COLOR[theory.standing]}"];'
+    )
+
+
 def dot_theories(ledger: Ledger, rankdir: str) -> str:
-    counts = {theory.name: 0 for theory in ledger.theories}
-    for claim in ledger.claims:
-        counts[claim.theory] += 1
+    names = {theory.name for theory in ledger.theories}
     lines = [
         f'digraph "{ledger.name}" {{',
         f"  rankdir={rankdir};",
         '  node [shape=box, style=rounded, fontname="Helvetica"];',
     ]
-    lines += [
-        f'  "{theory.name}" [label="{theory.name}.kb\\n{counts[theory.name]} claims"];'
-        for theory in ledger.theories
-    ]
+    lines += [theory_node(theory) for theory in ledger.theories]
     lines += [
         f'  "{prior}" -> "{theory.name}";'
         for theory in ledger.theories
         for prior in theory.priors
+    ]
+    # Containment is support too -- the words come down the tree -- but it is
+    # read off the paths rather than declared, so it is drawn as the weaker line.
+    lines += [
+        f'  "{theory.container}" -> "{theory.name}" [style=dashed, arrowhead=empty];'
+        for theory in ledger.theories
+        if theory.container in names
     ]
     return "\n".join(lines + ["}"])
 
 
 def node_tooltip(claim: Claim) -> str:
     """The claim's own words, wrapped -- an SVG `title`, so hovering reads it."""
-    lines = (line.replace("\\", "\\\\").replace('"', '\\"') for line in textwrap.wrap(claim.gist, 64))
+    lines = (
+        line.replace("\\", "\\\\").replace('"', '\\"')
+        for line in textwrap.wrap(claim.gist, 64)
+    )
     return "\\n".join(lines)
 
 
@@ -101,12 +115,13 @@ def dot_claims(ledger: Ledger, rankdir: str) -> str:
     ]
     lines += dot_legend()  # first, so it lands leftmost on the rank it pins to
     for theory in ledger.theories:
+        # The defining claim is drawn inside the cluster it names: it is a
+        # claim, and the reader who wants the ontology wants it in place.
         lines.append(f'  subgraph "cluster_{theory.name}" {{')
-        lines.append(f'    label="{theory.name}.kb"; color=gray75; style=rounded;')
+        lines.append(f'    label="{theory.stem}.kb"; color=gray75; style=rounded;')
         lines += [
             f'    "{claim.id}" [label={node_label(claim)}, color="{COLOR[claim.standing]}", URL="{claim.url}", tooltip="{node_tooltip(claim)}"];'
-            for claim in ledger.claims
-            if claim.theory == theory.name
+            for claim in (*filter(None, [theory.defining]), *theory.claims)
         ]
         lines.append("  }")
     lines += [
@@ -117,9 +132,11 @@ def dot_claims(ledger: Ledger, rankdir: str) -> str:
     # are the tower's shape -- drawn thinner. The distinction rides on
     # penwidth, not color, because `edgepaint` owns color downstream.
     lines += [
-        f'  "{prior}" -> "{claim.id}";'
-        if prior.split("/")[0] == claim.theory
-        else f'  "{prior}" -> "{claim.id}" [penwidth=0.5];'
+        (
+            f'  "{prior}" -> "{claim.id}";'
+            if claim.scope and prior.rpartition("/")[0] == claim.scope
+            else f'  "{prior}" -> "{claim.id}" [penwidth=0.5];'
+        )
         for claim in ledger.claims
         for prior in claim.why
     ]

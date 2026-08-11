@@ -1,14 +1,5 @@
 # notation.kb -- maintenance guide
 
-The design decisions themselves: what this notation commits to and what
-it declined. This is the theory `../../SKILL.kb/` is the manual for.
-
-- `prior:` `good-smells.kb`
-- `ontology:` label, sigil, status, standing, premise, arrow, node type,
-  warrant, stipulation, veto, judge, signature, check, entry, scan,
-  theory, ontology, prior, defeater
-- `defeated by:` an inference relation cheap enough to check at entry
-
 ## What belongs here
 
 A decision that could have gone the other way, stated with what it cost

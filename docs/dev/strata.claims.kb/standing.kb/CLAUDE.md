@@ -1,15 +1,5 @@
 # standing.kb -- maintenance guide
 
-The epistemic stratum: statuses, evidence, and the operator whose
-fixpoint is what anything's standing *is*.
-
-- `prior:` reference, view, fixpoint, purpose
-- `ontology:` status, claim, evidence, warrant, certificate, checker,
-  verdict, fiat, ruling, retraction, defeat, standing, assessor,
-  party, stance, quotient
-- `defeated by:` a base holding anything besides claims, or standing
-  stored as ground truth rather than computed
-
 ## What belongs here
 
 A commitment about how standing is defined, computed, and maintained
