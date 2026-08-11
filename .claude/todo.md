@@ -159,7 +159,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       fixpoint->standing), each reachable through `view` or `reference`.
       Either the header cites vocabulary it uses directly -- legitimate,
       and the drawing is just a Hasse view -- or it inherited an edge it
-      never needed. Surfaced 2026-08-09 by bin/llm.claims-graph
+      never needed. Surfaced 2026-08-09 by bin/llm-claims-kb-graph
   - [ ] Then: strata.claims.md's hand-drawn ASCII spine is derivable from
         the same `prior:` headers, so it is now a view with no stamp and
         no computer -- regenerate it, stamp it, or say why it stays hand-cut
@@ -173,12 +173,22 @@ Repo-level list. Skill-scoped work lives in each skill's own
       in claim.jsonschema.yaml description text (attention-grade); the
       2026-08-09 enforcement was a hand-check of 53 labels. Cross-file
       rule, so per-file schema can't hold it -- candidate homes:
-      llm-claims-kb/bin/ (now exists, holds llm.claims-dot and the
+      llm-claims-kb/bin/ (now exists, holds llm-claims-kb-dot and the
       dangling/ccomps/acyclic lints) or llm-kb/bin/llm.kb-validate
+  - [ ] Partly done 2026-08-11: llm-claims-kb-flatten checks it (theory
+        labels included, since flattening gives every theory one) and
+        found FLEET prefixing FLEET_MAP in strata.claims.kb. It runs
+        only when you flatten, so the check still wants a home that a
+        pre-commit pass would reach
+- [ ] The only dotted command names left in the repo are
+      llm-kb/bin/llm.kb-validate{,-links}; the 2026-08-08 exact-prefix
+      ruling makes them llm-kb-validate{,-links}. ~27 live references
+      here plus 11 files under ~/.claude outside skills/ -- a sweep to
+      do deliberately, not in passing
 - [ ] llm-claims-kb has no story for non-claim (evidence) collections
       inside a ledger: PRMS `design.claims.kb/world.kb/` (substrate
       assessments, frontmatter-free by design) crashes
-      `llm.claims-dot`'s `split_frontmatter`, and the manual is silent
+      `llm-claims-kb-dot`'s `split_frontmatter`, and the manual is silent
       on whether such collections are legal. Candidates: an exemption
       marker in the collection's CLAUDE.md, a collection `kind:`, or
       claims-only discipline stated in the manual. Counterpart item in

@@ -1,6 +1,6 @@
 # Graph Health
 
-Run `bin/llm.claims-graph <name>.claims.kb` after any rename, before
+Run `bin/llm-claims-kb-graph <name>.claims.kb` after any rename, before
 committing a batch of new claims, and on any ledger you did not
 write.
 

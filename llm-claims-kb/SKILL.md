@@ -62,13 +62,14 @@ A label, filename, or theory is load-bearing at every reference.
 Renaming one: `git mv` the file (both paths in the commit), sweep
 every `why:` and prose reference in live files -- historical records
 (devlogs, ADRs) keep the old name as provenance -- then re-run
-`bin/llm.claims-graph` and the schema validation before committing.
+`bin/llm-claims-kb-graph` and the schema validation before committing.
 
 ## Tools provided
 
-Paths are relative to this skill's directory.
+Paths are relative to this skill's directory; all of them read the
+ledger through `bin/llm_claims_kb.py`.
 
-### bin/llm.claims-graph
+### bin/llm-claims-kb-graph
 
 Purpose: see the shape of the argument, and catch the three ways a
 file-per-claim ledger rots silently -- a `why:` that points nowhere,
@@ -78,16 +79,40 @@ Recommended: run it after any rename, and before committing a batch
 of new claims. Reading a ledger you did not write, run it first.
 
 ```bash
-bin/llm.claims-graph <name>.claims.kb                 # every claim, clustered by theory
-bin/llm.claims-graph <name>.claims.kb --level theory  # the poset of collections alone
+bin/llm-claims-kb-graph <name>.claims.kb                 # every claim, clustered by theory
+bin/llm-claims-kb-graph <name>.claims.kb --level theory  # the poset of collections alone
 ```
 
 It renders an SVG under `$TMPDIR/ledger-graphs/<date>/` and prints
-the path, leaving the `.dot` beside it. `bin/llm.claims-dot` is the
-emitter underneath, if you want the DOT on stdout.
+the path, leaving the `.dot` beside it. `bin/llm-claims-kb-dot` is
+the emitter underneath, if you want the DOT on stdout.
 
 How to read the drawing, and the rots it catches:
 `SKILL.kb/self-audit.kb/graph-health.md`.
+
+### bin/llm-claims-kb-flatten
+
+Purpose: hand the ledger to a chat that has no files -- claude.ai, a
+colleague, another model. It prints the whole ledger as
+`Skill(llm-claims)`'s one-line-per-claim form on stdout, so the
+directory travels as a paste.
+
+```bash
+bin/llm-claims-kb-flatten <name>.claims.kb            # the ledger, as one text
+```
+
+Every structural thing the directory carries comes back as notation:
+`standing:` as the trailing sigil, `why:` as `<-` arrows whose
+targets wear their own sigils, `verify:` as `-- certified(CHECK)`,
+each theory header as the defining claim its collection opens with,
+and prose cites of claim files as the labels those files carry.
+Theories come out in `prior:` order, claims in `why:` order within a
+theory.
+
+Two things do not survive the trip, and the tool says so on stderr:
+a `why:` that resolves to no claim, and two labels `grep` cannot
+tell apart -- once the paths are gone, labels are the only handle
+the reader has.
 
 ## What this is not
 

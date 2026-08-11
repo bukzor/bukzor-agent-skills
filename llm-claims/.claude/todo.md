@@ -2,7 +2,7 @@
 
 - [ ] Wire design.claims.kb's `why:` edges: 27 claims carry only 3
       `why:` edges -- ccomps reports 25 components (found 2026-08-09 by
-      the new llm-claims-kb/bin/llm.claims-graph; its SKILL.md
+      the new llm-claims-kb/bin/llm-claims-kb-graph; its SKILL.md
       names arrows-in-prose-not-frontmatter as the failure the file
       form exists to prevent). The support structure exists in the
       bodies; move it into frontmatter so the graph tools and the

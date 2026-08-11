@@ -17,125 +17,16 @@ stderr; that is the one lint this tool owes its reader.
 """
 
 import argparse
-import os
-import re
 import sys
 import textwrap
-from collections.abc import Mapping
-from dataclasses import dataclass
 from pathlib import Path
 from typing import cast
 
-import yaml
+from llm_claims_kb import SIGIL, Claim, Ledger, dangling, read_ledger
 
-# The sigil each standing spells out, and the ink it earns. `bare`
-# needs no judge, so it gets the default ink; the rest name a judge.
-SIGIL = {"bare": "", "open": "?", "agent": "+", "user": "!"}
+# The ink each standing earns. `bare` needs no judge, so it gets the
+# default ink; the rest name a judge.
 COLOR = {"bare": "gray20", "open": "gray55", "agent": "#1f78b4", "user": "#33a02c"}
-
-
-@dataclass(frozen=True)
-class Claim:
-    id: str  # `<theory>/<stem>` -- ledger-wide identity
-    theory: str
-    stem: str
-    label: str
-    standing: str
-    why: tuple[str, ...]  # claim ids, resolved from file-relative paths
-    url: str  # the claim file, so a drawn node is a way in
-    gist: str  # opening paragraph, for the hover
-
-
-@dataclass(frozen=True)
-class Theory:
-    name: str
-    priors: tuple[str, ...]
-
-
-@dataclass(frozen=True)
-class Ledger:
-    name: str
-    theories: tuple[Theory, ...]
-    claims: tuple[Claim, ...]
-
-
-def claim_id(path: Path) -> str:
-    """`<theory>/<stem>`, with `..` segments of a `why:` path collapsed."""
-    clean = Path(os.path.normpath(path))
-    return f"{clean.parent.name.removesuffix('.kb')}/{clean.stem}"
-
-
-def split_frontmatter(text: str) -> tuple[Mapping[str, object], str]:
-    """The frontmatter mapping, and the body that follows it."""
-    match = re.match(r"---\n(.*?)\n---\n", text, re.DOTALL)
-    assert match is not None, text[:200]
-    loaded = cast(Mapping[str, object], yaml.safe_load(match.group(1)))
-    assert isinstance(loaded, dict), loaded
-    return loaded, text[match.end() :]
-
-
-def first_paragraph(body: str) -> str:
-    """The claim itself: the paragraph after the title, whitespace collapsed."""
-    blocks = (block.strip() for block in body.split("\n\n"))
-    paragraphs = (block for block in blocks if block and not block.startswith("#"))
-    return " ".join(next(paragraphs, "").split())
-
-
-def parse_header_bullet(text: str, key: str) -> str:
-    """The `- ``key:`` ...` theory-header bullet, continuation lines joined."""
-    match = re.search(
-        rf"^- `{key}:`(.*?)(?=^- `|\n\n|\Z)", text, re.MULTILINE | re.DOTALL
-    )
-    assert match is not None, (key, text[:200])
-    return " ".join(match.group(1).split())
-
-
-def parse_priors(value: str) -> tuple[str, ...]:
-    """Theory names cited as priors; every spelling of "none" yields none."""
-    names = (item.strip(" `-–—") for item in value.split(","))
-    return tuple(name.removesuffix(".kb") for name in names if name and name != "none")
-
-
-def read_claim(path: Path) -> Claim:
-    front, body = split_frontmatter(path.read_text())
-    label, standing, why = front["label"], front["standing"], front.get("why", [])
-    assert isinstance(label, str), label
-    assert isinstance(standing, str) and standing in SIGIL, standing
-    assert isinstance(why, list), why
-    return Claim(
-        id=claim_id(path),
-        theory=path.parent.name.removesuffix(".kb"),
-        stem=path.stem,
-        label=label,
-        standing=standing,
-        why=tuple(
-            claim_id(path.parent / str(entry)) for entry in cast(list[object], why)
-        ),
-        url=path.resolve().as_uri(),
-        gist=first_paragraph(body),
-    )
-
-
-def read_ledger(root: Path) -> Ledger:
-    theories: list[Theory] = []
-    claims: list[Claim] = []
-    for kb in sorted(root.glob("*.kb")):
-        priors = parse_priors(parse_header_bullet((kb / "CLAUDE.md").read_text(), "prior"))
-        theories.append(Theory(name=kb.name.removesuffix(".kb"), priors=priors))
-        claims.extend(read_claim(md) for md in sorted(kb.glob("*.md")) if md.name != "CLAUDE.md")
-    assert theories, root
-    return Ledger(
-        name=root.name.removesuffix(".claims.kb"),
-        theories=tuple(theories),
-        claims=tuple(claims),
-    )
-
-
-def dangling(ledger: Ledger) -> tuple[str, ...]:
-    """Cited claim ids that no file defines."""
-    known = {claim.id for claim in ledger.claims}
-    cited = {prior for claim in ledger.claims for prior in claim.why}
-    return tuple(sorted(cited - known))
 
 
 def escape(text: str) -> str:

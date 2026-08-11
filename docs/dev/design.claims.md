@@ -33,5 +33,5 @@ stay disconnected where it is not.
 
 ```bash
 grep -rH '^standing:' docs/dev/design.claims.kb/*.kb/   # who signed what
-llm-claims-kb/bin/llm.claims-graph docs/dev/design.claims.kb  # shape + lints
+llm-claims-kb/bin/llm-claims-kb-graph docs/dev/design.claims.kb  # shape + lints
 ```

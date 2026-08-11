@@ -1,0 +1,197 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = ["pyyaml"]
+# ///
+"""Flatten a file-per-claim ledger to the one-line-per-claim chat form.
+
+The output is one block of text to paste into claude.ai, where there are no
+files to walk and `Skill(llm-claims)`'s core notation is the whole system:
+`* LABEL <- PRIOR PRIOR: text`, sigils trailing. Everything the directory
+carries structurally comes back as notation -- `standing:` as the sigil,
+`why:` as the arrows, each target's sigil computed at the reference site so
+the warrant-mix shows where the weight rests, `verify:` as
+`-- certified(CHECK)`, and each theory header as the defining claim its
+collection opens with.
+
+Ordered so support precedes what rests on it: theories by `prior:`, claims by
+`why:` within a theory. The whole ledger is rendered, never a slice of one --
+a partial render would read as the ledger's full state and silently retract
+what it omitted.
+
+Lints, on stderr: a `why:` pointing nowhere, two labels `grep` cannot tell
+apart, a theory with no header to define it.
+"""
+
+import argparse
+import re
+import sys
+from collections.abc import Iterable, Mapping
+from datetime import date
+from itertools import combinations
+from pathlib import Path
+from typing import cast
+
+from llm_claims_kb import SIGIL, Claim, Ledger, Theory, dangling, read_ledger
+
+# A claim file as a claim body cites one: `foo.md`, `../bar.kb/foo.md`.
+CITE = re.compile(r"(?:\.\./)*(?:([a-z0-9-]+)\.kb/)?([a-z0-9-]+)\.md")
+
+# Enough notation to act on the paste without the skill loaded: a ledger's
+# own FRESH_READER and SELF_CONTAINED claims apply to the ledger's transport
+# form too.
+LEGEND = (
+    "Notation (`Skill(llm-claims)`): one claim per line; `LABEL` names the locus"
+    " of contention, a trailing sigil signs the judge -- `!` the user's call,"
+    " `+` the agent's (veto invited), `?` no one's yet, bare means none is"
+    " needed; `<-` names what the claim rests on. Union over the chat, last"
+    " wins."
+)
+
+
+def theory_label(name: str) -> str:
+    """A collection's name as a ledger label -- what its claims cite it by."""
+    return name.upper().replace("-", "_")
+
+
+def in_support_order(deps: Mapping[str, tuple[str, ...]]) -> tuple[str, ...]:
+    """Keys ordered so a dependency precedes its dependents, ties by name.
+
+    Not a plain topological sort: a ledger may legally cite in a cycle, so
+    what no order can place gets placed by name rather than dropped.
+    """
+    pending = dict(deps)
+    ordered: list[str] = []
+    while pending:
+        ready = sorted(
+            key for key, on in pending.items() if not set(on) & pending.keys()
+        )
+        ready = ready or [min(pending)]  # a citation cycle: name order breaks it
+        for key in ready:
+            del pending[key]
+        ordered.extend(ready)
+    return tuple(ordered)
+
+
+def arrows(why: Iterable[str], labels: Mapping[str, str]) -> str:
+    """The ` <- ` clause: cited claims by label, each carrying its own sigil."""
+    cited = " ".join(labels.get(prior, f"(missing:{prior})") for prior in why)
+    return f" <- {cited}" if cited else ""
+
+
+def theory_line(theory: Theory, labels: Mapping[str, str]) -> str:
+    """A theory's defining claim: the ontology is the text, the priors the arrows."""
+    ontology = (
+        f"theory of {theory.ontology}"
+        if theory.ontology
+        else "theory; ontology not recorded"
+    )
+    defeater = f" -- defeated by {theory.defeater}" if theory.defeater else ""
+    return f"* {theory_label(theory.name)}{arrows(theory.priors, labels)}: {ontology}{defeater}"
+
+
+def relabel(text: str, theory: str, labels: Mapping[str, str]) -> str:
+    """Prose cites of claim files, read back as labels: the paste has no files.
+
+    A cite naming no claim of this ledger is left as written -- it points at
+    something outside, and a filename says more there than nothing does.
+    """
+    return CITE.sub(
+        lambda cite: labels.get(f"{cite[1] or theory}/{cite[2]}", cite[0]), text
+    )
+
+
+def claim_line(claim: Claim, labels: Mapping[str, str]) -> str:
+    """One claim, one line -- the sigil on the label, the notes suffixed."""
+    notes = [f"certified({claim.verify})"] if claim.verify else []
+    notes += [f"authority: {claim.authority}"] if claim.authority else []
+    suffix = "".join(f" -- {note}" for note in notes)
+    gist = relabel(claim.gist, claim.theory, labels)
+    return f"* {labels[claim.id]}{arrows(claim.why, labels)}: {gist}{suffix}"
+
+
+def labels_of(ledger: Ledger) -> Mapping[str, str]:
+    """What each claim and theory is cited as: its label, wearing its sigil."""
+    return {
+        **{theory.name: theory_label(theory.name) for theory in ledger.theories},
+        **{claim.id: claim.label + SIGIL[claim.standing] for claim in ledger.claims},
+    }
+
+
+def lints(ledger: Ledger) -> tuple[str, ...]:
+    """What the flattening loses or blurs, for stderr.
+
+    Labels are the only handle the chat form has -- paths are gone -- so a
+    label another label prefixes is a real collision here, however well the
+    files were telling those two claims apart.
+    """
+    found = [f"dangling why: reference: {missing}" for missing in dangling(ledger)]
+    found += [
+        f"theory {theory.name}.kb has no `ontology:` header; its defining claim says nothing"
+        for theory in ledger.theories
+        if theory.ontology is None
+    ]
+    names = sorted(
+        [theory_label(theory.name) for theory in ledger.theories]
+        + [claim.label for claim in ledger.claims]
+    )
+    found += [
+        (
+            f"label {one} is defined twice"
+            if one == other
+            else f"label {one} prefixes {other}; `grep {one}` cannot tell them apart"
+        )
+        for one, other in combinations(names, 2)
+        if other.startswith(one)
+    ]
+    return tuple(found)
+
+
+def counted(number: int, singular: str, plural: str) -> str:
+    return f"{number} {singular}" if number == 1 else f"{number} {plural}"
+
+
+def flatten(ledger: Ledger, source: Path) -> str:
+    labels = labels_of(ledger)
+    by_theory = {theory.name: theory for theory in ledger.theories}
+    lines = [
+        f"# {ledger.name} -- claim ledger",
+        "",
+        f"{counted(len(ledger.claims), 'claim', 'claims')} in"
+        f" {counted(len(ledger.theories), 'theory', 'theories')}, from"
+        f" `{source}` as of {date.today().isoformat()}.",
+        "",
+        LEGEND,
+        "",
+    ]
+    for name in in_support_order(
+        {theory.name: theory.priors for theory in ledger.theories}
+    ):
+        claims = {claim.id: claim for claim in ledger.claims if claim.theory == name}
+        lines.append(theory_line(by_theory[name], labels))
+        lines += [
+            claim_line(claims[claim_id], labels)
+            for claim_id in in_support_order(
+                {claim.id: claim.why for claim in claims.values()}
+            )
+        ]
+        lines.append("")
+    return "\n".join(lines).strip() + "\n"
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
+    _ = parser.add_argument("ledger", type=Path, help="a `*.claims.kb/` directory")
+    args = parser.parse_args()
+    root = cast(Path, args.ledger)
+
+    ledger = read_ledger(root)
+    for complaint in lints(ledger):
+        print(f"{root}: {complaint}", file=sys.stderr)
+    print(flatten(ledger, root), end="")
+
+
+if __name__ == "__main__":
+    main()
