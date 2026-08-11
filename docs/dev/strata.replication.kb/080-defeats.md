@@ -7,12 +7,7 @@ blind: false
 
 The deliverable turn: defeats, not impressions. Propose diffs, don't
 write them -- the arguer shouldn't also be the filing clerk. A miss
-looks like a list of compliments with one hedged nitpick. Before
-sending, run the ledger's own mechanical checks (schema `$ref` chain,
-`verify:` lines, graph tool) and repair any rot: the audit spends its
-depth on whatever is broken, and mechanical breakage is the
-operator's to fix, not a finding worth a turn (2026-08-11: a dangling
-symlink led the first audit; the re-issued turn recovered the depth).
+looks like a list of compliments with one hedged nitpick.
 
 ````
 Now critique the ledger on its own terms.

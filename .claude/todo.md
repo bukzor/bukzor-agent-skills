@@ -136,6 +136,15 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
+- [ ] Finish the strata replication run: 080 (the critique turn) still
+      owes an answer. Restart point is the promoted session
+      `0476a1a8-b186-4988-8deb-83853c353acb`, cut at the 070 reply, in
+      worktree `bukzor-agent-skills--replication-run` (branch
+      `strata-replication-run`, tag `run/pre-080`, environment repaired).
+      Resume it, restore the frontier-tier model/effort the agent
+      definition supplied, send `strata.replication.kb/080-defeats.md`
+      unaltered, commit the reply as the next stage. Then 090 (owner's
+      rulings) and adjudication of 070's six filable claims
 - [ ] Decide the single-sigil seam (strata.claims): STANCE (user, 32b1a76)
       rules that a one-place "the standing" is a category error the schema
       must not encode, yet claim frontmatter holds exactly one `standing:`
