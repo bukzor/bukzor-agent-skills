@@ -166,6 +166,10 @@ Repo-level list. Skill-scoped work lives in each skill's own
       rule, so per-file schema can't hold it -- candidate homes:
       llm-claims-kb/bin/ (now exists, holds llm.claims-dot and the
       dangling/ccomps/acyclic lints) or llm-kb/bin/llm.kb-validate
+- [ ] Task 5 of the 2026-08-09/10 review arc (user-deferred, twice):
+      future planning for the claims/strata corpus — next steps, potential
+      endpoints, brief monetization discussion. Pure conversation; pick up
+      when the user says go
 - [ ] Evaluate absorbing the PRMS corpus dialect into llm-claims-kb (the
       `.claims.kb` ↔ `.prms.kb` seam): computed standing (the engine
       derives status; corpus records only bare and `!`) as a legitimate
