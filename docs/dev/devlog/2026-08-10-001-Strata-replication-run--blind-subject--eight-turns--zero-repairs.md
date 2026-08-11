@@ -111,6 +111,12 @@ quality than the hand-built `strata.claims.kb/`?
 
 ## Awaiting adjudication (the run's deliverable)
 
+> **Superseded (2026-08-11):** the symlink below turned out to be
+> mechanical rename fallout; it was repaired and 080 re-issued at
+> full depth. The list in `2026-08-11-000-*.md` replaces this one as
+> the adjudication input; this one stands as the record of the
+> distracted first pass.
+
 080's proposed defeats, condensed one per line; full argument in the
 session transcript.
 
