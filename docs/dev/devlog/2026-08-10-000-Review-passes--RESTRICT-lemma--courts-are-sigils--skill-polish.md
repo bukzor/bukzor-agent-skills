@@ -133,6 +133,14 @@ stayed: it is a Lean-generator theory source, not a ledger artifact
 `Gen/Main.lean`'s `validLabel` admits no dots), so "ledger" there
 names the theory — concept language, like `Ledger.lean`. Record in
 PRMS's `.claude/todo.md` (it keeps no devlog).
+Second amendment, same day: the user ruled the corpus dirs into
+their own typed suffix — `ledger.prms.kb/`, `demo.prms.kb/` (PRMS
+`5aa251c`) — after asking whether their contents conform to
+`Skill(llm-claims-kb)`; they don't (generator-enforced
+`claim:`/`text:`/`stmt:` fields, standing computed not recorded), and
+a suffix that lies defeats the convention. `theoryOf` generalized to
+the leading identifier; merge-evaluation items filed in both repos'
+todo lists.
 
 While in `llm-claims-kb/SKILL.md`: added `SKILL.kb/self-audit.kb/`,
 four ledger-specific rot audits (standing honesty, graph health,

@@ -166,6 +166,13 @@ Repo-level list. Skill-scoped work lives in each skill's own
       rule, so per-file schema can't hold it -- candidate homes:
       llm-claims-kb/bin/ (now exists, holds llm.claims-dot and the
       dangling/ccomps/acyclic lints) or llm-kb/bin/llm.kb-validate
+- [ ] Evaluate absorbing the PRMS corpus dialect into llm-claims-kb (the
+      `.claims.kb` ↔ `.prms.kb` seam): computed standing (the engine
+      derives status; corpus records only bare and `!`) as a legitimate
+      specialization vs a fork; label-form `why:` entries; `stmt:`/`proof:`
+      as the strong form of `verify:`. Counterpart item (field-name
+      convergence sketch) in
+      `prototype.personal-reasoning-management/.claude/todo.md`
 - [ ] USER: hand-copy llm-claims/SKILL.md's Core block into claude.ai
       preferences — the two are kept verbatim-identical and the block's
       wording changed during the 2026-08-09/10 polish (the .claims.kb
