@@ -22,7 +22,7 @@ hit. Use the tools below; they decode first.
 | `claude-search PATTERN [--role talk] [--all]` | which session discussed this, with snippets                  |
 | `claude-inventory [--days N] [--sh]`          | what was I working on; `--sh` emits resume commands          |
 | `claude-branch-list FILE [--branches-only]`   | the file's tree, marking real rewind points                  |
-| `claude-branch-extract`                       | linearize one branch into a new resumable JSONL              |
+| `claude-branch-extract [--at] [--as-session CWD]` | linearize one branch into a new resumable JSONL          |
 | `claude-jsonl-cwd FILE`                       | the directory a session ran in (needed to resume it)         |
 | `claude-jsonl-path DIR`                       | the projects/ dir holding a cwd's sessions                   |
 | `claude-jsonl-display < FILE`                 | render a transcript readably (`-to-log` writes it beside)    |
@@ -57,15 +57,42 @@ Every module is doctested; `uv run pytest` in that repo runs them.
 - **`type: user` is not "the user typed this".** Tool results are stored
   as user records. Distinguishing them (`role_of`, `is_user_text`) is
   what makes "what did I actually ask for" answerable.
-- **Sidechain files are subagent transcripts.** They carry
-  `isSidechain: true` and are not independently resumable -- searching
-  them is right, offering `--resume` on one is not.
+- **Subagent transcripts live under the parent session**, in
+  `projects/<slug>/<session-id>/subagents/agent-<id>.jsonl`, with every
+  record marked `isSidechain: true`. Nothing globbing `projects/*/*.jsonl`
+  sees them -- not `--resume`, not the tools above unless pointed at the
+  file. They are shaped like sessions otherwise, so
+  `claude-branch-extract --as-session CWD` re-homes one as a session of
+  its own: the marks come off, `cwd` moves to the directory the work
+  belongs in, and it resumes like anything else. What does not come
+  back is the agent definition it ran under -- the promoted session
+  gets the plain system prompt and the session's own model.
 - **User-role text is often harness-injected**: compaction summaries,
   skill preambles, command wrappers, `[Request interrupted...]`. Filter
   it before drawing conclusions about what a person said.
 - Files are append-only, so a frozen or killed session loses nothing but
   the in-flight turn. A crashed write can leave one malformed line;
   parse defensively rather than failing the whole file.
+
+## Rewinding to a state the picker will not offer
+
+`/rewind` cuts only at *your own* prompts, on the one chain resume
+loaded. Anything else -- before an assistant reply you want answered
+differently, before a turn you sent a subagent -- is reachable only by
+cutting the file:
+
+1. `claude-branch-list FILE` (or a `claude-search` hit) names the record
+   to keep as the last one.
+2. `claude-branch-extract FILE <uuid> --at` writes a new session ending
+   there; add `--as-session <cwd>` when the source is a subagent's.
+3. `cd <cwd> && claude --resume <new-id>`, then send the turn again.
+
+Two things do not come back with it: the repo state the dropped turn
+worked against -- version control is the only rewind for that, so commit
+each step of anything you may want to re-run -- and, for a promoted
+subagent, its agent definition. Re-asking without rewinding is not the
+same experiment: the first answer stays in context, and what comes back
+is a revision of it.
 
 ## Recovery after a crash or freeze
 

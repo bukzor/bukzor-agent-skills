@@ -74,6 +74,47 @@ hand over this whole directory instead of pasting turn by turn, expect
 that. The pastes inline the procedures they need instead of invoking
 skills -- nothing a blind agent loads may be able to name the answer.
 
+## The environment
+
+Run the subject in a dedicated worktree, never the live tree:
+
+```sh
+git worktree add -b <run-branch> ../<repo>--<run> HEAD
+git diff --binary HEAD | git -C ../<repo>--<run> apply   # if the tree is dirty
+git -C ../<repo>--<run> commit-files . -- -m wip         # seal it
+```
+
+The seal is the point: a bare `git status` in a dirty checkout lists
+the answer's own paths, so an unsealed worktree leaks through a command
+the subject has every reason to run. A bland one-word message leaks
+nothing.
+
+Then repair the ledger's mechanical rot before the run -- dangling
+symlinks, a `verify:` that no longer selects, a schema that will not
+resolve. A critique turn spends its depth on whatever is broken, so
+leaving rot in place buys an audit of the rot; and the turn cannot be
+re-asked of the same subject afterward (below). Mechanical breakage is
+the operator's to fix, not a finding worth a turn.
+
+## Rewinding a run
+
+Commit each stage as it lands -- the subject's reply into
+`strata.replication.run.kb/`, plus whatever it wrote into the tree, one
+commit per turn on the run branch. That branch is then a time machine
+for the *environment*: a checkout at stage N is exactly what the
+subject was reading when it answered N. A run that commits only at the
+end has no middle to return to, which is how the first run lost its
+critique turn.
+
+Rewinding the *subject* is separate, and re-sending a turn is not it:
+its first answer stays in its context and what comes back is a revision
+of that answer, not a second draft. Cut the transcript instead --
+`claude-branch-extract <subject.jsonl> <uuid> --at --as-session <worktree>`,
+per `Skill(claude-code-archeology)` -- which yields a resumable session
+ending at the last good reply. Note what a promoted subagent loses: its
+agent definition, hence its model and effort, which the operator must
+restore by hand when resuming.
+
 ## What to do with the result
 
 Defeats land as edits to the claims they defeat -- the git diff is the
