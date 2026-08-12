@@ -2,6 +2,7 @@
 """Tests for validate_frontmatter.py"""
 
 import datetime
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -30,6 +31,47 @@ definitions:
     type: array
     items: {type: string}
 """)
+
+
+def _init_repo(root: Path):
+    _ = subprocess.run(("git", "init", "-q", str(root)), capture_output=True, check=True)
+    _ = (root / ".gitignore").write_text("trash/\n")
+
+
+def _write_kb(collection: Path):
+    _ = collection.mkdir(parents=True)
+    _ = (collection / "entry.md").write_text("---\nlabel: X\n---\n\n# Entry\n")
+
+
+def _collections(results: list[fv.ValidationResult]) -> list[str]:
+    return [result.text for result in results if result.kind == "dir"]
+
+
+class DescribeGitignoredDiscovery:
+    def it_skips_a_kb_the_walk_found_under_an_ignored_directory(self, tmp_path: Path):
+        _init_repo(tmp_path)
+        _write_kb(tmp_path / "live.kb")
+        _write_kb(tmp_path / "trash" / "scratch.kb")
+
+        results = list(fv.validate_paths(iter([tmp_path])))
+
+        assert _collections(results) == ["live.kb"]
+
+    def it_validates_an_ignored_collection_named_on_the_command_line(self, tmp_path: Path):
+        _init_repo(tmp_path)
+        _write_kb(tmp_path / "trash" / "scratch.kb")
+
+        results = list(fv.validate_paths(iter([tmp_path / "trash"])))
+
+        assert _collections(results) == ["scratch.kb"]
+
+    def it_validates_everything_outside_a_repository(self, tmp_path: Path):
+        _write_kb(tmp_path / "live.kb")
+        _write_kb(tmp_path / "trash" / "scratch.kb")
+
+        results = list(fv.validate_paths(iter([tmp_path])))
+
+        assert sorted(_collections(results)) == ["live.kb", "scratch.kb"]
 
 
 class DescribeSkillRefResolution:

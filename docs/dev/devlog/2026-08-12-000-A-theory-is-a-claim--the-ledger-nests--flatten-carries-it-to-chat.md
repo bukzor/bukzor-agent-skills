@@ -111,9 +111,12 @@ the user ruled on, and reads as `user`. Filed.
 - The prefix-freedom check runs only when you flatten. It still wants
   a home a pre-commit pass reaches -- the long-standing item, now with
   a working implementation to move rather than write.
-- `llm.kb-validate .` reports 12 errors from inside gitignored
-  `trash/`. A red count that means nothing trains the eye to skip red
-  counts.
+- ~~`llm.kb-validate .` reports 12 errors from inside gitignored
+  `trash/`.~~ Closed the same day, on the operator's "that's not great
+  ergonomics": discovery now filters through `git check-ignore`, while
+  a path named on the command line is validated whatever git thinks of
+  it. The repo root reads 0 errors; the 17 files that stopped counting
+  are all under `trash/`.
 
 ## References
 

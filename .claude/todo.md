@@ -194,11 +194,14 @@ Repo-level list. Skill-scoped work lives in each skill's own
       is the resting state), but `strata.claims.kb/purpose.md` is the
       operating regime the user ruled on 2026-08-09 and reads as `user`;
       scan the rest for the same mismatch
-- [ ] llm.kb-validate walks gitignored directories: `llm.kb-validate .`
+- [x] llm.kb-validate walks gitignored directories: `llm.kb-validate .`
       at the repo root reports 12 errors, all inside `trash/`
       (`aborted-git-mv/` keeps a half-renamed ledger whose per-collection
       schemas are gone). Noise that trains the eye to ignore a red count
-      -- skip what `git check-ignore` claims, or take an exclude flag
+      -- skip what `git check-ignore` claims, or take an exclude flag.
+      Fixed 2026-08-12: discovery filters through `git check-ignore`, a
+      path named on the command line is validated regardless. The repo
+      root now reads 0 errors; 17 files under `trash/` stopped counting
 - [ ] The only dotted command names left in the repo are
       llm-kb/bin/llm.kb-validate{,-links}; the 2026-08-08 exact-prefix
       ruling makes them llm-kb-validate{,-links}. ~27 live references

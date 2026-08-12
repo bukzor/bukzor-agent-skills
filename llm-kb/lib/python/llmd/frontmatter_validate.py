@@ -10,9 +10,10 @@ package and its own relative imports below just work.
 
 import argparse
 import functools
+import subprocess
 import sys
 import urllib.parse
-from collections.abc import Iterable, Iterator
+from collections.abc import Iterable, Iterator, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast, override
@@ -137,6 +138,46 @@ def without_children(paths: Iterable[Path]) -> Iterator[Path]:
             seen.add(p)
 
 
+def ignored_by_git(anchor: Path, paths: Sequence[Path]) -> frozenset[Path]:
+    """Which of `paths` git ignores, asked of the repository holding `anchor`.
+
+    Empty when git has no say -- outside a work tree `check-ignore` exits 128,
+    and then everything found is corpus.
+    """
+    if not paths:
+        return frozenset()
+    # Absolute both sides: git reads a relative pathspec against `-C`, not the
+    # caller's cwd, and echoes back whatever it was handed.
+    absolute = {str(path.resolve()): path for path in paths}
+    completed = subprocess.run(
+        ('git', '-C', str(anchor.resolve()), 'check-ignore', '--stdin', '-z'),
+        input='\0'.join(absolute),
+        capture_output=True,
+        text=True,
+    )
+    # 0: something matched. 1: nothing did. Above that, git had no answer.
+    if completed.returncode > 1:
+        return frozenset()
+    return frozenset(absolute[match] for match in completed.stdout.split('\0') if match)
+
+
+def corpus(root: Path, found: Iterable[Path]) -> Iterator[Path]:
+    """Those of `found` that count as corpus: what git ignores is scratch.
+
+    A `.kb/` under `trash/` or `node_modules/` is somebody's scratch, and its
+    schema rot padding the error count teaches the reader to skip the count.
+    Only what the walk discovered can be dropped this way -- `root` was named
+    on the command line, so if it is itself ignored, asking was asking and
+    everything under it is validated.
+    """
+    discovered = list(found)
+    ignored = ignored_by_git(root, [root, *discovered])
+    if root in ignored:
+        return iter(discovered)
+    else:
+        return (path for path in discovered if path not in ignored)
+
+
 def is_kb_dir(path: Path) -> bool:
     """Check if directory is a .kb/ or hive partition."""
     return path.is_dir() and (path.name.endswith(SUFFIX) or HIVE_PARTITION_MARKER in path.name)
@@ -158,10 +199,10 @@ def validate_paths(paths: Iterator[Path], schema_override: Path | None = None, d
             for md_file in sorted(p.glob('*.md')):
                 yield from validate_one_file(md_file, schema_override, depth + 1)
 
-            yield from validate_paths(iter(kb_subdirs(p)), schema_override, depth + 1)
+            yield from validate_paths(corpus(p, kb_subdirs(p)), schema_override, depth + 1)
 
         elif p.is_dir():
-            yield from validate_paths(without_children(p.glob(f'**/*{SUFFIX}')), schema_override, depth)
+            yield from validate_paths(corpus(p, without_children(p.glob(f'**/*{SUFFIX}'))), schema_override, depth)
 
         elif p.is_file():
             yield from validate_one_file(p, schema_override, depth)

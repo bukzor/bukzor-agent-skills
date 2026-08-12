@@ -249,6 +249,11 @@ bin/llm.kb-validate file.md          # Validate single file
 
 Recursively finds and validates `.kb/` directories. Auto-detects schemas. Skips CLAUDE.md files.
 
+What the walk *discovers* is filtered by `.gitignore`: a `.kb/` under
+`trash/` or `node_modules/` is scratch, not corpus, and its rot must
+not pad the error count. Name such a path on the command line and you
+get it anyway -- asking is asking.
+
 Recommended: run `bin/llm.kb-validate` before committing changes.
 
 "No schema found" for `ideas.kb`/`todo.kb`: copy from `llm-subtask/skeleton/.claude/`.
