@@ -2,10 +2,11 @@
 $schema: "http://json-schema.org/draft-07/schema#"
 title: strata.replication prompt frontmatter
 description: >
-  Files in strata.replication.kb/ are pasteable conversation turns,
-  numbered in send order. The frontmatter says which original-session
-  turns this one distills and whether the blind is still on when it
-  is sent.
+  Files in strata.replication.kb/ are the run's conversation turns,
+  numbered in send order: each one's operator note, and a pointer to
+  the send-ready text in instructions.d/. The frontmatter says which
+  original-session turns this one distills and whether the blind is
+  still on when it is sent.
 type: object
 additionalProperties: false
 required:

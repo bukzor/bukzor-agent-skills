@@ -5,12 +5,14 @@ last-updated: "2026-08-09"
 # Strata, replicated
 
 A blind re-derivation of `strata.claims.kb/`, run as a conversation.
-`strata.replication.kb/` holds the turns: one pasteable prompt per
-file, numbered in send order. Open a fresh session at the repo root
-and send them in order, waiting for a real answer each time; each
-file's operator note says when to send it, what a miss looks like,
-and (where the original run had a stubborn failure) carries a repair
-paste to send only on that miss.
+`strata.replication.kb/` holds the turns, numbered in send order, and
+`strata.replication.kb/instructions.d/` holds what each one sends --
+a whole file per paste, so sending it is select-all-and-send with no
+operator note to strip. Open a fresh session at the repo root and
+send them in order, waiting for a real answer each time; each turn
+file says when to send it, what a miss looks like, and (where the
+original run had a stubborn failure) points at a repair paste to send
+only on that miss.
 
 The point is an independent second draft, not a rubber stamp. Two
 accounts that agree by different routes are evidence; one that

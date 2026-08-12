@@ -1,6 +1,7 @@
 # strata.replication.kb -- maintenance guide
 
-One pasteable conversation turn per file, numbered in send order.
+One conversation turn per file, numbered in send order; the text each
+one sends lives beside it in `instructions.d/`, one file per paste.
 `../strata.replication.md` is the operator's entry point: what the run
 is for, and the key each turn operationalizes.
 
@@ -13,11 +14,16 @@ that commit is the record of what we learned about prompting.
 
 Frontmatter per `../strata.replication.jsonschema.yaml`. Then, in
 order: a one-line title; an operator note saying when to send it and
-what a miss looks like; **one fenced block -- the paste**; optionally
-a `## Repair` section with one more fenced block, sent only when the
-noted miss actually shows. Nothing outside a fence is sent, so nothing
-inside a fence may address the operator. `<angle brackets>` inside a
-paste mark an operator fill-in.
+what a miss looks like; a pointer to its paste in `instructions.d/`;
+optionally a `## Repair` section pointing at a second paste, sent only
+when the noted miss actually shows.
+
+The paste is a whole file so that sending it is one copy: select all,
+send. That only holds if it stays send-ready -- no frontmatter, no
+title, nothing addressed to the operator, which is what the turn file
+is for. `instructions.d/<turn>.md` is a turn's paste;
+`instructions.d/<turn>--repair.md` is its repair. `<angle brackets>`
+inside a paste mark an operator fill-in.
 
 ## What belongs here
 
