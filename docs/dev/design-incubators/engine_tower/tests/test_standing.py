@@ -1,12 +1,15 @@
 import pytest
 
 from engine_tower.fixpoint import iterate
+from engine_tower.record import Schema
+from engine_tower.reference import edges
 from engine_tower.standing import (
     DESCRIBED,
     STIPULATED,
     Evidence,
     Standing,
     certified,
+    cite,
     grounded,
     phi,
     standing,
@@ -31,6 +34,36 @@ def test_two_checkers_certifying_one_entry_crash_the_operator():  # COMPLETION
     ev = frozenset({Evidence("a", certified("c1")), Evidence("a", certified("c2"))})
     with pytest.raises(AssertionError):
         phi(ev, entries)({"a": DESCRIBED})
+
+
+MISSION = Schema("mission.v1", frozenset({"schema", "text"}))
+CLAIM = Schema("claim.v1", frozenset({"schema", "text", "why"}), frozenset({"why"}))
+SCHEMAS = {s.name: s for s in (MISSION, CLAIM)}
+WARRANTED = {
+    "m": {"schema": "mission.v1", "text": "the mission"},
+    "g": {"schema": "claim.v1", "text": "a goal", "why": "m"},
+}
+
+
+def test_premises_are_read_off_the_reference_structure():  # OPERATOR
+    """OPERATOR raises an entry as far as the evidence citing it
+    "through the reference structure" supports.  Premises are
+    therefore not a second edge set to be kept in sync by hand: they
+    are the entry's out-edges in the quiver."""
+    rows = frozenset({Evidence("m", STIPULATED), Evidence("g", STIPULATED)})
+    cited = cite(rows, edges(WARRANTED, SCHEMAS))
+    assert cited == {
+        Evidence("m", STIPULATED),
+        Evidence("g", STIPULATED, frozenset({"m"})),  # the same edge, once
+    }
+    assert standing(cited, frozenset(WARRANTED)) == {"m": STIPULATED, "g": STIPULATED}
+
+
+def test_an_unwarranted_reference_still_gates_ascent():  # OPERATOR, THRESHOLD
+    # drop the mission's own evidence: g's premise falls below
+    # THRESHOLD, so citing it no longer lifts g
+    cited = cite(frozenset({Evidence("g", STIPULATED)}), edges(WARRANTED, SCHEMAS))
+    assert standing(cited, frozenset(WARRANTED))["g"] == DESCRIBED
 
 
 def test_phi_is_monotone_on_an_instance():  # OPERATOR

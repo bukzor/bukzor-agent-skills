@@ -11,6 +11,7 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 
 from engine_tower.fixpoint import iterate
+from engine_tower.reference import Edge
 
 _STATUS_NAMES = {0: "described", 1: "stipulated", 2: "obligated"}
 
@@ -69,6 +70,20 @@ class Evidence:
 
 
 THRESHOLD = STIPULATED  # premises must stand at least here to support ascent
+
+
+def cite(evidence: frozenset[Evidence], quiver: frozenset[Edge]) -> frozenset[Evidence]:
+    """Fill in each row's premises from the reference structure: an
+    entry's warrant is what the entry cites.  The quiver is the only
+    carrier of that edge -- writing premises by hand makes a second
+    edge set nothing reconciles.  [OPERATOR]"""
+    return frozenset(
+        Evidence(
+            ev.entry, ev.grants, frozenset(dst for src, dst in quiver if src == ev.entry)
+        )
+        for ev in evidence
+    )
+
 
 type Standing = Mapping[str, Status]  # a point of L^E
 type Attack = tuple[str, str]  # (attacker, target) -- defeat evidence, not a reference edge
