@@ -34,7 +34,7 @@ definitions:
 
 
 def _init_repo(root: Path):
-    _ = subprocess.run(("git", "init", "-q", str(root)), capture_output=True, check=True)
+    _ = subprocess.run(("git", "init", "-q", str(root)), check=True)
     _ = (root / ".gitignore").write_text("trash/\n")
 
 
@@ -72,6 +72,15 @@ class DescribeGitignoredDiscovery:
         results = list(fv.validate_paths(iter([tmp_path])))
 
         assert sorted(_collections(results)) == ["live.kb", "scratch.kb"]
+
+    def it_raises_when_git_cannot_answer(self, tmp_path: Path):
+        # A `.git` git refuses to read: the filter cannot know what is
+        # scratch, and must not silently decide that nothing is.
+        _ = (tmp_path / ".git").write_text("not a gitfile\n")
+        _write_kb(tmp_path / "live.kb")
+
+        with pytest.raises(subprocess.CalledProcessError):
+            _ = list(fv.validate_paths(iter([tmp_path])))
 
 
 class DescribeSkillRefResolution:

@@ -138,26 +138,45 @@ def without_children(paths: Iterable[Path]) -> Iterator[Path]:
             seen.add(p)
 
 
+def repository_root(anchor: Path) -> Path | None:
+    """The work tree holding `anchor`, found by the `.git` at its root.
+
+    Asked before shelling out, so that a failing `check-ignore` below is a
+    real error rather than an ambiguity to swallow. A submodule's `.git` is
+    a file and a plain clone's is a directory; either one answers.
+    """
+    for directory in (anchor, *anchor.parents):
+        if (directory / '.git').exists():
+            return directory
+        else:
+            continue
+    return None
+
+
 def ignored_by_git(anchor: Path, paths: Sequence[Path]) -> frozenset[Path]:
     """Which of `paths` git ignores, asked of the repository holding `anchor`.
 
-    Empty when git has no say -- outside a work tree `check-ignore` exits 128,
-    and then everything found is corpus.
+    Empty when no repository holds it -- then nothing is ignored. Any other
+    failure raises, with git's own diagnosis already on the terminal: a
+    filter that quietly stopped filtering would quietly change which files
+    get validated.
     """
-    if not paths:
+    anchor = anchor.resolve()
+    if not paths or repository_root(anchor) is None:
         return frozenset()
     # Absolute both sides: git reads a relative pathspec against `-C`, not the
     # caller's cwd, and echoes back whatever it was handed.
     absolute = {str(path.resolve()): path for path in paths}
+    command = ('git', '-C', str(anchor), 'check-ignore', '--stdin', '-z')
     completed = subprocess.run(
-        ('git', '-C', str(anchor.resolve()), 'check-ignore', '--stdin', '-z'),
+        command,
         input='\0'.join(absolute),
-        capture_output=True,
+        stdout=subprocess.PIPE,  # stderr inherited: git's complaints are the user's
         text=True,
     )
-    # 0: something matched. 1: nothing did. Above that, git had no answer.
+    # 0: something matched. 1: nothing did. Above that, git already said why.
     if completed.returncode > 1:
-        return frozenset()
+        raise subprocess.CalledProcessError(completed.returncode, command, completed.stdout)
     return frozenset(absolute[match] for match in completed.stdout.split('\0') if match)
 
 
