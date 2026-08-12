@@ -56,6 +56,7 @@ class Claim:
 @dataclass(frozen=True)
 class Theory:
     name: str  # its defining claim's id: `design.claims/notation`
+    path: Path  # the collection itself -- an id is not a path, only a handle
     defining: Claim | None  # absent until someone writes `<name>.md`
     claims: tuple[Claim, ...]  # confined to it; its sub-theories' are their own
 
@@ -203,6 +204,7 @@ def read_theory(origin: Path, collection: Path) -> Theory:
     ]
     return Theory(
         name=claim_id(origin, defining),
+        path=collection,
         defining=read_claim(origin, defining) if defining.exists() else None,
         claims=tuple(read_claim(origin, md) for md in confined),
     )

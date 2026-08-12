@@ -32,7 +32,16 @@ from itertools import combinations
 from pathlib import Path
 from typing import cast
 
-from llm_claims_kb import SIGIL, Claim, Ledger, Theory, claim_id, dangling, read_ledger
+from llm_claims_kb import (
+    SIGIL,
+    Claim,
+    Ledger,
+    Theory,
+    claim_id,
+    dangling,
+    defining_claim,
+    read_ledger,
+)
 
 # A claim file as a claim body cites one: `foo.md`, `../bar.kb/foo.md`.
 CITE = re.compile(r"(?:\.\./)*(?:[a-z0-9-]+\.kb/)?[a-z0-9-]+\.md")
@@ -120,7 +129,7 @@ def theory_block(
     opening = (
         claim_line(theory.defining, ledger.origin, labels)
         if theory.defining
-        else f"{theory.label}?: no defining claim -- `{theory.name}.md` is unwritten"
+        else f"{theory.label}?: no defining claim -- `{defining_claim(theory.path)}` is unwritten"
     )
     lines = ["  " * depth + f"* {opening}"]
     for item in in_support_order(
@@ -157,9 +166,9 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
     found = [f"dangling why: reference: {missing}" for missing in dangling(ledger)]
     found += [
         (
-            f"theory {theory.name}.kb has no defining claim: write {theory.name}.md"
+            f"{theory.path} has no defining claim: write {defining_claim(theory.path)}"
             if theory.defining is None
-            else f"theory {theory.name}.kb stipulates no `ontology:`; nothing confines its claims"
+            else f"{defining_claim(theory.path)} stipulates no `ontology:`; nothing confines the collection's claims"
         )
         for theory in ledger.theories
         if theory.defining is None or not theory.ontology
