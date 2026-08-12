@@ -180,6 +180,25 @@ Repo-level list. Skill-scoped work lives in each skill's own
         found FLEET prefixing FLEET_MAP in strata.claims.kb. It runs
         only when you flatten, so the check still wants a home that a
         pre-commit pass would reach
+- [ ] Break the FLEET / FLEET_MAP prefix collision in strata.claims.kb --
+      the one lint `llm-claims-kb-flatten` still reports repo-wide. Both
+      are established and referenced, so which side renames is the
+      operator's call: FLEET is the throwaway theory's defining claim,
+      FLEET_MAP the correspondence table inside it. Renaming FLEET_MAP
+      (to CORRESPONDENCE, say) touches fewer references than renaming the
+      theory. Sweep per SKILL.md's Renames rule, then re-flatten
+- [ ] Review the standing of the 21 theory-defining claims: the
+      2026-08-11 migration gave every theory header `standing: agent`
+      uniformly, because headers carried no standing before it. That is a
+      signature nobody made claim-by-claim. Most are plausibly right (`+`
+      is the resting state), but `strata.claims.kb/purpose.md` is the
+      operating regime the user ruled on 2026-08-09 and reads as `user`;
+      scan the rest for the same mismatch
+- [ ] llm.kb-validate walks gitignored directories: `llm.kb-validate .`
+      at the repo root reports 12 errors, all inside `trash/`
+      (`aborted-git-mv/` keeps a half-renamed ledger whose per-collection
+      schemas are gone). Noise that trains the eye to ignore a red count
+      -- skip what `git check-ignore` claims, or take an exclude flag
 - [ ] The only dotted command names left in the repo are
       llm-kb/bin/llm.kb-validate{,-links}; the 2026-08-08 exact-prefix
       ruling makes them llm-kb-validate{,-links}. ~27 live references

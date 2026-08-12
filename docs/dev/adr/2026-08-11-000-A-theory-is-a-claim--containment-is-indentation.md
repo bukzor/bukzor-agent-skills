@@ -42,6 +42,17 @@ ledger's own `design.claims.md` defines `design.claims.kb/` by the
 same rule, so the ledger is simply its outermost theory; a theory
 inside a theory is spelled the way everything else is.
 
+The defining claim is not *required*, and its absence has exactly one
+meaning: `X.kb/` with no `X.md` is an **open theory**. It stipulates
+nothing, so its claims answer to the ontologies above it, and it
+renders and is cited `LABEL?` -- the notation's own way of saying
+nobody has signed. What it never means is a folder: a collection whose
+claims need no words of their own belongs in its parent. Requiring the
+claim up front would price a new theory at a signature nobody is ready
+to make; letting it stand open prices the debt where the ledger
+already prices debt, and the first claim inside it that needs a word
+of its own is the bill.
+
 Priors ride on `why:`. On a defining claim, what the claim rests on
 *is* the list of theories whose words it also admits, so priors need
 no field of their own.
@@ -73,8 +84,8 @@ defining claim.
 - **Cons:** the claim schema is `additionalProperties: false`, and in
   draft-07 a `$ref` ignores its siblings, so a per-collection schema
   cannot extend it -- the three fields go on the shared schema as
-  optional, and the flatten lints the cases a schema would have caught
-  (a `.kb/` with no defining claim, a defining claim with no ontology)
+  optional, and the flatten lints the case a schema would have caught
+  (a defining claim that stipulates no ontology)
 
 ### Keep the header form, add `standing:` to it
 - **Pros:** the smallest possible diff
