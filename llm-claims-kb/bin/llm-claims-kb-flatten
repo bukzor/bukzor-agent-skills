@@ -19,8 +19,9 @@ as outside it. The whole ledger is rendered, never a slice of one -- a
 partial render would read as the ledger's full state and silently retract
 what it omitted.
 
-Lints, on stderr: a `why:` pointing nowhere, two labels `grep` cannot tell
-apart, a theory with no defining claim or no ontology.
+Lints, on stderr: a `why:` pointing nowhere, a defining claim stipulating
+no ontology, two labels `grep` cannot tell apart. A theory nobody has
+defined yet is not a lint -- it renders `?`, like any unsigned claim.
 """
 
 import argparse
@@ -151,9 +152,16 @@ def labels_of(ledger: Ledger) -> Mapping[str, str]:
     """What each claim is cited as: its label, wearing its sigil.
 
     Theories need no entry of their own -- a theory is cited by citing the
-    claim that defines it, and that claim is in here like any other.
+    claim that defines it, and that claim is in here like any other. The
+    exception is the theory whose defining claim is unwritten: it is open,
+    not absent, and a citation should show it that way rather than as a
+    dangling path.
     """
-    return {claim.id: claim.label + SIGIL[claim.standing] for claim in ledger.claims}
+    return {
+        theory.name: theory.label + SIGIL[theory.standing]
+        for theory in ledger.theories
+        if theory.defining is None
+    } | {claim.id: claim.label + SIGIL[claim.standing] for claim in ledger.claims}
 
 
 def lints(ledger: Ledger) -> tuple[str, ...]:
@@ -164,14 +172,15 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
     files were telling those two claims apart.
     """
     found = [f"dangling why: reference: {missing}" for missing in dangling(ledger)]
+    # An unwritten defining claim needs no lint: the theory renders `?`, which
+    # is the ledger's own way of saying nobody has signed it yet. A written one
+    # that stipulates nothing is the defect -- it reads as settled and confines
+    # no word.
     found += [
-        (
-            f"{theory.path} has no defining claim: write {defining_claim(theory.path)}"
-            if theory.defining is None
-            else f"{defining_claim(theory.path)} stipulates no `ontology:`; nothing confines the collection's claims"
-        )
+        f"{defining_claim(theory.path)} stipulates no `ontology:`;"
+        " nothing confines the collection's claims"
         for theory in ledger.theories
-        if theory.defining is None or not theory.ontology
+        if theory.defining and not theory.ontology
     ]
     names = sorted(claim.label for claim in ledger.claims)
     found += [

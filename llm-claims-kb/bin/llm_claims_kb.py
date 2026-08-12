@@ -230,7 +230,14 @@ def read_ledger(root: Path) -> Ledger:
 
 
 def dangling(ledger: Ledger) -> tuple[str, ...]:
-    """Cited claim ids that no file defines."""
-    known = {claim.id for claim in ledger.claims}
+    """Cited claim ids that no file defines.
+
+    A theory whose defining claim is unwritten is not one of them: the
+    collection is there, so the theory is open rather than absent, and citing
+    it is how that debt gets priced.
+    """
+    known = {claim.id for claim in ledger.claims} | {
+        theory.name for theory in ledger.theories
+    }
     cited = {prior for claim in ledger.claims for prior in claim.why}
     return tuple(sorted(cited - known))

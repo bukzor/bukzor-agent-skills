@@ -38,6 +38,14 @@ and the scan commands -- and a theory holds theories the same way it
 holds claims, without limit. Each `CLAUDE.md` keeps only what a claim
 cannot: where a new file goes.
 
+`X.kb/` alone, with the `.md` not yet written, is legal and means one
+thing only: an **open theory**. It stipulates no words, so its claims
+are confined to what the collections above it admit, and it renders and
+is cited `LABEL?` until someone defines and signs it. What it never
+means is a folder -- a ledger has no directory that is merely tidy, and
+a collection whose claims need no words of their own belongs in its
+parent.
+
 On disk a theory costs a directory and a header, so the
 split-for-the-reader move (`SKILL.kb/theories.md` in
 `Skill(llm-claims)`) is even cheaper here than in chat:
@@ -112,8 +120,8 @@ those files carry. Siblings come in `why:` order, so a claim's
 premises are above it as well as outside it.
 
 Three things do not survive the trip, and the tool says so on stderr:
-a `why:` that resolves to no claim, a theory with no defining claim or
-no ontology, and two labels `grep` cannot tell apart -- once the paths
+a `why:` that resolves to no claim, a defining claim that stipulates no
+`ontology:`, and two labels `grep` cannot tell apart -- once the paths
 are gone, labels are the only handle the reader has.
 
 ## What this is not
