@@ -25,3 +25,9 @@ monotone rule set induces a triangular operator -- and the glue. The
 statement is still small -- a status poset, an operator format, a
 translation discipline, one theorem -- and is the natural first
 target for whichever proof assistant the fleet procures.
+
+What remains to *prove* is not everything that remains open: the
+substrate is missing a law outright
+(`../history.kb/a-merge-needs-a-linearization-law.md`), and a missing
+law is no one's proof obligation. `grep '^standing: open'` is the
+list; this file is one entry on it.

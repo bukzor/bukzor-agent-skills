@@ -22,7 +22,6 @@ ontology:
   - assessor
   - party
   - stance
-  - quotient
 defeated-by: a base holding anything besides claims, or standing stored as ground truth rather than computed
 ---
 

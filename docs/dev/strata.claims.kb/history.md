@@ -5,8 +5,9 @@ ontology:
   - update
   - history
   - word
-  - transaction
   - branch
+  - merge
+  - linearization
   - store
   - state
   - key

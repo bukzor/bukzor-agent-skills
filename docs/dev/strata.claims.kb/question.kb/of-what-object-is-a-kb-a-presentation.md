@@ -4,6 +4,7 @@ standing: agent
 why:
   - ../history.kb/the-store-is-the-history.md
   - ../history.kb/state-is-a-fold.md
+  - ../history.kb/a-merge-needs-a-linearization-law.md
   - ../tower.kb/the-engine-tower-is-a-theory-poset.md
   - ../tower.kb/one-structure-twice.md
 ---
@@ -22,3 +23,7 @@ append-only) or a projection (derived, stamped); the invariant is the
 acts, their attribution, and the conservativity relations between
 theories. A redesign is lossless iff it interprets the theories while
 preserving the acts -- a checkable condition where there was a dread.
+
+Residue: "a word" answers for a store that never branches. What a
+branching one presents waits on the merge law
+(`../history.kb/a-merge-needs-a-linearization-law.md`).

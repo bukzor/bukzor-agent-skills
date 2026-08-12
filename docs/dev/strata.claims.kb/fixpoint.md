@@ -5,6 +5,7 @@ ontology:
   - poset
   - lattice
   - completeness
+  - quotient
   - product
   - coordinate
   - monotone operator

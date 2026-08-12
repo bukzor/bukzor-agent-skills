@@ -2,7 +2,7 @@
 label: EXTENSION
 standing: agent
 why:
-  - ../genre.kb/together-they-are-the-satisfaction-condition.md
+  - ../genre.kb/together-they-instantiate-the-satisfaction-condition.md
   - ../genre.kb/one-sort-buys-conservativity-for-free.md
   - ../tower.kb/what-remains-to-prove.md
 ---

@@ -1,16 +1,15 @@
 ---
 label: FRESH_COST
 standing: bare
-authority: "CAP (Gilbert & Lynch 2002); incremental view maintenance"
+authority: "incremental view maintenance; CAP (Gilbert & Lynch 2002) is the partitioned instance, in vocabulary this theory does not admit"
 why:
   - a-cache-is-lawful-iff-the-triangle-commutes.md
+  - ../purpose.kb/the-corpus-outgrows-any-reader.md
 ---
 
 # Always-Fresh Is Impossible
 
-A distributed store cannot keep every derived value continuously
-lawful. Under partition, consistency and availability trade off
-outright (CAP); short of partition, freshness work scales as update
-rate times dependent views, and when both grow with the corpus the
-total is super-linear. Perpetual freshness is not a discipline
-problem; it is priced out by arithmetic.
+Keeping every derived value continuously lawful costs update rate
+times dependent views. Both grow with a corpus that outgrows any
+reader, so the total is super-linear in it. Perpetual freshness is
+not a discipline problem; it is priced out by arithmetic.

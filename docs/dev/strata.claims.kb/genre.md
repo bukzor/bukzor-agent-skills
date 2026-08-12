@@ -16,7 +16,6 @@ ontology:
   - genre
   - sort
   - translation
-  - quotient
   - instance
   - motivation
 defeated-by: a genre that must re-legislate a prior theory's standing to exist -- conservativity failing in practice, not just in principle

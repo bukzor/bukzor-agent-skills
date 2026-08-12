@@ -1,8 +1,10 @@
 ---
 label: RESTRICT
 standing: bare
+authority: "Bekic's lemma -- simultaneous fixpoints decompose (Bekic 1984)"
 why:
   - monotone-operators-have-least-fixpoints.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_fixpoint.py::test_a_triangular_operator_restricts_to_its_first_coordinate
 ---
 
 # Triangular Operators Restrict

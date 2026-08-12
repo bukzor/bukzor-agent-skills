@@ -9,7 +9,7 @@ ontology:
   - extension
   - enforcement
 defeated-by: a lower engine needing a higher vocabulary
-last-updated: "2026-08-10"
+last-updated: "2026-08-12"
 ---
 
 # The strata, as a ledger
@@ -75,12 +75,17 @@ fixpoint ──────────────────┴────�
 purpose ───► view, standing, genre, protocol
 ```
 
+That picture is hand-cut, and is the only hand copy left: the poset
+itself is the `why:` lines of the twelve `<theory>.md` files, and
+`engine_tower/tests/test_tower.py` reads it from there to hold the
+module import graph to it.
+
 `fleet` is the throwaway theory; `question` is the historical one --
 the design problems the ledger was bought to settle, with their open
 residues, `question.md` the stamped synthesis. Theorems stand `bare`
 (`fixpoint`, plus `REACH`, `FRESH_COST`, `TAINT`, `WEIGHT`,
-`ASYMMETRY`, `SATISFACTION`); `OBLIGATION` stands `open` -- the one
-claim awaiting an answer. The regime (`purpose`) and the claims the
+`ASYMMETRY`); `OBLIGATION` and `MERGE` stand `open` -- a theorem
+owed and a law missing. The regime (`purpose`) and the claims the
 user ruled in the 2026-08-09 act review stand `user`. Everything
 else is signed `+`: the agent's judgment, veto invited, silence is
 consent -- a resting state, not a queue awaiting signatures

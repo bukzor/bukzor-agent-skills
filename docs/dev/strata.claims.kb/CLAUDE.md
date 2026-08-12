@@ -31,6 +31,8 @@ past-tense provenance, which no future change reaches.)
 Placement is fixed by vocabulary: the earliest theory whose ontology
 (its own plus its priors') admits every word the claim needs. Prefer
 adding an auxiliary prior theory over widening an ontology with
-machinery that is not really the theory's own. Each collection's
-`CLAUDE.md` carries its theory header: `prior:`, `ontology:`,
-`defeated by:`.
+machinery that is not really the theory's own. A theory's own
+defining claim -- `<theory>.md` beside its `<theory>.kb/` -- carries
+the vocabulary it admits (`ontology:`), its priors (`why:`), and what
+would defeat it; these files are claims like any other, and the
+collections' `CLAUDE.md` files are maintenance notes only.

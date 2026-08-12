@@ -12,7 +12,6 @@ verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/
 
 New evidence grows the operator, so standing after an append is
 computable by warm-start from the current fixpoint: appends are
-cheap, and an append-only store is the architecture that keeps them
 cheap. Retraction shrinks the operator, warm-start is unsound, and
 the honest choices are recomputing the affected cone or maintaining
 support counts. Mutual-warrant circles are the visible face of the
