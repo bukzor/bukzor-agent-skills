@@ -180,13 +180,17 @@ Repo-level list. Skill-scoped work lives in each skill's own
         found FLEET prefixing FLEET_MAP in strata.claims.kb. It runs
         only when you flatten, so the check still wants a home that a
         pre-commit pass would reach
-- [ ] Break the FLEET / FLEET_MAP prefix collision in strata.claims.kb --
-      the one lint `llm-claims-kb-flatten` still reports repo-wide. Both
-      are established and referenced, so which side renames is the
-      operator's call: FLEET is the throwaway theory's defining claim,
-      FLEET_MAP the correspondence table inside it. Renaming FLEET_MAP
-      (to CORRESPONDENCE, say) touches fewer references than renaming the
-      theory. Sweep per SKILL.md's Renames rule, then re-flatten
+- [ ] Land the strata.claims.kb migration on main -- the replication
+      session did it 2026-08-13 in its env worktree (`env-2026-08-13`,
+      `31f0b70`): `defeated-by:` -> `stale-when:` on all thirteen lines,
+      plus FLEET_MAP -> ATLAS, which breaks the prefix collision `grep
+      FLEET` could not see through. That branch is the experiment's
+      sandbox and diverged from main, so main's copy still carries the
+      old key -- 12 of the repo's 20 validator errors -- and still says
+      FLEET_MAP. The commit cherry-picks cleanly onto main (checked with
+      `git apply --check`); waiting on that session's word on who lands
+      it. The other 8 errors are `strata.replication.run.kb/` timestamps,
+      whose files live only on main, so that fix lands here too
 - [ ] Review the standing of the 21 theory-defining claims: the
       2026-08-11 migration gave every theory header `standing: agent`
       uniformly, because headers carried no standing before it. That is a
