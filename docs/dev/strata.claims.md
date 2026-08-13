@@ -8,7 +8,7 @@ ontology:
   - economics
   - extension
   - enforcement
-defeated-by: a lower engine needing a higher vocabulary
+stale-when: a lower engine needing a higher vocabulary
 last-updated: "2026-08-12"
 ---
 

@@ -1,5 +1,5 @@
 ---
-label: FLEET_MAP
+label: ATLAS
 standing: agent
 why:
   - ../tower.kb/the-engine-tower-is-a-theory-poset.md

@@ -22,7 +22,7 @@ ontology:
   - floor
   - binding
   - prose
-defeated-by: a runtime that enforces every rule natively -- banks dissolve into the kernel and this stratum becomes its configuration format
+stale-when: a runtime that enforces every rule natively -- banks dissolve into the kernel and this stratum becomes its configuration format
 ---
 
 # Protocol

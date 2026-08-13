@@ -11,7 +11,7 @@ ontology:
   - capture
   - world
   - disagreement
-defeated-by: a corpus small enough for one reader to re-read -- bounded growth dissolves every requirement here
+stale-when: a corpus small enough for one reader to re-read -- bounded growth dissolves every requirement here
 ---
 
 # Purpose
