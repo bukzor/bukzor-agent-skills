@@ -130,11 +130,13 @@ def validate_one_file(md_file: Path, schema_override: Path | None, depth: int) -
     yield ValidationResult(depth, 'file', md_file.name, errors=tuple(errors))
 
 
-def outermost(paths: Iterable[Path]) -> Iterator[Path]:
-    """Yield only the paths no other yielded path contains.
+def glob_prune(paths: Iterable[Path]) -> Iterator[Path]:
+    """Drop what lies under a path already yielded, as find(1) `-prune`.
 
     A `**` glob finds nested collections at every depth; the walk descends
     into those itself, so passing them along again validates them twice.
+    Unlike `-prune` this cannot stop the descent -- the glob has already
+    paid for it -- it only declines to pass the results on.
     """
     seen: set[Path] = set()
     for p in sorted(paths):
@@ -217,7 +219,7 @@ def validate_paths(paths: Iterator[Path], schema_override: Path | None = None, d
             yield from validate_paths(corpus(p, kb_subdirs(p)), schema_override, depth + 1)
 
         elif p.is_dir():
-            yield from validate_paths(corpus(p, outermost(p.glob(f'**/*{SUFFIX}'))), schema_override, depth)
+            yield from validate_paths(corpus(p, glob_prune(p.glob(f'**/*{SUFFIX}'))), schema_override, depth)
 
         elif p.is_file():
             yield from validate_one_file(p, schema_override, depth)
