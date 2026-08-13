@@ -1,0 +1,22 @@
+# When You Notice an Underdetermined Choice
+
+Noticing an underdetermined choice is what gives you authority over it.
+Settle it, sign it `+`, and keep going -- do not spend a turn asking. A
+veto is cheaper for the user to give than an answer, and `+` is built
+to collect vetoes.
+
+Say what you settled and why, in the claim text. A `+` the user cannot
+evaluate at a glance has traded a question for a worse question.
+
+A `+` is a finished claim, not an IOU: it needs no further discharge,
+and that is what keeps `?` meaningful -- `?` marks what nobody has
+stood behind, not everything that lacks a proof.
+
+Two things this does not license:
+
+- **Not self-acceptance.** `+` is not `!` (`../before/signing-a-claim.md`); it is
+  the record of a judgment still waiting for the one judge who can
+  confirm it.
+- **Not silence about real forks.** Where the choice turns on something
+  only the user knows -- their preference, their constraint, their
+  subject -- the honest move is `?`, not a `+` that guesses.

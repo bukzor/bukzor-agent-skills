@@ -1,0 +1,36 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+description: |
+  Decision-lifecycle frontmatter shared by every design-next.kb layer.
+  Consumer schemas $ref the individual $defs as property values, plus
+  `superseded-requires-superseded-by` in their allOf.
+$defs:
+  status:
+    description: |
+      Decision lifecycle. Absent = `accepted` (the default working position).
+      - `idea`: raw thought, possibly to be discarded
+      - `proposal`: worked out enough to engage with; under consideration
+      - `accepted`: decided; treat as ground truth (on future-work
+        entries this means the deferral itself is decided)
+      - `rejected`: considered and not adopted (kept for visible alternatives)
+      - `superseded`: was accepted, now replaced; see `superseded-by:`
+    enum: [idea, proposal, accepted, rejected, superseded]
+    default: accepted
+  blocked-on:
+    description: |
+      What's needed to advance. Optional; meaningful for `idea` / `proposal`.
+      - `discussion`: human deliberation
+      - `information`: external facts (research, data, prior art)
+    enum: [discussion, information]
+  superseded-by:
+    description: |
+      File-relative path reference to the entry that replaces this one.
+      Required when status is `superseded`.
+    type: string
+  superseded-requires-superseded-by:
+    if:
+      properties:
+        status:
+          const: superseded
+      required: [status]
+    then:
+      required: [superseded-by]

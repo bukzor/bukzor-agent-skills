@@ -1,0 +1,175 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = ["pyyaml"]
+# ///
+"""
+Check that path-valued frontmatter fields and inline body links in .kb/
+markdown files resolve to real files on disk.
+
+Born out of the Abby's Craft design.kb breakdown (2026-07-09): sanity-checking
+~150 hand-written why:/depends:/candidate-resolutions:/... cross-references
+across 83 files. `bin/llm.kb-validate` (llmd.frontmatter_validate) checks that
+frontmatter conforms to its JSON schema, but a schema only constrains e.g. a
+why: field to be "an array of strings" -- it has no way to know those strings
+are supposed to be paths that resolve. A typo'd why: link currently passes
+schema validation silently and just becomes a broken chain, discoverable only
+by a human clicking through.
+
+Standalone script, run directly -- not yet folded into `bin/llm.kb-validate`
+(would need `frontmatter_validate.py`'s `extract_frontmatter` reused instead
+of duplicated here, and a decision on whether link-checking runs
+unconditionally or behind a flag). See
+`.claude/todo.kb/2026-06-03-000-validate-path-references.md` for that
+integration's status.
+
+Two modes control which strings get treated as path references:
+
+- --strict (default): only `./`- or `../`-prefixed strings. Unambiguous,
+  zero false positives, but misses bare-relative mentions
+  (`foo.kb/bar.md`) and directory refs without a leading dot-slash
+  (`050-components.kb/`).
+- --lax: also nominates any string that "probably is" a path by shape --
+  ends with `/`, contains `.kb/`, or ends with `.md` -- even without a
+  `./`/`../` prefix. More recall, more false positives (CLI examples,
+  fixture filenames in prose); meant for a deliberate full-sweep audit
+  where a human/agent expects to triage hits, not a blocking per-commit
+  gate.
+
+Usage:
+    bin/llm.kb-validate-links [--strict|--lax] [paths...]   # default: .
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import sys
+from collections.abc import Iterator
+from itertools import chain
+from pathlib import Path
+
+import yaml
+
+# Frontmatter fields (across llm-kb, llm-design-kb, llm-discourse-graph
+# schemas) whose values are file-relative paths to other .kb/ nodes.
+LINK_FIELDS = (
+    'why', 'depends', 'source', 'sources',
+    'candidate-resolutions', 'conclusion', 'premises', 'resolved',
+)
+
+# Every backtick-wrapped span in body prose; _is_path_shaped() below decides
+# which spans are actually path references, per --strict/--lax.
+BACKTICK_SPAN_RE = re.compile(r'`([^`]+)`')
+
+
+def _is_path_shaped(value: str, *, lax: bool) -> bool:
+    """Heuristic gate: does this string look like a file-relative path reference?
+
+    Whitespace disqualifies unconditionally -- a real path never contains a
+    space in this repo's kebab-case convention, and command examples in
+    docs routinely embed a path plus trailing args/placeholders in one
+    backtick span (e.g. `` `../foo <path>` ``), which would otherwise read
+    as a single path-shaped string.
+
+    Strict (`./`/`../` prefix) is unambiguous and always checked. Lax adds
+    shape-based heuristics -- trades false positives for recall. See
+    module docstring for the full rationale.
+    """
+    if any(c.isspace() for c in value):
+        return False
+    if value.startswith(('./', '../')):
+        return True
+    if not lax:
+        return False
+    return value.endswith('/') or '.kb/' in value or value.endswith('.md')
+
+
+def extract_frontmatter(md_file: Path) -> str | None:
+    """Extract raw YAML frontmatter text, or None if the file has none.
+
+    Duplicated from llmd.frontmatter_validate rather than imported, since
+    this lives outside the package while it's still scratch -- fold into
+    that module (reusing its extract_frontmatter) on integration.
+    """
+    content = md_file.read_text()
+    if not content.startswith('---\n'):
+        return None
+    parts = content.split('---\n', 2)
+    if len(parts) < 3:
+        return None
+    return parts[1]
+
+
+def frontmatter_links(md_file: Path, *, lax: bool) -> Iterator[tuple[str, str]]:
+    """Yield (field, path) for every path-shaped value in known link fields."""
+    raw = extract_frontmatter(md_file)
+    if raw is None:
+        return
+    try:
+        data = yaml.safe_load(raw)
+    except yaml.YAMLError:
+        return  # frontmatter_validate.py already reports YAML errors
+    if not isinstance(data, dict):
+        return
+    for field_name in LINK_FIELDS:
+        value = data.get(field_name)
+        if value is None:
+            continue
+        values = value if isinstance(value, list) else [value]
+        for v in values:
+            if isinstance(v, str) and _is_path_shaped(v, lax=lax):
+                yield field_name, v
+
+
+def body_links(md_file: Path, *, lax: bool) -> Iterator[tuple[str, str]]:
+    """Yield ('body', path) for every backtick span that looks like a relative link."""
+    for match in BACKTICK_SPAN_RE.finditer(md_file.read_text()):
+        span = match.group(1)
+        if _is_path_shaped(span, lax=lax):
+            yield 'body', span
+
+
+def broken_links(md_file: Path, *, lax: bool) -> list[str]:
+    """Return one error string per link that doesn't resolve to a real file/dir."""
+    errors = []
+    for field_name, link in chain(frontmatter_links(md_file, lax=lax), body_links(md_file, lax=lax)):
+        target = (md_file.parent / link).resolve()
+        exists = target.is_dir() if link.endswith('/') else target.is_file()
+        if not exists:
+            errors.append(f"{field_name}: {link} -> {target} (missing)")
+    return errors
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    mode = parser.add_mutually_exclusive_group()
+    _ = mode.add_argument('--strict', action='store_true', help="only ./ or ../ -prefixed strings count as paths (default)")
+    _ = mode.add_argument('--lax', action='store_true', help="also nominate heuristically path-shaped strings (ends with /, contains .kb/, ends with .md) -- more recall, more false positives")
+    _ = parser.add_argument('paths', nargs='*', default=['.'], help='.md files or directories to scan recursively (default: .)')
+    args = parser.parse_args()
+    paths = [Path(p) for p in args.paths]
+    lax = bool(args.lax)
+
+    files: list[Path] = []
+    for p in paths:
+        files.extend([p] if p.is_file() else sorted(p.glob('**/*.md')))
+
+    file_count = 0
+    error_count = 0
+    for md_file in files:
+        file_count += 1
+        errors = broken_links(md_file, lax=lax)
+        if errors:
+            error_count += 1
+            print(f"❌ {md_file}")
+            for e in errors:
+                print(f"    {e}")
+
+    icon = "✅" if error_count == 0 else "❌"
+    print(f"{icon} {file_count} files, {error_count} with broken links")
+    sys.exit(0 if error_count == 0 else 2)
+
+
+if __name__ == '__main__':
+    main()

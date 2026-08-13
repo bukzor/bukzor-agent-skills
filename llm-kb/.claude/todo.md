@@ -1,0 +1,73 @@
+---
+managed-by: Skill(llm-subtask)
+cost-benefit-sweh:
+  timebox:
+    "@value": 4.0
+    rationale: |
+      File-level estimate for a 16-item rollup. Avg ~15 min/item = ~4h
+      cap. Exceeding this is the signal to split items into individual
+      todo.kb/ entries with per-item estimates.
+  benefit-2w:
+    "@value": 2.0
+    rationale: |
+      Mixed bag: skill-infra fixes (high daily payoff), broken-ref
+      cleanup (medium), and a few stale items. Average over 2 weeks
+      ≈ 2h saved.
+---
+
+- [x] todo.kb/2026-02-09-000 (Schema reuse with $ref) — all success criteria met; `schemas/` -> `jsonschema/` sweep landed (e309103)
+- [x] Fix broken references to complete-example.md in SKILL.md (lines 84, 116)
+- [x] Run movie-tracker test, evaluate against SKILL.md
+- [ ] Configure permissions via .claude/settings.json instead of --allowedTools
+- [x] Pivot to .kb naming (skill renamed llm.d → llm.kb)
+- [ ] .claude/ideas.kb/2026-04-17-000-design-process-for-new-kb-structures.md
+- [ ] .claude/ideas.kb/2026-04-17-001-codify-tables-lists-smell-as-kb-promotion-heuristic.md
+- [x] SKILL.md: sharpen "Promotion Signals" -- added parallel-sections bullet, 50-token threshold for growth pressure
+- [x] SKILL.md: make references prescriptive ("must read creating-a-new-kb.md on first kb creation")
+- [x] SKILL.md: route "Creating a Collection" procedure through the new how-to doc
+- [x] references/creating-a-new-kb.md: new doc with plan + four quality passes
+- [x] SKILL.kb/ runtime infrastructure: triggers, 13 self-audits, shared procedures
+- [x] docs/dev/ methodology kb: case-study, concepts, post-mortem split into capture + reconcile
+- [ ] todo.kb/2026-05-15-000-reconcile-seed-case-study-may-13-har-browse-rust-port.md
+- [x] Resolve `bin/llm.kb-validate` quirk: `SKILL.kb/SKILL.jsonschema.yaml` not auto-matched (moved schema to repo root)
+- [x] Route `must-read/after/distilling-from-a-raw-source.md` through `run-self-audits.md` for the generic audit portion —
+      split the file into "Distilling-specific actions" (alias
+      back-link, completeness-vs-source, cross-link siblings) and a
+      new "Generic audits" section citing `run-self-audits.md`
+      instead of inlining just the cross-references self-audit
+- [ ] ~~Move `docs/dev/procedures.kb/reconcile-case-study.md` to `SKILL.kb/procedures.kb/` (consumer-facing parallel to post-mortem move)~~ —
+      premise checked against history (commit `577702a`, "SKILL.kb
+      refactor; move post-mortem to consumer-facing") and found wrong:
+      that commit deliberately generalized post-mortem.md while
+      *keeping* reconcile-case-study.md skill-internal, because
+      reconcile operates on llm-kb's own specific distillation
+      taxonomy (failure-modes.kb/procedures.kb/principles.kb/
+      concepts.kb/glossary.kb), not a generic consumer shape the way
+      raw case-study capture is. No move performed. Leaving open as a
+      real question rather than closing mechanically: does a generic
+      consumer-facing reconcile procedure make sense as a *separate*
+      new file (not a move of this one), or does the taxonomy stay
+      skill-specific by design? Operator call.
+- [x] Re-read SKILL.md after the recent rewrite; confirm the "No schema found → copy from skeleton" line still reads coherent in context —
+      verified: sits under `bin/llm.kb-validate` usage docs as a
+      recovery line for that tool's "No schema found" output;
+      `llm-subtask/skeleton/.claude/` does contain
+      `todo.jsonschema.yaml`/`ideas.jsonschema.yaml`. Coherent, no
+      change needed
+- [x] Verify `tests/` still pass after schema reshuffle, `.d → .kb` rename, and KbValidator extension — 4 pass from repo root and from llm-kb/ (pytest ini_options hoisted to workspace root; bare `pytest` at root had silently collected 0 tests)
+- [ ] Devlog entry for this session (skeleton-default schema centralization, sessions.jsonschema migration)
+- [x] Commit current working tree (CLEAN-KITCHEN)
+- [ ] Pin pyright for member-cwd runs: llm-kb declares no basedpyright dep, so `uv run pyright` from llm-kb/ falls through to ambient PATH (2026-08-08 field case: resolved to prototype.chatfs's venv shim — same basedpyright version by luck). Add basedpyright-as-pyright to llm-kb's dev group (workspace source lives at root pyproject) or document root-only invocation. The config side is already cwd-safe (fd492ad pins stubPath)
+
+## Later
+
+- [ ] todo.kb/2026-07-13-000-cross-kb-cooperation-conventions.md (cross-kb references, symlink conventions, maintenance-traversal scope; llm-design-kb layer-crossing rider) -- consumer: prototype.chatfs graduation, proceeding on interim conventions meanwhile
+- [ ] todo.kb/2026-01-02-000-complete-d-to-kb-rename.md (finish `.d → .kb` rename in `complete-example/`; promote ADR 2025-12-03-000 to Accepted) -- related to prototype.chatfs harmonization
+- [ ] todo.kb/2025-12-04-000 (Claude enumerates contents despite explicit prohibition)
+- [ ] todo.kb/2026-06-03-000 (Validate path references -- frontmatter schema type; link-check script promoted to `bin/llm.kb-validate-links`, still not folded into `bin/llm.kb-validate` proper)
+  - [ ] todo.kb/2026-07-09-000 (Body-markdown path-link checker -- blocked on the above)
+  - [ ] todo.kb/2026-07-25-000 (Test coverage for `llm.kb-validate-links` -- zero tests for the new `--strict`/`--lax` modes and whitespace heuristic)
+- [ ] Synthesis-freshness check (fold into `bin/llm.kb-validate` or sibling): warn when a synthesis file's `last-updated` predates substantive changes to its collection -- field case 2026-08-08: `prototype.llm-stet/docs/dev/design.md` carries a hand-drawn poset diagram + open-claims list over `design.kb/`, and nothing catches drift; `last-updated` is currently write-only metadata. Field case 2026-08-09: `bukzor-agent-skills/docs/dev/strata.claims.kb/question.md` went stale same-day (purpose restructure 32b1a76 changed what three rows should cite) while its date-grain stamp stayed "current" -- the check needs commit-grain, not date-grain
+- [ ] Decide `post-mortem.md` naming (capture-incident? learn-from-failure?) -- defer until a second case-study clarifies the modes
+- [ ] Extract `SKILL.kb/self-audit.kb/bloat.md`'s "Frame" stance into `principles.kb/` once that collection is seeded
+- [x] Rename `SKILL.kb/must-read/` → `SKILL.kb/must-read.kb/` -- align with `Skill(llm-must-read-kb)` convention

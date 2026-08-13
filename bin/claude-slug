@@ -1,0 +1,23 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = ["claude-code-slug"]
+# ///
+"""Slugify text using Claude Code's own encoding scheme.
+
+Every character that is not ASCII alnum becomes exactly one '-' -- no
+squeezing runs, no case folding, no path semantics (unlike claude-path,
+this never resolves '.'/'..'/trailing-slash -- pure text, safe for titles).
+
+The encoding itself lives in `claude-code-slug` on PyPI, because four
+skills here and git-localhost-store all have to agree about it, and copies
+of one regex agree only until someone edits one of them. A PEP 723 header
+rather than a repo dependency: the callers reach this by relative path
+from a checkout, so it must work without anyone having synced a venv.
+
+Usage: claude-slug TEXT
+"""
+
+from claude_code_slug.slug import main
+
+raise SystemExit(main())

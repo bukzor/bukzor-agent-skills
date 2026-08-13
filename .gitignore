@@ -1,0 +1,6 @@
+.*.sw[a-z]
+settings.local.json
+__pycache__/
+*.pyc
+trash/
+uv.lock

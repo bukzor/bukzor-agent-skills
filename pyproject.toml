@@ -1,0 +1,33 @@
+[project]
+name = "bukzor-agent-skills"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "basedpyright-as-pyright",
+    "pytest>=9.1.1",
+]
+
+[tool.uv.sources]
+basedpyright-as-pyright = { path = "../basedpyright-as-pyright" }
+
+[tool.uv.workspace]
+members = ["llm-kb"]
+
+[tool.pytest.ini_options]
+python_classes = ["Describe*", "When*", "Test*"]
+python_functions = ["it_*", "test_*"]
+
+[tool.pyright]
+stubPath = "typings"
+exclude = [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.venv",
+    "**/trash",
+    # Self-contained `uv run --script` one-offs, each with their own
+    # inline PEP 723 header -- not part of any package's dependency set
+    # or type-annotated, and not meant to be.
+    "llm-kb/docs/dev/devlog/2025-12-10-000-claude-md-instruction-optimization.kb/*.py",
+]

@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"
+description: >
+  Propositional assertions — the atomic units of the knowledge graph.
+  Covers both observations and hypotheses. The body text states the
+  claim and any relevant context or caveats.
+type: object
+additionalProperties: false
+required:
+  - status
+properties:
+  status:
+    description: Epistemic standing of this claim
+    type: string
+    enum: [asserted, contested, retracted]
+  likelihood:
+    description: How likely this claim is to be true, 0-1 (default 1.0 — certain until told otherwise)
+    default: 1.0
+    type: number
+    minimum: 0
+    maximum: 1
+  sources:
+    description: >
+      Paths to sources providing this claim -- empirical provenance, or the
+      discussion participant who asserted it (kind user/assistant)
+    type: array
+    items:
+      type: string
+  date-observed:
+    description: When this was observed or collected, if empirical (ISO 8601)
+    type: date  # YAML parses ISO dates (2026-03-10) as date objects; see llm-kb schema-design
+  depends:
+    description: Paths to nodes this claim depends on for context
+    type: array
+    items:
+      type: string
+  tags:
+    description: Topic tags for cross-referencing
+    type: array
+    items:
+      type: string

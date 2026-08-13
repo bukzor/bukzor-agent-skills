@@ -1,0 +1,94 @@
+#!/bin/bash
+# Session start helper - reads key files for orientation
+
+set -euo pipefail
+
+onerror() {
+  error="$?"
+  echo >&2 "ERROR($error)"
+  exit "$error"
+}
+trap onerror ERR
+
+if (( ${DEBUG:-0} > 0 )); then
+  set -x
+fi
+
+DIR="."
+usage() {
+  echo >&2 "Usage: llm-collab-session-start [-C <dir>]"
+  echo >&2 "       Read key files for session orientation"
+  echo >&2 "       -C <dir>: run as if invoked from <dir> (default: .)"
+}
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -h|--help) usage; exit 0 ;;
+    -C)
+      [ -n "${2:-}" ] || { echo >&2 "Error: -C requires an argument"; usage; exit 1; }
+      DIR="$2"; shift 2 ;;
+    -*) echo >&2 "Unknown option: $1"; usage; exit 1 ;;
+    *)
+      echo >&2 "Error: unexpected argument '$1' -- positional args are not accepted; use -C '$1'"
+      usage; exit 1 ;;
+  esac
+done
+
+if [ ! -d "$DIR" ]; then
+  echo >&2 "Error: -C target '$DIR' is not a directory"
+  exit 1
+fi
+cd "$DIR"
+
+echo "📖 Reading session context..."
+echo ""
+
+# Read CLAUDE.md
+if [ -f CLAUDE.md ]; then
+  echo "=== CLAUDE.md ==="
+  cat CLAUDE.md
+  echo ""
+fi
+
+# List pending TODOs
+if [ -d .claude/todo.kb ]; then
+  TODO_FILES=$(find .claude/todo.kb -maxdepth 1 -name '*.md' -print0 | xargs -r0 ls -1t)
+  if [ -n "$TODO_FILES" ]; then
+    echo "=== Pending TODOs (.claude/todo.kb/) ==="
+    echo "$TODO_FILES" | while read -r todo; do
+      TITLE=$(sed -n '1s/^# //p' "$todo")
+      echo "  - $TITLE ($(basename "$todo"))"
+    done
+    echo ""
+  fi
+fi
+
+# Read latest devlog
+if [ -d docs/dev/devlog ]; then
+  LAST_LOG=$(find docs/dev/devlog -maxdepth 1 -name '*.md' ! -name CLAUDE.md -print0 | xargs -r0 ls -1t | sed -n '1p')
+  if [ -n "$LAST_LOG" ]; then
+    echo "=== Latest Devlog: $(basename "$LAST_LOG") ==="
+    cat "$LAST_LOG"
+    echo ""
+  fi
+fi
+
+# Show recent ADRs
+if [ -d docs/dev/adr ]; then
+  ADR_FILES=$(find docs/dev/adr -maxdepth 1 -name '*.md' ! -name CLAUDE.md -print0 | xargs -r0 ls -1t | sed -n '1,3p')
+  if [ -n "$ADR_FILES" ]; then
+    echo "=== Recent ADRs ==="
+    echo "$ADR_FILES" | while read -r adr; do
+      TITLE=$(sed -n '1s/^# //p' "$adr")
+      echo "  - $TITLE ($(basename "$adr"))"
+    done
+    echo ""
+  fi
+fi
+
+echo "✅ Session context loaded"
+echo ""
+echo "Quick commands:"
+echo "  - Create TODO: llm-subtask-todo --title \"Task title\""
+echo "  - Create ADR: llm-collab-adr --title \"Decision title\""
+echo "  - Create devlog: llm-collab-devlog --title \"Entry title\""
