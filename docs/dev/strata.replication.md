@@ -78,18 +78,28 @@ skills -- nothing a blind agent loads may be able to name the answer.
 
 ## The environment
 
-Run the subject in a dedicated worktree, never the live tree:
+Run the subject in a dedicated worktree on a branch of its own, built
+from `main` and holding the repo under study *and nothing about the
+study*:
 
 ```sh
-git worktree add -b <run-branch> ../<repo>--<run> HEAD
-git diff --binary HEAD | git -C ../<repo>--<run> apply   # if the tree is dirty
-git -C ../<repo>--<run> commit-files . -- -m wip         # seal it
+git worktree add -b <run-env> ../<repo>--<run> main
+git -C ../<repo>--<run> rm -rq docs/dev/devlog docs/dev/adr \
+    docs/dev/strata.replication.kb docs/dev/strata.replication.run.kb \
+    docs/dev/strata.replication.md .claude/todo.md .claude/todo.kb
+git -C ../<repo>--<run> commit-files . -- -m wip
 ```
 
-The seal is the point: a bare `git status` in a dirty checkout lists
-the answer's own paths, so an unsealed worktree leaks through a command
-the subject has every reason to run. A bland one-word message leaks
-nothing.
+Everything deleted there is something the subject would read about
+itself: the turns it has not been sent yet and what the operator calls
+a miss, its own earlier answers, the verdicts on them, the devlog
+saying what the run is for. Keeping them merely forbidden worked once
+and is one `ls` from not working.
+
+The seal matters as much as the deletions: a bare `git status` in a
+dirty checkout lists the answer's own paths, so an unsealed worktree
+leaks through a command the subject has every reason to run. A bland
+one-word message leaks nothing.
 
 Then repair the ledger's mechanical rot before the run -- dangling
 symlinks, a `verify:` that no longer selects, a schema that will not
@@ -98,15 +108,26 @@ leaving rot in place buys an audit of the rot; and the turn cannot be
 re-asked of the same subject afterward (below). Mechanical breakage is
 the operator's to fix, not a finding worth a turn.
 
+Rebuild the branch, don't merge into it. An environment branch is a
+checkpoint, not a line of work: when the repo moves under a run --
+because the run's own findings were filed, which is the point -- the
+next environment is a fresh branch off the new `main`, sealed the same
+way. Merging `main` into a months-old seal fights conflicts for a tree
+nobody wants to keep.
+
 ## Rewinding a run
 
 Commit each stage as it lands -- the subject's reply into
-`strata.replication.run.kb/`, plus whatever it wrote into the tree, one
-commit per turn on the run branch. That branch is then a time machine
-for the *environment*: a checkout at stage N is exactly what the
-subject was reading when it answered N. A run that commits only at the
-end has no middle to return to, which is how the first run lost its
+`strata.replication.run.kb/` on `main`, one commit per turn, the
+operator's verdict as its message. A run that commits only at the end
+has no middle to point back at, which is how the first run lost its
 critique turn.
+
+The record stays out of the environment. Put the stage files in the
+subject's own worktree and a re-asked turn is answered by a subject
+that can read its own previous answer -- the rewind undone by a
+`cat`. Two branches: the record on `main`, the environment sealed on
+its own.
 
 Rewinding the *conversations* is two cuts, because a run has two
 participants and neither rewind reaches the other. Start with the

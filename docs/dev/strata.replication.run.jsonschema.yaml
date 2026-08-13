@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: "http://json-schema.org/draft-07/schema#"
+title: strata.replication.run stage frontmatter
+description: >
+  Files in strata.replication.run.kb/ are one run's stages: the
+  subject's verbatim reply to one turn. The frontmatter says which turn
+  it answers and where in the subject's transcript to check it, since
+  the transcript is perishable and outside version control.
+type: object
+additionalProperties: false
+required:
+  - turn
+  - sent
+  - replied
+  - model
+  - effort
+  - transcript
+  - uuid
+properties:
+  turn:
+    description: The file in ../strata.replication.kb/ that was sent.
+    type: string
+    pattern: "^[0-9]{3}-[a-z-]+\\.md$"
+  sent:
+    description: When the turn reached the subject.
+    type: string
+  replied:
+    description: When the subject finished answering.
+    type: string
+  model:
+    description: The model that answered, as the reply record names it.
+    type: string
+  effort:
+    description: >
+      The reasoning effort the reply ran at. Recorded per stage because
+      a run that changes it mid-way is comparing two subjects.
+    type: string
+  transcript:
+    description: >
+      `<file>:<line>` in the subject's session JSONL under
+      ~/.claude/projects/ -- the record this file was extracted from.
+    type: string
+    pattern: "^[^:]+\\.jsonl:\\d+$"
+  uuid:
+    description: The reply record's uuid, stable across re-extraction.
+    type: string
