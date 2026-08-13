@@ -227,7 +227,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       convergence sketch) in
       `prototype.personal-reasoning-management/.claude/todo.md`
 - [x] Make `glob_prune` earn its name (a real `os.walk` prune instead of a
-      full glob plus two filters) — measured 2026-08-13 and dropped.
+      full glob plus two filters) -- measured 2026-08-13 and dropped.
       Discovery is 7% of runtime: the glob costs 144ms of a ~2000ms run,
       the rest is YAML + jsonschema over 366 files, and pruning saves
       ~70ms. Deciding descent means asking git per directory visited,
