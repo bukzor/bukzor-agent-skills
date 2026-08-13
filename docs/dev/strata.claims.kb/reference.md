@@ -18,7 +18,7 @@ ontology:
   - provenance
   - support
   - taint
-defeated-by: a corpus whose references predominantly live in prose -- some always will; when the enumerable edges are the minority, every computation claimed here is running on a sample
+stale-when: a corpus whose references predominantly live in prose -- some always will; when the enumerable edges are the minority, every computation claimed here is running on a sample
 ---
 
 # Reference

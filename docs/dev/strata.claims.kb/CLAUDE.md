@@ -33,6 +33,7 @@ Placement is fixed by vocabulary: the earliest theory whose ontology
 adding an auxiliary prior theory over widening an ontology with
 machinery that is not really the theory's own. A theory's own
 defining claim -- `<theory>.md` beside its `<theory>.kb/` -- carries
-the vocabulary it admits (`ontology:`), its priors (`why:`), and what
-would defeat it; these files are claims like any other, and the
+the vocabulary it admits (`ontology:`), its priors (`why:`), and the
+observable condition that voids its stamp (`stale-when:`); these
+files are claims like any other, and the
 collections' `CLAUDE.md` files are maintenance notes only.

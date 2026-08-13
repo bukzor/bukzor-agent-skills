@@ -14,7 +14,7 @@ ontology:
   - migration
   - transport
   - lift
-defeated-by: a fleet that abandons frontmatter typing -- prose-only payloads make this stratum vacuous
+stale-when: a fleet that abandons frontmatter typing -- prose-only payloads make this stratum vacuous
 ---
 
 # Record
