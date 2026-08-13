@@ -252,7 +252,8 @@ Recursively finds and validates `.kb/` directories. Auto-detects schemas. Skips 
 What the walk *discovers* is filtered by `.gitignore`: a `.kb/` under
 `trash/` or `node_modules/` is scratch, not corpus, and its rot must
 not pad the error count. Name such a path on the command line and you
-get it anyway -- asking is asking.
+get it anyway -- asking is asking. Each path is asked of the repository
+holding it, so a submodule's own `.gitignore` governs inside it.
 
 Recommended: run `bin/llm.kb-validate` before committing changes.
 

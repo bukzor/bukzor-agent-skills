@@ -13,7 +13,7 @@ import functools
 import subprocess
 import sys
 import urllib.parse
-from collections.abc import Iterable, Iterator, Sequence
+from collections.abc import Iterable, Iterator
 from dataclasses import dataclass
 from pathlib import Path
 from typing import cast, override
@@ -88,6 +88,9 @@ _REGISTRY: SchemaRegistry = Registry(retrieve=_retrieve_schema)
 
 SUFFIX = '.kb'
 HIVE_PARTITION_MARKER = '='
+# git's wording for the absence of a repository, stable since forever. Should
+# it ever change, the tests below fail rather than users.
+NO_REPOSITORY = 'not a git repository'
 
 
 @dataclass(frozen=True)
@@ -138,46 +141,37 @@ def without_children(paths: Iterable[Path]) -> Iterator[Path]:
             seen.add(p)
 
 
-def repository_root(anchor: Path) -> Path | None:
-    """The work tree holding `anchor`, found by the `.git` at its root.
+def ignored_by_git(path: Path) -> bool:
+    """Whether git ignores `path`, asked of the repository that holds it.
 
-    Asked before shelling out, so that a failing `check-ignore` below is a
-    real error rather than an ambiguity to swallow. A submodule's `.git` is
-    a file and a plain clone's is a directory; either one answers.
+    Each path is asked where it lives, so a submodule answers for its own
+    contents -- ask the superproject and it refuses outright, "Pathspec ...
+    is in submodule". `check-ignore` performs git's own repository
+    discovery, which is why nothing here goes looking for a `.git`.
+
+    Any refusal but that one raises, with git's diagnosis already on the
+    terminal: a filter that quietly stops filtering quietly changes which
+    files get validated.
     """
-    for directory in (anchor, *anchor.parents):
-        if (directory / '.git').exists():
-            return directory
-        else:
-            continue
-    return None
+    # Absolute both sides: git reads a relative pathspec against `-C`, not
+    # the caller's cwd.
+    path = path.resolve()
+    command = ('git', '-C', str(path if path.is_dir() else path.parent), 'check-ignore', '-q', str(path))
+    completed = subprocess.run(command, stderr=subprocess.PIPE, text=True)
 
+    if completed.returncode > 1 and NO_REPOSITORY in completed.stderr:
+        return False  # the one refusal that is an answer: no repository, nothing ignored
+    else:
+        _ = sys.stderr.write(completed.stderr)  # git's complaints are the user's
 
-def ignored_by_git(anchor: Path, paths: Sequence[Path]) -> frozenset[Path]:
-    """Which of `paths` git ignores, asked of the repository holding `anchor`.
-
-    Empty when no repository holds it -- then nothing is ignored. Any other
-    failure raises, with git's own diagnosis already on the terminal: a
-    filter that quietly stopped filtering would quietly change which files
-    get validated.
-    """
-    anchor = anchor.resolve()
-    if not paths or repository_root(anchor) is None:
-        return frozenset()
-    # Absolute both sides: git reads a relative pathspec against `-C`, not the
-    # caller's cwd, and echoes back whatever it was handed.
-    absolute = {str(path.resolve()): path for path in paths}
-    command = ('git', '-C', str(anchor), 'check-ignore', '--stdin', '-z')
-    completed = subprocess.run(
-        command,
-        input='\0'.join(absolute),
-        stdout=subprocess.PIPE,  # stderr inherited: git's complaints are the user's
-        text=True,
-    )
-    # 0: something matched. 1: nothing did. Above that, git already said why.
-    if completed.returncode > 1:
-        raise subprocess.CalledProcessError(completed.returncode, command, completed.stdout)
-    return frozenset(absolute[match] for match in completed.stdout.split('\0') if match)
+    # -q leaves the answer in the exit code alone.
+    match completed.returncode:
+        case 0:
+            return True
+        case 1:
+            return False
+        case code:
+            raise subprocess.CalledProcessError(code, command)
 
 
 def corpus(root: Path, found: Iterable[Path]) -> Iterator[Path]:
@@ -189,12 +183,10 @@ def corpus(root: Path, found: Iterable[Path]) -> Iterator[Path]:
     on the command line, so if it is itself ignored, asking was asking and
     everything under it is validated.
     """
-    discovered = list(found)
-    ignored = ignored_by_git(root, [root, *discovered])
-    if root in ignored:
-        return iter(discovered)
+    if ignored_by_git(root):
+        return iter(found)
     else:
-        return (path for path in discovered if path not in ignored)
+        return (path for path in found if not ignored_by_git(path))
 
 
 def is_kb_dir(path: Path) -> bool:

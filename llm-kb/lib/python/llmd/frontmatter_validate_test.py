@@ -38,6 +38,14 @@ def _init_repo(root: Path):
     _ = (root / ".gitignore").write_text("trash/\n")
 
 
+def _commit_all(repo: Path):
+    _ = subprocess.run(("git", "-C", str(repo), "add", "-A"), check=True)
+    _ = subprocess.run(
+        ("git", "-C", str(repo), "-c", "user.email=t@t", "-c", "user.name=t", "commit", "-qm", "fixture"),
+        check=True,
+    )
+
+
 def _write_kb(collection: Path):
     _ = collection.mkdir(parents=True)
     _ = (collection / "entry.md").write_text("---\nlabel: X\n---\n\n# Entry\n")
@@ -72,6 +80,24 @@ class DescribeGitignoredDiscovery:
         results = list(fv.validate_paths(iter([tmp_path])))
 
         assert sorted(_collections(results)) == ["live.kb", "scratch.kb"]
+
+    def it_asks_a_submodule_about_its_own_contents(self, tmp_path: Path):
+        # The superproject refuses the question outright -- "Pathspec ... is
+        # in submodule" -- so each path must be asked where it lives. The
+        # submodule's own .gitignore is what governs inside it.
+        _init_repo(tmp_path)
+        _init_repo(tmp_path / "mod")
+        _write_kb(tmp_path / "mod" / "live.kb")
+        _write_kb(tmp_path / "mod" / "trash" / "scratch.kb")
+        _commit_all(tmp_path / "mod")
+        _ = subprocess.run(
+            ("git", "-C", str(tmp_path), "-c", "advice.addEmbeddedRepo=false", "add", "mod"),
+            check=True,
+        )
+
+        results = list(fv.validate_paths(iter([tmp_path])))
+
+        assert _collections(results) == ["live.kb"]
 
     def it_raises_when_git_cannot_answer(self, tmp_path: Path):
         # A `.git` git refuses to read: the filter cannot know what is
