@@ -78,12 +78,19 @@ properties:
     minItems: 1
     items:
       type: string
-  defeated-by:
+  stale-when:
     description: >-
-      Defining claims only: the finding that would retire the theory
-      whole -- not "this claim was wrong" but "these were the wrong
-      words to have". Where a claim's own collapse is what a citing
-      claim's `why:` records, this is what no arrow can record.
+      Defining claims only: the cheapest observation witnessing that
+      this theory no longer projects from the world it was stamped
+      against. `last-updated:` says what a roll-up derives from; this
+      says what voids it -- the condition fires, the stamp is dead, and
+      the theory is re-derived before it is cited again. What the
+      re-derivation finds is decided then, not here: usually the words
+      want restating or a boundary redrawing, occasionally they were
+      the wrong words to have. Defeat is a re-derivation that comes
+      back empty -- an act when it happens, not a prediction a header
+      can make. Where a claim's own collapse is what a citing claim's
+      `why:` records, this is what no arrow can record.
     type: string
   last-updated:
     description: >-

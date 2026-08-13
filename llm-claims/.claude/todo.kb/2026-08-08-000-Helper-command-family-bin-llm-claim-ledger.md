@@ -40,7 +40,7 @@ invariant nothing checks is a hope.
 - [ ] A single parser for the notation — claim lines
       (`* LABEL<sigil> <- P1 P2: text -- STATUS`), strikes
       (`~~LABEL~~`), and theory-file headers (priors / ontology /
-      defeated-by) — consumed by every command below. No per-command
+      stale-when) — consumed by every command below. No per-command
       regexes: the false-positive classes above are the documented
       cost of token-grep.
 
@@ -108,7 +108,7 @@ single costliest task of the serialization session.
 ### Skeleton schema
 
 - [ ] ship a canonical theory-header jsonschema (priors / ontology /
-      defeated-by) with the skill, so ledger projects stop
+      stale-when) with the skill, so ledger projects stop
       re-inventing it (prototype.llm-stet hand-wrote
       `docs/dev/design.jsonschema.yaml`)
 

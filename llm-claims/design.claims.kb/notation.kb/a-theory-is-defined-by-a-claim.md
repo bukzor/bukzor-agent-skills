@@ -8,8 +8,8 @@ why:
 # A Theory Is Defined by a Claim
 
 A theory needs no node type of its own: it opens with a defining
-claim whose text fixes the ontology and the defeater, and whose
-arrows name the prior theories. Extension, contest, and demotion are
+claim whose text fixes the ontology and the staleness condition, and
+whose arrows name the prior theories. Extension, contest, and demotion are
 then ordinary governance on that claim, and a theory's standing is
 its defining claim's standing -- claims-are-the-only-node-type.md
 holds without exception.

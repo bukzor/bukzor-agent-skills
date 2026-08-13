@@ -20,7 +20,7 @@ ontology:
   - composition
   - token
   - blind
-defeated-by: a skill format with per-audience channels (an author-facing file beside the invoker-facing body), or a harness whose retrieval consults neither names nor descriptions -- either dissolves the single-surface economics these claims price
+stale-when: a skill format with per-audience channels (an author-facing file beside the invoker-facing body), or a harness whose retrieval consults neither names nor descriptions -- either dissolves the single-surface economics these claims price
 ---
 
 # authorship -- how a skill in this repo is written

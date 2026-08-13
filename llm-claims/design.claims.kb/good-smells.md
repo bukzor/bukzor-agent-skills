@@ -19,7 +19,7 @@ ontology:
   - rendering
   - demo
   - migration
-defeated-by: a change in who uses the notation -- a ledger written and read by tools, where entry cost and rendering hazards both vanish
+stale-when: a change in who uses the notation -- a ledger written and read by tools, where entry cost and rendering hazards both vanish
 last-updated: "2026-08-08"
 ---
 

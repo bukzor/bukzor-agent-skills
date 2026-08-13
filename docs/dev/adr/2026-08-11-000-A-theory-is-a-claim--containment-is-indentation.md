@@ -2,6 +2,10 @@
 
 **Date:** 2026-08-11
 **Status:** Accepted
+**Amended:** 2026-08-13 -- the header this ADR calls `defeated-by:` is
+now `stale-when:`, narrowed to the observable condition; see
+`devlog/2026-08-13-000-stale-when-replaces-defeated-by--a-header-cannot-predict-an-outcome.md`.
+The word `defeater` below reads as "staleness condition".
 
 ## Context
 

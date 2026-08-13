@@ -11,7 +11,7 @@ ontology:
   - distinction
   - ontology
   - cost
-defeated-by: a stopping point that is a truth rather than an act
+stale-when: a stopping point that is a truth rather than an act
 ---
 
 # stance -- the posture everything else stands on

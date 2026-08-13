@@ -9,7 +9,7 @@ ontology:
   - chat
   - agent
   - user
-defeated-by: a design that is not this notation's -- a second skill's commitments filed here
+stale-when: a design that is not this notation's -- a second skill's commitments filed here
 last-updated: "2026-08-10"
 ---
 
@@ -29,17 +29,17 @@ is still aimed at the right thing.
 Claims are grouped by the vocabulary they need, not the topic they
 touch. Each collection is a **theory**, defined by the claim file
 beside it -- `stance.md` defines `stance.kb/` -- which stipulates the
-ontology, names the priors in its `why:`, and states the defeater. A
-claim may use only the words its theory admits, its priors' and this
-file's among them (`Skill(llm-claims)` § Theories). This file is that
-shape one level up: the ledger is itself a theory, and nests the same
-way at any depth.
+ontology, names the priors in its `why:`, and states the staleness
+condition. A claim may use only the words its theory admits, its
+priors' and this file's among them (`Skill(llm-claims)` § Theories).
+This file is that shape one level up: the ledger is itself a theory,
+and nests the same way at any depth.
 
 ```
 stance ──► purpose ──► good-smells ──► notation
 ```
 
-| Theory | Holds | Defeated by |
+| Theory | Holds | Stale when |
 |---|---|---|
 | `stance` | what terminates a regress; what a distinction earns | a stopping point that is a truth rather than an act |
 | `purpose` | the invariant, the cost it must beat, the rung it occupies | a competitor that is a better notation rather than none |

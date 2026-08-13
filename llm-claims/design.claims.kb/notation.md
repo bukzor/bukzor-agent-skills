@@ -22,11 +22,11 @@ ontology:
   - theory
   - ontology
   - prior
-  - defeater
+  - staleness condition
   - indentation
   - containment
   - nesting
-defeated-by: an inference relation cheap enough to check at entry
+stale-when: an inference relation cheap enough to check at entry
 ---
 
 # notation -- the decisions this notation actually made

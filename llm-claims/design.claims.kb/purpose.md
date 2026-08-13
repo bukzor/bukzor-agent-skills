@@ -14,7 +14,7 @@ ontology:
   - reader
   - context
   - notation
-defeated-by: a different competitor -- a setting where the ledger is chosen against a better notation rather than against keeping none
+stale-when: a different competitor -- a setting where the ledger is chosen against a better notation rather than against keeping none
 ---
 
 # purpose -- what the notation is for
