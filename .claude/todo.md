@@ -226,12 +226,15 @@ Repo-level list. Skill-scoped work lives in each skill's own
       as the strong form of `verify:`. Counterpart item (field-name
       convergence sketch) in
       `prototype.personal-reasoning-management/.claude/todo.md`
-- [ ] Make `glob_prune` earn its name: `llm.kb-validate` globs `**/*.kb`
-      in full, then discards nested collections and gitignored ones, so a
-      big `node_modules/` or `trash/` is walked before being thrown away.
-      An `os.walk` that stops descending at both — a collection it has
-      already yielded, and a directory git ignores — is one prune instead
-      of a walk plus two filters
+- [x] Make `glob_prune` earn its name (a real `os.walk` prune instead of a
+      full glob plus two filters) — measured 2026-08-13 and dropped.
+      Discovery is 7% of runtime: the glob costs 144ms of a ~2000ms run,
+      the rest is YAML + jsonschema over 366 files, and pruning saves
+      ~70ms. Deciding descent means asking git per directory visited,
+      hundreds of execs against today's 97. It subtracts nothing either:
+      `corpus` must stay for the nested branch and "asking is asking"
+      becomes a flag threaded through the walk. Revisit only if a corpus
+      grows large enough for the walk to show up in a profile
 - [ ] USER: hand-copy llm-claims/SKILL.md's Core block into claude.ai
       preferences — the two are kept verbatim-identical and the block's
       wording changed during the 2026-08-09/10 polish (the .claims.kb
