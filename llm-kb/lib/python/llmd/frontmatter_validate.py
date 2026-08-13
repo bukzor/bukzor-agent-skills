@@ -130,8 +130,12 @@ def validate_one_file(md_file: Path, schema_override: Path | None, depth: int) -
     yield ValidationResult(depth, 'file', md_file.name, errors=tuple(errors))
 
 
-def without_children(paths: Iterable[Path]) -> Iterator[Path]:
-    """Yield paths, skipping any that are children of already-yielded paths."""
+def outermost(paths: Iterable[Path]) -> Iterator[Path]:
+    """Yield only the paths no other yielded path contains.
+
+    A `**` glob finds nested collections at every depth; the walk descends
+    into those itself, so passing them along again validates them twice.
+    """
     seen: set[Path] = set()
     for p in sorted(paths):
         if any(parent in seen for parent in p.parents):
@@ -213,7 +217,7 @@ def validate_paths(paths: Iterator[Path], schema_override: Path | None = None, d
             yield from validate_paths(corpus(p, kb_subdirs(p)), schema_override, depth + 1)
 
         elif p.is_dir():
-            yield from validate_paths(corpus(p, without_children(p.glob(f'**/*{SUFFIX}'))), schema_override, depth)
+            yield from validate_paths(corpus(p, outermost(p.glob(f'**/*{SUFFIX}'))), schema_override, depth)
 
         elif p.is_file():
             yield from validate_one_file(p, schema_override, depth)
