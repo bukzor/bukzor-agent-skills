@@ -44,7 +44,7 @@ class Claim:
     verify: str | None  # the CHECK of `-- certified(CHECK)`
     authority: str | None  # the act that settled the standing
     ontology: tuple[str, ...]  # the words stipulated -- defining claims only
-    defeater: str | None  # what would retire the theory -- defining claims only
+    stale_when: str | None  # what voids the theory's stamp -- defining claims only
     path: Path  # the claim file, so a drawn node is a way in
     gist: str  # opening paragraph: the claim itself
 
@@ -94,8 +94,8 @@ class Theory:
         return self.defining.ontology if self.defining else ()
 
     @property
-    def defeater(self) -> str | None:
-        return self.defining.defeater if self.defining else None
+    def stale_when(self) -> str | None:
+        return self.defining.stale_when if self.defining else None
 
 
 @dataclass(frozen=True)
@@ -156,14 +156,16 @@ def read_claim(origin: Path, path: Path) -> Claim:
     assert "label" in front, f"{path}: no `label:`, so this file is no claim"
     label, standing, why = front["label"], front["standing"], front.get("why", [])
     verify, authority = front.get("verify"), front.get("authority")
-    ontology, defeater = front.get("ontology", []), front.get("defeated-by")
+    ontology, stale_when = front.get("ontology", []), front.get("stale-when")
+    # Renamed 2026-08-13. Reading past the old key would drop the line silently.
+    assert "defeated-by" not in front, f"{path}: `defeated-by:` is now `stale-when:`"
     assert isinstance(label, str), label
     assert isinstance(standing, str) and standing in SIGIL, standing
     assert isinstance(why, list), why
     assert verify is None or isinstance(verify, str), verify
     assert authority is None or isinstance(authority, str), authority
     assert isinstance(ontology, list), ontology
-    assert defeater is None or isinstance(defeater, str), defeater
+    assert stale_when is None or isinstance(stale_when, str), stale_when
     identity = claim_id(origin, path)
     return Claim(
         id=identity,
@@ -178,7 +180,7 @@ def read_claim(origin: Path, path: Path) -> Claim:
         verify=verify,
         authority=authority,
         ontology=tuple(str(word) for word in cast(list[object], ontology)),
-        defeater=defeater,
+        stale_when=stale_when,
         path=path,
         gist=first_paragraph(body),
     )
