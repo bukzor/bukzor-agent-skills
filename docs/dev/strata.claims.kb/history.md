@@ -4,6 +4,7 @@ standing: agent
 ontology:
   - update
   - history
+  - log
   - word
   - branch
   - merge
