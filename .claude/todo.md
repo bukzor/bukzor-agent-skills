@@ -136,15 +136,35 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
-- [ ] Finish the strata replication run: 080 (the critique turn) still
-      owes an answer. Restart point is the promoted session
-      `0476a1a8-b186-4988-8deb-83853c353acb`, cut at the 070 reply, in
-      worktree `bukzor-agent-skills--replication-run` (branch
-      `strata-replication-run`, tag `run/pre-080`, environment repaired).
-      Resume it, restore the frontier-tier model/effort the agent
-      definition supplied, send `strata.replication.kb/080-defeats.md`
-      unaltered, commit the reply as the next stage. Then 090 (owner's
-      rulings) and adjudication of 070's six filable claims
+- [ ] Operator decision pending (2026-08-13): keep or revert the four
+      commits of the audit-repair session -- 52e6c55 (engine), befce32
+      (ledger), a9bf61a (paste split), e6e87f6 (record move). Offered as
+      `git revert` of any subset; no answer given. The two edits most
+      wanting a ruling either way touch `user`-signed claims: WORD (the
+      "a DAG of transactions where branching is allowed" gloss struck,
+      since a word is linear) and REGROUND ("theory" -> "view", a
+      confinement fix). Neither ruling was changed, but neither edit was
+      the agent's to make unilaterally
+- [~] Finish the strata replication run -- PARKED 2026-08-13 at the
+      operator's word; nothing expires, restart when they say. 080 was
+      answered once (`docs/dev/strata.replication.run.kb/080-defeats.md`)
+      and its findings are filed (52e6c55, befce32); what is parked is
+      the *re-run* of 080 against the repaired ledger. Restart point:
+      session `d7f2e549-1e8e-4981-99aa-780f9868341b` -- cut at the 070
+      reply, verified by probe ("the graded blind-lift comparison ...
+      sent to the coordinator") -- in worktree
+      `bukzor-agent-skills--replication-run`, branch `env-2026-08-13`.
+      Resume it, confirm Fable 5 at xhigh (the first 080 ran xhigh; hold
+      it so the two are comparable), send
+      `strata.replication.kb/instructions.d/080-defeats.md` unaltered,
+      extract with `strata.replication.run.kb/extract-stages.py` and
+      commit the stage on main. Then 090 (owner's rulings) and
+      adjudication of 070's six filable claims
+  - [ ] `env-2026-08-13` is not a private sandbox: peer sessions commit
+        onto it (186e256, 31f0b70 landed the stale-when rename there).
+        Re-check what the worktree holds before sending any turn -- the
+        seal is a root commit precisely so `git log` stays uninformative,
+        and each peer commit erodes that
 - [ ] Decide the single-sigil seam (strata.claims): STANCE (user, 32b1a76)
       rules that a one-place "the standing" is a category error the schema
       must not encode, yet claim frontmatter holds exactly one `standing:`
@@ -160,15 +180,22 @@ Repo-level list. Skill-scoped work lives in each skill's own
       Either the header cites vocabulary it uses directly -- legitimate,
       and the drawing is just a Hasse view -- or it inherited an edge it
       never needed. Surfaced 2026-08-09 by bin/llm-claims-kb-graph
-  - [ ] Then: strata.claims.md's hand-drawn ASCII spine is derivable from
+  - [x] Then: strata.claims.md's hand-drawn ASCII spine is derivable from
         the same `prior:` headers, so it is now a view with no stamp and
-        no computer -- regenerate it, stamp it, or say why it stays hand-cut
-- [ ] Witness test for RESTRICT
+        no computer -- regenerate it, stamp it, or say why it stays
+        hand-cut. Resolved 2026-08-13 (52e6c55, befce32): the third. The
+        picture says it is hand-cut and names the computed copy;
+        `test_tower.py` now reads the poset out of the twelve
+        `<theory>.md` `why:` lines instead of mirroring it by hand
+- [x] Witness test for RESTRICT
       (strata.claims.kb/fixpoint.kb/triangular-operators-restrict.md):
       a triangular operator on a two-lattice product whose first
       coordinate's lfp equals the lfp computed on the first lattice
       alone; wire `verify:` once it exists (bare standing needs no
-      test, but the incubator witnesses every other fixpoint claim)
+      test, but the incubator witnesses every other fixpoint claim).
+      Done 2026-08-13 (52e6c55):
+      `test_fixpoint.py::test_a_triangular_operator_restricts_to_its_first_coordinate`,
+      `verify:` wired, plus the `authority:` line (Bekic) it also lacked
 - [ ] Enforce claim-label prefix-freedom by tooling: the rule lives only
       in claim.jsonschema.yaml description text (attention-grade); the
       2026-08-09 enforcement was a hand-check of 53 labels. Cross-file
@@ -180,17 +207,16 @@ Repo-level list. Skill-scoped work lives in each skill's own
         found FLEET prefixing FLEET_MAP in strata.claims.kb. It runs
         only when you flatten, so the check still wants a home that a
         pre-commit pass would reach
-- [ ] Land the strata.claims.kb migration on main -- the replication
-      session did it 2026-08-13 in its env worktree (`env-2026-08-13`,
-      `31f0b70`): `defeated-by:` -> `stale-when:` on all thirteen lines,
-      plus FLEET_MAP -> ATLAS, which breaks the prefix collision `grep
-      FLEET` could not see through. That branch is the experiment's
-      sandbox and diverged from main, so main's copy still carries the
-      old key -- 12 of the repo's 20 validator errors -- and still says
-      FLEET_MAP. The commit cherry-picks cleanly onto main (checked with
-      `git apply --check`); waiting on that session's word on who lands
-      it. The other 8 errors are `strata.replication.run.kb/` timestamps,
-      whose files live only on main, so that fix lands here too
+- [x] Land the strata.claims.kb migration on main: `defeated-by:` ->
+      `stale-when:` on all thirteen lines, plus FLEET_MAP -> ATLAS, which
+      breaks the prefix collision `grep FLEET` could not see through.
+      Landed on main 2026-08-13 (03911d9, 891fd7e); verified here --
+      thirteen `stale-when:` lines, ATLAS in `where-the-v1-skills-sit.md`
+      and in question.md's table, flatten reports zero lints,
+      `llm.kb-validate docs/dev/strata.claims.kb` reads 68 files 0 errors.
+      (Attribution fix: the env-worktree commits 186e256/31f0b70 were
+      that same session reaching into `env-2026-08-13`, not the
+      replication session's doing.)
 - [ ] Review the standing of the 21 theory-defining claims: the
       2026-08-11 migration gave every theory header `standing: agent`
       uniformly, because headers carried no standing before it. That is a
