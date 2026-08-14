@@ -4,6 +4,7 @@ standing: agent
 ontology:
   - update
   - history
+  - log
   - word
   - branch
   - merge
@@ -15,6 +16,7 @@ ontology:
   - override
   - fold
   - query
+  - retraction
 stale-when: a substrate that forgets its past -- mutation in place with no recoverable history
 ---
 

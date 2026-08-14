@@ -11,8 +11,12 @@ assert LEDGER.is_dir(), LEDGER  # no ledger, no poset: fail, never skip
 
 # theories with no computational content, so no module: regime
 # requirements (purpose), proper nouns (fleet), past-tense provenance
-# (question), and the capstone -- `tower` lives as this test file
-NON_CODE = frozenset({"purpose", "fleet", "question", "tower"})
+# (question), the capstone -- `tower` lives as this test file -- and
+# the representation seam, which inventories the code's carriers
+# rather than adding any
+NON_CODE = frozenset(
+    {"purpose", "fleet", "question", "tower", "data-structures", "data-representation"}
+)
 
 
 def names(text: str) -> set[str]:

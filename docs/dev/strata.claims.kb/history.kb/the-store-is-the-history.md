@@ -1,13 +1,13 @@
 ---
-label: WORD
+label: LOG
 standing: user
 verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_history.py::test_any_prefix_is_queryable
 ---
 
 # The Store Is the History
 
-A store is a word in the free monoid of updates, not a mutable
-current state. "Prior states queryable" is not a feature bolted on:
+A store is an append-only log -- a word in the free monoid of
+updates -- not a mutable current state. "Prior states queryable" is not a feature bolted on:
 it is the decision to keep the word rather than only its fold.
 
 A word is linear. Stores that branch hold several, and what their

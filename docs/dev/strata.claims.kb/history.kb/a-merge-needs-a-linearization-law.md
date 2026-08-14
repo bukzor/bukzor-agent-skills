@@ -9,7 +9,7 @@ verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/
 
 # A Merge Needs a Linearization Law
 
-WORD keeps the word; FOLD is defined on words. Branching stores --
+LOG keeps the word; FOLD is defined on words. Branching stores --
 clones, working copies, any two writers who diverge from a common
 prefix -- hold two words, and nothing here says what their merge is.
 Interleaving is a choice, and a load-bearing one: two linearizations

@@ -31,7 +31,11 @@ past-tense provenance, which no future change reaches.)
 Placement is fixed by vocabulary: the earliest theory whose ontology
 (its own plus its priors') admits every word the claim needs. Prefer
 adding an auxiliary prior theory over widening an ontology with
-machinery that is not really the theory's own. A theory's own
+machinery that is not really the theory's own. Representation
+vocabulary -- file, directory, path, frontmatter, markdown, wire --
+is admitted only at `data-representation.kb/`; a lower claim needing
+those words is filed there or reworded. (These maintenance notes are
+exempt: they are about the files, and are not claims.) A theory's own
 defining claim -- `<theory>.md` beside its `<theory>.kb/` -- carries
 the vocabulary it admits (`ontology:`), its priors (`why:`), and the
 observable condition that voids its stamp (`stale-when:`); these

@@ -14,4 +14,4 @@ separate edge store. Referential integrity is the condition that every
 edge lands on an existing key, checkable at the same moment as typing.
 
 The graph is derived structure: delete the marking convention and the
-graph vanishes without touching a file.
+graph vanishes without touching an entry.

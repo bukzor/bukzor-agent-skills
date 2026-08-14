@@ -9,7 +9,7 @@ ontology:
   - extension
   - enforcement
 stale-when: a lower engine needing a higher vocabulary
-last-updated: "2026-08-12"
+last-updated: "2026-08-14"
 ---
 
 # The strata, as a ledger
@@ -64,6 +64,15 @@ holds the operating regime -- the user's requirements about scale,
 capture, and representational duty -- which `view`, `standing`,
 `genre`, and `protocol` cite.
 
+Two more sit above the spine as the serialization seam:
+`data-structures` reads the inventory of generic carriers off the
+central theories, and `data-representation` owes every carrier a
+realization in every persistence target -- markdown document,
+filesystem, datalog, program memory. The arrows point only down --
+no central theory cites the pair -- so below the seam the ledger is
+representation-free: `file`, `frontmatter`, `path` appearing in a
+lower theory is a filing error, not color.
+
 The spine, with auxiliaries feeding in:
 
 ```
@@ -73,19 +82,21 @@ history ──► record ──► reference ──► standing ──► genre 
     │        └──► protocol ┼─────────────┼────────────────────┘     question
 fixpoint ──────────────────┴─────────────┘
 purpose ───► view, standing, genre, protocol
+history, record, reference, standing, view, protocol, genre
+    └────────────────► data-structures ──► data-representation
 ```
 
 That picture is hand-cut, and is the only hand copy left: the poset
-itself is the `why:` lines of the twelve `<theory>.md` files, and
+itself is the `why:` lines of the fourteen `<theory>.md` files, and
 `engine_tower/tests/test_tower.py` reads it from there to hold the
 module import graph to it.
 
 `fleet` is the throwaway theory; `question` is the historical one --
 the design problems the ledger was bought to settle, with their open
 residues, `question.md` the stamped synthesis. Theorems stand `bare`
-(`fixpoint`, plus `REACH`, `FRESH_COST`, `TAINT`, `WEIGHT`,
-`ASYMMETRY`); `OBLIGATION` and `MERGE` stand `open` -- a theorem
-owed and a law missing. The regime (`purpose`) and the claims the
+(`fixpoint`, plus `REACH`, `FRESH_COST`, `TAINT`, `WEIGHT`);
+`OBLIGATION`, `MERGE`, and `RETRACTION` stand `open` -- a theorem
+owed and two laws missing. The regime (`purpose`) and the claims the
 user ruled in the 2026-08-09 act review stand `user`. Everything
 else is signed `+`: the agent's judgment, veto invited, silence is
 consent -- a resting state, not a queue awaiting signatures
