@@ -165,6 +165,13 @@ Repo-level list. Skill-scoped work lives in each skill's own
         Re-check what the worktree holds before sending any turn -- the
         seal is a root commit precisely so `git log` stays uninformative,
         and each peer commit erodes that
+  - [ ] Superseded pointers still exist and still resolve: branch
+        `strata-replication-run`, tag `run/pre-080`, session
+        `0476a1a8-b186-4988-8deb-83853c353acb`. The 2026-08-10 and
+        2026-08-11 devlogs name them, correctly for their dates. This
+        item is the current one; follow it, not them. Delete the branch
+        and tag once the re-run has happened (they are shared refs, so
+        that wants the operator's word)
 - [ ] Decide the single-sigil seam (strata.claims): STANCE (user, 32b1a76)
       rules that a one-place "the standing" is a category error the schema
       must not encode, yet claim frontmatter holds exactly one `standing:`
