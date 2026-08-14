@@ -94,9 +94,9 @@ module import graph to it.
 `fleet` is the throwaway theory; `question` is the historical one --
 the design problems the ledger was bought to settle, with their open
 residues, `question.md` the stamped synthesis. Theorems stand `bare`
-(`fixpoint`, plus `REACH`, `FRESH_COST`, `TAINT`, `WEIGHT`,
-`ASYMMETRY`); `OBLIGATION` and `MERGE` stand `open` -- a theorem
-owed and a law missing. The regime (`purpose`) and the claims the
+(`fixpoint`, plus `REACH`, `FRESH_COST`, `TAINT`, `WEIGHT`);
+`OBLIGATION`, `MERGE`, and `RETRACTION` stand `open` -- a theorem
+owed and two laws missing. The regime (`purpose`) and the claims the
 user ruled in the 2026-08-09 act review stand `user`. Everything
 else is signed `+`: the agent's judgment, veto invited, silence is
 consent -- a resting state, not a queue awaiting signatures
