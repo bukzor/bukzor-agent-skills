@@ -17,7 +17,7 @@ ontology:
   - approximation
   - interval
   - precision
-defeated-by: a misstatement of settled mathematics -- fixed by restating, not by argument
+stale-when: a misstatement of settled mathematics -- fixed by restating, not by argument
 ---
 
 # Fixpoint

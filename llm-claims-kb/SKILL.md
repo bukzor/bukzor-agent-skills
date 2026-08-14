@@ -18,7 +18,7 @@ restated here; this skill maps it onto a directory.
 | `<-` arrows | `why:` -- file-relative paths; never a copied sigil, standing lives at the definition site |
 | `-- certified(CHECK)` | `verify:` |
 | restating a label | editing the file; the git diff's `-` is the strikethrough |
-| a theory | a claim like any other -- `<theory>.md`, carrying `ontology:` and `defeated-by:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
+| a theory | a claim like any other -- `<theory>.md`, carrying `ontology:` and `stale-when:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
 | indentation | the tree: what a `.kb/` holds is nested under the claim naming it, at any depth |
 | `claim list` | `ls`; the standing scan is `grep -rH '^standing:' <name>.claims.kb/`, recursive so theories answer too |
 

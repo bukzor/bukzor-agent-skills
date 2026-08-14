@@ -1,7 +1,7 @@
 ---
 label: FRESH_COST
 standing: bare
-authority: "incremental view maintenance; CAP (Gilbert & Lynch 2002) is the partitioned instance, in vocabulary this theory does not admit"
+authority: "incremental view maintenance"
 why:
   - a-cache-is-lawful-iff-the-triangle-commutes.md
   - ../purpose.kb/the-corpus-outgrows-any-reader.md

@@ -9,7 +9,7 @@ def test_state_is_a_monoid_action():  # FOLD
 
 
 def test_a_branch_has_no_canonical_fold():  # MERGE
-    """WORD keeps a word and FOLD is defined on one, so a store that
+    """LOG keeps a word and FOLD is defined on one, so a store that
     branches is outside both.  Two branches off a common prefix that
     write the same key admit two linearizations, and they fold to
     different states -- the merge's state is not determined by the
@@ -22,7 +22,7 @@ def test_a_branch_has_no_canonical_fold():  # MERGE
     assert state(prefix + left + right) != state(prefix + right + left)
 
 
-def test_any_prefix_is_queryable():  # WORD
+def test_any_prefix_is_queryable():  # LOG
     h = H1 + H2
     assert state(h[:1]) == {"m": {"text": "mission v1"}}
     assert state(h)["m"] == {"text": "mission v2"}

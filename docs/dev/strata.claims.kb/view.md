@@ -16,7 +16,7 @@ ontology:
   - stamp
   - reader
   - diff
-defeated-by: a reader that can afford to recompute every read -- then caches, and everything priced here, vanish
+stale-when: a reader that can afford to recompute every read -- then caches, and everything priced here, vanish
 ---
 
 # View

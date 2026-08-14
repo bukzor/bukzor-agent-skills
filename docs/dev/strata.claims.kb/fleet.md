@@ -10,7 +10,7 @@ ontology:
   - ACS
   - llm-stet
   - and their internal names
-defeated-by: a named system changing in a way that breaks a recorded correspondence -- not any change at all; the correspondences are the content, and one can outlive the system it was read off
+stale-when: a named system changing in a way that breaks a recorded correspondence -- not any change at all; the correspondences are the content, and one can outlive the system it was read off
 ---
 
 # Fleet

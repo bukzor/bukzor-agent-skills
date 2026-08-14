@@ -102,10 +102,10 @@ def claim_line(claim: Claim, root: Path, labels: Mapping[str, str]) -> str:
     """One claim, one line without its bullet -- the caller owns the indent.
 
     A defining claim differs only in what it has to suffix: the word list it
-    stipulates, and what would retire the theory whole.
+    stipulates, and the observation that would void its stamp.
     """
     notes = [f"ontology: {', '.join(claim.ontology)}"] if claim.ontology else []
-    notes += [f"defeated by {claim.defeater}"] if claim.defeater else []
+    notes += [f"stale when {claim.stale_when}"] if claim.stale_when else []
     notes += [f"certified({claim.verify})"] if claim.verify else []
     notes += [f"authority: {claim.authority}"] if claim.authority else []
     suffix = "".join(f" -- {note}" for note in notes)

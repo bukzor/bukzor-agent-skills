@@ -4,7 +4,7 @@ standing: agent
 why:
   - status-is-a-poset-with-a-fibered-top.md
   - ../reference.kb/reachability-is-a-least-fixpoint.md
-verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_phi_is_monotone_on_an_instance
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_phi_is_monotone_on_an_instance tests/test_standing.py::test_premises_are_read_off_the_reference_structure
 ---
 
 # Evidence Induces a Monotone Operator

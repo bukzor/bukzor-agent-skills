@@ -3,7 +3,7 @@
 The update alphabet U; a history is a word in the free monoid U*.
 State is a map K -> Payload under override (last writer wins);
 `state` is the unique monoid action extending it.  Nothing here knows
-content.  [WORD, FOLD]
+content.  [LOG, FOLD]
 """
 
 from collections.abc import Mapping

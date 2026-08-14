@@ -18,7 +18,7 @@ ontology:
   - translation
   - instance
   - motivation
-defeated-by: a genre that must re-legislate a prior theory's standing to exist -- conservativity failing in practice, not just in principle
+stale-when: a genre that must re-legislate a prior theory's standing to exist -- conservativity failing in practice, not just in principle
 ---
 
 # Genre
