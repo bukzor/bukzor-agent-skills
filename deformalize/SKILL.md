@@ -14,6 +14,16 @@ This is not a port; it is a probe. Reification -- in any of its forms,
 prose or code -- is where a formal account's slid-over seams surface, so
 what breaks in the source is the primary finding, not a footnote.
 
+> **IMPERATIVE:**
+>
+> Your FIRST action when this skill loads MUST be:
+> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+>
+> That listing is an index of triggers: each filename names the occasion to
+> read it. Walk it while planning, before ANY action, and read every entry
+> whose trigger matches the work at hand — `when/` entries fire the moment
+> the condition holds, not on some later pass.
+
 ## The formal side stays formal
 
 `/formalize` delivers a formal account and keeps it formal -- the
@@ -37,23 +47,11 @@ never rewrites the source; it adds a reading path beside it.
 Deliver both per `Skill(llm-claims)`; file to `Skill(llm-claims-kb)`
 only once the account earns keeping.
 
-## Escalating to a runnable witness
+## Escalating to code
 
 Plain-old-Python is the third rung, reached when a claim needs a demo
-that would fail if the claim were false -- not the default path.
-
-1. **Plain-old-Python.** Boring, obvious code: stdlib-flavored,
-   dataclasses and functions, names in plain words. Jargon lives in the
-   docstring at its definition site, never in the API -- the glossary
-   above is the reading aid; the code doesn't re-derive it.
-2. **The file order is the theory order.** Each section uses only names
-   defined above it, so truncating at any section banner leaves a
-   working program. In multi-module form: the import graph respects the
-   source's poset, and a test checks it.
-3. **One law, one check.** Each law becomes the smallest demo or test
-   that would fail if the law were false -- a witness, not a
-   restatement. A law you can't check in ~50 lines isn't thereby wrong,
-   but say why not, in place.
+that would fail if the claim were false -- not the default path. When
+code is actually asked for: `SKILL.kb/must-read.kb/when/asked-for-code.md`.
 
 ## The review step
 
@@ -66,19 +64,10 @@ direction; a mismatch smoothed over is a finding destroyed. Expect the
 strict-reading failures to be the valuable ones: a demo that only passes
 under a weaker premise has found the source's missing premise.
 
-## Lifecycle (code only)
-
-Draft code in `trash/` -- it is a sketch until it survives the review
-step. A `verify:` target cannot live in scratch: if the witness earns
-keeping, promote it to a real project home (pyproject, real modules,
-real test suite), name its tests after the claims they witness, and
-wire the source's `verify:` lines to them. Promotion is itself an
-escalation of enforcement grade, and expect that escalation to find
-another round of cracks -- budget for it.
-
-The glossary and the successor theory have no such lifecycle -- they are
-ready the moment they are written, and filing them to disk is the same
-optional step `/formalize`'s own output takes.
+The glossary and the successor theory have no lifecycle of their own --
+they are ready the moment they are written, and filing them to disk is
+the same optional step `/formalize`'s own output takes. Code has one;
+see the trigger file above.
 
 The reasoning behind everything above, and the place to argue with it:
 `design.claims.md`.
