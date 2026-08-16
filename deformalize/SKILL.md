@@ -64,6 +64,12 @@ direction; a mismatch smoothed over is a finding destroyed. Expect the
 strict-reading failures to be the valuable ones: a demo that only passes
 under a weaker premise has found the source's missing premise.
 
+A witness produced blind -- by a run, or a person, with no view of the
+account it's checked against -- finds more than a witness the same run
+produces and then reviews itself. Where one is available cheaply, prefer
+it; where it isn't, self-review is still worth running, just discount
+its verdict accordingly.
+
 The glossary and the successor theory have no lifecycle of their own --
 they are ready the moment they are written, and filing them to disk is
 the same optional step `/formalize`'s own output takes. Code has one;

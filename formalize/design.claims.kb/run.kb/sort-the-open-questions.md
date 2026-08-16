@@ -19,3 +19,9 @@ to report by name.
 The declined form was stating each question twice, once as experienced
 and once as well-posed. The content survives in the three piles; the
 ritual of the double statement does not.
+
+File the sorted questions as their own theory, not an appendix to
+whichever theory happened to raise them. A reader who wants to know what
+the whole design was even for should find that in one place, and a
+theory of questions is what lets a later run add to it without
+re-deriving where it goes.

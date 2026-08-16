@@ -91,7 +91,9 @@ Then work the survivors, in order:
    piles: the ones the formalism decides, the ones it dissolves, and the
    ones that stay open. The dissolved pile is the valuable one -- a
    question that stops being askable was a confusion, and its
-   disappearance is a result worth reporting by name.
+   disappearance is a result worth reporting by name. File the sorted
+   questions as their own theory, not an appendix to whichever claim
+   happened to raise them.
 8. **Deliver** the ledger per `Skill(llm-claims)`: one claim per line,
    theories named for the ontology they admit, sigils signing the judge.
    That format lands the account at its own right size. Filing it to an
