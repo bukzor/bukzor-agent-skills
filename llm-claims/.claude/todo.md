@@ -16,11 +16,22 @@
       attention, poset, replay + provenance-map convention), distilled
       from the prototype.llm-stet serialization audit; details the
       rebase plan's "ledger gains lint" leg
+- [ ] Settle how a ledger asserts decided-but-unbuilt intent (the
+      `llm-discourse-graph` `TODO!` analogue). `?` covers *open*
+      questions, so what is missing is tense on a claim nobody disputes
+      -- AUTOCHECK, EXTRACT in `formalize/design.claims.kb/purpose.kb/`,
+      recorded today only as a sentence of body prose. Agent proposal,
+      unruled: a token between sigil and colon, `AUTOCHECK! todo: ...`,
+      keeping the label stable across the status change (a `-TODO`
+      suffix would break every `<-` reference on the day it ships).
+      Needs a `.kb` counterpart too -- there is no frontmatter field for
+      it, and `verify:` is the nearest neighbour
 - [ ] USER: re-paste the SKILL.md Core block into claude.ai preferences
       (verbatim-shared; pending since 2026-07-24 — the `+` sigil, the
       governance line, the open-claims policy, and a worked example in
       place of the self-describing one; 2026-07-28 — `<-` no longer
-      claims "entailment", per `SKILL.kb/must-read.kb/when/writing-or-reading-an-arrow.md`)
+      claims "entailment", per `SKILL.kb/must-read.kb/when/writing-or-reading-an-arrow.md`;
+      2026-08-15 — policy 4, every render is a patch)
 - [ ] Give `good-smells.kb/` something it can fail. All 11 entries were
       read off the finished notation in one conversation, so the notation
       satisfies every one by construction and 8 stand at `open`. A

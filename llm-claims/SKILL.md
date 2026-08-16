@@ -23,6 +23,7 @@ Policy:
 1. Claim set: union over chat, last wins.
 2. Every claim, both parties: sound, open, or retracted. Open claims are debt, priced by what rests on them.
 3. Governance is one line over labels: `claim accept MULTIBYTE` re-signs it `MULTIBYTE!`
+4. Every render is a patch: restating a claim supersedes it, unmentioned claims stand. List what changed and stop.
 
 <!-- /Core -->
 
@@ -126,6 +127,20 @@ claims got long.
 
 Auxiliary theories, naming, and words that recur across theories:
 `SKILL.kb/theories.md`.
+
+## Commentary
+
+The claim line is the artifact; anything you want to say *about* it goes
+in a sub-bullet beneath it, opened with `//`. Marginal notes take no
+label and no sigil, and they do not travel with the claim when it is
+re-rendered, filed, or flushed.
+
+* XY!: the claim, stated for a reader who was not there
+  * // why I read the antecedent this way; veto if I picked wrong
+
+The mark keeps indentation unambiguous -- a labelled child is
+containment, a `//` child is commentary -- and it greps: `grep -n '\* //'`
+finds every note in a render.
 
 ## Commands
 

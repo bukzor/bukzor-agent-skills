@@ -1,11 +1,7 @@
-# Before Emitting a Partial Ledger
+# Before Showing Revisions to a Ledger
 
-Union-last-wins makes every render a patch: restating a claim
-supersedes it, and unmentioned claims stand. So you need not render
-the whole ledger to update part of it -- list the claims that changed
-and stop.
-
-Two consequences:
+`SKILL.md`'s core states the rule -- every render is a patch. Two
+consequences for the writer:
 
 - Silence endorses the last version. If a claim no longer holds, say
   so -- revise it or strike it; omitting it does not retract it.
