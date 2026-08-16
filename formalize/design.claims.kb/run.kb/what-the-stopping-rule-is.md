@@ -1,26 +1,20 @@
 ---
 label: STOP
-standing: open
+standing: user
 why:
   - token-spend-is-a-real-goal.md
 ---
 
-# What the Stopping Rule Is
+# ~~What the Stopping Rule Is~~ -- retracted
 
-A run has a stopping rule, and has check-ins. What either one *is*
-remains open.
+`/formalize` runs inside an interactive session, and the session already
+supplies both halves this claim asked about: when a run is done (the
+operator ends it) and check-ins (the operator can interject at any
+point). There was never a `/formalize`-specific stopping mechanism to
+design -- the question presupposed one and dissolved once that
+presupposition was named.
 
-Settled: that they exist. A procedure with no stated end runs until the
-context does, which spends without deciding anything, and check-ins are
-the mechanism by which the owner can redirect a run before that.
-
-Open, and what an answer would settle:
-
-- **The stopping rule.** What observation tells a run it is done. Any
-  answer immediately determines whether a run can stop mid-procedure
-  with a partial basis, or must reach the end.
-- **The check-ins.** Where they fall, and which are required against
-  which are offered. An answer determines whether `/formalize` can run
-  unattended.
-
-Parked at the owner's word, 2026-08-15.
+Ruled 2026-08-16: *"it's finished when i decide to end the interactive
+session. It should go without saying: there's no need or value added by
+documenting such in SKILL.md."* Nothing else in this ledger cited `STOP`
+as a premise, so nothing propagates from the retraction.

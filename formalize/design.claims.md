@@ -62,7 +62,10 @@ grep -rl 'standing: open' design.claims.kb/   # nobody has stood behind it
 grep -rl 'standing: agent' design.claims.kb/  # agent-signed, veto invited
 ```
 
-One claim stands `open`: `run.kb/what-the-stopping-rule-is.md`, parked at
-the owner's word on 2026-08-15. The `agent` set is the four theory
-headers plus two claims of `run.kb/` -- each a judgment made on the
-owner's behalf that the owner may never have read.
+No claim stands `open`. `STOP` (`run.kb/what-the-stopping-rule-is.md`)
+was retracted 2026-08-16 -- it presupposed `/formalize` needed its own
+stopping mechanism distinct from the interactive session running it, and
+the owner's answer dissolved that presupposition rather than settling
+it. The `agent` set is the four theory headers plus two claims of
+`run.kb/` -- each a judgment made on the owner's behalf that the owner
+may never have read.
