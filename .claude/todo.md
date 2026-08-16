@@ -193,7 +193,11 @@ Repo-level list. Skill-scoped work lives in each skill's own
       verdict map) and CONTINUUM names the un-quotiented escape valve
       (llm-discourse-graph). Goes live the first time two assessors
       disagree about one claim -- then: multi-assessor frontmatter, or
-      port that claim to the discourse-graph presentation
+      port that claim to the discourse-graph presentation. Cited from
+      `.claude/todo.kb/2026-08-16-000-Reconcile-llm-claims-kb-s-standing-scheme-with-PRMS-s-stmt-proof-and-STANCE-s-assessor-relativity.md`
+      as a constraint on that redesign, not folded in -- this seam is
+      about validity being assessor-relative, a different question from
+      what verdicts a single assessor's judgment can carry
 - [ ] Decide whether strata.claims.kb's transitively-implied `prior:`
       entries are meant: `tred` drops five of eighteen (purpose->genre,
       purpose->standing, purpose->protocol, history->protocol,
@@ -276,7 +280,12 @@ Repo-level list. Skill-scoped work lives in each skill's own
       specialization vs a fork; label-form `why:` entries; `stmt:`/`proof:`
       as the strong form of `verify:`. Counterpart item (field-name
       convergence sketch) in
-      `prototype.personal-reasoning-management/.claude/todo.md`
+      `prototype.personal-reasoning-management/.claude/todo.md`.
+      Superseded as the tracking item by
+      `.claude/todo.kb/2026-08-16-000-Reconcile-llm-claims-kb-s-standing-scheme-with-PRMS-s-stmt-proof-and-STANCE-s-assessor-relativity.md`,
+      which also folds in the `retracted`/`rejected`/`dissolved`
+      verdict gap and `STANCE`'s assessor-relativity -- this line stays
+      as the PRMS-side pointer
 - [x] Make `glob_prune` earn its name (a real `os.walk` prune instead of a
       full glob plus two filters) -- measured 2026-08-13 and dropped.
       Discovery is 7% of runtime: the glob costs 144ms of a ~2000ms run,
