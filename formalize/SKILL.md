@@ -12,6 +12,16 @@ relating them. Deliver them as a ledger, per `Skill(llm-claims)`.
 The posture is the load-bearing part. Everything below is a way of
 holding it under pressure.
 
+> **IMPERATIVE:**
+>
+> Your FIRST action when this skill loads MUST be:
+> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+>
+> That listing is an index of triggers: each filename names the occasion to
+> read it. Walk it while planning, before ANY action, and read every entry
+> whose trigger matches the work at hand — `when/` entries fire the moment
+> the condition holds, not on some later pass.
+
 ## Why, before how
 
 A basis pays the moment it exists: open questions clarify and tied
@@ -99,6 +109,12 @@ Then work the survivors, in order:
    That format lands the account at its own right size. Filing it to an
    on-disk `*.claims.kb/` is optional post-processing, per
    `Skill(llm-claims-kb)`.
+
+   Open with a Layer 0: one sentence the whole basis reduces to, plus
+   the small number of named laws it refines into -- a further
+   subtraction of the basis, not a second artifact. Say so if the
+   design has no true one-sentence reduction; a forced one is worse
+   than none.
 
 ## Throughout
 
