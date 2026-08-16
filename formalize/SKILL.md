@@ -1,59 +1,119 @@
 ---
 name: formalize
-description: "Agent MUST load when asked to find the mathematical structure in a body of informal work, to distill designs/prose/schemas into theories of claims, or to test whether a named structure (category, lattice, monad) actually holds of the data."
+description: "Agent MUST load when asked to find the mathematical structure in a body of informal work, to boil a design down to its fundamental claims, or to settle a design question or a tied decision by formalizing what the design already commits to."
 ---
 
 # /formalize \<paths\>
 
-Take the ideas represented at the paths and produce their formal
-account: a well-factored set of theories-of-claims, filed per
-`Skill(llm-claims-kb)`.
+Take the work at the paths into formal-theory-design-expert posture, and
+boil it down to its fundamental units: claims, and the structures
+relating them. Deliver them as a ledger, per `Skill(llm-claims)`.
+
+The posture is the load-bearing part. Everything below is a way of
+holding it under pressure.
 
 ## Why, before how
 
-The account is a retention device, not an ornament: its owner will
-have "good ideas" that restructure the system, and the properties
-worth keeping must survive restructurings nobody re-verifies by hand.
-A structure earns its place by what it lets us keep. Judge every step
-below by that.
+A basis pays the moment it exists: open questions clarify and tied
+decisions break for free, as soon as you can see what the design
+actually commits to. It keeps paying afterward, because a structure that
+pins the design down holds a property settled across a change, instead
+of surrendering it to be re-derived by hand.
+
+Judge every step below by the six things the basis is bought for:
+
+1. find and resolve inconsistencies;
+2. find the minimal basis, and cut the complexity it shows unnecessary;
+3. bring a new agent to deep understanding fast;
+4. discuss a proposed change rigorously -- by which standing claims it
+   breaks;
+5. eventually, check a proposed change automatically;
+6. eventually, extract a known-good implementation.
+
+The last two are unbuilt. They still inform: a choice that forecloses
+mechanization is worth a second look.
 
 ## The bar
 
-Naming a structure -- a category, a lattice, a monad -- is worth
-nothing on its own. An identification carries: the carrier, the
-operations, the laws they satisfy, one smallest instance drawn from
-the data, and the observation that would kill it. If the laws fail on
-the data, "there is no structure here" is a result; say it plainly. A
-citation is not an exhibit.
+An identification cashes out as five things, stated in place:
+
+- what the things are;
+- what operations act on them;
+- what must hold of those operations;
+- one smallest example, drawn from the actual data;
+- **stale when** -- the condition under which the claim stops holding.
+
+Anything short of five is a name with an argument attached, and names
+transfer nothing. A citation proves the structure exists somewhere; it
+leaves open whether it holds here.
+
+The ontology comes from schemas and data. Prose says what the author
+meant to build, so read it for motivation -- and where the two disagree,
+report that, with the ontology still following the data.
+
+When the laws fail, ship the result: *this specific structure is not
+here*, for the candidates you actually tried. It saves the next agent
+from re-conjecturing them, and it usually localizes the offending part
+of the design.
+
+`stale when` earns its place because one condition serves three uses:
+against today's data it finds inconsistencies; against a proposed change
+it predicts breakage; and it tells a later agent which claims a change
+obliges them to re-check.
 
 ## Procedure
 
-1. **Survey** the paths wide before framing anything. Schemas and
-   data carry the actual ontology; prose carries only the motivation.
-   Report the recurring shapes, the tensions, and the places that
-   itch before theorizing. Delegate the breadth if that is cheaper.
-2. **Conjecture** freely: several candidate structures (five is a
-   floor), cheap sketches only, each meeting the bar above. At least
-   one should feel like a reach -- a list of safe picks is hiding the
-   good conjecture. Then kill your own weak ones and say what killed
-   each; survivors get worked in full.
-3. **Stratify.** The subject usually has layers, and a claim true of
-   the most generic layer may miss richer structure above it -- or be
-   false there. Say what makes a level a level, what relation orders
-   them, and which claims survive at which level; genericity and
-   structure trade against each other, so locate every claim on that
-   trade. Where one level's structure is definable from the level
-   below, say so -- that is load-bearing.
-4. **Boil down** to a one-page picture. State what you
-   compartmentalized away and what each abstraction costs; a
-   simplification that drops a real obligation is a bug.
-5. **Crystallize the questions** the work was bought to settle --
-   each stated twice, as experienced and as well-posed (often
-   different questions; the difference is a finding) -- then which
-   claims settle each, and what residue stays open.
-6. **File it** per `Skill(llm-claims-kb)`: one claim per file,
-   theories named (never numbered), each collection's `CLAUDE.md`
-   carrying `prior:`/`ontology:`/`defeated by:`. Auxiliary and
-   sub-theories are encouraged wherever one lets a citing theory
-   argue in one sentence. The questions from step 5 are themselves a
-   theory. The entry-point `.md` carries the poset and the picture.
+1. **Survey** wide before framing anything. Report the recurring shapes,
+   the tensions, and the places that itch -- before theorizing. The
+   itches are the best conjecture seeds you will get. Delegate breadth
+   to subagents; keep the judgment.
+2. **Conjecture** several candidate structures, cheap sketches, each
+   meeting the bar. Keep going while new candidates still change the
+   picture. Then kill your own, and say what killed each.
+3. **Stratify.** Designs have layers, and a claim's truth is relative to
+   the level it is stated at. Say what makes a level a level, and which
+   claims survive at which. Where an upper level is definable from the
+   level below, say so -- that is where structure is inherited.
+
+Then work the survivors, in order:
+
+4. **Hunt inconsistencies.** Evaluate each claim's staleness condition
+   against the data and against the other claims. Adjudicate what you
+   find, out loud.
+5. **Reduce.** For each claim, ask what still stands if it goes. A claim
+   the others entail is a consequence; record it as one. A claim nothing
+   else needs is a candidate for cutting -- along with the part of the
+   design it was accounting for.
+6. **Elaborate.** Read each claim and ask what a program written from it
+   alone would do. Where that is underdetermined, the design is
+   underspecified there, and that is a finding.
+7. **Sort the questions** the work was bought to settle into three
+   piles: the ones the formalism decides, the ones it dissolves, and the
+   ones that stay open. The dissolved pile is the valuable one -- a
+   question that stops being askable was a confusion, and its
+   disappearance is a result worth reporting by name.
+8. **Deliver** the ledger per `Skill(llm-claims)`: one claim per line,
+   theories named for the ontology they admit, sigils signing the judge.
+   That format lands the account at its own right size. Filing it to an
+   on-disk `*.claims.kb/` is optional post-processing, per
+   `Skill(llm-claims-kb)`.
+
+## Throughout
+
+- **Look for a simpler formalism of equal value**, periodically. The
+  good simplification is usually invisible at first framing and obvious
+  two steps later, once the structure has met real claims.
+- **Unify where the cost is equal.** One concept beats two: it halves
+  what a reader carries, and two notions held apart never reveal the law
+  they both obey.
+- **Spend deliberately.** Tokens are a real budget, traded against
+  thoroughness. Say when you are buying depth.
+
+## Handoff
+
+Stay formal. The formal vocabulary is what lets a claim pin anything
+down; `/deformalize` takes this output and adds the glossary and the
+plain-English successor theories that make it readable.
+
+The reasoning behind everything above, and the place to argue with it:
+`design.claims.md`.

@@ -5,6 +5,20 @@ managed-by: Skill(llm-subtask)
 Repo-level list. Skill-scoped work lives in each skill's own
 `.claude/todo.md`; the breadcrumbs below point at every open list.
 
+- [ ] `llm-claims-kb`'s `why:` resolution has no cross-ledger case:
+      `claim_id()` computes every id relative to the citing ledger's own
+      parent directory, so a `why:` path that climbs out to a sibling
+      skill's `.claims.kb/` (e.g. `formalize/` citing `deformalize/`)
+      reports as dangling even though the file exists and the path
+      resolves on disk. Found 2026-08-15 wiring the `/formalize` ↔
+      `/deformalize` seam — worked around by dropping those four `why:`
+      entries to prose-only backtick paths (non-normative per
+      `Skill(llm-claims-kb)`'s own rule), so nothing is broken, but the
+      structural graph has no edge for a real cross-skill dependency.
+      Needs a design decision before fixing: what a cross-ledger claim id
+      looks like (ledger-qualified?), and whether `llm-claims-kb-graph`
+      draws one drawing across ledgers or leaves the seam undrawn by
+      design
 - [x] T2/v2.2: land the core-and-classes rework of design-next.kb — brief:
       .claude/todo.kb/2026-07-12-000-Land-v2-2-core-and-classes-rework--T2-.md
   - [x] HAIKU (mechanical, confirmed 2026-07-11): genre→class rename sweep
