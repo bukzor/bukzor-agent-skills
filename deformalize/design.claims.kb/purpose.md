@@ -8,6 +8,8 @@ ontology:
   - finding
   - job
   - seam
+  - witness
+  - blind
 stale-when: a run whose output is judged for taste rather than for what it breaks
 ---
 

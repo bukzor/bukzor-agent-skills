@@ -26,6 +26,9 @@ ontology:
   - indentation
   - containment
   - nesting
+  - render
+  - negation
+  - mark
 stale-when: an inference relation cheap enough to check at entry
 ---
 
