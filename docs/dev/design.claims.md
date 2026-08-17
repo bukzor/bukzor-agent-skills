@@ -10,7 +10,7 @@ ontology:
   - ruling
   - ADR
 stale-when: a commitment that binds one skill only -- it belongs in that skill's own ledger, not here
-last-updated: "2026-08-09"
+last-updated: "2026-08-17"
 ---
 
 # The fleet's design, as a ledger

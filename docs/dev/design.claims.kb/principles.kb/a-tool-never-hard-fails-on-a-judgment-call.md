@@ -3,7 +3,7 @@ label: ADVISORY
 standing: agent
 force: must
 why:
-  - ../../../llm-claims/.claude/todo.kb/2026-08-08-000-Helper-command-family-bin-llm-claim-ledger.md
+  - ../../../../llm-claims/.claude/todo.kb/2026-08-08-000-Helper-command-family-bin-llm-claim-ledger.md
 ---
 
 # A Tool Never Hard-Fails on a Judgment Call

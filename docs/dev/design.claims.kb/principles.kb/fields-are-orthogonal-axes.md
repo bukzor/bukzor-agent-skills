@@ -3,9 +3,9 @@ label: ORTHOGONAL
 standing: user
 force: should
 why:
-  - ../../../llm-claims/design.claims.kb/notation.kb/a-verdict-names-what-the-judge-ruled.md
-  - ../strata.claims.kb/standing.kb/standing-is-standing-according-to.md
-  - ../design.claims.kb/extension.kb/what-need-does-a-stored-likelihood-serve.md
+  - ../../../../llm-claims/design.claims.kb/notation.kb/a-verdict-names-what-the-judge-ruled.md
+  - ../../strata.claims.kb/standing.kb/standing-is-standing-according-to.md
+  - ../extension.kb/what-need-does-a-stored-likelihood-serve.md
 authority: "user, 2026-08-17: 'we use orthogonality as the heuristic ... i'm only affirming data engineering best practice here'"
 ---
 

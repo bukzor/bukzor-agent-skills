@@ -3,8 +3,8 @@ label: REFORM
 standing: agent
 force: should
 why:
-  - ../design.claims.kb/extension.kb/what-becomes-of-llm-discourse-graph.md
-  - ../design.claims.kb/authorship.kb/one-skill-beats-two-that-overlap.md
+  - ../extension.kb/what-becomes-of-llm-discourse-graph.md
+  - ../authorship.kb/one-skill-beats-two-that-overlap.md
 authority: "user marginalia in PARSIMONY: maintenance, understandability, usability nightmare"
 ---
 

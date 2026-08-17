@@ -3,9 +3,9 @@ label: ROUTING
 standing: agent
 force: must
 why:
-  - ../design.claims.kb/extension.kb/where-the-migration-guide-and-its-trigger-live.md
-  - ../design.claims.kb/extension.kb/what-the-successor-is-called.md
-  - ../design.claims.kb/extension.kb/what-becomes-of-llm-discourse-graph.kb/delete-it-outright.md
+  - ../extension.kb/where-the-migration-guide-and-its-trigger-live.md
+  - ../extension.kb/what-the-successor-is-called.md
+  - ../extension.kb/what-becomes-of-llm-discourse-graph.kb/delete-it-outright.md
 ---
 
 # Whoever Meets the Old Form Is Routed

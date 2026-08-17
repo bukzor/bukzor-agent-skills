@@ -3,8 +3,8 @@ label: WARRANT
 standing: agent
 force: must
 why:
-  - ../design.claims.kb/extension.kb/do-most-extensions-want-both-modalities.md
-  - ../design.claims.kb/extension.kb/what-the-successor-is-called.md
+  - ../extension.kb/do-most-extensions-want-both-modalities.md
+  - ../extension.kb/what-the-successor-is-called.md
 ---
 
 # A Claim Is Worth Exactly Its Evidence

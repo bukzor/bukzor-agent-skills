@@ -3,9 +3,9 @@ label: APPEND_ONLY
 standing: agent
 force: must
 why:
-  - ../../../llm-claims/design.claims.kb/notation.kb/a-verdict-names-what-the-judge-ruled.md
-  - ../design.claims.kb/extension.kb/migration-plan.md
-  - ../design.claims.kb/extension.kb/what-becomes-of-llm-discourse-graph.kb/delete-it-outright.md
+  - ../../../../llm-claims/design.claims.kb/notation.kb/a-verdict-names-what-the-judge-ruled.md
+  - ../extension.kb/migration-plan.md
+  - ../extension.kb/what-becomes-of-llm-discourse-graph.kb/delete-it-outright.md
 ---
 
 # The Record Only Grows
