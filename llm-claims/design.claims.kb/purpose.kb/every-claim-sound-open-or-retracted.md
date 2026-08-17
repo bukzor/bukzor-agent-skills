@@ -5,9 +5,9 @@ standing: user
 
 # Every Claim Sound, Open, or Retracted
 
-The one invariant. At any moment, for both parties, each claim is
-believed sound, openly unsettled, or withdrawn — and never in the fourth
-state, the common one, where nobody remembers which.
+The one invariant. At any moment, for anyone reading it, each claim
+is believed sound, openly unsettled, or withdrawn — and never in the
+fourth state, the common one, where nobody remembers which.
 
 Everything else in the design is instrumental to holding it. A feature
 that does not help is decoration; a feature that lets a claim occupy the

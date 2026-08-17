@@ -1,6 +1,6 @@
 ---
 label: ASSESSOR
-standing: agent
+standing: user
 authority: "Habermas, validity claims redeemed within a discourse; fallibilism (Peirce, Popper)"
 ---
 

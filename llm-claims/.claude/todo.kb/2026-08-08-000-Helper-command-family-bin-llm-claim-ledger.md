@@ -64,6 +64,14 @@ vocabulary). Both are mechanical finds.
       designated last/throwaway theory; never a hard failure —
       confinement beyond label references is judgment, and the tool
       must not pretend otherwise
+- [ ] **assessor collision** — an entry carrying two `verify:` lines
+      or two certificates is one a single-valued `standing` cannot
+      express (STATUS's fibered top; SUGAR: the enum is sugar only
+      while a complete form underlies it). This is the tripwire for
+      the assessor-keyed standing work, which is deliberately
+      deferred until a real case appears: zero entries qualify as of
+      2026-08-16, so the check fires on the first one and the design
+      is not built speculatively
 
 ### `llm-claims-attention`
 

@@ -29,9 +29,8 @@ ruling has an ADR cites it as `authority:`.
 
 ## Theories
 
-One so far, a root: `authorship.md`, defining `authorship.kb/`. Each
-theory is the claim file beside its collection, so `ls` is the index
-and nothing here needs to restate it.
+Each theory is the claim file beside its collection, so `ls` is the
+index and nothing here needs to restate it.
 
 Roots are roots: claims here connect where a warrant is real, and
 stay disconnected where it is not.

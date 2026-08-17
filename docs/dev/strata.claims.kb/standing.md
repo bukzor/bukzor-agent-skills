@@ -10,6 +10,9 @@ ontology:
   - status
   - claim
   - evidence
+  - act
+  - occasion
+  - force
   - warrant
   - certificate
   - checker

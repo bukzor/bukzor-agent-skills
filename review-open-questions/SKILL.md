@@ -136,3 +136,17 @@ amended plan, compactly; execute on go.
 Rulings land in whatever register the work already keeps: claim-ledger
 signings (`Skill(llm-claims)`: accepted claims re-sign `!`),
 file edits, an ADR, a todo entry. The skill assumes none.
+
+Where the register is files, it is also the *presentation* medium:
+write the survivors into it, one file per decision, and let the chat
+message carry the tally and the path and nothing else. Prose review
+makes the owner quote your text back in order to rule on it -- toil
+for them, and their multi-part reply arrives detached from what it
+answered. On disk every ruling has an address, and they rule by
+editing in place: the verdict, plus marginalia in their own words
+wherever a rationale is worth keeping.
+
+Then adjudicate those edits rather than merely accepting them. A
+schematic edit the register's schema forbids is a ruling all the
+same: implement what it means in the register's own terms, and say
+plainly where you declined the literal form, and why.

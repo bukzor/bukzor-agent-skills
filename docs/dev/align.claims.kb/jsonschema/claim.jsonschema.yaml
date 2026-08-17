@@ -1,23 +1,38 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema
 $schema: "http://json-schema.org/draft-07/schema#"
-title: claim-ledger claim frontmatter
+title: align-census claim frontmatter
 description: >
-  One claim per file. The body states the claim and its reasons;
-  frontmatter carries the ledger label and the standing. Shared by
-  every theory in a ledger -- the theories differ in ontology, not in
-  shape.
-
-  A theory is defined by a claim like any other, `$THEORY.md` beside
-  the `$THEORY.kb/` holding the claims confined to it, so this schema
-  governs those too. The last three properties are theirs alone: an
-  ordinary claim carrying `ontology:` is a claim that wanted to be a
-  theory.
+  Fork of llm-claims-kb/jsonschema/claim.jsonschema.yaml (which forbids
+  unknown properties) extended with one field: `force`, imported from
+  llm-design-kb/jsonschema/technical-policy.jsonschema.yaml. Census
+  policies are imperatives; force grades how hard each one binds.
 type: object
 additionalProperties: false
 required:
   - label
   - standing
 properties:
+  force:
+    description: >
+      Normative force of this policy, as RFC 2119 requirement levels
+      (per llm-design-kb technical-policy). Negation lives in the
+      policy statement ("must not ..."), so there is no separate
+      must-not level. Omitted on open questions -- a question binds
+      nobody.
+    default: should
+    oneOf:
+      - const: must
+        description: >
+          Non-negotiable. Work that violates it is non-conforming;
+          there is no acceptable justification for deviating.
+      - const: should
+        description: >
+          Strong default. Deviation is permitted only with explicit,
+          recorded justification, weighed against the goal served.
+      - const: may
+        description: >
+          Preference / nice-to-have. Adopt when convenient; drop
+          without ceremony.
   label:
     description: >-
       Stable ledger label -- names the locus of contention, not the

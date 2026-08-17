@@ -13,8 +13,11 @@ The tower's load-bearing choices were reached independently in the
 prototypes. PRMS: `CLAIMS_ONLY`/`GENERIC_BASE` are the one-sort
 ruling whose payoff FREE_CONSERVE names; `LEAST_FIX` is COMPUTED;
 `PROJECTION` is the view triangle; `UNFORCED` is DEFEAT's query-time
-semantics; its theory headers state confinement and conservativity
-verbatim. ACS (`ideation.epistemics`): the abstract core's status
+semantics; its `stmt:`/`proof:` fields are `Skill(llm-claims-kb)`'s
+`verify:` at strong form -- obligating the checker to read a
+restatement of the claim's own content, not merely something
+correlated with it; its theory headers state confinement and
+conservativity verbatim. ACS (`ideation.epistemics`): the abstract core's status
 lattice is STATUS; its port parameter vector is the space of
 interpretations GRADE quantifies over; its port-comparison finding --
 zero core points die, only enforcement grade varies -- is GRADE
