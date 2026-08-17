@@ -5,6 +5,8 @@ managed-by: Skill(llm-subtask)
 Repo-level list. Skill-scoped work lives in each skill's own
 `.claude/todo.md`; the breadcrumbs below point at every open list.
 
+- [ ] Witness the act algebra (contravention fold, moot color, real-ledger
+      run) — brief: .claude/todo.kb/2026-08-17-000-Witness-the-act-algebra--contravention-fold-and-moot-color-in-engine-tower.md
 - [ ] `llm-claims-kb`'s `why:` resolution has no cross-ledger case:
       `claim_id()` computes every id relative to the citing ledger's own
       parent directory, so a `why:` path that climbs out to a sibling
