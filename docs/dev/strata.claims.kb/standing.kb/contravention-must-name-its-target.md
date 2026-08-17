@@ -6,6 +6,7 @@ why:
   - force-is-computed-never-asserted.md
   - an-act-is-a-bare-claim-of-the-record.md
   - ../purpose.kb/the-corpus-outgrows-any-reader.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "strikes or clash or litigation or annulment"
 ---
 
 # Contravention Must Name Its Target

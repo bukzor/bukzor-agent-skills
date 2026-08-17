@@ -5,6 +5,10 @@ obligated, then one incomparable top certified(c) per checker c (a
 fibered top).  Global state is L^E pointwise.  Evidence induces a
 monotone operator Phi; standing is DEFINED as its least fixpoint --
 computed, never stored.  [STATUS, OPERATOR, COMPUTED]
+
+Judgments enter the same base as acts -- bare claims of the record --
+and which acts count is computed per stance by the contravention
+fold, never asserted.  [ACT, FORCE, EXPLICIT]
 """
 
 from collections.abc import Callable, Mapping
@@ -79,14 +83,18 @@ def cite(evidence: frozenset[Evidence], quiver: frozenset[Edge]) -> frozenset[Ev
     edge set nothing reconciles.  [OPERATOR]"""
     return frozenset(
         Evidence(
-            ev.entry, ev.grants, frozenset(dst for src, dst in quiver if src == ev.entry)
+            ev.entry,
+            ev.grants,
+            frozenset(dst for src, dst in quiver if src == ev.entry),
         )
         for ev in evidence
     )
 
 
 type Standing = Mapping[str, Status]  # a point of L^E
-type Attack = tuple[str, str]  # (attacker, target) -- defeat evidence, not a reference edge
+type Attack = tuple[
+    str, str
+]  # (attacker, target) -- defeat evidence, not a reference edge
 
 
 def phi(
@@ -144,3 +152,123 @@ def grounded(
         )
 
     return iterate(step, (pin(frozenset()), pin(nodes)))
+
+
+@dataclass(frozen=True)
+class Act:
+    """One judgment: an assessor, a target, a verdict, an occasion --
+    a historical proposition, so it enters the base as a bare claim
+    [ACT].  `strikes` enumerates the addresses this act contravenes;
+    enumeration only, resolvable at evaluation time (contravention by
+    description is a syntax question, not answered here) [EXPLICIT]."""
+
+    assessor: str
+    target: str
+    verdict: str
+    occasion: int
+    strikes: frozenset[str] = frozenset()
+
+    @property
+    def address(self) -> str:
+        """Content-address: what the act already says -- assessor,
+        target, occasion.  The verdict is content at the address, not
+        part of it.  [REIFY]"""
+        return f"{self.assessor}:{self.target}:{self.occasion}"
+
+
+type Stance = Callable[[Act], bool]  # which acts a reader admits [STANCE]
+
+
+def effective(record: frozenset[Act], admits: Stance) -> frozenset[Act]:
+    """The contravention fold: the admitted acts, minus those an
+    admitted act names.  Recency resolves nothing -- unstruck clashing
+    acts both stand [EXPLICIT] -- and effectiveness is this
+    computation per stance, never a mark on any act [FORCE].
+    Same-issuer self-annulment is admitted by every stance: no reader
+    may hold an assessor to a commitment the assessor withdrew."""
+    by_address = {act.address: act for act in record}
+    assert len(by_address) == len(record), by_address  # one act per address [REIFY]
+    for act in record:
+        for target in act.strikes:
+            # act-on-act reference is well-founded: a target precedes
+            # the act that cites it [ACT]
+            assert by_address[target].occasion < act.occasion, (target, act)
+    struck = frozenset(
+        target
+        for act in record
+        for target in act.strikes
+        if admits(act) or act.assessor == by_address[target].assessor
+    )
+    return frozenset(act for act in record if admits(act) and act.address not in struck)
+
+
+def affirms(act: Act) -> bool:
+    """A verdict's polarity toward its target: `accepted` and
+    `certified` uphold, every other word takes standing away."""
+    return act.verdict in ("accepted", "certified")
+
+
+def contest(
+    acts: frozenset[Act], claims: frozenset[str]
+) -> tuple[frozenset[str], frozenset[str]]:
+    """Read the truth-order interval off an effective set: acts of
+    opposite polarity on one claim attack each other, a non-affirming
+    act attacks its claim, and `grounded` does the rest.  A clash
+    computes to the contested interval -- the same one whether the
+    clashing assessors are two or one.  [EXPLICIT, DEFEAT]"""
+    on = {c: frozenset(act for act in acts if act.target == c) for c in claims}
+    nodes = claims | frozenset(act.address for c in claims for act in on[c])
+    attacks = frozenset(
+        {(act.address, c) for c in claims for act in on[c] if not affirms(act)}
+        | {
+            (a.address, b.address)
+            for c in claims
+            for a in on[c]
+            for b in on[c]
+            if affirms(a) != affirms(b)
+        }
+    )
+    lower, upper = grounded(nodes, attacks)
+    return lower & claims, upper & claims
+
+
+def moot(presupposes: frozenset[Edge], defeated: frozenset[str]) -> frozenset[str]:
+    """Sense-collapse: a claim whose presupposition is defeated, or
+    itself moot, is moot -- a color outside the truth order, judging
+    the framing rather than the content.  Ledger spelling:
+    `verdict: dissolved`."""
+
+    def step(m: frozenset[str]) -> frozenset[str]:
+        return m | frozenset(
+            src for src, dst in presupposes if dst in defeated or dst in m
+        )
+
+    return iterate(step, frozenset())
+
+
+def color(
+    claims: frozenset[str],
+    presupposes: frozenset[Edge],
+    record: frozenset[Act],
+    admits: Stance,
+) -> Mapping[str, str]:
+    """The stack over one record: fold, interval, sense-collapse.
+
+    Moot absorbs content-acts -- they are dropped before the
+    truth-order pass -- so "moot and content-defeated" is impossible
+    by derivation; nothing here or in any schema asserts it.  Moot
+    seeds from surely-defeated only: a merely contested
+    presupposition collapses nothing yet."""
+    eff = effective(record, admits)
+    _, upper = contest(eff, claims)
+    mooted = moot(presupposes, claims - upper)
+    live = claims - mooted
+    lower, upper = contest(frozenset(act for act in eff if act.target in live), live)
+    return {
+        c: (
+            "moot"
+            if c in mooted
+            else "in" if c in lower else "contested" if c in upper else "out"
+        )
+        for c in claims
+    }

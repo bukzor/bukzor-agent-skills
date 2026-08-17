@@ -5,6 +5,7 @@ authority: "user ruling, 2026-08-17, this conversation: act algebra accepted in 
 why:
   - an-act-is-a-bare-claim-of-the-record.md
   - standing-is-standing-according-to.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "per_stance or absorbs"
 ---
 
 # Force Is Computed, Never Asserted

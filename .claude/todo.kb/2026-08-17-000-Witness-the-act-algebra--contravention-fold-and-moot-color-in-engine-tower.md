@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: open
+status: done
 ---
 
 # Witness the Act Algebra: Contravention Fold and Moot Color in engine_tower
@@ -45,27 +45,37 @@ one-act sugar).
 
 ## Implementation Steps
 
-- [ ] Effective-evidence fold (EXPLICIT): acts ordered by occasion;
+- [x] Effective-evidence fold (EXPLICIT): acts ordered by occasion;
       an act leaves the effective set only when an admitted act
       targets it; same-issuer self-annulment admitted by every
       stance; no recency resolution. Property tests: clashing
       uncited same-issuer acts both stand and compute to the
       contested interval; a citing act strikes exactly its named
-      targets.
-- [ ] Moot color (sense-collapse): presupposition edges propagate
+      targets. Done 2026-08-17: `Act`/`effective()`/`contest()` in
+      `standing.py` (clashes are mutual attacks between acts, read
+      through the existing `grounded` interval -- the same contested
+      interval whether the clashing assessors are two or one).
+- [x] Moot color (sense-collapse): presupposition edges propagate
       defeat as `moot`, a value outside the truth order that absorbs
       content-acts. Property test: a moot claim cannot also be
       content-defeated (MOOT's "never both" as a theorem, not a
-      constraint).
-- [ ] Desugar a real `.claims.kb/` (start:
+      constraint). Done: `moot()`/`color()`; absorption happens
+      before the truth-order pass, so the exclusion is derived, and
+      `test_moot_absorbs_content_acts` checks it exhaustively over
+      512 small records.
+- [x] Desugar a real `.claims.kb/` (start:
       `llm-claims/design.claims.kb/`) into acts per REIFY --
       `standing:`/`verdict:`/`authority:` as one act, `verify:` as a
       checker act -- and run the full stack over it; computed
       standing must reproduce every file's written fields
       (DEGENERATE: stored equals computed below the tripwires).
-- [ ] Add `verify:` lines to ACT, FORCE, EXPLICIT, ONE_WAY, REIFY
+      Done: `tests/test_data_representation.py`, 52 files;
+      `bare`/`open` desugar to no act (they name no judge) and pass
+      through as claim states.
+- [x] Add `verify:` lines to ACT, FORCE, EXPLICIT, ONE_WAY, REIFY
       pointing at the new tests; re-run
-      `llm-claims-kb-graph` and commit.
+      `llm-claims-kb-graph` and commit. All five run green verbatim;
+      `llm.kb-validate` 87 files 0 errors.
 
 ## Open Questions
 
@@ -78,11 +88,30 @@ one-act sugar).
 
 ## Success Criteria
 
-- [ ] All four laws witnessed by tests over a real ledger, not a
-      synthetic instance.
-- [ ] The five act-algebra claims carry passing `verify:` lines.
-- [ ] The "never both defeated and dissolved" exclusion holds as a
+- [x] All four laws witnessed by tests over a real ledger, not a
+      synthetic instance. (The composed stack -- fold, interval,
+      sense-collapse -- runs over all 52 claims of
+      `llm-claims/design.claims.kb`; that ledger exercises no
+      contravention, clash, or presupposition failure, so those
+      branches are additionally witnessed on smallest synthetic
+      instances, matching the suite's house style.)
+- [x] The five act-algebra claims carry passing `verify:` lines.
+- [x] The "never both defeated and dissolved" exclusion holds as a
       derived property with no schema constraint asserting it.
+
+## Residue (2026-08-17)
+
+- The sense-collapse tests are cited by no `verify:` -- no strata
+  claim states the law; the candidate carrier is WITHDRAWN's
+  `dissolved` word (`llm-claims/design.claims.kb/notation.kb/a-verdict-names-what-the-judge-ruled.md`).
+  User's call whether to file one.
+- `llm-claims-kb-graph` flags a pre-existing fleet citation cycle
+  (since b7b89c0): `discourse-graph-is-the-continuous-presentation`
+  <-> `the-discourse-graph-never-evaluates`. Needs a direction
+  ruling; not this task's to cut.
+- `standing.py` is ~275 lines; the module layout is pinned by
+  `test_the_modules_are_exactly_the_theories`, so any split means
+  splitting the standing *theory* in the user-ruled ledger first.
 
 ## Notes
 

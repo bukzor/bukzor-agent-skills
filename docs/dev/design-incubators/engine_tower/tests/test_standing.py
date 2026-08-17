@@ -1,21 +1,33 @@
+from itertools import product
+
 import pytest
 
 from engine_tower.fixpoint import iterate
+from engine_tower.history import state
 from engine_tower.record import Schema
 from engine_tower.reference import edges
 from engine_tower.standing import (
     DESCRIBED,
     STIPULATED,
+    Act,
     Evidence,
     Standing,
     certified,
     cite,
+    color,
+    contest,
+    effective,
     grounded,
+    moot,
     phi,
     standing,
     status_leq,
     status_sup,
 )
+
+
+def admits_all(act: Act) -> bool:
+    return True
 
 
 def standing_leq(x: Standing, y: Standing) -> bool:
@@ -133,3 +145,114 @@ def test_a_ruling_collapses_the_gap():  # DEFEAT
     mutual = frozenset({("a", "b"), ("b", "a")})
     lo, up = grounded(duo, mutual, rulings={"a": True})
     assert lo == up == {"a"}
+
+
+def test_a_citing_act_strikes_exactly_its_named_targets():  # EXPLICIT
+    a1 = Act("u", "p", "accepted", 0)
+    a2 = Act("u", "q", "accepted", 1)
+    fix = Act("v", "p", "rejected", 2, strikes=frozenset({a1.address}))
+    assert effective(frozenset({a1, a2, fix}), admits_all) == {a2, fix}
+
+
+def test_clashing_uncited_acts_both_stand():  # EXPLICIT -- no recency resolution
+    yes = Act("u", "p", "accepted", 0)
+    no = Act("u", "p", "rejected", 1)  # same issuer, later, citing nothing
+    assert effective(frozenset({yes, no}), admits_all) == {yes, no}
+
+
+def test_a_clash_computes_to_the_contested_interval():  # EXPLICIT, DEFEAT
+    # the same interval whether the clashing assessors are two or one
+    for second in ("u", "v"):
+        yes = Act("u", "p", "accepted", 0)
+        no = Act(second, "p", "rejected", 1)
+        eff = effective(frozenset({yes, no}), admits_all)
+        assert contest(eff, frozenset({"p"})) == (frozenset(), frozenset({"p"}))
+
+
+def test_litigation_is_one_move():  # EXPLICIT
+    yes = Act("u", "p", "accepted", 0)
+    no = Act("v", "p", "rejected", 1)
+    resolve = Act("w", "p", "accepted", 2, strikes=frozenset({no.address}))
+    eff = effective(frozenset({yes, no, resolve}), admits_all)
+    assert contest(eff, frozenset({"p"})) == (frozenset({"p"}), frozenset({"p"}))
+
+
+def test_self_annulment_is_admitted_by_every_stance():  # EXPLICIT
+    ruling = Act("v", "p", "accepted", 0)
+    annul = Act("v", "p", "retracted", 1, strikes=frozenset({ruling.address}))
+
+    def admits_no_strikes(act: Act) -> bool:
+        return not act.strikes
+
+    assert ruling not in effective(frozenset({ruling, annul}), admits_no_strikes)
+
+
+def test_force_is_computed_per_stance():  # FORCE
+    ruling = Act("u", "p", "accepted", 0)
+    strike = Act("v", "p", "rejected", 1, strikes=frozenset({ruling.address}))
+    record = frozenset({ruling, strike})
+    assert ruling not in effective(record, admits_all)
+
+    def distrusts_v(act: Act) -> bool:
+        return act.assessor != "v"
+
+    assert ruling in effective(record, distrusts_v)
+
+
+def test_act_on_act_reference_is_well_founded():  # ACT
+    early = Act("u", "p", "accepted", 0)
+    same_moment = Act("v", "p", "rejected", 0, strikes=frozenset({early.address}))
+    with pytest.raises(AssertionError):
+        effective(frozenset({early, same_moment}), admits_all)
+
+
+def test_a_claim_survives_restatement_an_act_does_not():  # ONE_WAY, ACT
+    # restating a claim edits the same row: the history folds to one entry
+    restated = state(
+        (("p", {"text": "first wording"}), ("p", {"text": "second wording"}))
+    )
+    assert len(restated) == 1
+    # the "same" judgment issued twice is two acts: indexical, unrepeatable
+    twice = {Act("u", "p", "accepted", 0), Act("u", "p", "accepted", 1)}
+    assert len({act.address for act in twice}) == 2
+
+
+def test_moot_propagates_defeat_along_presupposition_edges():
+    # q defeated; p presupposes q; r presupposes p: the collapse chains
+    presupposes = frozenset({("p", "q"), ("r", "p")})
+    assert moot(presupposes, frozenset({"q"})) == {"p", "r"}
+
+
+def test_a_moot_claim_is_never_also_content_defeated():
+    claims = frozenset({"p", "q"})
+    presupposes = frozenset({("p", "q")})
+    record = frozenset(
+        {
+            Act("u", "q", "rejected", 0),  # kills the presupposition
+            Act("u", "p", "rejected", 1),  # a content-defeat that must be absorbed
+        }
+    )
+    assert color(claims, presupposes, record, admits_all) == {"q": "out", "p": "moot"}
+
+
+def test_moot_absorbs_content_acts():  # FORCE -- exhaustive over small records
+    """A moot claim sits outside the truth order: any content-act on
+    it has no force, so adding one changes no claim's color."""
+    claims = frozenset({"p", "q"})
+    pool = [
+        Act(assessor, target, verdict, occasion)
+        for occasion, (assessor, target, verdict) in enumerate(
+            product("uv", "pq", ("accepted", "rejected"))
+        )
+    ]
+    for presupposes in (frozenset(), frozenset({("p", "q")})):
+        for bits in range(2 ** len(pool)):
+            record = frozenset(act for i, act in enumerate(pool) if bits >> i & 1)
+            before = color(claims, presupposes, record, admits_all)
+            for target in claims:
+                if before[target] != "moot":
+                    continue
+                for verdict in ("accepted", "rejected"):
+                    extra = Act("w", target, verdict, len(pool))
+                    after = color(claims, presupposes, record | {extra}, admits_all)
+                    assert after == before, (record, extra, before, after)

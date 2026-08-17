@@ -5,6 +5,7 @@ authority: "user ruling, 2026-08-17, this conversation: accepted in full"
 why:
   - an-act-is-a-bare-claim-of-the-record.md
   - force-is-computed-never-asserted.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_a_claim_survives_restatement_an_act_does_not
 ---
 
 # The Deflation Is One-Way

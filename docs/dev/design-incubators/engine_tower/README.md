@@ -12,6 +12,10 @@ a copy, so the ledger is the only place the poset lives.
 
 Each test asserts one ledger claim on the smallest instance that
 exhibits the phenomenon; the claim's `verify:` field names the test.
+The exception is `tests/test_data_representation.py`, which runs the
+act algebra over a real ledger (`llm-claims/design.claims.kb`) as
+REIFY's degenerate case: fields desugared to acts, nothing striking,
+stored standing reproduced by the computed one.
 
 Run, from the repo root:
 

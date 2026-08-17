@@ -6,6 +6,7 @@ why:
   - a-simplified-form-needs-a-complete-one-under-it.md
   - ../standing.kb/an-act-is-a-bare-claim-of-the-record.md
   - ../standing.kb/contravention-must-name-its-target.md
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_data_representation.py -k "one_act_sugar or reproduces"
 ---
 
 # An Act Earns a Row on Reference-Demand
