@@ -2,11 +2,12 @@
 
 `tests/test_standing.py` witnesses each ruled claim on the smallest
 instance that exhibits it.  What is checked here is derived rather
-than ruled -- absorption, one-pass sufficiency, assessor invariance,
-litigation -- and a derived result is a claim about every record, so
-the smallest instance is the wrong witness for it.  Generated records
-carry what the minimal ones cannot: strikes, three claims, a
-presupposition chain, and all four verdict words.
+than ruled -- absorption [ABSORB], one-pass sufficiency [LOCAL],
+assessor invariance [BLIND], litigation [EXPLICIT] -- and a derived
+result is a claim about every record, so the smallest instance is
+the wrong witness for it.  Generated records carry what the minimal
+ones cannot: strikes, three claims, a presupposition chain, and all
+four verdict words.
 """
 
 from collections.abc import Mapping
@@ -111,9 +112,9 @@ def test_the_generator_reaches_every_color():
 
 @PROPERTY
 @given(records(), presuppositions(), stances(), sampled_from(VERDICTS), data())
-def test_a_moot_claim_takes_no_further_content(
+def test_moot_absorbs_content_acts_in_any_record(
     record, presupposes, admits, verdict, choose
-):
+):  # ABSORB
     """A moot claim sits outside the truth order, so a content-act on
     it has nothing to move: adding one leaves every claim's color
     where it was, however the record already struck."""
@@ -160,7 +161,7 @@ def color_by_iteration(
 
 @PROPERTY
 @given(records(), presuppositions(), stances())
-def test_one_collapse_pass_reaches_the_fixpoint(record, presupposes, admits):
+def test_one_collapse_pass_reaches_the_fixpoint(record, presupposes, admits):  # LOCAL
     """Acts on a moot claim attack only that claim and each other, so
     dropping them moves no surviving claim's interval: a second round
     has no further collapse to find."""
@@ -192,7 +193,9 @@ def renamed(record: frozenset[Act], naming: Mapping[str, str]) -> frozenset[Act]
     presuppositions(),
     fixed_dictionaries({a: sampled_from(ASSESSORS) for a in ASSESSORS}),
 )
-def test_assessor_identity_carries_no_force_of_its_own(record, presupposes, naming):
+def test_assessor_identity_carries_no_force_of_its_own(  # BLIND
+    record, presupposes, naming
+):
     """To a reader who admits everything, who judged is not a fact the
     algebra can see: rename the assessors -- three into one, or one
     into three -- and every claim keeps its color.  A clash computes
@@ -205,7 +208,7 @@ def test_assessor_identity_carries_no_force_of_its_own(record, presupposes, nami
 
 @PROPERTY
 @given(records(), presuppositions(), sampled_from(ORDER))
-def test_one_act_settles_any_claim_whose_frame_stands(record, presupposes, target):
+def test_litigation_is_one_move_in_any_record(record, presupposes, target):  # EXPLICIT
     """Litigation is one move, from any record whatever: an act
     affirming the claim and striking every effective act against it
     leaves the claim un-attacked.  Where the frame has collapsed there

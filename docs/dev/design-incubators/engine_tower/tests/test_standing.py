@@ -217,13 +217,13 @@ def test_a_claim_survives_restatement_an_act_does_not():  # ONE_WAY, ACT
     assert len({act.address for act in twice}) == 2
 
 
-def test_moot_propagates_defeat_along_presupposition_edges():
+def test_moot_propagates_defeat_along_presupposition_edges():  # SENSE
     # q defeated; p presupposes q; r presupposes p: the collapse chains
     presupposes = frozenset({("p", "q"), ("r", "p")})
     assert moot(presupposes, frozenset({"q"})) == {"p", "r"}
 
 
-def test_a_moot_claim_is_never_also_content_defeated():
+def test_a_moot_claim_is_never_also_content_defeated():  # ABSORB, SENSE
     claims = frozenset({"p", "q"})
     presupposes = frozenset({("p", "q")})
     record = frozenset(
@@ -235,7 +235,7 @@ def test_a_moot_claim_is_never_also_content_defeated():
     assert color(claims, presupposes, record, admits_all) == {"q": "out", "p": "moot"}
 
 
-def test_moot_absorbs_content_acts():  # FORCE -- exhaustive over small records
+def test_moot_absorbs_content_acts():  # ABSORB -- exhaustive over small records
     """A moot claim sits outside the truth order: any content-act on
     it has no force, so adding one changes no claim's color."""
     claims = frozenset({"p", "q"})

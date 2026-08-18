@@ -21,6 +21,9 @@ ontology:
   - ruling
   - retraction
   - defeat
+  - presupposition
+  - sense-collapse
+  - moot
   - standing
   - assessor
   - party

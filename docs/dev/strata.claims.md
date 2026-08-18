@@ -9,7 +9,7 @@ ontology:
   - extension
   - enforcement
 stale-when: a lower engine needing a higher vocabulary
-last-updated: "2026-08-14"
+last-updated: "2026-08-18"
 ---
 
 # The strata, as a ledger
@@ -94,7 +94,8 @@ module import graph to it.
 `fleet` is the throwaway theory; `question` is the historical one --
 the design problems the ledger was bought to settle, with their open
 residues, `question.md` the stamped synthesis. Theorems stand `bare`
-(`fixpoint`, plus `REACH`, `FRESH_COST`, `TAINT`, `WEIGHT`);
+(`fixpoint`, plus `REACH`, `FRESH_COST`, `TAINT`, `WEIGHT`, and the
+act algebra's `ABSORB`, `LOCAL`, `BLIND`);
 `OBLIGATION`, `MERGE`, and `RETRACTION` stand `open` -- a theorem
 owed and two laws missing. The regime (`purpose`) and the claims the
 user ruled in the 2026-08-09 act review stand `user`. Everything
@@ -107,10 +108,17 @@ consent -- a resting state, not a queue awaiting signatures
 `verify:` commands run from the repo root; they exercise
 `design-incubators/engine_tower/`, the tower as a uv project -- one
 module per code-bearing theory, one test per witnessed claim, plus a
-test that the module import graph respects the poset above. These are instance
-witnesses at tooling grade: they check the phenomenon on a smallest
-instance, not the theorem, so they move no standing to `bare` --
-OBLIGATION names the proof-grade step.
+test that the module import graph respects the poset above. Most are
+instance witnesses at tooling grade: they check the phenomenon on a
+smallest instance, not the theorem, so they move no standing to
+`bare` -- OBLIGATION names the proof-grade step.
+
+The act algebra's derived results (`ABSORB`, `LOCAL`, `BLIND`) are
+checked by quantification instead, over generated records bounded at
+three claims, five acts, four verdict words, and acyclic
+presupposition: more evidence, still not proof. They stand `bare` on
+their derivation from the law of acts, and that bound is the debt a
+proof would discharge.
 
 ## Scans
 
