@@ -9,7 +9,7 @@ why:
 
 # When Is a Genre Safe to Add?
 
-As wrestled (PRMS's CLAIMS_ONLY and GENERIC_BASE; `design-next.kb/`'s
+As wrestled (PRMS's `CLAIMS_ONLY` and `GENERIC_BASE`; `design-next.kb/`'s
 core-and-classes rules): how can many genres share one core without
 each new genre silently changing what old entries mean?
 

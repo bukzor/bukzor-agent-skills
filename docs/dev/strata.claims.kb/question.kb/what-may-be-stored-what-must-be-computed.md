@@ -9,7 +9,7 @@ why:
 
 # What May Be Stored, What Must Be Computed?
 
-As wrestled (PRMS, as LEAST_FIX): may an entry's standing be written
+As wrestled (PRMS, as `LEAST_FIX`): may an entry's standing be written
 into the entry -- and what exactly corrupts if it is?
 
 Settled, upgraded from taste to theorem: acts only are stored;
