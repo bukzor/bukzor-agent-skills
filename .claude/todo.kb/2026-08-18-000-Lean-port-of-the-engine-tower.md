@@ -28,8 +28,9 @@ low for what `certified` wants to mean.
 
 ## Current Situation
 
-- Python incubator, 45 tests green; five claims carry passing
-  `verify:` lines (ACT, FORCE, EXPLICIT, ONE_WAY, REIFY).
+- Python incubator, 50 tests green; nine act-algebra claims carry
+  passing `verify:` lines (ACT, FORCE, EXPLICIT, ONE_WAY, REIFY, and
+  the derived SENSE, ABSORB, LOCAL, BLIND).
 - Every real ledger run so far is degenerate: no strikes, no
   clashes, no presupposition failures. Those branches are witnessed
   only on smallest synthetic instances.
@@ -38,7 +39,12 @@ low for what `certified` wants to mean.
   over generated strike-bearing records. That is evidence about small
   records -- three claims, five acts, four verdict words -- not proof
   about all of them, so it lowers the odds of a bug escaping without
-  answering what this task answers.
+  answering what this task answers. The four statements are now filed
+  as claims that run those checks (ABSORB, LOCAL, BLIND standing
+  `bare`, plus SENSE for the collapse rule they lean on), and the
+  bound is recorded as debt at them and in `strata.claims.md`
+  (Verify) -- so the general-form requirement below now has named
+  claims to discharge rather than a devlog to re-read.
 - The standing theory is still re-rulable: KEY, CUT open; GRAIN
   closes on their tripwires
   (`llm-claims/design.claims.kb/notation.kb/how-should-judge-verdict-standing-be-represented-long-term.md`).
