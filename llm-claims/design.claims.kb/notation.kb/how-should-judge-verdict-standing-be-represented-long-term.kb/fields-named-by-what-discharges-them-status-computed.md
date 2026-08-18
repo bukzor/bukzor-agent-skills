@@ -2,7 +2,7 @@
 label: STRONGFORM
 standing: agent
 why:
-  - a-single-scalar-plus-two-marks.md
+  - a-single-scalar-plus-one-open-vocabulary-mark.md
 ---
 
 # Fields Named by What Discharges Them, Status Computed

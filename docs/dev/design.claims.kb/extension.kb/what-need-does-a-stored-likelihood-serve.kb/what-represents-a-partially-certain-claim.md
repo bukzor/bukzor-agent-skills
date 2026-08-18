@@ -3,6 +3,7 @@ label: HEDGE_FORM
 standing: open
 why:
   - ../what-need-does-a-stored-likelihood-serve.md
+  - ../../../strata.claims.kb/data-representation.kb/a-simplified-form-needs-a-complete-one-under-it.md
 ---
 
 # What Represents a Partially-Certain Claim?

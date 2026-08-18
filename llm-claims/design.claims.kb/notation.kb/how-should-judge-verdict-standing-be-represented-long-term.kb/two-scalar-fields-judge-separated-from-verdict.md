@@ -3,7 +3,7 @@ label: VERDICT_JUDGE
 standing: agent
 verdict: retracted
 why:
-  - a-single-scalar-plus-two-marks.md
+  - a-single-scalar-plus-one-open-vocabulary-mark.md
 ---
 
 # Two Scalar Fields, Judge Separated From Verdict

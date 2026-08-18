@@ -29,14 +29,20 @@ question still asks is presentation, three parameters:
 
 - KEY -- the spelling of the map once a second assessor *of the
   same sort* writes (CASCADE's `$all` plus RFC 7396 merge-patch, or
-  otherwise), and the collision lint that trips the widening.
+  otherwise), and the collision lint that trips the widening. That
+  lint is armed: `engine_tower`'s ledger test resugars each claim
+  from its acts and asserts one signing act, so the day a second
+  same-sort assessor signs one, the test fails and this parameter
+  comes due.
 - CUT -- which discrete words the written value uses, and when a
   word escalates to the truth/certainty/utility triple; entangled
   with HEDGE_FORM, which the same map would close in the same
   stroke.
 - CACHE -- when a computed, stance-indexed standing is cached and
-  stamped (COMPUTED's discipline); acceptance debt until something
-  runs the fixpoint over a real ledger.
+  stamped (COMPUTED's discipline). The defeat fixpoint runs over a
+  real ledger; the evidence operator whose least fixpoint *is*
+  standing does not, and until it does this parameter is acceptance
+  debt.
 
 `how-should-judge-verdict-standing-be-represented-long-term.kb/`
 holds one file per prior design bearing on this -- read them as
