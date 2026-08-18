@@ -81,12 +81,18 @@ properties:
     type: string
   ontology:
     description: >-
-      Defining claims only, and what makes a claim one: the words this
-      theory stipulates, on top of every word its priors admit. One
-      entry per word or phrase, because the list is what confinement
-      is checked against -- a word no ontology on the path admits is
-      either a misplaced claim or an understated ontology. Widening
-      the list is a revision to this claim, so it takes a signature.
+      Defining claims only: the words this theory coins. A word earns a
+      place only where the theory stipulates it -- fixes a meaning the
+      reader could not have brought -- so topic vocabulary stays off the
+      list however central the subject makes it; proper nouns are the
+      other admissible kind. Prefer the phrase the prose actually uses:
+      truncating it to its head noun is what turns an ownable term into
+      an unownable one. A theory that coins nothing omits the key.
+      Listing a word excludes the theory's siblings from it, and that
+      exclusion is the list's whole force -- descendants already read
+      every word their container stipulates, and another ledger is out
+      of jurisdiction. Widening the list is a revision to this claim, so
+      it takes a signature.
     type: array
     minItems: 1
     items:

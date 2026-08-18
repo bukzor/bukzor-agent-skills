@@ -1,15 +1,8 @@
 ---
 label: DESIGN
 standing: agent
-ontology:
-  - skill
-  - design
-  - claim
-  - theory
-  - agent
-  - user
 stale-when: a design filed here that is not `/formalize`'s -- a second skill's commitments in this ledger
-last-updated: "2026-08-15"
+last-updated: "2026-08-18"
 ---
 
 # The design, as a ledger
@@ -29,8 +22,9 @@ Claims are grouped by the vocabulary they need. Each collection is a
 **theory**, defined by the claim file beside it -- `run.md` defines
 `run.kb/` -- which stipulates the ontology, names the priors in its
 `why:`, and states the staleness condition. A claim may use only the
-words its theory admits, its priors' and this file's among them
-(`Skill(llm-claims)` § Theories).
+words its theory and its priors admit (`Skill(llm-claims)` § Theories).
+This file stipulates nothing: it has no siblings to exclude, so a word
+listed here would bind no one.
 
 ```
 purpose ──► identification ──► run ──► setting

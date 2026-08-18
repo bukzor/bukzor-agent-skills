@@ -5,16 +5,7 @@ why:
   - purpose.md
   - identification.md
 ontology:
-  - run
-  - step
-  - survey
-  - conjecture
-  - candidate
-  - level
-  - checkpoint
-  - stopping rule
-  - token
-  - delegation
+  - level-relative
 stale-when: a run performed by a program rather than by an agent reading the material
 ---
 

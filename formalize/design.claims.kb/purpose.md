@@ -3,16 +3,8 @@ label: PURPOSE
 standing: agent
 ontology:
   - basis
-  - structure
-  - design
-  - question
-  - decision
-  - inconsistency
-  - complexity
-  - understanding
-  - change
-  - implementation
-  - posture
+  - Layer 0
+  - formal-theory-design-expert posture
 stale-when: a run of `/formalize` whose payoff is a use outside the six named here
 ---
 

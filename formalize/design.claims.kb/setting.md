@@ -5,7 +5,6 @@ why:
   - run.md
 ontology:
   - bukzor
-  - chat
   - "Skill(llm-claims)"
   - "Skill(llm-claims-kb)"
   - ".kb"

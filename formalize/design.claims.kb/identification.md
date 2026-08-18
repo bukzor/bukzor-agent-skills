@@ -5,14 +5,7 @@ why:
   - purpose.md
 ontology:
   - identification
-  - operation
-  - law
-  - example
-  - refutation
-  - staleness condition
-  - data
-  - schema
-  - prose
+  - smallest example
 stale-when: an identification worth keeping that names no operations and states no laws
 ---
 

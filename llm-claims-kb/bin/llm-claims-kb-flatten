@@ -193,16 +193,6 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
     other.
     """
     found = [f"dangling why: reference: {missing}" for missing in dangling(ledger)]
-    # An unwritten defining claim needs no lint: the theory renders `?`, which
-    # is the ledger's own way of saying nobody has signed it yet. A written one
-    # that stipulates nothing is the defect -- it reads as settled and confines
-    # no word.
-    found += [
-        f"{defining_claim(theory.path)} stipulates no `ontology:`;"
-        " nothing confines the collection's claims"
-        for theory in ledger.theories
-        if theory.defining and not theory.ontology
-    ]
     names = sorted(
         claim.label for claim in (*ledger.claims, *imported(ledger).values())
     )

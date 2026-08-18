@@ -107,14 +107,18 @@ is what you cite when the words you need are *beside* you rather than
 above. The shape repeats at every depth and nests without limit -- the
 flat list is just the case where nothing nests.
 
-The list comes first and the grouping follows from it: a claim belongs to
-the outermost theory whose ontology admits every word its text needs.
-A theory's standing is its defining claim's standing, and widening the
-ontology is a revision to it.
+A theory lists only the words it coins -- those it fixes a meaning for
+that a reader could not have brought; topic vocabulary stays off the
+list however central to the subject. The grouping follows: a claim
+belongs to the outermost theory that coins every coined word its text
+needs. A theory's standing is its defining claim's standing, and
+widening the ontology is a revision to it.
 
-- **Confinement** -- a claim uses only the words admitted above it plus
-  its priors'. It greps: a word no ontology on the path admits is either
-  a misplaced claim or an understated ontology.
+- **Confinement** -- an ontology excludes: a listed word is that
+  theory's, and its siblings may not use it. It greps for a sibling
+  saying an owned word -- the word was no coinage and gets culled, the
+  claim is misfiled and moves, or the two mean different things by it
+  and one of them uniquifies.
 - **Conservativity** -- a later theory never lowers a prior's standing.
   Where it seems to, the prior was wrong; fix it there.
 
