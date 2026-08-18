@@ -146,6 +146,17 @@ answered. On disk every ruling has an address, and they rule by
 editing in place: the verdict, plus marginalia in their own words
 wherever a rationale is worth keeping.
 
+In place means the address where each survivor will live: a new claim
+in the ledger whose ontology admits it (`standing: agent`), a question
+beside its theory (`open`) -- never a review-shaped register minted for
+the occasion. Staging has an owner already: the diff is the batch's
+scope, its file list drives the walkthrough, rejecting wholesale is
+reverting it, and reconciliation complete is the merge. A separate
+staging register buys none of that and bills the fold -- every claim
+moved home after ruling. When the review outlives the diff, the
+standing scan (`grep -rH '^standing:'`) still answers what awaits
+ruling: the sigil is the review state, wherever the claim sits.
+
 Then adjudicate those edits rather than merely accepting them. A
 schematic edit the register's schema forbids is a ruling all the
 same: implement what it means in the register's own terms, and say

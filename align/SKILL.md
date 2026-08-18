@@ -32,7 +32,10 @@ completeness, or quality.
 
 1. **Extract** the goals the target embodies — explicit and implicit — plus any
    non-goals it implies. Plain list, nothing else.
-2. **Ask** which are the user's, which aren't, what's missing.
+2. **Ask** which are the user's, which aren't, what's missing. More than a
+   handful of goals: the ask is a ruling batch — run it under
+   `Skill(review-open-questions)`, whose register law says where each goal
+   lands and how the user rules on it.
 3. **Reconcile** corrections into a clarified goal set; reflect it back to confirm.
 4. **Adjust** the target to match.
 5. **Repeat** until a pass surfaces no misalignment.

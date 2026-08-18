@@ -17,6 +17,8 @@ ontology:
   - tier
   - retrieval
   - trigger
+  - occasion
+  - domain
   - composition
   - token
   - blind
