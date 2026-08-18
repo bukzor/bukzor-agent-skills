@@ -9,10 +9,10 @@ The output is one nested list to paste into claude.ai, where there are no
 files to walk and `Skill(llm-claims)`'s core notation is the whole system:
 `* LABEL <- PRIOR PRIOR: text`, sigils trailing. Everything the directory
 carries structurally comes back as notation -- `standing:` as the sigil,
-`why:` as the arrows, each target's sigil computed at the reference site so
-the warrant-mix shows where the weight rests, `verify:` as
-`-- certified(CHECK)`, and the tree as indentation, each theory's claims
-written under the claim that defines it.
+`verdict:` as a strike through the label, `why:` as the arrows, each
+target's sigil computed at the reference site so the warrant-mix shows where
+the weight rests, `verify:` as `-- certified(CHECK)`, and the tree as
+indentation, each theory's claims written under the claim that defines it.
 
 Siblings come in support order, so a line's premises stand above it as well
 as outside it. The whole ledger is rendered, never a slice of one -- a
@@ -34,13 +34,14 @@ from pathlib import Path
 from typing import cast
 
 from llm_claims_kb import (
-    SIGIL,
     Claim,
     Ledger,
+    Prior,
     Theory,
     claim_id,
     dangling,
     defining_claim,
+    foreign,
     read_ledger,
 )
 
@@ -54,7 +55,9 @@ LEGEND = (
     "Notation (`Skill(llm-claims)`): one claim per line; `LABEL` names the locus"
     " of contention, a trailing sigil signs the judge -- `!` the user's call,"
     " `+` the agent's (veto invited), `?` no one's yet, bare means none is"
-    " needed; `<-` names what the claim rests on. Indentation nests: a claim"
+    " needed -- and a struck label, `~~LABEL!~~`, is a judgment that went"
+    " against the claim; `<-` names what the claim rests"
+    " on. Indentation nests: a claim"
     " reads in every word stipulated above it, and a claim stipulating an"
     " `ontology:` is a theory -- what is indented under it is confined to"
     " those words. Union over the chat, last wins."
@@ -80,17 +83,17 @@ def in_support_order(deps: Mapping[str, tuple[str, ...]]) -> tuple[str, ...]:
     return tuple(ordered)
 
 
-def arrows(why: Iterable[str], labels: Mapping[str, str]) -> str:
+def arrows(why: Iterable[Prior], labels: Mapping[str, str]) -> str:
     """The ` <- ` clause: cited claims by label, each carrying its own sigil."""
-    cited = " ".join(labels.get(prior, f"(missing:{prior})") for prior in why)
+    cited = " ".join(labels.get(prior.id, f"(missing: {prior.id})") for prior in why)
     return f" <- {cited}" if cited else ""
 
 
 def relabel(text: str, claim: Claim, root: Path, labels: Mapping[str, str]) -> str:
     """Prose cites of claim files, read back as labels: the paste has no files.
 
-    A cite naming no claim of this ledger is left as written -- it points at
-    something outside, and a filename says more there than nothing does.
+    A cite naming no claim of this ledger and no file either is left as
+    written: a filename says more there than nothing does.
     """
     return CITE.sub(
         lambda cite: labels.get(claim_id(root, claim.path.parent / cite[0]), cite[0]),
@@ -134,8 +137,11 @@ def theory_block(
     )
     lines = ["  " * depth + f"* {opening}"]
     for item in in_support_order(
-        {claim.id: claim.why for claim in theory.claims}
-        | {name: child.priors for name, child in inside.items()}
+        {claim.id: tuple(prior.id for prior in claim.why) for claim in theory.claims}
+        | {
+            name: tuple(prior.id for prior in child.priors)
+            for name, child in inside.items()
+        }
     ):
         lines += (
             theory_block(inside[item], ledger, labels, depth + 1)
@@ -156,12 +162,20 @@ def labels_of(ledger: Ledger) -> Mapping[str, str]:
     exception is the theory whose defining claim is unwritten: it is open,
     not absent, and a citation should show it that way rather than as a
     dangling path.
+
+    A claim in another ledger has no label to show either -- reading it is
+    outside what this render was pointed at -- but the citation is sound, so
+    it keeps its path and says where the label went.
     """
-    return {
-        theory.name: theory.label + SIGIL[theory.standing]
-        for theory in ledger.theories
-        if theory.defining is None
-    } | {claim.id: claim.label + SIGIL[claim.standing] for claim in ledger.claims}
+    return (
+        {
+            theory.name: theory.cited_as
+            for theory in ledger.theories
+            if theory.defining is None
+        }
+        | {claim.id: claim.cited_as for claim in ledger.claims}
+        | {other: f"(elsewhere: {other})" for other in foreign(ledger)}
+    )
 
 
 def lints(ledger: Ledger) -> tuple[str, ...]:

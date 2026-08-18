@@ -15,12 +15,13 @@ restated here; this skill maps it onto a directory.
 |---|---|
 | one claim, one line | one claim, one file (`kebab-case.md`, named in prose) |
 | label + sigil | `label:` + `standing:` frontmatter, the sigil spelled out: `bare`, `open` (`?`), `agent` (`+`), `user` (`!`) |
+| a struck label, `~~XY~~` | `verdict:` -- present only where the judgment went against the claim; the strike says which way it went, the word says what they ruled |
 | `<-` arrows | `why:` -- file-relative paths; never a copied sigil, standing lives at the definition site |
 | `-- certified(CHECK)` | `verify:` |
 | restating a label | editing the file; the git diff's `-` is the strikethrough |
 | a theory | a claim like any other -- `<theory>.md`, carrying `ontology:` and `stale-when:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
 | indentation | the tree: what a `.kb/` holds is nested under the claim naming it, at any depth |
-| `claim list` | `ls`; the standing scan is `grep -rH '^standing:' <name>.claims.kb/`, recursive so theories answer too |
+| `claim list` | `ls`; the standing scan is `grep -rH '^standing:' <name>.claims.kb/`, recursive so theories answer too; the verdict scan is `grep -rl 'verdict:'` |
 
 Schema: `jsonschema/claim.jsonschema.yaml`. Link or copy it next to
 each ledger and `$ref` it from a per-collection schema.
@@ -113,16 +114,20 @@ bin/llm-claims-kb-flatten <name>.claims.kb            # the ledger, as one text
 ```
 
 Every structural thing the directory carries comes back as notation:
-`standing:` as the trailing sigil, `why:` as `<-` arrows whose
-targets wear their own sigils, `verify:` as `-- certified(CHECK)`,
-the tree as indentation, and prose cites of claim files as the labels
-those files carry. Siblings come in `why:` order, so a claim's
-premises are above it as well as outside it.
+`standing:` as the trailing sigil, `verdict:` as a strike through the
+label that sigil signs, `why:` as `<-` arrows whose targets wear their
+own sigils, `verify:` as `-- certified(CHECK)`, the tree as
+indentation, and prose cites of claim files as the labels those files
+carry. Siblings come in `why:` order, so a claim's premises are above
+it as well as outside it.
 
 Three things do not survive the trip, and the tool says so on stderr:
-a `why:` that resolves to no claim, a defining claim that stipulates no
+a `why:` that resolves to no file, a defining claim that stipulates no
 `ontology:`, and two labels `grep` cannot tell apart -- once the paths
-are gone, labels are the only handle the reader has.
+are gone, labels are the only handle the reader has. A `why:` into
+another ledger does survive, as the path it was written as: the
+citation is sound, and no render of this ledger can supply a label
+that lives in another one.
 
 ## What this is not
 

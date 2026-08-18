@@ -12,8 +12,10 @@ way support flows -- from the prior claim to the one that rests on it
 -- so the drawing reads in the same direction as the ledger's own
 `<name>.claims.md` spine.
 
-A `why:` target that names no claim file is drawn red and reported on
-stderr; that is the one lint this tool owes its reader.
+A `why:` target that names no file at all is drawn red and reported on
+stderr; that is the one lint this tool owes its reader. One that names a file
+in another ledger is drawn gray instead -- the citation resolves, and only its
+standing is beyond what this drawing was pointed at.
 """
 
 import argparse
@@ -22,7 +24,15 @@ import textwrap
 from pathlib import Path
 from typing import cast
 
-from llm_claims_kb import SIGIL, Claim, Ledger, Theory, dangling, read_ledger
+from llm_claims_kb import (
+    SIGIL,
+    Claim,
+    Ledger,
+    Theory,
+    dangling,
+    foreign,
+    read_ledger,
+)
 
 # The ink each standing earns. `bare` needs no judge, so it gets the
 # default ink; the rest name a judge.
@@ -37,12 +47,12 @@ def node_label(claim: Claim) -> str:
     """The ledger label over the file name read back as the sentence it is."""
     said = escape(f'"{claim.stem.replace("-", " ")}"')
     lines = "<BR/>".join(textwrap.wrap(said, 26))
-    return f"<<B>{escape(claim.label)}{SIGIL[claim.standing]}</B><BR/><I>{lines}</I>>"
+    return f"<<B>{escape(claim.cited_as)}</B><BR/><I>{lines}</I>>"
 
 
 def theory_node(theory: Theory) -> str:
     """A theory as its defining claim: the label wears the sigil that claim signed."""
-    said = f"{theory.label}{SIGIL[theory.standing]}"
+    said = theory.cited_as
     return (
         f'  "{theory.name}" [label="{said}\\n{theory.stem}.kb\\n{len(theory.claims)} claims"'
         f', color="{COLOR[theory.standing]}"];'
@@ -58,7 +68,7 @@ def dot_theories(ledger: Ledger, rankdir: str) -> str:
     ]
     lines += [theory_node(theory) for theory in ledger.theories]
     lines += [
-        f'  "{prior}" -> "{theory.name}";'
+        f'  "{prior.id}" -> "{theory.name}";'
         for theory in ledger.theories
         for prior in theory.priors
     ]
@@ -94,6 +104,12 @@ def dot_legend() -> list[str]:
         f'<TD BORDER="1" COLOR="{COLOR[standing]}"><B>LABEL{SIGIL[standing]}</B><BR/><I>{why}</I></TD>'
         for standing, why in gloss.items()
     )
+    # A verdict has no sigil of its own -- it strikes the label the judge
+    # signed -- so the key shows the shape rather than a mark to memorize.
+    cells += (
+        f'<TD BORDER="1" COLOR="{COLOR["user"]}"><B>~~LABEL!~~</B><BR/>'
+        "<I>ruled against</I></TD>"
+    )
     table = "".join(
         [
             '<TABLE BORDER="0" CELLSPACING="6" CELLPADDING="4">',
@@ -128,14 +144,18 @@ def dot_claims(ledger: Ledger, rankdir: str) -> str:
         f'  "{missing}" [label="{missing}\\n(missing)", color=red, style=dashed];'
         for missing in dangling(ledger)
     ]
+    lines += [
+        f'  "{other}" [label="{other}\\n(another ledger)", color=gray55, style=dashed];'
+        for other in foreign(ledger)
+    ]
     # Within a theory the arrows are the argument; across theories they
     # are the tower's shape -- drawn thinner. The distinction rides on
     # penwidth, not color, because `edgepaint` owns color downstream.
     lines += [
         (
-            f'  "{prior}" -> "{claim.id}";'
-            if claim.scope and prior.rpartition("/")[0] == claim.scope
-            else f'  "{prior}" -> "{claim.id}" [penwidth=0.5];'
+            f'  "{prior.id}" -> "{claim.id}";'
+            if claim.scope and prior.id.rpartition("/")[0] == claim.scope
+            else f'  "{prior.id}" -> "{claim.id}" [penwidth=0.5];'
         )
         for claim in ledger.claims
         for prior in claim.why
@@ -162,6 +182,8 @@ def main() -> None:
     ledger = read_ledger(root)
     for missing in dangling(ledger):
         print(f"{root}: dangling why: reference: {missing}", file=sys.stderr)
+    for other in foreign(ledger):
+        print(f"{root}: why: reference into another ledger: {other}", file=sys.stderr)
     if level == "claim":
         print(dot_claims(ledger, rankdir or "TB"))
     elif level == "theory":

@@ -15,9 +15,9 @@ The `llm-claims-kb-*` tools all read a ledger through here, so the schema has
 one parser and the tools disagree only about rendering.
 
 Tolerant by design: a theory may have no defining claim yet, and a `why:` may
-point nowhere. Reporting those is each tool's business, not the reader's --
-`dangling()`, `Theory.defining` and the `None`s are what it hands them to
-report with.
+point outside the ledger or nowhere at all. Reporting those is each tool's
+business, not the reader's -- `foreign()`, `dangling()`, `Theory.defining` and
+the `None`s are what it hands them to report with.
 """
 
 import os
@@ -34,13 +34,26 @@ SIGIL = {"bare": "", "open": "?", "agent": "+", "user": "!"}
 
 
 @dataclass(frozen=True)
+class Prior:
+    """One `why:` entry: the claim id it names, and the file it named it by.
+
+    Both, because a citation that lands outside this ledger has no id here to
+    look up, and only the path can then say whether it is a reference or rot.
+    """
+
+    id: str
+    path: Path
+
+
+@dataclass(frozen=True)
 class Claim:
     id: str  # path under the ledger's parent, unsuffixed -- ledger-wide identity
     scope: str  # the id of the theory it is confined to
     stem: str
     label: str
     standing: str
-    why: tuple[str, ...]  # claim ids, resolved from file-relative paths
+    verdict: str | None  # what was ruled, where the ruling went against the claim
+    why: tuple[Prior, ...]  # what it rests on, in citation order
     verify: str | None  # the CHECK of `-- certified(CHECK)`
     authority: str | None  # the act that settled the standing
     ontology: tuple[str, ...]  # the words stipulated -- defining claims only
@@ -51,6 +64,21 @@ class Claim:
     @property
     def url(self) -> str:
         return self.path.resolve().as_uri()
+
+    @property
+    def cited_as(self) -> str:
+        """Label and the sigil signing its judge, struck through where the
+        judgment went against the claim.
+
+        A struck label is the chat form's own mark for a verdict, and it names
+        no word: which of them applies is in the claim's prose, and `grep
+        LABEL` finds a struck line like any other. The strike has to reach the
+        reference site, because that is where a lone sigil reads backwards --
+        `!` on a rejected claim says the user signed it, when what they signed
+        was its rejection.
+        """
+        said = f"{self.label}{SIGIL[self.standing]}"
+        return f"~~{said}~~" if self.verdict else said
 
 
 @dataclass(frozen=True)
@@ -86,7 +114,13 @@ class Theory:
         return self.defining.standing if self.defining else "open"
 
     @property
-    def priors(self) -> tuple[str, ...]:
+    def cited_as(self) -> str:
+        """What claims cite it as: its defining claim's citation, or the
+        fallback label under an open sigil until that claim is written."""
+        return self.defining.cited_as if self.defining else f"{self.label}?"
+
+    @property
+    def priors(self) -> tuple[Prior, ...]:
         return self.defining.why if self.defining else ()
 
     @property
@@ -135,6 +169,13 @@ def claim_id(origin: Path, path: Path) -> str:
     return "/".join([*directories, relative.stem])
 
 
+def prior(origin: Path, source: Path, entry: str) -> Prior:
+    """One `why:` entry resolved -- entries are file-relative, so they join to
+    the directory of the claim doing the citing."""
+    target = source.parent / entry
+    return Prior(claim_id(origin, target), target)
+
+
 def split_frontmatter(text: str) -> tuple[Mapping[str, object], str]:
     """The frontmatter mapping, and the body that follows it."""
     match = re.match(r"---\n(.*?)\n---\n", text, re.DOTALL)
@@ -155,12 +196,14 @@ def read_claim(origin: Path, path: Path) -> Claim:
     front, body = split_frontmatter(path.read_text())
     assert "label" in front, f"{path}: no `label:`, so this file is no claim"
     label, standing, why = front["label"], front["standing"], front.get("why", [])
-    verify, authority = front.get("verify"), front.get("authority")
+    verdict, verify = front.get("verdict"), front.get("verify")
+    authority = front.get("authority")
     ontology, stale_when = front.get("ontology", []), front.get("stale-when")
     # Renamed 2026-08-13. Reading past the old key would drop the line silently.
     assert "defeated-by" not in front, f"{path}: `defeated-by:` is now `stale-when:`"
     assert isinstance(label, str), label
     assert isinstance(standing, str) and standing in SIGIL, standing
+    assert verdict is None or isinstance(verdict, str), verdict
     assert isinstance(why, list), why
     assert verify is None or isinstance(verify, str), verify
     assert authority is None or isinstance(authority, str), authority
@@ -173,10 +216,8 @@ def read_claim(origin: Path, path: Path) -> Claim:
         stem=path.stem,
         label=label,
         standing=standing,
-        why=tuple(
-            claim_id(origin, path.parent / str(entry))
-            for entry in cast(list[object], why)
-        ),
+        verdict=verdict,
+        why=tuple(prior(origin, path, str(entry)) for entry in cast(list[object], why)),
         verify=verify,
         authority=authority,
         ontology=tuple(str(word) for word in cast(list[object], ontology)),
@@ -231,8 +272,8 @@ def read_ledger(root: Path) -> Ledger:
     )
 
 
-def dangling(ledger: Ledger) -> tuple[str, ...]:
-    """Cited claim ids that no file defines.
+def undefined(ledger: Ledger) -> tuple[Prior, ...]:
+    """Every cited prior this ledger defines no claim for, one per id.
 
     A theory whose defining claim is unwritten is not one of them: the
     collection is there, so the theory is open rather than absent, and citing
@@ -241,5 +282,26 @@ def dangling(ledger: Ledger) -> tuple[str, ...]:
     known = {claim.id for claim in ledger.claims} | {
         theory.name for theory in ledger.theories
     }
-    cited = {prior for claim in ledger.claims for prior in claim.why}
-    return tuple(sorted(cited - known))
+    found = {
+        cited.id: cited
+        for claim in ledger.claims
+        for cited in claim.why
+        if cited.id not in known
+    }
+    return tuple(found[key] for key in sorted(found))
+
+
+def foreign(ledger: Ledger) -> tuple[str, ...]:
+    """Cited ids whose file is on disk, outside this ledger.
+
+    A real reference -- a tower's lower storeys keep ledgers of their own, and
+    a claim that rests on ruled law elsewhere has to be able to say so. What
+    this reader cannot supply is their standing, never having been pointed at
+    the ledger that carries it.
+    """
+    return tuple(cited.id for cited in undefined(ledger) if cited.path.exists())
+
+
+def dangling(ledger: Ledger) -> tuple[str, ...]:
+    """Cited ids that name no file anywhere: the rot lint."""
+    return tuple(cited.id for cited in undefined(ledger) if not cited.path.exists())
