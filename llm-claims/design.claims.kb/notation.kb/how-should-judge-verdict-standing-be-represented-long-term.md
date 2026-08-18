@@ -6,10 +6,8 @@ why:
   - ../purpose.kb/the-format-must-hold-whatever-is-actually-true.md
   - ../purpose.kb/forced-misrepresentation-is-the-failure-mode.md
   - a-verdict-names-what-the-judge-ruled.md
-  - ../../../docs/dev/strata.claims.kb/standing.kb/verdicts-are-assessor-indexed.md
-  - ../../../docs/dev/strata.claims.kb/standing.kb/an-act-is-a-bare-claim-of-the-record.md
-  - ../../../docs/dev/strata.claims.kb/standing.kb/status-is-a-poset-with-a-fibered-top.md
-  - ../../../docs/dev/strata.claims.kb/data-representation.kb/a-simplified-form-needs-a-complete-one-under-it.md
+  - ../../../docs/dev/strata.claims.kb/standing.md
+  - ../../../docs/dev/strata.claims.kb/data-representation.md
 ---
 
 # How Should Judge/Verdict/Standing Be Represented, Long-Term?
