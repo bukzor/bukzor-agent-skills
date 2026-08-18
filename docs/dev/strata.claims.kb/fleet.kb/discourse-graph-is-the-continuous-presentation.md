@@ -4,7 +4,6 @@ standing: agent
 why:
   - ../standing.kb/verdicts-are-assessor-indexed.md
   - ../standing.kb/status-is-a-poset-with-a-fibered-top.md
-  - the-discourse-graph-never-evaluates.md
 ---
 
 # Discourse-Graph Is the Continuous Presentation
@@ -19,8 +18,7 @@ entries over an `$all` consensus, RFC 7396 merge-patch to override --
 is the assessor law verbatim, designed 2026-03, months before the
 mechanized operator crashed on the missing join. Design, not shipped:
 the live schema (`jsonschema/claims.jsonschema.yaml`) carries neither
-the party map nor the axes, only a flat `status` and a scalar
-`likelihood` (the-discourse-graph-never-evaluates.md). The two
-systems are one structure at two resolutions, not a division of
-labor; porting between them is choosing a quotient, not translating a
-theory.
+the party map nor the axes, only a flat `status` enum and a scalar
+`likelihood`. The two systems are one structure at two resolutions,
+not a division of labor; porting between them is choosing a quotient,
+not translating a theory.
