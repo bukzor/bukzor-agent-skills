@@ -131,6 +131,31 @@ path would be verbose exactly where it is load-bearing. A citation
 naming something that is no claim -- a schema, a todo -- has no label
 to show, and keeps its path.
 
+### bin/llm-claims-kb-mentions
+
+Purpose: catch a claim whose prose names a label its theory never
+imported -- a citation the reader is told to resolve and cannot.
+
+```bash
+bin/llm-claims-kb-mentions                      # the whole fleet
+bin/llm-claims-kb-mentions <name>.claims.kb     # findings in one ledger
+```
+
+A mention resolves if the label is in the same ledger or in a theory
+this one imports, transitively -- a defining claim's `why:` is that
+import. Every ledger in the tree is read whichever are checked, since
+whether a token is a label at all is a fact about the fleet.
+
+Two things are not citations and are never reported: a backticked
+name, which is a literal quoted from elsewhere -- another system's
+label, a field, a filename -- and a sibling skill named as a whole,
+which reaches into nothing. Reaching past the boundary for a label
+inside is what wants an import.
+
+A finding has two honest fixes, and the tool does not choose: import
+the theory that defines the label, or stop reaching for it -- usually
+by naming the file, which the sentence often already does.
+
 ## What this is not
 
 `Skill(llm-discourse-graph)` also keeps claims in files: a bare
