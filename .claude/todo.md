@@ -154,6 +154,10 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
+- [ ] Lean port of the engine tower — gated, not next: fires on the
+      triggers in the brief (algebra bug escapes / real ledger goes
+      non-degenerate after KEY+CUT close / incubator graduates);
+      brief: .claude/todo.kb/2026-08-18-000-Lean-port-of-the-engine-tower.md
 - [ ] Operator decision pending (2026-08-13): keep or revert the four
       commits of the audit-repair session -- 52e6c55 (engine), befce32
       (ledger), a9bf61a (paste split), e6e87f6 (record move). Offered as
