@@ -258,7 +258,14 @@ def color(
     truth-order pass -- so "moot and content-defeated" is impossible
     by derivation; nothing here or in any schema asserts it.  Moot
     seeds from surely-defeated only: a merely contested
-    presupposition collapses nothing yet."""
+    presupposition collapses nothing yet.
+
+    The second pass cannot move a surviving claim's interval: attacks
+    never cross claims, so a moot claim's acts leave as a whole
+    island.  It stays for what it proves rather than what it
+    computes -- without the drop, the exclusion above would rest on
+    testing `mooted` first, which is the precedence rule the
+    criterion forbids."""
     eff = effective(record, admits)
     _, upper = contest(eff, claims)
     mooted = moot(presupposes, claims - upper)
