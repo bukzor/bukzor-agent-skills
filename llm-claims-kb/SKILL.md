@@ -125,9 +125,11 @@ Three things do not survive the trip, and the tool says so on stderr:
 a `why:` that resolves to no file, a defining claim that stipulates no
 `ontology:`, and two labels `grep` cannot tell apart -- once the paths
 are gone, labels are the only handle the reader has. A `why:` into
-another ledger does survive, as the path it was written as: the
-citation is sound, and no render of this ledger can supply a label
-that lives in another one.
+another ledger survives as its label, read from the file it names --
+that crossing is the theory import, and an import that rendered as a
+path would be verbose exactly where it is load-bearing. A citation
+naming something that is no claim -- a schema, a todo -- has no label
+to show, and keeps its path.
 
 ## What this is not
 

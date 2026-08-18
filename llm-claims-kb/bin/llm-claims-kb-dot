@@ -31,6 +31,7 @@ from llm_claims_kb import (
     Theory,
     dangling,
     foreign,
+    imported,
     read_ledger,
 )
 
@@ -48,6 +49,20 @@ def node_label(claim: Claim) -> str:
     said = escape(f'"{claim.stem.replace("-", " ")}"')
     lines = "<BR/>".join(textwrap.wrap(said, 26))
     return f"<<B>{escape(claim.cited_as)}</B><BR/><I>{lines}</I>>"
+
+
+def foreign_node(identity: str, claim: Claim | None) -> str:
+    """A cited claim from another ledger, drawn like any other and clickable
+    through to it -- gray and dashed because this drawing was not pointed at
+    the ledger that holds it, so its neighbours are off the page. A citation
+    naming no claim has no label to draw, and keeps its path."""
+    if claim is None:
+        return f'  "{identity}" [label="{identity}", color=gray55, style=dashed];'
+    else:
+        return (
+            f'  "{identity}" [label={node_label(claim)}, color=gray55,'
+            f' style=dashed, URL="{claim.url}", tooltip="{node_tooltip(claim)}"];'
+        )
 
 
 def theory_node(theory: Theory) -> str:
@@ -144,9 +159,9 @@ def dot_claims(ledger: Ledger, rankdir: str) -> str:
         f'  "{missing}" [label="{missing}\\n(missing)", color=red, style=dashed];'
         for missing in dangling(ledger)
     ]
+    outside = imported(ledger)
     lines += [
-        f'  "{other}" [label="{other}\\n(another ledger)", color=gray55, style=dashed];'
-        for other in foreign(ledger)
+        foreign_node(other, outside.get(other)) for other in foreign(ledger)
     ]
     # Within a theory the arrows are the argument; across theories they
     # are the tower's shape -- drawn thinner. The distinction rides on

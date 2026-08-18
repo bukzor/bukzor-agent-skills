@@ -176,10 +176,13 @@ def prior(origin: Path, source: Path, entry: str) -> Prior:
     return Prior(claim_id(origin, target), target)
 
 
-def split_frontmatter(text: str) -> tuple[Mapping[str, object], str]:
-    """The frontmatter mapping, and the body that follows it."""
+def split_frontmatter(text: str) -> tuple[Mapping[str, object], str] | None:
+    """The frontmatter mapping and the body that follows it, or None where the
+    file opens with no frontmatter at all -- a `why:` may point at a schema or
+    a todo, and a reader following one has to be able to come back empty."""
     match = re.match(r"---\n(.*?)\n---\n", text, re.DOTALL)
-    assert match is not None, text[:200]
+    if match is None:
+        return None
     loaded = cast(Mapping[str, object], yaml.safe_load(match.group(1)))
     assert isinstance(loaded, dict), loaded
     return loaded, text[match.end() :]
@@ -193,7 +196,9 @@ def first_paragraph(body: str) -> str:
 
 
 def read_claim(origin: Path, path: Path) -> Claim:
-    front, body = split_frontmatter(path.read_text())
+    split = split_frontmatter(path.read_text())
+    assert split is not None, f"{path}: no frontmatter, so this file is no claim"
+    front, body = split
     assert "label" in front, f"{path}: no `label:`, so this file is no claim"
     label, standing, why = front["label"], front["standing"], front.get("why", [])
     verdict, verify = front.get("verdict"), front.get("verify")
@@ -295,11 +300,35 @@ def foreign(ledger: Ledger) -> tuple[str, ...]:
     """Cited ids whose file is on disk, outside this ledger.
 
     A real reference -- a tower's lower storeys keep ledgers of their own, and
-    a claim that rests on ruled law elsewhere has to be able to say so. What
-    this reader cannot supply is their standing, never having been pointed at
-    the ledger that carries it.
+    a claim that rests on ruled law elsewhere has to be able to say so.
     """
     return tuple(cited.id for cited in undefined(ledger) if cited.path.exists())
+
+
+def cited_claim(origin: Path, path: Path) -> Claim | None:
+    """The claim a citation names, or None where it names none: a `why:` may
+    legally point at a schema, a todo, or nothing on disk at all."""
+    if not path.is_file():
+        return None
+    split = split_frontmatter(path.read_text())
+    if split is None or "label" not in split[0]:
+        return None
+    else:
+        return read_claim(origin, path)
+
+
+def imported(ledger: Ledger) -> Mapping[str, Claim]:
+    """The claims cited from outside this ledger, read from their own files.
+
+    A defining claim's `why:` is how one theory imports another -- the
+    theories whose words it also admits -- so following a citation across the
+    boundary honors that import rather than reaching past this reader's scope.
+    Keyed by the citing ledger's ids, since that is what a `why:` here says.
+    """
+    found = {
+        cited.id: cited_claim(ledger.origin, cited.path) for cited in undefined(ledger)
+    }
+    return {name: claim for name, claim in found.items() if claim is not None}
 
 
 def dangling(ledger: Ledger) -> tuple[str, ...]:

@@ -42,6 +42,7 @@ from llm_claims_kb import (
     dangling,
     defining_claim,
     foreign,
+    imported,
     read_ledger,
 )
 
@@ -163,9 +164,11 @@ def labels_of(ledger: Ledger) -> Mapping[str, str]:
     not absent, and a citation should show it that way rather than as a
     dangling path.
 
-    A claim in another ledger has no label to show either -- reading it is
-    outside what this render was pointed at -- but the citation is sound, so
-    it keeps its path and says where the label went.
+    A claim in another ledger is cited as its own label too, read from its own
+    file. That is what a `why:` across a boundary is for -- on a defining
+    claim it is the theory import -- so the citing line says a label, not a
+    path, and needs no mark saying the label came from elsewhere. What names
+    no claim at all keeps its path: a filename says more there than nothing.
     """
     return (
         {
@@ -174,7 +177,8 @@ def labels_of(ledger: Ledger) -> Mapping[str, str]:
             if theory.defining is None
         }
         | {claim.id: claim.cited_as for claim in ledger.claims}
-        | {other: f"(elsewhere: {other})" for other in foreign(ledger)}
+        | {other: other for other in foreign(ledger)}
+        | {name: claim.cited_as for name, claim in imported(ledger).items()}
     )
 
 
@@ -183,7 +187,10 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
 
     Labels are the only handle the chat form has -- paths are gone -- so a
     label another label prefixes is a real collision here, however well the
-    files were telling those two claims apart.
+    files were telling those two claims apart. An imported label is in the
+    paste on the same terms and collides on them too: two ledgers may each
+    hold a STANDING and stay unambiguous, right up until one imports the
+    other.
     """
     found = [f"dangling why: reference: {missing}" for missing in dangling(ledger)]
     # An unwritten defining claim needs no lint: the theory renders `?`, which
@@ -196,7 +203,9 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
         for theory in ledger.theories
         if theory.defining and not theory.ontology
     ]
-    names = sorted(claim.label for claim in ledger.claims)
+    names = sorted(
+        claim.label for claim in (*ledger.claims, *imported(ledger).values())
+    )
     found += [
         (
             f"label {one} is defined twice"
