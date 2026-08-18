@@ -80,6 +80,17 @@ All three punts were filed in durable registers later this day:
 - ADR → ledger + devlog fold → `standing: open` as
   `design.claims.kb/does-the-ledger-subsume-the-adr.md`
 
+## Addendum (later the same day)
+
+- The decision-space framework generalized and promoted to the global
+  redesign must-read as "A verdict has four cells" (placement, name,
+  route, schedule; treatment derived) — dotfiles commit f8a9ac9, with
+  this repo's reforms as its receipts.
+- design-next's devlog-cut ruling reopened (283e40f): the third-place
+  definition names the read-back moment the residue test found
+  missing. `[!QUESTION]` in `040-design.kb/class-record.md`; ADR_FATE
+  rules after it.
+
 ## References
 
 - b7b89c0, ae1dee3 — the census's creation and fold (the evidence)
