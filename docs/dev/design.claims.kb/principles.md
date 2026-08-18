@@ -1,6 +1,11 @@
 ---
 label: CONSTITUTION
 standing: agent
+why:
+  - ../strata.claims.kb/standing.md
+  - ../strata.claims.kb/data-representation.md
+  - ../../../llm-claims/design.claims.kb/notation.md
+  - ../../../llm-claims/design.claims.kb/purpose.md
 ontology:
   - principle
   - force
