@@ -73,10 +73,12 @@ reworked days ago and merging fresh work is manufactured churn.
 
 ## Open Questions
 
-- Fold llm-claims-kb into llm-claims (punted; cheap once llm-triggers
-  matures).
-- formalize/deformalize merge — on strain only.
-- ADR → ledger + devlog fold (punted, above).
+All three punts were filed in durable registers later this day:
+
+- Fold llm-claims-kb into llm-claims → `.claude/todo.md`
+- formalize/deformalize merge (on-strain tripwire) → `.claude/todo.md`
+- ADR → ledger + devlog fold → `standing: open` as
+  `design.claims.kb/does-the-ledger-subsume-the-adr.md`
 
 ## References
 

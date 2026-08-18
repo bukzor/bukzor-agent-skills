@@ -303,6 +303,15 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `corpus` must stay for the nested branch and "asking is asking"
       becomes a flag threaded through the walk. Revisit only if a corpus
       grows large enough for the walk to show up in a profile
+- [ ] Fold llm-claims-kb into llm-claims — per DOMAINS
+      (design.claims.kb/authorship.kb/skills-are-domains-occasions-are-triggers.md):
+      the notation/file-form split priced load cost, now priced at the
+      trigger-gated file. Punted 2026-08-18 pending llm-triggers
+      maturing; on merge the old skill name keeps a routing stub
+      (ROUTING)
+- [ ] Merge formalize + deformalize — tripwire, not scheduled: fires
+      when either skill's next rework strains against the other (they
+      are one translation's two directions). Punted 2026-08-18
 - [ ] USER: hand-copy llm-claims/SKILL.md's Core block into claude.ai
       preferences — the two are kept verbatim-identical and the block's
       wording changed during the 2026-08-09/10 polish (the .claims.kb

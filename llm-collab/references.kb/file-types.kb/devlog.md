@@ -1,14 +1,18 @@
 ---
 filename: docs/dev/devlog/YYYY-MM-DD-NNN-slug.md
 audience: Future sessions
-purpose: Capture reasoning, principles, and conventions that diffs can't
+purpose: Narrative third place — process and decision-making that fit neither code comments nor commit messages
 ---
 
 # devlog/ (The "When")
 
 **Audience:** Future you, future Claude sessions
 
-**Purpose:** Capture what diffs can't — reasoning, principles, conventions
+**Purpose:** The third place for narrative documentation of process — what
+fits neither a code comment (it is not about the extant code) nor a commit
+message (it spans or outlives one change): the concerns at hand, the
+discussion and decision-making surrounding a change. Captures what diffs
+can't — reasoning, principles, conventions.
 
 **Must contain:**
 - Decisions and their rationale (especially rejected alternatives)
