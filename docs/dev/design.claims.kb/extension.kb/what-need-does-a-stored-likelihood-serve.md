@@ -3,6 +3,7 @@ label: SCALAR
 standing: user
 why:
   - what-becomes-of-llm-discourse-graph.md
+  - ../../strata.claims.kb/data-representation.md
 ---
 
 # What Need Does a Stored Likelihood Serve?
