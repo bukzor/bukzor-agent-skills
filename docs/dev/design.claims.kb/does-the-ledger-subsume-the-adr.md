@@ -20,3 +20,10 @@ Deliberately punted the same day. Cheap evidence accrues on its own:
 the next ruling that wants an ADR either says something no claim
 field holds, or it doesn't. Ruling this retires or re-charters
 `docs/dev/adr/`.
+
+Entangled: the devlog half assumes the devlog survives, and its v2
+fate is itself open -- design-next's residue test ruled it cut
+(2026-07-18), reopened 2026-08-18 by the same third-place definition
+this question leans on (`[!QUESTION]` in
+`design-next.kb/040-design.kb/class-record.md`). Rule devlog's fate
+first, or the two together.

@@ -148,6 +148,13 @@ Repo-level list. Skill-scoped work lives in each skill's own
       established, open items) already better-homed in incident/design/
       principles-procedures/task; no residue, no nameable read-back moment.
       Updated class-record.md and core-and-classes.md accordingly
+- [ ] REOPENED 2026-08-18: devlog's v2 fate — the residue test's "cut"
+      (above, 2026-07-18) has a counter-argument: the user's third-place
+      definition (llm-collab/references.kb/file-types.kb/devlog.md)
+      names a read-back moment ("what were the concerns surrounding
+      this change?"). Marked as [!QUESTION] in
+      design-next.kb/040-design.kb/class-record.md; ADR_FATE
+      (design.claims.kb/does-the-ledger-subsume-the-adr.md) leans on it
 - [ ] llm-design-kb/principles.kb charter: contents outgrew "design.kb
       authoring" scope (evaluate-uses-independently, test-the-residue) —
       widen CLAUDE.md charter or rehome (user rated rehoming tier-4)

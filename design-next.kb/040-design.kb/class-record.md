@@ -23,6 +23,19 @@ items → task entries — leaving no content type this class alone would
 hold, and no nameable read-back moment
 (`writes-name-their-read-back.md`'s own motivating counter-example).
 
+> [!QUESTION] Reopened 2026-08-18: does the third-place definition survive the residue test?
+> The user's definition of the devlog
+> (`llm-collab/references.kb/file-types.kb/devlog.md`: the narrative
+> third place for what fits neither code comments nor commit
+> messages) names a read-back moment the residue test found missing
+> -- "what were the concerns surrounding this change?" -- and its
+> content (discussion, concerns) is not obviously held by the
+> better-homes above (an incident is a failure; a design entry is an
+> outcome). Re-run the residue test against that definition before
+> this cut lands. `ADR_FATE`
+> (`docs/dev/design.claims.kb/does-the-ledger-subsume-the-adr.md`)
+> leans on the answer.
+
 One class definition carries what v1 spread across `llm-kb`
 (case-studies, migrations) and their duplicated generator scripts.
 `kb new incident --title …` and kin replace the per-type scripts.
