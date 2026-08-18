@@ -7,7 +7,7 @@ standing: user
 
 The delivered account reads without a PhD.
 
-It serves `/formalize`'s ONBOARD use
+It serves `/formalize`'s new-agent fast-track
 (`../../../formalize/design.claims.kb/purpose.kb/fast-track-a-new-agent.md`)
 and is a constraint on the delivered pair -- formal account plus
 glossary. It applies late, once `/formalize`'s conjecturing is

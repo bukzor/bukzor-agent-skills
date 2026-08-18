@@ -11,8 +11,9 @@ How does the notation mark a claim that is decided but not yet
 built -- the `llm-discourse-graph` `TODO!` analogue? Open.
 
 `?` already covers *disputed* claims; what's missing is tense on a claim
-nobody disputes. `formalize/design.claims.kb/purpose.kb/`'s AUTOCHECK and
-EXTRACT are the live instance: both ruled `user`, neither built, and the
+nobody disputes. Two claims in `formalize/design.claims.kb/purpose.kb/` are the live
+instance -- `check-a-proposed-change-automatically.md` and
+`extract-an-implementation.md`: both ruled `user`, neither built, and the
 distinction lives only in a sentence of body prose today -- nothing in
 the frontmatter says "decided, not yet real."
 

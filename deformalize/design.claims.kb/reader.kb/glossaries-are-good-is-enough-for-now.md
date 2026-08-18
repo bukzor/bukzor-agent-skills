@@ -11,8 +11,8 @@ For now the skills assert that glossaries are good, record the
 definitions the owner asked for, rename aggressively wherever a plain
 name is equally accurate, and suggest a couple of format conventions.
 
-MINE, `/formalize`'s ruling that the skill is written for the owner's
-own designs
+`/formalize`'s ruling that the skill is written for the owner's own
+designs
 (`../../../formalize/design.claims.kb/setting.kb/written-for-the-owners-own-designs.md`),
 is why this stays enough: a general-audience tool would need more. That
 is the whole of the apparatus today, deliberately. A glossary

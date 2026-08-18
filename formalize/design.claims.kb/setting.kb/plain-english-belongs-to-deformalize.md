@@ -5,7 +5,7 @@ standing: user
 
 # Plain English Belongs to /deformalize
 
-The plain-English burden belongs to `/deformalize`'s DEFORM_JOB
+The plain-English burden belongs to `/deformalize`
 (`../../../deformalize/design.claims.kb/purpose.kb/deformalize-adds-glossary-and-successors.md`).
 `/formalize` stays formal.
 

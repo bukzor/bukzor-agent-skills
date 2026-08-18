@@ -27,8 +27,8 @@ question than VOID answers, and putting both on one mark would be the
 same category error `strata.claims.kb/standing.kb/standing-is-standing-according-to.md`
 names for standing itself: one mark asked to carry two questions.
 
-The live instance is `formalize/design.claims.kb/run.kb/what-the-stopping-rule-is.md`
-(STOP): "the question presupposed one and dissolved once that
+The live instance is `formalize/design.claims.kb/run.kb/what-the-stopping-rule-is.md`:
+"the question presupposed one and dissolved once that
 presupposition was named." Its `standing: user` is right -- the user
 did rule on it -- but nothing today distinguishes that ruling from an
 ordinary accepted claim. It wants its own mark, `dissolved: true`,
