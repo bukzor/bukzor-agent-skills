@@ -33,6 +33,12 @@ low for what `certified` wants to mean.
 - Every real ledger run so far is degenerate: no strikes, no
   clashes, no presupposition failures. Those branches are witnessed
   only on smallest synthetic instances.
+- The cheaper confidence rung is taken (2026-08-18):
+  `tests/test_derived_theorems.py` quantifies four derived results
+  over generated strike-bearing records. That is evidence about small
+  records -- three claims, five acts, four verdict words -- not proof
+  about all of them, so it lowers the odds of a bug escaping without
+  answering what this task answers.
 - The standing theory is still re-rulable: KEY, CUT open; GRAIN
   closes on their tripwires
   (`llm-claims/design.claims.kb/notation.kb/how-should-judge-verdict-standing-be-represented-long-term.md`).
@@ -59,11 +65,6 @@ low for what `certified` wants to mean.
 - Every real ledger remains degenerate. Until something strikes or
   dissolves in production, the minimal witnesses carry the actual
   load.
-- The cheaper confidence rung is untaken: quantified property tests
-  over strike-bearing records (a separate, smaller decision). If the
-  felt need is confidence rather than proof, take that rung first --
-  every property written there is a theorem statement this task
-  inherits verbatim.
 
 ## Requirements
 
@@ -129,3 +130,14 @@ right interim rung (an afternoon, targets the strike-bearing domain
 gap in `test_moot_absorbs_content_acts`), formalization rated
 high-leverage only as the graduation move. The one-artifact ruling
 and the six-session estimate are from that conversation.
+
+The rung was taken the same day, so this task inherits its four
+statements rather than inventing them: moot absorbs content-acts,
+one collapse pass reaches the fixpoint, assessor identity carries no
+force of its own, one act settles any claim whose frame stands
+(`tests/test_derived_theorems.py`). Writing them turned up one
+result the informal argument had not stated: the second contest in
+`color()` is redundant for the value -- dropping a moot claim's acts
+removes whole components, so no surviving claim's interval can move
+-- and is load-bearing only for the derivation, which is why it
+stays.
