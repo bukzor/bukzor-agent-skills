@@ -1,5 +1,5 @@
 ---
-label: STANDING
+label: VISIBLE_STANDING
 standing: open
 ---
 
