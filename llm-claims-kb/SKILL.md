@@ -156,6 +156,29 @@ A finding has two honest fixes, and the tool does not choose: import
 the theory that defines the label, or stop reaching for it -- usually
 by naming the file, which the sentence often already does.
 
+### bin/llm-claims-kb-ownership
+
+Purpose: report where the fleet's stipulations and the licensing law
+disagree -- the word a sibling pair both claim, the import nobody
+uses. The law itself is the ownership theory,
+`../llm-claims/design.claims.kb/ownership.md`.
+
+```bash
+bin/llm-claims-kb-ownership            # every double stipulation, judged
+bin/llm-claims-kb-ownership --census   # the one-line summary
+bin/llm-claims-kb-ownership --idle     # the idle-import adjudication queue
+```
+
+The default scan judges each double by how the two stipulators
+relate: siblings fail, because the owner is undefined there and only
+adjudication resolves it; a nested pair is inert, since the outer
+entry owns and the inner restates it; an unrelated pair in one
+ledger is queued without failing; a pair in different ledgers is out
+of jurisdiction -- namespaces are per-ledger -- and is counted, never
+reported. `--idle` is a queue, not an error list: an import whose
+words go unsaid may still carry real support, and only reading the
+citing theory tells.
+
 ## What this is not
 
 `Skill(llm-discourse-graph)` also keeps claims in files: a bare

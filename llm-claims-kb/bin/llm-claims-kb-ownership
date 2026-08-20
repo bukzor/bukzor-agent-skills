@@ -1,0 +1,203 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = ["pyyaml"]
+# ///
+"""The ownership scan: where the fleet's stipulations and the law disagree.
+
+The law is the ownership theory (llm-claims/design.claims.kb/ownership.md);
+its runnable fixtures are ownership.py beside it. This scan reads the real
+fleet and reports each word two theories both stipulate, judged by how the
+two relate:
+
+- **siblings** -- the law's owner is undefined there (SINGLE_VALUED), and
+  only adjudication resolves it: a finding, and the failing exit;
+- **nested** -- inert: the outer entry owns and the inner restates it
+  (OUTERMOST_WINS);
+- **unrelated, one ledger** -- queued for adjudication, non-failing;
+- **foreign ledgers** -- legal, namespaces are per-ledger (SORT_REACH):
+  counted, never reported.
+
+`--census` prints the one-line summary ARITY's `verify:` runs. `--idle`
+prints the idle-import queue (IDLE_UNDECIDABLE): imports whose taker never
+says the taken words. Support may still ride each arrow, so idle entries
+are adjudicated by reading and are never errors.
+
+Run from the repo root.
+"""
+
+import argparse
+import re
+import sys
+from collections.abc import Iterable, Sequence
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent))
+
+from llm_claims_kb import Theory, read_ledger  # noqa: E402
+
+
+def ledger_roots(under: Path = Path()) -> tuple[Path, ...]:
+    """Every ledger under the working tree, worktree copies excepted."""
+    return tuple(
+        sorted(
+            path
+            for path in under.rglob("*.claims.kb")
+            if path.is_dir() and ".claude" not in path.parts
+        )
+    )
+
+
+def fleet() -> tuple[Theory, ...]:
+    """Every theory in every ledger."""
+    return tuple(
+        theory for root in ledger_roots() for theory in read_ledger(root).theories
+    )
+
+
+def site(theory: Theory) -> str:
+    """A fleet-unique name: the collection's path."""
+    return str(theory.path)
+
+
+def ledger_of(theory: Theory) -> Path:
+    """The `*.claims.kb` the theory lives in -- itself, for a ledger's own."""
+    here = theory.path.resolve()
+    return next(one for one in (here, *here.parents) if one.name.endswith(".claims.kb"))
+
+
+def kinship(one: Theory, other: Theory) -> str:
+    """How two stipulators relate -- which is what the law reads off a double."""
+    here, there = one.path.resolve(), other.path.resolve()
+    if here == there or here in there.parents or there in here.parents:
+        return "inside"
+    elif ledger_of(one) != ledger_of(other):
+        return "foreign"
+    elif here.parent == there.parent:
+        return "sibling"
+    else:
+        return "cousin"
+
+
+def prose(path: Path) -> str:
+    """The claim speaking: body only, code spans struck, lowercased."""
+    body = re.sub(r"\A---\n.*?\n---\n", "", path.read_text(), flags=re.DOTALL)
+    return re.sub(r"```.*?```|`[^`]*`", " ", body, flags=re.DOTALL).lower()
+
+
+def says(text: str, word: str) -> bool:
+    """The word on word boundaries, bare or plural."""
+    return re.search(rf"(?<!\w){re.escape(word)}s?(?!\w)", text) is not None
+
+
+def doubles(theories: Sequence[Theory]) -> Iterable[tuple[str, str, Theory, Theory]]:
+    """Each word two theories both stipulate, with the relation the law reads."""
+    for one in theories:
+        for other in theories:
+            if site(one) < site(other):
+                for word in sorted(set(one.ontology) & set(other.ontology)):
+                    yield word, kinship(one, other), one, other
+
+
+def interior_text(root: Theory, theories: Sequence[Theory]) -> str:
+    """Everything the theory's interior says, as one blob."""
+    home = root.path.resolve()
+    region = [
+        theory
+        for theory in theories
+        if theory.path.resolve() == home or home in theory.path.resolve().parents
+    ]
+    return " ".join(
+        prose(claim.path)
+        for theory in region
+        for claim in (theory.defining, *theory.claims)
+        if claim
+    )
+
+
+def idle_imports(theories: Sequence[Theory]) -> Iterable[tuple[Theory, Theory]]:
+    """Imports whose taker's interior never says the taken words."""
+    home = {
+        theory.defining.path.resolve(): theory
+        for theory in theories
+        if theory.defining
+    }
+    for theory in theories:
+        text = interior_text(theory, theories)
+        for cited in theory.priors:
+            prior = home.get(cited.path.resolve())
+            if prior and not any(says(text, word) for word in prior.ontology):
+                yield theory, prior
+
+
+def census(theories: Sequence[Theory]) -> str:
+    """One line: the shape of the gap between the corpus and the law (ARITY)."""
+    tally = {"sibling": 0, "inside": 0, "cousin": 0, "foreign": 0}
+    for _, how, _, _ in doubles(theories):
+        tally[how] += 1
+    idle = len(list(idle_imports(theories)))
+    total = sum(len(theory.priors) for theory in theories)
+    pairs = ", ".join(f"{count} {how}" for how, count in tally.items())
+    return f"doubles: {pairs}; imports: {idle} idle of {total}"
+
+
+def report(theories: Sequence[Theory]) -> int:
+    """The default scan: every double, judged, sibling findings failing."""
+    failing = 0
+    rows = sorted(
+        doubles(theories),
+        key=lambda row: (row[1], row[0], site(row[2]), site(row[3])),
+    )
+    for word, how, one, other in rows:
+        if how == "sibling":
+            failing += 1
+            print(
+                f"finding: {word!r} stipulated by siblings {site(one)} and"
+                f" {site(other)} -- owner undefined (SINGLE_VALUED); adjudicate"
+            )
+        elif how == "inside":
+            outer, inner = sorted(
+                (one, other), key=lambda theory: len(theory.path.resolve().parts)
+            )
+            print(
+                f"inert: {word!r} restated by {site(inner)} inside"
+                f" {site(outer)} -- the outer owns (OUTERMOST_WINS)"
+            )
+        elif how == "cousin":
+            print(
+                f"adjudicate: {word!r} stipulated by unrelated {site(one)} and"
+                f" {site(other)} in one ledger"
+            )
+        else:
+            pass  # foreign doubles are legal: namespaces are per-ledger
+    print(census(theories))
+    return 1 if failing else 0
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--census", action="store_true", help="one summary line")
+    parser.add_argument(
+        "--idle", action="store_true", help="the idle-import adjudication queue"
+    )
+    args = parser.parse_args()
+    theories = fleet()
+    if args.census:
+        print(census(theories))
+        return 0
+    elif args.idle:
+        queue = sorted(idle_imports(theories), key=lambda pair: site(pair[0]))
+        for taker, prior in queue:
+            print(
+                f"adjudicate: {site(taker)} imports {site(prior)}"
+                f" and says none of its words"
+            )
+        total = sum(len(theory.priors) for theory in theories)
+        print(f"{len(queue)} idle of {total} imports -- resolve each by reading")
+        return 0
+    else:
+        return report(theories)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
