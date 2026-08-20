@@ -4,7 +4,8 @@
 
 A commitment of the licensing law -- who may say a stipulated name,
 what finding follows when they may not, what the law itself makes of
-a repair -- stated with what it cost and what it bought.
+a repair, and the procedure that adjudicates what the law leaves
+undefined -- stated with what it cost and what it bought.
 
 ## What does NOT belong here
 
