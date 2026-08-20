@@ -45,7 +45,9 @@ Two things keep it open, and neither is a doubt about the analogy:
   *into* edge-claims. That choice is the real content of the ruling,
   and it should be made deliberately rather than discovered.
 
-The alternative is the discipline that runs today: confinement as
-filing hygiene, checked by a reader against a vocabulary list, with
-no edge in the base at all. Its weakness is the one CONFINE already
-names -- nothing computes the answer, so nothing catches the drift.
+The alternative is the discipline that runs today: confinement as a
+filing rule, checked against the vocabulary a theory admits
+[CONFINE], with no edge in the base at all. Its weakness is that a
+checked vocabulary is not a recorded dependency -- however well the
+check runs, nothing in the base says the claim leans on the theory,
+so no act against the theory reaches the claim.

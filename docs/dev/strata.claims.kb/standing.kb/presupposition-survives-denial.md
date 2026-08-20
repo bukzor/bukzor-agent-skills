@@ -22,10 +22,10 @@ The test has two faces, and only one of them is mechanized:
   together, because both presupposed the thing that failed. A rule
   that dropped only one polarity would be reading the attack
   relation, not this one.
-- as a filing criterion it is discipline, unmechanized like
-  confinement. Whether an edge belongs in the presupposition
-  relation is settled by trying the denial in prose, and nothing
-  checks that the answer was honest.
+- as a filing criterion it is an argument, not a computation.
+  Whether an edge belongs in the presupposition relation is settled
+  by trying the denial, and the fixpoint reads only the verdict that
+  trying produced -- never the reasoning that produced it.
 
 This is also why presupposition cannot be folded into the attack
 relation, however the edges are drawn. An attack that fires when `q`

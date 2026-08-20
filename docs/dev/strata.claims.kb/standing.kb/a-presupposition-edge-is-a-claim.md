@@ -31,11 +31,16 @@ a side effect:
   be out [SENSE]. A disputed edge is exactly as good as a disputed
   presupposition, and lands in the same coordinate.
 
-The two levels do not recurse: an edge-claim is not an endpoint of
-any edge. What an edge-claim presupposes is a question this ruling
-declines to ask -- not because the answer is obvious, but because
-nothing has needed it, and an unasked question stays cheap to open
-while an answered one does not.
+The two levels do not recurse: an edge-claim is neither end of any
+edge, and a graph saying otherwise is refused at the entry. That is
+a simplifying stipulation rather than a finding, and its two halves
+are not worth the same. Barring edges *out of* an edge-claim is what
+keeps the collapse monotone -- let an edge-claim be mooted and the
+edge it asserts falls inert, retracting a collapse already made,
+which is not a move a least fixpoint has. Barring edges *into* one
+buys only symmetry. Either half is stale the day a reader needs the
+edge it forbids: lifting the first costs an approximation fixpoint
+over the frame graph, lifting the second costs one assertion.
 
 The declined alternative is the relation as a parameter, handed to
 the engine beside the record. It was what the engine did, and it

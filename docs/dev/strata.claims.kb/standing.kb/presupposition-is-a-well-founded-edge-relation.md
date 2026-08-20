@@ -10,9 +10,10 @@ verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/
 # Presupposition Is a Well-Founded Edge Relation
 
 Presupposition is a second edge relation over the same claims -- a
-quiver, not a status, not a verdict, and not something an act
-asserts. It is well-founded: no claim is reachable from itself along
-it, however far around.
+quiver, not a status, not a verdict, and never the content of an act:
+an act reaches an edge only through the claim that asserts it [EDGE].
+It is well-founded: no claim is reachable from itself along it,
+however far around.
 
 A cycle is rejected rather than resolved. Admit one and defeating
 either end moots both, so the acts that seeded the collapse land on a
