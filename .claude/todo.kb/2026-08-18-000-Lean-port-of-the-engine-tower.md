@@ -55,7 +55,7 @@ low for what `certified` wants to mean.
       Overrides every postpone-state below; wrong answers outrank
       unsettled rulings.
 - [ ] A real ledger starts exercising the non-degenerate branches --
-      first live strike, clash, or `dissolved` -- *and* the standing
+      first live strike, clash, or moot claim -- *and* the standing
       theory's open rulings (KEY, CUT) have closed.
 - [ ] The incubator graduates (the desugaring or the engine is about
       to leave for real tooling). The port is the graduation fork

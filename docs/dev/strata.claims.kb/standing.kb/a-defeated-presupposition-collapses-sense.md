@@ -5,16 +5,14 @@ why:
   - defeat-is-evidence-for-an-approximator.md
   - ../fixpoint.kb/monotone-operators-have-least-fixpoints.md
   - ../reference.kb/key-valued-fields-present-a-quiver.md
-verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "moot_propagates"
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "moot_propagates or contested_presupposition or never_also"
 ---
 
 # A Defeated Presupposition Collapses Sense
 
 A claim whose presupposition is defeated is *moot*: it has no
 standing interval at all -- not `contested`, which is an interval
-with room in it, but no content left to bound. A verdict on it
-judges the framing rather than what was asserted; the ledger spells
-it `verdict: dissolved`.
+with room in it, but no content left to bound.
 
 Three commitments make that computable:
 

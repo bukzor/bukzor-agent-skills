@@ -223,6 +223,24 @@ def test_moot_propagates_defeat_along_presupposition_edges():  # SENSE
     assert moot(presupposes, frozenset({"q"})) == {"p", "r"}
 
 
+def test_a_contested_presupposition_collapses_nothing():  # SENSE
+    # q is clashed, not defeated: p's frame is in doubt, not gone, and
+    # a reader who still believes q still has p's question in front of
+    # them.  Seeding the collapse from `not surely in` would take p.
+    claims = frozenset({"p", "q"})
+    presupposes = frozenset({("p", "q")})
+    record = frozenset(
+        {
+            Act("u", "q", "accepted", 0),
+            Act("v", "q", "rejected", 1),
+        }
+    )
+    assert color(claims, presupposes, record, admits_all) == {
+        "q": "contested",
+        "p": "in",
+    }
+
+
 def test_a_moot_claim_is_never_also_content_defeated():  # ABSORB, SENSE
     claims = frozenset({"p", "q"})
     presupposes = frozenset({("p", "q")})

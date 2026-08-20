@@ -234,9 +234,8 @@ def contest(
 
 def moot(presupposes: frozenset[Edge], defeated: frozenset[str]) -> frozenset[str]:
     """Sense-collapse: a claim whose presupposition is defeated, or
-    itself moot, is moot -- a color outside the truth order, judging
-    the framing rather than the content.  Ledger spelling:
-    `verdict: dissolved`."""
+    itself moot, is moot -- a color outside the truth order, with no
+    interval to read.  [SENSE]"""
 
     def step(m: frozenset[str]) -> frozenset[str]:
         return m | frozenset(
