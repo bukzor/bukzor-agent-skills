@@ -19,7 +19,6 @@ ontology:
   - check
   - scan
   - theory
-  - ontology
   - prior
   - staleness condition
   - indentation

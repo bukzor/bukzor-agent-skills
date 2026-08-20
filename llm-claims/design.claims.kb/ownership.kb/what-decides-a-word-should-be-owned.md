@@ -1,20 +1,24 @@
 ---
 label: SHOULD_OWN
-standing: open
+standing: user
 why:
   - zero-force-empties-the-docket-not-the-question.md
   - a-plain-english-double-culls-or-narrows.md
+authority: user ruling, 2026-08-20 -- "whether a theory uses them is poorly correlated to whether they are violating encapsulation/separation of concerns/primacy of this theory"
 ---
 
-# What decides a word should be owned?
+# A word is owned where use signals violation
 
-Given that force triages findings and cannot rank the unowned
-(SCREENING), what does decide that a word wants a stipulation? The
-notation's own rule -- coinages only, words the theory fixes a
-meaning for that a reader could not have brought -- names the class
-but not a procedure for a contested case. The corpus holds 307
-stipulations today (observed 2026-08-20). The plain-English end is
-settled by PLAIN: those words go free, or the entry expands to what
-was genuinely coined. What stays open is the middle -- a word
-neither plainly common nor plainly a coinage, with no test yet to
-say which side it falls on.
+A word should be owned only where another theory's saying it is a
+reliable sign of violation -- of encapsulation, of separation of
+concerns, of the owning theory's primacy. A word plenty of
+unrelated theories will need fails that test by construction: use
+and violation are uncorrelated, so the license polices noise, and
+PLAIN's menu applies -- remove the ownership, or contract the
+entry to the term genuinely coined.
+
+The declined test is centrality: how much the coining theory
+invests in a word says nothing about who else will need it.
+'ontology', 'retraction', and 'transport' were each load-bearing
+for their theories and still plain English -- ruled so 2026-08-20,
+overturning an agent sort that had read centrality as coinage.

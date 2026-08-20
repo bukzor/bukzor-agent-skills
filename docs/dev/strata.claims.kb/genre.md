@@ -8,7 +8,6 @@ ontology:
   - vocabulary
   - signature
   - theory
-  - ontology
   - confinement
   - conservativity
   - satisfaction

@@ -4,7 +4,6 @@ standing: agent
 why:
   - data-structures.md
   - view.md
-  - record.md
 ontology:
   - representation
   - target

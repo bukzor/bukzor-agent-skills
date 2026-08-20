@@ -20,7 +20,8 @@ The declined alternative is promoting one stipulator to owner of a
 word nobody coined: that manufactures licensing debt across the
 fleet, and the nonmonotone witness (`../ownership.py nonmonotone`)
 shows a cull toward a single owner can mint findings while
-discharging none. Worked 2026-08-20: ten of thirteen sibling pairs
-resolved this way -- seven words culled everywhere, one entry
+discharging none. Worked 2026-08-20: all thirteen sibling pairs
+resolved this way -- ten words culled everywhere, one entry
 expanded ('product' to 'synchronized product', the phrase its
-prose already said).
+prose already said). The test for whether a word is plain English
+in this sense is SHOULD_OWN's: would unrelated theories need it?

@@ -14,6 +14,6 @@ to license anything. The gap is the double-stipulation census:
 observed 2026-08-20 with the docket cleared, 0 sibling pairs (the
 undefined cases SINGLE_VALUED sends to adjudication -- 13 at first
 scan, all adjudicated), 6 nested pairs (inert under
-OUTERMOST_WINS), 48 foreign pairs (legal -- namespaces are
+OUTERMOST_WINS), 47 foreign pairs (legal -- namespaces are
 per-ledger). The counts are
 dated data; the shape of the gap is the claim.

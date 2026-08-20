@@ -11,7 +11,6 @@ ontology:
   - typing
   - morphism
   - migration
-  - transport
   - lift
 stale-when: a fleet that abandons typed payloads -- prose-only entries make this stratum vacuous
 ---
