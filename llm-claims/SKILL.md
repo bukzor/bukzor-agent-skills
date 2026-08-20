@@ -117,8 +117,11 @@ widening the ontology is a revision to it.
 - **Confinement** -- an ontology excludes: a listed word is that
   theory's, and its siblings may not use it. It greps for a sibling
   saying an owned word -- the word was no coinage and gets culled, the
-  claim is misfiled and moves, or the two mean different things by it
-  and one of them uniquifies.
+  claim is misfiled and moves, the speaker genuinely depends on the
+  owner and imports it (an import asserts support too -- take it only
+  where that holds), the two mean different things by it and
+  one uniquifies, or the speaker is the owner's own prior and the word
+  wants a shared theory upstream of both.
 - **Conservativity** -- a later theory never lowers a prior's standing.
   Where it seems to, the prior was wrong; fix it there.
 
