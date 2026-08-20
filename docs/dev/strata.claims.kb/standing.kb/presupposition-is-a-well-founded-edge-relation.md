@@ -27,8 +27,8 @@ quietly, as any reachability computation would. That answers, but the
 answer is unreadable in exactly the case the reader most needs it,
 and it converts a locatable error into a silently wrong standing.
 
-Where the relation comes from is a separate question, and open: the
-engine takes it alongside the record rather than out of it, so no
-reader's stance bears on it and no act can raise or strike one. That
-sits badly with acts being the only way anything enters the base, and
-is the next thing to rule here.
+Where the relation comes from is a separate question, ruled at
+[EDGE]: each edge is a claim, so the graph well-foundedness is asked
+of is the one a reader upholds, not the one on offer. Cycles are
+therefore reader-relative too -- and a reader who has defeated an
+edge has nothing left to reject.

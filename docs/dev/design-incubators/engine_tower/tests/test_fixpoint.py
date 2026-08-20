@@ -8,7 +8,9 @@ from engine_tower.fixpoint import iterate
 type Edges = frozenset[tuple[str, str]]
 
 
-def op(roots: frozenset[str], edges: Edges) -> Callable[[frozenset[str]], frozenset[str]]:
+def op(
+    roots: frozenset[str], edges: Edges
+) -> Callable[[frozenset[str]], frozenset[str]]:
     # F(X) = roots ∪ post(X): monotone but not inflationary, so
     # downward iteration is possible and the overshoot is visible
     def f(x: frozenset[str]) -> frozenset[str]:

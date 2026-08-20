@@ -285,18 +285,34 @@ class Color:
         return self.content is None
 
 
+def frames(edge_claims: Mapping[str, Edge], upheld: frozenset[str]) -> frozenset[Edge]:
+    """The presupposition graph a reader is actually holding: the edges
+    whose claims stand for that reader.  An edge nobody upholds is
+    inert -- including for well-foundedness, which is asked of the
+    graph in hand and never of the graph on offer.  [EDGE]"""
+    return frozenset(edge for claim, edge in edge_claims.items() if claim in upheld)
+
+
 def color(
     claims: frozenset[str],
-    presupposes: frozenset[Edge],
+    edge_claims: Mapping[str, Edge],
     record: frozenset[Act],
     admits: Stance,
 ) -> Mapping[str, Color]:
     """The stack over one record: fold, interval, sense-collapse.
 
+    Every presupposition edge is itself a claim of the base, so the
+    graph is read out of the record under this reader's stance rather
+    than handed in beside it [EDGE, ACT, STANCE].  Two readers who
+    disagree about whether one claim presupposes another compute
+    different senses, which is the disagreement being representable
+    instead of being a precondition.
+
     Sense is computed the way content is, from the same acts: a claim
-    collapses *surely* when a presupposition is surely defeated, and
-    *possibly* when one is merely disputed.  Two seeds, two bounds,
-    one collapse -- neither bound is a rule of its own [SENSE].
+    collapses *surely* when a presupposition it surely has is surely
+    defeated, and *possibly* when an edge it may have leads to a claim
+    that may be out.  Two seeds, two graphs, one collapse -- neither
+    bound is a rule of its own [SENSE].
 
     Moot absorbs content-acts -- they are dropped before the second
     truth-order pass -- so "moot and content-defeated" is impossible by
@@ -308,10 +324,21 @@ def color(
     -- without the drop, the exclusion above would rest on testing the
     collapsed set first, which is the precedence rule the criterion
     forbids."""
+    assert (
+        edge_claims.keys() <= claims
+    ), f"edge-claims outside the base: {sorted(edge_claims.keys() - claims)}"
+    endpoints = frozenset(c for edge in edge_claims.values() for c in edge)
+    # the two levels do not recurse: what an edge-claim presupposes is
+    # a question this stratification declines to ask [EDGE]
+    assert endpoints.isdisjoint(
+        edge_claims
+    ), f"presupposition over edge-claims: {sorted(endpoints & edge_claims.keys())}"
     eff = effective(record, admits)
     lower, upper = contest(eff, claims)
-    surely = collapse(presupposes, claims - upper)  # a presupposition is out
-    possibly = collapse(presupposes, claims - lower)  # one is not surely in
+    # surely: an edge surely held, to a claim surely out
+    surely = collapse(frames(edge_claims, lower), claims - upper)
+    # possibly: an edge that may hold, to a claim that may be out
+    possibly = collapse(frames(edge_claims, upper), claims - lower)
     live = claims - surely
     lower, upper = contest(frozenset(act for act in eff if act.target in live), live)
     return {

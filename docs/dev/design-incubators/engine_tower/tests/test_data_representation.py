@@ -110,7 +110,7 @@ def test_computed_standing_reproduces_the_written_fields():  # REIFY, DEFEAT
     back contested or moot, and no claim of this ledger records a
     presupposition for its subject to turn on."""
     stored = read_ledger()
-    verdicts = color(frozenset(stored), frozenset(), desugar(stored), admits_all)
+    verdicts = color(frozenset(stored), {}, desugar(stored), admits_all)
     for claim, f in stored.items():
         want = Color("in", "out" if "verdict" in f else "in")
         assert verdicts[claim] == want, (claim, f)
