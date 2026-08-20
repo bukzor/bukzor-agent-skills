@@ -10,7 +10,6 @@ ontology:
   - oracle
   - distinction
   - ontology
-  - cost
 stale-when: a stopping point that is a truth rather than an act
 ---
 

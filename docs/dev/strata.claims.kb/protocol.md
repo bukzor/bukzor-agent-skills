@@ -12,7 +12,7 @@ ontology:
   - bank
   - monitor
   - guard
-  - product
+  - synchronized product
   - agent
   - enforcement
   - grade

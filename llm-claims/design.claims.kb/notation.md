@@ -17,7 +17,6 @@ ontology:
   - judge
   - signature
   - check
-  - entry
   - scan
   - theory
   - ontology

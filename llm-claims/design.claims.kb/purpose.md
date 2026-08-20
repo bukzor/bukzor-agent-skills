@@ -6,14 +6,10 @@ why:
 ontology:
   - ledger
   - claim
-  - invariant
   - party
-  - cost
   - adoption
   - rung
-  - reader
   - context
-  - notation
 stale-when: a different competitor -- a setting where the ledger is chosen against a better notation rather than against keeping none
 ---
 

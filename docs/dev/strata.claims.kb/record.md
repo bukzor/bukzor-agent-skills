@@ -6,7 +6,6 @@ why:
 ontology:
   - schema
   - record
-  - instance
   - field
   - validation
   - typing

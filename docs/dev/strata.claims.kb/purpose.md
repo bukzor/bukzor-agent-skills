@@ -3,7 +3,6 @@ label: PURPOSE
 standing: agent
 ontology:
   - corpus
-  - reader
   - growth
   - work
   - review

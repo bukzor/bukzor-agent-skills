@@ -6,7 +6,6 @@ ontology:
   - lattice
   - completeness
   - quotient
-  - product
   - coordinate
   - monotone operator
   - triangular

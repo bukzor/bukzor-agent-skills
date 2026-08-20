@@ -14,7 +14,6 @@ ontology:
   - debt
   - drift
   - stamp
-  - reader
   - diff
 stale-when: a reader that can afford to recompute every read -- then caches, and everything priced here, vanish
 ---
