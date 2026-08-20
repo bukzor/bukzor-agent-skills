@@ -13,7 +13,7 @@ issue type.
 The pull toward a second type is constant and arrives disguised as
 tidiness. It is answered by asking what the new type would let us say
 that a sigil cannot
-(../stance.kb/prefer-the-smaller-ontology.md). Where the honest answer
+(../stance.kb/prefer-fewer-distinctions.md). Where the honest answer
 is "nothing, but things would sort better", sorting is `grep`'s job and
 costs no writer anything.
 

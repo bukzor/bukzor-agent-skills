@@ -9,7 +9,6 @@ ontology:
   - judgment
   - oracle
   - distinction
-  - ontology
 stale-when: a stopping point that is a truth rather than an act
 ---
 

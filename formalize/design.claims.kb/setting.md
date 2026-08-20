@@ -2,7 +2,7 @@
 label: SETTING
 standing: agent
 why:
-  - run.md
+  - purpose.md
 ontology:
   - bukzor
   - "Skill(llm-claims)"

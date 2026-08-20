@@ -15,4 +15,4 @@ it may still carry real support, and only reading the citing theory
 tells. So the scan files idle imports as an adjudication queue,
 never as errors -- each entry resolves by reading into "keep, the
 support is real" or "cull, the arrow is dead under both lenses."
-Observed 2026-08-20: 4 idle of 52 imports fleet-wide.
+Observed 2026-08-20: 3 idle of 53 imports fleet-wide.

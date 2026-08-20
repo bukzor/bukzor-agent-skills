@@ -19,7 +19,6 @@ ontology:
   - verdict
   - fiat
   - ruling
-  - retraction
   - defeat
   - presupposition
   - sense

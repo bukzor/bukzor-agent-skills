@@ -4,7 +4,7 @@ standing: user
 authority: user ruling, 2026-08-09, review of the theory-split triggers
 why:
     - a-theory-is-defined-by-a-claim.md
-    - ../stance.kb/prefer-the-smaller-ontology.md
+    - ../stance.kb/prefer-fewer-distinctions.md
 ---
 
 # A Theory Splits on Cost, Not Count
@@ -16,7 +16,7 @@ leaning theory re-derives them and the copies drift. And a split
 earns its boundary when most parts come out easier to read: shorter
 ontology, shorter arrows, claims arguing in one vocabulary instead of
 two. The new boundary is a distinction, and pays rent the way any
-distinction does (../stance.kb/prefer-the-smaller-ontology.md).
+distinction does (../stance.kb/prefer-fewer-distinctions.md).
 
 The declined trigger is length: a theory never splits because its
 claim list got long. Count is a proxy for the reader's cost, which

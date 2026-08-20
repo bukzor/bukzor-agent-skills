@@ -11,7 +11,7 @@ The agent's signature is kept distinct from the user's: `+` spends a
 glyph on a distinction `!` could have absorbed, because the sigil
 signs the judge (the-sigil-signs-the-judge.md).
 
-It survives ../stance.kb/prefer-the-smaller-ontology.md:
+It survives ../stance.kb/prefer-fewer-distinctions.md:
 
 - `?` asks the user for an answer; `+` asks for a veto, and silence
   is consent — the two want opposite responses.
