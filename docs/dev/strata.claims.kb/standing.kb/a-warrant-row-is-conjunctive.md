@@ -3,7 +3,7 @@ label: REWIRE
 standing: agent
 why:
   - evidence-induces-a-monotone-operator.md
-verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_an_unwarranted_reference_still_gates_ascent
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "unwarranted_reference or second_row"
 ---
 
 # A Warrant Row Is Conjunctive

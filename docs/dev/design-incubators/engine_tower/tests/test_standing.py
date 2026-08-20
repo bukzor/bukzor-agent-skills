@@ -8,6 +8,7 @@ from engine_tower.record import Schema
 from engine_tower.reference import edges
 from engine_tower.standing import (
     DESCRIBED,
+    OBLIGATED,
     STIPULATED,
     Act,
     Color,
@@ -33,6 +34,16 @@ def admits_all(act: Act) -> bool:
 
 def standing_leq(x: Standing, y: Standing) -> bool:
     return all(status_leq(x[e], y[e]) for e in x)
+
+
+def test_the_status_chain_orders_by_commitment():  # STATUS
+    """The claim names four rungs in a particular order, so the check
+    runs the whole chain rather than one pair of it: each rung strictly
+    below the next, and no rung below its predecessor."""
+    chain = (DESCRIBED, STIPULATED, OBLIGATED, certified("a"))
+    for lower, higher in zip(chain, chain[1:]):
+        assert status_leq(lower, higher), (lower, higher)
+        assert not status_leq(higher, lower), (higher, lower)
 
 
 def test_the_fibered_top_has_no_join():  # STATUS
@@ -77,6 +88,22 @@ def test_an_unwarranted_reference_still_gates_ascent():  # OPERATOR, THRESHOLD
     # THRESHOLD, so citing it no longer lifts g
     cited = cite(frozenset({Evidence("g", STIPULATED)}), edges(WARRANTED, SCHEMAS))
     assert standing(cited, frozenset(WARRANTED))["g"] == DESCRIBED
+
+
+def test_a_second_row_grants_where_the_first_is_dead():  # REWIRE
+    """Within a row support is conjunctive -- the test above is one
+    failed premise killing a grant.  Across rows it is disjunctive: a
+    second row on the same entry grants on its own.  That is why
+    repair is rewiring: a stronger grant filed into the dead row is
+    spend without effect, however far it is raised."""
+    entries = frozenset({"g", "m", "n"})
+    dead = Evidence("g", STIPULATED, frozenset({"m"}))  # m is never warranted
+    live = Evidence("g", STIPULATED, frozenset({"n"}))
+    warrants_n = Evidence("n", STIPULATED)
+    assert standing(frozenset({dead, warrants_n}), entries)["g"] == DESCRIBED
+    assert standing(frozenset({dead, live, warrants_n}), entries)["g"] == STIPULATED
+    louder = Evidence("g", OBLIGATED, frozenset({"m"}))
+    assert standing(frozenset({dead, louder, warrants_n}), entries)["g"] == DESCRIBED
 
 
 def test_phi_is_monotone_on_an_instance():  # OPERATOR

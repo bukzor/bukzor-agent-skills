@@ -4,7 +4,7 @@ standing: agent
 why:
   - sense-and-content-are-judged-separately.md
   - presupposition-is-a-well-founded-edge-relation.md
-verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py tests/test_derived_theorems.py -k "absorbs"
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py tests/test_derived_theorems.py tests/test_declined_readings.py -k "absorbs or polarities or morgan"
 ---
 
 # Presupposition Survives Denial

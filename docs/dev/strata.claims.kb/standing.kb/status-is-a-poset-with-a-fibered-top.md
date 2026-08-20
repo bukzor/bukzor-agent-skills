@@ -3,7 +3,7 @@ label: STATUS
 standing: user
 why:
   - verdicts-are-assessor-indexed.md
-verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py::test_the_fibered_top_has_no_join
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "status_chain or fibered_top"
 ---
 
 # Status Is a Poset with a Fibered Top

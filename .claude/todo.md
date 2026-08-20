@@ -161,6 +161,26 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
+- [ ] Build the antichain completion the standing theory already claims:
+      COMPUTED (`standing.kb/standing-is-computed-not-stored.md`) and
+      COMPLETION (`standing.kb/the-status-order-is-not-a-complete-lattice.md`)
+      say standing's values live in the completion of the status order,
+      and the engine raises at the missing join instead. The claims are
+      honest about it — COMPLETION says the mechanized operator raises
+      exactly there — but the repair they name is unbuilt, so no
+      `verify:` can cover that sentence. Found 2026-08-20 by the
+      `verify:` under-selection sweep; the two other under-selections
+      that sweep found were fixed by writing the missing witness, this
+      one cannot be. Either build the completion (values become
+      antichains, joins total) or shrink both bodies to what the engine
+      does
+- [ ] `verify:` flattens to `certified(CHECK)` identically whether the
+      check passes today or names a test nobody has written
+      (`data-representation.kb/every-structure-lands-in-every-target.md`
+      is the live instance, sanctioned by the claim schema as acceptance
+      debt). A reader of the flattened ledger cannot tell a witnessed
+      claim from an owed one. Notation defect in `Skill(llm-claims)`,
+      surfaced 2026-08-20
 - [ ] Lean port of the engine tower — gated, not next: fires on the
       triggers in the brief (algebra bug escapes / real ledger goes
       non-degenerate after KEY+CUT close / incubator graduates);

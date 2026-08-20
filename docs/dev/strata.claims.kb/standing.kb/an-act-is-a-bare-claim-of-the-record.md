@@ -5,7 +5,7 @@ authority: "user ruling, 2026-08-17, this conversation: act algebra accepted in 
 why:
   - verdicts-are-assessor-indexed.md
   - standing-is-computed-not-stored.md
-verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "well_founded or restatement"
+verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py -k "well_founded or restatement or edge_claim_is_a_claim"
 ---
 
 # An Act Is a Bare Claim of the Record
