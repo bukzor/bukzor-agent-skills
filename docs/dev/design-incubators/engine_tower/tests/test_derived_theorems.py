@@ -27,12 +27,13 @@ from hypothesis.strategies import (
 from engine_tower.reference import Edge
 from engine_tower.standing import (
     Act,
+    Color,
     Stance,
     affirms,
+    collapse,
     color,
     contest,
     effective,
-    moot,
 )
 
 ASSESSORS = ("u", "v", "w")
@@ -74,8 +75,9 @@ def records(draw) -> frozenset[Act]:
 @composite
 def presuppositions(draw) -> frozenset[Edge]:
     """A frame graph running down the claim order, hence acyclic --
-    the tower's own discipline [STRATA].  A cycle would make a claim's
-    frame turn on its own defeat, which is a different subject."""
+    the tower's own discipline [STRATA], and the engine's precondition
+    [DESCEND].  Drawing a cycle would sample outside the domain, where
+    the properties below say nothing and `collapse` raises."""
     downward = [(src, dst) for i, src in enumerate(ORDER) for dst in ORDER[:i]]
     return draw(frozensets(sampled_from(downward)))
 
@@ -100,14 +102,20 @@ def stances(draw) -> Trusting:
 def test_the_generator_reaches_every_color():
     """The properties below are conditioned on color -- a moot claim,
     a defeated one.  A generator that stopped reaching one would leave
-    them quiet rather than red, so it fails here instead."""
-    for wanted in ("moot", "in", "contested", "out"):
-        find(
-            tuples(presuppositions(), records()),
-            lambda case, wanted=wanted: wanted
-            in color(CLAIMS, *case, admits_all).values(),
-            settings=PROPERTY,
-        )
+    them quiet rather than red, so it fails here instead.  Both
+    coordinates are swept: a disputed subject is as much a case to
+    reach as a defeated one, and nothing else here would notice if the
+    generator never drew it."""
+    for field in ("sense", "content"):
+        for wanted in ("in", "contested", "out"):
+            find(
+                tuples(presuppositions(), records()),
+                lambda case, field=field, wanted=wanted: any(
+                    getattr(c, field) == wanted
+                    for c in color(CLAIMS, *case, admits_all).values()
+                ),
+                settings=PROPERTY,
+            )
 
 
 @PROPERTY
@@ -123,7 +131,7 @@ def test_moot_absorbs_content_acts_in_any_record(
     assessor = choose.draw(sampled_from(sorted(admits.assessors)))
     before = color(CLAIMS, presupposes, record, admits)
     for target in sorted(CLAIMS):
-        if before[target] != "moot":
+        if not before[target].moot:
             continue
         extra = Act(assessor, target, verdict, len(record))
         after = color(CLAIMS, presupposes, record | {extra}, admits)
@@ -135,25 +143,30 @@ def color_by_iteration(
     presupposes: frozenset[Edge],
     record: frozenset[Act],
     admits: Stance,
-) -> Mapping[str, str]:
+) -> Mapping[str, Color]:
     """The collapse cycle run to a fixpoint: contest, collapse the
-    frames that defeat took out, contest again over what is left, and
-    repeat while the moot set grows.  `color` takes one pass, and that
-    the two agree is the property below."""
+    subjects that defeat took out, contest again over what is left,
+    and repeat while the collapsed set grows.  The other bound is read
+    the same way at the end, off the settled pass.  `color` takes one
+    pass for both, and that the two agree is the property below."""
     eff = effective(record, admits)
-    mooted: frozenset[str] = frozenset()
+    surely: frozenset[str] = frozenset()
     while True:
-        live = claims - mooted
+        live = claims - surely
         lower, upper = contest(frozenset(a for a in eff if a.target in live), live)
-        grown = mooted | moot(presupposes, (live - upper) | mooted)
-        if grown != mooted:
-            mooted = grown
+        grown = surely | collapse(presupposes, (live - upper) | surely)
+        if grown != surely:
+            surely = grown
             continue
+        possibly = collapse(presupposes, (live - lower) | surely)
         return {
             c: (
-                "moot"
-                if c in mooted
-                else "in" if c in lower else "contested" if c in upper else "out"
+                Color("out", None)
+                if c in surely
+                else Color(
+                    "contested" if c in possibly else "in",
+                    "in" if c in lower else "contested" if c in upper else "out",
+                )
             )
             for c in claims
         }
@@ -211,8 +224,10 @@ def test_assessor_identity_carries_no_force_of_its_own(  # BLIND
 def test_litigation_is_one_move_in_any_record(record, presupposes, target):  # EXPLICIT
     """Litigation is one move, from any record whatever: an act
     affirming the claim and striking every effective act against it
-    leaves the claim un-attacked.  Where the frame has collapsed there
-    is nothing to win -- content cannot mend a moot claim."""
+    leaves the claim un-attacked.  It settles content and nothing
+    else -- the subject is other claims' business, so the move that
+    wins the point leaves a disputed subject exactly as disputed, and
+    where the subject is gone there is nothing to win at all."""
     before = color(CLAIMS, presupposes, record, admits_all)
     against = frozenset(
         act.address
@@ -221,7 +236,8 @@ def test_litigation_is_one_move_in_any_record(record, presupposes, target):  # E
     )
     move = Act("x", target, "accepted", len(record), strikes=against)
     after = color(CLAIMS, presupposes, record | {move}, admits_all)
-    assert after[target] == ("moot" if before[target] == "moot" else "in"), (
+    won = before[target] if before[target].moot else Color(before[target].sense, "in")
+    assert after[target] == won, (
         f"+{move.address} accepted striking {sorted(against)}: "
-        f"{target} {before[target]} -> {after[target]}"
+        f"{target} {before[target]} -> {after[target]}, wanted {won}"
     )

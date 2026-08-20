@@ -22,7 +22,9 @@ ontology:
   - retraction
   - defeat
   - presupposition
+  - sense
   - sense-collapse
+  - content
   - moot
   - standing
   - assessor

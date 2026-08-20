@@ -232,17 +232,57 @@ def contest(
     return lower & claims, upper & claims
 
 
-def moot(presupposes: frozenset[Edge], defeated: frozenset[str]) -> frozenset[str]:
+def collapse(presupposes: frozenset[Edge], defeated: frozenset[str]) -> frozenset[str]:
     """Sense-collapse: a claim whose presupposition is defeated, or
-    itself moot, is moot -- a color outside the truth order, with no
-    interval to read.  [SENSE]"""
+    itself collapsed, has no subject left.  Read off the transitive
+    closure of the presupposition relation -- a least fixpoint, so the
+    collapse climbs a chain without a second rule [SENSE, KNASTER].
 
-    def step(m: frozenset[str]) -> frozenset[str]:
-        return m | frozenset(
-            src for src, dst in presupposes if dst in defeated or dst in m
+    The closure is well-founded: no claim presupposes itself, however
+    far around.  A cycle is rejected rather than resolved -- admitting
+    one lets a claim be mooted by its own defeat, absorbing the very
+    acts that seeded the collapse [DESCEND].
+
+    Called once per bound.  The seed says which defeat is meant, and
+    the answer inherits the seed's certainty [SENSE]."""
+
+    def step(reach: frozenset[Edge]) -> frozenset[Edge]:
+        return reach | frozenset(
+            (src, far) for src, mid in reach for near, far in presupposes if mid == near
         )
 
-    return iterate(step, frozenset())
+    reach = iterate(step, presupposes)
+    circular = sorted(src for src, dst in reach if src == dst)
+    assert not circular, f"these claims presuppose themselves: {circular}"
+    return frozenset(src for src, dst in reach if dst in defeated)
+
+
+@dataclass(frozen=True)
+class Color:
+    """One claim's standing, on the two questions a claim answers to:
+    has it a subject at all (`sense`), and is what it says upheld
+    (`content`).  Both are read on the same interval -- `in`,
+    `contested`, `out` -- and neither bounds the other: a claim whose
+    subject is disputed can still be settled on its own terms, and
+    saying so is why this is a pair and not a point [SENSE].
+
+    `content` is absent exactly where `sense` is `out`.  The claim is
+    moot, and its truth question does not arise -- so there is no
+    fourth truth value to rank against the other three, and no
+    precedence rule deciding which of moot and defeated wins
+    [ABSORB]."""
+
+    sense: str
+    content: str | None
+
+    def __post_init__(self) -> None:
+        assert (self.content is None) == (
+            self.sense == "out"
+        ), f"{self}: content is absent exactly where sense is out"
+
+    @property
+    def moot(self) -> bool:
+        return self.content is None
 
 
 def color(
@@ -250,31 +290,38 @@ def color(
     presupposes: frozenset[Edge],
     record: frozenset[Act],
     admits: Stance,
-) -> Mapping[str, str]:
+) -> Mapping[str, Color]:
     """The stack over one record: fold, interval, sense-collapse.
 
-    Moot absorbs content-acts -- they are dropped before the
-    truth-order pass -- so "moot and content-defeated" is impossible
-    by derivation; nothing here or in any schema asserts it.  Moot
-    seeds from surely-defeated only: a merely contested
-    presupposition collapses nothing yet.
+    Sense is computed the way content is, from the same acts: a claim
+    collapses *surely* when a presupposition is surely defeated, and
+    *possibly* when one is merely disputed.  Two seeds, two bounds,
+    one collapse -- neither bound is a rule of its own [SENSE].
+
+    Moot absorbs content-acts -- they are dropped before the second
+    truth-order pass -- so "moot and content-defeated" is impossible by
+    derivation; nothing here or in any schema asserts it [ABSORB].
 
     The second pass cannot move a surviving claim's interval: attacks
-    never cross claims, so a moot claim's acts leave as a whole
-    island.  It stays for what it proves rather than what it
-    computes -- without the drop, the exclusion above would rest on
-    testing `mooted` first, which is the precedence rule the
-    criterion forbids."""
+    never cross claims, so a moot claim's acts leave as a whole island
+    [LOCAL].  It stays for what it proves rather than what it computes
+    -- without the drop, the exclusion above would rest on testing the
+    collapsed set first, which is the precedence rule the criterion
+    forbids."""
     eff = effective(record, admits)
-    _, upper = contest(eff, claims)
-    mooted = moot(presupposes, claims - upper)
-    live = claims - mooted
+    lower, upper = contest(eff, claims)
+    surely = collapse(presupposes, claims - upper)  # a presupposition is out
+    possibly = collapse(presupposes, claims - lower)  # one is not surely in
+    live = claims - surely
     lower, upper = contest(frozenset(act for act in eff if act.target in live), live)
     return {
         c: (
-            "moot"
-            if c in mooted
-            else "in" if c in lower else "contested" if c in upper else "out"
+            Color("out", None)
+            if c in surely
+            else Color(
+                "contested" if c in possibly else "in",
+                "in" if c in lower else "contested" if c in upper else "out",
+            )
         )
         for c in claims
     }

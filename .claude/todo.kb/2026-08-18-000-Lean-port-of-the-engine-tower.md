@@ -28,9 +28,15 @@ low for what `certified` wants to mean.
 
 ## Current Situation
 
-- Python incubator, 50 tests green; nine act-algebra claims carry
-  passing `verify:` lines (ACT, FORCE, EXPLICIT, ONE_WAY, REIFY, and
-  the derived SENSE, ABSORB, LOCAL, BLIND).
+- Python incubator, 60 tests green; ten act-algebra claims carry
+  passing `verify:` lines (ACT, FORCE, EXPLICIT, ONE_WAY, REIFY,
+  DESCEND, and the derived SENSE, ABSORB, LOCAL, BLIND).
+- SENSE was re-ruled 2026-08-20: standing is a *pair* -- sense and
+  content, each on the same interval -- so a disputed presupposition
+  now reads `contested` at the sense coordinate instead of vanishing.
+  DESCEND was filed beside it, rejecting presupposition cycles. The
+  postpone condition below therefore holds on its own terms: the act
+  algebra moved this week, and the sense half of it is a week old.
 - Every real ledger run so far is degenerate: no strikes, no
   clashes, no presupposition failures. Those branches are witnessed
   only on smallest synthetic instances.

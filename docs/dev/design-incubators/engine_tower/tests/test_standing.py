@@ -10,15 +10,16 @@ from engine_tower.standing import (
     DESCRIBED,
     STIPULATED,
     Act,
+    Color,
     Evidence,
     Standing,
     certified,
     cite,
+    collapse,
     color,
     contest,
     effective,
     grounded,
-    moot,
     phi,
     standing,
     status_leq,
@@ -217,27 +218,38 @@ def test_a_claim_survives_restatement_an_act_does_not():  # ONE_WAY, ACT
     assert len({act.address for act in twice}) == 2
 
 
-def test_moot_propagates_defeat_along_presupposition_edges():  # SENSE
+def test_collapse_climbs_the_presupposition_chain():  # SENSE
     # q defeated; p presupposes q; r presupposes p: the collapse chains
     presupposes = frozenset({("p", "q"), ("r", "p")})
-    assert moot(presupposes, frozenset({"q"})) == {"p", "r"}
+    assert collapse(presupposes, frozenset({"q"})) == {"p", "r"}
 
 
-def test_a_contested_presupposition_collapses_nothing():  # SENSE
-    # q is clashed, not defeated: p's frame is in doubt, not gone, and
-    # a reader who still believes q still has p's question in front of
-    # them.  Seeding the collapse from `not surely in` would take p.
+def test_a_presupposition_cycle_is_rejected():  # DESCEND
+    """Were the cycle admitted, defeating either end would moot both,
+    and the acts that seeded the collapse would land on a claim that
+    absorbs them -- a defeat that erases its own evidence."""
+    cycle = frozenset({("p", "q"), ("q", "p")})
+    with pytest.raises(AssertionError, match=r"presuppose themselves: \['p', 'q'\]"):
+        collapse(cycle, frozenset({"q"}))
+
+
+def test_a_disputed_presupposition_leaves_sense_contested():  # SENSE
+    # q is clashed, not defeated -- "there is a king of france" is in
+    # dispute.  p's subject is in doubt, not gone: p is not moot, and
+    # neither is it plainly `in`, which is what a point-valued answer
+    # was forced to say.  The two coordinates carry both facts.
     claims = frozenset({"p", "q"})
     presupposes = frozenset({("p", "q")})
     record = frozenset(
         {
             Act("u", "q", "accepted", 0),
             Act("v", "q", "rejected", 1),
+            Act("u", "p", "accepted", 2),
         }
     )
     assert color(claims, presupposes, record, admits_all) == {
-        "q": "contested",
-        "p": "in",
+        "q": Color("in", "contested"),
+        "p": Color("contested", "in"),
     }
 
 
@@ -250,7 +262,19 @@ def test_a_moot_claim_is_never_also_content_defeated():  # ABSORB, SENSE
             Act("u", "p", "rejected", 1),  # a content-defeat that must be absorbed
         }
     )
-    assert color(claims, presupposes, record, admits_all) == {"q": "out", "p": "moot"}
+    assert color(claims, presupposes, record, admits_all) == {
+        "q": Color("in", "out"),
+        "p": Color("out", None),
+    }
+
+
+def test_a_color_has_no_content_where_it_has_no_sense():  # SENSE, ABSORB
+    """The exclusion is structural, not a precedence rule: there is no
+    value of the pair that is both moot and content-defeated."""
+    with pytest.raises(AssertionError, match="content is absent exactly"):
+        Color("out", "out")
+    with pytest.raises(AssertionError, match="content is absent exactly"):
+        Color("contested", None)
 
 
 def test_moot_absorbs_content_acts():  # ABSORB -- exhaustive over small records
@@ -268,7 +292,7 @@ def test_moot_absorbs_content_acts():  # ABSORB -- exhaustive over small records
             record = frozenset(act for i, act in enumerate(pool) if bits >> i & 1)
             before = color(claims, presupposes, record, admits_all)
             for target in claims:
-                if before[target] != "moot":
+                if not before[target].moot:
                     continue
                 for verdict in ("accepted", "rejected"):
                     extra = Act("w", target, verdict, len(pool))

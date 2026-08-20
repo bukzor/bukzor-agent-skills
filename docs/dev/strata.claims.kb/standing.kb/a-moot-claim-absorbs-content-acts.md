@@ -2,7 +2,7 @@
 label: ABSORB
 standing: bare
 why:
-  - a-defeated-presupposition-collapses-sense.md
+  - sense-and-content-are-judged-separately.md
   - force-is-computed-never-asserted.md
 verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/test_standing.py tests/test_derived_theorems.py -k "absorbs or never_also"
 ---
