@@ -10,7 +10,7 @@ ontology:
   - agent
   - user
 stale-when: a design that is not this notation's -- a second skill's commitments filed here
-last-updated: "2026-08-10"
+last-updated: "2026-08-20"
 ---
 
 # The design, as a ledger
@@ -36,7 +36,8 @@ This file is that shape one level up: the ledger is itself a theory,
 and nests the same way at any depth.
 
 ```
-stance ──► purpose ──► good-smells ──► notation
+stance ──► purpose ──► good-smells ──► notation ──► ownership
+              └─────────────────────────────────────────┘
 ```
 
 | Theory | Holds | Stale when |
@@ -45,12 +46,13 @@ stance ──► purpose ──► good-smells ──► notation
 | `purpose` | the invariant, the cost it must beat, the rung it occupies | a competitor that is a better notation rather than none |
 | `good-smells` | criteria any claim notation can be judged against | a ledger written and read by tools |
 | `notation` | the decisions this notation actually made | an inference relation cheap enough to check at entry |
+| `ownership` | who may say a stipulated name; the law's findings and repairs | a shipped scan enforcing a rule no claim states |
 
 The chain runs one way and the direction is the point: a criterion is
 stated before the design it judges, and a decision cites its criterion
 rather than restating it. `notation` is the theory most likely to be
-wrong, and the only one `SKILL.kb/` is downstream of — a change there is
-a change to the manual.
+wrong; it and `ownership` are the two `SKILL.kb/` is downstream of -- a
+change in either is a change to the manual.
 
 `good-smells.kb/` is the only one large enough to want a roll-up as
 well; `good-smells.md` carries it under the defining claim, stamped.
