@@ -45,6 +45,9 @@ collection types (only those needed — none are mandatory, and a scope
 may have zero of a given type) plus project-specific auxiliary
 collections (e.g. `background.kb/`, `technical-policy.kb/` from
 `Skill(llm-design-kb)`). The project root is itself an implicit scope.
+Every collection carries its own `$CATEGORY.jsonschema.yaml` beside it --
+schemas do not inherit from an ancestor scope, so one left at the graph
+root leaves each sub-scope's collections silently unvalidated.
 
 ### When to elaborate
 
