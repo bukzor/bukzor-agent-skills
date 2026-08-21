@@ -21,5 +21,5 @@ invariance where this ledger can check it.
 Calling them *the* satisfaction condition would overstate:
 conservativity is a further property, and one that can fail in an
 institution. What they buy is real anyway -- "the same theory,
-carried across representations" becomes a phrase with content, and
+carried across signatures" becomes a phrase with content, and
 confinement stops being hygiene and starts being load-bearing.

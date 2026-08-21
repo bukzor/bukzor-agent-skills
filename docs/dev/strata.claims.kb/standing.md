@@ -25,6 +25,7 @@ ontology:
   - assessor
   - party
   - stance
+  - residue
 stale-when: a base holding anything besides claims, or standing stored as ground truth rather than computed
 ---
 

@@ -38,12 +38,12 @@ Two things keep it open, and neither is a doubt about the analogy:
   above it that borrowed the vocabulary. That may be right, but no
   ledger here has ever lost a theory, so there is no experience to
   rule from.
-- it collides with the stratification. An edge-claim belongs to some
+- it collides with the two-level split. An edge-claim belongs to some
   theory, so under this reading it presupposes that theory's defining
   claim -- and [EDGE] forbids an edge-claim from being either end of
   an edge. Ruling this in means either exempting edge-claims from
-  their own home or weakening the stratification to bar only edges
-  *into* edge-claims. That choice is the real content of the ruling,
+  their own home or weakening that split to bar only edges *into*
+  edge-claims. That choice is the real content of the ruling,
   and it should be made deliberately rather than discovered.
 
 The alternative is the discipline that runs today: confinement as a

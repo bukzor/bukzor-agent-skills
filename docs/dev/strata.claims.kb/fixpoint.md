@@ -16,6 +16,7 @@ ontology:
   - approximation
   - interval
   - precision
+  - support
 stale-when: a misstatement of settled mathematics -- fixed by restating, not by argument
 ---
 

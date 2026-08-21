@@ -9,7 +9,6 @@ ontology:
   - wrestling
   - settlement
   - dissolution
-  - residue
 stale-when: the user disavowing a question, or a driving question the tower cannot decompose
 last-updated: "2026-08-14"
 ---

@@ -9,7 +9,6 @@ ontology:
   - cache
   - derivative
   - refresh
-  - recompute
   - staleness
   - debt
   - drift
