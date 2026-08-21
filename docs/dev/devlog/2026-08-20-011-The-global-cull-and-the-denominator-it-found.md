@@ -95,9 +95,28 @@ say as freely is English, however hard this one leans on it — and the
 own side settles at 22 proposals, most of them `ownership.kb`'s own
 coinages, which it does not yet own.
 
+## The idle queue emptied on the way past
+
+No cull stranded an arrow, and reading the two survivors closed both —
+one of each kind the queue can hold.
+
+`ROSTER` reads its inventory off seven strata and cited six. Its body
+says "a theory definition is a record with sequence-valued fields
+(`genre`)" and carried no arrow into `genre.kb`: the witness was never
+written, and `sort` leaving the genre ontology was only what exposed it.
+`CONFINE` is where a theory's admitted vocabulary lives, so that is the
+citation.
+
+`GRAIN` → `data-representation` was the other kind. Its three parameters
+are KEY, a map spelling; CUT, which words the value uses; CACHE, when a
+computed standing is stamped — `record`, `standing`, `view`. None of them
+asks how a value crosses into a persistence format, which is the whole
+of what data-representation prices. Nothing in the interior witnessed
+the arrow because the dependency was never there.
+
+Fleet: 0 contending, 0 inert, 0 idle of 59, 0 trespasses, 0 unimported
+mentions, both graphs acyclic.
+
 ## Left open
 
-- The two idle imports are unchanged, and no cull stranded a new one.
-  `data-structures` → `genre` went idle when `sort` left `genre.md` last
-  turn; `GRAIN` → `data-representation` was idle before either sweep.
-- The own side's 22 proposals are unactioned. The cull was the ask.
+The own side's 22 proposals are unactioned. The cull was the ask.
