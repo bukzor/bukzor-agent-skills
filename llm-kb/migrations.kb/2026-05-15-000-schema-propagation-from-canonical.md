@@ -1,12 +1,21 @@
 ---
-status: verified
+status: in-progress
 kind: recurring
 depends-on:
   - 2026-07-07-000-schema-copies-to-ref-stubs.md
 scope: |
-  Every project that authors `.claude/todo.kb/` or `.claude/ideas.kb/`
-  must carry a `.claude/<category>.jsonschema.yaml` whose content
-  includes `$ref: skill://llm-subtask/jsonschema/<category>.jsonschema.yaml`.
+  Every project that authors a `<category>.kb/` for a category with a
+  published canonical must carry an adjacent
+  `<category>.jsonschema.yaml` whose content includes
+  `$ref: skill://<skill>/jsonschema/<category>.jsonschema.yaml`.
+
+  A category has a canonical exactly when the skills repo publishes
+  `<skill>/jsonschema/<category>.jsonschema.yaml`. Widened 2026-08-21
+  from todo/ideas alone to all of them, per
+  2026-08-21-000's "On finishing".
+
+  "Adjacent" is strict -- sibling of the `.kb/`, no inheritance from an
+  ancestor scope -- so a nested sub-scope needs its own schema file.
 
   Extension *on top of* the `$ref` is allowed (conjunction: consumers
   may add fields or narrow constraints, never loosen -- see "Policy
@@ -39,7 +48,9 @@ related-todo: ~/.claude/skills/llm-kb/.claude/todo.kb/2026-02-09-000-schema-reus
 verified-by: |
   2026-07-07 validate.sh sweep of ~/repo after the migrate.sh rollout:
   clean except the one documented judgment-pending NO-REF finding
-  (ideation.physical-musings).
+  (ideation.physical-musings). Superseded 2026-08-21 -- that finding is
+  resolved, but the scope widened and the wider scope is not clean; see
+  "Measured residual".
 ---
 
 # Schema propagation from the llm-subtask canonical
@@ -152,9 +163,12 @@ guard, with the invariant relaxed from byte-equality to
   the delta explicit; one that wants a different contract renames its
   category.
 
-Known open finding: `ideation.physical-musings/.claude/todo.jsonschema.yaml`
-is a hand-rolled local schema (NO-REF). Under this policy it should
-either become `$ref` + narrowing, or rename its category.
+Known open finding, **closed 2026-08-21**:
+`ideation.physical-musings/.claude/todo.jsonschema.yaml` was a
+hand-rolled local schema (NO-REF). Judged stale and stubbed under
+2026-08-21-000 -- its `status` enum legislated an `in-progress` value
+that appears in no `todo.kb/` file anywhere in the homedir, and the
+`deferred` half of its divergence the canonical had already absorbed.
 
 ## Applied 2026-07-07: tree-wide MISSING rollout
 
@@ -166,3 +180,65 @@ projects' todo/ideas frontmatter is validated for the first time;
 nonconformant data found there is deliberately out of this migration's
 scope, captured in
 `llm-kb/.claude/todo.kb/2026-07-07-000-Downstream-todo-ideas-frontmatter-conformance-sweep.md`.
+
+## Widened 2026-08-21: every category, every root
+
+2026-08-21-000 judged the last of its DIVERGED backlog and handed this
+entry its "On finishing" instruction: widen from todo/ideas to every
+category with a canonical, so that migration needs no sequel.
+
+Three things widened at once, and the third was the surprise.
+
+**Categories: declared -> derived.** The one-shot carried a nine-row
+`categories.tsv`. The filesystem had nineteen canonicals. A
+hand-maintained list of what exists drifts from what exists; this one
+was nine behind. `lib.sh` now derives the table by globbing
+`<skill>/jsonschema/*.jsonschema.yaml`, so publishing a canonical
+enrolls it and retiring one un-enrolls it. Nothing names a category.
+
+Deliberately no exclusion list: `dialect` and `layer-entry` are
+published but are a vocabulary and an extension base, not frontmatter
+categories. They need no exclusion because the guard only fires where a
+matching `<category>.kb/` exists, and neither has one. An exclusion list
+would be a second thing to keep in sync -- exactly what was just
+removed.
+
+**Roots: `~/repo` -> `~/repo ~/claude ~/.claude`.** `~/claude` and
+`~/.claude` author these categories and had never been swept.
+
+**Shape: `.claude/<category>.kb/` -> any `<category>.kb/`.** The old
+pattern only matched collections directly under a `.claude/`. Discourse
+graphs live at `docs/`, at repo root, and nested inside each other. This
+is the same defect 2026-08-21-003 found one level down in
+`scratch.vim-work`: schemas get placed where the author was standing,
+and every scope elaborated later is silently unvalidated.
+
+## Measured residual, 2026-08-21
+
+42 findings: **32 MISSING, 10 NO-REF** (worktrees and the replication
+clone pruned -- fixing a copy of the skills repo fixes nothing and it
+re-diverges on respawn).
+
+Ten of the 42 were already in the old scope and in the old root. The
+guard is `kind: recurring` and was last run 2026-07-07; that is six
+weeks of ordinary drift, and it is the argument for running it on a
+schedule rather than at migration boundaries. Six of those ten are one
+stale `dotfiles` clone on the unmerged `orphan-recovery` branch.
+
+By category: todo 9, ideas 8, technical-policy 7, sessions 5,
+questions 3, timeline 2, findings 2, deductions 2, claims 2, sources 1,
+evidence 1.
+
+`status` drops from `verified` to `in-progress`: the scope grew and the
+new scope is not clean. `migrate.sh` resolves MISSING mechanically, but
+each stub it writes subjects a collection to validation for the first
+time, which surfaces frontmatter work behind it -- so the count of
+findings understates the work, as `scratch.vim-work` showed (44 files
+newly checked the moment its schema resolved).
+
+Two exclusions in the one-shot's `excluded-prefixes.txt` went stale the
+day they were written and are not carried over:
+`incident-forensics/` (2026-08-21-001 is `complete`; its canonicals left
+`skeleton/` and the skeleton copies are stubs) and `~/.claude/sessions`
+(the addressing decision got made -- `llm-sessions/jsonschema/` exists
+and `~/.claude/sessions.jsonschema.yaml` is a stub).

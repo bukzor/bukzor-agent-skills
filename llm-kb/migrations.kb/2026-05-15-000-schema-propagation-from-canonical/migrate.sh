@@ -17,7 +17,8 @@ onerror() {
 trap onerror ERR
 
 HERE="$(dirname "$(readlink -f "$0")")"
-export MODELINE='# yaml-language-server: $schema=https://json-schema.org/draft-07/schema'
+# shellcheck source=lib.sh
+source "$HERE/lib.sh"
 
 if (( DEBUG > 0 )); then
   set -x
@@ -27,9 +28,7 @@ fi
   : "non-clean report is exactly what migrate is for: $?" ) |
   sed -n 's/^MISSING *//p' |
   xargs -d'\n' -rL1 bash -ec '
-    category="$(basename "$1" .jsonschema.yaml)"
-    printf "%s\n%s\n" "$MODELINE" \
-      "\$ref: \"skill://llm-subtask/jsonschema/$category.jsonschema.yaml\"" > "$1"
+    canonical_stub "$(basename "$1" .jsonschema.yaml)" > "$1"
     echo "STUBBED $1"
   ' - \
 ;
