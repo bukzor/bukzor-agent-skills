@@ -294,9 +294,22 @@ additionalProperties: false
 
         assert [error for error in errors if "bogus" in error], errors
 
-    def it_declines_jurisdiction_over_a_skill_manifest(self, tmp_path: Path):
-        # SKILL.md's frontmatter is Claude Code's format, not llm-kb's.
+    def it_reports_a_skill_manifest_like_any_other_loose_file(self, tmp_path: Path):
+        # Whose keys these are and whether to report on the file are separate
+        # questions. llm-kb defines no schema for SKILL.md, and still says so.
         manifest = tmp_path / "SKILL.md"
         _ = manifest.write_text("---\nname: x\ndescription: y\n---\n\n# X\n")
 
-        assert list(fv.validate_one_file(manifest, None, 0)) == []
+        results = list(fv.validate_one_file(manifest, None, 0))
+
+        assert [result.errors for result in results] == [(fv.NO_SCHEMA_GOVERNS,)], results
+
+    def it_skips_a_maintenance_guide_wherever_it_sits(self, tmp_path: Path):
+        # CLAUDE.md is forced to live inside the collection it governs, so
+        # reporting it would report a file that cannot be a member.
+        collection = tmp_path / "notes.kb"
+        collection.mkdir()
+        guide = collection / "CLAUDE.md"
+        _ = guide.write_text("---\nanything: goes\n---\n\n# Notes\n")
+
+        assert list(fv.validate_one_file(guide, None, 0)) == []

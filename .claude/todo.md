@@ -220,11 +220,14 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `devlog/`/`adr/` entry: `validate_paths` descends only into
       `.kb/`, so the unschema'd-frontmatter error added 2026-08-21 fires
       only when such a file is named on the command line. Widening the
-      walk turns 26 tracked files red at once -- 14 beside their own
-      `.kb/`, 10 `devlog/adr`, 2 other -- so each population needs a
-      resolution first;
+      walk turns 47 tracked files red at once -- 21 `SKILL.md`, 14
+      beside their own `.kb/`, 10 `devlog/adr`, 2 other -- so each
+      population needs a resolution first;
       `llm-kb/references/frontmatter-outside-a-collection.md` names the
-      three that exist. Stakes: every ledger's entry point
+      three that exist. The 21 are the population a widened walk must
+      not reach rather than resolve: a skill manifest is not kb data,
+      and llm-kb defines no schema for Claude Code's keys. Stakes: every
+      ledger's entry point
       (`X.claims.md`, carrying `last-updated:` and the poset) is such a
       file, so the eight `last-updated` values unquoted on 2026-08-21
       are right by consistency, not by enforcement

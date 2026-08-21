@@ -88,7 +88,6 @@ _REGISTRY: SchemaRegistry = Registry(retrieve=_retrieve_schema)
 
 SUFFIX = '.kb'
 HIVE_PARTITION_MARKER = '='
-NOT_KB_DATA = frozenset({'CLAUDE.md', 'SKILL.md'})
 # Frontmatter no schema governs is unchecked, and calling it valid is how a
 # reader learns to distrust every ✅. The reference holds the three ways out,
 # so the message spends its words on the address rather than restating them.
@@ -131,11 +130,12 @@ class ValidationResult:
 
 def validate_one_file(md_file: Path, schema_override: Path | None, depth: int) -> Iterator[ValidationResult]:
     """Validate one file, yielding output. Skips non-data files."""
-    # CLAUDE.md is a maintenance guide; dotfiles (e.g. .template.md) are
-    # meta-data conventions and not part of the .kb/ data corpus. SKILL.md's
-    # frontmatter is Claude Code's format, stipulated elsewhere -- checking it
-    # here would be llm-kb claiming keys it does not own.
-    if md_file.name in NOT_KB_DATA or md_file.name.startswith('.'):
+    # Skipped because their location is forced, not because their frontmatter
+    # is uninteresting: a maintenance guide governs the collection it sits in,
+    # and a dotfile (e.g. .template.md) states the collection's conventions, so
+    # both must live inside a `.kb/` without being members of it. A file merely
+    # outside every collection fails that test and gets the ordinary verdict.
+    if md_file.name == 'CLAUDE.md' or md_file.name.startswith('.'):
         return
     errors = validate_file(md_file, schema_override)
     yield ValidationResult(depth, 'file', md_file.name, errors=tuple(errors))

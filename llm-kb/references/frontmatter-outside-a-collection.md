@@ -10,9 +10,7 @@ quotes, a field is renamed in nine files and missed in the tenth, and
 nothing says so. A validator that reports ✅ for a file it never checked
 teaches you to distrust every ✅ it prints.
 
-Three ways out, best first. They apply to kb data; a file whose
-frontmatter belongs to somebody else takes no resolution at all -- see
-the last section.
+Three ways out, best first.
 
 ## Push the file down into a collection
 
@@ -61,17 +59,21 @@ is real -- a claim ledger's `X.md` is a claim like any other, so
 the shared name is a coincidence of spelling, and the roll-up needs its
 own resolution from the three above.
 
-## What is not kb data at all
+## The two files that are skipped, and why that is not a fourth way out
 
-`CLAUDE.md` and `SKILL.md` are skipped, not resolved. A maintenance
-guide is instruction rather than data, and a skill manifest's `name` and
-`description` are Claude Code's format, stipulated where that format is
-defined. Checking either here would be llm-kb claiming keys it does not
-own, and shipping a schema for someone else's fields is how a fork
-starts.
+`CLAUDE.md` and dotfiles like `.template.md` are skipped outright: both
+are *forced* to live inside the collection they describe, so both are
+files in a `.kb/` that cannot be members of it. Nothing else qualifies.
+The test is a forced location, not an inconvenient verdict.
 
-Being unchecked is not the same as being exempt. If those keys want
-validating, the tool that owns the format is where the check belongs.
-The test for anything else you are tempted to add to that list is
-ownership, never inconvenience: "no schema fits this" is a finding, and
-the three resolutions are what to do about it.
+A file that merely sits outside every collection fails that test and
+gets the ordinary error, whoever owns its keys. A skill's `SKILL.md` is
+the case worth stating: its `name` and `description` are Claude Code's
+format, so llm-kb defines no schema for them -- and still reports that
+no schema governs them, because those are two different questions.
+Saying "not mine to define" is honest; saying nothing about a file you
+were handed is not.
+
+The resolution there is neither a schema nor an exemption: don't hand a
+kb validator a file that isn't kb data. If those keys want checking, the
+tool that owns the format is where the check belongs.
