@@ -81,13 +81,31 @@ reaches (21 `SKILL.md`, 14 beside their own `.kb/`, 10 `devlog`/`adr`,
 2 other), and widening the walk to reach them turns all 47 red at once.
 Each population needs its resolution first. Filed, with the counts.
 
-`SKILL.md` is the population with no resolution available: Claude Code
-requires those keys at that exact path, so it cannot move down, its
-parent cannot be renamed, and the keys cannot be dropped. It wants a
-fourth lookup rule — match the reserved filename against a schema
-llm-kb owns — which would also check the two things nothing checks
-today: that `name` equals its directory, and that `description` reads
-as the discovery text it actually is.
+## The population that wasn't a population
+
+`SKILL.md` looked like the hard case: Claude Code requires those keys at
+that exact path, so it cannot move down, its parent cannot be renamed,
+and the keys cannot be dropped. I proposed a fourth lookup rule — match
+the reserved filename against a schema llm-kb ships — on the grounds
+that the keys are checkable and nothing checks them.
+
+Wrong, and the owner named it in a sentence: *SKILL.md is outside the
+purview of llm-kb, and now it's clearly so.* The error was inferring
+jurisdiction from checkability. `name` and `description` are Claude
+Code's format, stipulated where that format is defined; llm-kb shipping
+a schema for them is the same overreach as a local schema forking a
+canonical one, which this repo spent the previous day undoing.
+
+So `SKILL.md` joins `CLAUDE.md` on the not-kb-data list — skipped, not
+counted, no verdict either way — and the 47 drops to 26. Declining
+jurisdiction is not the silent pass this session removed: that one
+counted a file and printed ✅ over it, while this yields no result at
+all and the tail reads `0 files`.
+
+The rename is what made the ruling visible. While `SKILL.jsonschema.yaml`
+sat beside `SKILL.md`, the file looked like llm-kb's business. Once the
+schema is `skill.jsonschema.yaml` and there is no `skill.md`, there is
+nothing left suggesting llm-kb ever reached that far.
 
 ## What the verification had to be
 
@@ -97,7 +115,14 @@ third test asserts the *absence* of the new error for a file with no
 frontmatter at all; it passed on first run, so the guard was removed to
 watch it fail and restored.
 
-One thing worth knowing about this repo's tooling: the `llm.kb-validate`
-on `PATH` came from a sibling project's venv and is a non-editable
-install, so it kept reporting the old behavior after the source changed.
-`uv run` from `llm-kb/` is what exercises the working tree.
+The `llm.kb-validate` on `PATH` reported the old behavior throughout,
+because `meta-reasoning`'s venv had `llm-kb` and `llm-claims-kb` as
+*copied* path dependencies. A path dependency that isn't editable is a
+snapshot wearing a source tree's name — the whole reason to point at a
+directory is that it gets edited. Both are `editable = true` now, and
+the binary on `PATH` tracks the working tree.
+
+Worth noticing as a class: for most of this session the tool that
+verifies the work was itself stale, and nothing said so. It is the same
+failure the session set out to fix, one level up — a green result whose
+provenance nobody checked.
