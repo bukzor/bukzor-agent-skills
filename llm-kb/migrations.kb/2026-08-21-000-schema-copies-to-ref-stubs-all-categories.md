@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: complete
 kind: one-shot
 scope: |
   Every full-copy `*.jsonschema.yaml` anywhere in the user's tree whose
@@ -136,42 +136,98 @@ it would have reported `OK`. B's six schemas are `evidence`, `findings`,
 migration's table. The two migrations never overlapped. The exclusion can
 be dropped once B is committed.
 
-## Residual: DIVERGED (14, untouched)
+## Residual: DIVERGED (14) -- all judged 2026-08-21
 
-Reported, never rewritten -- each needs a human read.
+No longer untouched, and no longer awaiting a human read. Every one has
+a ruling and the ruling is applied: eleven became stubs, one became a
+`#base` extender, three stay standalone and say so in their own opening
+lines.
 
-Genuinely local intent:
+Each was judged against the same three-way test -- **stale** (drifted
+copy, canonical already says it) -> stub; **local intent** (says
+something true the canonical does not) -> extender on `#base`;
+**genuinely rival** (a different model of the domain wearing the same
+filename) -> leave standalone, and record why *in the file* so no later
+sweep re-opens it.
 
-- `dotfiles/.claude/todo.jsonschema.yaml` -- a 7-field subset; drops
-  `status`, `managed-by`, `blocked-by`, `closeout`, the reading fields.
-- `ideation.physical-musings/.claude/todo.jsonschema.yaml` -- adds
-  `in-progress` and `deferred` to `status`, which the canonical omits
-  on purpose. Already the sole residual of the 2026-07-07 sweep.
-- `ideation.epistemics/{claims,deductions}.jsonschema.yaml` -- a rival
-  epistemic vocabulary: `certified`/`stipulated` in place of `status`
-  and `likelihood`.
+### Stale -> stubbed (11)
+
+`template.python-project`, all six. Each was diffed field-by-field
+against the canonical and confirmed a strict subset before the stub went
+in -- "looks close" was not accepted as evidence:
+
+- `discourse.kb/{claims,deductions,definitions,questions,sources}.jsonschema.yaml`
+- `docs/dev/technical-policy.jsonschema.yaml`
+
+Stubbing them dropped `discourse.kb` from 15 errors to 0. The 15 were
+never content drift: each file declared draft-07 while using `type: date`,
+which only the house dialect supplies. A stale copy does not merely lag
+the canonical -- it pins a dialect that cannot express what its own data
+says.
+
+The rest:
+
+- `~/.claude/todo.jsonschema.yaml` -- the 7-field subset. Nothing it
+  dropped was ever exercised.
+- `ideation.physical-musings/.claude/todo.jsonschema.yaml` -- the sole
+  residual of the 2026-07-07 sweep, finally closed. Its `status` enum
+  added `in-progress` and `deferred`; the canonical has since absorbed
+  `deferred`, and a homedir-wide check found **zero** `status:
+  in-progress` in any `todo.kb/` or `ideas.kb/` file, and no other todo
+  schema anywhere adding it. A population of one that never used the
+  value it legislated: defaulting, not legislating. Its live data
+  (`status: deferred`) validates against the stub today.
+- `ideation.physical-musings/docs/dev/{sources,technical-policy}.jsonschema.yaml`
+  -- pre-`source` technical-policy, and a `kind` enum the canonical has
+  since supersetted.
+
+### Local intent -> extender (1)
+
+- `ideation.physical-musings/docs/dev/claims.jsonschema.yaml` -- `$ref`s
+  `#base` and adds `ratified:` (a settlement marker per R.SETTLE-AUDIT),
+  with `unevaluatedProperties: false`. Eleven lines instead of a
+  hundred-line fork, and it inherits every future canonical field.
+
+### Genuinely rival -> standalone, with the reason in the file (3)
+
+These are not drift and must not be stubbed. Each now opens with a
+comment naming the canonical it departs from and why, so the next sweep
+reads the answer instead of re-deriving it:
+
+- `ideation.epistemics/{claims,deductions}.jsonschema.yaml` -- warrant
+  is carried by *field presence* (`certified`/`stipulated`), not by a
+  `status` value. The canonical **requires** `status`; removing that
+  requirement is the whole point of the design. A stub would assert the
+  opposite of the project's thesis.
 - `prototype.chatfs/.../chatfs-cli-mockup/dev.kb/claims.jsonschema.yaml`
   -- an observation ledger, not a discourse claim: `evidence`,
-  `first-recorded`, `last-checked`, `previously-claimed`, and a
-  `status` enum of `observed`/`settled`/`refuted`.
-- `ideation.physical-musings/docs/dev/claims.jsonschema.yaml` -- adds
-  `ratified`.
-- `ideation.physical-musings/docs/dev/{sources,technical-policy}.jsonschema.yaml`
-  -- pre-`source` technical-policy; `kind` enum differs on sources.
+  `first-recorded`, `last-checked`, `previously-claimed`, and a `status`
+  enum (`observed`/`settled`/`refuted`) disjoint from the canonical's.
+  Same filename, different domain object.
 
-Stale snapshots that drifted cosmetically, so they match no blob --
-strongest stub candidates once someone confirms:
+Two of fourteen were rival, and both were rival for the same reason:
+they disagreed with the canonical about `status`. That is where this
+family of schemas is actually contested, and it is worth knowing before
+the next canonical change touches that field.
 
-- `template.python-project/discourse.kb/{definitions,questions}.jsonschema.yaml`
-  -- semantically identical to canonical; differ only in dialect and
-  description line-wrapping.
-- `template.python-project/discourse.kb/{claims,deductions,sources}.jsonschema.yaml`
-  -- one field behind (`sources` shape, missing `sources`, `kind` enum).
-- `template.python-project/docs/dev/technical-policy.jsonschema.yaml` --
-  predates `source`.
+### Known residual, not a fourteenth ruling
 
-This is the same template that minted a stale `todo` snapshot in 2026-07-07;
-six more of its files are the single largest cluster here.
+`~/repo/github.com/bukzor/dotfiles/.claude/todo.jsonschema.yaml` still
+holds the pre-stub bytes, byte-identical to what `~/.claude/` had. It is
+not a second divergence -- it is the same file on the unmerged
+`orphan-recovery` branch of a second dotfiles clone. The ruling above
+covers it; the reunify effort carries it. Left alone deliberately rather
+than reaching into another workstream's branch, but flagged: a careless
+merge reinstates the stale copy over the stub.
+
+### What `verified` would require
+
+`status` stops at `complete`, not `verified`, because `validate.sh` still
+prints four DIVERGED lines and a reader cannot tell "ruled rival" from
+"unexamined". All three rivals now carry a machine-findable marker
+comment on their first lines. Teaching the classifier to read it would
+make a clean run mean something -- and would make the orphan-recovery
+copy the only thing standing between here and `verified`.
 
 ## Found along the way, not acted on
 
