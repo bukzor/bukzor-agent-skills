@@ -85,16 +85,21 @@ the target is decided, so it stays todo work that unblocks a later one.
       anywhere. Prerequisite grew: six canonicals needed the
       two-entry-point conversion, not the one forecast -- the whole
       discourse quintet had `technical-policy`'s defect.
-- [ ] Apply migration B: `git mv` the incident-forensics schemas to skill
-      root `jsonschema/`, stub the skeleton and both copy sites.
+- [x] Apply migration B: `git mv` the incident-forensics schemas to skill
+      root `jsonschema/`, stub the skeleton and both copy sites. Done
+      2026-08-21. Verified on the two external trees, which hold the only
+      bound instances; the in-repo run is vacuous.
 - [x] Design the layer-entry canonical, or record the argument against one
       (cluster 1). Done 2026-08-21: verdict was canonicalize;
       `llm-design-kb/jsonschema/layer-entry.jsonschema.yaml` published,
       reasoning in the sub-kb's `-001-` entry. Ratified 2026-08-21 with one
       amendment: `minItems: 1` on `why` struck, `default: []` added.
-- [ ] Apply migration C: rewrite `why:` slug references as file-relative
+- [x] Apply migration C: rewrite `why:` slug references as file-relative
       paths (har-browse ~184 refs, plus mitmproxy, llm-vitals, chatfs),
-      then stub the 12 towers' layer schemas onto the canonical.
+      then stub the 12 towers' layer schemas onto the canonical. Done
+      2026-08-21: 268 of 271 across 175 files in 15 towers, idempotency
+      demonstrated by md5 diff. Held at `in-progress` by 3 refs that are
+      genuinely ambiguous, not by anything mechanical.
 - [ ] Decide whether the decision-lifecycle trio (`status` / `blocked-on` /
       `superseded-by`, three hand-synced copies found in cluster 1) earns
       its own canonical. Deliberately left out of layer-entry.
@@ -110,6 +115,47 @@ the target is decided, so it stays todo work that unblocks a later one.
       two of those six are semantically identical to canonical (drifted
       only in dialect and line-wrapping) -- the cheapest ruling to make
       first, and the one that stops minting stale copies into new repos.
+- [x] Apply migration D: schema *symlinks* to `$ref` stubs. Done
+      2026-08-21, all 30 across 7 repos. This cluster was invisible to the
+      census, which swept for copies; only `find -type l` finds it. Five
+      had been dangling since `llm-discourse-graph/schemas/` was renamed.
+- [ ] Disambiguate the 3 `canonical-conversation-graph` `why:` refs in
+      `prototype.chatfs` -- a real entry exists at both
+      `docs/dev/design.kb/030-requirements.kb/` and `040-design.kb/`, and
+      the prose does not settle which is meant. Migration C names all
+      three bearer files. This is the only thing holding C at
+      `in-progress`.
+- [ ] Judge the 15 errors migration D exposed in
+      `scratch.vim-work/docs/sources/2026-03-02-*.kb/`. All 44 files there
+      were failing because the schema symlinks dangled; 29 conform. The
+      15 are real drift getting its first honest reading, and want the
+      same stale-or-intentional ruling as the 14.
+- [ ] Fix `template.python-project`'s pre-commit `prettier` hook: it
+      calls `pnpm-run`, which exists nowhere on this machine (only
+      `pnpm`). Four files sit uncommitted behind it. Pre-existing, not
+      migration damage -- but it blocks the largest DIVERGED cluster from
+      being committed once judged.
+- [ ] Configure remotes, or record that there deliberately are none, for
+      `~/claude/meta-reasoning` and `~/claude/crostini-health`. Both now
+      hold committed-but-unpushable work from this effort.
+- [ ] Sweep the stale `# yaml-language-server: $schema=...draft-07...`
+      first line off every stub written under 2026-08-21-{000,003}
+      (~48 files). Each references a 2020-12 canonical. Harmless to the
+      validator, wrong for the editor. Do this *after* the judgment
+      passes -- it touches the same files.
+- [ ] Rename the coined term "symlink farm" where it leaked into the
+      codebase: `llm-kb/lib/python/llmd/frontmatter_validate.py:68`,
+      `llm-kb/references/schema-reuse.md:107`,
+      `llm-kb/.claude/todo.kb/2026-02-09-000-schema-reuse-with-ref.md:63`,
+      `design-next.kb/070-future-work.kb/v1-migration-bridge.md:14`. It
+      is agent-coined, never user-sanctioned, and after migration D it
+      also misdescribes what it labels: `~/.claude/skills/` is the skill
+      *installation* mechanism, not a dedup device.
+- [ ] Write the template-uses-`$ref` policy into
+      `references/schema-reuse.md`. Ratified 2026-08-21 ("template should
+      use `$ref` unless there's an excellent reason to the contrary") but
+      never written down, which is how `template.python-project` came to
+      mint six stale snapshots.
 - [ ] Widen `migrations.kb/2026-05-15-000-schema-propagation-from-canonical`
       from todo/ideas to every category with a published canonical, once A's
       validator can back the wider claim. Do not widen the `scope:` before
