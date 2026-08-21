@@ -54,11 +54,26 @@ you read it, while a `skill://` URL to a one-line file says go look.
 Extract when copies exist and must agree; leave a short type inline however
 many schemas write it.
 
-Canonical schemas live in a `jsonschema/` directory at the *skill root*,
-never inside a `skeleton/` -- skeleton contents get copied into projects, and
-a copied full schema is a snapshot that drifts. The skeleton holds the same
-one-line stub, so a project initialized from it is live-linked to the
-canonical schema from day one.
+## Templates: `$ref` unless there's an excellent reason not to
+
+A template is a copy-generator, so any copy-pattern inside one is a defect
+multiplier: every project initialized from it inherits the same snapshot,
+which is stale for the rest of that project's life. Ship the stub, not the
+schema.
+
+Canonical schemas therefore live in a `jsonschema/` directory at the *skill
+root*, never inside a `skeleton/` -- skeleton contents get copied into
+projects, and a copied full schema is a snapshot that drifts. The skeleton
+holds the same one-line stub, so a project initialized from it is live-linked
+to the canonical schema from day one.
+
+What a stale copy actually costs is worse than lag. `template.python-project`
+shipped six full copies; stubbing them on 2026-08-21 took `discourse.kb` from
+15 errors to 0, and not one of the 15 was ordinary drift. Every copy declared
+draft-07 while its own data used `type: date` -- a house type supplied only by
+`skill://llm-kb/jsonschema/dialect.jsonschema.yaml`. A stale copy doesn't
+merely trail the canonical; it pins a *dialect* that cannot express what its
+own data says. A template repeats that defect once per new project.
 
 ## Two ways to point at the file
 
