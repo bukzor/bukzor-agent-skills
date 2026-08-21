@@ -161,6 +161,17 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
+- [ ] Standing-theory residue left by the 2026-08-20 rename sweep (devlog
+      007). Each is a recommendation the sweep declined to fold in, not an
+      open question:
+  - [ ] Widen `Mapping[str, Edge]` to allow several edges per edge-claim.
+        The single-edge shape is an artifact of the first witness; no claim
+        rules it
+  - [ ] Lift the *into* half of the edge stratification — one assertion.
+        The *out of* half stays declined: it wants an approximation
+        fixpoint first
+  - [ ] Lift `stale-when:` to non-defining claims, so a stipulation
+        tripwire has a structural home instead of living in prose
 - [ ] Build the antichain completion the standing theory already claims:
       COMPUTED (`standing.kb/standing-is-computed-not-stored.md`) and
       COMPLETION (`standing.kb/the-status-order-is-not-a-complete-lattice.md`)
