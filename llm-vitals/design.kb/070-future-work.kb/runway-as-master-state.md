@@ -1,7 +1,7 @@
 ---
 why:
-  - counter-tech-revenue-bias
-  - enable-accountable-deep-work
+  - ../020-goals.kb/counter-tech-revenue-bias.md
+  - ../020-goals.kb/enable-accountable-deep-work.md
 status: proposal
 blocked-on: discussion
 trigger: When cash flows are reliably tracked in any system the picker can ingest.

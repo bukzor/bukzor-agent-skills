@@ -22,6 +22,6 @@ statement.
 
 - `.kb/` ↔ `.md` follow growth pressure: stay flat until items need
   per-entry detail.
-- `why:` frontmatter slugs reference file stems (`reduce-dropped-tasks`)
-  with order prefixes stripped (`010-mission` → `mission`), per the
-  `llm-design-kb` skill's example pattern.
+- `why:` frontmatter items are file-relative paths ending in `.md`
+  (`../020-goals.kb/reduce-dropped-tasks.md`), per
+  `skill://llm-design-kb/jsonschema/layer-entry.jsonschema.yaml`.

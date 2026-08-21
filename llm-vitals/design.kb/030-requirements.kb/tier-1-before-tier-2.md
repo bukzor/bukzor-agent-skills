@@ -1,7 +1,7 @@
 ---
 why:
-  - grow-incrementally
-  - wellness-as-upstream
+  - ../020-goals.kb/grow-incrementally.md
+  - ../020-goals.kb/wellness-as-upstream.md
 ---
 
 # Tier 1 Before Tier 2

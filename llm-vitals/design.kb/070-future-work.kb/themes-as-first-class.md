@@ -1,6 +1,6 @@
 ---
 why:
-  - enable-accountable-deep-work
+  - ../020-goals.kb/enable-accountable-deep-work.md
 status: proposal
 blocked-on: discussion
 trigger: When ≥3 active items clearly share a root cause and the picker would benefit from knowing the coupling.

@@ -1,7 +1,7 @@
 ---
 why:
-  - visible-debt
-  - tier-1-before-tier-2
+  - ../030-requirements.kb/visible-debt.md
+  - ../030-requirements.kb/tier-1-before-tier-2.md
 ---
 
 # Burn Rate

@@ -1,7 +1,7 @@
 ---
 why:
-  - decoupled-data-location
-  - grow-incrementally
+  - ../030-requirements.kb/decoupled-data-location.md
+  - ../020-goals.kb/grow-incrementally.md
 ---
 
 # Automation Boundary

@@ -1,7 +1,7 @@
 ---
 why:
-  - reduce-dropped-tasks
-  - counter-tech-revenue-bias
+  - ../020-goals.kb/reduce-dropped-tasks.md
+  - ../020-goals.kb/counter-tech-revenue-bias.md
 status: proposal
 blocked-on: discussion
 ---

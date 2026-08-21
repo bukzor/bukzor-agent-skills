@@ -1,7 +1,7 @@
 ---
 why:
-  - visible-debt
-  - multi-axis-surface
+  - ../030-requirements.kb/visible-debt.md
+  - ../030-requirements.kb/multi-axis-surface.md
 ---
 
 # Status Coloring (Red / Yellow / Green)

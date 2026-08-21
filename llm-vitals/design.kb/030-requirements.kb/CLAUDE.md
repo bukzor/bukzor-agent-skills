@@ -21,8 +21,8 @@ observable property the system must exhibit.
 
 ## Frontmatter
 
-Each entry's `why:` references one or more goal slugs from
-`020-goals.kb/`.
+Each entry's `why:` references one or more goal paths in
+`../020-goals.kb/`.
 
 ## When to Add / Read
 

@@ -1,6 +1,6 @@
 ---
 why:
-  - reduce-dropped-tasks
+  - ../020-goals.kb/reduce-dropped-tasks.md
 status: proposal
 blocked-on: discussion
 trigger: After the MVP picker is sticky (~2 weeks of consistent use).

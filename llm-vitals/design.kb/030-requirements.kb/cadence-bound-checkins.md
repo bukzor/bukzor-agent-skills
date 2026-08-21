@@ -1,8 +1,8 @@
 ---
 why:
-  - reduce-dropped-tasks
-  - wellness-as-upstream
-  - grow-incrementally
+  - ../020-goals.kb/reduce-dropped-tasks.md
+  - ../020-goals.kb/wellness-as-upstream.md
+  - ../020-goals.kb/grow-incrementally.md
 ---
 
 # Cadence-Bound Check-Ins

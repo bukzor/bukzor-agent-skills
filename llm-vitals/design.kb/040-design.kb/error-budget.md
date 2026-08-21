@@ -1,7 +1,7 @@
 ---
 why:
-  - tier-1-before-tier-2
-  - wellness-as-upstream
+  - ../030-requirements.kb/tier-1-before-tier-2.md
+  - ../020-goals.kb/wellness-as-upstream.md
 ---
 
 # Error Budget

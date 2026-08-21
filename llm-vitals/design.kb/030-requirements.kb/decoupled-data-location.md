@@ -1,7 +1,7 @@
 ---
 why:
-  - unify-personal-and-enterprise
-  - grow-incrementally
+  - ../020-goals.kb/unify-personal-and-enterprise.md
+  - ../020-goals.kb/grow-incrementally.md
 ---
 
 # Decoupled Data Location

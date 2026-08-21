@@ -1,7 +1,7 @@
 ---
 why:
-  - wellness-as-upstream
-  - grow-incrementally
+  - ../020-goals.kb/wellness-as-upstream.md
+  - ../020-goals.kb/grow-incrementally.md
 trigger: After journal-kind vitals have ≥3 months of regular entries (enough corpus for trend extraction).
 ---
 

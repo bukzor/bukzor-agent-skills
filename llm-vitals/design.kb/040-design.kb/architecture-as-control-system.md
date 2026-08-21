@@ -1,8 +1,8 @@
 ---
 why:
-  - multi-axis-surface
-  - visible-debt
-  - cadence-bound-checkins
+  - ../030-requirements.kb/multi-axis-surface.md
+  - ../030-requirements.kb/visible-debt.md
+  - ../030-requirements.kb/cadence-bound-checkins.md
 ---
 
 # Architecture as a Control System

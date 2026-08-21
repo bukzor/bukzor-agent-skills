@@ -1,6 +1,6 @@
 ---
 why:
-  - session-lifecycle-anchoring
+  - ../030-requirements.kb/session-lifecycle-anchoring.md
 ---
 
 # Anchoring (Habit Stacking)

@@ -1,6 +1,6 @@
 ---
 why:
-  - support-both-vital-kinds
+  - ../030-requirements.kb/support-both-vital-kinds.md
 ---
 
 # Vital Kinds

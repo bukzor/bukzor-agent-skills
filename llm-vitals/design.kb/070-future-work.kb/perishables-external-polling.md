@@ -1,6 +1,6 @@
 ---
 why:
-  - counter-tech-revenue-bias
+  - ../020-goals.kb/counter-tech-revenue-bias.md
 trigger: When visible-debt counters alone stop being enough — i.e., operator is still missing time-sensitive customer signals despite the dashboard.
 ---
 

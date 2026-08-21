@@ -1,7 +1,7 @@
 ---
 why:
-  - decoupled-data-location
-  - unify-personal-and-enterprise
+  - ../030-requirements.kb/decoupled-data-location.md
+  - ../020-goals.kb/unify-personal-and-enterprise.md
 ---
 
 # Repo Split

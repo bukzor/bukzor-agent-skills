@@ -1,6 +1,6 @@
 ---
 why:
-  - enable-accountable-deep-work
+  - ../020-goals.kb/enable-accountable-deep-work.md
 trigger: After ~20 day-log entries exist providing calibration baseline.
 ---
 

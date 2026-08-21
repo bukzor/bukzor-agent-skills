@@ -1,7 +1,7 @@
 ---
 why:
-  - session-lifecycle-anchoring
-  - grow-incrementally
+  - ../030-requirements.kb/session-lifecycle-anchoring.md
+  - ../020-goals.kb/grow-incrementally.md
 ---
 
 # Demand-Driven Review

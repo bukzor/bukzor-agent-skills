@@ -1,7 +1,7 @@
 ---
 why:
-  - visible-debt
-  - counter-tech-revenue-bias
+  - ../030-requirements.kb/visible-debt.md
+  - ../020-goals.kb/counter-tech-revenue-bias.md
 ---
 
 # Debt as Prioritization

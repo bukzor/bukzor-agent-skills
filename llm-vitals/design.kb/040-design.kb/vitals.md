@@ -1,7 +1,7 @@
 ---
 why:
-  - multi-axis-surface
-  - visible-debt
+  - ../030-requirements.kb/multi-axis-surface.md
+  - ../030-requirements.kb/visible-debt.md
 ---
 
 # Vitals

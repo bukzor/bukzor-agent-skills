@@ -1,7 +1,7 @@
 ---
 why:
-  - tier-1-before-tier-2
-  - cadence-bound-checkins
+  - ../030-requirements.kb/tier-1-before-tier-2.md
+  - ../030-requirements.kb/cadence-bound-checkins.md
 ---
 
 # Two-Tier SLO

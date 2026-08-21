@@ -1,6 +1,6 @@
 ---
 why:
-  - multi-axis-surface
+  - ../030-requirements.kb/multi-axis-surface.md
 trigger: When the operator wants to share the dashboard with someone non-technical (coach, partner, accountability buddy).
 ---
 

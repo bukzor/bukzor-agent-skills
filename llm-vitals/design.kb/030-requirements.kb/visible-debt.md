@@ -1,8 +1,8 @@
 ---
 why:
-  - reduce-dropped-tasks
-  - counter-tech-revenue-bias
-  - wellness-as-upstream
+  - ../020-goals.kb/reduce-dropped-tasks.md
+  - ../020-goals.kb/counter-tech-revenue-bias.md
+  - ../020-goals.kb/wellness-as-upstream.md
 ---
 
 # Visible Debt

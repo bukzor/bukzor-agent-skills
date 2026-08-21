@@ -20,9 +20,7 @@ they cover the mission's success criteria.
 
 ## Frontmatter
 
-Each entry's `why:` references the mission slug `mission` (the single
-.md at this layer's parent has no slug; we use `mission` as the
-canonical reference).
+Each entry's `why:` references the mission, `../010-mission.md`.
 
 ## When to Add / Read
 

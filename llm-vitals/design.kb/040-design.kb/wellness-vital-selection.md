@@ -1,7 +1,7 @@
 ---
 why:
-  - wellness-as-upstream
-  - support-both-vital-kinds
+  - ../020-goals.kb/wellness-as-upstream.md
+  - ../030-requirements.kb/support-both-vital-kinds.md
 ---
 
 # Wellness Vital Selection

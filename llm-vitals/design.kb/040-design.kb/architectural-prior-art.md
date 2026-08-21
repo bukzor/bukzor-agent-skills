@@ -1,6 +1,6 @@
 ---
 why:
-  - multi-axis-surface
+  - ../030-requirements.kb/multi-axis-surface.md
 ---
 
 # Architectural Prior Art — Three-Tradition Convergence

@@ -26,7 +26,7 @@ back into the active design.
 
 Each entry carries:
 
-- `why:` — slugs from earlier layers explaining motivation
+- `why:` — paths to entries in earlier layers explaining motivation
 - `trigger:` — a one-line condition for promoting this idea
 
 When an idea's trigger fires, promote the entry to its appropriate

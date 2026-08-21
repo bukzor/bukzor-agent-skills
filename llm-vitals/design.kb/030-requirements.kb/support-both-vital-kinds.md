@@ -1,7 +1,7 @@
 ---
 why:
-  - wellness-as-upstream
-  - unify-personal-and-enterprise
+  - ../020-goals.kb/wellness-as-upstream.md
+  - ../020-goals.kb/unify-personal-and-enterprise.md
 ---
 
 # Support Both Vital Kinds
