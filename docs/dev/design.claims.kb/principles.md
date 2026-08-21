@@ -9,7 +9,6 @@ why:
 ontology:
   - principle
   - force
-  - rule
   - heuristic
   - tripwire
   - deferral

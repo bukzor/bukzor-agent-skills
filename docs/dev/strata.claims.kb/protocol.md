@@ -7,7 +7,6 @@ why:
   - purpose.md
 ontology:
   - trigger
-  - condition
   - directive
   - bank
   - monitor
@@ -21,7 +20,6 @@ ontology:
   - adapter
   - floor
   - binding
-  - prose
 stale-when: a runtime that enforces every rule natively -- banks dissolve into the kernel and this stratum becomes its configuration format
 ---
 

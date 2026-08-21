@@ -6,10 +6,8 @@ ontology:
   - growth
   - work
   - review
-  - entry
   - capture
   - world
-  - disagreement
 stale-when: a corpus small enough for one reader to re-read -- bounded growth dissolves every requirement here
 ---
 

@@ -8,11 +8,8 @@ why:
   - purpose.md
 ontology:
   - status
-  - claim
-  - evidence
   - act
   - occasion
-  - force
   - warrant
   - certificate
   - checker
@@ -21,11 +18,9 @@ ontology:
   - ruling
   - defeat
   - presupposition
-  - live
   - collapse
   - upheld
   - disposition
-  - standing
   - assessor
   - party
   - stance

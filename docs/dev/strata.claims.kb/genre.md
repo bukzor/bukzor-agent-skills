@@ -5,9 +5,7 @@ why:
   - standing.md
   - purpose.md
 ontology:
-  - vocabulary
   - signature
-  - theory
   - confinement
   - conservativity
   - satisfaction
@@ -15,7 +13,6 @@ ontology:
   - genre
   - sort
   - translation
-  - motivation
 stale-when: a genre that must re-legislate a prior theory's standing to exist -- conservativity failing in practice, not just in principle
 ---
 

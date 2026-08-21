@@ -10,14 +10,11 @@ why:
   - protocol.md
   - genre.md
 ontology:
-  - structure
   - carrier
   - roster
   - presentation
   - atom
   - sequence
-  - set
-  - map
   - nesting
 stale-when: a central theory's law quantifying over a carrier the roster cannot present
 ---

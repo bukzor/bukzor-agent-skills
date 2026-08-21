@@ -5,17 +5,12 @@ why:
   - notation.md
   - purpose.md
 ontology:
-  - sort
   - owner
-  - answerable
-  - reach
   - interior
   - licensed
   - finding
-  - contention
   - trespass
   - dangling
-  - force
   - repair
   - namespace
   - recognition

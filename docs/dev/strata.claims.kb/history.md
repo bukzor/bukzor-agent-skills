@@ -10,7 +10,6 @@ ontology:
   - merge
   - linearization
   - store
-  - state
   - key
   - payload
   - override

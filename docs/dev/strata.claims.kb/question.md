@@ -4,7 +4,6 @@ standing: agent
 why:
   - fleet.md
 ontology:
-  - question
   - posing
   - wrestling
   - settlement

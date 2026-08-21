@@ -4,8 +4,6 @@ standing: agent
 why:
   - history.md
 ontology:
-  - schema
-  - record
   - field
   - validation
   - typing
