@@ -215,11 +215,14 @@ the target is decided, so it stays todo work that unblocks a later one.
       opens a migration. Decide whether the recurring guards get a
       schedule (a hook, a cron, a `/session-end` step). A `kind:
       recurring` migration nobody runs is a `complete` one that lies.
-- [ ] Teach `2026-08-21-000/validate.sh` to distinguish a ruled rival
-      from an unexamined one. All three rivals now open with a marker
-      comment naming the canonical they depart from. Until the
-      classifier reads it, a clean run is unreachable and the entry
-      cannot reach `verified`.
+- [ ] Teach the validators to distinguish a ruled rival from an
+      unexamined one. All three rivals now open with a marker comment
+      naming the canonical they depart from. This matters most for the
+      **recurring** guard (`2026-05-15-000`), which reports the two
+      `ideation.epistemics` rivals as NO-REF and will do so forever --
+      a permanent two-line lie in a report meant to be read as drift.
+      The one-shot `2026-08-21-000/validate.sh` wants it too, where it
+      is what stands between `complete` and `verified`.
 - [ ] `~/repo/github.com/bukzor/dotfiles` on branch `orphan-recovery`
       still holds the pre-stub `.claude/todo.jsonschema.yaml`,
       byte-identical to what `~/.claude/` had, plus 5 more MISSING. Not
