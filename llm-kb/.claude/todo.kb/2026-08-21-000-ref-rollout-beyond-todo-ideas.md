@@ -282,12 +282,22 @@ re-runs it should include `*.jsonschema.yaml` descriptions in scope.
       fetched the commits that wrote the stubs. `git fetch` resolves all
       seven with no edit. Left alone because it is another workstream's
       checkout. Until it is refreshed the guard cannot reach `verified`.
-- [ ] Decide whether `llm-discourse-graph`'s `claims.status` needs a value
+- [x] Decide whether `llm-discourse-graph`'s `claims.status` needs a value
       for *moot / no longer applies*. Three entries in
       `summer-programming-project` use `superseded` and one uses
       `resolved`; nowhere else in the homedir. Retracting them would be
       false -- the bodies say the findings were not wrong. Legislation for
       the fleet, so it was handed up rather than defaulted.
+      Ruled 2026-08-21 (user): not a status value at all. `status` holds
+      epistemic standing, and "stopped mattering" is a second axis, so
+      claims gained `live: bool` (default true) and `superseded-by:
+      path[]` (`00dda9e`), with a `dependentSchemas` rule forbidding the
+      two from disagreeing. Not "moot" -- it means *irrelevant* in
+      American usage and *open to argument* in British and legal usage,
+      opposite senses for a word going into a schema. `live`/`dead`
+      inverts nowhere. All three entries migrated (`f4b693b`) and the
+      second axis is documented in SKILL.md (`52c28ba`), which had
+      described the metadata as one axis and so kept producing the bug.
 - [ ] Rule on `prototype.chatfs`'s 9 remaining conformance errors:
       `status: exploring|active` and `kind: investigation` outside the
       closed enums, and `resolved:` holding a date where the canonical
@@ -321,3 +331,16 @@ re-runs it should include `*.jsonschema.yaml` descriptions in scope.
       `~/claude/bug--parallel-path-contamination/`: neither is a repo nor
       tracked (`~/claude/.gitignore` is `*/`). Stubs were written there
       and cannot be committed anywhere.
+- [ ] Decide whether `deductions` and `questions` want the same
+      `live`/`superseded-by` axis that `claims` just gained. A claim's
+      death often strands the deductions resting on it, and a question can
+      stop mattering without being answered. Deliberately not done with
+      claims: there is no observed instance yet, and legislating the
+      shape of three collections from evidence about one is how the
+      original conflation got in.
+- [ ] Consider adding `~` to the guard's roots. Coverage of the dotfiles
+      repo is currently an accident -- `~/repo/.../dotfiles` happens to
+      sit inside a scanned root, which is the only reason
+      `~/.vim/.claude/` was ever seen. Anything dotfiles tracks at top
+      level outside `~/repo`, `~/claude`, `~/.claude` is invisible by
+      construction. Weigh against what `~` drags in.
