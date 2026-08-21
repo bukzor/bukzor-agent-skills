@@ -149,8 +149,9 @@ layer-entry, because its consumers and its churn are different.
 ## Verification
 
 The published file was behavior-tested against the repo validator
-(llmd.frontmatter_validate), eleven cases: strict root accepts path and
-sibling refs and no-why, rejects slugs, empty lists, and extra fields; a
+(llmd.frontmatter_validate), eleven cases, and re-run after the `minItems`
+strike: strict root accepts path and sibling refs, no-why, and empty
+lists, rejects slugs and extra fields; a
 skill://-resolving extender enforces required-why and local closure over
 added fields; the `#why` fragment resolves standalone and rejects slugs.
 All as intended.
