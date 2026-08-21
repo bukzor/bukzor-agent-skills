@@ -242,3 +242,106 @@ day they were written and are not carried over:
 `skeleton/` and the skeleton copies are stubs) and `~/.claude/sessions`
 (the addressing decision got made -- `llm-sessions/jsonschema/` exists
 and `~/.claude/sessions.jsonschema.yaml` is a stub).
+
+## Worked 2026-08-21: 42 findings down to 7
+
+Four lanes, file-disjoint, run in parallel; each agent sole writer in its
+own roots. Outcome: **35 of 42 resolved, 8 files ruled, 7 residual.**
+
+| lane | findings | outcome |
+| --- | --- | --- |
+| terminology/policy | -- | template-uses-`$ref` policy landed (`deda3d9`), rename across 4 sites (`e44a815`) |
+| skills repo + `~/.claude` | 13 | all resolved |
+| `~/claude` | 14 | 7 stubbed, 4 ruled rival, 1 stale-hop repointed; 26 files newly validated |
+| `~/repo` | 15 | 13 stubbed, 2 left for ruling; 41 files newly validated, 9 orphan stubs swept in |
+
+The recurring pattern held everywhere: **a stub does not fix a
+collection, it exposes one.** 67 files came under validation for the
+first time; 8 errors surfaced behind them and were fixed. Two nested
+sub-scopes (`chatfs-fuser/.../caller-responsibility.kb`,
+`summer-programming-project/.../archive.kb`) were invisible to every
+previous sweep and to their own authors until given a sibling schema.
+
+## The guard was silently disarmed by good documentation
+
+Found while comparing how the four lanes recorded their rulings, and it
+invalidates every clean run this guard reported before today.
+
+The NO-REF test was `grep -qF <canonical-uri> <schema>`. A grep cannot
+distinguish *refs the canonical* from *explains why it doesn't ref the
+canonical* -- and the second is exactly what a careful author writes.
+All four rivals ruled today open with a comment naming the canonical
+URI, and all four therefore reported **clean while having no `$ref` at
+all**. The better the divergence was documented, the more certainly it
+went unreported. `bukzor.samsung-debloat`'s `findings` sat in that state
+with eleven entries and a schema of a different model.
+
+Fixed by parsing instead of matching (`classify_schema` in `lib.sh`):
+
+- `$ref`s are collected **recursively, fragments stripped**, so an
+  extender that refs `<canonical>#base` from inside an `allOf` counts as
+  a use. The old grep got that case right only by substring accident.
+- A ruling now lives in the schema's own **`$comment`** -- JSON Schema's
+  reserved annotation keyword, inert in draft-07 and 2020-12 alike --
+  and must *begin* with the literal token
+  `NO-REF ruled <YYYY-MM-DD> (<migration-stem>):`. It is data the same
+  parse already reads; a `#` comment is dropped by the parser and can
+  only be grepped for.
+- Unparseable input reports `BAD-YAML` instead of masquerading as
+  `NO-REF`.
+
+Ruled files report on stderr and do not fail the run. Without that, the
+guard re-reports a settled question forever and every sweep re-litigates
+it -- which is how three of these four came to be judged twice already.
+
+Fixtures (`trash/classify-fixtures`) cover stub, extender, ruled,
+mentions-only, lead-in-before-token, and unparseable. **The old
+mechanism is wrong on three of the six, in both directions:** it passes
+`mentions-only` and flags `ruled`.
+
+All 8 rulings are now marked and honored: 4 in `~/claude` (`ec830e7`,
+`e2624c5`, `6213067`), 2 in `ideation.epistemics` (`6d6e51c`), 1 in
+`prototype.chatfs` (`8d79a6f`), 1 here (`54c4baf`).
+
+## Residual: 7, and not one of them is drift
+
+All seven are the `dotfiles` clone at `~/repo/github.com/bukzor/dotfiles`
+on branch `orphan-recovery`.
+
+**Correcting the record:** an earlier note here warned that a careless
+merge would reinstate the stale copies over the stubs. That is wrong.
+`orphan-recovery`'s HEAD is an *ancestor* of the live checkout's HEAD --
+already merged -- and the clone has simply never fetched the commits that
+wrote the stubs. It does not know the objects exist. There is nothing to
+merge and no hazard; `git fetch` in that checkout resolves all seven,
+with no edit and no ruling.
+
+Left alone deliberately: it is another workstream's checkout, and
+refreshing it is the user's call, not a sweep's.
+
+`status` stays `in-progress` rather than `complete`, because `complete`
+claims no known residual and seven are known. `verified` additionally
+requires a clean run; the honest gate is: refresh that clone, re-run,
+see zero.
+
+## Handed up, not decided here
+
+Three canonical-level questions surfaced. Each is legislation for the
+fleet, and this migration only propagates -- it does not legislate:
+
+1. `llm-discourse-graph`'s `claims.status` has no value for *moot / no
+   longer applies*. Three entries in `summer-programming-project` use
+   `superseded`, one uses `resolved`; nowhere else in the homedir.
+   Retracting them would be false -- the bodies say the findings were
+   not wrong.
+2. `prototype.chatfs` uses `status: exploring|active` and
+   `kind: investigation` outside the closed enums, and a `resolved:`
+   date where the canonical says string. Nine such errors, not papered
+   over.
+3. A roll-up `X.md` beside `X.kb/` always reports `No schema found`:
+   `schema_for()` only looks *inside* `.kb/`. Confirmed in three
+   independent trees, including this repo's own
+   `llm-kb/complete-example/decorations.md` and `llm-kb/.claude/todo.md`.
+   Either the resolver should walk to the sibling schema, or
+   `references/frontmatter-outside-a-collection.md` is the answer and the
+   validator should say so without calling it an error.
