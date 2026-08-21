@@ -27,14 +27,23 @@ uncorrelated there, so the license polices noise, and PLAIN's menu
 applies: remove the ownership, or contract the entry to the term
 genuinely coined.
 
-The test mechanizes as concentration across theories, not rarity in
-English. A word whose occurrences pile up in one theory makes an
-occurrence elsewhere anomalous, which is the counterfactual exactly;
-a word spread evenly across the fleet is ambient vocabulary whatever
-its corpus frequency. Rarity answers a different question -- can a
+The test mechanizes as concentration outside the owner's interior,
+not rarity in English. Inside it, saying the owner's word is the
+point, so a root's word -- ambient over its whole ledger by
+construction -- measures nothing there. A word that thins out past
+the interior makes an occurrence beyond it anomalous, which is the
+counterfactual exactly; a word spread evenly across the fleet is
+ambient vocabulary whatever its corpus frequency. Rarity answers a different question -- can a
 reader supply the meaning unaided -- and the two disagree on real
 cases: 'cost' is everyday English and still concentrated enough to
 own, if it is.
+
+Spread carried by import is not spread. A prior exists to be read in
+its own words, so a stratum's vocabulary surfacing in the theories
+above it is the tower working, not the license failing -- 'fixpoint',
+said by six theories outside its own, is the auxiliary theory doing
+what it was split off to do. The count is evidence for the
+counterfactual, never the ruling on it.
 
 The declined test is centrality: how much the coining theory invests
 in a word says nothing about who else will need it. 'ontology',
