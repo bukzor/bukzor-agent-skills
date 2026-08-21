@@ -95,6 +95,14 @@ each node. Questions derive their state from field presence: `resolved` means
 answered, `candidate-resolutions` means under investigation, neither means
 new/open. See the schemas for the complete field definitions.
 
+Two axes, not one. `status` is whether we believe a node (`asserted`,
+`contested`, `retracted`); `live` is whether it still bears on anything.
+Retiring is not retracting: a claim that was true and then got acted on is
+`status: asserted, live: false`, and saying it stopped mattering must never
+require calling it wrong. Where a successor exists, name it in
+`superseded-by:` -- any collection, not just `claims.kb/` -- instead of
+burying the replacement in prose.
+
 ### The core wiring pattern
 
 Questions are answered by claims. Claims are supported by deductions.
@@ -141,6 +149,7 @@ grep -rL "resolved:" questions.kb/*.md        # Open questions
 cat claims.kb/some-claim.md                  # Read a claim
 ls claims.kb/some-claim.kb/                  # Has elaboration?
 grep -l "status: contested" claims.kb/*.md   # Find contested knowledge
+grep -l "live: false" claims.kb/*.md         # Retired, not retracted
 ```
 
 ## Design rationale
