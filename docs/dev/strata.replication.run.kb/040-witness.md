@@ -1,7 +1,7 @@
 ---
 turn: 040-witness.md
-sent: "2026-08-10T20:55:01.591Z"
-replied: "2026-08-10T21:05:45.940Z"
+sent: 2026-08-10T20:55:01.591Z
+replied: 2026-08-10T21:05:45.940Z
 model: claude-fable-5
 effort: high
 transcript: agent-ad6558e4768ab4666.jsonl:143

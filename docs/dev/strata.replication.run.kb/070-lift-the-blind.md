@@ -1,7 +1,7 @@
 ---
 turn: 070-lift-the-blind.md
-sent: "2026-08-10T21:14:07.002Z"
-replied: "2026-08-10T21:22:06.936Z"
+sent: 2026-08-10T21:14:07.002Z
+replied: 2026-08-10T21:22:06.936Z
 model: claude-fable-5
 effort: high
 transcript: agent-ad6558e4768ab4666.jsonl:191
