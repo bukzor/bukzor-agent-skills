@@ -8,6 +8,7 @@ why:
   - ../standing.kb/evidence-induces-a-monotone-operator.md
   - ../view.kb/a-cache-is-lawful-iff-the-triangle-commutes.md
   - ../protocol.kb/a-trigger-bank-is-a-monitor.md
+  - ../genre.kb/confinement-is-the-syntactic-half.md
 ---
 
 # The Roster Is Read Off the Carriers

@@ -7,7 +7,6 @@ why:
   - ../purpose.kb/forced-misrepresentation-is-the-failure-mode.md
   - a-verdict-names-what-the-judge-ruled.md
   - ../../../docs/dev/strata.claims.kb/standing.md
-  - ../../../docs/dev/strata.claims.kb/data-representation.md
 ---
 
 # How Should Judge/Verdict/Standing Be Represented, Long-Term?
