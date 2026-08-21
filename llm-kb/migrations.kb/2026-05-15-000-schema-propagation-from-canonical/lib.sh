@@ -81,3 +81,39 @@ collections() {
 }
 
 export -f build_table table skill_of canonical_uri canonical_stub collections
+
+# A ruling recorded by an author who examined a divergence and kept it.
+# It lives in the schema's own `$comment` -- JSON Schema's reserved
+# annotation keyword, ignored by every validator in both draft-07 and
+# 2020-12 -- so it is *data*, read by the same parse the guard already
+# does. It deliberately is not a `#` comment: a YAML comment is dropped
+# by the parser, so the only way to honor one is to grep the file, and a
+# grep cannot tell "refs the canonical" from "mentions the canonical
+# while explaining why it doesn't ref it."
+export RULING_TOKEN='NO-REF ruled '
+
+# Every $ref in the document, fragments stripped. Not just the root: a
+# stub refs at the root, but an extender refs `<canonical>#base` from
+# inside an allOf or a $defs subschema, and that is equally a use of the
+# canonical.
+schema_refs() {
+  local raw
+  raw="$(yq -r '.. | select(tag == "!!map" and has("$ref")) | .["$ref"]' -- "$1")" || return 1
+  printf '%s\n' "$raw" | sed 's/#.*//'
+}
+
+# OK | RULED | NO-REF | BAD-YAML
+classify_schema() {
+  local schema="$1" canonical="$2" refs ruling
+  refs="$(schema_refs "$schema" 2>/dev/null)" || { echo BAD-YAML; return 0; }
+  if grep -qxF -- "$canonical" <<<"$refs"; then
+    echo OK
+  elif ruling="$(yq -r '.["$comment"] // ""' -- "$schema" 2>/dev/null)" &&
+    [[ "$ruling" == "$RULING_TOKEN"* ]]; then
+    echo RULED
+  else
+    echo NO-REF
+  fi
+}
+
+export -f schema_refs classify_schema
