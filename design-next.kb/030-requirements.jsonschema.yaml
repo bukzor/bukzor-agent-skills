@@ -1,12 +1,9 @@
-$schema: "http://json-schema.org/draft-07/schema#"
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: "https://json-schema.org/draft/2020-12/schema"
 description: Schema for requirement entries in 030-requirements.kb/
-type: object
-additionalProperties: false
-required:
-  - why
+$ref: "skill://llm-design-kb/jsonschema/layer-entry.jsonschema.yaml#base"
+required: [why]
 properties:
-  why:
-    $ref: "jsonschema/why.jsonschema.yaml"
   status:
     $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/status"
   blocked-on:
@@ -15,3 +12,4 @@ properties:
     $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/superseded-by"
 allOf:
   - $ref: "jsonschema/decision-lifecycle.jsonschema.yaml#/$defs/superseded-requires-superseded-by"
+unevaluatedProperties: false
