@@ -313,3 +313,9 @@ additionalProperties: false
         _ = guide.write_text("---\nanything: goes\n---\n\n# Notes\n")
 
         assert list(fv.validate_one_file(guide, None, 0)) == []
+
+    def it_reports_a_named_path_that_does_not_exist(self, tmp_path: Path):
+        # A mistyped path validated nothing; that must not read as nothing wrong.
+        results = list(fv.validate_paths(iter([tmp_path / "no-such-file.md"])))
+
+        assert [result.errors for result in results] == [("File not found",)], results

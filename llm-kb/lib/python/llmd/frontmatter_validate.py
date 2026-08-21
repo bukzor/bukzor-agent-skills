@@ -235,6 +235,12 @@ def validate_paths(paths: Iterator[Path], schema_override: Path | None = None, d
         elif p.is_file():
             yield from validate_one_file(p, schema_override, depth)
 
+        else:
+            # Named on the command line and neither collection, directory, nor
+            # file -- a mistyped path. Reported rather than passed over: having
+            # validated nothing must never read as having found nothing wrong.
+            yield ValidationResult(depth, 'file', p.name, errors=('File not found',))
+
 
 def extract_frontmatter(md_file: Path) -> str | None:
     """Extract YAML frontmatter from markdown file."""
