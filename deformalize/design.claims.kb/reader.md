@@ -6,7 +6,6 @@ why:
 ontology:
   - reader
   - plain English
-  - glossary
   - term
   - formal theory
   - informal theory

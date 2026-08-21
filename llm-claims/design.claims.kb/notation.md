@@ -4,22 +4,10 @@ standing: agent
 why:
   - good-smells.md
 ontology:
-  - label
-  - sigil
-  - status
-  - standing
-  - premise
-  - arrow
   - node type
-  - warrant
-  - stipulation
   - veto
-  - judge
   - signature
-  - check
   - scan
-  - theory
-  - prior
   - staleness condition
   - indentation
   - containment

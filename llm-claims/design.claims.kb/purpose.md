@@ -4,8 +4,6 @@ standing: agent
 why:
   - stance.md
 ontology:
-  - ledger
-  - claim
   - party
   - adoption
   - rung

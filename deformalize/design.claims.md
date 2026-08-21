@@ -6,6 +6,7 @@ ontology:
   - design
   - claim
   - theory
+  - glossary
   - agent
   - user
 stale-when: a design filed here that is not `/deformalize`'s -- a second skill's commitments in this ledger

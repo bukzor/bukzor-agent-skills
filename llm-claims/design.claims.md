@@ -9,6 +9,20 @@ ontology:
   - chat
   - agent
   - user
+  - ledger
+  - claim
+  - theory
+  - prior
+  - label
+  - sigil
+  - status
+  - standing
+  - stipulation
+  - premise
+  - arrow
+  - warrant
+  - judge
+  - check
 stale-when: a design that is not this notation's -- a second skill's commitments filed here
 last-updated: "2026-08-20"
 ---
