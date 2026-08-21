@@ -6,7 +6,6 @@ ontology:
   - reification
   - probe
   - finding
-  - job
   - seam
   - witness
   - blind

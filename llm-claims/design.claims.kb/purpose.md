@@ -7,7 +7,6 @@ ontology:
   - party
   - adoption
   - rung
-  - context
 stale-when: a different competitor -- a setting where the ledger is chosen against a better notation rather than against keeping none
 ---
 

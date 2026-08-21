@@ -9,7 +9,6 @@ ontology:
   - confinement
   - conservativity
   - satisfaction
-  - extension
   - genre
   - translation
 stale-when: a genre that must re-legislate a prior theory's standing to exist -- conservativity failing in practice, not just in principle

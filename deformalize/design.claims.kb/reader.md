@@ -10,7 +10,6 @@ ontology:
   - formal theory
   - informal theory
   - Python
-  - project
 stale-when: an account read only by agents already fluent in the formal vocabulary
 ---
 

@@ -2,14 +2,11 @@
 label: AUTHORSHIP
 standing: agent
 ontology:
-  - skill
-  - SKILL.md
   - description
   - author
   - invoker
   - operator
   - exemplar
-  - peer
   - substrate
   - tier
   - retrieval
@@ -18,7 +15,6 @@ ontology:
   - domain
   - composition
   - token
-  - blind
 stale-when: a skill format with per-audience channels (an author-facing file beside the invoker-facing body), or a harness whose retrieval consults neither names nor descriptions -- either dissolves the single-surface economics these claims price
 ---
 

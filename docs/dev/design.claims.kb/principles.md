@@ -10,7 +10,6 @@ why:
   - extension.md
 ontology:
   - principle
-  - force
   - heuristic
   - tripwire
   - deferral

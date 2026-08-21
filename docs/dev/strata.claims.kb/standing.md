@@ -16,7 +16,6 @@ ontology:
   - checker
   - verdict
   - fiat
-  - ruling
   - defeat
   - presupposition
   - collapse

@@ -4,8 +4,6 @@ standing: agent
 why:
   - purpose.md
 ontology:
-  - design
-  - criterion
   - writer
   - consumer
   - token

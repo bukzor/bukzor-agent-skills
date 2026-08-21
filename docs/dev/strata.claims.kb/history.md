@@ -2,10 +2,8 @@
 label: HISTORY
 standing: agent
 ontology:
-  - update
   - history
   - log
-  - word
   - branch
   - merge
   - linearization

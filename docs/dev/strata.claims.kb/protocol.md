@@ -12,8 +12,6 @@ ontology:
   - monitor
   - guard
   - synchronized product
-  - agent
-  - enforcement
   - grade
   - runtime
   - interpretation

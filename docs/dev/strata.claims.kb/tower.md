@@ -5,8 +5,6 @@ why:
   - genre.md
   - protocol.md
 ontology:
-  - stratum
-  - tower
   - seam
   - stratification
   - self-application

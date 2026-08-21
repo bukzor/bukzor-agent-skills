@@ -3,11 +3,7 @@ label: PURPOSE
 standing: agent
 ontology:
   - corpus
-  - growth
-  - work
-  - review
   - capture
-  - world
 stale-when: a corpus small enough for one reader to re-read -- bounded growth dissolves every requirement here
 ---
 
