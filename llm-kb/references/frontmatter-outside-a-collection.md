@@ -55,11 +55,11 @@ roll-up. It does not, and should not be made to: a member and a summary
 of the members are different kinds, and the one schema would have to
 require each one's fields of the other.
 
-Where the two genuinely are one kind, the domain says so and the pairing
-is real -- a claim ledger's `X.md` is a claim like any other, so
-`X.jsonschema.yaml` fits it exactly. Where the domain does not say so,
-the shared name is a coincidence of spelling, and the roll-up needs its
-own resolution from the three above.
+The shared name is a coincidence of spelling, and the roll-up needs its
+own resolution from the three above. In practice the third one fits: a
+roll-up's keys are a date its collection's git history already answers,
+or a constant nothing reads. Strip them and the file is prose, which is
+what it was.
 
 ## The two files that are skipped, and why that is not a fourth way out
 

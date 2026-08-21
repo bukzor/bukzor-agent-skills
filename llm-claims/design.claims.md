@@ -24,7 +24,6 @@ ontology:
   - judge
   - check
 stale-when: a design that is not this notation's -- a second skill's commitments filed here
-last-updated: 2026-08-20
 ---
 
 # The design, as a ledger

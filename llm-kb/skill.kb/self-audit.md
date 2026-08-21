@@ -1,7 +1,3 @@
----
-last-updated: 2026-05-13
----
-
 # self-audit -- proactive quality checks for kb work
 
 Each file in `self-audit.kb/` is one quality check: a question to ask

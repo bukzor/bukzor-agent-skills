@@ -1,7 +1,3 @@
----
-last-updated: 2026-08-09
----
-
 # Strata, replicated
 
 A blind re-derivation of `strata.claims.kb/`, run as a conversation.

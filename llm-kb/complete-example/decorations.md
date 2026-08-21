@@ -1,7 +1,3 @@
----
-last-updated: 2024-03-09
----
-
 # Decorations
 
 Dinosaur theme with green/blue/orange palette, matching cake and Alex's interests.

@@ -11,6 +11,3 @@ properties:
     $ref: "jsonschema/status.jsonschema.yaml"
   budget:
     $ref: "jsonschema/budget.jsonschema.yaml"
-  last-updated:
-    description: Required for summary files (e.g., cake.md summarizing cake.kb/)
-    type: date

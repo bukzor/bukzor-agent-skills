@@ -1,7 +1,6 @@
 ---
 status: decided
 budget: 45
-last-updated: 2024-03-10
 ---
 
 # Cake

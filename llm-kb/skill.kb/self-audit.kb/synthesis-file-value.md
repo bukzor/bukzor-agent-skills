@@ -3,7 +3,7 @@
 ## Goal
 
 Every `$CATEGORY.md` alongside `$CATEGORY.kb/` adds value beyond
-`ls -RF`, and declares `last-updated:` frontmatter.
+`ls -RF`, and carries no frontmatter.
 
 ## Procedure
 
@@ -14,10 +14,12 @@ For each `$CATEGORY.md` next to a `$CATEGORY.kb/`:
 
 If yes, also:
 
-> Does the frontmatter declare `last-updated: YYYY-MM-DD`?
+> Is it free of frontmatter?
 
 ## Recovery
 
 - Duplicates `ls`? Strip the file.
-- Adds value, missing or stale `last-updated`? Update it (and
-  refresh the content if it has gone stale).
+- Carries frontmatter? Ask what the keys are for. A date the collection's
+  own git history already gives, or a constant nothing reads, is a
+  subtraction. Anything else is a member of some collection and belongs
+  in one -- see `references/frontmatter-outside-a-collection.md`.

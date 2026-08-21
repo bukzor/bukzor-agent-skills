@@ -2,7 +2,6 @@
 label: DESIGN
 standing: agent
 stale-when: a design filed here that is not `/formalize`'s -- a second skill's commitments in this ledger
-last-updated: 2026-08-18
 ---
 
 # The design, as a ledger

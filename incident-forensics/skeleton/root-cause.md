@@ -1,7 +1,3 @@
----
-last-updated: 1970-01-01
----
-
 # Root cause: open
 
 <!-- While open: state the question precisely -- what has to be true for

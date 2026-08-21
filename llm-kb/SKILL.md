@@ -82,10 +82,10 @@ Roll up a scope to help readers decide whether to dive deeper.
 May describe themes, patterns, or even list contents -- whatever helps readers
 avoid reading the directory. Omit when trivial (few items); `ls` suffices.
 
-If present, requires frontmatter:
-```yaml
-last-updated: YYYY-MM-DD
-```
+Carries no frontmatter. A roll-up is prose about a collection, not a member
+of one, so there is no schema for it to be data under -- and the one field it
+used to declare, `last-updated:`, is what `git log -1` and `stat` already
+answer, more honestly than a date a human remembers to bump.
 
 ### Maintenance Guides (CLAUDE.md)
 
