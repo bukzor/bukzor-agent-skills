@@ -18,6 +18,18 @@ setup: |
     `llm-kb` is a workspace member, so `uv add` detects the sibling and
     wires `tool.uv.sources` to it -- no PyPI lookup, no manual
     `[tool.uv.sources]` edit.
+
+    From a separate repo (not a workspace member), add it explicitly as
+    an editable path dependency:
+
+    ```sh
+    uv add --editable ../relative/path/to/bukzor-agent-skills/llm-kb
+    ```
+
+    Editable matters: without it, `uv sync` snapshot-builds llm-kb once
+    and later edits to its source don't reach the consumer until the
+    next sync. `[tool.uv.sources] llm-kb = { path = "...", editable =
+    true }` is the resulting/equivalent manual form.
 ---
 
 > **IMPERATIVE:**
