@@ -124,6 +124,51 @@ The rename is what made the first ruling visible. While
 llm-kb's business. Once the schema is `skill.jsonschema.yaml` and there
 is no `skill.md`, nothing suggests llm-kb ever reached that far.
 
+## The blast radius was small because the walk was
+
+The scope above is honest but it was also the finding, unrecognized: the
+walk descends only into `.kb/`, so `llm.kb-validate docs/dev/design.claims.kb`
+reported `37 files, 0 errors` without ever opening `design.claims.md` —
+the file that, by llm-claims-kb's own rule, *defines the theory the
+collection holds*. A ledger certified clean with its root claim unread.
+
+Three independent sources make the roll-up part of the collection rather
+than a document beside it: llm-kb's anatomy lists `$CATEGORY.md` inside
+the pattern, `skill.kb/self-audit.kb/synthesis-file-value.md` audits it
+as kb work, and a ledger's `X.md` is a claim like any other. So the walk
+takes `X.md` with `X.kb/`, stopping when the parent is itself a `.kb/` —
+a nested roll-up is already a member of the collection above it.
+
+Thirteen roll-ups now report `No schema found` in the ordinary run
+rather than only when named. The live tree reads `540 files, 13 errors`,
+and that is the true state.
+
+## Folding is a failure mode with a procedure against it
+
+The owner's counter to the reach argument was that these files are not
+"unchecked" — name one and the tool reports on it. True, and my word was
+wrong: I had used *unchecked* to mean *no schema applies*, which is the
+exact conflation `return []` used to make. I reverted to pre-session
+vocabulary and then reasoned from it.
+
+Then I withdrew the whole position — including the half the counter
+never touched. The position had two independent claims welded together
+again: that the walk should **reach** `X.md`, and that `X.md` should be
+**paired** with `X.jsonschema.yaml`. The objection landed on the
+phrasing of the second. I dropped both.
+
+`must-read.kb/before/retracting-or-conceding-a-claim.md` exists for
+precisely this, and I did not read it before conceding. Its Arbiter role
+has one job — check whether Skeptic's concession was earned — and the
+concession here was not: Skeptic had a surviving argument (the walk does
+not reach them) that was never voiced. Advocate/Skeptic without Arbiter
+is agreement with extra steps.
+
+The fused-variable count for one session: whose keys are these vs.
+should the tool report on the file; current reach vs. what deserves
+checking; reach vs. pairing. Three, all the same shape, all resolved by
+separating rather than choosing.
+
 ## What the verification had to be
 
 Both new assertions were driven to red first and failed with the
@@ -143,3 +188,11 @@ Worth noticing as a class: for most of this session the tool that
 verifies the work was itself stale, and nothing said so. It is the same
 failure the session set out to fix, one level up — a green result whose
 provenance nobody checked.
+
+One more of the family, found by tripping over it: `validate_paths` had
+three branches and no `else`, so a path that is neither collection,
+directory, nor file fell out of the walk silently. A three-path
+invocation reported `2 files` and never mentioned that the third was
+mistyped — in the very command run to settle an argument about
+trustworthy output. `validate_file` had carried a `File not found`
+message all along that nothing could reach.

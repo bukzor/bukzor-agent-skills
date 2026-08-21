@@ -216,18 +216,28 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `must-read.kb/when/` trigger, unlike its sibling skills. Raised
       2026-08-20; the specifics were not recorded, so scope it from
       what `llm-kb` and `llm-claims` carry before spending
-- [ ] 13 collection roll-ups now report `No schema found`, which is
-      true and is where the three resolutions run out: a synthesis file
-      cannot move into the `.kb/` it summarizes, its parent is not the
-      thing to rename, and its `last-updated` is load-bearing (the claim
-      schema says a cache is lawful iff it names the revision it derives
-      from). The missing fourth resolution is that a collection's schema
-      covers its roll-up, which
-      `llm-kb/complete-example/food.jsonschema.yaml` already does and
-      documents -- `last-updated`, "Required for summary files (e.g.,
-      cake.md summarizing cake.kb/)" -- while `decorations.jsonschema.yaml`
-      beside it says "items" and forbids the field. Settle the example
-      against itself before generalizing from either half
+- [ ] 13 collection roll-ups report `No schema found` since 31eeb7c, so
+      the live tree reads `540 files, 13 errors`. Resolve each against
+      the three ways out in
+      `llm-kb/references/frontmatter-outside-a-collection.md`, per file
+      -- that work has not been done, and this session asserted a gap in
+      the three without doing it. The facts to start from: six are
+      `.claude/todo.md` (`managed-by`, mostly `cost-benefit-sweh`),
+      three are a skill's `design.claims.md` and two more are
+      `docs/dev/*.claims.md` (`label`/`standing`/`ontology`/`stale-when`/
+      `last-updated`), and `docs/dev/strata.replication.md`,
+      `incident-forensics/skeleton/root-cause.md`,
+      `llm-kb/complete-example/decorations.md` carry `last-updated`
+      alone. Renaming the parent is available for `docs/dev/`,
+      `skeleton/`, `complete-example/` and not for `.claude/` or a
+      skill root, both of which Claude Code fixes by name
+- [ ] `llm-kb/complete-example/` contradicts itself about a summary
+      file: `food.jsonschema.yaml` documents `last-updated` as
+      "Required for summary files (e.g., cake.md summarizing cake.kb/)",
+      while `decorations.jsonschema.yaml` beside it says "Schema for
+      decoration items" and forbids the field -- and `decorations.md`
+      carries it. Whichever half is right, the file the fleet learns the
+      pattern from should not teach both
 - [ ] The walk still reaches no `README.md` and no `devlog/`/`adr/`
       entry, and `llm-discourse-graph` is the only skill whose dated
       docs carry frontmatter -- 9 ADRs with `date`/`status`/`supersedes`,
@@ -236,6 +246,15 @@ Repo-level list. Skill-scoped work lives in each skill's own
       21 `SKILL.md` are the population a widened walk must not reach
       rather than resolve: a skill manifest is not kb data, and llm-kb
       defines no schema for Claude Code's keys
+- [ ] `llm-vitals/skeleton/worksheet.template.md` carries `date`/`kind`
+      under no schema, and the skip in `validate_one_file` is
+      `name.startswith('.')` while its own comment gives `.template.md`
+      as the example. Either the file wants the dot or the check wants
+      the suffix its comment already names
+- [ ] `llm-design-kb/references/how-to-document-design-knowledge.md` is
+      the only file in any skill's `references/` with frontmatter
+      (`requires:`, a must-read-style directive). One file; decide it on
+      its own rather than making `references/` a collection fleet-wide
 - [ ] Three `.claude/todo.jsonschema.yaml` outside this repo are not the
       canonical stub, though `llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md`
       reads `status: complete` over a scope naming the whole tree:
