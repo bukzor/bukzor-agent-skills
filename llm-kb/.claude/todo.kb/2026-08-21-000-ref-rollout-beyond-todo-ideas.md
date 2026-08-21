@@ -169,7 +169,7 @@ the target is decided, so it stays todo work that unblocks a later one.
       (~48 files). Each references a 2020-12 canonical. Harmless to the
       validator, wrong for the editor. Do this *after* the judgment
       passes -- it touches the same files.
-- [ ] Rename the coined term "symlink farm" where it leaked into the
+- [x] Rename the coined term "symlink farm" where it leaked into the
       codebase: `llm-kb/lib/python/llmd/frontmatter_validate.py:68`,
       `llm-kb/references/schema-reuse.md:107`,
       `llm-kb/.claude/todo.kb/2026-02-09-000-schema-reuse-with-ref.md:63`,
@@ -177,11 +177,16 @@ the target is decided, so it stays todo work that unblocks a later one.
       is agent-coined, never user-sanctioned, and after migration D it
       also misdescribes what it labels: `~/.claude/skills/` is the skill
       *installation* mechanism, not a dedup device.
-- [ ] Write the template-uses-`$ref` policy into
+      Done 2026-08-21 (`e44a815`): four sites, plus two the census
+      missed. The replacement is a plain description of skill
+      installation, not another coinage.
+- [x] Write the template-uses-`$ref` policy into
       `references/schema-reuse.md`. Ratified 2026-08-21 ("template should
       use `$ref` unless there's an excellent reason to the contrary") but
       never written down, which is how `template.python-project` came to
       mint six stale snapshots.
+      Done 2026-08-21 (`deda3d9`), as a new section in
+      `references/schema-reuse.md`.
 - [x] Widen `migrations.kb/2026-05-15-000-schema-propagation-from-canonical`
       from todo/ideas to every category with a published canonical.
       Unblocked by the judgment pass and done 2026-08-21. Three things
@@ -199,7 +204,7 @@ the target is decided, so it stays todo work that unblocks a later one.
         Collections nest, and only the outermost was ever checked -- the
         same defect found one level down in `scratch.vim-work`.
 
-- [ ] Work the widened guard's residual: **42 findings, 32 MISSING and
+- [x] Work the widened guard's residual: **42 findings, 32 MISSING and
       10 NO-REF** (`2026-05-15-000/validate.sh`, no arguments). By
       category: todo 9, ideas 8, technical-policy 7, sessions 5,
       questions 3, timeline 2, findings 2, deductions 2, claims 2,
@@ -210,6 +215,13 @@ the target is decided, so it stays todo work that unblocks a later one.
       subjects a collection to validation for the *first* time, and
       `scratch.vim-work` is the precedent: one schema resolving newly
       checked 44 files. Expect frontmatter conformance work behind each.
+
+      Done 2026-08-21: **42 -> 7**, in four file-disjoint lanes. 35
+      resolved, 8 files ruled and marked. 67 files came under
+      validation for the first time; 8 errors surfaced behind them,
+      all fixed. The `scratch.vim-work` precedent held exactly --
+      including two nested sub-scopes invisible to every previous
+      sweep. Full record in the migration entry.
 - [ ] Ten of those 42 were already in the old scope and old root -- six
       weeks of ordinary drift on a guard that only runs when someone
       opens a migration. Decide whether the recurring guards get a
@@ -262,3 +274,50 @@ canonical's bytes invalidates nothing, but it is that migration's sweep
 to run, not this one's. Worth noting *why* it regressed: canonical
 schemas are data files, so a prose-oriented sweep can miss them. Whoever
 re-runs it should include `*.jsonschema.yaml` descriptions in scope.
+
+- [ ] Refresh the `dotfiles` clone at `~/repo/github.com/bukzor/dotfiles`
+      (branch `orphan-recovery`). It is the *entire* remaining guard
+      residual -- 7 findings -- and none of it is drift: that branch is an
+      ancestor of the live checkout at `~`, and the clone has simply never
+      fetched the commits that wrote the stubs. `git fetch` resolves all
+      seven with no edit. Left alone because it is another workstream's
+      checkout. Until it is refreshed the guard cannot reach `verified`.
+- [ ] Decide whether `llm-discourse-graph`'s `claims.status` needs a value
+      for *moot / no longer applies*. Three entries in
+      `summer-programming-project` use `superseded` and one uses
+      `resolved`; nowhere else in the homedir. Retracting them would be
+      false -- the bodies say the findings were not wrong. Legislation for
+      the fleet, so it was handed up rather than defaulted.
+- [ ] Rule on `prototype.chatfs`'s 9 remaining conformance errors:
+      `status: exploring|active` and `kind: investigation` outside the
+      closed enums, and `resolved:` holding a date where the canonical
+      says string. Either the enums want widening (a canonical edit) or
+      the data is wrong. Deliberately not papered over.
+- [ ] Fix or document the roll-up quirk: an `X.md` beside `X.kb/` always
+      reports `No schema found`, because `schema_for()` only looks
+      *inside* `.kb/`. Confirmed in three independent trees including this
+      repo's own `llm-kb/complete-example/decorations.md` and
+      `llm-kb/.claude/todo.md`. Either the resolver walks to the sibling
+      schema, or `references/frontmatter-outside-a-collection.md` is the
+      answer and the validator should say so without calling it an error.
+- [ ] Verify the two further `pnpm-run` sites the terminology pass
+      reported fixing: `copier-template/config.d/pre-commit/javascript.yaml`
+      and the root `config.d/pre-commit/javascript.yaml`. Same defect as
+      `template.python-project` -- a hook entry that only resolves inside a
+      direnv shell. Reported, not yet independently confirmed.
+- [ ] Commit or discard two session entries left fixed-but-uncommitted in
+      `2026-05-19--task-archeology/.claude/sessions.kb/` and
+      `template.python-project/.claude/sessions.kb/` (`session.uuid`
+      scalar -> list). Left alone as other agents' in-flight work.
+- [ ] Decide whether the four collections with no published canonical want
+      one: `research.home-office/use-cases.kb`,
+      `summer-programming-project/.../curriculum.kb`, and
+      `github-manager/{goals,maintenance-actions}.kb`. The guard is silent
+      on them by construction, so they are invisible to every sweep.
+- [ ] Fix the `ai-coding-tools-facts.d` tree (~40 errors). One schema
+      declares `http://json-schema.org/draft-07/schema#` *with* the
+      trailing `#`, which the validator rejects as an unknown dialect.
+- [ ] Decide what to do about `~/claude/.claude/` and
+      `~/claude/bug--parallel-path-contamination/`: neither is a repo nor
+      tracked (`~/claude/.gitignore` is `*/`). Stubs were written there
+      and cannot be committed anywhere.
