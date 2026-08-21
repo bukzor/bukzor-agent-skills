@@ -2,7 +2,7 @@
 label: SCALAR
 standing: user
 why:
-  - what-becomes-of-llm-discourse-graph.md
+  - migration-plan.md
   - ../../strata.claims.kb/data-representation.md
 ---
 
@@ -21,5 +21,5 @@ flat.
 That is the need. Whether `likelihood: 0.7` is a good answer to it is
 two further questions, in
 `what-need-does-a-stored-likelihood-serve.kb/`. Neither blocks
-anything: the field is carried over unchanged until they close --
-"We just keep the field until it's closed."
+anything: `migration-plan.md` holds the field in escrow until they
+close.

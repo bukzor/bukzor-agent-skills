@@ -4,6 +4,7 @@ standing: user
 why:
   - what-becomes-of-llm-discourse-graph.md
   - where-the-migration-guide-and-its-trigger-live.md
+  - the-stored-likelihood-is-neither-cache-nor-testimony.md
 ---
 
 # The migration plan

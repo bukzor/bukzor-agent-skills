@@ -15,7 +15,6 @@ claims cites into the cited theory's tree -- cannot be ruled on
 mechanically: under the fused `why:` support may still ride the
 arrow itself, and only reading the citing theory tells. So the scan
 files these as an adjudication queue, never as errors -- each entry
-resolves by reading into "keep, the support is real" or "cull, the
-arrow is dead under both lenses." Observed 2026-08-20: 1 idle of 52
-imports fleet-wide, down from 3 when the scan read only the
-vocabulary lens.
+resolves by reading into keep, cull, or refile (IDLE_TEST).
+Observed 2026-08-20: 1 idle of 53 imports fleet-wide; the queue
+turns over as imports are minted and read, which is it working.
