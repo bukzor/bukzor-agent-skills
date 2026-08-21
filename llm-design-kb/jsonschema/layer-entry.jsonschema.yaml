@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: Design-tower layer entry
+description: |
+  Frontmatter for an entry in a design.kb layer collection (Skill(llm-design-kb)):
+  prose plus upward `why:` motivation edges.
+
+  This canonical owns the entry *shape* only. Which layers a tower has, and
+  which of them require motivation, are per-project decisions expressed in
+  each layer's own binding schema:
+
+  - exact conformance (typical for a layer where motivation is optional):
+      $ref: "skill://llm-design-kb/jsonschema/layer-entry.jsonschema.yaml"
+  - motivated layer (typical for 020-060):
+      $ref: "skill://llm-design-kb/jsonschema/layer-entry.jsonschema.yaml#base"
+      required: [why]
+      unevaluatedProperties: false
+  - extension (project-local fields):
+      $ref: "skill://llm-design-kb/jsonschema/layer-entry.jsonschema.yaml#base"
+      properties:
+        project-field: {type: string}
+      unevaluatedProperties: false
+
+  Tower roots (010-mission) and auxiliary collections (use-cases.kb/,
+  background.kb/, ...) are not layer entries and do not bind this schema.
+
+  Plain 2020-12, not the llmd dialect: no extension types are used, and the
+  strict-root/open-base pattern below requires 2020-12 semantics
+  ($ref-with-siblings as conjunction, unevaluatedProperties).
+
+$defs:
+  why:
+    $anchor: why
+    description: |
+      Motivation edges: file-relative path references to the entries this one
+      exists to serve -- usually the layer above (e.g.
+      `../020-goals.kb/site-agnostic-capture.md`), or a same-layer sibling by
+      bare filename (`kb-spec.md`) when the motivating concept naturally lives
+      at the same layer.
+
+      Items are resolvable paths, never bare slugs: paths survive entry
+      promotion to sub-kbs, resolve mechanically for link checking, and follow
+      the same relative-reference rules as everything else in the kb system.
+      The `.md` suffix requirement is what separates the two: every conforming
+      reference ends in `.md`; a slug never does.
+
+      An empty list is the default and is always legal. A tower root has
+      nothing above it, and an entry whose motivation is not yet written down
+      is under-documented rather than invalid; omitting the field and writing
+      `why: []` mean the same thing. A schema that rejected its own default
+      would be incoherent.
+    type: array
+    default: []
+    items:
+      type: string
+      pattern: '\.md$'
+
+  base:
+    $anchor: base
+    description: |
+      The extensible base: everything but the closure. Consumers that add
+      fields (or add `required: [why]` for a motivated layer) $ref this
+      anchor and close themselves with `unevaluatedProperties: false`;
+      exact-conformance consumers $ref the document root, which is this base
+      plus closure.
+    type: object
+    properties:
+      why:
+        $ref: "#why"
+
+$ref: "#/$defs/base"
+unevaluatedProperties: false
