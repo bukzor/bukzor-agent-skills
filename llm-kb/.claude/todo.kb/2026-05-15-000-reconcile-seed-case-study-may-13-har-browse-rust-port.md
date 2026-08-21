@@ -62,7 +62,7 @@ case-study. That procedure's steps drive the work below.
     `status: reconciled`
 - [ ] Cross-link failure-modes to procedures (mitigated-by) and to principles
 - [ ] After distillation: run
-    `SKILL.kb/must-read.kb/after/distilling-from-a-raw-source.md` audits
+    `skill.kb/must-read.kb/after/distilling-from-a-raw-source.md` audits
 
 ## Open Questions
 
@@ -79,13 +79,13 @@ case-study. That procedure's steps drive the work below.
   procedure (the case-study no longer embeds the method)
 - [ ] Seed case-study has `status: reconciled` and aligned aliases
 - [ ] `bin/llm.kb-validate docs/dev/` clean
-- [ ] No orphan references (`SKILL.kb/self-audit.kb/cross-references.md`
+- [ ] No orphan references (`skill.kb/self-audit.kb/cross-references.md`
   passes)
 
 ## Notes
 
 This is the originating work the May 13 devlog flagged as "Next Session." The
-two sessions since have built infrastructure (SKILL.kb audit corpus,
+two sessions since have built infrastructure (skill.kb audit corpus,
 skeleton-default schema centralization). This is the consequential next step.
 
 Filename examples in `docs/dev/{CLAUDE.md, concepts.kb/procedure.md,

@@ -1,4 +1,4 @@
-# SKILL.kb -- maintenance guide
+# skill.kb -- maintenance guide
 
 The manual: one rule per file, for everything past *reading* a ledger.
 `SKILL.md` carries only what it takes to read one and points here for
@@ -38,7 +38,7 @@ implements does, and that decision is a claim in
 ## Filenames name their own trigger
 
 `SKILL.md` does not enumerate this directory; it says
-`ls -RF SKILL.kb/must-read.kb/`. That only works if each filename, read
+`ls -RF skill.kb/must-read.kb/`. That only works if each filename, read
 together with its juncture directory, says when to come read it —
 `after/retracting-a-claim.md`, `before/changing-a-claim.md`. A name that
 states the topic but not the occasion is a name that never fires, and a

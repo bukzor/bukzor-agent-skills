@@ -45,7 +45,7 @@ Schema: `jsonschema/claim.jsonschema.yaml`. Link or copy it next to
 each ledger and `$ref` it from a per-collection schema.
 
 A claims.kb is a `.kb`: `Skill(llm-kb)`'s audits and maintenance
-rules apply to it wholesale. The audits in `SKILL.kb/self-audit.kb/`
+rules apply to it wholesale. The audits in `skill.kb/self-audit.kb/`
 here are the ledger-specific additions, not replacements.
 
 ## Layout
@@ -66,7 +66,7 @@ a collection whose claims need no words of their own belongs in its
 parent.
 
 On disk a theory costs a directory and a header, so the
-split-for-the-reader move (`SKILL.kb/theories.md` in
+split-for-the-reader move (`skill.kb/theories.md` in
 `Skill(llm-claims)`) is even cheaper here than in chat:
 auxiliary theories that simplify a citing theory's claims are
 encouraged, not exceptional.
@@ -120,7 +120,7 @@ the path, leaving the `.dot` beside it. `llm-claims-kb-dot` is
 the emitter underneath, if you want the DOT on stdout.
 
 How to read the drawing, and the rots it catches:
-`SKILL.kb/self-audit.kb/graph-health.md`.
+`skill.kb/self-audit.kb/graph-health.md`.
 
 ### llm-claims-kb-flatten
 

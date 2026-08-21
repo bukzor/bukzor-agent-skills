@@ -6,7 +6,7 @@ for future agents.
 
 ## Plan: enumerate and categorize
 
-Run `../SKILL.kb/procedures.kb/enumerate-and-categorize.md` to list every
+Run `../skill.kb/procedures.kb/enumerate-and-categorize.md` to list every
 item the collection will hold and categorize them by type. The procedure
 also covers the flat-`.md` fallback for small collections.
 

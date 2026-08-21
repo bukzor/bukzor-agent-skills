@@ -23,17 +23,17 @@ setup: |
 > **IMPERATIVE:**
 >
 > Your FIRST action when this skill loads MUST be:
-> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+> `Bash("ls -RF skill.kb/must-read.kb/")`
 >
 > That listing is an index of triggers: each filename names the occasion to
 > read it. Walk it while planning, before ANY action, and read every entry
 > whose trigger matches the work at hand — `before/` entries must be read
 > *before* the action they name, not alongside it.
 
-The must-read entries link to audits in `SKILL.kb/self-audit.kb/` and
-procedures in `SKILL.kb/procedures.kb/`; follow those links when triggers
+The must-read entries link to audits in `skill.kb/self-audit.kb/` and
+procedures in `skill.kb/procedures.kb/`; follow those links when triggers
 fire. When adding new kb content of your own, browsing
-`SKILL.kb/self-audit.kb/` directly is a cheap proactive check for relevant
+`skill.kb/self-audit.kb/` directly is a cheap proactive check for relevant
 quality concerns.
 
 # llm.kb Pattern
@@ -178,8 +178,8 @@ suffix, a sibling pointer file, or the parent scope's naming convention
 keeps that prefix -- `references/dated-slug-filename.md`) is this
 pattern in the wrong shape. Bring it into
 shape the same way you'd promote a flat file -- growth-signal checklist
-and mechanical steps: `SKILL.kb/self-audit.kb/promotion-signals.md`,
-`SKILL.kb/procedures.kb/promote-to-collection.md`.
+and mechanical steps: `skill.kb/self-audit.kb/promotion-signals.md`,
+`skill.kb/procedures.kb/promote-to-collection.md`.
 
 ## Naming
 

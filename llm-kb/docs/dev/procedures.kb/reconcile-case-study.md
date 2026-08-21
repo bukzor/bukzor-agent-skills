@@ -45,12 +45,12 @@ has a canonical entry with mitigations and cross-refs. Set
 
    If a needed mitigation doesn't exist, create it. Procedure for
    multi-step methods; principle for aphorisms. Use
-   `../../../SKILL.kb/procedures.kb/stub-missing-entry.md` for
+   `../../../skill.kb/procedures.kb/stub-missing-entry.md` for
    cascade-bounded stubbing.
 
 3. **Concept and glossary stubs.** Any novel term mentioned without
    a definition: stub it per
-   `../../../SKILL.kb/procedures.kb/stub-missing-entry.md`.
+   `../../../skill.kb/procedures.kb/stub-missing-entry.md`.
 
 4. **Distilled procedures and principles.** If the case-study embeds
    a method or aphorism worth promoting, extract it to
@@ -72,7 +72,7 @@ has a canonical entry with mitigations and cross-refs. Set
 
 ## After completing
 
-Run `../../../SKILL.kb/must-read.kb/after/distilling-from-a-raw-source.md`
+Run `../../../skill.kb/must-read.kb/after/distilling-from-a-raw-source.md`
 audits.
 
 ## What this prevents
@@ -83,7 +83,7 @@ audits.
 
 ## Related
 
-- `../../../SKILL.kb/procedures.kb/post-mortem.md` -- the capture
+- `../../../skill.kb/procedures.kb/post-mortem.md` -- the capture
   procedure that feeds this one.
-- `../../../SKILL.kb/procedures.kb/stub-missing-entry.md` -- cascade
+- `../../../skill.kb/procedures.kb/stub-missing-entry.md` -- cascade
   bounding.

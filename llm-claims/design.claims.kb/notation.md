@@ -22,5 +22,5 @@ stale-when: an inference relation cheap enough to check at entry
 
 Every commitment the notation makes that could have gone the other way
 is a claim here, stated with what it cost and what it bought. This is
-the theory `../SKILL.kb/` is the manual for, and the one most likely to
+the theory `../skill.kb/` is the manual for, and the one most likely to
 be wrong: a change here is a change to the manual.

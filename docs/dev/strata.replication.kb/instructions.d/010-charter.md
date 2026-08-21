@@ -6,7 +6,7 @@ Why I'm asking -- judge everything downstream by this: I keep having "good ideas
 
 The bar, throughout: naming a structure -- a category, a lattice, a monad -- is worth nothing on its own. An identification carries its carrier, its operations, the laws they satisfy, one smallest instance drawn from the data, and the observation that would kill it. If the laws fail on the data, "there is no structure here" is a result; say it plainly.
 
-The data: the root skill is ./llm-kb; `ls */SKILL.md` is the index. Read each skill's *.jsonschema.yaml and SKILL.kb/, not just its SKILL.md -- the schemas carry the actual ontology, the prose only the motivation. Also survey three earlier, independent attacks on the same problem:
+The data: the root skill is ./llm-kb; `ls */SKILL.md` is the index. Read each skill's *.jsonschema.yaml and skill.kb/, not just its SKILL.md -- the schemas carry the actual ontology, the prose only the motivation. Also survey three earlier, independent attacks on the same problem:
 
 - ~/repo/github.com/bukzor/ideation.epistemics
 - ~/repo/github.com/bukzor/prototype.personal-reasoning-management

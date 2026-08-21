@@ -48,7 +48,7 @@ distilled items lives in the corresponding `.kb/` collections.
 
 ## See also
 
-- `../../../SKILL.kb/procedures.kb/post-mortem.md` -- the procedure that produces case-studies.
+- `../../../skill.kb/procedures.kb/post-mortem.md` -- the procedure that produces case-studies.
 
 TODO: expand with the distinguishing examples once we have a second
 case-study to compare against.

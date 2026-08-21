@@ -17,7 +17,7 @@ change the notation.
 
 ## What does NOT belong here
 
-Instructions for using a ledger -> `../SKILL.kb/`. Those are directives:
+Instructions for using a ledger -> `../skill.kb/`. Those are directives:
 nothing about them is contestable in the way a claim is, and dressing
 one in `label:`/`standing:` frontmatter produces a claim-shaped file
 that says nothing about its own standing.

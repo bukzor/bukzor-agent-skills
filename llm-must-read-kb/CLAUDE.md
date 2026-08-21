@@ -14,12 +14,12 @@ for agents working **on** the skill (not consumers of it).
 
 This skill prescribes a directory shape and access pattern. It should
 apply that same pattern to itself wherever it has trigger-bound
-directives — e.g. any future `SKILL.kb/must-read.kb/` here governing
+directives — e.g. any future `skill.kb/must-read.kb/` here governing
 edits to trigger files or scope additions.
 
 If you find yourself writing "always do X before editing trigger
 files" prose in SKILL.md, that's a signal to add a
-`SKILL.kb/must-read.kb/before/editing-a-trigger-file.md` instead.
+`skill.kb/must-read.kb/before/editing-a-trigger-file.md` instead.
 
 ## What changes warrant which artifact
 

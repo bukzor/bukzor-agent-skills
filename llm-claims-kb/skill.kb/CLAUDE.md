@@ -1,4 +1,4 @@
-# SKILL.kb -- maintenance guide
+# skill.kb -- maintenance guide
 
 Maintainer-side elaborations of the manual. `self-audit.kb/` holds
 the audits a claims.kb should periodically survive -- only the

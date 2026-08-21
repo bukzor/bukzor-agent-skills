@@ -33,12 +33,12 @@ invariant holds at every rung -- every claim sound, open, or retracted.
 
 The rest of this file is what it takes to read a ledger and to name an
 operation on one. What each operation *obliges* is a file apiece in
-`SKILL.kb/must-read.kb/`.
+`skill.kb/must-read.kb/`.
 
 > **IMPERATIVE:**
 >
 > Your FIRST action when this skill loads MUST be:
-> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+> `Bash("ls -RF skill.kb/must-read.kb/")`
 >
 > That listing is an index of triggers: each filename names the occasion to
 > read it. Walk it while planning, before ANY action, and read every entry
@@ -133,7 +133,7 @@ arguing in one vocabulary instead of two. Never because the list of
 claims got long.
 
 Auxiliary theories, naming, and words that recur across theories:
-`SKILL.kb/theories.md`.
+`skill.kb/theories.md`.
 
 ## Commentary
 

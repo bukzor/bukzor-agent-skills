@@ -13,4 +13,4 @@ chain. It is a claim ledger in the file form, `Skill(llm-claims-kb)`:
 one theory per collection, one claim per file, `label:` and `standing:`
 in frontmatter. `design.claims.md` is the entry point.
 
-`SKILL.md` and `SKILL.kb/` are the manual, and carry no claims.
+`SKILL.md` and `skill.kb/` are the manual, and carry no claims.

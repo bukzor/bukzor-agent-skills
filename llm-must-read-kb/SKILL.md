@@ -158,7 +158,7 @@ When a trigger's method is shared across triggers, or long enough to
 deserve its own file, factor it out:
 
 ```
-SKILL.kb/
+skill.kb/
 ├── must-read.kb/
 │   ├── before/marking-kb-work-done.md   ─ "run the validation pass"
 │   └── after/creating-or-editing-kb-files.md  ─ "run the audit pass"
@@ -181,7 +181,7 @@ The pattern installs at three scopes:
 |---|---|---|
 | Personal | `~/.claude/must-read.kb/` | User's own rules across all projects |
 | Project | `$REPO/.claude/must-read.kb/` | Project-specific triggers, versioned with the code |
-| Skill | `$SKILL/SKILL.kb/must-read.kb/` | Triggers bundled with a skill; consumers inherit them on load |
+| Skill | `$SKILL/skill.kb/must-read.kb/` | Triggers bundled with a skill; consumers inherit them on load |
 
 All three coexist; each scope ships its own `must-read.kb/`. The agent
 scans every reachable one during planning. Same-named triggers across
@@ -229,7 +229,7 @@ text, verbatim:
 > **IMPERATIVE:**
 >
 > Your FIRST action when this skill loads MUST be:
-> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+> `Bash("ls -RF skill.kb/must-read.kb/")`
 >
 > That listing is an index of triggers: each filename names the occasion to
 > read it. Walk it while planning, before ANY action, and read every entry

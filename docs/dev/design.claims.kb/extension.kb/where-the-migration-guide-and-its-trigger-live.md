@@ -8,7 +8,7 @@ why:
 # Where the Migration Guide and Its Trigger Live
 
 Both live in `llm-discourse-graph` itself: the guide under
-`SKILL.kb/`, and a `must-read.kb/when/` trigger pointing at it.
+`skill.kb/`, and a `must-read.kb/when/` trigger pointing at it.
 
 The warrant is routing, not tidiness. An agent that meets an
 old-format directory loads `llm-discourse-graph`, because that is

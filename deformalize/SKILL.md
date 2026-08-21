@@ -17,7 +17,7 @@ what breaks in the source is the primary finding, not a footnote.
 > **IMPERATIVE:**
 >
 > Your FIRST action when this skill loads MUST be:
-> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+> `Bash("ls -RF skill.kb/must-read.kb/")`
 >
 > That listing is an index of triggers: each filename names the occasion to
 > read it. Walk it while planning, before ANY action, and read every entry
@@ -51,7 +51,7 @@ only once the account earns keeping.
 
 Plain-old-Python is the third rung, reached when a claim needs a demo
 that would fail if the claim were false -- not the default path. When
-code is actually asked for: `SKILL.kb/must-read.kb/when/asked-for-code.md`.
+code is actually asked for: `skill.kb/must-read.kb/when/asked-for-code.md`.
 
 ## The review step
 

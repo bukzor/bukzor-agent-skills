@@ -174,7 +174,7 @@ Rules this tooling mechanizes:
 
 - `SKILL.md` — sigil table and claim-line grammar; the
   `grep -nE '[A-Z_][?+]'` scan that `-attention` productizes
-- `SKILL.kb/theories.md` — confinement and conservativity; the
+- `skill.kb/theories.md` — confinement and conservativity; the
   placement rule `-lint` checks the mechanical slice of
 - `design.claims.kb/good-smells.kb/enforceable-invariants-win.md`,
   `.../survives-dumb-media-and-tools.md` — the criteria this tooling

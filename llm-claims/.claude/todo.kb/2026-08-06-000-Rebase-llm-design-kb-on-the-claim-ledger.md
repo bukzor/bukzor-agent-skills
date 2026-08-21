@@ -30,7 +30,7 @@ maintenance affordances (schemas, validation, self-audit passes).
 
 - Tower ≅ quotient of ledger: `why:` links are `<-` arrows restricted
   to inter-layer edges; layers are theories with declared priors
-  (`SKILL.kb/theories.md` already provides the machinery).
+  (`skill.kb/theories.md` already provides the machinery).
 - Perfect bijection observed: `?` claims ↔ `070-future-work.kb/`
   entries; `~~struck~~` ↔ "why not X" notes.
 - The tower's one genuinely new layer is requirements
@@ -67,17 +67,17 @@ maintenance affordances (schemas, validation, self-audit passes).
   - [ ] `?`-debt report: what rests on open claims, how much
   - [ ] re-run every `certified(CHECK)`
   - [ ] reconcile frontmatter standing vs prose sigils (no drift)
-- [ ] Write the footnote-provenance convention into `SKILL.kb/` (new
+- [ ] Write the footnote-provenance convention into `skill.kb/` (new
       entry beside `must-read.kb/before/signing-a-claim.md`) and demo it in
       `design.claims.kb/`
-- [ ] Promote file-per-claim conventions into SKILL.kb: theory-header
+- [ ] Promote file-per-claim conventions into skill.kb: theory-header
       file + one prose claim per file (prior art:
       `~/claude/meta-reasoning/multi-design-merge.claim.kb/`)
 - [ ] Literature-authority convention: `authority: literature (citation)`
       for field facts; lint the category errors (`+` on a field fact —
       nothing to veto; bare project choice — missing standing)
 - [ ] Port the self-audit/must-read practice from llm-kb
-      (`SKILL.kb/self-audit.kb/` + trigger files); seed passes:
+      (`skill.kb/self-audit.kb/` + trigger files); seed passes:
   - [ ] `missing-generalization` — the abstraction pass: ≥2 claims
         instantiating an unstated generalization → mint it as `+`
         citing the instances

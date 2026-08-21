@@ -35,7 +35,7 @@ ahead of the triggered action, not just a suggestion.
 |----------|------------------------------------|--------------------------------------------------|
 | Personal | `~/.claude/must-read.kb/`          | Rule applies across all projects, tied to the user's own habits/preferences. **Default.** |
 | Project  | `$REPO/.claude/must-read.kb/`      | Rule is specific to this repo's conventions, versioned with its code. |
-| Skill    | `$SKILL/SKILL.kb/must-read.kb/`    | Rule should bind every consumer of a skill, shipped with it. |
+| Skill    | `$SKILL/skill.kb/must-read.kb/`    | Rule should bind every consumer of a skill, shipped with it. |
 
 If invoked from inside a skill directory, don't infer skill scope
 silently — skill-level triggers are sticky for every consumer and

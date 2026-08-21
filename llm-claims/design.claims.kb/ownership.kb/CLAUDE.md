@@ -12,7 +12,7 @@ undefined -- stated with what it cost and what it bought.
 - Per-name fleet adjudications (this sibling double, that idle
   import) -> the scans report them; a ruling lands where the word is
   stipulated, not as a claim about the law.
-- The audit procedure a law implies -> `../../SKILL.kb/` and
-  llm-claims-kb's `SKILL.kb/self-audit.kb/`.
+- The audit procedure a law implies -> `../../skill.kb/` and
+  llm-claims-kb's `skill.kb/self-audit.kb/`.
 - The runnable law -> `../ownership.py`, the witness the `verify:`
   lines name.

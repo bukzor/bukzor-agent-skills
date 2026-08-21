@@ -13,7 +13,7 @@ without them is really a decision (`../notation.kb/`).
 ## What does NOT belong here
 
 - The decision a criterion justifies -> `../notation.kb/`.
-- Rules for operating a ledger -> `../../SKILL.kb/`. Those run the
+- Rules for operating a ledger -> `../../skill.kb/`. Those run the
   notation; these grade it.
 
 ## Standing

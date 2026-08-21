@@ -1,8 +1,8 @@
-# SKILL.kb -- maintenance guide
+# skill.kb -- maintenance guide
 
 This directory holds the skill's runtime directives for consumers. The
 SKILL.md `IMPERATIVE` block at the project root tells consumers to
-`ls -RF SKILL.kb/must-read.kb/` on skill load.
+`ls -RF skill.kb/must-read.kb/` on skill load.
 
 Maintainer's job: keep the must-read triggers, audits, and procedures
 organized so an agent reaching this directory at runtime finds the right

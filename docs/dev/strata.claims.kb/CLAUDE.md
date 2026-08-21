@@ -20,7 +20,7 @@ whose reversal would change what is safe to build.
 ## What does NOT belong here
 
 Design decisions for particular tools or skills -> `design-next.kb/`.
-Instructions for using ledgers or kbs -> the skills' `SKILL.kb/`.
+Instructions for using ledgers or kbs -> the skills' `skill.kb/`.
 Correspondence with named external systems belongs only in `fleet.kb/`
 -- every other theory stays proper-noun-free so it survives those
 systems changing. (`question.kb/` excepted: its proper nouns are

@@ -35,7 +35,7 @@ file.
 
 Findings from a run -- those argue with `../strata.claims.kb/` by
 editing claims, or land in `../devlog/`. Instructions for reading
-ledgers -> the skills' `SKILL.kb/`.
+ledgers -> the skills' `skill.kb/`.
 
 ## Adding or changing a turn
 

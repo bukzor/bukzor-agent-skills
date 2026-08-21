@@ -13,4 +13,4 @@ stated from the line's side.
 
 This is why claim text carries its own justification rather than
 pointing at where the justification was said. Its operational form is
-`../../SKILL.kb/must-read.kb/before/writing-a-claim.md`.
+`../../skill.kb/must-read.kb/before/writing-a-claim.md`.

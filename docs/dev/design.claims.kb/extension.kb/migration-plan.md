@@ -15,7 +15,7 @@ is required to move. Four commitments, ruled 2026-08-16:
 - **Old instances stay legal.** The five-collection format keeps
   working; nothing is rewritten on a schedule.
 - **The guide travels with the skill** -- under
-  `llm-discourse-graph/SKILL.kb/`, with a `must-read.kb/when/`
+  `llm-discourse-graph/skill.kb/`, with a `must-read.kb/when/`
   trigger pointing at it, so an agent that meets an old-format
   directory is routed to the guide by the skill it was already going
   to load.

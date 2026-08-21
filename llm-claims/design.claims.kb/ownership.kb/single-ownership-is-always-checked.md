@@ -17,7 +17,7 @@ of exactly two means:
   (`llm-claims-kb/bin/llm-claims-kb-ownership`), which fails on
   sibling doubles and queues the rest;
 - **agentically**, in documented procedures: the confinement audit
-  in `llm-claims-kb/SKILL.kb/self-audit.kb/confinement.md`, and the
+  in `llm-claims-kb/skill.kb/self-audit.kb/confinement.md`, and the
   adjudication procedure filed beside this claim (DOCKET, PLAIN,
   TRIAGE, IDLE_TEST) for what the scan can only queue.
 

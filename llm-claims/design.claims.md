@@ -31,7 +31,7 @@ last-updated: 2026-08-20
 
 `design.claims.kb/` records what this skill commits to, in the notation the
 skill teaches: one claim per file, carrying its label and its standing.
-`SKILL.md` and `SKILL.kb/` are the manual; this is the reasoning behind
+`SKILL.md` and `skill.kb/` are the manual; this is the reasoning behind
 the manual, and the place to argue with it.
 
 Read `notation.kb/` to understand or change a design decision. Read
@@ -65,7 +65,7 @@ stance ──► purpose ──► good-smells ──► notation ──► owne
 The chain runs one way and the direction is the point: a criterion is
 stated before the design it judges, and a decision cites its criterion
 rather than restating it. `notation` is the theory most likely to be
-wrong; it and `ownership` are the two `SKILL.kb/` is downstream of -- a
+wrong; it and `ownership` are the two `skill.kb/` is downstream of -- a
 change in either is a change to the manual.
 
 `good-smells.kb/` is the only one large enough to want a roll-up as

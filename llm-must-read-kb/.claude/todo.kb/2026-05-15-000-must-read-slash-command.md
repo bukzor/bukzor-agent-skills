@@ -39,7 +39,7 @@ procedure.
 
 Default: personal (`~/.claude/must-read.kb/`). Override flags map to
 project (`$REPO/.claude/must-read.kb/`) or skill
-(`$SKILL/SKILL.kb/must-read.kb/`) homes. Inside a skill dir, prompt
+(`$SKILL/skill.kb/must-read.kb/`) homes. Inside a skill dir, prompt
 rather than infer — skill-level rules are sticky and should be
 deliberate.
 

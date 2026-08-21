@@ -1,4 +1,4 @@
-# SKILL.kb -- maintenance guide
+# skill.kb -- maintenance guide
 
 Maintainer-side elaborations of the manual. `must-read.kb/` holds the
 one trigger this skill currently needs: what to do when a formalization

@@ -10,7 +10,7 @@ why:
 A second, blind formalization exists as an auxiliary escalation, not the
 default path -- the same shape as escalating `/deformalize` to code. The
 minimal run never calls for it. Where it's wanted:
-`SKILL.kb/must-read.kb/when/independent-verification-is-wanted.md`.
+`skill.kb/must-read.kb/when/independent-verification-is-wanted.md`.
 
 It belongs here, in `/formalize`, rather than in `/deformalize` or
 elsewhere: reconciling two independently-produced formal accounts is

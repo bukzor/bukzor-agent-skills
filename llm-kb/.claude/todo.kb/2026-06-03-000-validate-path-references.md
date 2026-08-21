@@ -43,7 +43,7 @@ jsonschema type/format and not wired into `bin/llm.kb-validate`. Step 1
 of the original 3-step integration plan (docs mention → fold into
 `frontmatter_validate.py` → handle forward-reference false positives)
 is done (`references/creating-a-new-kb.md`,
-`SKILL.kb/self-audit.kb/cross-references.md` both point at it now).
+`skill.kb/self-audit.kb/cross-references.md` both point at it now).
 This changes the remaining deliverable from "design from scratch" to
 "integrate/generalize this script."
 

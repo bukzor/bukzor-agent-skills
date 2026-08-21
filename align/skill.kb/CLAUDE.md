@@ -1,4 +1,4 @@
-# SKILL.kb -- maintenance guide
+# skill.kb -- maintenance guide
 
 Procedures live at this level, one per file; a trigger in
 `must-read.kb/` (`Skill(llm-must-read-kb)`) names each one's

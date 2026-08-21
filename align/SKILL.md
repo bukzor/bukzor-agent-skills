@@ -14,7 +14,7 @@ completeness, or quality.
 > **IMPERATIVE:**
 >
 > Your FIRST action when this skill loads MUST be:
-> `Bash("ls -RF SKILL.kb/must-read.kb/")`
+> `Bash("ls -RF skill.kb/must-read.kb/")`
 >
 > That listing is an index of triggers: each filename names the occasion to
 > read it. Walk it while planning, before ANY action, and read every entry

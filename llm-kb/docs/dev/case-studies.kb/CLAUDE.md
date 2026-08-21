@@ -1,7 +1,7 @@
 # Case-studies
 
 First-person incident narratives produced by
-`../../../SKILL.kb/procedures.kb/post-mortem.md`. See
+`../../../skill.kb/procedures.kb/post-mortem.md`. See
 `../concepts.kb/case-study.md` for the concept.
 
 ## What belongs here

@@ -1,8 +1,9 @@
 $schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"
-title: SKILL.kb summary-file frontmatter
+title: skill.kb member frontmatter
 description: |
-  Frontmatter for top-level summary files in SKILL.kb/ (e.g.
-  self-audit.md) that summarize a sibling .kb/ collection.
+  Frontmatter for files directly in skill.kb/ -- each a summary of a
+  sibling .kb/ (self-audit.md over self-audit.kb/), so each carries the
+  date it was last derived from one.
 
 type: object
 required:
