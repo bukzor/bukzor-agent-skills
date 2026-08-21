@@ -9,7 +9,7 @@ ontology:
   - extension
   - enforcement
 stale-when: a lower engine needing a higher vocabulary
-last-updated: "2026-08-18"
+last-updated: 2026-08-18
 ---
 
 # The strata, as a ledger

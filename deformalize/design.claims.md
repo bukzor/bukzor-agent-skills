@@ -10,7 +10,7 @@ ontology:
   - agent
   - user
 stale-when: a design filed here that is not `/deformalize`'s -- a second skill's commitments in this ledger
-last-updated: "2026-08-15"
+last-updated: 2026-08-15
 ---
 
 # The design, as a ledger

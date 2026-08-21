@@ -1,5 +1,5 @@
 ---
-last-updated: "2026-08-09"
+last-updated: 2026-08-09
 ---
 
 # Strata, replicated

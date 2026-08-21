@@ -1,5 +1,4 @@
-# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
-$schema: "http://json-schema.org/draft-07/schema#"
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
 title: claim-ledger claim frontmatter
 description: >
   One claim per file. The body states the claim and its reasons;
@@ -117,5 +116,4 @@ properties:
       of the theory's claims: the date that view was derived from
       them. A cache is lawful iff it says what revision it derives
       from; a defining claim with no roll-up has nothing to stamp.
-    type: string
-    pattern: "^\\d{4}-\\d{2}-\\d{2}$"
+    $ref: "skill://llm-kb/jsonschema/date.jsonschema.yaml"

@@ -1,5 +1,4 @@
 # yaml-language-server: $schema=https://json-schema.org/draft-07/schema
-$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"
 description: >
   Propositional assertions — the atomic units of the knowledge graph.
   Covers both observations and hypotheses. The body text states the
@@ -28,7 +27,7 @@ properties:
       type: string
   date-observed:
     description: When this was observed or collected, if empirical (ISO 8601)
-    type: date  # YAML parses ISO dates (2026-03-10) as date objects; see llm-kb schema-design
+    $ref: "skill://llm-kb/jsonschema/date.jsonschema.yaml"
   depends:
     description: Paths to nodes this claim depends on for context
     type: array
