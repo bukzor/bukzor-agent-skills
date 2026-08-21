@@ -17,9 +17,35 @@ $defs:
       - status
     properties:
       status:
-        description: Epistemic standing of this claim
+        description: >
+          Epistemic standing: whether we believe this claim. Deliberately
+          not a place to record that a claim stopped mattering -- that is
+          `live`, and conflating them forces a false choice between saying
+          a claim is true and saying it is finished.
         type: string
         enum: [asserted, contested, retracted]
+      live:
+        description: >
+          Whether this claim still bears on anything (default true).
+          Orthogonal to `status`. A claim that was true and then got acted
+          on is `status: asserted, live: false`: retiring it must not
+          require calling it wrong. Named as the antonym of `dead` -- as in
+          dead code or a dead link, still present, no longer in force,
+          never "mistaken".
+        default: true
+        type: boolean
+      superseded-by:
+        description: >
+          Paths to the nodes that replace this one -- any collection, not
+          just claims.kb: a claim is often retired by a goal or a design
+          note rather than by another claim. A relation, not a status: a
+          link checker can follow it, and it says *which* node won rather
+          than dead-ending. A claim can be dead without a
+          successor -- the world moved and nothing replaced it -- so `live`
+          is the primitive and this is the extra.
+        type: array
+        items:
+          type: string
       likelihood:
         description: How likely this claim is to be true, 0-1 (default 1.0 — certain until told otherwise)
         default: 1.0
@@ -46,5 +72,15 @@ $defs:
         type: array
         items:
           type: string
+    dependentSchemas:
+      superseded-by:
+        description: >
+          A superseded claim is not live, and storing both without tying
+          them lets the two disagree -- the exact defect that got `status`
+          removed from ideation.epistemics' fork.
+        required: [live]
+        properties:
+          live:
+            const: false
 $ref: "#/$defs/base"
 unevaluatedProperties: false
