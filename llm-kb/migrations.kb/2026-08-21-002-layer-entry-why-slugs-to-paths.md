@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: complete
 kind: one-shot
 scope: |
   Every design.kb layer collection in the user's tree -- 15 towers
@@ -119,10 +119,35 @@ were failing validation for want of one. Every such entry carries `why:`,
 so each layer gained the same `#base` + `required: [why]` binding as every
 other motivated layer -- 10 new files, 43 errors cleared.
 
-Residual, needing a decision rather than a script: three refs naming the
-slug `canonical-conversation-graph`, which exists at both
-`030-requirements.kb/` and `040-design.kb/` of
-`prototype.chatfs/docs/dev/design.kb`. Left as slugs and visible as
-validator errors, in
-`docs/dev/design.kb/040-design.kb/rotate-90-degrees-layout.md` and
-`packages/chatfs-cli/design.kb/040-design.kb/{chat-as-directory,no-partial-synthesis}.md`.
+The three refs that needed a decision rather than a script are
+resolved. All named the slug `canonical-conversation-graph`, which exists
+as a real entry at both `030-requirements.kb/` and `040-design.kb/` of
+`prototype.chatfs/docs/dev/design.kb`; all three resolve to the
+**030-requirements** one.
+
+The deciding evidence is layer direction. Every one of the three citers
+(`docs/dev/design.kb/040-design.kb/rotate-90-degrees-layout.md`,
+`packages/chatfs-cli/design.kb/040-design.kb/{chat-as-directory,no-partial-synthesis}.md`)
+sits in a 040 layer, and `why:` points upward -- so a same-layer sibling is
+the wrong shape of target. Corroborating, per ref:
+
+- Every other `why:` ref in the project's 040 layer (13 of 13) targets
+  `../030-requirements.kb/`; not one targets a 040 sibling. The 040 entry
+  of that name does reach `rotate-90-degrees-layout.md`, but as a body
+  "See also" -- lateral, and in the opposite direction.
+- The 030 requirement names the citer's own subject matter: "Downstream
+  stages (rendering, filesystem layout) consume this format" is exactly
+  what the rotated on-disk layout is.
+- Both chatfs-cli citers listed the slug in a `why:` beside
+  `opaque-extractor-boundary` and `atomic-cache-updates`, which the
+  mechanical pass resolved into `docs/dev/design.kb/030-requirements.kb/`.
+  Those siblings fix the namespace the list was written in;
+  `chat-as-directory.md`'s prose calls one of them "requirement:
+  `atomic-cache-updates`" outright.
+
+Git history was checked and did not discriminate: both entries already
+existed on 2026-04-20, when `rotate-90-degrees-layout.md` acquired its ref.
+
+After: `llm.kb-validate` reads 0 errors on both `docs/dev/design.kb` (was 1)
+and `packages/chatfs-cli/design.kb` (was 2); `llm.kb-validate-links` reports
+0 broken `why:` refs, unchanged. Landed as prototype.chatfs 71ae676.
