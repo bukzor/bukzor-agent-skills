@@ -1,7 +1,7 @@
 ---
 turn: 060-the-questions.md
-sent: 2026-08-10T21:11:08.565Z
-replied: 2026-08-10T21:13:55.974Z
+sent: "2026-08-10T21:11:08.565Z"
+replied: "2026-08-10T21:13:55.974Z"
 model: claude-fable-5
 effort: high
 transcript: agent-ad6558e4768ab4666.jsonl:159

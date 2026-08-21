@@ -1,7 +1,7 @@
 ---
 turn: 080-defeats.md
-sent: 2026-08-12T14:14:02.925Z
-replied: 2026-08-12T14:24:16.945Z
+sent: "2026-08-12T14:14:02.925Z"
+replied: "2026-08-12T14:24:16.945Z"
 model: claude-fable-5
 effort: xhigh
 transcript: 0476a1a8-b186-4988-8deb-83853c353acb.jsonl:121

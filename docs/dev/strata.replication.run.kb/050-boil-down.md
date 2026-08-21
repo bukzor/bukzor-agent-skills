@@ -1,7 +1,7 @@
 ---
 turn: 050-boil-down.md
-sent: 2026-08-10T21:06:10.867Z
-replied: 2026-08-10T21:10:55.082Z
+sent: "2026-08-10T21:06:10.867Z"
+replied: "2026-08-10T21:10:55.082Z"
 model: claude-fable-5
 effort: high
 transcript: agent-ad6558e4768ab4666.jsonl:156
