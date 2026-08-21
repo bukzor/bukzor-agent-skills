@@ -11,11 +11,15 @@ trap onerror ERR
 
 # Run as a real module (`python -m`), not a parentless script -- gives it a
 # correct __package__ so its own `from .ledger import ...` just works.
+# Invoke the workspace venv's python directly, not `uv run` -- `uv run`
+# resolves its project from the caller's cwd, not this script's location,
+# so a bare `uv run` here is one `cd` away from silently resolving
+# against the wrong project (or none). The venv python is already the
+# right interpreter with llm_claims_kb installed editable.
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 if (( DEBUG > 0 )); then
   set -x
 fi
 
-exec env PYTHONPATH="$here/../lib/python${PYTHONPATH:+:$PYTHONPATH}" \
-  uv run python -m llm_claims_kb.dot "$@"
+exec "$here/../../.venv/bin/python" -m llm_claims_kb.dot "$@"

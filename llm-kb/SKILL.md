@@ -11,6 +11,12 @@ setup: |
     requires:
         - Skill(llm-kb)
     ```
+
+    Code that imports `llmd` directly (rather than shelling out to
+    `bin/llm.kb-validate`) needs the package too: `uv add llm-kb` from
+    within this workspace. `llm-kb` is a workspace member, so `uv add`
+    detects the sibling and wires `tool.uv.sources` to it -- no PyPI
+    lookup, no manual `[tool.uv.sources]` edit.
 ---
 
 > **IMPERATIVE:**

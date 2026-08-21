@@ -2,6 +2,22 @@
 name: llm-claims-kb
 description: "Claim ledger kept as files. Agent MUST load when reading or maintaining a *.claims.kb/ directory, when asked to persist a claim ledger to disk, or when asked to draw, graph, or check the integrity of one. The notation itself is Skill(llm-claims)."
 ---
+--- # workaround: anthropics/claude-code#13003
+setup: |
+    All projects that depend on this skill should have as `CLAUDE.md` frontmatter:
+
+    ```yaml
+    --- # workaround: anthropics/claude-code#13003
+    requires:
+        - Skill(llm-claims-kb)
+    ```
+
+    Code that imports `llm_claims_kb` directly (rather than shelling out
+    to `bin/llm-claims-kb-*`) needs the package too: `uv add llm-claims-kb`
+    from within this workspace. `llm-claims-kb` is a workspace member, so
+    `uv add` detects the sibling and wires `tool.uv.sources` to it -- no
+    PyPI lookup, no manual `[tool.uv.sources]` edit.
+---
 
 # llm-claims-kb
 
