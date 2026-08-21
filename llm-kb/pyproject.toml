@@ -8,6 +8,9 @@ dependencies = [
   "referencing>=0.35",
 ]
 
+[project.scripts]
+"llm.kb-validate" = "llmd.frontmatter_validate:main"
+
 [dependency-groups]
 dev = [
   "pytest>=8.4.2",

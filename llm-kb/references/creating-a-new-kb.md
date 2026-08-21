@@ -57,7 +57,7 @@ would be useful to expose as machine-readable metadata (status,
 last-updated, severity, owner, etc.)?
 
 If yes, design a `$CATEGORY.jsonschema.yaml` for the collection and add
-frontmatter to each item file. Validate with `bin/llm.kb-validate`. If
+frontmatter to each item file. Validate with `llm.kb-validate`. If
 the schema is non-trivial, see `schema-design.md`.
 
 If no, leave the items prose-only. Schema isn't free; the structure
@@ -65,15 +65,15 @@ should pay its weight in queryability.
 
 ### Pass 4: validation
 
-Run `bin/llm.kb-validate <path>` and resolve any errors before considering
+Run `llm.kb-validate <path>` and resolve any errors before considering
 the collection complete. The validator catches frontmatter schema
 violations and structural issues -- manual auditing here wastes tokens and
 misses real problems.
 
-`bin/llm.kb-validate` doesn't yet check that cross-references (`why:`,
+`llm.kb-validate` doesn't yet check that cross-references (`why:`,
 `depends:`, dot-slash-prefixed relative prose links) resolve to real files --
 run `bin/llm.kb-validate-links <path>` alongside it for that, until the
-check lands in `bin/llm.kb-validate` proper
+check lands in `llm.kb-validate` proper
 (`.claude/todo.kb/2026-06-03-000-validate-path-references.md`).
 
 ## When in doubt

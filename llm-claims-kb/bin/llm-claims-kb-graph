@@ -29,7 +29,10 @@ fi
 
 mkdir -p "$out"
 
-"$here"/llm-claims-kb-dot "$ledger" "$@" > "$out/$name.dot"
+# Absolute venv path, not a bare `llm-claims-kb-dot` -- this is a
+# script-to-script call and shouldn't depend on the caller's shell
+# having .venv/bin on PATH (unlike the docs, which may assume it).
+"$here/../../.venv/bin/llm-claims-kb-dot" "$ledger" "$@" > "$out/$name.dot"
 
 # tred first: the drawing is a Hasse view, so a citation the path already
 # implies is dropped. edgepaint needs a laid-out graph, and neato -n2

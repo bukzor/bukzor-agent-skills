@@ -12,11 +12,12 @@ setup: |
         - Skill(llm-kb)
     ```
 
-    Code that imports `llmd` directly (rather than shelling out to
-    `bin/llm.kb-validate`) needs the package too: `uv add llm-kb` from
-    within this workspace. `llm-kb` is a workspace member, so `uv add`
-    detects the sibling and wires `tool.uv.sources` to it -- no PyPI
-    lookup, no manual `[tool.uv.sources]` edit.
+    `uv add llm-kb` from within this workspace also puts `llm.kb-validate`
+    on `$PATH` as an installed console script (see Tools Provided below)
+    -- and code that imports `llmd` directly gets the package too.
+    `llm-kb` is a workspace member, so `uv add` detects the sibling and
+    wires `tool.uv.sources` to it -- no PyPI lookup, no manual
+    `[tool.uv.sources]` edit.
 ---
 
 > **IMPERATIVE:**
@@ -219,7 +220,7 @@ potential). The summary procedure here is for orientation only:
 4. Create per-directory CLAUDE.md guides
 5. Create synthesis files (`$CATEGORY.md`) where they help
 6. Populate content files
-7. Validate with `bin/llm.kb-validate <path>`
+7. Validate with `llm.kb-validate <path>`
 
 ## Reading Collections
 
@@ -237,7 +238,7 @@ searching one 500-line file.
 
 ## Tools Provided
 
-### bin/llm.kb-validate
+### llm.kb-validate
 
 Purpose: catch frontmatter schema violations (error prevention).
 
@@ -247,10 +248,10 @@ schema mismatches.
 Usage:
 
 ```bash
-bin/llm.kb-validate                  # Validate current directory (default)
-bin/llm.kb-validate path/to/project  # Validate specific directory
-bin/llm.kb-validate category.kb/     # Validate one category
-bin/llm.kb-validate file.md          # Validate single file
+llm.kb-validate                  # Validate current directory (default)
+llm.kb-validate path/to/project  # Validate specific directory
+llm.kb-validate category.kb/     # Validate one category
+llm.kb-validate file.md          # Validate single file
 ```
 
 Recursively finds and validates `.kb/` directories. Auto-detects schemas. Skips CLAUDE.md files.
@@ -261,7 +262,7 @@ not pad the error count. Name such a path on the command line and you
 get it anyway -- asking is asking. Each path is asked of the repository
 holding it, so a submodule's own `.gitignore` governs inside it.
 
-Recommended: run `bin/llm.kb-validate` before committing changes.
+Recommended: run `llm.kb-validate` before committing changes.
 
 "No schema found" for `ideas.kb`/`todo.kb`: copy from `llm-subtask/skeleton/.claude/`.
 

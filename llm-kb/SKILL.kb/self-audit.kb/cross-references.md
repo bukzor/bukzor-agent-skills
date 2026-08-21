@@ -16,7 +16,7 @@ Run `../../bin/llm.kb-validate-links <path>`
 first -- it mechanically checks known frontmatter link fields (`why`,
 `depends`, `source`, `sources`, `candidate-resolutions`, `conclusion`,
 `premises`, `resolved`) and backtick-wrapped, dot-slash-prefixed relative
-body links. Not wired into `bin/llm.kb-validate` yet -- see
+body links. Not wired into `llm.kb-validate` yet -- see
 `../../.claude/todo.kb/2026-06-03-000-validate-path-references.md` for
 status.
 

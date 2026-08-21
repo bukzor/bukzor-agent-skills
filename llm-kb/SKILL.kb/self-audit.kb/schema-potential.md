@@ -17,7 +17,7 @@ If 3+ items carry the same kind of fact, schema-promote on sight.
 ## Recovery
 
 Design a schema (`references/schema-design.md`). Lift the in-prose
-fields into frontmatter. Run `bin/llm.kb-validate`.
+fields into frontmatter. Run `llm.kb-validate`.
 
 ## Related
 

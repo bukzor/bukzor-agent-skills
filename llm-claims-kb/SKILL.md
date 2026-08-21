@@ -12,11 +12,13 @@ setup: |
         - Skill(llm-claims-kb)
     ```
 
-    Code that imports `llm_claims_kb` directly (rather than shelling out
-    to `bin/llm-claims-kb-*`) needs the package too: `uv add llm-claims-kb`
-    from within this workspace. `llm-claims-kb` is a workspace member, so
-    `uv add` detects the sibling and wires `tool.uv.sources` to it -- no
-    PyPI lookup, no manual `[tool.uv.sources]` edit.
+    `uv add llm-claims-kb` from within this workspace also puts
+    `llm-claims-kb-ownership`/`-dot`/`-flatten`/`-mentions` on `$PATH`
+    as installed console scripts (see Tools provided below) -- and code
+    that imports `llm_claims_kb` directly gets the package too.
+    `llm-claims-kb` is a workspace member, so `uv add` detects the
+    sibling and wires `tool.uv.sources` to it -- no PyPI lookup, no
+    manual `[tool.uv.sources]` edit.
 ---
 
 # llm-claims-kb
@@ -94,8 +96,10 @@ every `why:` and prose reference in live files -- historical records
 
 ## Tools provided
 
-Paths are relative to this skill's directory; all of them read the
-ledger through `lib/python/llm_claims_kb/ledger.py`.
+All but `llm-claims-kb-graph` are console scripts installed by the
+`llm-claims-kb` package (`uv add llm-claims-kb` -- see `setup:` above);
+called by bare name below, on `$PATH` once installed. All of them read
+the ledger through `lib/python/llm_claims_kb/ledger.py`.
 
 ### bin/llm-claims-kb-graph
 
@@ -112,13 +116,13 @@ bin/llm-claims-kb-graph <name>.claims.kb --level theory  # the poset of collecti
 ```
 
 It renders an SVG under `$TMPDIR/ledger-graphs/<date>/` and prints
-the path, leaving the `.dot` beside it. `bin/llm-claims-kb-dot` is
+the path, leaving the `.dot` beside it. `llm-claims-kb-dot` is
 the emitter underneath, if you want the DOT on stdout.
 
 How to read the drawing, and the rots it catches:
 `SKILL.kb/self-audit.kb/graph-health.md`.
 
-### bin/llm-claims-kb-flatten
+### llm-claims-kb-flatten
 
 Purpose: hand the ledger to a chat that has no files -- claude.ai, a
 colleague, another model. It prints the whole ledger as
@@ -126,7 +130,7 @@ colleague, another model. It prints the whole ledger as
 directory travels as a paste.
 
 ```bash
-bin/llm-claims-kb-flatten <name>.claims.kb            # the ledger, as one text
+llm-claims-kb-flatten <name>.claims.kb            # the ledger, as one text
 ```
 
 Every structural thing the directory carries comes back as notation:
@@ -147,14 +151,14 @@ path would be verbose exactly where it is load-bearing. A citation
 naming something that is no claim -- a schema, a todo -- has no label
 to show, and keeps its path.
 
-### bin/llm-claims-kb-mentions
+### llm-claims-kb-mentions
 
 Purpose: catch a claim whose prose names a label its theory never
 imported -- a citation the reader is told to resolve and cannot.
 
 ```bash
-bin/llm-claims-kb-mentions                      # the whole fleet
-bin/llm-claims-kb-mentions <name>.claims.kb     # findings in one ledger
+llm-claims-kb-mentions                      # the whole fleet
+llm-claims-kb-mentions <name>.claims.kb     # findings in one ledger
 ```
 
 A mention resolves if the label is in the same ledger or in a theory
@@ -172,7 +176,7 @@ A finding has two honest fixes, and the tool does not choose: import
 the theory that defines the label, or stop reaching for it -- usually
 by naming the file, which the sentence often already does.
 
-### bin/llm-claims-kb-ownership
+### llm-claims-kb-ownership
 
 Purpose: report where the fleet's stipulations and the licensing law
 disagree -- the word two theories both claim, the word a neighbour
@@ -183,11 +187,11 @@ theory, `../llm-claims/design.claims.kb/ownership.md`, whose
 to the law and reports, and defines nothing of its own.
 
 ```bash
-bin/llm-claims-kb-ownership              # every double stipulation, judged
-bin/llm-claims-kb-ownership --trespass   # owned words said by unlicensed siblings
-bin/llm-claims-kb-ownership --idle       # the idle-import adjudication queue
-bin/llm-claims-kb-ownership --candidates # what to own, and what to release
-bin/llm-claims-kb-ownership --census     # the one-line summary
+llm-claims-kb-ownership              # every double stipulation, judged
+llm-claims-kb-ownership --trespass   # owned words said by unlicensed siblings
+llm-claims-kb-ownership --idle       # the idle-import adjudication queue
+llm-claims-kb-ownership --candidates # what to own, and what to release
+llm-claims-kb-ownership --census     # the one-line summary
 ```
 
 The default scan judges each double by how the two stipulators
