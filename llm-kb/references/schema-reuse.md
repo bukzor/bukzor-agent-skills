@@ -104,8 +104,9 @@ split rather than waiting for one to accumulate organically.
 
 `$ref: "skill://llm-subtask/why.jsonschema.yaml"` -- authority is the skill
 name, path is the file within that skill's root. Resolved in-memory via
-`~/.claude/skills/<skill>/<path>` (a symlink farm onto this repo, so it also
-transparently resolves same-repo cross-skill refs). No network fetch either
+`~/.claude/skills/<skill>/<path>`; an installed skill is a directory symlink
+to its source checkout, so a ref between two skills of this repo lands in the
+working copy rather than a snapshot of it. No network fetch either
 way. See the ADR (`llm-kb/docs/dev/adr/2026-05-18-000-skill-uri-scheme.md`) for
 the scheme's full rationale.
 

@@ -64,9 +64,10 @@ def _retrieve_schema(uri: str) -> Resource[Schema]:
 
     In-memory, filesystem-backed: no network fetch.
 
-    - `skill://<skill>/<path>` resolves via `~/.claude/skills/<skill>/`,
-      which is a symlink farm onto this repo, so this also transparently
-      resolves same-repo cross-skill refs.
+    - `skill://<skill>/<path>` reads `~/.claude/skills/<skill>/<path>`,
+      where each installed skill is a directory symlink to its source
+      checkout -- so a ref between two skills of one repo lands in that
+      repo's working copy, not a snapshot of it.
     - `file://<path>` is what a file-relative `$ref` resolves to, since
       `load_schema` gives every loaded schema a `file://` `$id` as a base.
     """

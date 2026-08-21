@@ -11,7 +11,8 @@ skill is gutted one at a time to defer to the engine: first the
 engine absorbs the eight `bin/` scripts behind their existing names,
 then SKILL.md prose shrinks to recognition content as procedures move
 to commands, then the trigger subsystem takes over the action-shaped
-triggers, and finally an adapter manifest replaces the symlink farm.
+triggers, and finally an adapter manifest replaces the per-skill
+install symlinks.
 Consumer projects keep working at every step because the data
 formats (the spec) are v1-compatible from the start.
 

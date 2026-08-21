@@ -60,9 +60,9 @@ The full arc is history in `2026-02-09-000-schema-reuse-with-ref.kb/`
 Where things landed:
 
 - **Resolution:** the validator resolves `$ref` via `skill://` (in-memory,
-  through the `~/.claude/skills/` symlink farm), `file://`-based relative
-  paths, and JSON-Pointer/`$anchor` fragments; circular refs verified a
-  non-issue (lazy resolution).
+  through the installed-skill paths under `~/.claude/skills/`),
+  `file://`-based relative paths, and JSON-Pointer/`$anchor` fragments;
+  circular refs verified a non-issue (lazy resolution).
 - **Canonical placement:** `llm-subtask/jsonschema/{todo,ideas}.jsonschema.yaml`
   (skill-root `jsonschema/`, never `skeleton/` — copies drift; all skills
   publishing schemas now use a `jsonschema/` dir). Every consumer,
