@@ -32,7 +32,7 @@ purpose ──► reader
 `purpose` is the prior: `reader`'s claims about the glossary need the
 job (DEFORM_JOB) already on the table before they can argue for a shape.
 
-Several claims here rest on claims of `../formalize/design.claims.kb/`
+Several claims here rest on claims of `../../formalize/claims.kb/design.claims.kb/`
 -- the seam runs one way, `/formalize` handing off to `/deformalize`, and
 the `why:` arrows point the same direction the handoff does.
 
@@ -44,5 +44,5 @@ grep -rl 'standing: agent' design.claims.kb/  # agent-signed, veto invited
 ```
 
 Every claim here was ruled on directly or moved in with its ruling
-intact (2026-08-15, migrated from `../formalize/design.claims.kb/`
+intact (2026-08-15, migrated from `../../formalize/claims.kb/design.claims.kb/`
 where it was misfiled). Only the two theory headers stand `agent`.

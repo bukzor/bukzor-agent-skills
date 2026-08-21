@@ -15,5 +15,5 @@ that survive this filter are stipulations: decisions only the user
 can make. Present those few, each with what would make the user agree
 or disagree.
 
-See SIGNATURE, PROVISIONAL (`../../../design.claims.kb/notation.kb/`);
+See SIGNATURE, PROVISIONAL (`../../../claims.kb/design.claims.kb/notation.kb/`);
 incident: session "over-veto", 2026-08-09.

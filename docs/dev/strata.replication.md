@@ -1,6 +1,6 @@
 # Strata, replicated
 
-A blind re-derivation of `strata.claims.kb/`, run as a conversation.
+A blind re-derivation of `claims.kb/strata.claims.kb/`, run as a conversation.
 `strata.replication.kb/` holds the turns, numbered in send order, and
 `strata.replication.kb/instructions.d/` holds what each one sends --
 a whole file per paste, so sending it is select-all-and-send with no

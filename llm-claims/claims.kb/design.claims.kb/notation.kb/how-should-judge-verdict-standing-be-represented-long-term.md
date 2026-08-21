@@ -6,7 +6,7 @@ why:
   - ../purpose.kb/the-format-must-hold-whatever-is-actually-true.md
   - ../purpose.kb/forced-misrepresentation-is-the-failure-mode.md
   - a-verdict-names-what-the-judge-ruled.md
-  - ../../../docs/dev/strata.claims.kb/standing.md
+  - ../../../../docs/dev/claims.kb/strata.claims.kb/standing.md
 ---
 
 # How Should Judge/Verdict/Standing Be Represented, Long-Term?

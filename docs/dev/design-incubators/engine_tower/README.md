@@ -1,7 +1,7 @@
 # engine_tower
 
 Mechanized witnesses for the engine-tower claim ledger
-(`../../strata.claims.md`). One module per code-bearing theory --
+(`../../claims.kb/strata.claims.md`). One module per code-bearing theory --
 `tower` lives as the test suite's poset check; `purpose`, `fleet`,
 and `question` stay out of the code by design (regime requirements
 and proper nouns have no computational content). A module imports

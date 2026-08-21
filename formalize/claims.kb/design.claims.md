@@ -42,7 +42,7 @@ it pays for. `run` is the theory `SKILL.md` is downstream of -- a change
 there is a change to the manual.
 
 Who reads the deformalized account, and in what words, is
-`/deformalize`'s own theory (`../deformalize/design.claims.kb/reader.md`)
+`/deformalize`'s own theory (`../../deformalize/claims.kb/design.claims.kb/reader.md`)
 -- `/formalize` only hands the account off, per
 `setting.kb/plain-english-belongs-to-deformalize.md`. It was misfiled
 here through 2026-08-15 and moved once a real ledger existed for

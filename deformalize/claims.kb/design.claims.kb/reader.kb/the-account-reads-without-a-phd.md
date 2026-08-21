@@ -8,7 +8,7 @@ standing: user
 The delivered account reads without a PhD.
 
 It serves `/formalize`'s new-agent fast-track
-(`../../../formalize/design.claims.kb/purpose.kb/fast-track-a-new-agent.md`)
+(`../../../../formalize/claims.kb/design.claims.kb/purpose.kb/fast-track-a-new-agent.md`)
 and is a constraint on the delivered pair -- formal account plus
 glossary. It applies late, once `/formalize`'s conjecturing is
 finished. Imposing it during conjecture is deeply unhelpful there: it

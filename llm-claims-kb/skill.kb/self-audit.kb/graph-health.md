@@ -26,5 +26,5 @@ count and cycle check: a ledger whose claims arrive as dust rather
 than one component has its arrows in prose, not in `why:`, and is
 the failure this skill exists to prevent. The two ledgers in this
 repo read as the two ends of that scale -- a fully wired one comes
-back a single component, and `../../../llm-claims/design.claims.kb/`
+back a single component, and `../../../llm-claims/claims.kb/design.claims.kb/`
 came back 25 components across 27 claims.

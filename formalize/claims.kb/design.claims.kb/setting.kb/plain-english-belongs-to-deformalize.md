@@ -6,7 +6,7 @@ standing: user
 # Plain English Belongs to /deformalize
 
 The plain-English burden belongs to `/deformalize`
-(`../../../deformalize/design.claims.kb/purpose.kb/deformalize-adds-glossary-and-successors.md`).
+(`../../../../deformalize/claims.kb/design.claims.kb/purpose.kb/deformalize-adds-glossary-and-successors.md`).
 `/formalize` stays formal.
 
 This is what makes readability and the formal-theory-design-expert

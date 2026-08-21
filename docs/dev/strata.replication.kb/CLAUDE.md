@@ -33,7 +33,7 @@ file.
 
 ## What does NOT belong here
 
-Findings from a run -- those argue with `../strata.claims.kb/` by
+Findings from a run -- those argue with `../claims.kb/strata.claims.kb/` by
 editing claims, or land in `../devlog/`. Instructions for reading
 ledgers -> the skills' `skill.kb/`.
 

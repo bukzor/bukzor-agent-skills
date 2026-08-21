@@ -9,6 +9,6 @@ reversal would change skill text across the fleet.
 
 One skill's own design commitments -> that skill's own
 `design.claims.kb/` (precedent:
-`../../../../llm-claims/design.claims.kb/`). The historical record
+`../../../../../llm-claims/claims.kb/design.claims.kb/`). The historical record
 of a ruling -> `../../adr/`; the ADR holds the act, this collection
 holds the standing.

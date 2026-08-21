@@ -4,8 +4,8 @@ standing: agent
 why:
   - ../strata.claims.kb/standing.md
   - ../strata.claims.kb/data-representation.md
-  - ../../../llm-claims/design.claims.kb/notation.md
-  - ../../../llm-claims/design.claims.kb/purpose.md
+  - ../../../../llm-claims/claims.kb/design.claims.kb/notation.md
+  - ../../../../llm-claims/claims.kb/design.claims.kb/purpose.md
   - authorship.md
   - extension.md
 ontology:

@@ -4,7 +4,7 @@ standing: agent
 force: should
 why:
   - ../../../../llm-claims/.claude/todo.kb/2026-08-08-000-Helper-command-family-bin-llm-claim-ledger.md
-  - ../../../../llm-claims/design.claims.kb/notation.kb/how-should-judge-verdict-standing-be-represented-long-term.md
+  - ../../../../../llm-claims/claims.kb/design.claims.kb/notation.kb/how-should-judge-verdict-standing-be-represented-long-term.md
   - ../../strata.claims.kb/data-representation.kb/a-simplified-form-needs-a-complete-one-under-it.md
 ---
 

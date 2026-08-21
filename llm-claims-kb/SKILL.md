@@ -83,7 +83,7 @@ split-for-the-reader move (`skill.kb/theories.md` in
 auxiliary theories that simplify a citing theory's claims are
 encouraged, not exceptional.
 
-Worked instance: `../llm-claims/design.claims.kb/` -- the
+Worked instance: `../llm-claims/claims.kb/design.claims.kb/` -- the
 notation's own design, kept in this form.
 
 ## Claim bodies
@@ -194,7 +194,7 @@ Purpose: report where the fleet's stipulations and the licensing law
 disagree -- the word two theories both claim, the word a neighbour
 says without license, the import nobody uses -- and propose which
 words are worth owning at all. The law itself is the ownership
-theory, `../llm-claims/design.claims.kb/ownership.md`, whose
+theory, `../llm-claims/claims.kb/design.claims.kb/ownership.md`, whose
 `ownership.py` this tool imports and runs: the scan adapts the fleet
 to the law and reports, and defines nothing of its own.
 

@@ -13,7 +13,7 @@ name is equally accurate, and suggest a couple of format conventions.
 
 `/formalize`'s ruling that the skill is written for the owner's own
 designs
-(`../../../formalize/design.claims.kb/setting.kb/written-for-the-owners-own-designs.md`),
+(`../../../../formalize/claims.kb/design.claims.kb/setting.kb/written-for-the-owners-own-designs.md`),
 is why this stays enough: a general-audience tool would need more. That
 is the whole of the apparatus today, deliberately. A glossary
 discipline specified further than this becomes a ritual performed on
