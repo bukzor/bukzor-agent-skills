@@ -43,7 +43,7 @@ $defs:
         enum: [bare, open, agent, user]
       verdict:
         description: >-
-          Present only when the judgment came out against the claim.
+          Present only when a judgment took the claim out of force.
           `standing:` still names the judge -- here, whoever ruled this;
           `verdict:` names what they ruled. Absent means accepted, so no
           existing claim needs migration. Open vocabulary, not an enum:
@@ -51,8 +51,12 @@ $defs:
           `rejected` (a proposal was never accepted to begin with),
           `dissolved` (the claim's own question was never well-formed, so
           there was no content left to judge -- a verdict on the framing,
-          not on what was asserted), or whatever else a claim actually
-          needs. Scan: `grep -rl 'verdict:'`.
+          not on what was asserted), `retired` (it stopped bearing on
+          anything, which is no finding of error --
+          `Skill(llm-discourse-graph)` writes this one `live: false`),
+          `superseded` (something replaced it; name the replacement in
+          the body), or whatever else a claim actually needs. Scan:
+          `grep -rl 'verdict:'`.
         type: string
       why:
         description: >-

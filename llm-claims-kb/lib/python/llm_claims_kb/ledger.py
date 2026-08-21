@@ -52,7 +52,7 @@ class Claim:
     stem: str
     label: str
     standing: str
-    verdict: str | None  # what was ruled, where the ruling went against the claim
+    verdict: str | None  # what was ruled, where a ruling took the claim out of force
     why: tuple[Prior, ...]  # what it rests on, in citation order
     verify: str | None  # the CHECK of `-- certified(CHECK)`
     authority: str | None  # the act that settled the standing
@@ -68,7 +68,7 @@ class Claim:
     @property
     def cited_as(self) -> str:
         """Label and the sigil signing its judge, struck through where the
-        judgment went against the claim.
+        judgment took the claim out of force.
 
         A struck label is the chat form's own mark for a verdict, and it names
         no word: which of them applies is in the claim's prose, and `grep

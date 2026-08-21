@@ -45,7 +45,7 @@ restated here; this skill maps it onto a directory.
 |---|---|
 | one claim, one line | one claim, one file (`kebab-case.md`, named in prose) |
 | label + sigil | `label:` + `standing:` frontmatter, the sigil spelled out: `bare`, `open` (`?`), `agent` (`+`), `user` (`!`) |
-| a struck label, `~~XY~~` | `verdict:` -- present only where the judgment went against the claim; the strike says which way it went, the word says what they ruled |
+| a struck label, `~~XY~~` | `verdict:` -- present only where a judgment took the claim out of force; the strike says that much, the word says what they ruled |
 | `<-` arrows | `why:` -- file-relative paths; never a copied sigil, standing lives at the definition site |
 | `-- certified(CHECK)` | `verify:` |
 | restating a label | editing the file; the git diff's `-` is the strikethrough |
@@ -240,3 +240,15 @@ file, `why:` arrows, a claim file naming every collection. Meeting a
 claims directory, tell them apart by shape, not name: sibling node-type
 collections mean the discourse graph; frontmatter standing and a `.md`
 beside every `.kb/` mean a ledger.
+
+One equivalence carries in both directions: a struck label -- on disk,
+`verdict:` present -- and the discourse graph's `live: false` say the
+same thing, that the claim is no longer in force. Neither says it was
+wrong. The graph needs a second field because its `status:` is
+truth-valued, so without `live:` retiring a claim would mean calling it
+`retracted`; a ledger's `standing:` names the judge rather than the
+truth, so retirement costs only a word -- `retired` where nothing
+replaced the claim, `superseded` where something did. What does not
+translate is the graph's `superseded-by:`, which names the successor in
+a field; a ledger names it in the body, and the successor's label is
+what `grep` finds.
