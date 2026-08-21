@@ -257,3 +257,39 @@ properties:
         )
 
         assert errors == []
+
+
+class DescribeSchemaDiscovery:
+    def it_errors_on_frontmatter_no_schema_can_reach(self, tmp_path: Path):
+        loose = tmp_path / "loose.md"
+        _ = loose.write_text("---\nlabel: X\n---\n\n# Loose\n")
+
+        errors = fv.validate_file(loose)
+
+        assert len(errors) == 1, errors
+        assert "frontmatter-outside-a-collection" in errors[0], errors[0]
+
+    def it_passes_a_file_that_has_no_frontmatter_at_all(self, tmp_path: Path):
+        loose = tmp_path / "loose.md"
+        _ = loose.write_text("# Loose\n")
+
+        assert fv.validate_file(loose) == []
+
+    def it_reaches_through_a_hive_partition_to_the_collection_schema(self, tmp_path: Path):
+        # A partition subdivides a collection without renaming it, so the
+        # schema is still the collection's.
+        _ = (tmp_path / "logs.jsonschema.yaml").write_text("""\
+type: object
+required: [label]
+properties:
+  label: {type: string}
+additionalProperties: false
+""")
+        partition = tmp_path / "logs.kb" / "year=2026"
+        partition.mkdir(parents=True)
+        entry = partition / "entry.md"
+        _ = entry.write_text("---\nbogus: X\n---\n\n# Entry\n")
+
+        errors = fv.validate_file(entry)
+
+        assert [error for error in errors if "bogus" in error], errors

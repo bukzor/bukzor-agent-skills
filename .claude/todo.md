@@ -216,18 +216,28 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `must-read.kb/when/` trigger, unlike its sibling skills. Raised
       2026-08-20; the specifics were not recorded, so scope it from
       what `llm-kb` and `llm-claims` carry before spending
-- [ ] Top-level `$CATEGORY.md` summary files are counted by
-      `llm.kb-validate` but not schema-checked: schema lookup for a
-      collection resolves `X.kb/` -> `X.jsonschema.yaml`, and the `X.md`
-      beside it matches nothing. Probed 2026-08-21 -- quoting
-      `last-updated` in `llm-kb/complete-example/decorations.md` still
-      reads `20 files, 0 errors`. Noted as out of scope by the
-      2026-07-09 date-migration session and still true; what changed is
-      the stakes, since every ledger's entry point (`X.claims.md`,
-      carrying `last-updated:` and the poset) is exactly such a file.
-      The eight `last-updated` values unquoted on 2026-08-21 are right
-      by consistency, not by enforcement -- six of them live in
-      unchecked files
+- [ ] The walk reaches no top-level `$CATEGORY.md`, `README.md`, or
+      `devlog/`/`adr/` entry: `validate_paths` descends only into
+      `.kb/`, so the unschema'd-frontmatter error added 2026-08-21 fires
+      only when such a file is named on the command line. Widening the
+      walk turns 47 tracked files red at once -- 21 `SKILL.md`, 14
+      beside their own `.kb/`, 10 `devlog/adr`, 2 other -- so each
+      population needs a resolution first;
+      `llm-kb/references/frontmatter-outside-a-collection.md` names the
+      three that exist. Stakes: every ledger's entry point
+      (`X.claims.md`, carrying `last-updated:` and the poset) is such a
+      file, so the eight `last-updated` values unquoted on 2026-08-21
+      are right by consistency, not by enforcement
+- [ ] `SKILL.md` frontmatter is under no schema and none of the three
+      resolutions can bring it under one: Claude Code requires
+      `name`/`description` at that exact path, so the file cannot move
+      into a `.kb/`, its parent cannot be renamed, and the keys cannot
+      be dropped. 21 in the fleet, every one exactly `name` +
+      `description` (one also `disable-model-invocation`). Wants a
+      fourth lookup rule -- match the reserved filename against an
+      llm-kb-owned schema -- which would also check what nothing checks
+      today: that `name` equals the directory it sits in, and that
+      `description` reads as the discovery text it is
 - [ ] Three `.claude/todo.jsonschema.yaml` outside this repo are not the
       canonical stub, though `llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md`
       reads `status: complete` over a scope naming the whole tree:

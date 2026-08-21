@@ -276,6 +276,7 @@ Other references, load as relevant:
 - `references/pattern-guide.md` - Complete pattern explanation
 - `references/schema-design.md` - Schema design guidance
 - `references/schema-reuse.md` - Sharing schema fields/files via `$ref`
+- `references/frontmatter-outside-a-collection.md` - The three fixes when a file's frontmatter is under no schema
 - `references/complete-example.md` - Worked example (birthday party planning)
 - `references/splitting-large-docs.md` - Splitting heuristics
 - `references/dated-slug-filename.md` - `$DATE-NNN-slug.md` naming, used by any dated collection

@@ -1,0 +1,60 @@
+# Frontmatter Outside a Collection
+
+`llm.kb-validate` finds a file's schema one way: a file inside `X.kb/` is
+checked against `X.jsonschema.yaml` beside that directory. A file that
+lives anywhere else has no schema to be checked against.
+
+That is an error, not a pass. Frontmatter is data, and unchecked data
+drifts -- a key that used to be a list becomes a string, a date grows
+quotes, a field is renamed in nine files and missed in the tenth, and
+nothing says so. A validator that reports ✅ for a file it never checked
+teaches you to distrust every ✅ it prints.
+
+Three ways out, best first.
+
+## Push the file down into a collection
+
+Right when the file is one of several things of a kind, or will be.
+Create `X.kb/`, move the file into it, and write `X.jsonschema.yaml`
+beside the directory. `creating-a-new-kb.md` covers the rest.
+
+The move is also the honest test of whether the frontmatter was data: if
+no sibling would ever carry the same keys, the file is not a member of
+anything, and one of the other two resolutions applies.
+
+## Rename the parent to `X.kb/`
+
+Right when the directory already holds a homogeneous set and only the
+suffix is missing -- a `procedures/` of procedures, an `evidence/` of
+evidence. `git mv procedures procedures.kb`, write
+`procedures.jsonschema.yaml` beside it, and every member is checked from
+then on.
+
+Cheaper than it looks: the members do not move, so relative links between
+them survive. Links *into* the collection from outside do not -- sweep
+them in the same commit.
+
+## Remove the frontmatter
+
+Last resort, and legitimate only where the keys were never data: a
+`title:` that restates the `#` heading, an editor's leftovers, a field
+one agent invented and nothing ever read. Deleting those is a real
+subtraction.
+
+Deleting frontmatter that something reads is not a resolution, it is the
+defect with the alarm switched off. If a key is load-bearing, it wants a
+schema, which means one of the two resolutions above.
+
+## Why a synthesis file is not exempt
+
+`$CATEGORY.md` rolls up `$CATEGORY.kb/`, so it is tempting to read
+`$CATEGORY.jsonschema.yaml` as covering both the collection and its
+roll-up. It does not, and should not be made to: a member and a summary
+of the members are different kinds, and the one schema would have to
+require each one's fields of the other.
+
+Where the two genuinely are one kind, the domain says so and the pairing
+is real -- a claim ledger's `X.md` is a claim like any other, so
+`X.jsonschema.yaml` fits it exactly. Where the domain does not say so,
+the shared name is a coincidence of spelling, and the roll-up needs its
+own resolution from the three above.

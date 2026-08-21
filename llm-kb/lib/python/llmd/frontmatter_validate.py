@@ -88,6 +88,14 @@ _REGISTRY: SchemaRegistry = Registry(retrieve=_retrieve_schema)
 
 SUFFIX = '.kb'
 HIVE_PARTITION_MARKER = '='
+# Frontmatter no schema governs is unchecked, and calling it valid is how a
+# reader learns to distrust every ✅. The reference holds the three ways out,
+# so the message spends its words on the address rather than restating them.
+NO_SCHEMA_GOVERNS = (
+    f"Frontmatter no schema governs: only a file inside X{SUFFIX}/ is checked"
+    " (against X.jsonschema.yaml beside it)."
+    " Resolutions: skill://llm-kb/references/frontmatter-outside-a-collection.md"
+)
 # git's wording for the absence of a repository, stable since forever. Should
 # it ever change, the tests below fail rather than users.
 NO_REPOSITORY = 'not a git repository'
@@ -269,6 +277,25 @@ def validate_against_schema(data: JsonValue, schema: JsonObj) -> list[str]:
     return iter_schema_errors(schema, data, _REGISTRY)
 
 
+def schema_for(md_file: Path) -> Path | None:
+    """The schema a file's location puts it under, or None if none does.
+
+    A file in `X.kb/` is governed by `X.jsonschema.yaml` beside that
+    directory. A hive partition (`year=2026/`) subdivides a collection
+    without renaming it, so the walk up passes through any number of them
+    to reach the `.kb/` they partition.
+    """
+    directory = md_file.parent
+    while HIVE_PARTITION_MARKER in directory.name:
+        directory = directory.parent
+
+    if directory.name.endswith(SUFFIX):
+        category = directory.name.removesuffix(SUFFIX)
+        return directory.parent / f"{category}.jsonschema.yaml"
+    else:
+        return None
+
+
 def validate_file(md_file: Path, schema_override: Path | None = None) -> list[str]:
     """Validate a single markdown file. Returns list of errors."""
     if not md_file.exists():
@@ -283,15 +310,9 @@ def validate_file(md_file: Path, schema_override: Path | None = None) -> list[st
     except yaml.YAMLError as e:
         return [f"Invalid YAML: {e}"]
 
-    # Auto-detect schema if not provided
-    schema_file = schema_override
-    if not schema_file:
-        parent = md_file.parent.name
-        if parent.endswith(SUFFIX):
-            category = parent.removesuffix(SUFFIX)
-            schema_file = md_file.parent.parent / f"{category}.jsonschema.yaml"
-        else:
-            return []  # Can't validate without schema
+    schema_file = schema_override or schema_for(md_file)
+    if schema_file is None:
+        return [NO_SCHEMA_GOVERNS]
 
     schema_path = Path(schema_file)
     if not schema_path.exists():
