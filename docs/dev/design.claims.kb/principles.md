@@ -6,6 +6,8 @@ why:
   - ../strata.claims.kb/data-representation.md
   - ../../../llm-claims/design.claims.kb/notation.md
   - ../../../llm-claims/design.claims.kb/purpose.md
+  - authorship.md
+  - extension.md
 ontology:
   - principle
   - force

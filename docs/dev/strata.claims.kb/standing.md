@@ -6,6 +6,7 @@ why:
   - view.md
   - fixpoint.md
   - purpose.md
+  - protocol.md
 ontology:
   - status
   - act

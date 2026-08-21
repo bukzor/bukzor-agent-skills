@@ -4,6 +4,7 @@ standing: agent
 why:
   - data-structures.md
   - view.md
+  - tower.md
 ontology:
   - representation
   - serialization

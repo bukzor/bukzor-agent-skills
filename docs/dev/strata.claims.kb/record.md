@@ -3,6 +3,7 @@ label: RECORD
 standing: agent
 why:
   - history.md
+  - view.md
 ontology:
   - field
   - validation
