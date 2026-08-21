@@ -11,7 +11,6 @@ ontology:
   - satisfaction
   - extension
   - genre
-  - sort
   - translation
 stale-when: a genre that must re-legislate a prior theory's standing to exist -- conservativity failing in practice, not just in principle
 ---
