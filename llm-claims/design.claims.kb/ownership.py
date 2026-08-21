@@ -62,9 +62,30 @@ def ancestors_of(fleet: Fleet, t: Theory) -> Fleet:
     return frozenset(a for a in fleet if is_prefix(a.path, t.path) and a.path != t.path)
 
 
+def imported_closure(fleet: Fleet, t: Theory) -> Fleet:
+    """Every theory the taker imports, the chain included."""
+    seen: set[Theory] = set()
+    frontier = [t]
+    while frontier:
+        for p in frontier.pop().imports:
+            taker = at(fleet, p)
+            if taker not in seen:
+                seen.add(taker)
+                frontier.append(taker)
+    return frozenset(seen)
+
+
 def importers(fleet: Fleet, owner_t: Theory) -> Fleet:
-    """Direct importers only; whether a chain suffices is DIRECT_ONLY, open."""
-    return frozenset(t for t in fleet if owner_t.path in t.imports)
+    """Whoever reaches the owner by import, through a chain or directly.
+
+    An import carries its own imports onward, because a theory has to be
+    able to read what it rests on, and a prior's claims are written in
+    the prior's priors' words: reach truncated at one hop leaves a taker
+    unable to read its own premises. One law, two sorts -- the label sort
+    has always resolved this way, and the sorts differ in the shape of
+    the finding, never in the law.
+    """
+    return frozenset(t for t in fleet if owner_t in imported_closure(fleet, t))
 
 
 def ledger(fleet: Fleet, owner_t: Theory) -> Fleet:
@@ -135,19 +156,6 @@ def word_findings(fleet: Fleet) -> frozenset[tuple[Path, Path, str]]:
 def force(fleet: Fleet, word: str) -> int:
     """EXCLUSION_FORCE: findings generated -- a property of the neighbours."""
     return len([f for f in word_findings(fleet) if f[2] == word])
-
-
-def imported_closure(fleet: Fleet, t: Theory) -> Fleet:
-    """Transitive today, matching the shipped mentions rule; DIRECT_ONLY is open."""
-    seen: set[Theory] = set()
-    frontier = [t]
-    while frontier:
-        for p in frontier.pop().imports:
-            taker = at(fleet, p)
-            if taker not in seen:
-                seen.add(taker)
-                frontier.append(taker)
-    return frozenset(seen)
 
 
 def resolves(fleet: Fleet, label: str, site: Theory) -> bool:
