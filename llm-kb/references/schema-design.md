@@ -29,16 +29,19 @@ repository:
   format: uri  # Validate URLs
 
 date:
-  type: date  # YAML parses ISO dates (2024-03-10) as date objects
+  # a calendar day; `instant` is the tz-aware-timestamp counterpart
+  $ref: "skill://llm-kb/jsonschema/date.jsonschema.yaml"
 
 additionalProperties: false  # Strict validation recommended
 ```
 
-`type: date` (and `type: instant`, tz-aware datetime) are llmd dialect
-extensions, not stock JSON Schema. A schema using them must either declare
-`$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"` or declare no
-`$schema` at all (absent means the llmd dialect). Under a stock dialect
-declaration these types are unknown, and validation reports the schema bug.
+`date` and `instant` (a tz-aware datetime) are llmd dialect extensions, not
+stock JSON Schema, so a schema writing `type: date` inline owes a
+`$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"` declaration --
+under a stock dialect the type is unknown and validation reports the schema
+bug. `$ref` the shared unit instead and the question does not arise: the
+declaration lives once, in the unit, and a `$ref` crossing re-selects the
+dialect from the resource it lands in.
 
 ## Reuse Across Files
 
