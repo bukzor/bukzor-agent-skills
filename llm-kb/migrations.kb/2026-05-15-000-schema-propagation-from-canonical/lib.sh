@@ -12,7 +12,7 @@
 #
 # Callers must set HERE to this directory before sourcing.
 
-export SKILLS_REPO="$HOME/repo/github.com/bukzor/bukzor-agent-skills"
+export SKILLS_REPO="${SKILLS_REPO:-$HOME/repo/github.com/bukzor/bukzor-agent-skills}"
 # A plain stub uses only `$ref`, which means the same thing in every
 # dialect, so it declares the better-tooled draft-07 meta-schema; see
 # llm-kb/references/schema-reuse.md.
@@ -29,7 +29,12 @@ export MODELINE='# yaml-language-server: $schema=https://json-schema.org/draft-0
 # This is not hypothetical bookkeeping: `design-next.kb/` publishes a
 # canonical and has no SKILL.md. It resolves only because it happens to
 # be installed anyway. The next such directory might not be.
-table() {
+#
+# Computed once at source time, not per call. validate.sh asks
+# skill_of() a question per collection directory -- thousands of times
+# across the roots -- and rebuilding the table each time cost minutes.
+# A guard slow enough to skip is a guard that gets skipped.
+build_table() {
   local f skill category
   for f in "$SKILLS_REPO"/*/jsonschema/*.jsonschema.yaml; do
     skill="$(basename "$(dirname "$(dirname "$f")")")"
@@ -41,6 +46,11 @@ table() {
     fi
     printf '%s\t%s\n' "$category" "$skill"
   done
+}
+export SCHEMA_TABLE="${SCHEMA_TABLE:-$(build_table)}"
+
+table() {
+  printf '%s\n' "$SCHEMA_TABLE"
 }
 
 skill_of() {
@@ -70,4 +80,4 @@ collections() {
     -type d -name '*.kb' -print
 }
 
-export -f table skill_of canonical_uri canonical_stub collections
+export -f build_table table skill_of canonical_uri canonical_stub collections
