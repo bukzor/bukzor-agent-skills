@@ -216,6 +216,28 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `must-read.kb/when/` trigger, unlike its sibling skills. Raised
       2026-08-20; the specifics were not recorded, so scope it from
       what `llm-kb` and `llm-claims` carry before spending
+- [ ] Top-level `$CATEGORY.md` summary files are counted by
+      `llm.kb-validate` but not schema-checked: schema lookup for a
+      collection resolves `X.kb/` -> `X.jsonschema.yaml`, and the `X.md`
+      beside it matches nothing. Probed 2026-08-21 -- quoting
+      `last-updated` in `llm-kb/complete-example/decorations.md` still
+      reads `20 files, 0 errors`. Noted as out of scope by the
+      2026-07-09 date-migration session and still true; what changed is
+      the stakes, since every ledger's entry point (`X.claims.md`,
+      carrying `last-updated:` and the poset) is exactly such a file.
+      The eight `last-updated` values unquoted on 2026-08-21 are right
+      by consistency, not by enforcement -- six of them live in
+      unchecked files
+- [ ] Three `.claude/todo.jsonschema.yaml` outside this repo are not the
+      canonical stub, though `llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md`
+      reads `status: complete` over a scope naming the whole tree:
+      `dotfiles/` (89 lines), `prototype.chatfs/` (10),
+      `ideation.physical-musings/` (12). The first two never mention
+      `Skill(llm-subtask)`, so they look like the migration's own
+      "diverged on purpose" exclusion rather than stale copies -- but
+      the record does not say which, and a completeness claim nobody
+      can re-derive is the thing the migration was written to prevent.
+      Confirm each, then either stub it or name it in the exclusion
 - [ ] Lean port of the engine tower — gated, not next: fires on the
       triggers in the brief (algebra bug escapes / real ledger goes
       non-degenerate after KEY+CUT close / incubator graduates);

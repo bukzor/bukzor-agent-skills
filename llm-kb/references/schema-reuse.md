@@ -44,6 +44,16 @@ Real examples: `llm-kb/.claude/todo.jsonschema.yaml`,
 source. Editing the canonical file changes validation everywhere in one
 place; no propagation, no drift.
 
+## The floor: what `$ref` is bought with
+
+The cost `$ref` buys off is hand-synced duplication -- N copies that have
+to agree and don't, which is what every real instance above was. It is not
+repetition as such. A definition a reader can restate correctly from memory
+costs more as a reference than as a copy: `type: date` says what it is where
+you read it, while a `skill://` URL to a one-line file says go look.
+Extract when copies exist and must agree; leave a short type inline however
+many schemas write it.
+
 Canonical schemas live in a `jsonschema/` directory at the *skill root*,
 never inside a `skeleton/` -- skeleton contents get copied into projects, and
 a copied full schema is a snapshot that drifts. The skeleton holds the same
