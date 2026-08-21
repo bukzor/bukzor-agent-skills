@@ -32,5 +32,13 @@ A genuinely different sense takes `uniquify` -- its own string -- and
 a genuine intent to narrow takes culling the outer entry and keeping
 the inner, which says so explicitly. What would reopen this is a
 notation that marks a sense-switch at a scope boundary, visible to a
-reader and a scan alike. The six nested pairs in the fleet are all
-plain re-listing, `tower.kb` re-listing 'tower' among them.
+reader and a scan alike. Every nested pair the fleet has produced has
+been plain re-listing, never a narrowing.
+
+The rule's commonest case is a ledger root, where it does something
+the trespass scan cannot show. A root has no siblings, so REACH
+gives it the whole ledger and its entry can never charge anyone; what
+the entry still does is bar every theory below from fencing the word.
+A root listing is the ledger declaring a word common property -- which
+is what a word every theory says needs, and why promoting one there is
+a repair and not an evasion.
