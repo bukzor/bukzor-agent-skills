@@ -96,16 +96,33 @@ Code's format, stipulated where that format is defined; llm-kb shipping
 a schema for them is the same overreach as a local schema forking a
 canonical one, which this repo spent the previous day undoing.
 
-So `SKILL.md` joins `CLAUDE.md` on the not-kb-data list — skipped, not
-counted, no verdict either way — and the 47 drops to 26. Declining
-jurisdiction is not the silent pass this session removed: that one
-counted a file and printed ✅ over it, while this yields no result at
-all and the tail reads `0 files`.
+The correction I then made was wrong in the mirror image: I put
+`SKILL.md` on the skip list beside `CLAUDE.md`, so naming it printed
+`0 files, 0 errors`. The owner caught that too, with the test that
+should have been obvious — *CLAUDE.md is exempted because it needs to
+appear in `.kb/`, where it's a file but not a participant. The same
+isn't true of SKILL.md.* The skip list's members are there because
+their **location is forced**; a file merely outside every collection
+fails that test.
 
-The rename is what made the ruling visible. While `SKILL.jsonschema.yaml`
-sat beside `SKILL.md`, the file looked like llm-kb's business. Once the
-schema is `skill.jsonschema.yaml` and there is no `skill.md`, there is
-nothing left suggesting llm-kb ever reached that far.
+Both errors are one error made twice. *Whose keys are these* and
+*should the tool report on this file* are independent variables, and I
+kept answering them with a single move — first claiming jurisdiction,
+then disclaiming existence. Separated, the answer is neither: llm-kb
+defines no schema for `SKILL.md`, and says so out loud. `1 files, 1
+errors`. The resolution is in a third place entirely — don't hand a kb
+validator a file that isn't kb data.
+
+This is the fused-variable trap from
+`must-read.kb/when/redesigning-something-that-already-exists.md`, met
+in the wild: a choice that arrived as two options, each losing
+something worth keeping, because two questions had been welded into
+one.
+
+The rename is what made the first ruling visible. While
+`SKILL.jsonschema.yaml` sat beside `SKILL.md`, the file looked like
+llm-kb's business. Once the schema is `skill.jsonschema.yaml` and there
+is no `skill.md`, nothing suggests llm-kb ever reached that far.
 
 ## What the verification had to be
 
