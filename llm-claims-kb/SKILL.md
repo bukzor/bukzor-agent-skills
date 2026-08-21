@@ -79,7 +79,7 @@ every `why:` and prose reference in live files -- historical records
 ## Tools provided
 
 Paths are relative to this skill's directory; all of them read the
-ledger through `bin/llm_claims_kb.py`.
+ledger through `lib/python/llm_claims_kb/ledger.py`.
 
 ### bin/llm-claims-kb-graph
 

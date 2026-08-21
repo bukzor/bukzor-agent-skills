@@ -7,13 +7,17 @@ requires-python = ">=3.13"
 dependencies = [
     "basedpyright-as-pyright",
     "pytest>=9.1.1",
+    "llm-kb",
+    "llm-claims-kb",
 ]
 
 [tool.uv.sources]
 basedpyright-as-pyright = { path = "../basedpyright-as-pyright" }
+llm-kb = { workspace = true }
+llm-claims-kb = { workspace = true }
 
 [tool.uv.workspace]
-members = ["llm-kb"]
+members = ["llm-kb", "llm-claims-kb"]
 
 [tool.pytest.ini_options]
 python_classes = ["Describe*", "When*", "Test*"]
