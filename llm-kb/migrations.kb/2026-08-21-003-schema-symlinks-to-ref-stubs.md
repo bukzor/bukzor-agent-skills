@@ -89,17 +89,50 @@ establish each baseline before the stubs went back:
   backlog under 2026-08-21-000, not to this entry.
 - `scratch.vim-work`: **44 errors before, 15 after.** All 44 files were
   failing because the schema did not resolve at all; 29 of them conform
-  and had simply never been checked. The remaining 15 are real drift,
-  newly visible for the first time.
+  and had simply never been checked. The remaining 15 were a *second*
+  instance of the same defect one level down -- see Follow-up; since
+  fixed to 0.
 - `prototype.chatfs/packages/chatfs-cli/design.kb`: 2 errors, both the
   `canonical-conversation-graph` `why:` slugs left deliberately
   unresolved by 2026-08-21-002. Not caused here.
 
 ## Follow-up
 
-The 15 newly-exposed `scratch.vim-work` errors want judging, the same way
-the 14 DIVERGED files do. They are not a regression -- they are the first
-honest reading that tree has had.
+**The 15 newly-exposed `scratch.vim-work` errors are resolved**
+(`scratch.vim-work` b4658bf): 44 files, 0 errors. Judged, and the verdict
+was not the expected one -- none of them were content drift.
+
+All 15 shared one cause, and it was `No schema found`, not a schema
+violation. `llm.kb-validate` resolves a schema *strictly* as a sibling of
+the `.kb/` it governs (`schema_for()` in `frontmatter_validate.py`: walk
+up hive partitions, then require `<category>.jsonschema.yaml` beside the
+directory). There is no inheritance from an ancestor scope. The two
+elaborated questions -- `config-debug-hell.kb/` and `distro-alignment.kb/`
+-- are legitimate nested scopes per `Skill(llm-discourse-graph)` §Scoping
+and hierarchy, each with its own `claims.kb/` etc., and *none* of those
+nested scopes had a sibling schema. The pre-`$ref` symlinks had only ever
+been placed at the graph root.
+
+Fixed by cause: 7 house stubs, one per nested collection, identical in
+form to the 5 at the root. Zero frontmatter edited. The archived
+2026-03-02 capture validates exactly as authored -- no extender was
+needed, and no case arose for freezing a file as unfixable history.
+
+Why it hid for months: while the root symlinks dangled, all 44 files
+failed identically, so the 15 with a *second*, independent defect were
+indistinguishable from the 29 that were merely unreadable.
+
+Generalizes past this tree. A symlink-era graph gets schema links at its
+root because that is where the author was standing; every scope
+elaborated later is silently unvalidated. Worth a `-type d -name '*.kb'`
+sweep for collection directories lacking a sibling schema -- that finds
+this class directly, where a `-type l` sweep cannot.
+
+Proposal, not applied (canonicals are out of scope here):
+`llm-discourse-graph/SKILL.md` §Scoping and hierarchy says a sub-scope
+"may contain any of this skill's collection types" without saying each
+one needs its own schema file beside it. One sentence there prevents the
+next instance.
 
 The house stub keeps a `# yaml-language-server: $schema=...draft-07...`
 first line, matching the 18 stubs written under 2026-08-21-000. It is
