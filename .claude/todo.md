@@ -192,6 +192,30 @@ Repo-level list. Skill-scoped work lives in each skill's own
       debt). A reader of the flattened ledger cannot tell a witnessed
       claim from an owed one. Notation defect in `Skill(llm-claims)`,
       surfaced 2026-08-20
+- [ ] Judge the own side of `llm-claims-kb-ownership --candidates`:
+      21 unowned words that concentrate in one theory and are said
+      nowhere a finding could fire. Most are `ownership.kb`'s own
+      coinages, which it does not yet own (`import`, `taker`,
+      `unowned`, `double`, `idle`, `queue`, `cull`, `menu`,
+      `position`, `ownership`); the rest are `below`, `type`, `axis`,
+      `projection`, `defeated`, `guide`, `adr`, `phi`, `wrestled`,
+      `attack`, `collapsed`. The scan proposes, `SHOULD_OWN` decides
+      -- the count is evidence for the counterfactual, never the
+      ruling on it. Deferred 2026-08-20 (the cull was the ask); the
+      cull side of the same scan is settled, all 7 survivors kept
+- [ ] `llm.kb-validate .` at the repo root descends into
+      `.claude/worktrees/` even though `.gitignore:7` names it and the
+      2026-08-12 fix filters discovery through `git check-ignore`:
+      24 of the 25 errors it reports are duplicate copies from the two
+      live worktrees. Likely cause -- a worktree carries its own `.git`,
+      so `check-ignore` run inside it answers relative to that root.
+      The live tree is clean (verified 2026-08-20, after fixing the two
+      real errors it was hiding), so this is pure noise, and noise that
+      trains the eye to ignore a red count
+- [ ] `llm-discourse-graph` has no migration guide and no
+      `must-read.kb/when/` trigger, unlike its sibling skills. Raised
+      2026-08-20; the specifics were not recorded, so scope it from
+      what `llm-kb` and `llm-claims` carry before spending
 - [ ] Lean port of the engine tower — gated, not next: fires on the
       triggers in the brief (algebra bug escapes / real ledger goes
       non-degenerate after KEY+CUT close / incubator graduates);
