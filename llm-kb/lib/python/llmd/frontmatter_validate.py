@@ -216,12 +216,34 @@ def kb_subdirs(path: Path) -> list[Path]:
     return [d for d in sorted(path.iterdir()) if is_kb_dir(d)]
 
 
+def roll_up_of(collection: Path) -> Path | None:
+    """The `X.md` that rolls up `X.kb/`, where the walk would otherwise miss it.
+
+    A collection is `X.kb/` and the `X.md` beside it together, so walking
+    the one without the other reports a collection clean while its own
+    summary goes unread. A *nested* collection's roll-up needs no finding:
+    it is already a member of the collection above and is validated there.
+    """
+    if is_kb_dir(collection.parent):
+        return None
+
+    candidate = collection.parent / f"{collection.name.removesuffix(SUFFIX)}.md"
+    if candidate.is_file():
+        return candidate
+    else:
+        return None  # `X.kb/` with no `X.md` is a collection nobody has summarized
+
+
 def validate_paths(paths: Iterator[Path], schema_override: Path | None = None, depth: int = 0) -> Iterator[ValidationResult]:
     """Recursively validate paths, yielding ValidationResult objects."""
     for path in paths:
         p = Path(path)
 
         if is_kb_dir(p):
+            roll_up = roll_up_of(p)
+            if roll_up is not None:
+                yield from validate_one_file(roll_up, schema_override, depth)
+
             yield ValidationResult(depth, 'dir', p.name)
 
             for md_file in sorted(p.glob('*.md')):

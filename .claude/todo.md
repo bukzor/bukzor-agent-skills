@@ -216,21 +216,26 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `must-read.kb/when/` trigger, unlike its sibling skills. Raised
       2026-08-20; the specifics were not recorded, so scope it from
       what `llm-kb` and `llm-claims` carry before spending
-- [ ] The walk reaches no top-level `$CATEGORY.md`, `README.md`, or
-      `devlog/`/`adr/` entry: `validate_paths` descends only into
-      `.kb/`, so the unschema'd-frontmatter error added 2026-08-21 fires
-      only when such a file is named on the command line. Widening the
-      walk turns 47 tracked files red at once -- 21 `SKILL.md`, 14
-      beside their own `.kb/`, 10 `devlog/adr`, 2 other -- so each
-      population needs a resolution first;
-      `llm-kb/references/frontmatter-outside-a-collection.md` names the
-      three that exist. The 21 are the population a widened walk must
-      not reach rather than resolve: a skill manifest is not kb data,
-      and llm-kb defines no schema for Claude Code's keys. Stakes: every
-      ledger's entry point
-      (`X.claims.md`, carrying `last-updated:` and the poset) is such a
-      file, so the eight `last-updated` values unquoted on 2026-08-21
-      are right by consistency, not by enforcement
+- [ ] 13 collection roll-ups now report `No schema found`, which is
+      true and is where the three resolutions run out: a synthesis file
+      cannot move into the `.kb/` it summarizes, its parent is not the
+      thing to rename, and its `last-updated` is load-bearing (the claim
+      schema says a cache is lawful iff it names the revision it derives
+      from). The missing fourth resolution is that a collection's schema
+      covers its roll-up, which
+      `llm-kb/complete-example/food.jsonschema.yaml` already does and
+      documents -- `last-updated`, "Required for summary files (e.g.,
+      cake.md summarizing cake.kb/)" -- while `decorations.jsonschema.yaml`
+      beside it says "items" and forbids the field. Settle the example
+      against itself before generalizing from either half
+- [ ] The walk still reaches no `README.md` and no `devlog/`/`adr/`
+      entry, and `llm-discourse-graph` is the only skill whose dated
+      docs carry frontmatter -- 9 ADRs with `date`/`status`/`supersedes`,
+      1 devlog of 4 with a bare `date`. That is a collection wearing a
+      plain directory: `adr.kb/` plus a schema, not a wider walk. The
+      21 `SKILL.md` are the population a widened walk must not reach
+      rather than resolve: a skill manifest is not kb data, and llm-kb
+      defines no schema for Claude Code's keys
 - [ ] Three `.claude/todo.jsonschema.yaml` outside this repo are not the
       canonical stub, though `llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md`
       reads `status: complete` over a scope naming the whole tree:

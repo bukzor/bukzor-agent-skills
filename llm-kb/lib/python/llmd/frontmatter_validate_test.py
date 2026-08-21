@@ -319,3 +319,30 @@ additionalProperties: false
         results = list(fv.validate_paths(iter([tmp_path / "no-such-file.md"])))
 
         assert [result.errors for result in results] == [("File not found",)], results
+
+
+class DescribeCollectionRollUp:
+    def it_validates_the_md_beside_the_kb_it_rolls_up(self, tmp_path: Path):
+        _write_kb(tmp_path / "notes.kb")
+        _ = (tmp_path / "notes.md").write_text("---\nbogus: X\n---\n\n# Notes\n")
+
+        results = list(fv.validate_paths(iter([tmp_path / "notes.kb"])))
+
+        assert "notes.md" in [result.text for result in results], results
+
+    def it_leaves_a_nested_roll_up_to_the_collection_that_holds_it(self, tmp_path: Path):
+        # `outer.kb/inner.md` is already a member of outer.kb, so finding it
+        # again as inner.kb's roll-up would validate it twice.
+        _write_kb(tmp_path / "outer.kb" / "inner.kb")
+        _ = (tmp_path / "outer.kb" / "inner.md").write_text("---\nlabel: X\n---\n\n# Inner\n")
+
+        results = list(fv.validate_paths(iter([tmp_path / "outer.kb"])))
+
+        assert [result.text for result in results].count("inner.md") == 1, results
+
+    def it_says_nothing_of_a_collection_nobody_summarized(self, tmp_path: Path):
+        _write_kb(tmp_path / "notes.kb")
+
+        results = list(fv.validate_paths(iter([tmp_path / "notes.kb"])))
+
+        assert [result.text for result in results] == ["notes.kb", "entry.md"], results
