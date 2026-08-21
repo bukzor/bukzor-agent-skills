@@ -293,3 +293,10 @@ additionalProperties: false
         errors = fv.validate_file(entry)
 
         assert [error for error in errors if "bogus" in error], errors
+
+    def it_declines_jurisdiction_over_a_skill_manifest(self, tmp_path: Path):
+        # SKILL.md's frontmatter is Claude Code's format, not llm-kb's.
+        manifest = tmp_path / "SKILL.md"
+        _ = manifest.write_text("---\nname: x\ndescription: y\n---\n\n# X\n")
+
+        assert list(fv.validate_one_file(manifest, None, 0)) == []

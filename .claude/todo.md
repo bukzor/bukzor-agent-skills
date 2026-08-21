@@ -220,24 +220,14 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `devlog/`/`adr/` entry: `validate_paths` descends only into
       `.kb/`, so the unschema'd-frontmatter error added 2026-08-21 fires
       only when such a file is named on the command line. Widening the
-      walk turns 47 tracked files red at once -- 21 `SKILL.md`, 14
-      beside their own `.kb/`, 10 `devlog/adr`, 2 other -- so each
-      population needs a resolution first;
+      walk turns 26 tracked files red at once -- 14 beside their own
+      `.kb/`, 10 `devlog/adr`, 2 other -- so each population needs a
+      resolution first;
       `llm-kb/references/frontmatter-outside-a-collection.md` names the
       three that exist. Stakes: every ledger's entry point
       (`X.claims.md`, carrying `last-updated:` and the poset) is such a
       file, so the eight `last-updated` values unquoted on 2026-08-21
       are right by consistency, not by enforcement
-- [ ] `SKILL.md` frontmatter is under no schema and none of the three
-      resolutions can bring it under one: Claude Code requires
-      `name`/`description` at that exact path, so the file cannot move
-      into a `.kb/`, its parent cannot be renamed, and the keys cannot
-      be dropped. 21 in the fleet, every one exactly `name` +
-      `description` (one also `disable-model-invocation`). Wants a
-      fourth lookup rule -- match the reserved filename against an
-      llm-kb-owned schema -- which would also check what nothing checks
-      today: that `name` equals the directory it sits in, and that
-      `description` reads as the discovery text it is
 - [ ] Three `.claude/todo.jsonschema.yaml` outside this repo are not the
       canonical stub, though `llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md`
       reads `status: complete` over a scope naming the whole tree:

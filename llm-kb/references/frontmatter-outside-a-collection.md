@@ -10,7 +10,9 @@ quotes, a field is renamed in nine files and missed in the tenth, and
 nothing says so. A validator that reports ✅ for a file it never checked
 teaches you to distrust every ✅ it prints.
 
-Three ways out, best first.
+Three ways out, best first. They apply to kb data; a file whose
+frontmatter belongs to somebody else takes no resolution at all -- see
+the last section.
 
 ## Push the file down into a collection
 
@@ -58,3 +60,18 @@ is real -- a claim ledger's `X.md` is a claim like any other, so
 `X.jsonschema.yaml` fits it exactly. Where the domain does not say so,
 the shared name is a coincidence of spelling, and the roll-up needs its
 own resolution from the three above.
+
+## What is not kb data at all
+
+`CLAUDE.md` and `SKILL.md` are skipped, not resolved. A maintenance
+guide is instruction rather than data, and a skill manifest's `name` and
+`description` are Claude Code's format, stipulated where that format is
+defined. Checking either here would be llm-kb claiming keys it does not
+own, and shipping a schema for someone else's fields is how a fork
+starts.
+
+Being unchecked is not the same as being exempt. If those keys want
+validating, the tool that owns the format is where the check belongs.
+The test for anything else you are tempted to add to that list is
+ownership, never inconvenience: "no schema fits this" is a finding, and
+the three resolutions are what to do about it.
