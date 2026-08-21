@@ -1,5 +1,5 @@
 ---
-status: in-progress
+status: verified
 kind: recurring
 depends-on:
   - 2026-07-07-000-schema-copies-to-ref-stubs.md
@@ -345,3 +345,31 @@ fleet, and this migration only propagates -- it does not legislate:
    Either the resolver should walk to the sibling schema, or
    `references/frontmatter-outside-a-collection.md` is the answer and the
    validator should say so without calling it an error.
+
+## Verified 2026-08-21, same day
+
+The seven went to zero, and the last two were worth the trip.
+
+`git pull` did not work and could not have: the clone's branch had no
+upstream, and -- the part I had wrong -- the stub commits had never been
+pushed from the live checkout at all, so no fetch anywhere could have
+found them. Pushed those two commits, fetched, fast-forwarded the clone
+onto the branch that carries them (`orphan-recovery` was already an
+ancestor, so nothing was lost and the ref still exists). Five findings
+gone.
+
+The remaining two were **not** an artifact of the stale clone. They were
+`~/.vim/.claude/{ideas,todo}.kb`, genuinely unvalidated, and they were
+visible *only* through the clone: `~/.vim` is in no scanned root, but
+`~/repo/github.com/bukzor/dotfiles/.vim` is. A second checkout of a repo
+is not only noise -- it smuggles unscanned paths into scope. Both
+collections are empty, so the stubs are vacuous today and stop the next
+entry from landing unchecked (`82e1a8e`).
+
+That generalizes: **the guard's roots are `~/repo`, `~/claude`,
+`~/.claude`, and the dotfiles repo is rooted at `~`.** Every tracked
+`.claude/` outside those three prefixes -- `~/.vim/`, and anything else
+dotfiles adds at top level -- is invisible except by accident. Either
+add `~` as a root and prune what that pulls in, or accept that dotfiles
+is covered only through its second checkout, which is a coincidence
+rather than a design.
