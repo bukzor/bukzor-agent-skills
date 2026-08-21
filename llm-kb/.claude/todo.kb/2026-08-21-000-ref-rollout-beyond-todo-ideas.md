@@ -63,6 +63,7 @@ leaving cluster 6.
 | 5 | todo/ideas stragglers | 2 | `llm-subtask/jsonschema/` | migration A |
 | 6 | `~/.claude` sessions | canonical outside any skill | `llm-sessions/jsonschema/`, new skill | done |
 | 7 | technical-policy | 1 identical | exists | migration A |
+| 8 | schema symlinks | 30, incl. 5 already dangling | various | migration D |
 
 Migration A is `migrations.kb/2026-08-21-000-schema-copies-to-ref-stubs-all-categories.md`;
 B is `.../2026-08-21-001-canonical-schemas-out-of-skeleton.md`; C is

@@ -99,9 +99,10 @@ use bare slugs: har-browse (63), llm-vitals (61, schema-enforced
 `^[a-z0-9-]+$`), chatfs (39), fuser-vfs (33), mitmproxy (21), chatfs-cli
 (16, resolving cross-tower into `docs/dev/design.kb`). Two use
 tower-root-relative paths that do not resolve from the entry that writes
-them: sttt-engine (35) and template-py (3). Correcting the survey: har-browse's instances are
-slugs (`data-possession`), whatever its schema description implies --
-only design-next actually uses paths of the pair it named.
+them: sttt-engine (35) and template-py (3). Correcting the survey:
+har-browse's instances are slugs (`data-possession`), whatever its schema
+description implies -- only design-next actually uses paths of the pair
+it named.
 
 Paths win, and not merely on count. SKILL.md already prescribes "a list of
 file-relative path references", so the slug towers are non-conforming to
@@ -179,7 +180,7 @@ under the canonical as data stands; "data edit" is the exact fix.
 | template.python-project docs/dev/design | All 3 why refs are tower-root-relative, so they do not resolve from the entry | Rewrite each to file-relative (`010-mission.md` -> `../010-mission.md`). Whether the template ships a stub or a copy is the still-open template question flagged in the survey; not settled here |
 | bukzor.garden/packages/sttt-engine docs/dev/design | All 35 why refs are tower-root-relative | Same rewrite. No schemas in this tower |
 | prototype.chatfs docs/dev/design-incubators/fuser-vfs/design.kb | All 33 why refs are slugs | Rewrite each slug to a path. No schemas in this tower |
-| prototype.chatfs packages/chatfs-cli/design.kb | All 16 why refs are slugs, resolving cross-tower into `docs/dev/design.kb` | Rewrite each to a cross-tower path. Its 040 schema is a symlink to the project tower's |
+| prototype.chatfs packages/chatfs-cli/design.kb | All 16 why refs are slugs, resolving cross-tower into `docs/dev/design.kb` | Rewrite each to a cross-tower path. Its 040 schema is a `$ref` stub onto the project tower's (a symlink until 2026-08-21-003) |
 
 Net data cost of the canonical: the slug-to-path rewrite in the six slug
 towers plus the relative-base fix in the two tower-root-relative ones --
