@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: pending
+status: blocked
 ---
 
 # Lean Port of the Engine Tower
