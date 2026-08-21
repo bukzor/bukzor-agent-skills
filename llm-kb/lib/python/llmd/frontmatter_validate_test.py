@@ -302,7 +302,7 @@ additionalProperties: false
 
         results = list(fv.validate_one_file(manifest, None, 0))
 
-        assert [result.errors for result in results] == [(fv.NO_SCHEMA_GOVERNS,)], results
+        assert [result.errors for result in results] == [(fv.NO_SCHEMA_FOUND,)], results
 
     def it_skips_a_maintenance_guide_wherever_it_sits(self, tmp_path: Path):
         # CLAUDE.md is forced to live inside the collection it governs, so

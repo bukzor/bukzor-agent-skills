@@ -88,12 +88,12 @@ _REGISTRY: SchemaRegistry = Registry(retrieve=_retrieve_schema)
 
 SUFFIX = '.kb'
 HIVE_PARTITION_MARKER = '='
-# Frontmatter no schema governs is unchecked, and calling it valid is how a
-# reader learns to distrust every ✅. The reference holds the three ways out,
-# so the message spends its words on the address rather than restating them.
-NO_SCHEMA_GOVERNS = (
-    f"Frontmatter no schema governs: only a file inside X{SUFFIX}/ is checked"
-    " (against X.jsonschema.yaml beside it)."
+# The same finding as its sibling below, at a coarser resolution: there, the
+# schema is named and absent; here, no name was reached. Which places the
+# lookup reaches is the reference's subject and changes over time -- an error
+# that recited the current reach would teach it as the rule.
+NO_SCHEMA_FOUND = (
+    "No schema found for this frontmatter."
     " Resolutions: skill://llm-kb/references/frontmatter-outside-a-collection.md"
 )
 # git's wording for the absence of a repository, stable since forever. Should
@@ -315,7 +315,7 @@ def validate_file(md_file: Path, schema_override: Path | None = None) -> list[st
 
     schema_file = schema_override or schema_for(md_file)
     if schema_file is None:
-        return [NO_SCHEMA_GOVERNS]
+        return [NO_SCHEMA_FOUND]
 
     schema_path = Path(schema_file)
     if not schema_path.exists():

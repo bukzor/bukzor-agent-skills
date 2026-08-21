@@ -1,14 +1,16 @@
 # Frontmatter Outside a Collection
 
-`llm.kb-validate` finds a file's schema one way: a file inside `X.kb/` is
-checked against `X.jsonschema.yaml` beside that directory. A file that
-lives anywhere else has no schema to be checked against.
-
-That is an error, not a pass. Frontmatter is data, and unchecked data
+Frontmatter is data, and data belongs under a schema. Unchecked data
 drifts -- a key that used to be a list becomes a string, a date grows
 quotes, a field is renamed in nine files and missed in the tenth, and
 nothing says so. A validator that reports ✅ for a file it never checked
-teaches you to distrust every ✅ it prints.
+teaches you to distrust every ✅ it prints, so a file it cannot check is
+an error rather than a pass.
+
+Where the lookup reaches today is one place: a file inside `X.kb/` is
+checked against `X.jsonschema.yaml` beside that directory. Read that as
+the current reach, not as the rule -- a file the lookup misses is not
+thereby exempt, it is a file to bring within reach.
 
 Three ways out, best first.
 
