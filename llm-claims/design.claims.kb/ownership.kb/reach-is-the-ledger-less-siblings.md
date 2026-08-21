@@ -26,9 +26,10 @@ Three regions the earlier account admitted by separate moves --
 interior, ancestors, and importers' interiors -- survive as
 consequences, since none of them is a sibling; `witness_moves` runs
 that containment. Two the earlier account left barred and unanswerable
-come inside: cousins and nephews, 2 occurrences in the fleet at the
-ruling (probe of 2026-08-20), so the amendment is bought for coherence
-and not for cleanup.
+come inside: the theories nested under a sibling, and those nested
+under an ancestor's siblings. Neither is a sibling, so neither was ever
+prosecutable, and barring them was the artifact -- which is why the
+amendment is bought for coherence and not for cleanup.
 
 The declined alternative is standing over a sibling's whole cone,
 which would close the one hole this leaves: a sibling that may not say
