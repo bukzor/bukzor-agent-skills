@@ -24,9 +24,12 @@ Three scans, one per way the corpus can depart from the law:
   stipulation behind it (EXCLUSION_FORCE). A queue, not an error list:
   each finding has four honest repairs (FOUR_POSITIONS) and the scan
   picks none of them.
-- `--idle` -- imports whose taker never says the taken words
-  (IDLE_UNDECIDABLE). Support may still ride each arrow, so idle entries
-  are adjudicated by reading and are never errors.
+- `--idle` -- imports with neither lens witnessed: the taker never says
+  the taken words, and no claim in its interior cites into the prior's
+  tree (IDLE_UNDECIDABLE). A claim-level `why:` into the prior is the
+  support lens made mechanical (IDLE_TEST's tell); what remains may
+  still carry support on the arrow alone, so idle entries are
+  adjudicated by reading and are never errors.
 
 `--candidates` asks the fourth question, which is about the ontology
 rather than about a departure from it: which words a ledger should own
@@ -104,10 +107,36 @@ def address(theory: Theory) -> tuple[str, ...]:
     return (str(root),) + theory.path.relative_to(root).parts
 
 
-def prose(path: Path) -> str:
-    """The claim speaking: body only, code spans struck, lowercased."""
+def speech(path: Path) -> str:
+    """The claim speaking: body only, code spans struck.
+
+    A backticked name is a literal quoted from elsewhere, not this claim
+    saying the word, so it never counts as speech -- the same cutout the
+    mentions scan makes.
+    """
     body = re.sub(r"\A---\n.*?\n---\n", "", path.read_text(), flags=re.DOTALL)
-    return re.sub(r"```.*?```|`[^`]*`", " ", body, flags=re.DOTALL).lower()
+    return re.sub(r"```.*?```|`[^`]*`", " ", body, flags=re.DOTALL)
+
+
+def prose(path: Path) -> str:
+    """What the law listens to: the claim's speech, lowercased."""
+    return speech(path).lower()
+
+
+def quotes(theory: Theory, word: str) -> Iterable[tuple[str, str]]:
+    """Each sentence in the theory's own voice that says the word.
+
+    The evidence a finding is adjudicated on: the disposition turns on
+    which sense the site meant, and only the sentence tells.
+    """
+    for claim in (theory.defining, *theory.claims):
+        if claim:
+            for block in speech(claim.path).split("\n\n"):
+                for line in re.split(r"(?<=[.!?;:])\s+", " ".join(block.split())):
+                    if says(line.lower(), word):
+                        yield claim.path.name, line
+        else:
+            pass
 
 
 def says(text: str, word: str) -> bool:
@@ -282,14 +311,50 @@ def interior_text(root: Theory, theories: Sequence[Theory]) -> str:
     return " ".join(own_text(theory) for theory in region)
 
 
+def cites_into(claim, target: Theory) -> bool:
+    """One of the claim's `why:` paths resolves into the target theory's tree."""
+    tree = target.path.resolve()
+    defining = target.defining.path.resolve() if target.defining else None
+    return any(
+        cited.path.resolve() == defining or tree in cited.path.resolve().parents
+        for cited in claim.why
+    )
+
+
+def support_witnessed(root: Theory, prior: Theory, theories: Sequence[Theory]) -> bool:
+    """A claim in the taker's interior rests on the prior's tree by `why:`.
+
+    This is the support lens read mechanically: cross-theory citation by
+    claim-relative path is a normal way to write support, and an import
+    whose interior carries such an arrow is not idle, whatever words go
+    unsaid. The taker's own defining claim is excluded -- its citation
+    IS the import under adjudication, so it cannot witness itself.
+    """
+    home = root.path.resolve()
+    skip = root.defining.path.resolve() if root.defining else None
+    for theory in theories:
+        there = theory.path.resolve()
+        if not (there == home or home in there.parents):
+            continue
+        for claim in (*theory.claims, *filter(None, [theory.defining])):
+            if claim.path.resolve() != skip and cites_into(claim, prior):
+                return True
+    return False
+
+
 def idle_imports(theories: Sequence[Theory]) -> Iterable[tuple[Theory, Theory]]:
-    """Imports whose taker's interior never says the taken words."""
+    """Imports with neither lens witnessed: no taken word said by the
+    taker's interior, and no interior `why:` landing in the prior's tree."""
     home = homes(theories)
     for theory in theories:
         text = interior_text(theory, theories)
         for cited in theory.priors:
             prior = home.get(cited.path.resolve())
-            if prior and not any(says(text, word) for word in prior.ontology):
+            if (
+                prior
+                and not any(says(text, word) for word in prior.ontology)
+                and not support_witnessed(theory, prior, theories)
+            ):
                 yield theory, prior
 
 
@@ -343,6 +408,9 @@ def main() -> int:
         "--trespass", action="store_true", help="owned words said by siblings"
     )
     parser.add_argument(
+        "--cite", action="store_true", help="quote the trespassing sentences"
+    )
+    parser.add_argument(
         "--idle", action="store_true", help="the idle-import adjudication queue"
     )
     parser.add_argument(
@@ -361,9 +429,17 @@ def main() -> int:
         return 0
     elif args.trespass:
         rows = trespasses(theories)
+        spoke = {address(theory): theory for theory in theories}
         for word, owner_path, sites in rows:
             print(f"force {len(sites):>2}  {word!r} owned by {'/'.join(owner_path)}")
             print(f"          said by: {' '.join(site[-1] for site in sites)}")
+            if args.cite:
+                for site_path in sites:
+                    for claim, line in quotes(spoke[site_path], word):
+                        print(f"    {site_path[-1]}/{claim}")
+                        print(f"      {line}")
+            else:
+                pass
         skipped = contended(theories)
         print(
             f"{sum(len(sites) for _, _, sites in rows)} trespasses over"
@@ -388,12 +464,20 @@ def main() -> int:
     elif args.idle:
         queue = sorted(idle_imports(theories), key=lambda pair: site(pair[0]))
         for taker, prior in queue:
+            note = (
+                " (which stipulates no words)"
+                if not prior.ontology
+                else " and says none of its words"
+            )
             print(
-                f"adjudicate: {site(taker)} imports {site(prior)}"
-                f" and says none of its words"
+                f"adjudicate: {site(taker)} imports {site(prior)}{note}"
+                f" -- no interior why: lands there either"
             )
         total = sum(len(theory.priors) for theory in theories)
-        print(f"{len(queue)} idle of {total} imports -- resolve each by reading")
+        print(
+            f"{len(queue)} idle of {total} imports -- neither lens witnessed;"
+            f" resolve each by reading"
+        )
         return 0
     else:
         return report(theories)
