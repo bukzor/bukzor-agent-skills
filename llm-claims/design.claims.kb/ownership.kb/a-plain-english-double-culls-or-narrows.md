@@ -10,8 +10,13 @@ authority: user ruling, 2026-08-20 -- "these seem like 'plain english' which nee
 
 A double over a plain-English word resolves by exactly two moves:
 
-- **remove the ownership**: cull the entry from every stipulator;
-  an unowned word is free, so this can only discharge findings;
+- **remove the ownership**: cull the entry from every stipulator.
+  The cull is not a concession that the word goes unprotected -- it
+  is the actuation of a finding that the word was never a technical
+  term and should have been modelled as ordinary English all along.
+  `ontology:` is evidential, not constitutive: it records where a
+  coinage was found, it never makes one. So an unowned word is free,
+  and this move can only discharge findings;
 - **expand the entry** to the term of art the theory actually
   coins -- the full phrase its own prose already uses -- and so
   narrow the ownership claim to what was genuinely stipulated.
