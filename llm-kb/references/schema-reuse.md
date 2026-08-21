@@ -236,6 +236,47 @@ lacks `$anchor: base` is a defect, not a variant: consumers with extra
 fields have nowhere to attach and fork the whole file instead. Treat the
 shape as the entry requirement for publishing one.
 
+## Neither: recording a ruling that a rival stays a rival
+
+Sometimes a category name collides and the meanings don't, or a project
+runs a genuinely different model of the same noun. Then the answer is a
+standalone schema -- not a `$ref`, not a `#base` extender. Two things
+make that expensive if left implicit:
+
+1. The recurring guard
+   (`migrations.kb/2026-05-15-000-schema-propagation-from-canonical`)
+   reports every such file as `NO-REF`, forever, so each sweep
+   re-litigates a settled question.
+2. Whoever sweeps next has to re-derive an argument someone already made.
+
+So record the ruling *in the schema*, in its root `$comment`, beginning
+with the literal token:
+
+```yaml
+$comment: |
+  NO-REF ruled 2026-08-21 (2026-05-15-000-schema-propagation-from-canonical):
+  the category name collides, the meaning doesn't -- that canonical is an
+  incident chronology, this is a party's running order. Not expressible as
+  a `#base` extender: <why>.
+```
+
+`$comment` is JSON Schema's reserved annotation keyword; it is inert
+under draft-07 and 2020-12 alike, and it is *data* -- read by the same
+parse the guard already does.
+
+**Not a `#` comment.** This is the whole point, and it was learned the
+expensive way. The guard used to grep for the canonical's URI, and a
+divergence note naturally *names* the canonical it diverges from -- so
+every well-documented rival matched the grep and reported clean while
+having no `$ref` at all. Documenting the divergence was what disabled
+the check. A YAML comment is dropped by the parser and can only ever be
+grepped; a `$comment` can be read.
+
+State why a `#base` extender is unavailable, not just that it is. The
+usual reasons: the canonical requires a field this model doesn't have,
+or replaces a closed enum -- extension is conjunction, so it can narrow
+but never loosen.
+
 ## yaml-language-server compatibility
 
 Partial, not full. A generic YAML/JSON-Schema tool (yaml-language-server,
