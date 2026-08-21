@@ -1,4 +1,5 @@
 # yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: "skill://llm-kb/jsonschema/dialect.jsonschema.yaml"
 title: strata.replication.run stage frontmatter
 description: >
   Files in strata.replication.run.kb/ are one run's stages: the
@@ -22,10 +23,10 @@ properties:
     pattern: "^[0-9]{3}-[a-z-]+\\.md$"
   sent:
     description: When the turn reached the subject.
-    $ref: "skill://llm-kb/jsonschema/instant.jsonschema.yaml"
+    type: instant
   replied:
     description: When the subject finished answering.
-    $ref: "skill://llm-kb/jsonschema/instant.jsonschema.yaml"
+    type: instant
   model:
     description: The model that answered, as the reply record names it.
     type: string
