@@ -10,18 +10,18 @@ verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/
 # Presupposition Is a Well-Founded Edge Relation
 
 Presupposition is a second edge relation over the same claims -- a
-quiver, not a status, not a verdict, and never the content of an act:
-an act reaches an edge only through the claim that asserts it [EDGE].
+quiver, not a status, not a verdict, and never what an act says: an
+act reaches an edge only through the claim that asserts it [EDGE].
 It is well-founded: no claim is reachable from itself along it,
 however far around.
 
 A cycle is rejected rather than resolved. Admit one and defeating
-either end moots both, so the acts that seeded the collapse land on a
-claim that absorbs them -- a defeat that erases its own evidence, and
-an answer with no reading. There is no repair at the fixpoint either:
-the collapse is monotone in its seed, so any cycle it touches it
-takes whole. What a cycle really reports is a modelling error at the
-site, and the cheapest place to say so is the entry.
+either end collapses both, so the acts that seeded the collapse land
+on a claim that absorbs them -- a defeat that erases its own evidence,
+and an answer with no reading. There is no repair at the fixpoint
+either: the collapse is monotone in its seed, so any cycle it touches
+it takes whole. What a cycle really reports is a modelling error at
+the site, and the cheapest place to say so is the entry.
 
 The declined alternative is to let the collapse close over cycles
 quietly, as any reachability computation would. That answers, but the

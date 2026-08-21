@@ -4,7 +4,7 @@ standing: open
 why:
   - confinement-is-the-syntactic-half.md
   - ../standing.kb/a-presupposition-edge-is-a-claim.md
-  - ../standing.kb/sense-and-content-are-judged-separately.md
+  - ../standing.kb/live-and-upheld-are-judged-separately.md
 ---
 
 # A Claim Presupposes Its Theory
@@ -20,8 +20,9 @@ asserted.
 Three things argue for it:
 
 - the failure modes match. A claim written in a fallen theory's
-  vocabulary is not false, it is unreadable -- which is what moot
-  means [SENSE], and nothing else in the ledger has that shape.
+  vocabulary is not false, it is unreadable -- which is what not
+  being live means [SPLIT], and nothing else in the ledger has that
+  shape.
 - the edges would already be well-founded. Theories are ordered by
   their priors, so a graph running from each claim to its own theory
   and from each theory to its priors descends with that order
@@ -32,9 +33,9 @@ Three things argue for it:
 
 Two things keep it open, and neither is a doubt about the analogy:
 
-- the hammer is large. One act against a defining claim would moot
-  every claim that theory holds, at once, and every claim above it
-  that borrowed the vocabulary. That may be exactly right, but no
+- the hammer is large. One act against a defining claim would
+  collapse every claim that theory holds, at once, and every claim
+  above it that borrowed the vocabulary. That may be right, but no
   ledger here has ever lost a theory, so there is no experience to
   rule from.
 - it collides with the stratification. An edge-claim belongs to some

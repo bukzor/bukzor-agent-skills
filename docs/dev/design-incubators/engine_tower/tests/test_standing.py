@@ -8,17 +8,20 @@ from engine_tower.record import Schema
 from engine_tower.reference import edges
 from engine_tower.standing import (
     DESCRIBED,
+    FALSE,
     OBLIGATED,
     STIPULATED,
+    TRUE,
+    UNKNOWN,
     Act,
-    Color,
+    Disposition,
     Evidence,
     Standing,
     certified,
     cite,
     collapse,
-    color,
     contest,
+    disposition,
     effective,
     grounded,
     phi,
@@ -245,16 +248,16 @@ def test_a_claim_survives_restatement_an_act_does_not():  # ONE_WAY, ACT
     assert len({act.address for act in twice}) == 2
 
 
-def test_collapse_climbs_the_presupposition_chain():  # SENSE
+def test_collapse_climbs_the_presupposition_chain():  # SPLIT
     # q defeated; p presupposes q; r presupposes p: the collapse chains
     presupposes = frozenset({("p", "q"), ("r", "p")})
     assert collapse(presupposes, frozenset({"q"})) == {"p", "r"}
 
 
 def test_a_presupposition_cycle_is_rejected():  # DESCEND
-    """Were the cycle admitted, defeating either end would moot both,
-    and the acts that seeded the collapse would land on a claim that
-    absorbs them -- a defeat that erases its own evidence."""
+    """Were the cycle admitted, defeating either end would collapse
+    both, and the acts that seeded the collapse would land on a claim
+    that absorbs them -- a defeat that erases its own evidence."""
     cycle = frozenset({("p", "q"), ("q", "p")})
     with pytest.raises(AssertionError, match=r"presuppose themselves: \['p', 'q'\]"):
         collapse(cycle, frozenset({"q"}))
@@ -264,11 +267,11 @@ CLAIMS = frozenset({"p", "q", "p-needs-q"})
 NEEDS = {"p-needs-q": ("p", "q")}  # the edge, as a claim of the base [EDGE]
 
 
-def test_a_disputed_presupposition_leaves_sense_contested():  # SENSE
+def test_a_disputed_presupposition_leaves_live_unknown():  # SPLIT
     # q is clashed, not defeated -- "there is a king of france" is in
-    # dispute.  p's subject is in doubt, not gone: p is not moot, and
-    # neither is it plainly `in`, which is what a point-valued answer
-    # was forced to say.  The two coordinates carry both facts.
+    # dispute.  p's subject is in doubt, not gone: p has not collapsed,
+    # and neither is it plainly live, which is what a point-valued
+    # answer was forced to say.  The two coordinates carry both facts.
     record = frozenset(
         {
             Act("u", "q", "accepted", 0),
@@ -276,30 +279,30 @@ def test_a_disputed_presupposition_leaves_sense_contested():  # SENSE
             Act("u", "p", "accepted", 2),
         }
     )
-    assert color(CLAIMS, NEEDS, record, admits_all) == {
-        "q": Color("in", "contested"),
-        "p": Color("contested", "in"),
-        "p-needs-q": Color("in", "in"),  # unopposed, so the reader holds it
+    assert disposition(CLAIMS, NEEDS, record, admits_all) == {
+        "q": Disposition(TRUE, UNKNOWN),
+        "p": Disposition(UNKNOWN, TRUE),
+        "p-needs-q": Disposition(TRUE, TRUE),  # unopposed, so the reader holds it
     }
 
 
-def test_a_moot_claim_is_never_also_content_defeated():  # ABSORB, SENSE
+def test_a_collapsed_claim_is_never_also_defeated():  # ABSORB, SPLIT
     record = frozenset(
         {
             Act("u", "q", "rejected", 0),  # kills the presupposition
-            Act("u", "p", "rejected", 1),  # a content-defeat that must be absorbed
+            Act("u", "p", "rejected", 1),  # a defeat that must be absorbed
         }
     )
-    assert color(CLAIMS, NEEDS, record, admits_all) == {
-        "q": Color("in", "out"),
-        "p": Color("out", None),
-        "p-needs-q": Color("in", "in"),
+    assert disposition(CLAIMS, NEEDS, record, admits_all) == {
+        "q": Disposition(TRUE, FALSE),
+        "p": Disposition(FALSE, UNKNOWN),
+        "p-needs-q": Disposition(TRUE, TRUE),
     }
 
 
 def test_a_defeated_edge_claim_collapses_nothing():  # EDGE
     """q is refuted, but the claim that p needs q is refuted too: the
-    reader is not holding that edge, so it moots nothing.  An edge
+    reader is not holding that edge, so it collapses nothing.  An edge
     handed in beside the record could not be answered this way."""
     record = frozenset(
         {
@@ -307,19 +310,19 @@ def test_a_defeated_edge_claim_collapses_nothing():  # EDGE
             Act("u", "p-needs-q", "rejected", 1),
         }
     )
-    assert color(CLAIMS, NEEDS, record, admits_all) == {
-        "q": Color("in", "out"),
-        "p": Color("in", "in"),
-        "p-needs-q": Color("in", "out"),
+    assert disposition(CLAIMS, NEEDS, record, admits_all) == {
+        "q": Disposition(TRUE, FALSE),
+        "p": Disposition(TRUE, TRUE),
+        "p-needs-q": Disposition(TRUE, FALSE),
     }
 
 
-def test_a_disputed_edge_claim_cannot_moot_surely():  # EDGE, SENSE
-    """q is surely out and the edge is merely in dispute, so the edge
-    reaches the upper bound and not the lower: p's sense is contested,
-    the same answer a surely-held edge to a disputed q gives.  A
-    contested edge that mooted outright would let a claim be erased on
-    a frame nobody had established."""
+def test_a_disputed_edge_claim_cannot_collapse_surely():  # EDGE, SPLIT
+    """q is surely defeated and the edge is merely in dispute, so the
+    edge reaches the upper bound and not the lower: p's liveness is
+    unknown, the same answer a surely-held edge to a disputed q gives.
+    A contested edge that collapsed outright would let a claim be
+    erased on a frame nobody had established."""
     record = frozenset(
         {
             Act("u", "q", "rejected", 0),
@@ -327,10 +330,10 @@ def test_a_disputed_edge_claim_cannot_moot_surely():  # EDGE, SENSE
             Act("v", "p-needs-q", "rejected", 2),
         }
     )
-    assert color(CLAIMS, NEEDS, record, admits_all) == {
-        "q": Color("in", "out"),
-        "p": Color("contested", "in"),
-        "p-needs-q": Color("in", "contested"),
+    assert disposition(CLAIMS, NEEDS, record, admits_all) == {
+        "q": Disposition(TRUE, FALSE),
+        "p": Disposition(UNKNOWN, TRUE),
+        "p-needs-q": Disposition(TRUE, UNKNOWN),
     }
 
 
@@ -338,7 +341,7 @@ def test_two_readers_hold_different_frames():  # EDGE, STANCE
     """The frame graph is reader-relative, because it is read out of
     the record and the record is read under a stance.  One reader
     credits the assessor who struck the edge and one does not; they
-    compute different senses for p from the same record."""
+    disagree about whether p is live at all, from the same record."""
     record = frozenset(
         {
             Act("u", "q", "rejected", 0),
@@ -350,8 +353,12 @@ def test_two_readers_hold_different_frames():  # EDGE, STANCE
     def trusts_only_u(act: Act) -> bool:
         return act.assessor == "u"
 
-    assert color(CLAIMS, NEEDS, record, trusts_only_u)["p"] == Color("out", None)
-    assert color(CLAIMS, NEEDS, record, admits_all)["p"] == Color("contested", "in")
+    assert disposition(CLAIMS, NEEDS, record, trusts_only_u)["p"] == Disposition(
+        FALSE, UNKNOWN
+    )
+    assert disposition(CLAIMS, NEEDS, record, admits_all)["p"] == Disposition(
+        UNKNOWN, TRUE
+    )
 
 
 def test_an_edge_claim_is_a_claim_of_the_base():  # EDGE, ACT
@@ -359,9 +366,9 @@ def test_an_edge_claim_is_a_claim_of_the_base():  # EDGE, ACT
     hold is rejected, and so is a presupposition over an edge-claim --
     the stratification that keeps the two levels from recursing."""
     with pytest.raises(AssertionError, match="edge-claims outside the base"):
-        color(frozenset({"p", "q"}), NEEDS, frozenset(), admits_all)
+        disposition(frozenset({"p", "q"}), NEEDS, frozenset(), admits_all)
     with pytest.raises(AssertionError, match="presupposition over edge-claims"):
-        color(
+        disposition(
             CLAIMS | {"r", "r-needs-the-edge"},
             NEEDS | {"r-needs-the-edge": ("r", "p-needs-q")},
             frozenset(),
@@ -369,18 +376,18 @@ def test_an_edge_claim_is_a_claim_of_the_base():  # EDGE, ACT
         )
 
 
-def test_a_color_has_no_content_where_it_has_no_sense():  # SENSE, ABSORB
-    """The exclusion is structural, not a precedence rule: there is no
-    value of the pair that is both moot and content-defeated."""
-    with pytest.raises(AssertionError, match="content is absent exactly"):
-        Color("out", "out")
-    with pytest.raises(AssertionError, match="content is absent exactly"):
-        Color("contested", None)
+def test_a_collapsed_claim_answers_no_truth_question():  # SPLIT, ABSORB
+    """The exclusion is structural, not a precedence rule: no value of
+    the pair is both collapsed and settled on the merits, either way."""
+    with pytest.raises(AssertionError, match="no truth question"):
+        Disposition(FALSE, FALSE)
+    with pytest.raises(AssertionError, match="no truth question"):
+        Disposition(FALSE, TRUE)
 
 
-def test_moot_absorbs_content_acts():  # ABSORB -- exhaustive over small records
-    """A moot claim sits outside the truth order: any content-act on
-    it has no force, so adding one changes no claim's color."""
+def test_a_collapsed_claim_absorbs_verdicts():  # ABSORB -- exhaustive, small records
+    """A collapsed claim sits outside the truth order: any verdict on
+    it has no force, so adding one moves no claim's disposition."""
     pool = [
         Act(assessor, target, verdict, occasion)
         for occasion, (assessor, target, verdict) in enumerate(
@@ -390,11 +397,13 @@ def test_moot_absorbs_content_acts():  # ABSORB -- exhaustive over small records
     for edge_claims in ({}, NEEDS):
         for bits in range(2 ** len(pool)):
             record = frozenset(act for i, act in enumerate(pool) if bits >> i & 1)
-            before = color(CLAIMS, edge_claims, record, admits_all)
+            before = disposition(CLAIMS, edge_claims, record, admits_all)
             for target in CLAIMS:
-                if not before[target].moot:
+                if not before[target].collapsed:
                     continue
                 for verdict in ("accepted", "rejected"):
                     extra = Act("w", target, verdict, len(pool))
-                    after = color(CLAIMS, edge_claims, record | {extra}, admits_all)
+                    after = disposition(
+                        CLAIMS, edge_claims, record | {extra}, admits_all
+                    )
                     assert after == before, (record, extra, before, after)

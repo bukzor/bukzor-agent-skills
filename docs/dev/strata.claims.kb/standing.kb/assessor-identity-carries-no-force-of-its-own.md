@@ -13,7 +13,7 @@ verify: uv --directory docs/dev/design-incubators/engine_tower run pytest tests/
 
 To a reader who admits every act, who judged is invisible: rename
 the assessors however you like -- three names into one, or one into
-three -- and every claim keeps its color. Authority reaches the
+three -- and every claim keeps its disposition. Authority reaches the
 computation through that reader's stance, and through nothing else.
 
 So the algebra offers no seniority, no tie-break by name, no house

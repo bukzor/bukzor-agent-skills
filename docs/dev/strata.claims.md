@@ -71,7 +71,7 @@ realization in every persistence target -- markdown document,
 filesystem, datalog, program memory. The arrows point only down --
 no central theory cites the pair -- so below the seam the ledger is
 representation-free: `file`, `frontmatter`, `path` appearing in a
-lower theory is a filing error, not color.
+lower theory is a filing error, not a matter of style.
 
 The spine, with auxiliaries feeding in:
 

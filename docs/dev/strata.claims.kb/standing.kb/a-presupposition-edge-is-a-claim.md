@@ -18,24 +18,24 @@ in beside the record [ACT, STANCE].
 Three things follow, and each is the point of the ruling rather than
 a side effect:
 
-- two readers who disagree about whether `p` presupposes `q` compute
-  different senses for `p`. The disagreement is a thing the base can
+- two readers who disagree about whether `p` presupposes `q` disagree
+  about whether `p` is live. The disagreement is a thing the base can
   hold, instead of a precondition for holding anything.
 - an edge nobody upholds is inert, well-foundedness included. The
   cycle test is asked of the graph in hand, never the graph on offer
   [DESCEND] -- so a cycle someone has already defeated is not an
   error anyone is obliged to fix.
-- sense is computed from the two seeds content is: a claim collapses
-  *surely* when an edge it surely has leads to a claim surely out,
-  and *possibly* when an edge that may hold leads to a claim that may
-  be out [SENSE]. A disputed edge is exactly as good as a disputed
-  presupposition, and lands in the same coordinate.
+- liveness is computed from the two seeds merit is: a claim collapses
+  *surely* when an edge it surely has leads to a claim surely
+  defeated, and *possibly* when an edge that may hold leads to a claim
+  that may be defeated [SPLIT]. A disputed edge is exactly as good as
+  a disputed presupposition, and lands in the same coordinate.
 
 The two levels do not recurse: an edge-claim is neither end of any
 edge, and a graph saying otherwise is refused at the entry. That is
 a simplifying stipulation rather than a finding, and its two halves
 are not worth the same. Barring edges *out of* an edge-claim is what
-keeps the collapse monotone -- let an edge-claim be mooted and the
+keeps the collapse monotone -- let an edge-claim collapse and the
 edge it asserts falls inert, retracting a collapse already made,
 which is not a move a least fixpoint has. Barring edges *into* one
 buys only symmetry. Either half is stale the day a reader needs the

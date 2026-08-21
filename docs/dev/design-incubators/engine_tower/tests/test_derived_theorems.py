@@ -26,13 +26,17 @@ from hypothesis.strategies import (
 
 from engine_tower.reference import Edge
 from engine_tower.standing import (
+    FALSE,
+    TRUE,
+    UNKNOWN,
     Act,
-    Color,
+    Disposition,
     Stance,
+    Tri,
     affirms,
     collapse,
-    color,
     contest,
+    disposition,
     effective,
     frames,
 )
@@ -108,29 +112,30 @@ def stances(draw) -> Trusting:
     return Trusting(draw(frozensets(sampled_from(ASSESSORS), min_size=1)))
 
 
-def test_the_generator_reaches_every_color():
-    """The properties below are conditioned on color -- a moot claim,
-    a defeated one.  A generator that stopped reaching one would leave
-    them quiet rather than red, so it fails here instead.  Both
-    coordinates are swept: a disputed subject is as much a case to
-    reach as a defeated one, and nothing else here would notice if the
-    generator never drew it."""
-    for field in ("sense", "content"):
-        for wanted in ("in", "contested", "out"):
+def test_the_generator_reaches_every_disposition():
+    """The properties below are conditioned on disposition -- a
+    collapsed claim, a defeated one.  A generator that stopped reaching
+    one would leave them quiet rather than red, so it fails here
+    instead.  Both coordinates are swept: a disputed subject is as much
+    a case to reach as a defeated one, and nothing else here would
+    notice if the generator never drew it."""
+    for field in ("live", "upheld"):
+        for wanted in Tri:
             find(
                 tuples(presuppositions(), records()),
                 lambda case, field=field, wanted=wanted: any(
-                    getattr(c, field) == wanted
-                    for c in color(CLAIMS, *case, admits_all).values()
+                    getattr(c, field) is wanted
+                    for c in disposition(CLAIMS, *case, admits_all).values()
                 ),
                 settings=PROPERTY,
             )
-    # and the case the sense bounds turn on: an edge-claim in dispute,
-    # which must reach the upper collapse and not the lower [EDGE]
+    # and the case the liveness bounds turn on: an edge-claim in
+    # dispute, which must reach the upper collapse and not the lower
+    # [EDGE]
     find(
         tuples(presuppositions(), records()),
         lambda case: any(
-            color(CLAIMS, *case, admits_all)[name].content == "contested"
+            disposition(CLAIMS, *case, admits_all)[name].upheld is UNKNOWN
             for name in case[0]
         ),
         settings=PROPERTY,
@@ -139,35 +144,35 @@ def test_the_generator_reaches_every_color():
 
 @PROPERTY
 @given(records(), presuppositions(), stances(), sampled_from(VERDICTS), data())
-def test_moot_absorbs_content_acts_in_any_record(
+def test_a_collapsed_claim_absorbs_verdicts_in_any_record(
     record, edge_claims, admits, verdict, choose
 ):  # ABSORB
-    """A moot claim sits outside the truth order, so a content-act on
-    it has nothing to move: adding one leaves every claim's color
+    """A collapsed claim sits outside the truth order, so a verdict on
+    it has nothing to move: adding one leaves every claim's disposition
     where it was, however the record already struck."""
     # an assessor this reader credits -- an act they discount would
     # pass the property by having no force at all
     assessor = choose.draw(sampled_from(sorted(admits.assessors)))
-    before = color(CLAIMS, edge_claims, record, admits)
+    before = disposition(CLAIMS, edge_claims, record, admits)
     for target in sorted(CLAIMS):
-        if not before[target].moot:
+        if not before[target].collapsed:
             continue
         extra = Act(assessor, target, verdict, len(record))
-        after = color(CLAIMS, edge_claims, record | {extra}, admits)
+        after = disposition(CLAIMS, edge_claims, record | {extra}, admits)
         assert after == before, f"+{extra.address} {verdict}: {before} -> {after}"
 
 
-def color_by_iteration(
+def disposition_by_iteration(
     claims: frozenset[str],
     edge_claims: Mapping[str, Edge],
     record: frozenset[Act],
     admits: Stance,
-) -> Mapping[str, Color]:
+) -> Mapping[str, Disposition]:
     """The collapse cycle run to a fixpoint: contest, collapse the
     subjects that defeat took out, contest again over what is left,
     and repeat while the collapsed set grows.  The other bound is read
-    the same way at the end, off the settled pass.  `color` takes one
-    pass for both, and that the two agree is the property below."""
+    the same way at the end, off the settled pass.  `disposition` takes
+    one pass for both, and that the two agree is the property below."""
     eff = effective(record, admits)
     surely: frozenset[str] = frozenset()
     while True:
@@ -180,11 +185,11 @@ def color_by_iteration(
         possibly = collapse(frames(edge_claims, upper), (live - lower) | surely)
         return {
             c: (
-                Color("out", None)
+                Disposition(FALSE, UNKNOWN)
                 if c in surely
-                else Color(
-                    "contested" if c in possibly else "in",
-                    "in" if c in lower else "contested" if c in upper else "out",
+                else Disposition(
+                    UNKNOWN if c in possibly else TRUE,
+                    TRUE if c in lower else UNKNOWN if c in upper else FALSE,
                 )
             )
             for c in claims
@@ -194,11 +199,11 @@ def color_by_iteration(
 @PROPERTY
 @given(records(), presuppositions(), stances())
 def test_one_collapse_pass_reaches_the_fixpoint(record, edge_claims, admits):  # LOCAL
-    """Acts on a moot claim attack only that claim and each other, so
-    dropping them moves no surviving claim's interval: a second round
-    has no further collapse to find."""
-    one_pass = color(CLAIMS, edge_claims, record, admits)
-    to_fixpoint = color_by_iteration(CLAIMS, edge_claims, record, admits)
+    """Acts on a collapsed claim attack only that claim and each other,
+    so dropping them moves no surviving claim's interval: a second
+    round has no further collapse to find."""
+    one_pass = disposition(CLAIMS, edge_claims, record, admits)
+    to_fixpoint = disposition_by_iteration(CLAIMS, edge_claims, record, admits)
     assert one_pass == to_fixpoint, f"one pass {one_pass}, iterated {to_fixpoint}"
 
 
@@ -230,11 +235,11 @@ def test_assessor_identity_carries_no_force_of_its_own(  # BLIND
 ):
     """To a reader who admits everything, who judged is not a fact the
     algebra can see: rename the assessors -- three into one, or one
-    into three -- and every claim keeps its color.  A clash computes
-    to the contested interval whether the clashing assessors are two
-    or one; so with everything else."""
-    before = color(CLAIMS, edge_claims, record, admits_all)
-    after = color(CLAIMS, edge_claims, renamed(record, naming), admits_all)
+    into three -- and every claim keeps its disposition.  A clash
+    computes to the contested interval whether the clashing assessors
+    are two or one; so with everything else."""
+    before = disposition(CLAIMS, edge_claims, record, admits_all)
+    after = disposition(CLAIMS, edge_claims, renamed(record, naming), admits_all)
     assert after == before, f"{naming}: {before} -> {after}"
 
 
@@ -243,19 +248,23 @@ def test_assessor_identity_carries_no_force_of_its_own(  # BLIND
 def test_litigation_is_one_move_in_any_record(record, edge_claims, target):  # EXPLICIT
     """Litigation is one move, from any record whatever: an act
     affirming the claim and striking every effective act against it
-    leaves the claim un-attacked.  It settles content and nothing
+    leaves the claim un-attacked.  It settles `upheld` and nothing
     else -- the subject is other claims' business, so the move that
     wins the point leaves a disputed subject exactly as disputed, and
     where the subject is gone there is nothing to win at all."""
-    before = color(CLAIMS, edge_claims, record, admits_all)
+    before = disposition(CLAIMS, edge_claims, record, admits_all)
     against = frozenset(
         act.address
         for act in effective(record, admits_all)
         if act.target == target and not affirms(act)
     )
     move = Act("x", target, "accepted", len(record), strikes=against)
-    after = color(CLAIMS, edge_claims, record | {move}, admits_all)
-    won = before[target] if before[target].moot else Color(before[target].sense, "in")
+    after = disposition(CLAIMS, edge_claims, record | {move}, admits_all)
+    won = (
+        before[target]
+        if before[target].collapsed
+        else Disposition(before[target].live, TRUE)
+    )
     assert after[target] == won, (
         f"+{move.address} accepted striking {sorted(against)}: "
         f"{target} {before[target]} -> {after[target]}, wanted {won}"

@@ -21,10 +21,10 @@ ontology:
   - ruling
   - defeat
   - presupposition
-  - sense
-  - sense-collapse
-  - content
-  - moot
+  - live
+  - collapse
+  - upheld
+  - disposition
   - standing
   - assessor
   - party

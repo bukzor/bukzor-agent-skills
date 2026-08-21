@@ -1,8 +1,9 @@
-"""Why presupposition is not a connective [SENSE].
+"""Why presupposition is not a connective [SPLIT].
 
-SENSE declines two truth-functional readings of "the king of france
-is bald": the conjunctive one, which makes the claim plain `out` when
-there is no king, and the conditional one, which makes it plain `in`.
+SPLIT declines two truth-functional readings of "the king of france
+is bald": the conjunctive one, which makes the claim plainly false
+when there is no king, and the conditional one, which makes it plainly
+true.
 The argument that neither can carry a presupposition rests on facts
 about intuitionistic propositional logic, and citing a fact is not
 checking it -- so this checks them, by brute force over every preorder
@@ -183,7 +184,7 @@ CASES = (
 
 
 @pytest.mark.parametrize("case", CASES, ids=lambda c: c.name)
-def test_a_truth_functional_reading_cannot_carry_presupposition(case):  # SENSE
+def test_a_truth_functional_reading_cannot_carry_presupposition(case):  # SPLIT
     found = countermodel(case.formula)
     if (found is None) != case.valid:
         witness = "no countermodel at 3 worlds"

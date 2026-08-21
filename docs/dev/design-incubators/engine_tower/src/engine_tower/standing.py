@@ -13,6 +13,7 @@ fold, never asserted.  [ACT, FORCE, EXPLICIT]
 
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+from enum import Enum
 
 from engine_tower.fixpoint import iterate
 from engine_tower.reference import Edge
@@ -233,18 +234,18 @@ def contest(
 
 
 def collapse(presupposes: frozenset[Edge], defeated: frozenset[str]) -> frozenset[str]:
-    """Sense-collapse: a claim whose presupposition is defeated, or
-    itself collapsed, has no subject left.  Read off the transitive
-    closure of the presupposition relation -- a least fixpoint, so the
-    collapse climbs a chain without a second rule [SENSE, KNASTER].
+    """A claim whose presupposition is defeated, or itself collapsed,
+    has no subject left.  Read off the transitive closure of the
+    presupposition relation -- a least fixpoint, so the collapse climbs
+    a chain without a second rule [SPLIT, KNASTER].
 
     The closure is well-founded: no claim presupposes itself, however
     far around.  A cycle is rejected rather than resolved -- admitting
-    one lets a claim be mooted by its own defeat, absorbing the very
+    one lets a claim be collapsed by its own defeat, absorbing the very
     acts that seeded the collapse [DESCEND].
 
     Called once per bound.  The seed says which defeat is meant, and
-    the answer inherits the seed's certainty [SENSE]."""
+    the answer inherits the seed's certainty [SPLIT]."""
 
     def step(reach: frozenset[Edge]) -> frozenset[Edge]:
         return reach | frozenset(
@@ -257,32 +258,49 @@ def collapse(presupposes: frozenset[Edge], defeated: frozenset[str]) -> frozense
     return frozenset(src for src, dst in reach if dst in defeated)
 
 
+class Tri(Enum):
+    """What this record answers to a yes-or-no question about a claim.
+    UNKNOWN is one value covering two situations -- a dispute the
+    record does not settle, and a question that does not arise -- and
+    the coordinate it sits in is what tells them apart [SPLIT]."""
+
+    TRUE = "true"
+    FALSE = "false"
+    UNKNOWN = "unknown"
+
+    def __repr__(self) -> str:
+        return self.name
+
+
+TRUE = Tri.TRUE
+FALSE = Tri.FALSE
+UNKNOWN = Tri.UNKNOWN
+
+
 @dataclass(frozen=True)
-class Color:
-    """One claim's standing, on the two questions a claim answers to:
-    has it a subject at all (`sense`), and is what it says upheld
-    (`content`).  Both are read on the same interval -- `in`,
-    `contested`, `out` -- and neither bounds the other: a claim whose
+class Disposition:
+    """One claim's standing, as the two propositions a claim answers
+    to: it is `live` -- there is a subject for it to be about -- and
+    what it says is `upheld`.  Neither bounds the other: a claim whose
     subject is disputed can still be settled on its own terms, and
-    saying so is why this is a pair and not a point [SENSE].
+    saying so is why this is a pair and not a point [SPLIT].
 
-    `content` is absent exactly where `sense` is `out`.  The claim is
-    moot, and its truth question does not arise -- so there is no
-    fourth truth value to rank against the other three, and no
-    precedence rule deciding which of moot and defeated wins
-    [ABSORB]."""
+    A claim that is not live is *collapsed*, and its truth question
+    does not arise -- so `upheld` is UNKNOWN there, a gap rather than
+    a fourth value ranked against the other three, and no precedence
+    rule decides which of collapsed and defeated wins [ABSORB]."""
 
-    sense: str
-    content: str | None
+    live: Tri
+    upheld: Tri
 
     def __post_init__(self) -> None:
-        assert (self.content is None) == (
-            self.sense == "out"
-        ), f"{self}: content is absent exactly where sense is out"
+        assert not (
+            self.live is FALSE and self.upheld is not UNKNOWN
+        ), f"{self}: a collapsed claim has no truth question to answer"
 
     @property
-    def moot(self) -> bool:
-        return self.content is None
+    def collapsed(self) -> bool:
+        return self.live is FALSE
 
 
 def frames(edge_claims: Mapping[str, Edge], upheld: frozenset[str]) -> frozenset[Edge]:
@@ -293,37 +311,38 @@ def frames(edge_claims: Mapping[str, Edge], upheld: frozenset[str]) -> frozenset
     return frozenset(edge for claim, edge in edge_claims.items() if claim in upheld)
 
 
-def color(
+def disposition(
     claims: frozenset[str],
     edge_claims: Mapping[str, Edge],
     record: frozenset[Act],
     admits: Stance,
-) -> Mapping[str, Color]:
-    """The stack over one record: fold, interval, sense-collapse.
+) -> Mapping[str, Disposition]:
+    """The stack over one record: fold, interval, collapse.
 
     Every presupposition edge is itself a claim of the base, so the
     graph is read out of the record under this reader's stance rather
     than handed in beside it [EDGE, ACT, STANCE].  Two readers who
-    disagree about whether one claim presupposes another compute
-    different senses, which is the disagreement being representable
-    instead of being a precondition.
+    disagree about whether one claim presupposes another disagree
+    about which claims are live, which is the disagreement being
+    representable instead of being a precondition.
 
-    Sense is computed the way content is, from the same acts: a claim
-    collapses *surely* when a presupposition it surely has is surely
-    defeated, and *possibly* when an edge it may have leads to a claim
-    that may be out.  Two seeds, two graphs, one collapse -- neither
-    bound is a rule of its own [SENSE].
+    `live` is computed the way `upheld` is, from the same acts: a
+    claim collapses *surely* when a presupposition it surely has is
+    surely defeated, and *possibly* when an edge it may have leads to
+    a claim that may be defeated.  Two seeds, two graphs, one collapse
+    -- neither bound is a rule of its own [SPLIT].
 
-    Moot absorbs content-acts -- they are dropped before the second
-    truth-order pass -- so "moot and content-defeated" is impossible by
-    derivation; nothing here or in any schema asserts it [ABSORB].
+    A collapsed claim absorbs verdicts -- they are dropped before the
+    second truth-order pass -- so "collapsed and defeated" is
+    impossible by derivation; nothing here or in any schema asserts it
+    [ABSORB].
 
     The second pass cannot move a surviving claim's interval: attacks
-    never cross claims, so a moot claim's acts leave as a whole island
-    [LOCAL].  It stays for what it proves rather than what it computes
-    -- without the drop, the exclusion above would rest on testing the
-    collapsed set first, which is the precedence rule the criterion
-    forbids."""
+    never cross claims, so a collapsed claim's acts leave as a whole
+    island [LOCAL].  It stays for what it proves rather than what it
+    computes -- without the drop, the exclusion above would rest on
+    testing the collapsed set first, which is the precedence rule the
+    criterion forbids."""
     assert (
         edge_claims.keys() <= claims
     ), f"edge-claims outside the base: {sorted(edge_claims.keys() - claims)}"
@@ -343,11 +362,11 @@ def color(
     lower, upper = contest(frozenset(act for act in eff if act.target in live), live)
     return {
         c: (
-            Color("out", None)
+            Disposition(FALSE, UNKNOWN)
             if c in surely
-            else Color(
-                "contested" if c in possibly else "in",
-                "in" if c in lower else "contested" if c in upper else "out",
+            else Disposition(
+                UNKNOWN if c in possibly else TRUE,
+                TRUE if c in lower else UNKNOWN if c in upper else FALSE,
             )
         )
         for c in claims

@@ -15,7 +15,7 @@ form is incubating until it proves out.
 from collections.abc import Mapping
 from pathlib import Path
 
-from engine_tower.standing import Act, Color, color, effective
+from engine_tower.standing import FALSE, TRUE, Act, Disposition, disposition, effective
 
 LEDGER = Path(__file__).parents[5] / "llm-claims" / "design.claims.kb"
 assert LEDGER.is_dir(), LEDGER  # no ledger, no witness: fail, never skip
@@ -105,12 +105,12 @@ def test_the_fields_are_the_one_act_sugar():  # REIFY, SUGAR
 
 def test_computed_standing_reproduces_the_written_fields():  # REIFY, DEFEAT
     """Below the tripwires -- one signer per claim, no contravention,
-    no dispute -- both intervals collapse everywhere: a written
-    verdict computes to out, everything else to in, no claim comes
-    back contested or moot, and no claim of this ledger records a
-    presupposition for its subject to turn on."""
+    no dispute -- both intervals settle everywhere: a written verdict
+    computes to false, everything else to true, nothing comes back
+    unknown, and no claim of this ledger records a presupposition for
+    its subject to turn on."""
     stored = read_ledger()
-    verdicts = color(frozenset(stored), {}, desugar(stored), admits_all)
+    verdicts = disposition(frozenset(stored), {}, desugar(stored), admits_all)
     for claim, f in stored.items():
-        want = Color("in", "out" if "verdict" in f else "in")
+        want = Disposition(TRUE, FALSE if "verdict" in f else TRUE)
         assert verdicts[claim] == want, (claim, f)
