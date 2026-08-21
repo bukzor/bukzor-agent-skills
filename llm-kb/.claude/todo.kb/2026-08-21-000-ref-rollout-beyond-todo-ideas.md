@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: not-started
+status: in-progress
 required-reading:
   - ~/.claude/skills/llm-kb/references/schema-reuse.md
   - ~/.claude/skills/llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md
@@ -78,8 +78,10 @@ the target is decided, so it stays todo work that unblocks a later one.
       (migration A), run `validate.sh` homedir-wide, review the DIVERGED
       report. Done 2026-08-21. The scripts *subsume* the 2026-07-07 pair
       rather than replacing or copying it; that entry is `complete` and
-      stays as executed. Scope lives in `categories.tsv`, so widening is
-      one line.
+      stays as executed. Scope lived in `categories.tsv` until
+      2026-08-21, when the recurring guard replaced the declared table
+      with one derived from the published canonicals -- the table had
+      fallen nine categories behind the filesystem.
 - [x] Apply migration A to clusters 2 (identical half), 4, 5, 7. Done
       2026-08-21: 18 files stubbed across 7 projects, 0 `STALE-REF` found
       anywhere. Prerequisite grew: six canonicals needed the
@@ -107,34 +109,58 @@ the target is decided, so it stays todo work that unblocks a later one.
       the canonical moved to a new `llm-sessions` skill and `~/.claude`
       keeps a stub. There was never an absolute-path `$ref`; the defect
       was a canonical outside any skill, unreachable by `skill://`.
-- [ ] Judge the drifted copies one at a time: stale, or local intent that
-      should extend `#base`? There are **14, not 12**, and they are not
-      all discourse -- 10 discourse, 2 `todo`, 2 `technical-policy`.
-      Enumerated with a reason each under `## Residual` in migration A.
-      Six are `template.python-project`, the single largest cluster, and
-      two of those six are semantically identical to canonical (drifted
-      only in dialect and line-wrapping) -- the cheapest ruling to make
-      first, and the one that stops minting stale copies into new repos.
+- [x] Judge the drifted copies one at a time: stale, or local intent that
+      should extend `#base`? There were **14, not 12**. Done 2026-08-21,
+      all of them, with each ruling and its evidence under `## Residual`
+      in migration A: 11 stale -> stubbed, 1 local intent -> `#base`
+      extender, 2 genuinely rival -> left standalone with the reason
+      written into the file so no later sweep re-opens it. Migration A is
+      `complete`.
+
+      The two rivals contest the same field, `status`: `ideation.epistemics`
+      carries warrant by field presence and exists to *remove* the
+      canonical's `status` requirement, and chatfs's `dev.kb/claims` is an
+      observation ledger with a disjoint enum. That is where this schema
+      family is actually disputed -- worth knowing before the next
+      canonical change touches `status`.
+
+      The `template.python-project` six were the largest cluster and the
+      most valuable: stubbing them took `discourse.kb` from 15 errors to
+      0. None of the 15 was content drift. Each file declared draft-07
+      while using `type: date`, which only the house dialect supplies --
+      a stale copy does not merely lag the canonical, it pins a dialect
+      that cannot express its own data.
 - [x] Apply migration D: schema *symlinks* to `$ref` stubs. Done
       2026-08-21, all 30 across 7 repos. This cluster was invisible to the
       census, which swept for copies; only `find -type l` finds it. Five
       had been dangling since `llm-discourse-graph/schemas/` was renamed.
-- [ ] Disambiguate the 3 `canonical-conversation-graph` `why:` refs in
-      `prototype.chatfs` -- a real entry exists at both
-      `docs/dev/design.kb/030-requirements.kb/` and `040-design.kb/`, and
-      the prose does not settle which is meant. Migration C names all
-      three bearer files. This is the only thing holding C at
-      `in-progress`.
-- [ ] Judge the 15 errors migration D exposed in
-      `scratch.vim-work/docs/sources/2026-03-02-*.kb/`. All 44 files there
-      were failing because the schema symlinks dangled; 29 conform. The
-      15 are real drift getting its first honest reading, and want the
-      same stale-or-intentional ruling as the 14.
-- [ ] Fix `template.python-project`'s pre-commit `prettier` hook: it
-      calls `pnpm-run`, which exists nowhere on this machine (only
-      `pnpm`). Four files sit uncommitted behind it. Pre-existing, not
-      migration damage -- but it blocks the largest DIVERGED cluster from
-      being committed once judged.
+- [x] Disambiguate the 3 `canonical-conversation-graph` `why:` refs in
+      `prototype.chatfs`. Done 2026-08-21: all three resolve to
+      `030-requirements.kb/`. Settled by distribution rather than by
+      re-reading the ambiguous prose -- 13 of 13 sibling refs in that
+      layer target 030 and none targets a 040 sibling. Migration C is
+      `complete`.
+- [x] Judge the 15 errors migration D exposed in
+      `scratch.vim-work/docs/sources/2026-03-02-*.kb/`. Done 2026-08-21:
+      15 -> 0. The stale-or-intentional framing this item was written
+      with applied to none of them, because none was drift: all 15 said
+      `No schema found`. `llm.kb-validate` resolves a schema strictly as
+      a sibling of the `.kb/` it governs, with no inheritance from an
+      ancestor scope, and the two elaborated questions are legitimate
+      nested scopes that had no schema beside them. Fixed with 7 sibling
+      stubs; zero frontmatter edited, so the 2026-03-02 capture validates
+      exactly as authored.
+
+      Generalized: the symlink-era graph got its schemas at the root,
+      where the author was standing, and every scope elaborated later was
+      silently unvalidated. That defect is now in the recurring guard's
+      scope -- see the widening item below.
+- [x] Fix `template.python-project`'s pre-commit `prettier` hook. Done
+      2026-08-21, but not for the reason this item gives: `pnpm-run` does
+      exist, at `<repo>/bin/pnpm-run`, put on PATH by `.envrc` via
+      direnv. The hook worked inside a direnv shell and nowhere else --
+      including under pre-commit. Fixed to `entry: bin/pnpm-run`, with a
+      `REPO=` backport in the script itself.
 - [ ] Configure remotes, or record that there deliberately are none, for
       `~/claude/meta-reasoning` and `~/claude/crostini-health`. Both now
       hold committed-but-unpushable work from this effort.
@@ -156,14 +182,65 @@ the target is decided, so it stays todo work that unblocks a later one.
       use `$ref` unless there's an excellent reason to the contrary") but
       never written down, which is how `template.python-project` came to
       mint six stale snapshots.
-- [ ] Widen `migrations.kb/2026-05-15-000-schema-propagation-from-canonical`
-      from todo/ideas to every category with a published canonical, once A's
-      validator can back the wider claim. Do not widen the `scope:` before
-      then -- a recurring guard whose validator does not cover its stated
-      scope is worse than a narrow one. Still blocked as of 2026-08-21:
-      A's validator covers all nine categories but does not *pass*
-      homedir-wide, because the 14 above are unjudged. Widen after the
-      judgment pass, not after A.
+- [x] Widen `migrations.kb/2026-05-15-000-schema-propagation-from-canonical`
+      from todo/ideas to every category with a published canonical.
+      Unblocked by the judgment pass and done 2026-08-21. Three things
+      widened, and the third was not anticipated here:
+
+      - **Categories, declared -> derived.** The plan was to copy A's
+        nine-row `categories.tsv`. The filesystem had nineteen
+        canonicals; the table was nine behind. The guard now globs
+        `<skill>/jsonschema/`, so publishing a canonical enrolls it and
+        there is no list to keep in sync. No exclusion list either:
+        `dialect` and `layer-entry` are published but have no `.kb/`, so
+        the guard is vacuous on them without being told.
+      - **Roots.** `~/claude` and `~/.claude` had never been swept.
+      - **Shape.** The old pattern matched only `.claude/<category>.kb/`.
+        Collections nest, and only the outermost was ever checked -- the
+        same defect found one level down in `scratch.vim-work`.
+
+- [ ] Work the widened guard's residual: **42 findings, 32 MISSING and
+      10 NO-REF** (`2026-05-15-000/validate.sh`, no arguments). By
+      category: todo 9, ideas 8, technical-policy 7, sessions 5,
+      questions 3, timeline 2, findings 2, deductions 2, claims 2,
+      sources 1, evidence 1. `migrate.sh` resolves MISSING mechanically;
+      NO-REF wants the same stale/extender/rival ruling as the 14.
+
+      The count understates the work. Every stub `migrate.sh` writes
+      subjects a collection to validation for the *first* time, and
+      `scratch.vim-work` is the precedent: one schema resolving newly
+      checked 44 files. Expect frontmatter conformance work behind each.
+- [ ] Ten of those 42 were already in the old scope and old root -- six
+      weeks of ordinary drift on a guard that only runs when someone
+      opens a migration. Decide whether the recurring guards get a
+      schedule (a hook, a cron, a `/session-end` step). A `kind:
+      recurring` migration nobody runs is a `complete` one that lies.
+- [ ] Teach `2026-08-21-000/validate.sh` to distinguish a ruled rival
+      from an unexamined one. All three rivals now open with a marker
+      comment naming the canonical they depart from. Until the
+      classifier reads it, a clean run is unreachable and the entry
+      cannot reach `verified`.
+- [ ] `~/repo/github.com/bukzor/dotfiles` on branch `orphan-recovery`
+      still holds the pre-stub `.claude/todo.jsonschema.yaml`,
+      byte-identical to what `~/.claude/` had, plus 5 more MISSING. Not
+      a second divergence -- the same file on an unmerged branch of a
+      second clone, and the reunify effort carries it. Left alone rather
+      than reaching into another workstream's branch, but a careless
+      merge reinstates the stale copy over the stub.
+- [ ] `template.python-project/copier-template/.pre-commit-config.yaml.jinja`
+      still emits `entry: pnpm-run`. The template that mints the broken
+      hook was not fixed when the hook was -- the same shape as the six
+      stale schema snapshots, and the reason the template-uses-`$ref`
+      policy item below is worth writing down.
+- [ ] Add one sentence to `llm-discourse-graph/SKILL.md` §Scoping and
+      hierarchy: a sub-scope that contains any of this skill's
+      collection types needs its own `<category>.jsonschema.yaml` beside
+      it. The section currently says a sub-scope "may contain any of
+      this skill's collection types" and stops there, which is how
+      `scratch.vim-work` went months with 15 unvalidated files.
+- [ ] One surviving error in `ideation.epistemics` at
+      `background.kb/prior-art`. Left after that repo's pass; not
+      diagnosed.
 
 ## Deferred
 
