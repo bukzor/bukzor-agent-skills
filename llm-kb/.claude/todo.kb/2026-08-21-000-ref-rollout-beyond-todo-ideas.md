@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: in-progress
+status: open
 required-reading:
   - ~/.claude/skills/llm-kb/references/schema-reuse.md
   - ~/.claude/skills/llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md
