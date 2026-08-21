@@ -2,8 +2,8 @@
 label: TRIAGE
 standing: bare
 why:
-  - sibling-doubles-leave-the-law-undefined.md
-  - a-trespass-needs-license-answerability-and-speech.md
+  - sibling-doubles-contend-for-one-word.md
+  - a-trespass-is-an-unlicensed-sibling-speaking.md
 ---
 
 # Pending speech sorts by candidate owner

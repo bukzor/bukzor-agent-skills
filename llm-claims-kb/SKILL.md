@@ -159,25 +159,44 @@ by naming the file, which the sentence often already does.
 ### bin/llm-claims-kb-ownership
 
 Purpose: report where the fleet's stipulations and the licensing law
-disagree -- the word a sibling pair both claim, the import nobody
-uses. The law itself is the ownership theory,
-`../llm-claims/design.claims.kb/ownership.md`.
+disagree -- the word two theories both claim, the word a neighbour
+says without license, the import nobody uses -- and propose which
+words are worth owning at all. The law itself is the ownership
+theory, `../llm-claims/design.claims.kb/ownership.md`, whose
+`ownership.py` this tool imports and runs: the scan adapts the fleet
+to the law and reports, and defines nothing of its own.
 
 ```bash
-bin/llm-claims-kb-ownership            # every double stipulation, judged
-bin/llm-claims-kb-ownership --census   # the one-line summary
-bin/llm-claims-kb-ownership --idle     # the idle-import adjudication queue
+bin/llm-claims-kb-ownership              # every double stipulation, judged
+bin/llm-claims-kb-ownership --trespass   # owned words said by unlicensed siblings
+bin/llm-claims-kb-ownership --idle       # the idle-import adjudication queue
+bin/llm-claims-kb-ownership --candidates # what to own, and what to release
+bin/llm-claims-kb-ownership --census     # the one-line summary
 ```
 
 The default scan judges each double by how the two stipulators
-relate: siblings fail, because the owner is undefined there and only
-adjudication resolves it; a nested pair is inert, since the outer
-entry owns and the inner restates it; an unrelated pair in one
-ledger is queued without failing; a pair in different ledgers is out
-of jurisdiction -- namespaces are per-ledger -- and is counted, never
-reported. `--idle` is a queue, not an error list: an import whose
-words go unsaid may still carry real support, and only reading the
-citing theory tells.
+relate. Two in one ledger contend: two owners for one word, an error
+charged to both entries, which fails the exit because only a person
+can decide which one loses it. A nested pair is inert, since the
+outer entry owns and the inner restates it. A pair in different
+ledgers is out of jurisdiction -- namespaces are per-ledger -- and is
+counted, never reported.
+
+`--trespass` is the law run over the corpus: an owned word said by
+one of the owner's own siblings, with no import to license it,
+grouped per stipulation and ranked by force. It is a queue, not an
+error list -- every finding has four honest repairs (cull, move,
+admit, uniquify) and the scan picks none of them. `--idle` is a queue
+too: an import whose words go unsaid may still carry real support,
+and only reading the citing theory tells.
+
+`--candidates` asks the prior question, which is about the ontology
+rather than a departure from it: a word a ledger leans on and says in
+one theory only is worth owning, because its appearance elsewhere
+would signal a concerns violation; a word said across many theories
+is ambient vocabulary and owning it polices noise. Concentration is
+the measure, never rarity in English. `--floor` and `--ceiling` move
+the two thresholds.
 
 ## What this is not
 

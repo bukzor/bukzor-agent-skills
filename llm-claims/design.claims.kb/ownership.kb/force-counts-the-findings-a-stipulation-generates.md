@@ -2,13 +2,13 @@
 label: EXCLUSION_FORCE
 standing: bare
 why:
-  - a-trespass-needs-license-answerability-and-speech.md
+  - a-trespass-is-an-unlicensed-sibling-speaking.md
 ---
 
 # Force counts the findings a stipulation generates
 
 A stipulation's force is the number of findings it generates -- how
-many answerable, unlicensed sites actually say its words. Force is a
+many of the owner's own siblings actually say its words. Force is a
 property of the neighbours' speech, not of the word: the same
 stipulation is heavy in a crowded ledger and weightless in an empty
 one, and it changes when a neighbour edits, with no edit here.

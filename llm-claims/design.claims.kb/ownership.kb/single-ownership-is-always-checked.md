@@ -3,7 +3,7 @@ label: CHECK_OWNERSHIP
 standing: user
 why:
   - the-data-holds-a-relation-the-law-needs-a-function.md
-  - sibling-doubles-leave-the-law-undefined.md
+  - sibling-doubles-contend-for-one-word.md
 authority: user ruling, 2026-08-20 -- "either mechanistically, in python, or agentically, in documented procedures"
 ---
 

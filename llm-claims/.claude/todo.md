@@ -60,3 +60,21 @@
 - [ ] Verify the sigil set (`?`/`!`/`+`) against the derivation chat once
       captured/exported — DUMB_MEDIA's rejected `'` sigil suggests there
       may have been a fuller set (e.g. superseded/retracted)
+- [ ] Admit unambiguous brace notation in an `ontology:` entry:
+      `{pre,post}-fixed point` expands to two words, so one entry can
+      carry a shared stem without the checker reading the whole string
+      as a single term. Field case: `docs/dev/strata.claims.kb/fixpoint.md`
+      wrote `pre-/post-fixed point`, which no claim can match verbatim
+      and which the ownership scan therefore reported as never spoken,
+      while `fixpoint.kb/` says "pre-fixed points" and "post-fixed
+      point" in as many words. Slash-bundling should be rejected once
+      braces are accepted
+- [ ] Work the trespass docket: 252 findings over 121 stipulations
+      (`llm-claims-kb-ownership --trespass`), 88 in
+      `docs/dev/strata.claims.kb`. Take them in `--candidates` cull
+      order — the heaviest stipulations are ambient words SHOULD_OWN
+      says not to own, so culling clears findings in bulk before any
+      per-finding repair is worth choosing
+- [ ] Tighten `--candidates`' own side: `phi`, `defeated`, `collapsed`,
+      `wrestled` are false positives at floor 8. Candidates are 2/3
+      precise today; the cull side is clean

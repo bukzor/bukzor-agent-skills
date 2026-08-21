@@ -12,6 +12,7 @@ ontology:
   - interior
   - licensed
   - finding
+  - contention
   - trespass
   - dangling
   - force

@@ -5,8 +5,11 @@ standing: open
 
 # Does licensing require a direct import?
 
-Does the import move of reach require a direct `why:` arrow, or does
-an import carry its own imports onward? The shipped mentions rule
+Does the import that readmits a sibling require a direct `why:`
+arrow, or does an import carry its own imports onward? REACH shrank
+what turns on this: imports now license one population only, the
+owner's own siblings, since every other position is licensed without
+an arrow. The shipped mentions rule
 says onward -- "a defining claim's `why:`, transitively" -- but the
 measured traffic is zero: of 92 fleet-label citations, 91 resolve in
 their own ledger, 1 through a direct import, none through the chain

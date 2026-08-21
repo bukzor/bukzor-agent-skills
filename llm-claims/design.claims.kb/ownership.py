@@ -31,8 +31,8 @@ class Theory:
 Fleet = frozenset[Theory]
 
 
-class AmbiguousOwner(Exception):
-    """Sibling stipulators of one word: the law is undefined, not violated."""
+class Contention(Exception):
+    """Two owners for one word: an error charged to both stipulations."""
 
 
 def at(fleet: Fleet, path: Path) -> Theory:
@@ -47,16 +47,19 @@ def is_prefix(shorter: Path, longer: Path) -> bool:
     return longer[: len(shorter)] == shorter
 
 
+def ledger_of(t: Theory) -> str:
+    """SORT_REACH: the namespace is per-ledger; the root names the ledger."""
+    return t.path[0]
+
+
 def interior(fleet: Fleet, owner_t: Theory) -> Fleet:
     """CONTAINMENT_ADMITS: containment admits downward without an arrow."""
     return frozenset(t for t in fleet if is_prefix(owner_t.path, t.path))
 
 
 def ancestors_of(fleet: Fleet, t: Theory) -> Fleet:
-    """THREE_MOVES' ancestor move: a synthesis may say its parts' words."""
-    return frozenset(
-        a for a in fleet if is_prefix(a.path, t.path) and a.path != t.path
-    )
+    """The ancestor move: a synthesis may say its parts' words (REACH)."""
+    return frozenset(a for a in fleet if is_prefix(a.path, t.path) and a.path != t.path)
 
 
 def importers(fleet: Fleet, owner_t: Theory) -> Fleet:
@@ -64,12 +67,25 @@ def importers(fleet: Fleet, owner_t: Theory) -> Fleet:
     return frozenset(t for t in fleet if owner_t.path in t.imports)
 
 
+def ledger(fleet: Fleet, owner_t: Theory) -> Fleet:
+    """SORT_REACH: the namespace the owner governs, and the only one."""
+    return frozenset(t for t in fleet if ledger_of(t) == ledger_of(owner_t))
+
+
+def answerable(fleet: Fleet, owner_t: Theory) -> Fleet:
+    """LOCAL: standing runs to the owner's siblings and no further."""
+    return frozenset(
+        t
+        for t in ledger(fleet, owner_t)
+        if t.path[:-1] == owner_t.path[:-1] and t.path != owner_t.path
+    )
+
+
 def reach(fleet: Fleet, owner_t: Theory) -> Fleet:
-    """THREE_MOVES: interior, ancestors, and importers' interiors."""
-    moves = interior(fleet, owner_t) | ancestors_of(fleet, owner_t)
-    for taker in importers(fleet, owner_t):
-        moves |= interior(fleet, taker)
-    return moves
+    """REACH: the ledger less the siblings, who enter by importing."""
+    return ledger(fleet, owner_t) - (
+        answerable(fleet, owner_t) - importers(fleet, owner_t)
+    )
 
 
 def stipulators(fleet: Fleet, word: str) -> Fleet:
@@ -77,20 +93,20 @@ def stipulators(fleet: Fleet, word: str) -> Fleet:
     return frozenset(t for t in fleet if word in t.ontology)
 
 
-def owner(fleet: Fleet, word: str) -> Theory | None:
-    """OUTERMOST_WINS on nesting; SINGLE_VALUED: siblings raise, not resolve."""
-    claimants = stipulators(fleet, word)
+def owner(fleet: Fleet, word: str, namespace: str) -> Theory | None:
+    """OUTERMOST_WINS on nesting; CONTENTION raises, one ledger at a time."""
+    claimants = frozenset(
+        t for t in stipulators(fleet, word) if ledger_of(t) == namespace
+    )
     outermost = frozenset(
         t
         for t in claimants
-        if not any(
-            is_prefix(o.path, t.path) and o.path != t.path for o in claimants
-        )
+        if not any(is_prefix(o.path, t.path) and o.path != t.path for o in claimants)
     )
     if not outermost:
         return None
     elif len(outermost) > 1:
-        raise AmbiguousOwner(word, sorted(t.path for t in outermost))
+        raise Contention(word, sorted(t.path for t in outermost))
     else:
         (winner,) = outermost
         return winner
@@ -98,38 +114,27 @@ def owner(fleet: Fleet, word: str) -> Theory | None:
 
 def licensed(fleet: Fleet, word: str, site: Theory) -> bool:
     """DEFAULT: an unowned word is free; owned, license is reach (LICENSE)."""
-    who = owner(fleet, word)
+    who = owner(fleet, word, ledger_of(site))
     if who is None:
         return True
     else:
         return site in reach(fleet, who)
 
 
-def answerable(owner_t: Theory, site: Theory) -> bool:
-    """Sibling-only for words; how far else is ANSWERABLE_IS_LOCAL, open."""
-    return owner_t.path[:-1] == site.path[:-1] and owner_t.path != site.path
-
-
 def word_findings(fleet: Fleet) -> frozenset[tuple[Path, Path, str]]:
-    """TRESPASS: unlicensed, answerable, and actually said -- all three."""
+    """TRESPASS: a non-importing sibling of the owner, saying the word."""
     return frozenset(
         (who.path, site.path, word)
         for site in fleet
         for word in site.says
-        if (who := owner(fleet, word)) is not None
+        if (who := owner(fleet, word, ledger_of(site))) is not None
         and not licensed(fleet, word, site)
-        and answerable(who, site)
     )
 
 
 def force(fleet: Fleet, word: str) -> int:
     """EXCLUSION_FORCE: findings generated -- a property of the neighbours."""
     return len([f for f in word_findings(fleet) if f[2] == word])
-
-
-def ledger_of(t: Theory) -> str:
-    """SORT_REACH: the namespace is per-ledger; the root names the ledger."""
-    return t.path[0]
 
 
 def imported_closure(fleet: Fleet, t: Theory) -> Fleet:
@@ -199,7 +204,9 @@ def witness_default() -> str:
     assert word_findings(fleet) == frozenset(), word_findings(fleet)
     dangles = label_findings(fleet)
     assert dangles == frozenset({(("L", "s"), "GHOST")}), dangles
-    return "the unowned word is free; the undefined label dangles, charged to its holder"
+    return (
+        "the unowned word is free; the undefined label dangles, charged to its holder"
+    )
 
 
 def witness_dangling() -> str:
@@ -218,15 +225,23 @@ def witness_dangling() -> str:
 
 
 def witness_owner() -> str:
-    """OUTERMOST_WINS on nesting; SINGLE_VALUED on siblings."""
+    """OUTERMOST_WINS on nesting; CONTENTION on doubles; per-ledger throughout."""
     nested = frozenset(
         {
             Theory(path=("L", "o"), ontology=frozenset({"w"})),
             Theory(path=("L", "o", "i"), ontology=frozenset({"w"})),
         }
     )
-    who = owner(nested, "w")
+    who = owner(nested, "w", "L")
     assert who is not None and who.path == ("L", "o"), who
+    foreign = frozenset(
+        {
+            Theory(path=("L", "a"), ontology=frozenset({"w"})),
+            Theory(path=("M", "b"), ontology=frozenset({"w"})),
+        }
+    )
+    theirs = owner(foreign, "w", "M")
+    assert theirs is not None and theirs.path == ("M", "b"), theirs
     siblings = frozenset(
         {
             Theory(path=("L", "a"), ontology=frozenset({"w"})),
@@ -234,39 +249,59 @@ def witness_owner() -> str:
         }
     )
     try:
-        owner(siblings, "w")
-    except AmbiguousOwner:
-        return "nested doubles: the outer owns; sibling doubles: AmbiguousOwner"
+        owner(siblings, "w", "L")
+    except Contention:
+        return "the outer owns; each ledger answers for itself; a double contends"
     raise AssertionError(("sibling double resolved, should have raised", siblings))
 
 
 def witness_reach() -> str:
-    """THREE_MOVES: interior, ancestor, importer's interior in; cousin out."""
+    """REACH: the ledger less the owner's siblings, who enter by importing."""
     o = Theory(path=("L", "o"), ontology=frozenset({"w"}))
     inside = Theory(path=("L", "o", "i"))
     root = Theory(path=("L",))
     taker = Theory(path=("L", "m"), imports=(("L", "o"),))
-    takers_child = Theory(path=("L", "m", "n"))
-    cousin = Theory(path=("L", "c", "d"))
-    fleet = frozenset({o, inside, root, taker, takers_child, cousin})
+    sibling = Theory(path=("L", "s"))
+    nephew = Theory(path=("L", "s", "n"))
+    fleet = frozenset({o, inside, root, taker, sibling, nephew})
     r = reach(fleet, o)
-    assert {inside, root, taker, takers_child} <= r, sorted(t.path for t in r)
-    assert cousin not in r, cousin
-    return "interior, ancestor, and importer's interior licensed; the cousin is not"
+    assert {inside, root, taker, nephew} <= r, sorted(t.path for t in r)
+    assert sibling not in r, sibling
+    return "only the bare sibling is barred; importing lets it back in"
+
+
+def witness_moves() -> str:
+    """The three old moves survive the collapse: each is merely not a sibling."""
+    o = Theory(path=("L", "o"), ontology=frozenset({"w"}))
+    fleet = frozenset(
+        {
+            o,
+            Theory(path=("L", "o", "i")),
+            Theory(path=("L",)),
+            Theory(path=("L", "m"), imports=(("L", "o"),)),
+            Theory(path=("L", "m", "n")),
+        }
+    )
+    moves = interior(fleet, o) | ancestors_of(fleet, o)
+    for taker in importers(fleet, o):
+        moves |= interior(fleet, taker)
+    assert moves <= reach(fleet, o), sorted(t.path for t in moves - reach(fleet, o))
+    return "interior, ancestors, importers' interiors: all inside the one exclusion"
 
 
 def witness_trespass() -> str:
-    """TRESPASS: sibling speech is a finding; a deeper cousin is silent."""
+    """TRESPASS: the sibling speaks and is charged; nephew and stranger are free."""
     fleet = frozenset(
         {
             Theory(path=("L", "o"), ontology=frozenset({"w"})),
             Theory(path=("L", "s"), says=frozenset({"w"})),
-            Theory(path=("L", "c", "d"), says=frozenset({"w"})),
+            Theory(path=("L", "s", "n"), says=frozenset({"w"})),
+            Theory(path=("M", "f"), says=frozenset({"w"})),
         }
     )
     found = word_findings(fleet)
     assert found == frozenset({(("L", "o"), ("L", "s"), "w")}), found
-    return "the sibling is the one finding; the deeper cousin is unanswerable"
+    return "the sibling alone; the nephew is licensed, the foreign site ungoverned"
 
 
 def witness_force() -> str:
@@ -308,7 +343,11 @@ def witness_repairs() -> str:
 
 
 def witness_nonmonotone() -> str:
-    """YIELD's retraction: a repair discharges one finding and mints another."""
+    """YIELD's retraction: a repair discharges one finding and mints another.
+
+    The move that clears w carries the site into the interior of a theory whose
+    own child owns v, making the site that child's sibling for the first time.
+    """
     fleet = frozenset(
         {
             Theory(path=("L", "o"), ontology=frozenset({"w"})),
@@ -329,6 +368,7 @@ WITNESSES: dict[str, Callable[[], str]] = {
     "dangling": witness_dangling,
     "owner": witness_owner,
     "reach": witness_reach,
+    "moves": witness_moves,
     "trespass": witness_trespass,
     "force": witness_force,
     "repairs": witness_repairs,

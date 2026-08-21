@@ -5,36 +5,64 @@
 # ///
 """The ownership scan: where the fleet's stipulations and the law disagree.
 
-The law is the ownership theory (llm-claims/design.claims.kb/ownership.md);
-its runnable fixtures are ownership.py beside it. This scan reads the real
-fleet and reports each word two theories both stipulate, judged by how the
-two relate:
+The law is the ownership theory (llm-claims/design.claims.kb/ownership.md),
+and this scan does not restate it: `ownership.py` beside that theory is
+imported and run over the real fleet, so `owner`, `reach` and the findings
+have exactly one definition. What lives here is the adapter -- reading
+ledgers off disk, deciding what a claim *says* -- plus the reporting.
 
-- **siblings** -- the law's owner is undefined there (SINGLE_VALUED), and
-  only adjudication resolves it: a finding, and the failing exit;
-- **nested** -- inert: the outer entry owns and the inner restates it
-  (OUTERMOST_WINS);
-- **unrelated, one ledger** -- queued for adjudication, non-failing;
-- **foreign ledgers** -- legal, namespaces are per-ledger (SORT_REACH):
-  counted, never reported.
+Three scans, one per way the corpus can depart from the law:
 
-`--census` prints the one-line summary ARITY's `verify:` runs. `--idle`
-prints the idle-import queue (IDLE_UNDECIDABLE): imports whose taker never
-says the taken words. Support may still ride each arrow, so idle entries
-are adjudicated by reading and are never errors.
+- the default, **contention** -- one word owned twice in one ledger, an
+  error charged to both entries, which only a person can settle
+  (CONTENTION): a failing exit. A word stipulated by a theory and its own
+  descendant is inert instead, the outer owning (OUTERMOST_WINS), and one
+  stipulated in two different ledgers is legal, namespaces being
+  per-ledger (SORT_REACH).
+- `--trespass` -- an owned word said by one of the owner's own siblings,
+  with no import to license it (TRESPASS), ranked by the force of the
+  stipulation behind it (EXCLUSION_FORCE). A queue, not an error list:
+  each finding has four honest repairs (FOUR_POSITIONS) and the scan
+  picks none of them.
+- `--idle` -- imports whose taker never says the taken words
+  (IDLE_UNDECIDABLE). Support may still ride each arrow, so idle entries
+  are adjudicated by reading and are never errors.
+
+`--candidates` asks the fourth question, which is about the ontology
+rather than about a departure from it: which words a ledger should own
+(SHOULD_OWN), measured as concentration across theories. `--census`
+prints the one-line summary ARITY's `verify:` runs.
 
 Run from the repo root.
 """
 
 import argparse
+import importlib.util
 import re
 import sys
-from collections.abc import Iterable, Sequence
+from collections import Counter
+from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent))
 
-from llm_claims_kb import Theory, read_ledger  # noqa: E402
+from llm_claims_kb import Theory, read_ledger
+
+
+def load_law():
+    """The runnable law, imported from beside the theory the claims cite."""
+    here = Path(__file__).resolve()
+    path = here.parents[2] / "llm-claims/design.claims.kb/ownership.py"
+    assert path.exists(), (path, "the law must sit beside its theory")
+    spec = importlib.util.spec_from_file_location("ownership_law", path)
+    assert spec and spec.loader, path
+    module = importlib.util.module_from_spec(spec)
+    sys.modules["ownership_law"] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+law = load_law()
 
 
 def ledger_roots(under: Path = Path()) -> tuple[Path, ...]:
@@ -62,21 +90,18 @@ def site(theory: Theory) -> str:
 
 def ledger_of(theory: Theory) -> Path:
     """The `*.claims.kb` the theory lives in -- itself, for a ledger's own."""
-    here = theory.path.resolve()
+    here = theory.path
     return next(one for one in (here, *here.parents) if one.name.endswith(".claims.kb"))
 
 
-def kinship(one: Theory, other: Theory) -> str:
-    """How two stipulators relate -- which is what the law reads off a double."""
-    here, there = one.path.resolve(), other.path.resolve()
-    if here == there or here in there.parents or there in here.parents:
-        return "inside"
-    elif ledger_of(one) != ledger_of(other):
-        return "foreign"
-    elif here.parent == there.parent:
-        return "sibling"
-    else:
-        return "cousin"
+def address(theory: Theory) -> tuple[str, ...]:
+    """The law's path form: the ledger, then the steps down to the theory.
+
+    The ledger heads the tuple because the law reads the namespace off it
+    (SORT_REACH), and siblinghood off the rest.
+    """
+    root = ledger_of(theory)
+    return (str(root),) + theory.path.relative_to(root).parts
 
 
 def prose(path: Path) -> str:
@@ -90,13 +115,160 @@ def says(text: str, word: str) -> bool:
     return re.search(rf"(?<!\w){re.escape(word)}s?(?!\w)", text) is not None
 
 
+def own_text(theory: Theory) -> str:
+    """What this theory says in its own voice -- its claims, not its children's.
+
+    Descendants speak for themselves: the law reaches them through
+    containment, so folding their prose in here would charge a parent for
+    a word only its child said.
+    """
+    return " ".join(
+        prose(claim.path) for claim in (theory.defining, *theory.claims) if claim
+    )
+
+
+def spoken(text: str, words: Iterable[str]) -> frozenset[str]:
+    """Which of the words the text says -- bare or plural, phrases included.
+
+    Single words go through a token set because the candidate list is the
+    whole fleet's ontology and a regex apiece is the scan's hot loop.
+    """
+    tokens = frozenset(re.findall(r"[a-z][a-z'-]*", text))
+    singles = frozenset(word for word in words if " " not in word)
+    phrases = frozenset(word for word in words if " " in word)
+    return frozenset(
+        word for word in singles if word in tokens or f"{word}s" in tokens
+    ) | frozenset(word for word in phrases if says(text, word))
+
+
+def homes(theories: Sequence[Theory]) -> Mapping[Path, Theory]:
+    """Each defining claim's file, to the theory it defines -- how `why:` lands."""
+    return {
+        theory.defining.path.resolve(): theory for theory in theories if theory.defining
+    }
+
+
+def contended(theories: Sequence[Theory]) -> frozenset[str]:
+    """Words the law cannot assign an owner: two stipulators in one ledger.
+
+    Asked of the law itself, one ledger at a time -- `owner` raising is the
+    definition, not a rule restated here.
+    """
+    barrel = adapt(theories, frozenset())
+    namespaces = {law.ledger_of(one) for one in barrel}
+    found = set()
+    for word in {word for one in barrel for word in one.ontology}:
+        for namespace in namespaces:
+            try:
+                law.owner(barrel, word, namespace)
+            except law.Contention:
+                found.add(word)
+    return frozenset(found)
+
+
+def adapt(theories: Sequence[Theory], candidates: frozenset[str]) -> frozenset:
+    """The fleet in the law's own terms: paths, ontologies, speech, imports.
+
+    `candidates` is what to listen for; pass the empty set when only
+    ownership is in question, since reading every claim is the expensive
+    half and stipulations alone answer it.
+    """
+    home = homes(theories)
+    return frozenset(
+        law.Theory(
+            path=address(theory),
+            ontology=frozenset(theory.ontology),
+            says=spoken(own_text(theory), candidates) if candidates else frozenset(),
+            imports=tuple(
+                address(home[prior.path.resolve()])
+                for prior in theory.priors
+                if prior.path.resolve() in home
+            ),
+        )
+        for theory in theories
+    )
+
+
 def doubles(theories: Sequence[Theory]) -> Iterable[tuple[str, str, Theory, Theory]]:
-    """Each word two theories both stipulate, with the relation the law reads."""
+    """Each word two theories both stipulate, and how the law reads the pair."""
     for one in theories:
         for other in theories:
             if site(one) < site(other):
+                here, there = one.path.resolve(), other.path.resolve()
+                if here in there.parents or there in here.parents:
+                    verdict = "inert"
+                elif ledger_of(one) != ledger_of(other):
+                    verdict = "foreign"
+                else:
+                    verdict = "contending"
                 for word in sorted(set(one.ontology) & set(other.ontology)):
-                    yield word, kinship(one, other), one, other
+                    yield word, verdict, one, other
+
+
+def trespasses(theories: Sequence[Theory]) -> tuple[tuple[str, tuple, tuple], ...]:
+    """The law's word findings, gathered per stipulation, heaviest first.
+
+    Force is the tally itself: a stipulation's force is the findings it
+    generates (EXCLUSION_FORCE), so grouping the findings once beats asking
+    the law's `force` per word, which recomputes the whole scan each call.
+    """
+    candidates = {word for theory in theories for word in theory.ontology}
+    barrel = adapt(theories, frozenset(candidates - contended(theories)))
+    docket: dict[tuple[str, tuple], set[tuple]] = {}
+    for owner_path, site_path, word in law.word_findings(barrel):
+        docket.setdefault((word, owner_path), set()).add(site_path)
+    return tuple(
+        (word, owner_path, tuple(sorted(sites)))
+        for (word, owner_path), sites in sorted(
+            docket.items(), key=lambda row: (-len(row[1]), row[0])
+        )
+    )
+
+
+def usage(theories: Sequence[Theory]) -> Mapping[str, Mapping[str, Counter[str]]]:
+    """Per ledger, per word: how many times each theory says it.
+
+    Plurals fold into their singular where the ledger says both, matching
+    the word boundary the law's own `says` reads. Possessives and primes
+    drop with the apostrophe, so `owner's` counts as owning.
+    """
+    tally: dict[str, dict[str, Counter[str]]] = {}
+    for theory in theories:
+        book = tally.setdefault(str(ledger_of(theory)), {})
+        for word, count in Counter(
+            re.findall(r"[a-z]{3,}(?:-[a-z]+)*", own_text(theory))
+        ).items():
+            book.setdefault(word, Counter())[site(theory)] += count
+    for book in tally.values():
+        for word in [one for one in book if one.endswith("s") and one[:-1] in book]:
+            book[word[:-1]].update(book.pop(word))
+    return tally
+
+
+def candidates(
+    theories: Sequence[Theory], floor: int, ceiling: int
+) -> tuple[tuple[str, str, str, int, int], ...]:
+    """SHOULD_OWN, both directions: what to own, and what to stop owning.
+
+    The test is concentration across theories, never rarity in English: a
+    word a ledger leans on and says in one theory only is a word whose
+    appearance elsewhere would signal a concerns violation, which is the
+    counterfactual SHOULD_OWN asks. A word said all over the ledger is
+    ambient vocabulary however unusual it looks, and owning it polices
+    noise.
+    """
+    owned: dict[str, set[str]] = {}
+    for theory in theories:
+        owned.setdefault(str(ledger_of(theory)), set()).update(theory.ontology)
+    found = []
+    for home, book in usage(theories).items():
+        for word, where in book.items():
+            uses, spread = sum(where.values()), len(where)
+            if word in owned[home] and spread > ceiling:
+                found.append(("cull", home, word, uses, spread))
+            elif word not in owned[home] and spread == 1 and uses >= floor:
+                found.append(("own", home, word, uses, spread))
+    return tuple(sorted(found, key=lambda row: (row[0], -row[3], row[1], row[2])))
 
 
 def interior_text(root: Theory, theories: Sequence[Theory]) -> str:
@@ -107,21 +279,12 @@ def interior_text(root: Theory, theories: Sequence[Theory]) -> str:
         for theory in theories
         if theory.path.resolve() == home or home in theory.path.resolve().parents
     ]
-    return " ".join(
-        prose(claim.path)
-        for theory in region
-        for claim in (theory.defining, *theory.claims)
-        if claim
-    )
+    return " ".join(own_text(theory) for theory in region)
 
 
 def idle_imports(theories: Sequence[Theory]) -> Iterable[tuple[Theory, Theory]]:
     """Imports whose taker's interior never says the taken words."""
-    home = {
-        theory.defining.path.resolve(): theory
-        for theory in theories
-        if theory.defining
-    }
+    home = homes(theories)
     for theory in theories:
         text = interior_text(theory, theories)
         for cited in theory.priors:
@@ -132,41 +295,40 @@ def idle_imports(theories: Sequence[Theory]) -> Iterable[tuple[Theory, Theory]]:
 
 def census(theories: Sequence[Theory]) -> str:
     """One line: the shape of the gap between the corpus and the law (ARITY)."""
-    tally = {"sibling": 0, "inside": 0, "cousin": 0, "foreign": 0}
-    for _, how, _, _ in doubles(theories):
-        tally[how] += 1
+    tally = {"contending": 0, "inert": 0, "foreign": 0}
+    for _, verdict, _, _ in doubles(theories):
+        tally[verdict] += 1
     idle = len(list(idle_imports(theories)))
     total = sum(len(theory.priors) for theory in theories)
-    pairs = ", ".join(f"{count} {how}" for how, count in tally.items())
-    return f"doubles: {pairs}; imports: {idle} idle of {total}"
+    pairs = ", ".join(f"{count} {verdict}" for verdict, count in tally.items())
+    docket = trespasses(theories)
+    return (
+        f"doubles: {pairs}; imports: {idle} idle of {total}; trespasses:"
+        f" {sum(len(sites) for _, _, sites in docket)} over {len(docket)} stipulations"
+    )
 
 
 def report(theories: Sequence[Theory]) -> int:
-    """The default scan: every double, judged, sibling findings failing."""
+    """The default scan: every double, judged, contention failing."""
     failing = 0
     rows = sorted(
         doubles(theories),
         key=lambda row: (row[1], row[0], site(row[2]), site(row[3])),
     )
-    for word, how, one, other in rows:
-        if how == "sibling":
+    for word, verdict, one, other in rows:
+        if verdict == "contending":
             failing += 1
             print(
-                f"finding: {word!r} stipulated by siblings {site(one)} and"
-                f" {site(other)} -- owner undefined (SINGLE_VALUED); adjudicate"
+                f"finding: {word!r} owned by both {site(one)} and {site(other)}"
+                f" -- charged to both entries (CONTENTION); one has to lose it"
             )
-        elif how == "inside":
+        elif verdict == "inert":
             outer, inner = sorted(
                 (one, other), key=lambda theory: len(theory.path.resolve().parts)
             )
             print(
                 f"inert: {word!r} restated by {site(inner)} inside"
                 f" {site(outer)} -- the outer owns (OUTERMOST_WINS)"
-            )
-        elif how == "cousin":
-            print(
-                f"adjudicate: {word!r} stipulated by unrelated {site(one)} and"
-                f" {site(other)} in one ledger"
             )
         else:
             pass  # foreign doubles are legal: namespaces are per-ledger
@@ -178,12 +340,50 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--census", action="store_true", help="one summary line")
     parser.add_argument(
+        "--trespass", action="store_true", help="owned words said by siblings"
+    )
+    parser.add_argument(
         "--idle", action="store_true", help="the idle-import adjudication queue"
+    )
+    parser.add_argument(
+        "--candidates", action="store_true", help="what to own, and what to release"
+    )
+    parser.add_argument(
+        "--floor", type=int, default=8, help="uses before a word is worth owning"
+    )
+    parser.add_argument(
+        "--ceiling", type=int, default=4, help="theories past which a word is ambient"
     )
     args = parser.parse_args()
     theories = fleet()
     if args.census:
         print(census(theories))
+        return 0
+    elif args.trespass:
+        rows = trespasses(theories)
+        for word, owner_path, sites in rows:
+            print(f"force {len(sites):>2}  {word!r} owned by {'/'.join(owner_path)}")
+            print(f"          said by: {' '.join(site[-1] for site in sites)}")
+        skipped = contended(theories)
+        print(
+            f"{sum(len(sites) for _, _, sites in rows)} trespasses over"
+            f" {len(rows)} stipulations -- cull, move, admit, or uniquify each;"
+            f" {len(skipped)} contended words skipped as undecidable"
+        )
+        return 0
+    elif args.candidates:
+        rows = candidates(theories, args.floor, args.ceiling)
+        for verdict, home, word, uses, spread in rows:
+            print(
+                f"{verdict:4} {word!r} in {home} --"
+                f" {uses} uses across {spread} theories"
+            )
+        culls = sum(1 for row in rows if row[0] == "cull")
+        print(
+            f"{culls} owned words are ambient (>{args.ceiling} theories);"
+            f" {len(rows) - culls} unowned words concentrate"
+            f" (>={args.floor} uses, 1 theory) -- SHOULD_OWN decides, not this scan"
+        )
         return 0
     elif args.idle:
         queue = sorted(idle_imports(theories), key=lambda pair: site(pair[0]))
