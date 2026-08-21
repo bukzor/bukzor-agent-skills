@@ -19,11 +19,26 @@ export SKILLS_REPO="$HOME/repo/github.com/bukzor/bukzor-agent-skills"
 export MODELINE='# yaml-language-server: $schema=https://json-schema.org/draft-07/schema'
 
 # category<TAB>skill, one row per published canonical.
+#
+# A canonical only counts if its skill:// form actually resolves --
+# SKILLS_HOME/<skill>/jsonschema/<category>.jsonschema.yaml, where
+# SKILLS_HOME is ~/.claude/skills. Publishing under a repo subdirectory
+# that is not installed there would otherwise mint stubs that reference
+# a URI nothing can retrieve, silently, for a whole category.
+#
+# This is not hypothetical bookkeeping: `design-next.kb/` publishes a
+# canonical and has no SKILL.md. It resolves only because it happens to
+# be installed anyway. The next such directory might not be.
 table() {
   local f skill category
   for f in "$SKILLS_REPO"/*/jsonschema/*.jsonschema.yaml; do
     skill="$(basename "$(dirname "$(dirname "$f")")")"
     category="$(basename "$f" .jsonschema.yaml)"
+    if [[ ! -f "$HOME/.claude/skills/$skill/jsonschema/$category.jsonschema.yaml" ]]; then
+      echo >&2 "WARNING: $skill/jsonschema/$category.jsonschema.yaml is published" \
+        "but skill://$skill/ does not resolve; not enrolling $category"
+      continue
+    fi
     printf '%s\t%s\n' "$category" "$skill"
   done
 }
