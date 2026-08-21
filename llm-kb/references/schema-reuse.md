@@ -213,7 +213,12 @@ validator, 2026-07-08; recorded in
   `#/$defs/base` resolves identically. Both work file-relative and
   through `skill://`.
 
-Canonical instances: `llm-subtask/jsonschema/{todo,ideas}.jsonschema.yaml`.
+Every published canonical uses this shape -- as of 2026-08-21 that is all
+nine, across `llm-subtask/`, `llm-claims-kb/`, `llm-design-kb/`, and
+`llm-discourse-graph/`, each at `<skill>/jsonschema/`. A canonical that
+lacks `$anchor: base` is a defect, not a variant: consumers with extra
+fields have nowhere to attach and fork the whole file instead. Treat the
+shape as the entry requirement for publishing one.
 
 ## yaml-language-server compatibility
 
