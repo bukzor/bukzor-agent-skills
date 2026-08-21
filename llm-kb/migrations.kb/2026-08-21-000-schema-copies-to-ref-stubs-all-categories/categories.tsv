@@ -1,0 +1,18 @@
+# The scope of this migration, as data. One row per schema category that
+# already has a published canonical; the canonical is always
+# <skill>/jsonschema/<category>.jsonschema.yaml in the skills repo, and
+# the stub URI is always skill://<that>.
+#
+# Adding a category here is the whole cost of widening the migration --
+# validate.sh and migrate.sh have no category names in them.
+#
+# category	skill
+todo	llm-subtask
+ideas	llm-subtask
+claim	llm-claims-kb
+technical-policy	llm-design-kb
+claims	llm-discourse-graph
+deductions	llm-discourse-graph
+definitions	llm-discourse-graph
+questions	llm-discourse-graph
+sources	llm-discourse-graph

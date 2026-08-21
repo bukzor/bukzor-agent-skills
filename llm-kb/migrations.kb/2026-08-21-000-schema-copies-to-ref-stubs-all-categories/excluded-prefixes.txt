@@ -1,0 +1,10 @@
+# Path prefixes this migration must not touch, beyond the canonicals
+# themselves and the other worktrees of the skills repo (both computed).
+# One prefix per line, ~ allowed; blank lines and # comments ignored.
+#
+# Owned by 2026-08-21-001-canonical-schemas-out-of-skeleton: its schemas
+# have to leave skeleton/ before anything is stubbed onto them.
+~/repo/github.com/bukzor/bukzor-agent-skills/incident-forensics/
+# No canonical to point at yet -- the addressing decision is open; see
+# ~/.claude/skills/llm-kb/.claude/todo.kb/2026-08-21-000-ref-rollout-beyond-todo-ideas.md
+~/.claude/sessions
