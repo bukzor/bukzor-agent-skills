@@ -8,7 +8,6 @@ ontology:
   - criterion
   - writer
   - consumer
-  - tool
   - token
   - medium
   - rendering
