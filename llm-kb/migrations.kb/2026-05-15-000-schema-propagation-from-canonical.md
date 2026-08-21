@@ -294,7 +294,7 @@ Ruled files report on stderr and do not fail the run. Without that, the
 guard re-reports a settled question forever and every sweep re-litigates
 it -- which is how three of these four came to be judged twice already.
 
-Fixtures (`trash/classify-fixtures`) cover stub, extender, ruled,
+`test.sh` covers stub, extender, ruled,
 mentions-only, lead-in-before-token, and unparseable. **The old
 mechanism is wrong on three of the six, in both directions:** it passes
 `mentions-only` and flags `ruled`.

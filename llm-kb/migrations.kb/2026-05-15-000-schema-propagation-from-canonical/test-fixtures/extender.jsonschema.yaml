@@ -1,0 +1,3 @@
+allOf:
+  - $ref: "skill://llm-subtask/jsonschema/todo.jsonschema.yaml#base"
+type: object
