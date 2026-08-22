@@ -100,6 +100,8 @@ NO_SCHEMA_FOUND = (
 # git's wording for the absence of a repository, stable since forever. Should
 # it ever change, the tests below fail rather than users.
 NO_REPOSITORY = 'not a git repository'
+# git's refusal to answer for a path inside a submodule, same guarantee.
+IN_SUBMODULE = 'is in submodule'
 
 
 @dataclass(frozen=True)
@@ -159,23 +161,42 @@ def glob_prune(paths: Iterable[Path]) -> Iterator[Path]:
             seen.add(p)
 
 
-def ignored_by_git(path: Path) -> bool:
-    """Whether git ignores `path`, asked of the repository that holds it.
-
-    Each path is asked where it lives, so a submodule answers for its own
-    contents -- ask the superproject and it refuses outright, "Pathspec ...
-    is in submodule". `check-ignore` performs git's own repository
-    discovery, which is why nothing here goes looking for a `.git`.
-
-    Any refusal but that one raises, with git's diagnosis already on the
-    terminal: a filter that quietly stops filtering quietly changes which
-    files get validated.
-    """
+def check_ignore(repo_at: Path, path: Path) -> subprocess.CompletedProcess[str]:
+    """Ask `git check-ignore` about `path`, of whichever repository holds `repo_at`."""
     # Absolute both sides: git reads a relative pathspec against `-C`, not
     # the caller's cwd.
-    path = path.resolve()
-    command = ('git', '-C', str(path if path.is_dir() else path.parent), 'check-ignore', '-q', str(path))
-    completed = subprocess.run(command, stderr=subprocess.PIPE, text=True)
+    command = ('git', '-C', str(repo_at if repo_at.is_dir() else repo_at.parent), 'check-ignore', '-q', str(path))
+    return subprocess.run(command, stderr=subprocess.PIPE, text=True)
+
+
+def ignored_by_git(root: Path, path: Path) -> bool:
+    """Whether git ignores `path`, asked of the repository that holds `root`.
+
+    Asked of `root` rather than of `path`, because a nested checkout answers
+    only for itself: a linked worktree the outer tree ignores into
+    `.claude/worktrees/` calls its whole contents good corpus, and the walk
+    validates a stale copy of the tree it is already validating.
+
+    Two refusals hand the question back down to `path`'s own repository.
+    "Pathspec ... is in submodule" is git enforcing the boundary, and it is
+    right to: a submodule is corpus that keeps its own history, so its
+    `.gitignore` is what governs inside it. "not a git repository" means
+    `root` was named outside any repository, which says nothing about what
+    lies under it.
+
+    A symlink that leaves `root`'s tree takes the question with it: git
+    answers only about paths inside the repository it was asked, so a path
+    that resolved elsewhere is asked where it landed.
+
+    Any other refusal raises, with git's diagnosis already on the terminal:
+    a filter that quietly stops filtering quietly changes which files get
+    validated.
+    """
+    root, path = root.resolve(), path.resolve()
+    completed = check_ignore(root if path.is_relative_to(root) else path, path)
+
+    if completed.returncode > 1 and (IN_SUBMODULE in completed.stderr or NO_REPOSITORY in completed.stderr):
+        completed = check_ignore(path, path)
 
     if completed.returncode > 1 and NO_REPOSITORY in completed.stderr:
         return False  # the one refusal that is an answer: no repository, nothing ignored
@@ -189,7 +210,7 @@ def ignored_by_git(path: Path) -> bool:
         case 1:
             return False
         case code:
-            raise subprocess.CalledProcessError(code, command)
+            raise subprocess.CalledProcessError(code, cast(tuple[str, ...], completed.args))
 
 
 def corpus(root: Path, found: Iterable[Path]) -> Iterator[Path]:
@@ -201,10 +222,10 @@ def corpus(root: Path, found: Iterable[Path]) -> Iterator[Path]:
     on the command line, so if it is itself ignored, asking was asking and
     everything under it is validated.
     """
-    if ignored_by_git(root):
+    if ignored_by_git(root, root):
         return iter(found)
     else:
-        return (path for path in found if not ignored_by_git(path))
+        return (path for path in found if not ignored_by_git(root, path))
 
 
 def is_kb_dir(path: Path) -> bool:

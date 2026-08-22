@@ -81,10 +81,43 @@ class DescribeGitignoredDiscovery:
 
         assert sorted(_collections(results)) == ["live.kb", "scratch.kb"]
 
+    def it_skips_a_worktree_the_outer_tree_ignores(self, tmp_path: Path):
+        # A linked worktree is a second checkout of the same repository, and
+        # asked about its own contents it calls them all corpus -- including
+        # the directory the outer tree ignores it into. The outer tree is the
+        # one whose .gitignore said "scratch", so it is the one to ask.
+        _init_repo(tmp_path)
+        _ = (tmp_path / ".gitignore").write_text("trash/\n.claude/worktrees/\n")
+        _write_kb(tmp_path / "live.kb")
+        _commit_all(tmp_path)
+        _ = subprocess.run(
+            ("git", "-C", str(tmp_path), "worktree", "add", "-q", "-b", "side", ".claude/worktrees/side"),
+            check=True,
+        )
+
+        results = list(fv.validate_paths(iter([tmp_path])))
+
+        assert _collections(results) == ["live.kb"]
+
+    def it_asks_the_repository_a_symlink_landed_in(self, tmp_path: Path):
+        # A collection linked in from another repository is outside the one
+        # that named it -- git refuses to answer about a path it does not
+        # contain -- so the question goes where the link landed.
+        here, away = tmp_path / "here", tmp_path / "away"
+        _init_repo(here)
+        _init_repo(away)
+        _write_kb(away / "trash" / "linked.kb")
+        (here / "linked.kb").symlink_to(away / "trash" / "linked.kb")
+        _write_kb(here / "live.kb")
+
+        results = list(fv.validate_paths(iter([here])))
+
+        assert _collections(results) == ["live.kb"]
+
     def it_asks_a_submodule_about_its_own_contents(self, tmp_path: Path):
         # The superproject refuses the question outright -- "Pathspec ... is
-        # in submodule" -- so each path must be asked where it lives. The
-        # submodule's own .gitignore is what governs inside it.
+        # in submodule" -- and it is right to: a submodule is corpus that
+        # keeps its own history, so its own .gitignore governs inside it.
         _init_repo(tmp_path)
         _init_repo(tmp_path / "mod")
         _write_kb(tmp_path / "mod" / "live.kb")
