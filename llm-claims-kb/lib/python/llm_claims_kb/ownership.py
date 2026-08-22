@@ -49,7 +49,7 @@ from .ledger import Theory, read_ledger
 def load_law():
     """The runnable law, imported from beside the theory the claims cite."""
     here = Path(__file__).resolve()
-    path = here.parents[4] / "llm-claims/design.claims.kb/ownership.py"
+    path = here.parents[4] / "llm-claims/claims.kb/design.claims.kb/ownership.py"
     assert path.exists(), (path, "the law must sit beside its theory")
     spec = importlib.util.spec_from_file_location("ownership_law", path)
     assert spec and spec.loader, path
