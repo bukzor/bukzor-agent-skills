@@ -1,5 +1,5 @@
 ---
-label: REFORM_SCOPE
+label: COHORT
 standing: open
 why:
   - when-does-the-reform-execute.md
