@@ -3,8 +3,8 @@ label: MECHANIZE
 standing: agent
 force: should
 why:
-  - ../../../../llm-claims-kb/jsonschema/claim.jsonschema.yaml
-  - ../../../../llm-claims/.claude/todo.kb/2026-08-08-000-Helper-command-family-bin-llm-claim-ledger.md
+  - ../../../../../llm-claims-kb/jsonschema/claim.jsonschema.yaml
+  - ../../../../../llm-claims/.claude/todo.kb/2026-08-08-000-Helper-command-family-bin-llm-claim-ledger.md
 ---
 
 # Mechanize the Checkable, Only the Checkable
