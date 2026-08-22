@@ -9,7 +9,7 @@ originating-commits:
   - c32c963    # bukzor-agent-skills, 2026-05-21: ideas.kb: replace em-dashes with ASCII -- in 2026-04-17 entries
 related-session: ~/.claude/sessions.kb/finish-debolding-cleanup.md
 why: |
-  Em-dashes (`—`) in LLM-generated prose are an "LLM tell" — a textual
+  Em-dashes (`—`) in LLM-generated prose are an "LLM tell" -- a textual
   signature that signals the prose was machine-written rather than
   human-authored. The broader debolding/ASCII-dash sweep across the
   user's docs and skill markdown replaces em-dashes with ASCII `--` so
@@ -61,7 +61,7 @@ markers (e.g. files in `_quotes/`, `_captured/`, or carrying
 
 ## Idempotency
 
-`sed -i 's/—/--/g'` is idempotent — `--` doesn't match `—` so
+`sed -i 's/—/--/g'` is idempotent -- `--` doesn't match `—` so
 re-running on already-converted text is a no-op.
 
 ## Sibling work
@@ -69,6 +69,17 @@ re-running on already-converted text is a no-op.
 `~/.claude/sessions.kb/finish-debolding-cleanup.md` covers the broader
 "strip LLM-tells" sweep including (probably) bold-as-emphasis removal,
 voice tightening, etc. This migration captures only the em-dash slice.
+
+## Declined: widening scope to schema `description:` text
+
+Proposed 2026-08-22 during the schema survey: re-run the validator with
+`*.jsonschema.yaml` in scope, since a schema's `description:` blocks are
+prose and carry em-dashes like any other.
+
+Declined by @bukzor the same day -- "meh. not important enough." The
+`why:` above is about artifacts that read as the user's voice; a
+`description:` is read by a validator and by an editor tooltip, which
+is the one place the tell costs nothing. The scope stays as written.
 
 ## Why "applying" not "applied"
 
