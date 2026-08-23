@@ -22,7 +22,7 @@ Not hypothetical: this fleet has run this exact experiment twice.
 to delete it, because a single scalar cannot honestly hold
 disagreement or graded belief and users notice. `TRICHOTOMY.md`
 itself is scoped to "both parties" -- a two-assessor world, not the
-unbounded one `docs/dev/strata.claims.kb/purpose.kb/the-corpus-outgrows-any-reader.md`
+unbounded one `docs/dev/claims.kb/strata.claims.kb/purpose.kb/the-corpus-outgrows-any-reader.md`
 already rules this ecosystem must survive. Both are the same failure,
 found independently, twice: agreed that a design adequate only for
 one assessor and a fixed few verdicts will need to widen, not later,

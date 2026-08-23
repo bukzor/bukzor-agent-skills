@@ -14,7 +14,7 @@ that degree is design-only).
 tested codebase (`docs/dev/design-incubators/engine_tower/`).
 **Context:** The act algebra was user-ruled 2026-08-17 (commit
 b7b89c0): ACT, FORCE, EXPLICIT, ONE_WAY in
-`docs/dev/strata.claims.kb/standing.kb/`, REIFY in
+`docs/dev/claims.kb/strata.claims.kb/standing.kb/`, REIFY in
 `.../data-representation.kb/`. Two of its four laws (support
 fixpoint, defeat/interval calculus) already run in engine_tower with
 a pytest witness suite; the other two exist only as prose.

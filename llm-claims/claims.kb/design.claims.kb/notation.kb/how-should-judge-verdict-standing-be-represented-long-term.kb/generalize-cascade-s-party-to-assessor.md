@@ -11,12 +11,12 @@ why:
 
 CASCADE's mechanism is the right shape, keyed one notch too narrow:
 "party" (a discussion participant) where
-`docs/dev/strata.claims.kb/standing.kb/verdicts-are-assessor-indexed.md`
+`docs/dev/claims.kb/strata.claims.kb/standing.kb/verdicts-are-assessor-indexed.md`
 already rules "parties and checkers are one sort" (an assessor).
 Widening the key closes STRONGFORM's and MECHANIZED's judge-is-a-
 proof-or-checker case in the same field CASCADE already built for
 judge-is-a-person, and the two systems that reached for this
-mechanism independently (`docs/dev/strata.claims.kb/fleet.kb/discourse-graph-is-the-continuous-presentation.md`)
+mechanism independently (`docs/dev/claims.kb/strata.claims.kb/fleet.kb/discourse-graph-is-the-continuous-presentation.md`)
 is the warrant for treating this as the convergent answer rather than
 a fifth option.
 

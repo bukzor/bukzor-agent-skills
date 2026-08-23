@@ -7,7 +7,7 @@ why:
 
 # A Fixpoint Over an Assessor-Indexed Evidence Operator
 
-`docs/dev/strata.claims.kb/standing.kb/` plus its witness suite
+`docs/dev/claims.kb/strata.claims.kb/standing.kb/` plus its witness suite
 (`design-incubators/engine_tower`, tested, and the act algebra run
 over `llm-claims/design.claims.kb` itself).
 Standing is *defined* as the least fixpoint of a monotone evidence

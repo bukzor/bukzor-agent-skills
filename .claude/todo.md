@@ -357,7 +357,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       Landed on main 2026-08-13 (03911d9, 891fd7e); verified here --
       thirteen `stale-when:` lines, ATLAS in `where-the-v1-skills-sit.md`
       and in question.md's table, flatten reports zero lints,
-      `llm.kb-validate docs/dev/strata.claims.kb` reads 68 files 0 errors.
+      `llm.kb-validate docs/dev/claims.kb/strata.claims.kb` reads 68 files 0 errors.
       (Attribution fix: the env-worktree commits 186e256/31f0b70 were
       that same session reaching into `env-2026-08-13`, not the
       replication session's doing.)

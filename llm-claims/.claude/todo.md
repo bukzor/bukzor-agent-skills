@@ -63,7 +63,7 @@
 - [ ] Admit unambiguous brace notation in an `ontology:` entry:
       `{pre,post}-fixed point` expands to two words, so one entry can
       carry a shared stem without the checker reading the whole string
-      as a single term. Field case: `docs/dev/strata.claims.kb/fixpoint.md`
+      as a single term. Field case: `docs/dev/claims.kb/strata.claims.kb/fixpoint.md`
       wrote `pre-/post-fixed point`, which no claim can match verbatim
       and which the ownership scan therefore reported as never spoken,
       while `fixpoint.kb/` says "pre-fixed points" and "post-fixed
@@ -71,7 +71,7 @@
       braces are accepted
 - [ ] Work the trespass docket: 252 findings over 121 stipulations
       (`llm-claims-kb-ownership --trespass`), 88 in
-      `docs/dev/strata.claims.kb`. Take them in `--candidates` cull
+      `docs/dev/claims.kb/strata.claims.kb`. Take them in `--candidates` cull
       order — the heaviest stipulations are ambient words SHOULD_OWN
       says not to own, so culling clears findings in bulk before any
       per-finding repair is worth choosing

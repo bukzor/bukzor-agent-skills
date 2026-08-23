@@ -122,9 +122,9 @@ proof would discharge.
 ## Scans
 
 ```bash
-grep -rH '^standing:' docs/dev/strata.claims.kb/       # the ledger at a glance
-grep -rH '^standing: open' docs/dev/strata.claims.kb/  # what wants an answer
-grep -rA4 '^why:' docs/dev/strata.claims.kb/          # the warrant graph
+grep -rH '^standing:' docs/dev/claims.kb/strata.claims.kb/       # the ledger at a glance
+grep -rH '^standing: open' docs/dev/claims.kb/strata.claims.kb/  # what wants an answer
+grep -rA4 '^why:' docs/dev/claims.kb/strata.claims.kb/          # the warrant graph
 ```
 
 ## Provenance

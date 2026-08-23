@@ -33,7 +33,7 @@ hold, and no nameable read-back moment
 > better-homes above (an incident is a failure; a design entry is an
 > outcome). Re-run the residue test against that definition before
 > this cut lands. `ADR_FATE`
-> (`docs/dev/design.claims.kb/does-the-ledger-subsume-the-adr.md`)
+> (`docs/dev/claims.kb/design.claims.kb/does-the-ledger-subsume-the-adr.md`)
 > leans on the answer.
 
 One class definition carries what v1 spread across `llm-kb`

@@ -12,7 +12,7 @@ before catching itself.
 
 **Complexity:** Large. Breaking schema change across every `.claims.kb/`
 in the repo (`llm-claims`, `formalize`, `deformalize`,
-`docs/dev/design.claims.kb`, `docs/dev/strata.claims.kb`), plus a
+`docs/dev/claims.kb/design.claims.kb`, `docs/dev/claims.kb/strata.claims.kb`), plus a
 cross-repo question (whether/how to absorb `prototype.personal-reasoning-management`'s
 dialect). Comparable in shape to the `defeated-by:` -> `stale-when:`
 migration (`docs/dev/devlog/2026-08-13-000-...md`), likely bigger.
@@ -52,7 +52,7 @@ with that picture, all real, none new:
    all.
 
 Separately, and not to be conflated with the above but bearing on the
-same field: `STANCE` (`docs/dev/strata.claims.kb/standing.kb/standing-is-standing-according-to.md`,
+same field: `STANCE` (`docs/dev/claims.kb/strata.claims.kb/standing.kb/standing-is-standing-according-to.md`,
 ratified `32b1a76`) already rules that a one-place "the standing" of an
 entry is a category error -- standing is a two-place function of
 evidence *and* stance/assessor, with no global arbiter even in
@@ -76,7 +76,7 @@ later.
 - `prototype.personal-reasoning-management/corpus/demo.prms.kb/`: real,
   working example of `stmt:`/`proof:` (e.g. `proven.md`: `stmt: 2 + 2 =
   4`, `proof: decide`) and computed (not hand-authored) standing.
-- `docs/dev/strata.claims.kb/standing.kb/` and `fleet.kb/`: `STANCE` and
+- `docs/dev/claims.kb/strata.claims.kb/standing.kb/` and `fleet.kb/`: `STANCE` and
   `CONTINUUM`, the formal statement of assessor-relative validity and
   its named escape valve.
 - One claim in this repo has already been retracted in file form ahead
@@ -154,6 +154,6 @@ inventing new sigil characters:
 Candidate first step: run `/formalize` on this problem itself --
 `llm-claims-kb/jsonschema/claim.jsonschema.yaml`,
 `prototype.personal-reasoning-management/corpus/demo.prms.kb/`, and
-`docs/dev/strata.claims.kb/standing.kb/` + `fleet.kb/` as the paths.
+`docs/dev/claims.kb/strata.claims.kb/standing.kb/` + `fleet.kb/` as the paths.
 Fittingly recursive: the tool built this session, pointed at the
 question that stopped this session's own schema patch.
