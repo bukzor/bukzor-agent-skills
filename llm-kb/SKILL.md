@@ -76,7 +76,9 @@ $PROJECT/
 
 Roll up a scope to help readers decide whether to dive deeper.
 
-- README.md -- root scope (the whole project or multiple `.kb/` collections)
+- README.md -- root scope (the whole project or multiple `.kb/` collections),
+  and the one nested case where `$CATEGORY.md` is unavailable: see
+  "Where an Elaboration Goes"
 - $CATEGORY.md -- category scope (rolls up `$CATEGORY.kb/`)
 
 May describe themes, patterns, or even list contents -- whatever helps readers
@@ -173,6 +175,19 @@ ongoing value:
 Either way, `$ITEM.md` should stand alone as the answer -- a reader
 shouldn't need `$ITEM.kb/` to know what was decided, only to know why an
 alternative wasn't picked.
+
+### Where an Elaboration Goes
+
+Nest by what a file *elaborates*, not by what it resembles. Anything
+elaborating `X.md` goes under `X.kb/`, at whatever depth `X.md` sits.
+The trap is a directory that already holds peer collections: two
+`$SIBLING.kb/` beside `X.md` make a third peer look like the
+precedent, when the only question is what the new collection is about.
+
+Its roll-up takes the collection's own name -- `X.kb/candidates.md`
+rolling up `X.kb/candidates.kb/`. `README.md` inside a collection is
+for the case that forces it: a collection elaborating a same-named
+item file cannot name its roll-up `X.md`, because `X.md` is the item.
 
 ## Recognizing the Shape
 
@@ -277,6 +292,32 @@ holding it, so a submodule's own `.gitignore` governs inside it.
 Recommended: run `llm.kb-validate` before committing changes.
 
 "No schema found" for `ideas.kb`/`todo.kb`: copy from `llm-subtask/skeleton/.claude/`.
+
+### llm.kb-validate-links
+
+Purpose: catch path references that don't resolve -- the failure a
+schema cannot see. `llm.kb-validate` checks that a `why:` field is an
+array of strings; it has no way to know those strings are meant to be
+paths, so a typo'd cross-reference passes schema validation and
+becomes a broken chain nobody notices.
+
+Not an installed console script -- run it by path, `uv` handles its
+deps:
+
+```bash
+~/.claude/skills/llm-kb/bin/llm.kb-validate-links            # cwd, --strict
+~/.claude/skills/llm-kb/bin/llm.kb-validate-links --lax path/
+```
+
+`--strict` (default) nominates only `./`- and `../`-prefixed strings:
+no false positives, but blind to bare-relative refs like `foo.kb/bar.md`.
+`--lax` also nominates path-shaped strings without that prefix -- more
+recall, and CLI examples in prose will surface as hits to triage. Use
+it for a deliberate sweep, not as a per-commit gate.
+
+Checks frontmatter path fields and inline body links both. Folding it
+into `llm.kb-validate` proper is tracked in
+`.claude/todo.kb/2026-06-03-000-validate-path-references.md`.
 
 ## References
 

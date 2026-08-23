@@ -59,9 +59,29 @@ Three candidate answers, and picking is the work:
    `references/frontmatter-outside-a-collection.md` says strip it.
 
 Option 3 is the cheapest and the most consistent with the written rule,
-so the burden is on 1 and 2. Before stripping, confirm nothing reads
-`managed-by:` off a roll-up -- `claude-open-tasks-list` is the consumer
-to check.
+so the burden is on 1 and 2 -- but the reader sweep it depends on has
+since come back mixed (2026-08-23, from `~/claude/meta-reasoning`),
+and the mixed part is decisive:
+
+- `managed-by:` has no reader. Grep found writers and the member
+  schema's `const` pin, nothing that consumes it. Strippable.
+- `cost-benefit-sweh:` **is read** -- `claude-open-tasks-list` and
+  `wsjf-rank` rank the backlog off it, and this repo's own
+  `llm-subtask/.claude/todo.md` carries a full one today. Stripping a
+  roll-up wholesale deletes live prioritization data.
+- `status:` is skeleton-set to `template` and hand-edited to `active`
+  in at least one consumer; no reader found, sweep not exhaustive.
+
+So option 3 cannot be applied as stated. Either it narrows to "strip
+the constants, keep the data" -- which needs 1 or 2 anyway for what
+remains -- or `cost-benefit-sweh` moves out of roll-ups entirely and
+`### Synthesis Files`' "carries no frontmatter" stands unamended.
+That choice is the decision this item is really about.
+
+Scale, for whoever rules it: 24 files under `~` carry the skeleton
+frontmatter (`find ~ -name todo.md -path '*/.claude/*' | xargs grep -l
+'managed-by: Skill(llm-subtask)'`), across separate repos, so the
+sweep is one commit each.
 
 ## 2. The validators cannot tell a ruled rival from an unexamined one
 
