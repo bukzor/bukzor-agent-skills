@@ -47,6 +47,27 @@ is done (`references/creating-a-new-kb.md`,
 This changes the remaining deliverable from "design from scratch" to
 "integrate/generalize this script."
 
+## Observed in the field
+
+A full-repo run against `~/claude/meta-reasoning` (3071 files) found 5
+hits: 3 real depth-off refs, 2 false positives. Both false-positive
+classes are integration work this file owns.
+
+**It does not filter by `.gitignore`.** One hit was inside a gitignored
+`empty.bak/` holding vendored plugin files -- not corpus, and its rot
+must not pad the error count. `llm.kb-validate` already gets this right
+and SKILL.md states the rule for it ("What the walk *discovers* is
+filtered by `.gitignore`"), asked per-repository so a submodule's own
+ignores govern inside it. Folding the checker in should inherit that
+walk rather than keep a second one.
+
+**Forward references read as breaks.** `design-3.claim.kb/CLAUDE.md`
+cites `../design-3.claim.md` in the same sentence that says it is
+"written at review exit" -- the file is correctly absent until then.
+This is the known step-3 false-positive problem with a concrete
+specimen: the prose declares the reference deferred, so the signal
+exists in the text, but nothing machine-readable carries it.
+
 ## Deliverable
 
 **Custom jsonschema type for frontmatter** -- a way to denote "path
