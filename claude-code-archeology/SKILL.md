@@ -103,6 +103,10 @@ subagent that remembers everything. Cut both files, or -- better for
 anything you may want to replay -- run the other side as its own session
 and drive it with `SendMessage`.
 
+In-place surgery -- cutting a poisoned tail so the *same* agent id
+resumes, clearing a `stoppedByUser` refusal in the meta.json -- is
+`Skill(claude-code-surgery)`.
+
 ## Recovery after a crash or freeze
 
 1. `claude-inventory --days 2 --sh` -- every resumable session, newest
