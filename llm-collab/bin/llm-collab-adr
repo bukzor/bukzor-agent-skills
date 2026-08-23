@@ -84,7 +84,7 @@ if [ ! -d "docs/dev/adr" ]; then
 fi
 
 DATE=${DATE:-$(date +%Y-%m-%d)}
-LAST=$(find docs/dev/adr -maxdepth 1 -name "$DATE-*" -print0 2>/dev/null | xargs -r0 ls -1t | sed -n '1p' || echo "")
+LAST=$(find docs/dev/adr -maxdepth 1 -name "$DATE-*" -print0 2>/dev/null | xargs -r0 -n1 basename | sort | sed -n '$p' || echo "")
 
 if [ -z "$LAST" ]; then
   NUM="000"
