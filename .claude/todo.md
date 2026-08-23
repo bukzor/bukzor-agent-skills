@@ -5,6 +5,25 @@ managed-by: Skill(llm-subtask)
 Repo-level list. Skill-scoped work lives in each skill's own
 `.claude/todo.md`; the breadcrumbs below point at every open list.
 
+- [ ] Close the 20 remaining schema gaps — brief:
+      .claude/todo.kb/2026-08-23-000-Close-the-20-remaining-schema-gaps-left-by-the-reverted-schema-blast.md
+- [ ] Modeline sweep, draft-07 first lines over 2020-12 schemas — brief:
+      .claude/todo.kb/2026-08-23-001-Modeline-sweep-draft-07-first-lines-over-2020-12-schemas.md
+- [ ] Six `todo.md` roll-ups carry frontmatter under no schema — the
+      standing 6 errors in `llm.kb-validate .`. Per llm-kb, a roll-up
+      carries none; `references/frontmatter-outside-a-collection.md`
+      says strip it. Confirm nothing reads `managed-by:` first
+- [ ] Write up the 2026-08-22 schema blast as a case study in
+      `llm-kb/docs/dev/case-studies.kb/`. The delegation brief said "add
+      schemas where missing" and the agent read it as "make every
+      collection have a schema", unable to tell a canonical from a gap.
+      The lesson is that the boundary must be stated as a prohibition —
+      *never write a file that already exists* — not as an objective.
+      Second lesson, dearer: a backup *branch* is not a backup when
+      `rebase.updateRefs=true` is set globally, because the rebase
+      carries it forward onto the rewritten history. Use a tag
+- [ ] `origin/env-2026-08-13` still exists on the remote; its commit is
+      in no other pushed ref
 - [x] Witness the act algebra (contravention fold, moot color, real-ledger
       run) — brief: .claude/todo.kb/2026-08-17-000-Witness-the-act-algebra--contravention-fold-and-moot-color-in-engine-tower.md
       Done 2026-08-17; residue (uncited moot tests, fleet citation
