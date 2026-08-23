@@ -15,6 +15,10 @@ cost-benefit-sweh:
       ≈ 2h saved.
 ---
 
+- [ ] todo.kb/2026-08-21-000-ref-rollout-beyond-todo-ideas.md -- the
+      2026-08-21 homedir schema survey. 16 steps done, and the residual decomposed into six sole-writer lanes (`2026-08-23-000`
+      through `-005`) that the entry rolls up. Run -005 first, -003
+      alone, the rest in parallel
 - [x] todo.kb/2026-02-09-000 (Schema reuse with $ref) — all success criteria met; `schemas/` -> `jsonschema/` sweep landed (e309103)
 - [x] Fix broken references to complete-example.md in SKILL.md (lines 84, 116)
 - [x] Run movie-tracker test, evaluate against SKILL.md
