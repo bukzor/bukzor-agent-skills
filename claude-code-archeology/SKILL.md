@@ -25,7 +25,8 @@ hit. Use the tools below; they decode first.
 | `claude-branch-extract [--at] [--as-session CWD]` | linearize one branch into a new resumable JSONL          |
 | `claude-jsonl-cwd FILE`                       | the directory a session ran in (needed to resume it)         |
 | `claude-jsonl-path DIR`                       | the projects/ dir holding a cwd's sessions                   |
-| `claude-jsonl-display < FILE`                 | render a transcript readably (`-to-log` writes it beside)    |
+| `claude-jsonl-display < FILE`                 | render a transcript readably -- **on stderr**; stdout carries only a machine-oriented `result.result` line, if any, so `\| tail`/`\| grep` on stdout alone will not see it |
+| `claude-jsonl-to-log < FILE`                   | same rendering, captured to a `.log` file beside it           |
 
 Library behind them: `claude_code_archeology.{session,search,inventory,
 tree,format_short,branch_extract}` -- import it rather than re-parsing
