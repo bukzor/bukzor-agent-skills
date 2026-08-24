@@ -433,6 +433,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       wording changed during the 2026-08-09/10 polish (the .claims.kb
       rename itself left it byte-identical)
 - [ ] llm-claims/.claude/todo.md
+- [ ] llm-claims-kb/.claude/todo.md
 - [ ] llm-kb/.claude/todo.md
 - [ ] llm-collab/.claude/todo.md (v2 dissolves llm-collab — weigh new
       investment against core-and-classes.md before spending)
