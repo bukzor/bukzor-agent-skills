@@ -134,8 +134,9 @@ separate registry.
 
 ### Schema Files ($CATEGORY.jsonschema.yaml)
 
-Validates frontmatter in `$CATEGORY.kb/*.md`. Prevents drift between files in the
-same collection.
+Validates frontmatter in `$CATEGORY.kb/*.md`, and in the sibling
+`$CATEGORY.md` roll-up where that carries frontmatter (a claims ledger's
+defining claim does). Prevents drift between files in the same collection.
 
 - Required if any content files in that collection use frontmatter
 - Optional if content files are prose-only

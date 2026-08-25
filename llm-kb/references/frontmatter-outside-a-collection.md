@@ -7,10 +7,11 @@ nothing says so. A validator that reports ✅ for a file it never checked
 teaches you to distrust every ✅ it prints, so a file it cannot check is
 an error rather than a pass.
 
-Where the lookup reaches today is one place: a file inside `X.kb/` is
-checked against `X.jsonschema.yaml` beside that directory. Read that as
-the current reach, not as the rule -- a file the lookup misses is not
-thereby exempt, it is a file to bring within reach.
+Where the lookup reaches today is two places: a file inside `X.kb/` is
+checked against `X.jsonschema.yaml` beside that directory, and `X.md`
+beside `X.kb/` is checked against that same schema where the schema
+exists. Read that as the current reach, not as the rule -- a file the
+lookup misses is not thereby exempt, it is a file to bring within reach.
 
 Three ways out, best first.
 
@@ -47,19 +48,22 @@ Deleting frontmatter that something reads is not a resolution, it is the
 defect with the alarm switched off. If a key is load-bearing, it wants a
 schema, which means one of the two resolutions above.
 
-## Why a synthesis file is not exempt
+## The roll-up slot is under its collection's schema
 
-`$CATEGORY.md` rolls up `$CATEGORY.kb/`, so it is tempting to read
-`$CATEGORY.jsonschema.yaml` as covering both the collection and its
-roll-up. It does not, and should not be made to: a member and a summary
-of the members are different kinds, and the one schema would have to
-require each one's fields of the other.
+`$CATEGORY.md` rolls up `$CATEGORY.kb/`, and `$CATEGORY.jsonschema.yaml`
+governs it too, when it carries frontmatter and the schema exists. The
+claims ledger is what forced that reach: a ledger's `X.md` beside
+`X.kb/` is not only the roll-up but the ledger's defining claim -- a
+member-shaped thing -- and `Skill(llm-claims-kb)`'s one claim schema
+governs theories and ordinary claims alike, so the collection's schema
+is exactly its law.
 
-The shared name is a coincidence of spelling, and the roll-up needs its
-own resolution from the three above. In practice the third one fits: a
-roll-up's keys are a date its collection's git history already answers,
-or a constant nothing reads. Strip them and the file is prose, which is
-what it was.
+Where member and roll-up genuinely are different kinds, the schema says
+so -- a `oneOf` naming both shapes -- or the roll-up carries no
+frontmatter and is prose, which no schema is asked about. Frontmatter
+the schema was never taught is still the ordinary error, not a pass: a
+roll-up is welcome to be prose, but its data is not exempt for being
+one level up.
 
 ## The two files that are skipped, and why that is not a fourth way out
 

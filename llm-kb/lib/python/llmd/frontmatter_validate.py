@@ -337,14 +337,23 @@ def schema_for(md_file: Path) -> Path | None:
     directory. A hive partition (`year=2026/`) subdivides a collection
     without renaming it, so the walk up passes through any number of them
     to reach the `.kb/` they partition.
+
+    `X.md` beside `X.kb/` -- the collection's roll-up, and in a claims
+    ledger its defining claim -- is governed by that same schema. Only
+    where the schema exists, though: a roll-up is not obligated to be
+    data, so the collection's silence leaves it the ordinary loose-file
+    verdict rather than demanding a schema into existence.
     """
     directory = md_file.parent
     while HIVE_PARTITION_MARKER in directory.name:
         directory = directory.parent
 
+    sibling_schema = md_file.parent / f"{md_file.stem}.jsonschema.yaml"
     if directory.name.endswith(SUFFIX):
         category = directory.name.removesuffix(SUFFIX)
         return directory.parent / f"{category}.jsonschema.yaml"
+    elif (md_file.parent / f"{md_file.stem}{SUFFIX}").is_dir() and sibling_schema.exists():
+        return sibling_schema
     else:
         return None
 

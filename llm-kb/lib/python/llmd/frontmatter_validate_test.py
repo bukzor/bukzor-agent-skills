@@ -238,6 +238,47 @@ items: {type: string}
         assert errors == []
 
 
+_MEMBER_SCHEMA = """\
+type: object
+required: [label]
+properties:
+  label: {type: string}
+additionalProperties: false
+"""
+
+
+class DescribeRollUpSchemaDiscovery:
+    def _roll_up(self, tmp_path: Path, frontmatter: str = "label: X") -> Path:
+        top = tmp_path / "thing.md"
+        _ = top.write_text(f"---\n{frontmatter}\n---\n\n# Thing\n")
+        return top
+
+    def it_governs_a_roll_up_by_its_collections_schema(self, tmp_path: Path):
+        (tmp_path / "thing.kb").mkdir()
+        _ = (tmp_path / "thing.jsonschema.yaml").write_text(_MEMBER_SCHEMA)
+
+        assert fv.validate_file(self._roll_up(tmp_path)) == []
+
+    def it_reports_a_roll_up_that_breaks_that_schema(self, tmp_path: Path):
+        (tmp_path / "thing.kb").mkdir()
+        _ = (tmp_path / "thing.jsonschema.yaml").write_text(_MEMBER_SCHEMA)
+
+        errors = fv.validate_file(self._roll_up(tmp_path, "unheard-of: 1"))
+
+        assert errors, "expected the collection's schema to reject this roll-up"
+        assert "label" in " ".join(errors)
+
+    def it_still_reports_no_schema_where_the_collection_has_none(self, tmp_path: Path):
+        (tmp_path / "thing.kb").mkdir()
+
+        assert fv.validate_file(self._roll_up(tmp_path)) == [fv.NO_SCHEMA_FOUND]
+
+    def it_ignores_a_name_matched_schema_with_no_collection_beside_it(self, tmp_path: Path):
+        _ = (tmp_path / "thing.jsonschema.yaml").write_text(_MEMBER_SCHEMA)
+
+        assert fv.validate_file(self._roll_up(tmp_path)) == [fv.NO_SCHEMA_FOUND]
+
+
 class DescribeFileRelativeRefResolution:
     def it_resolves_a_whole_file_ref_to_a_sibling_schema(self, tmp_path: Path):
         _ = (tmp_path / "why.jsonschema.yaml").write_text("""\
