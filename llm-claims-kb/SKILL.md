@@ -63,11 +63,20 @@ here are the ledger-specific additions, not replacements.
 ## Layout
 
 One rule, every level: `X.md` beside `X.kb/` defines that theory, `X.md`
-alone is a claim of the theory it sits in. So `<name>.claims.md` is the
-ledger's own defining claim -- and its entry point, carrying the poset
-and the scan commands -- and a theory holds theories the same way it
-holds claims, without limit. Each `CLAUDE.md` keeps only what a claim
-cannot: where a new file goes.
+alone is a claim of the theory it sits in. So the ledger's top file is
+both roles at once -- the defining claim and the prose roll-up, one
+file, claim frontmatter over roll-up prose, carrying the poset and the
+scan commands -- and a theory holds theories the same way it holds
+claims, without limit. That slot is the exception to `Skill(llm-kb)`'s
+frontmatter-free roll-up: its validator checks the roll-up against the
+collection's own schema where one exists, because in a ledger the
+roll-up is a claim. Each `CLAUDE.md` keeps only what a claim cannot:
+where a new file goes.
+
+The ledger's name follows its scope: `<name>.claims.kb/` where a
+subject token is needed, bare `claims.md` + `claims.kb/` inside a scope
+that already supplies the subject -- a source's `sources.kb/X.kb/`,
+say.
 
 `X.kb/` alone, with the `.md` not yet written, is legal and means one
 thing only: an **open theory**. It stipulates no words, so its claims
@@ -239,7 +248,9 @@ node type deep and standing-first: `label:` and `standing:` in every
 file, `why:` arrows, a claim file naming every collection. Meeting a
 claims directory, tell them apart by shape, not name: sibling node-type
 collections mean the discourse graph; frontmatter standing and a `.md`
-beside every `.kb/` mean a ledger.
+beside every `.kb/` mean a ledger. A bare name is no evidence either
+way -- a ledger nested in a scope that supplies its subject is bare
+`claims.md` + `claims.kb/` too.
 
 One equivalence carries in both directions: a struck label -- on disk,
 `verdict:` present -- and the discourse graph's `live: false` say the
