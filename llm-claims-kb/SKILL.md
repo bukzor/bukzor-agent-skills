@@ -1,6 +1,6 @@
 ---
 name: llm-claims-kb
-description: "Claim ledger kept as files. Agent MUST load when reading or maintaining a *.claims.kb/ directory, when asked to persist a claim ledger to disk, or when asked to draw, graph, or check the integrity of one. The notation itself is Skill(llm-claims)."
+description: "Claim ledger kept as files. Agent MUST load when reading or maintaining a ledger directory (*.claims.kb/, or bare claims.kb/ in a scope that supplies the subject), when asked to persist a claim ledger to disk, or when asked to draw, graph, or check the integrity of one. The notation itself is Skill(llm-claims)."
 ---
 --- # workaround: anthropics/claude-code#13003
 setup: |
