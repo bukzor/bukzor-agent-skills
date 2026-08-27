@@ -81,8 +81,13 @@ Roll up a scope to help readers decide whether to dive deeper.
   "Where an Elaboration Goes"
 - $CATEGORY.md -- category scope (rolls up `$CATEGORY.kb/`)
 
-May describe themes, patterns, or even list contents -- whatever helps readers
-avoid reading the directory. Omit when trivial (few items); `ls` suffices.
+Say only what holds at collection scope -- themes, tensions, the shape the
+members make together. Never enumerate the members and never restate one: a
+list of the collection is what `ls` is for, and a hand-copied list goes stale
+the next time a member is added or renamed. Mention a member only where
+there is something to say about it that its own file cannot say. When there
+is nothing to say at this scope, nothing is the right thing to say -- omit
+the file.
 
 Carries no frontmatter. A roll-up is prose about a collection, not a member
 of one, so there is no schema for it to be data under -- and the one field it
