@@ -83,10 +83,14 @@ differently, before a turn you sent a subagent -- is reachable only by
 cutting the file:
 
 1. `claude-branch-list FILE` (or a `claude-search` hit) names the record
-   to keep as the last one.
-2. `claude-branch-extract FILE <uuid> --at` writes a new session ending
-   there; add `--as-session <cwd>` when the source is a subagent's.
-3. `cd <cwd> && claude --resume <new-id>`, then send the turn again.
+   the state you want is built around.
+2. `claude-branch-extract FILE <uuid> --at` writes a new session cutting
+   just past it -- the ref plus the message after it, since a message cut
+   away needs another extraction to get back while one kept too many is
+   droppable in-session with `/rewind`; add `--as-session <cwd>` when the
+   source is a subagent's. It prints the record it actually cut after.
+3. `cd <cwd> && claude --resume <new-id>`, then send the turn again --
+   `/rewind` first if the extra trailing message is in your way.
 
 Two things do not come back with it: the repo state the dropped turn
 worked against -- version control is the only rewind for that, so commit
