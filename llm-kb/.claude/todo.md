@@ -19,6 +19,16 @@ cost-benefit-sweh:
       2026-08-21 homedir schema survey. 16 steps done, and the residual decomposed into six sole-writer lanes (`2026-08-23-000`
       through `-005`) that the entry rolls up. Run -005 first, -003
       alone, the rest in parallel
+- [ ] todo.kb/2026-08-27-000-Execute-the-five-fleet-verdicts-from-lane--005.md --
+      the owner ruled all five on 2026-08-27; lane -005 recorded the
+      verdicts and by its own charter does not apply them
+- [ ] todo.kb/2026-08-27-001-Guard-admission-blockers-before-the-anacron-trial.md --
+      9 of the schema guard's 10 findings are one guard defect
+      (`claims` vs `claim`); gates the anacron row above
+- [ ] Move the two untracked schemas in the stale `dotfiles` clone
+      (`.claude/{reference,user-preferences}.jsonschema.yaml` -- the wanted
+      half of the 2026-08-22 sitting, reverted everywhere else) into the live
+      `$HOME` tree and commit them there; they exist nowhere else
 - [x] todo.kb/2026-02-09-000 (Schema reuse with $ref) — all success criteria met; `schemas/` -> `jsonschema/` sweep landed (e309103)
 - [x] Fix broken references to complete-example.md in SKILL.md (lines 84, 116)
 - [x] Run movie-tracker test, evaluate against SKILL.md
