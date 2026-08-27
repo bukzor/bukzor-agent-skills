@@ -78,9 +78,12 @@ Every module is doctested; `uv run pytest` in that repo runs them.
 ## Rewinding to a state the picker will not offer
 
 `/rewind` cuts only at *your own* prompts, on the one chain resume
-loaded. Anything else -- before an assistant reply you want answered
-differently, before a turn you sent a subagent -- is reachable only by
-cutting the file:
+loaded -- which, after a plain extraction, is most of what you want.
+What it cannot reach is a state that must *keep* an assistant reply or
+tool result and drop what followed, a point inside a turn, or a promoted
+subagent's transcript, whose user-role records are tool results rather
+than prompts. Answering a reply differently is not on that list: rewind
+to the prompt that produced it and re-send. For the rest, cut the file:
 
 1. `claude-branch-list FILE` (or a `claude-search` hit) names the record
    the state you want is built around.
