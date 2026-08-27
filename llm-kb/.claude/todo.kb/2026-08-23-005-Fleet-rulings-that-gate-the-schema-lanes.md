@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: open
+status: done
 related-effort: ./2026-08-21-000-ref-rollout-beyond-todo-ideas.md
 suggested-reading:
   - ./2026-08-21-000-ref-rollout-beyond-todo-ideas.kb/2026-08-21-001-layer-entry-canonical-recommendation.md
@@ -109,6 +109,6 @@ Weigh against what `~` drags in.
 
 ## Success Criteria
 
-- [ ] Five written recommendations, each naming its declined alternative
-- [ ] Five user verdicts recorded
-- [ ] Every lane that was waiting on one knows which way it went
+- [x] Five written recommendations, each naming its declined alternative
+- [x] Five user verdicts recorded
+- [x] Every lane that was waiting on one knows which way it went

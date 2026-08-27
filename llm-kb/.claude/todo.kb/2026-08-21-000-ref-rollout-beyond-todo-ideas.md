@@ -231,5 +231,34 @@ verifies through); the rest fan out.
       discourse scoping sentence
 - [ ] [-004 The `pnpm-run` hook in its template](2026-08-23-004-pnpm-run-hook-in-template-python-project.md)
       -- the generator still mints the defect its instance was fixed for
-- [ ] [-005 Fleet rulings that gate the lanes](2026-08-23-005-Fleet-rulings-that-gate-the-schema-lanes.md)
-      -- five decisions handed up rather than defaulted
+- [x] [-005 Fleet rulings that gate the lanes](2026-08-23-005-Fleet-rulings-that-gate-the-schema-lanes.md)
+      -- five decisions handed up rather than defaulted; all five ruled
+
+## Verdicts from lane -005
+
+All five ruled by the owner, 2026-08-27. Each recommendation file carries
+the reasoning and the declined alternative; the edit each verdict
+authorizes belongs to the lane that needed it.
+
+- **Decision-lifecycle trio: canonicalize.**
+  `llm-design-kb/jsonschema/decision-lifecycle.jsonschema.yaml`, a `#base`
+  mixin with the conditional folded in. Seven consumers swap an inline
+  block for one `allOf` line; zero instance edits. Never named `status`.
+- **Canonical-less collections: no canonical, three local schemas.**
+  `use-cases`, `goals`, `maintenance-actions` each get a plain local file;
+  `curriculum` is not a collection and leaves the list; `principles.kb`
+  carries no frontmatter and needs nothing.
+- **`live:` axis: deductions yes, questions no.** Questions deferred
+  again; the trigger is the first hand-rolled death marker anywhere.
+- **Recurring guards: daily anacron, adopted as a trial.** Files a report,
+  blocks nothing, arrives at session start. The bullet guard waits for a
+  triage pass on its 1191-line baseline. Pull the trial if a nonempty
+  report survives two weeks of session starts unrepaired.
+- **Guard roots: no `~`; `$HOME/.vim` joins `ROOTS`.** The entry carries a
+  comment saying why. Revisit -- with the `$HOME` git index, registered in
+  `bukzor_homedir_archeology` -- on the first `.kb` outside `repo/`,
+  `claude/`, `.claude/`, `.vim/`.
+
+Two of these gate work elsewhere: the trio verdict is what lane -003's
+ruled-rival markers point at, and the `.vim` root is a one-line
+`validate.sh` edit for whichever lane touches the guard next.
