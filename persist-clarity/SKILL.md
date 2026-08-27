@@ -11,21 +11,23 @@ that produced them, which evaporates at the context boundary. Clarity
 is not storable: fluency, the state where every trade-off is ready to
 hand, dies with the context no matter what you write. What you can do
 is persist its four residues and a re-entry path that restores it. This
-skill is that operation. (Origin: the data-plane design sittings,
-2026-08-27.)
+skill is that operation.
 
 ## The four residues
 
 1. **Results** — conclusions *with their standing*: who ruled each one,
    what's still open, what would reopen it. A summary of conclusions is
-   not this; a summary strips exactly the standing. Results are usually
-   already persisted by the time you're here — verify against disk
-   rather than rewrite.
+   not this; a summary strips exactly the standing. Work with what disk
+   already holds: verify, and/or amend, reword, sharpen — mint as a
+   last resort.
 2. **Reversals** — why the losing alternatives lost. The most valuable
    residue and the first one lost: without it, the next session
    re-proposes the dead idea and re-pays the whole litigation. Record
    each kill *beside the winner* — its ground, its revisit condition,
-   the owner's veto quoted verbatim.
+   the owner's veto quoted verbatim. The shape for this is a decision
+   point (`skill://llm-kb#decision-points`): `$ITEM.md` states the
+   resolution and why, `$ITEM.kb/` holds one file per candidate —
+   chosen and declined alike.
 3. **Lenses** — the ways-of-seeing that generated the decisions. Find
    them by looking for the moments the work *turned*: the question that
    made a hard choice easy; the razor you applied more than once; the
@@ -71,11 +73,14 @@ route is a decision you've silently delegated to amnesia.
 2. **Run the cold-reader test** on each: could an agent with no memory
    of this session reconstruct it from disk? Persist only what fails —
    re-persisting what's already on disk buries the new under the known.
-3. **File into existing homes.** Decision record (claims ledger, ADR,
-   design doc) for results and reversals; the project's methodology
-   home (playbook, HACKING) for lenses; the task system for discharge
-   routes. Invent no parallel structure — a new home is the owner's
-   call, not a wrap-up side effect.
+3. **File each residue into its home.** Decision record (claims
+   ledger, ADR, design doc) for results and reversals; the project's
+   methodology home (playbook, HACKING) for lenses; the task system
+   for discharge routes. Prefer the homes that exist; where a residue
+   has none, mint the smallest one that holds it — a single file
+   beats a structure, and either beats evaporation. What's banned is
+   only the *parallel* home: a second place for something that
+   already has a place.
 4. **Write the re-entry path last** — it indexes everything the
    previous steps filed.
 5. **Verify as the cold agent**: follow your own re-entry path reading
@@ -104,10 +109,11 @@ route is a decision you've silently delegated to amnesia.
   still believe it.
 - **The narrative dump.** A transcript-shaped copy nobody will reload;
   the address beats it at a thousandth the size.
-- **Fresh structure.** Parallel homes drift; the wrap-up files into
-  what exists.
+- **Parallel structure.** A second home for a residue that already
+  has one; the two drift, and the reader trusts the wrong one.
 - **Persisting the journey as the state.** Render the final framing;
   the journey lives in the reversals and at the address.
-- **Polishing the persisted.** Results are usually safe already; the
-  residues only you currently hold — reversals and lenses — are the
-  ones evaporating while you tidy. Spend the wrap-up there first.
+- **Polishing the persisted.** Anything already on disk can be
+  sharpened later, by anyone; the residues only you currently hold —
+  reversals and lenses — evaporate now, and only you can save them.
+  Spend the wrap-up there first.
