@@ -161,9 +161,10 @@ comparisons.
 
 ### Decision Points ($ITEM.md + $ITEM.kb/)
 
-A single open question or decision can itself be elaborated: `$ITEM.md`
-poses the question, `$ITEM.kb/` holds one file per candidate answer or
-option (same shape as any other collection -- one file per item).
+At its second contending answer, a question or decision SHOULD be
+elaborated: `$ITEM.md` poses the question, `$ITEM.kb/` holds one file
+per candidate answer or option -- open, chosen, and declined alike
+(same shape as any other collection -- one file per item).
 
 When the decision closes, rewrite `$ITEM.md` to state the resolution and
 why, rather than leaving it as a bare question. Then choose per option's
