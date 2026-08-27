@@ -22,7 +22,7 @@ hit. Use the tools below; they decode first.
 | `claude-search PATTERN [--role talk] [--all]` | which session discussed this, with snippets                  |
 | `claude-inventory [--days N] [--sh]`          | what was I working on; `--sh` emits resume commands          |
 | `claude-branch-list FILE [--branches-only]`   | the file's tree, marking real rewind points                  |
-| `claude-branch-extract [--at] [--as-session CWD]` | linearize one branch into a new resumable JSONL          |
+| `claude-branch-extract [--as-session CWD]`    | linearize one branch into a new resumable JSONL              |
 | `claude-jsonl-cwd FILE`                       | the directory a session ran in (needed to resume it)         |
 | `claude-jsonl-path DIR`                       | the projects/ dir holding a cwd's sessions                   |
 | `claude-jsonl-display < FILE`                 | render a transcript readably -- **on stderr**; stdout carries only a machine-oriented `result.result` line, if any, so `\| tail`/`\| grep` on stdout alone will not see it |
@@ -77,23 +77,25 @@ Every module is doctested; `uv run pytest` in that repo runs them.
 
 ## Rewinding to a state the picker will not offer
 
-`/rewind` cuts only at *your own* prompts, on the one chain resume
-loaded -- which, after a plain extraction, is most of what you want.
-What it cannot reach is a state that must *keep* an assistant reply or
-tool result and drop what followed, a point inside a turn, or a promoted
-subagent's transcript, whose user-role records are tool results rather
-than prompts. Answering a reply differently is not on that list: rewind
-to the prompt that produced it and re-send. For the rest, cut the file:
+Extraction hands you a whole branch and `/rewind` cuts it back, and
+between them that is the whole recipe:
 
-1. `claude-branch-list FILE` (or a `claude-search` hit) names the record
-   the state you want is built around.
-2. `claude-branch-extract FILE <uuid> --at` writes a new session cutting
-   just past it -- the ref plus the message after it, since a message cut
-   away needs another extraction to get back while one kept too many is
-   droppable in-session with `/rewind`; add `--as-session <cwd>` when the
-   source is a subagent's. It prints the record it actually cut after.
-3. `cd <cwd> && claude --resume <new-id>`, then send the turn again --
-   `/rewind` first if the extra trailing message is in your way.
+1. `claude-branch-list FILE` (or a `claude-search` hit) names any record
+   on the branch you want -- a locator, not a boundary.
+2. `claude-branch-extract FILE <uuid>` writes a new session holding that
+   branch through its tip; add `--as-session <cwd>` when the source is a
+   subagent's.
+3. `cd <cwd> && claude --resume <new-id>`, `/rewind` to the prompt of
+   yours the state sits behind, then send the turn again.
+
+**Extraction running forward to the tip is wanted, not a gap.** Naming
+the record and stopping there is `/rewind`'s job, done later and better:
+the picker offers every prompt of yours, and taking one drops the later
+era from context. An extraction-time cut was tried and removed for
+duplicating it. The residue -- dropping a tail mid-turn, where no prompt
+of yours precedes the cut -- is in-place surgery on the session that
+already owns the id, `Skill(claude-code-surgery)`, not a second flag
+here. Do not re-add one.
 
 Two things do not come back with it: the repo state the dropped turn
 worked against -- version control is the only rewind for that, so commit
