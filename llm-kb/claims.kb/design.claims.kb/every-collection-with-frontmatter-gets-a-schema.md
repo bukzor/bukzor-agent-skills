@@ -19,3 +19,7 @@ carry, write the schema that admits them, run the validator.
 The rule generalizes past the current list. Any collection that grows
 frontmatter grows a schema in the same commit; that is what makes
 `No schema found` a real error rather than a routine one to skim past.
+
+What counts as *no schema* is narrower than it reads, and the gap has
+already been executed once at fleet scale: see `a-ref-stub-is-a-schema.md`.
+A sibling schema file that exists is the schema, however short.
