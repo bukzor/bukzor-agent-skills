@@ -93,8 +93,8 @@ the record and stopping there is `/rewind`'s job, done later and better:
 the picker offers every prompt of yours, and taking one drops the later
 era from context. An extraction-time cut was tried and removed for
 duplicating it. The residue -- dropping a tail mid-turn, where no prompt
-of yours precedes the cut -- is in-place surgery on the session that
-already owns the id, `Skill(claude-code-surgery)`, not a second flag
+of yours precedes the cut -- is `claude-jsonl-truncate`'s job, in place
+or to a fresh id (`Skill(claude-code-surgery)`), not a second flag
 here. Do not re-add one.
 
 Two things do not come back with it: the repo state the dropped turn
