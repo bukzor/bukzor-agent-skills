@@ -1,10 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-must-read-kb)
-    - Skill(llm-collab)
-    - Skill(llm-subtask)
----
-
 # llm-must-read-kb Skill
 
 See `SKILL.md` for documentation. This file gives maintenance guidance

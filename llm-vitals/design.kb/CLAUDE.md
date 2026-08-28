@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # Design Knowledge — llm-vitals
 
 Layered design documentation for the `llm-vitals` skill: a multi-axis

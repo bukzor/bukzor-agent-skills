@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # Design Knowledge — next-generation architecture
 
 Layered design for the v2 rebuild of this repo's skill ecosystem: one

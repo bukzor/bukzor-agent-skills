@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-collab)
----
-
 # Development Log
 
 Chronological record of development sessions.

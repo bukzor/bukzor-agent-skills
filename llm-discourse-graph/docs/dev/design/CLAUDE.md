@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-design-kb)
----
-
 # Design Knowledge
 
 Living design documentation for this project.

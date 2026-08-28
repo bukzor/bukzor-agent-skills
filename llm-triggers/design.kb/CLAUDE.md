@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # Design Knowledge — llm-triggers
 
 Layered design for the trigger subsystem: a runtime-neutral condition

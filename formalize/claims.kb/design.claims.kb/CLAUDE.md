@@ -1,9 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-claims)
-    - Skill(llm-claims-kb)
----
-
 # design.claims.kb -- maintenance guide
 
 The design of `/formalize`, kept as a claim ledger in the notation the

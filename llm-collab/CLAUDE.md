@@ -1,9 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-subtask)
-    - Skill(llm-collab)
----
-
 # llm-collab Skill
 
 See `SKILL.md` for documentation.

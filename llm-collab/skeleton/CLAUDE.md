@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-collab)
----
-
 # [Project] - Development Guide for Claude
 
 ## Quick Reference

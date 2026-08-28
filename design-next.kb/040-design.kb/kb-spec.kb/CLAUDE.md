@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # kb-spec.kb — maintenance guide
 
 Long-form definitions of spec elements, elaborating `../kb-spec.md`

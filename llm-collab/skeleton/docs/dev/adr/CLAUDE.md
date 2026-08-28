@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-collab)
----
-
 # Architecture Decision Records
 
 Significant architectural and design decisions for this project.

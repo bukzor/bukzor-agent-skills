@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-claims)
----
-
 # design.claims.kb -- maintenance guide
 
 The design of this notation, kept as a claim ledger in the notation

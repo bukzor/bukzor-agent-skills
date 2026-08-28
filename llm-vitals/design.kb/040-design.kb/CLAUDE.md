@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # Design Layer — Architectural Primitives
 
 Entries describe *what the system is* — the core architectural

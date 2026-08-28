@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-collab)
----
-
 # llm-discourse-graph — Development Guide
 
 ## Quick Reference

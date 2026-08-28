@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # Requirements Layer
 
 How we validate the goals are achieved. Each requirement is a

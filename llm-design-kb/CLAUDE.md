@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-kb)
----
-
 # llm-design-kb Skill
 
 See `SKILL.md` for the design.kb layering pattern this skill defines.

@@ -1,10 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-subtask)
-    - Skill(llm-collab)
-    - Skill(llm-claims-kb)
----
-
 # llm-kb
 
 `claims.kb/design.claims.kb/` is a claim ledger in the file form,

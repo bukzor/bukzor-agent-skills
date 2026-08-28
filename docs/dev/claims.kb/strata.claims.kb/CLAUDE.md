@@ -1,9 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-claims)
-    - Skill(llm-claims-kb)
----
-
 # strata.claims.kb -- maintenance guide
 
 The formal model of the skill ecosystem's engine tower, kept as a

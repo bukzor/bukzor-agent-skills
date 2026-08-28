@@ -1,6 +1,7 @@
 --- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-design-kb)
+triggers:
+    - when: writing or amending
+      read: Skill(llm-design-kb)
 ---
 
 # Technical Policy

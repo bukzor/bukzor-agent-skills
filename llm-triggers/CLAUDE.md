@@ -1,10 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-kb)
-depends:
-    - Skill(llm-design-kb)
----
-
 # llm-triggers
 
 The kb suite's trigger subsystem: condition-triggered directive

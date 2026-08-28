@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # Goals Layer
 
 How we accomplish the mission. Each goal is a strategic stance,

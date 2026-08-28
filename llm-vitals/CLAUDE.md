@@ -1,10 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-kb)
-depends:
-    - Skill(llm-design-kb)
----
-
 # llm-vitals
 
 A multi-axis attention-allocation system across personal, wellness,

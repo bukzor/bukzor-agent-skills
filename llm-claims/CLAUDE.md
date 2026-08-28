@@ -1,10 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-subtask)
-    - Skill(llm-claims-kb)
-    - Skill(llm-discourse-graph)
----
-
 # llm-claims
 
 `claims.kb/design.claims.kb/` here is **not** the layered `Skill(llm-design-kb)`

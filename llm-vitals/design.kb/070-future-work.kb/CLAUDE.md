@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # Future Work Layer
 
 Ideas worth remembering but not yet ready to act on. Each entry has

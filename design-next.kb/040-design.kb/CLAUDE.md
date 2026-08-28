@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-design-kb)
----
-
 # Design Layer
 
 How we satisfy the requirements: a thin core (spec, engine) plus

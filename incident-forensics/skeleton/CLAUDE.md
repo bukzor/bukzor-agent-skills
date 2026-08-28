@@ -1,9 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-kb)
-    - Skill(incident-forensics)
----
-
 # INCIDENT -- Investigation kb
 
 <!-- Replace: one paragraph. What failed, on what system, over what

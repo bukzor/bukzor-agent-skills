@@ -1,8 +1,3 @@
---- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(llm-kb)
----
-
 # Principles Layer — Design Authorship
 
 Reusable rules for *writing* design.kb content well, distilled from
