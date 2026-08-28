@@ -109,13 +109,11 @@ Content discovery is `ls`. Never enumerate in CLAUDE.md.
 
 ## Frontmatter Directives
 
-Directives are **triggers** -- (condition, target). Bare is well-formed only
-where the carrier was itself reached conditionally (`must-read.kb/` entry,
-`SKILL.md`). Give a CLAUDE.md's directives a condition or drop them; the
-skill's `description:` carries the trigger.
-
-- `requires:` -- read before acting on this file's content.
-- `depends:` -- read when relevant. Legacy; prefer the target's own trigger.
+`triggers:`, and the legacy `requires:`/`depends:`, are specified by
+`Skill(llm-triggers)`. The rule a kb author needs: a bare directive is
+well-formed only where the carrier was itself reached conditionally. A
+CLAUDE.md discharges nothing, so give its directives a stated condition or
+none at all.
 
 ### Content Files ($ITEM.md in .kb/)
 
