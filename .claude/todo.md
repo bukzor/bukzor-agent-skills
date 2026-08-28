@@ -28,6 +28,10 @@ Repo-level list. Skill-scoped work lives in each skill's own
       looks like (ledger-qualified?), and whether `llm-claims-kb-graph`
       draws one drawing across ledgers or leaves the seam undrawn by
       design
+- [ ] `llm.kb-validate` has no way for a specialized check to plug in,
+      so every checker beside it is a separate command a caller has to
+      know by name — brief:
+      `.claude/todo.kb/2026-08-28-000-Let-specialized-checks-plug-in-under-llm.kb-validate.md`
 - [x] T2/v2.2: land the core-and-classes rework of design-next.kb — brief:
       .claude/todo.kb/2026-07-12-000-Land-v2-2-core-and-classes-rework--T2-.md
   - [x] HAIKU (mechanical, confirmed 2026-07-11): genre→class rename sweep
