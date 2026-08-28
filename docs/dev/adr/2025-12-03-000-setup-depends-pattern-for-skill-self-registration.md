@@ -1,7 +1,7 @@
 # setup-depends pattern for skill self-registration
 
 **Date:** 2025-12-03
-**Status:** Accepted
+**Status:** Superseded by [2026-08-27-000](2026-08-27-000-Skill-load-triggers-live-in-the-description--not-in-project-frontmatter.md)
 
 ## Context
 
