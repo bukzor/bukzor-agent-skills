@@ -1,21 +1,13 @@
 ---
 name: llm-must-read-kb
-description: "Agent MUST load for must-read.kb/ directories and prescribed-access trigger banks"
+description: "Prescribed-access trigger banks (must-read.kb/). Agent MUST load when adding, retiring, or re-scoping a trigger in a bank, or when a trigger misfired -- never fired, or fired on the wrong condition. Design successor: Skill(llm-triggers)."
 ---
 --- # workaround: anthropics/claude-code#13005
 setup: |
-    Adopting a `must-read.kb/` requires TWO things in the host CLAUDE.md.
-
-    1. Frontmatter declaring the dependency:
-
-    ```yaml
-    --- # workaround: anthropics/claude-code#13003
-    depends:
-        - Skill(llm-must-read-kb)
-    ```
-
-    2. A "Required Reading" stanza wiring the agent to the trigger bank.
-       See "Adoption" in the skill body for the exact text.
+    Adopting a `must-read.kb/` requires a "Required Reading" stanza in the
+    host CLAUDE.md, wiring the agent to the trigger bank. See "Adoption" in
+    the skill body for the exact text. Nothing else: a description names
+    when to load a skill, but only this stanza names where the bank is.
 ---
 
 # Must-Read Trigger Banks

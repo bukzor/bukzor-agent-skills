@@ -1,17 +1,9 @@
 ---
 name: llm-claims-kb
-description: "Claim ledger kept as files. Agent MUST load when reading or maintaining a ledger directory (*.claims.kb/, or bare claims.kb/ in a scope that supplies the subject), when asked to persist a claim ledger to disk, or when asked to draw, graph, or check the integrity of one. The notation itself is Skill(llm-claims)."
+description: "Claim ledger kept as files. Agent MUST load when maintaining a ledger directory (*.claims.kb/, or bare claims.kb/ in a scope that supplies the subject), when asked to persist a claim ledger to disk, or when asked to draw, graph, or check the integrity of one. The notation itself is Skill(llm-claims)."
 ---
 --- # workaround: anthropics/claude-code#13003
 setup: |
-    All projects that depend on this skill should have as `CLAUDE.md` frontmatter:
-
-    ```yaml
-    --- # workaround: anthropics/claude-code#13003
-    requires:
-        - Skill(llm-claims-kb)
-    ```
-
     `uv add llm-claims-kb` from within this workspace also puts
     `llm-claims-kb-ownership`/`-dot`/`-flatten`/`-mentions` on `$PATH`
     as installed console scripts (see Tools provided below) -- and code

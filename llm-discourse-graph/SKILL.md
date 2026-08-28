@@ -1,16 +1,6 @@
 ---
 name: llm-discourse-graph
-description: "Epistemic knowledge graph for collaborative human-LLM inquiry. Five collections: questions, claims, deductions, sources, definitions."
----
---- # workaround: anthropics/claude-code#13005
-setup: |
-    All projects that depend on this skill should have as `CLAUDE.md` frontmatter:
-
-    ```yaml
-    --- # workaround: anthropics/claude-code#13003
-    requires:
-        - Skill(llm-discourse-graph)
-    ```
+description: "Epistemic knowledge graph for collaborative human-LLM inquiry -- questions, claims, deductions, sources, and definitions as linked .kb/ collections. Agent MUST load when adding to or restructuring a discourse graph, when deciding which collection a new node belongs in, or when an inquiry needs recording as a graph of questions and evidence rather than a flat list."
 ---
 
 # llm-discourse-graph

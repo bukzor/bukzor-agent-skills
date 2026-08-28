@@ -1,17 +1,9 @@
 ---
 name: llm-kb
-description: "Agent MUST load for .kb/ directories and structured multi-agent knowledge bases"
+description: "Conventions for structured multi-agent knowledge bases. Agent MUST load when creating a .kb/ collection, when adding, renaming, splitting, or removing files in one, or when explaining or repairing a .kb/ layout."
 ---
 --- # workaround: anthropics/claude-code#13005
 setup: |
-    All projects that depend on this skill should have as `CLAUDE.md` frontmatter:
-
-    ```yaml
-    --- # workaround: anthropics/claude-code#13003
-    requires:
-        - Skill(llm-kb)
-    ```
-
     `uv add llm-kb` from within this workspace also puts `llm.kb-validate`
     on `$PATH` as an installed console script (see Tools Provided below)
     -- and code that imports `llmd` directly gets the package too.
@@ -102,13 +94,9 @@ knows what belongs here -- not what's currently here.
 - Root CLAUDE.md -- common principles (pushed up from per-directory guides)
 - Per-directory CLAUDE.md -- category-specific guidance for that `.kb/`
 
-Root CLAUDE.md must have:
-
-- Frontmatter declaring this skill (see `setup:` above for exact format)
-- An overview of available `.kb/` collections and their purpose
-
-This ensures any agent working in the project loads the pattern and can
-navigate to the right collection without exploring.
+Root CLAUDE.md must have an overview of available `.kb/` collections and
+their purpose. It needs no frontmatter declaring this skill; the
+`description:` carries the trigger.
 
 After reading `$CATEGORY.kb/CLAUDE.md`, agent must know:
 - What belongs here (concept, not enumeration)
@@ -121,10 +109,13 @@ Content discovery is `ls`. Never enumerate in CLAUDE.md.
 
 ## Frontmatter Directives
 
-CLAUDE.md and other agent-context markdown files use frontmatter to give agents operational instructions. These are **action triggers**, not passive metadata.
+Directives are **triggers** -- (condition, target). Bare is well-formed only
+where the carrier was itself reached conditionally (`must-read.kb/` entry,
+`SKILL.md`). Give a CLAUDE.md's directives a condition or drop them; the
+skill's `description:` carries the trigger.
 
-- `requires:` -- all agents MUST read the listed files before acting on this file's content; failure to do so WILL result in task failure.
-- `depends:` -- read when relevant.
+- `requires:` -- read before acting on this file's content.
+- `depends:` -- read when relevant. Legacy; prefer the target's own trigger.
 
 ### Content Files ($ITEM.md in .kb/)
 

@@ -1,16 +1,6 @@
 ---
 name: llm-collab
-description: "Agent MUST load when dealing with ADRs, devlogs, or multi-session documentation"
----
---- # workaround: anthropics/claude-code#13005
-setup: |
-    All projects that depend on this skill should have as `CLAUDE.md` frontmatter:
-
-    ```yaml
-    --- # workaround: anthropics/claude-code#13003
-    depends:
-        - Skill(llm-collab)
-    ```
+description: "Agent MUST load when writing or amending an ADR or devlog entry, or when deciding whether a decision warrants an ADR."
 ---
 
 # LLM-Collaborative Documentation
@@ -98,13 +88,6 @@ references.kb/: [Categorized guides: file-types.kb/, guidelines.kb/, workflows.k
 **When to update:** After architectural ADRs, when onboarding reveals gaps.
 
 See `Skill(llm-design-kb)` for the full pattern.
-
-## Frontmatter Directives
-
-CLAUDE.md and other agent-context markdown files use frontmatter to give agents operational instructions. These are **action triggers**, not passive metadata.
-
-- `requires:` — all agents MUST read the listed files before acting on this file's content; failure to do so WILL result in task failure.
-- `depends:` — read when relevant.
 
 ## Adaptation Guidelines
 

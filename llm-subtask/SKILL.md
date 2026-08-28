@@ -1,18 +1,11 @@
 ---
 name: llm-subtask
-description: "Agent MUST load for 'subtask'/'todo' commands, multi-task work, or mid-task questions"
+description: "Agent MUST load on 'subtask'/'todo' commands, on multi-task work or mid-task questions, or when adding or amending an entry in a todo.kb/ or ideas.kb/"
 ---
 --- # workaround: anthropics/claude-code#13005
 setup: |
-    All projects that depend on this skill should have as `CLAUDE.md` frontmatter:
-
-    ```yaml
-    --- # workaround: anthropics/claude-code#13003
-    depends:
-    - Skill(llm-subtask)
-    ```
-
-    And include a "Current Work" section pointing to the todo system:
+    Projects using this skill should include a "Current Work" section
+    pointing to the todo system:
 
     ```markdown
     ## Current Work

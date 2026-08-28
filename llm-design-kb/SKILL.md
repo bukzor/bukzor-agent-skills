@@ -1,16 +1,6 @@
 ---
 name: llm-design-kb
-description: "Agent MUST load for design.kb/ directories and layered design documentation"
----
---- # workaround: anthropics/claude-code#13005
-setup: |
-    All projects that depend on this skill should have as `CLAUDE.md` frontmatter:
-
-    ```yaml
-    --- # workaround: anthropics/claude-code#13003
-    depends:
-        - Skill(llm-design-kb)
-    ```
+description: "Layered design documentation -- design.kb/ collections ordered mission, goals, requirements, design, future work. Agent MUST load when creating a design.kb/, when writing, moving, or splitting a document within one, or when deciding which layer a design statement belongs in."
 ---
 
 # Design Knowledge Bases
