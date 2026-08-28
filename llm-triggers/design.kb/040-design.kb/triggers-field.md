@@ -30,6 +30,12 @@ spelled as a directory name or a frontmatter key. Values are trigger-descs
 **`read:` takes a scalar or a list.** One condition may deliver several
 targets; a shared antecedent never forces near-duplicate entries.
 
+**A condition is read in its carrier's scope.** State only the part the
+carrier does not already establish — usually the verb alone. In
+`technical-policy.kb/CLAUDE.md`, `when: writing or amending` says
+everything: what is being written, and that it follows the collection's
+conventions, are what the location already means.
+
 **A bare entry inherits its carrier's condition.** No juncture means the
 condition was discharged by whatever routed the reader in. This is what
 `depends:` should have meant — that field instead asked the reader to judge
