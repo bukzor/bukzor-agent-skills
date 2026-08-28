@@ -76,6 +76,24 @@ and what counts as scarce in that repository.
   (attempted to) optimize away. For those bits, best you can do is
   make them easy and efficient to find, choose."*
 
+### Option D — carry the authorship law as a skill, so its trigger travels
+- **Pros:** `2026-08-27-000` makes the description the authoritative
+  trigger surface, and a description travels with the artifact where
+  `must-read.kb` is operator-local. The domain is real and already has
+  eleven claims.
+- **Cons:** decisive on price. A description is tier-one text
+  (`price-text-by-load-frequency.md`) — every session in the fleet pays
+  it forever — and skill-writing is a monthly occasion consumed by a
+  fraction of sessions. A `must-read.kb` bank is `ls`-ed once as
+  filenames and its entry read only on a match, which is strictly
+  better economics for a rare trigger. A skill body would also become a
+  second home for law the ledger already holds, and the two would drift.
+- **Declined, not deferred.** The operator-locality it would have fixed
+  is a separate problem, already filed as
+  `design-next.kb/070-future-work.kb/federated-trigger-banks.md`.
+  Revisit if banks federate, or when a fleet author who is not the
+  operator appears.
+
 ## Consequences
 
 **Positive:**
