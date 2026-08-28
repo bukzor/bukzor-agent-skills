@@ -5,9 +5,9 @@ description: "Trigger subsystem for the kb suite (design phase): condition vocab
 
 # llm-triggers
 
-Design-phase stub. The subsystem's content is `design.kb/`; nothing
-here is runtime machinery yet. Until the v2 build, working trigger
-banks remain governed by `Skill(llm-must-read-kb)`.
+The kb suite's trigger subsystem. The `triggers:` field is specified in
+`design.kb/040-design.kb/triggers-field.md`; bank conventions remain
+`Skill(llm-must-read-kb)`. The rest of `design.kb/` is design-phase.
 
 ## Tools
 

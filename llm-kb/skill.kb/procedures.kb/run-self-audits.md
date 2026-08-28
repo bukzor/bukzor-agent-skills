@@ -17,6 +17,7 @@ Re-run until passing. Failure stops downstream tiers.
 | Audit | Applies when |
 |---|---|
 | `llm.kb-validate <path>` | always |
+| `llm-triggers/bin/llm-triggers-lint <path>` | any frontmatter written or edited |
 | `../self-audit.kb/cross-references.md` | any kb file written or edited |
 
 ## Tier 2 — required when applicable
