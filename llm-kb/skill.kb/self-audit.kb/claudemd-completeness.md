@@ -13,9 +13,10 @@ For each CLAUDE.md you touched, verify three rules are present:
 2. **What does NOT belong** -- boundaries to adjacent collections.
 3. **When to add / read files here** -- the trigger.
 
-For a root CLAUDE.md, also verify frontmatter declares
-`requires: Skill(llm-kb)` and the body identifies the project's
-`.kb/` collections.
+For a root CLAUDE.md, also verify the frontmatter declares this skill
+(`depends:` by default — see `claudemd-enumeration.md` for when
+`requires:` is warranted) and the body identifies the project's `.kb/`
+collections.
 
 ## Recovery
 
