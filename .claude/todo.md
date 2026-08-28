@@ -32,6 +32,14 @@ Repo-level list. Skill-scoped work lives in each skill's own
       so every checker beside it is a separate command a caller has to
       know by name — brief:
       `.claude/todo.kb/2026-08-28-000-Let-specialized-checks-plug-in-under-llm.kb-validate.md`
+- [ ] `cost-benefit-sweh` prices SWE-hours, which is the wrong axis
+      wherever the scarce resource is the owner's own attention rather
+      than engineering time — the two do not convert. `meta-reasoning`
+      needed a second field for it and reconciled the two in its own
+      schema; decide whether an owner-attention axis belongs beside
+      `cost-benefit-sweh` in
+      `llm-subtask/jsonschema/todo.jsonschema.yaml`, so the fleet has
+      one frame rather than one per repo that notices
 - [x] T2/v2.2: land the core-and-classes rework of design-next.kb — brief:
       .claude/todo.kb/2026-07-12-000-Land-v2-2-core-and-classes-rework--T2-.md
   - [x] HAIKU (mechanical, confirmed 2026-07-11): genre→class rename sweep
