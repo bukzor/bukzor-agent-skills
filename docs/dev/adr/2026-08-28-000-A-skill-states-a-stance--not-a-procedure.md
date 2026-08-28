@@ -94,6 +94,22 @@ and what counts as scarce in that repository.
   Revisit if banks federate, or when a fleet author who is not the
   operator appears.
 
+### Option E — two trigger levels, broad and skill-specific
+- **Pros:** precedent exists in the same bank — `before/git/` carries
+  `running-ANY-git-command.md` beside `commit.md`, the narrow one
+  chaining to the broad. Precise firing; a `CLAUDE.md` edit would not
+  surface skill mechanics.
+- **Cons:** `one-skill-beats-two-that-overlap.md`. Writing a skill is
+  always writing agent-facing instruction, so the narrow entry is a
+  strict subset, and the git split earns its second entry by carrying a
+  whole tooling reference where ours would carry three lines about lazy
+  loading. Bank filenames are `ls -RF`'d every session, so a second
+  entry is tier-one cost for tier-three content.
+- **Declined, with a tripwire:** split when the skill-only material
+  outgrows a subsection. Until then one entry, whose body routes by
+  surface — what governs every agent-facing text, and the four claims
+  that are skill-only.
+
 ## Consequences
 
 **Positive:**
