@@ -1,0 +1,365 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = ["pathspec", "pyyaml"]
+# ///
+"""
+Check frontmatter triggers against the carrier law.
+
+A frontmatter directive -- `requires:`, `depends:`, or `triggers:` -- is a
+trigger: a (condition, target) pair. A *bare* directive states no condition,
+so it inherits its carrier's, which is well-formed only where the carrier was
+itself reached conditionally: a `must-read.kb/` entry, a `SKILL.md`, an
+invocable `commands/` file, or a file some other trigger names as its target.
+A `CLAUDE.md` loads for every agent entering the scope, so a bare directive
+there fires on arrival for everyone, whatever they came to do. Naming a
+juncture (`before:`/`when:`/`after:`) under `triggers:` is the repair.
+
+`triggers:` is the only field. `requires:` and `depends:` are retired: both
+meant "read this", and both took their condition from the carrier, so each
+collapses to a bare `triggers:` entry -- which is well-formed in a conditional
+carrier and nowhere else.
+
+Rules:
+    bare-unconditional  error  bare directive in an unconditional carrier
+    retired-field       error  `requires:`/`depends:`; use `triggers:`
+    unresolved-read     warn   `read:` names a path that is not on disk
+    no-read             warn   `triggers:` entry that reads nothing
+    unparsed            warn   frontmatter YAML did not parse
+
+Only frontmatter is read. An ADR, a devlog, or a design entry that names the
+retired fields in prose is a record of them, not a use.
+
+Usage:
+    llm-triggers-lint [PATH]     # default: .
+"""
+
+from __future__ import annotations
+
+import argparse
+import os
+import re
+import sys
+from collections import Counter
+from collections.abc import Iterable, Iterator
+from pathlib import Path
+from typing import NamedTuple
+
+import pathspec
+import yaml
+
+DIRECTIVE_FIELDS = ('requires', 'depends', 'triggers')
+RETIRED_FIELDS = ('requires', 'depends')
+JUNCTURES = ('before', 'when', 'after')
+
+SEVERITY = {
+    'bare-unconditional': 'error',
+    'retired-field': 'error',
+    'unresolved-read': 'warn',
+    'no-read': 'warn',
+    'unparsed': 'warn',
+}
+
+# Never corpus, whatever .gitignore says: git's own storage, virtualenvs, and
+# vendored packages all carry .md files that nobody authored here.
+ALWAYS_PRUNE = frozenset({'.git', '.venv', 'node_modules'})
+
+# A frontmatter fence. The trailing comment is the claude-code#13003
+# workaround: claude-code strips the first frontmatter block out of a
+# CLAUDE.md, so a second block opens with a commented fence, which its parser
+# declines to recognize and therefore passes through to the model.
+FENCE_RE = re.compile(r'^---(?:\s+#.*)?$')
+
+# A directive key at the top level of a frontmatter block, for the line scan
+# that stands in when YAML refuses the block.
+FIELD_RE = re.compile(rf'^({"|".join(DIRECTIVE_FIELDS)}):')
+
+# `Skill(llm-kb)`, `Command(commit)` -- a target named by handle, not by path.
+HANDLE_RE = re.compile(r'^\w+\([^)]*\)$')
+
+
+class Trigger(NamedTuple):
+    """One directive: a whole `requires:`/`depends:` field, or one `triggers:` entry."""
+
+    field: str
+    line: int  # 1-based, in the file
+    juncture: str | None
+    reads: tuple[str, ...]
+
+
+class Finding(NamedTuple):
+    rule: str
+    path: Path
+    line: int
+    field: str
+    detail: str
+
+
+def gitignore_spec(directory: Path) -> pathspec.PathSpec | None:
+    """The .gitignore in `directory`, compiled, or None if it has none."""
+    gitignore = directory / '.gitignore'
+    if not gitignore.is_file():
+        return None
+    return pathspec.GitIgnoreSpec.from_lines(gitignore.read_text().splitlines())
+
+
+Stack = tuple[tuple[Path, pathspec.PathSpec], ...]
+
+
+def ignored(stack: Stack, path: Path, *, is_dir: bool) -> bool:
+    """Whether any .gitignore in scope excludes `path`.
+
+    Each spec is matched against the path relative to the directory that
+    declared it, which is what a gitignore pattern is anchored to.
+    """
+    for base, spec in stack:
+        relative = path.relative_to(base).as_posix() + ('/' if is_dir else '')
+        if spec.match_file(relative):
+            return True
+    return False
+
+
+def markdown_files(root: Path) -> Iterator[Path]:
+    """Every *.md under `root`, minus what .gitignore and ALWAYS_PRUNE exclude.
+
+    .gitignore files are read directly rather than asked of `git check-ignore`:
+    a linter has no business running git against trees that have work in
+    flight. The cost is that git's other exclude sources (`info/exclude`, the
+    user's global ignore file) go unconsulted.
+    """
+    root = root.resolve()
+    if root.is_file():
+        yield root
+        return
+
+    stacks: dict[Path, Stack] = {root: ()}
+    for dirpath, dirnames, filenames in os.walk(root):
+        here = Path(dirpath)
+        stack = stacks[here]
+        spec = gitignore_spec(here)
+        if spec is not None:
+            stack += ((here, spec),)
+
+        dirnames[:] = sorted(
+            name
+            for name in dirnames
+            if name not in ALWAYS_PRUNE and not ignored(stack, here / name, is_dir=True)
+        )
+        for name in dirnames:
+            stacks[here / name] = stack
+
+        for name in sorted(filenames):
+            path = here / name
+            if name.endswith('.md') and not ignored(stack, path, is_dir=False):
+                yield path
+
+
+def frontmatter_blocks(text: str) -> list[tuple[int, str]]:
+    """(0-based file line of each leading fenced block's first line, its YAML text).
+
+    A file may carry two blocks -- see FENCE_RE. Only blocks at the head of
+    the file count; the same fences appear mid-body in ADRs and devlogs that
+    quote frontmatter as an example.
+    """
+    lines = text.split('\n')
+    blocks: list[tuple[int, str]] = []
+    cursor = 0
+    while cursor < len(lines):
+        if not lines[cursor].strip():
+            cursor += 1
+            continue
+        if not FENCE_RE.match(lines[cursor]):
+            break
+        start = cursor + 1
+        closes = (n for n in range(start, len(lines)) if lines[n].rstrip() == '---')
+        end = next(closes, None)
+        if end is None:
+            break
+        blocks.append((start, '\n'.join(lines[start:end])))
+        cursor = end + 1
+    return blocks
+
+
+def scalar_or_list(node: yaml.Node | None) -> tuple[str, ...]:
+    """The values of a field written either as one scalar or as a list of them."""
+    match node:
+        case yaml.ScalarNode():
+            return (str(node.value),)
+        case yaml.SequenceNode():
+            return tuple(str(item.value) for item in node.value if isinstance(item, yaml.ScalarNode))
+        case _:
+            return ()
+
+
+def trigger_entry(node: yaml.Node, offset: int) -> Trigger:
+    """One `triggers:` list item, as a Trigger."""
+    line = offset + node.start_mark.line + 1
+    if not isinstance(node, yaml.MappingNode):
+        return Trigger('triggers', line, None, ())
+    keys = {key.value: value for key, value in node.value if isinstance(key, yaml.ScalarNode)}
+    juncture = next((name for name in JUNCTURES if name in keys), None)
+    return Trigger('triggers', line, juncture, scalar_or_list(keys.get('read')))
+
+
+def block_triggers(node: yaml.Node, offset: int) -> Iterator[Trigger]:
+    """Every directive in one composed frontmatter block."""
+    if not isinstance(node, yaml.MappingNode):
+        return
+    for key, value in node.value:
+        if not isinstance(key, yaml.ScalarNode):
+            continue
+        line = offset + key.start_mark.line + 1
+        if key.value in RETIRED_FIELDS:
+            yield Trigger(str(key.value), line, None, scalar_or_list(value))
+        elif key.value == 'triggers':
+            if isinstance(value, yaml.SequenceNode):
+                yield from (trigger_entry(entry, offset) for entry in value.value)
+            else:
+                yield Trigger('triggers', line, None, ())
+
+
+def scanned_triggers(offset: int, block: str) -> Iterator[Trigger]:
+    """Directives found by reading a block line by line.
+
+    Stands in for composition when a block's YAML is malformed, so that a
+    broken directive is still classified instead of silently skipped -- the
+    condition it fails to state is exactly what the file was meant to carry.
+    """
+    for n, line in enumerate(block.split('\n')):
+        match = FIELD_RE.match(line)
+        if match:
+            yield Trigger(match.group(1), offset + n + 1, None, ())
+
+
+def file_triggers(path: Path) -> tuple[tuple[Trigger, ...], tuple[int, ...]]:
+    """Every directive in `path`, and the start lines of blocks YAML refused."""
+    triggers: list[Trigger] = []
+    unparsed: list[int] = []
+    for offset, block in frontmatter_blocks(path.read_text()):
+        try:
+            node = yaml.compose(block)
+        except yaml.YAMLError:
+            unparsed.append(offset + 1)
+            triggers.extend(scanned_triggers(offset, block))
+        else:
+            if node is not None:
+                triggers.extend(block_triggers(node, offset))
+    return tuple(triggers), tuple(unparsed)
+
+
+def read_target(carrier: Path, value: str) -> Path | None:
+    """The file `value` names, or None when it names a handle rather than a path."""
+    value = value.strip()
+    if not value or HANDLE_RE.match(value):
+        return None
+    path = Path(value).expanduser()
+    return (path if path.is_absolute() else carrier.parent / path).resolve()
+
+
+def all_targets(parsed: dict[Path, tuple[tuple[Trigger, ...], tuple[int, ...]]]) -> set[Path]:
+    """Every path any trigger in the scan names, resolved."""
+    return {
+        target
+        for carrier, (triggers, _) in parsed.items()
+        for trigger in triggers
+        for value in trigger.reads
+        if (target := read_target(carrier, value)) is not None
+    }
+
+
+def reached_by(path: Path, targets: set[Path]) -> str | None:
+    """How `path` was reached conditionally, or None if it loads on arrival.
+
+    The three conditional forms are structural, so the carrier law is
+    mechanical rather than a judgment call: the bank's path is the condition,
+    invocation is the condition, and a file that only some other trigger
+    routes to inherits that trigger's condition.
+
+    Target membership is only as complete as the scan: a file reached by a
+    trigger in a tree that was not walked reads as unconditional here.
+    """
+    if 'must-read.kb' in path.parts:
+        return 'must-read.kb entry'
+    if path.name == 'SKILL.md':
+        return 'skill invocation'
+    if 'commands' in path.parts:
+        return 'command invocation'
+    if path.resolve() in targets:
+        return "another trigger's read: target"
+    return None
+
+
+def trigger_findings(path: Path, trigger: Trigger, condition: str | None) -> Iterator[Finding]:
+    """Every rule `trigger` breaks, given what condition its carrier discharges."""
+    bare = f'bare {trigger.field}: in an unconditional carrier -- state a juncture ({"/".join(JUNCTURES)}:) under triggers:'
+
+    if trigger.field in RETIRED_FIELDS:
+        if condition is None:
+            yield Finding('bare-unconditional', path, trigger.line, trigger.field, bare)
+        else:
+            yield Finding(
+                'retired-field', path, trigger.line, trigger.field,
+                f'retired field -- collapses to a bare triggers: entry ({condition})',
+            )
+        return
+
+    if trigger.juncture is None and condition is None:
+        yield Finding('bare-unconditional', path, trigger.line, trigger.field, bare)
+    elif not trigger.reads:
+        yield Finding('no-read', path, trigger.line, trigger.field, 'trigger entry with no read:')
+
+    for value in trigger.reads:
+        target = read_target(path, value)
+        if target is not None and not target.exists():
+            yield Finding(
+                'unresolved-read', path, trigger.line, 'read',
+                f'{value} -> {target} (missing)',
+            )
+
+
+def findings(parsed: dict[Path, tuple[tuple[Trigger, ...], tuple[int, ...]]]) -> list[Finding]:
+    """Every finding in the scan, in file then line order."""
+    targets = all_targets(parsed)
+    found: list[Finding] = []
+    for path, (triggers, unparsed) in parsed.items():
+        condition = reached_by(path, targets)
+        found.extend(
+            Finding('unparsed', path, line, 'frontmatter', 'YAML did not parse; fell back to a line scan')
+            for line in unparsed
+        )
+        for trigger in triggers:
+            found.extend(trigger_findings(path, trigger, condition))
+    return sorted(found, key=lambda f: (str(f.path), f.line, f.rule))
+
+
+def report(found: Iterable[Finding]) -> str:
+    """One greppable, editor-jumpable line per finding."""
+    return '\n'.join(
+        f'{f.path}:{f.line}: {SEVERITY[f.rule]}: {f.field}: {f.detail} [{f.rule}]' for f in found
+    )
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        prog='llm-triggers-lint',
+        description=__doc__,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    _ = parser.add_argument('path', nargs='?', default='.', help='file or directory to scan (default: .)')
+    args = parser.parse_args()
+
+    files = list(markdown_files(Path(args.path)))
+    parsed = {path: file_triggers(path) for path in files}
+    found = findings(parsed)
+    if found:
+        print(report(found))
+
+    errors = sum(1 for f in found if SEVERITY[f.rule] == 'error')
+    icon = '❌' if errors else '✅'
+    tally = ' -- ' + ', '.join(f'{rule} {n}' for rule, n in Counter(f.rule for f in found).most_common()) if found else ''
+    print(f'{icon} {len(files)} files, {errors} errors, {len(found) - errors} warnings{tally}')
+    sys.exit(2 if errors else 0)
+
+
+if __name__ == '__main__':
+    main()
