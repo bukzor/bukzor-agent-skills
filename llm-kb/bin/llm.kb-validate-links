@@ -51,12 +51,9 @@ from pathlib import Path
 
 import yaml
 
-# Frontmatter fields (across llm-kb, llm-design-kb, llm-discourse-graph
-# schemas) whose values are file-relative paths to other .kb/ nodes.
-LINK_FIELDS = (
-    'why', 'depends', 'source', 'sources',
-    'candidate-resolutions', 'conclusion', 'premises', 'resolved',
-)
+# An opening delimiter may carry a trailing comment -- `--- # workaround:
+# anthropics/claude-code#13003` is common in CLAUDE.md frontmatter.
+FRONTMATTER_OPEN_RE = re.compile(r'\A---[^\S\n]*(?:#[^\n]*)?\n')
 
 # Every backtick-wrapped span in body prose; _is_path_shaped() below decides
 # which spans are actually path references, per --strict/--lax.
@@ -93,16 +90,38 @@ def extract_frontmatter(md_file: Path) -> str | None:
     that module (reusing its extract_frontmatter) on integration.
     """
     content = md_file.read_text()
-    if not content.startswith('---\n'):
+    opener = FRONTMATTER_OPEN_RE.match(content)
+    if opener is None:
         return None
-    parts = content.split('---\n', 2)
-    if len(parts) < 3:
+    body = content[opener.end():]
+    end = body.find('\n---\n')
+    if end == -1:
         return None
-    return parts[1]
+    return body[:end + 1]
+
+
+def _scalars(node: object, field: str) -> Iterator[tuple[str, str]]:
+    """Yield (dotted-field-name, value) for every string leaf under node."""
+    if isinstance(node, str):
+        yield field, node
+    elif isinstance(node, list):
+        for item in node:  # pyright: ignore[reportUnknownVariableType]
+            yield from _scalars(item, field)
+    elif isinstance(node, dict):
+        for key, item in node.items():  # pyright: ignore[reportUnknownVariableType]
+            yield from _scalars(item, f'{field}.{key}' if field else str(key))
 
 
 def frontmatter_links(md_file: Path, *, lax: bool) -> Iterator[tuple[str, str]]:
-    """Yield (field, path) for every path-shaped value in known link fields."""
+    """Yield (field, path) for every path-shaped value in the frontmatter.
+
+    Every field, not a whitelist. A whitelist stops checking the moment a kb
+    invents a field name -- `suggested-reading:`, `also-touches:`,
+    `lands-in:` all went unchecked here -- and it fails silently, which is
+    the one failure mode a validator may not have. Under --strict the
+    `./`/`../` prefix carries the whole judgment, so admitting every field
+    costs no false positives.
+    """
     raw = extract_frontmatter(md_file)
     if raw is None:
         return
@@ -112,14 +131,9 @@ def frontmatter_links(md_file: Path, *, lax: bool) -> Iterator[tuple[str, str]]:
         return  # frontmatter_validate.py already reports YAML errors
     if not isinstance(data, dict):
         return
-    for field_name in LINK_FIELDS:
-        value = data.get(field_name)
-        if value is None:
-            continue
-        values = value if isinstance(value, list) else [value]
-        for v in values:
-            if isinstance(v, str) and _is_path_shaped(v, lax=lax):
-                yield field_name, v
+    for field_name, value in _scalars(data, ''):
+        if _is_path_shaped(value, lax=lax):
+            yield field_name, value
 
 
 def body_links(md_file: Path, *, lax: bool) -> Iterator[tuple[str, str]]:
