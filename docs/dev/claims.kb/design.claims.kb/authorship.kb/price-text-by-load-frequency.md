@@ -29,3 +29,11 @@ the work or charges the fleet.
 The tell of a misfiled optimization: compressing cold text saves
 tokens nobody was paying, while elaborating hot text charges every
 invoker forever.
+
+A third misfiling costs more than either, because it looks like
+restraint. Hot text that *delegates* to cold — a body whose operative
+instruction is to go read the ledger it was derived from — charges
+every invoker the cold tier's full price at the hot tier's frequency,
+and does it in the name of not caching. The rule being invoked
+governs current state; a check does not rot, so a body may state its
+own checks and must. Measured once at 88% of a skill's load budget.

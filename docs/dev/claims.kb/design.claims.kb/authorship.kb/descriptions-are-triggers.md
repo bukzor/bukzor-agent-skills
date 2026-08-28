@@ -14,3 +14,11 @@ must-load-when conditions only, in the words a user would actually
 use. A what-it-does summary earns perhaps a tenth of a trigger's
 value; "MUST load on /name" earns nothing at all, since named
 invocation never consults the description.
+
+The calibration test is the message that caused the skill to exist.
+Put it beside the description and ask whether it would have fired: a
+skill derived from an occasion it does not name will be absent
+exactly when it is most needed, and its author is the last person
+who will notice, having arrived by another road. One skill failed
+this on its own founding message — written for ranking, derived from
+a session that began "I'm worried it's not aligned."
