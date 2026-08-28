@@ -71,7 +71,7 @@ violations and structural issues -- manual auditing here wastes tokens and
 misses real problems.
 
 `llm.kb-validate` doesn't yet check that cross-references (`why:`,
-`depends:`, dot-slash-prefixed relative prose links) resolve to real files --
+`triggers:`, dot-slash-prefixed relative prose links) resolve to real files --
 run `bin/llm.kb-validate-links <path>` alongside it for that, until the
 check lands in `llm.kb-validate` proper
 (`.claude/todo.kb/2026-06-03-000-validate-path-references.md`).

@@ -37,13 +37,10 @@ Two regimes, one lifecycle:
   separate registry tracks hardened labels — the promoted key's own
   schema entry is the record; a registry would only restate it.
 
-`requires:` stays a top-level directive: it commands loading and is
+`triggers:` stays a top-level directive: it commands loading and is
 mechanically enforceable; `references:` asserts relations and
-commands nothing. V1's `depends:` retires *into* a `references:`
-label — the relation survives, structure kept, label made explicit
-where `depends:` left it implied.
+commands nothing.
 
 If accepted: `kb-spec.md` gains a references bullet beside
-directives; the `depends:` migration ships its doctor check; the
-meta-schema validates the map shape (label → list, always a list)
-once for all collections.
+directives; the meta-schema validates the map shape (label → list,
+always a list) once for all collections.

@@ -107,26 +107,23 @@ file is meant to be skimmed at plan time, not read in full every time.
 
 ## Step 6: Write the frontmatter
 
-Two directives, both optional, per `Skill(llm-kb)`'s base convention
-(this skill inherits rather than redefines them):
+One directive, optional, per `Skill(llm-kb)`'s base convention (this
+skill inherits rather than redefines it):
 
 ```yaml
 ---
-requires:
-    - path/to/file-that-must-be-read-first.md
-depends:
-    - Skill(some-skill)
+triggers:
+    - read: path/to/file-that-must-be-read-first.md
 ---
 ```
 
-- `requires:` — listed files/skills MUST be read before acting on
-  *this* file's content. Use when the directive assumes background the
-  agent might not have (e.g. a git commit trigger requiring the repo's
-  git conventions doc first). Creates a hard sequencing dependency,
-  same strength as the `before/` juncture itself.
-- `depends:` — informational; read when relevant, not unconditionally
-  required. Use for related-but-not-blocking context.
-- Omit both if the body is fully self-contained.
+The entry is bare — no `before:`/`when:`/`after:` — because it inherits
+this file's own trigger condition, which is legal here: a trigger file
+is itself conditionally reached. Use when the directive assumes
+background the agent might not have (e.g. a git commit trigger
+requiring the repo's git conventions doc first). Creates a hard
+sequencing dependency, same strength as the `before/` juncture itself.
+Omit if the body is fully self-contained.
 
 ## Step 7: Decide aliasing vs. new content
 
@@ -148,7 +145,7 @@ body lives in one place and can't drift out of sync.
    the first time: does the H1 alone let you confirm or reject a
    match without reading further? Does the body give a clear,
    executable action once matched?
-3. If `requires:` was set, confirm every listed path/skill actually
+3. If `triggers:` was set, confirm every listed path/skill actually
    exists and is reachable from where an agent would be standing when
    the trigger fires.
 4. If this created a new juncture-topic family (Step 4's nesting
@@ -162,5 +159,5 @@ body lives in one place and can't drift out of sync.
 - The filename + juncture read as a grammatical trigger phrase (Step
   4's self-check).
 - The body matches the Step 5 template shape and is under ~50 lines.
-- `requires:`/`depends:` are set only where genuinely needed, pointing
-  at real, reachable targets.
+- `triggers:` entries are set only where genuinely needed, pointing at
+  real, reachable targets.

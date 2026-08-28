@@ -36,8 +36,8 @@ prefer to surface the question in llm-kb first (or jointly), then
 specialize here. Examples:
 
 - Promotion signals → llm-kb owns these; we inherit.
-- Frontmatter directives (`requires:`/`depends:`) → llm-kb owns; we
-  inherit and apply at the trigger-bank scope.
+- Frontmatter directives (`triggers:`) → llm-kb owns; we inherit and
+  apply at the trigger-bank scope.
 - Filename slug conventions → llm-kb owns the *general* rule; we
   prescribe the *juncture-verb composition* on top.
 

@@ -25,9 +25,8 @@ no procedures, no behavior, no teaching:
   is a sibling `$name.kb/`, whose synthesis file is the node itself.
   One shape, many edge vocabularies — see `class-epistemic.md`.
 - **Cross-references**: see `cross-reference-notation.md`.
-- **Directives**: `requires:` frontmatter lists files that must be
-  read before acting on the bearer's content — the only load
-  directive.
+- **Directives**: `triggers:` frontmatter states read conditions for
+  the bearer's content — the only load directive.
 - **Naming**: kebab-case, name-signals-content, ordering prefixes.
 
 Everything downstream cites the spec by section; the spec never

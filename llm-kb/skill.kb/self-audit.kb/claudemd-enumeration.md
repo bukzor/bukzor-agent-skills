@@ -41,6 +41,7 @@ information is durable.
 ## Frontmatter check (root CLAUDE.md only)
 
 If the CLAUDE.md being audited is the root of a kb-using project, verify
-the frontmatter declares this skill — `depends: Skill(llm-kb)` by
-default. Reserve `requires:` for a project where essentially every
+the frontmatter declares this skill via `triggers:`, with a stated
+condition — `when: creating or maintaining a .kb/ collection` by
+default. Widen the condition only for a project where essentially every
 arriving agent writes kb structure, and argue the case in the file.

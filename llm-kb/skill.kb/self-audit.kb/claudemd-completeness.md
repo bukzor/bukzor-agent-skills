@@ -14,8 +14,8 @@ For each CLAUDE.md you touched, verify three rules are present:
 3. **When to add / read files here** -- the trigger.
 
 For a root CLAUDE.md, also verify the frontmatter declares this skill
-(`depends:` by default — see `claudemd-enumeration.md` for when
-`requires:` is warranted) and the body identifies the project's `.kb/`
+via `triggers:`, with a stated condition (see `claudemd-enumeration.md`
+for the default condition) and the body identifies the project's `.kb/`
 collections.
 
 ## Recovery
