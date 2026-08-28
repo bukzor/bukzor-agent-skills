@@ -3,8 +3,8 @@ name: upstream-reporting
 description: "Agent MUST load when a diagnosed bug belongs to someone else's project -- before searching for an existing issue, drafting a report or comment, or handing the user a body to paste into a tracker."
 ---
 --- # workaround: anthropics/claude-code#13003
-depends:
-    - Skill(walled-web)
+triggers:
+    - read: Skill(walled-web)
 ---
 
 # Reporting upstream

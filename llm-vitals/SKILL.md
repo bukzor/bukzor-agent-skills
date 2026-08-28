@@ -4,8 +4,8 @@ disable-model-invocation: true
 description: "Agent MUST load for 'vitals'/'check-in'/'checkin' commands, wellness journaling, or surfacing wellness-vital debt"
 ---
 --- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-kb)
+triggers:
+    - read: Skill(llm-kb)
 default: vitals checkin
 ---
 

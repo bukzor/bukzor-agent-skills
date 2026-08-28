@@ -1,8 +1,3 @@
----
-requires:
-  - Skill(llm-kb)
----
-
 # How to Document Design Knowledge
 
 Living design documentation using the llm.kb pattern. Deeper than CLAUDE.md,

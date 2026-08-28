@@ -3,12 +3,12 @@ name: incident-forensics
 description: "Agent MUST load when diagnosing a system failure whose evidence is perishable (freeze, crash, OOM, corruption, performance collapse), when the user asks to track or resume an investigation, or before running the first evidence-gathering command of one."
 ---
 --- # workaround: anthropics/claude-code#13003
-requires:
-    - Skill(llm-kb)
-depends:
-    - Skill(llm-subtask)
-    - Skill(upstream-reporting)
-    - Skill(walled-web)
+triggers:
+    - read:
+        - Skill(llm-kb)
+        - Skill(llm-subtask)
+        - Skill(upstream-reporting)
+        - Skill(walled-web)
 ---
 
 # Incident forensics
