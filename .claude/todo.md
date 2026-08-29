@@ -54,10 +54,11 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `.claude/todo.kb/2026-08-28-000-Let-specialized-checks-plug-in-under-llm.kb-validate.md`
 - [x] Decide whether `cost-benefit-sweh` needs a second axis for owner
       attention, on the theory that SWE-hours price engineering time
-      and the owner's own hours are a scarcer thing. Ruled 2026-08-28:
-      no — SWEh is an appropriate unit for owner attention, so the
-      existing three fields cover it and a repo that mints its own
-      cost axis only makes its backlog `unrated` to `wsjf-rank`
+      and the owner's own hours are a scarcer thing. Ruled 2026-08-28
+      — "stipulated: SWEh is an entirely appropriate unit for owner
+      attention" — and by the agent's reading, the existing three
+      fields cover it; a repo that mints its own cost axis only makes
+      its backlog `unrated` to `wsjf-rank`
 - [x] T2/v2.2: land the core-and-classes rework of design-next.kb — brief:
       .claude/todo.kb/2026-07-12-000-Land-v2-2-core-and-classes-rework--T2-.md
   - [x] HAIKU (mechanical, confirmed 2026-07-11): genre→class rename sweep
