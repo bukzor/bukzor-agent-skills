@@ -58,7 +58,10 @@ The render *is* the ask — no ceremony around it.
 `Skill(llm-claims)`'s presentation rules govern: a `?` comes with
 what an answer would settle; a `+` is a standing offer to veto, never
 a sign-off queue. Integrate what comes back — rulings re-sign,
-contests reopen, corrections supersede.
+contests reopen, corrections supersede — and keep each ruling's
+words attached to its label: at the persist beat they become the
+claim's `authority:`, never mined from the transcript after the
+fact.
 
 Review is a veto point, not a gate: silence persists every claim at
 its honest sigil — a `+` lands at agent standing, vetoable forever; a

@@ -5,6 +5,9 @@ managed-by: Skill(llm-subtask)
 Repo-level list. Skill-scoped work lives in each skill's own
 `.claude/todo.md`; the breadcrumbs below point at every open list.
 
+- [ ] persist-clarity: owner rulings pending on the redesign's open
+      questions (return promised for 2026-08-30) —
+      persist-clarity/.claude/todo.kb/2026-08-29-000-Rule-on-the-redesign-open-questions.md
 - [ ] The homedir JSON-Schema survey is skill-scoped work now. Its six
       remaining lanes roll up under
       `llm-kb/.claude/todo.kb/2026-08-21-000-ref-rollout-beyond-todo-ideas.md`;

@@ -17,10 +17,13 @@ drift, and the reader trusts the wrong one.
 
 ## Homes, by ecosystem
 
+The strategy is chosen by what the project already has:
+
 - Claims-ledger projects (`Skill(llm-claims-kb)`): the mapping is
   that skill's table — standing to `standing:`, strikes to `verdict:`
-  with the ground and the acceptance quoted in `authority:`, arrows
-  to `why:`; the roll-up carries the re-entry section.
+  with the ground, rulings to `authority:` — words the review beat
+  already attached to their labels — arrows to `why:`; the roll-up
+  carries the re-entry section.
   `Skill(llm-claims)`'s session-ending rule already obliges this
   serialization — this operation adds the rest.
 - Session-register projects (`Skill(llm-sessions)`, discussion

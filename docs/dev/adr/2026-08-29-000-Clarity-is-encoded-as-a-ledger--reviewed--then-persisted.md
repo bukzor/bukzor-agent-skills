@@ -96,8 +96,11 @@ found no external readers of any section, so no routes needed:
 - **Cons:** sequencing, not savings, is the point: the filing detail
   is dead weight during encode and review, and the cold file can
   grow rich landing rules without charging the first two beats.
-  This is the owner's stated preference, not a derivation — the
-  price argument alone is roughly neutral.
+  Review added the stronger ground — change-rate separation:
+  strategy text churns per-ecosystem while the stance stays stable,
+  and the split keeps that churn out of the hot body. The split is
+  the owner's stated preference; the price argument alone is
+  roughly neutral.
 
 ### Option D — encode directly into `llm-claims-kb` files, skipping the chat render
 - **Pros:** no translation step in claims-ledger projects.
@@ -114,6 +117,9 @@ found no external readers of any section, so no routes needed:
   it matters most.
 - The review beat inherits `Skill(llm-claims)`'s bank instead of
   duplicating presentation rules that would drift.
+- Rulings arrive in-band, attached to labels; the acceptance quote
+  becomes `authority:` at serialization, retiring the founding run's
+  after-the-fact transcript archeology for owner quotes.
 
 **Negative:**
 - A full run costs one render and one beat of latency before filing.
