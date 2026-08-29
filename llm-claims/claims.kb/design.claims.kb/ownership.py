@@ -193,7 +193,7 @@ def admit(fleet: Fleet, site_path: Path, owner_path: Path) -> Fleet:
 
 
 def uniquify(fleet: Fleet, site_path: Path, word: str, fresh: str) -> Fleet:
-    """FOUR_POSITIONS, the word itself: the two meanings differ."""
+    """FOUR_POSITIONS, the word itself: rename at a stipulator."""
     t = at(fleet, site_path)
     return (fleet - {t}) | {replace(t, says=(t.says - {word}) | {fresh})}
 
