@@ -486,6 +486,11 @@ def report(theories: Sequence[Theory]) -> int:
             )
         else:
             pass  # foreign doubles are legal: namespaces are per-ledger
+    if failing:
+        print(
+            "how to choose a repair: Skill(llm-claims-kb)"
+            " skill.kb/self-audit.kb/confinement.md"
+        )
     print(census(theories))
     return 1 if failing else 0
 
@@ -533,7 +538,9 @@ def main() -> int:
         print(
             f"{sum(len(sites) for _, _, sites in rows)} trespasses over"
             f" {len(rows)} stipulations -- cull, move, admit, or uniquify each;"
-            f" {len(skipped)} contended words skipped as undecidable"
+            f" {len(skipped)} contended words skipped as undecidable;"
+            f" how to choose a repair: Skill(llm-claims-kb)"
+            f" skill.kb/self-audit.kb/confinement.md"
         )
         return 0
     elif args.candidates:

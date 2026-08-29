@@ -40,13 +40,17 @@ restated here; this skill maps it onto a directory.
 | a struck label, `~~XY~~` | `verdict:` -- present only where a judgment took the claim out of force; the strike says that much, the word says what they ruled |
 | `<-` arrows | `why:` -- file-relative paths; never a copied sigil, standing lives at the definition site |
 | `-- certified(CHECK)` | `verify:` |
+| the pre-colon token, `XY! todo:` (decided, not yet built) | `todo: true` -- deleted when the state lands, the label never moves |
 | restating a label | editing the file; the git diff's `-` is the strikethrough |
 | a theory | a claim like any other -- `<theory>.md`, carrying `ontology:` and `stale-when:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
 | indentation | the tree: what a `.kb/` holds is nested under the claim naming it, at any depth |
 | `claim list` | `ls`; the standing scan is `grep -rH '^standing:' <name>.claims.kb/`, recursive so theories answer too; the verdict scan is `grep -rl 'verdict:'` |
 
 Schema: `jsonschema/claim.jsonschema.yaml`. Link or copy it next to
-each ledger and `$ref` it from a per-collection schema.
+each ledger and `$ref` it from a per-collection schema. A theory whose
+claims are imperatives (conventionally `technical-policy.kb/`) binds
+`jsonschema/policy.jsonschema.yaml` instead -- the claim schema plus
+`force:` (RFC 2119), whose `#force` anchor is borrowable alone.
 
 A claims.kb is a `.kb`: `Skill(llm-kb)`'s audits and maintenance
 rules apply to it wholesale. The audits in `skill.kb/self-audit.kb/`
@@ -68,7 +72,10 @@ where a new file goes.
 The ledger's name follows its scope: `<name>.claims.kb/` where a
 subject token is needed, bare `claims.md` + `claims.kb/` inside a scope
 that already supplies the subject -- a source's `sources.kb/X.kb/`,
-say.
+say. Third case: the children of a bare `claims.kb/` take bare subject
+tokens -- `claims.kb/design.md` + `design.kb/`, never
+`claims.kb/design.claims.kb/` -- because the container already supplied
+the word "claims" and a name repeats no token its container supplies.
 
 `X.kb/` alone, with the `.md` not yet written, is legal and means one
 thing only: an **open theory**. It stipulates no words, so its claims
@@ -219,7 +226,8 @@ counted, never reported.
 one of the owner's own siblings, with no import to license it,
 grouped per stipulation and ranked by force. It is a queue, not an
 error list -- every finding has four honest repairs (cull, move,
-admit, uniquify) and the scan picks none of them. `--idle` is a queue
+admit, uniquify) and the scan picks none of them;
+`skill.kb/self-audit.kb/confinement.md` is how to choose. `--idle` is a queue
 too: an import whose words go unsaid may still carry real support,
 and only reading the citing theory tells.
 

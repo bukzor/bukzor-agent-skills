@@ -16,12 +16,23 @@ sibling saying an owned word", and the finding is one of five.
 - Both mean it, differently. One of them uniquifies -- usually by
   restoring the phrase its own prose already uses, since a list entry
   truncated to its head noun is how an ownable term becomes unownable.
+  A phrase minted for the purpose serves too, but then editing every
+  site to say it is part of the repair: the entry records a coinage,
+  it cannot make one.
 - Both mean it the same way, and the speaker is one of the owner's own
   priors. Then the word is owned too far downstream: it wants a theory
   upstream of everyone who needs it, which they import. A word every
   sibling says is not an unownable word -- it is a missing shared
   prior, and this is the reading to reach for before culling anything
-  the ledger genuinely stipulates.
+  the ledger genuinely stipulates. Often it is not missing: where one
+  contender is already the other's prior, keep the entry there and
+  cull downstream. Mint only when neither reaches the other, since a
+  new theory costs an import from every party.
+
+The dispositions combine. A word both mean the same way may still be
+too coarse to own: sharpen it at the upstream stipulator and cull the
+rest, because the coarse word left owned trespasses on every sibling
+that says it.
 
 Silence is not health: an ontology nobody has narrowed in a while may
 just mean nobody scanned.
