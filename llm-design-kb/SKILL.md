@@ -129,13 +129,16 @@ After any session that changes code or design understanding in a project with
    any TODO whose behavior landed this session, and resolve any QUESTION
    that settled.
 3. **Capture new concepts.** Did discussion surface goals, requirements, or
-   components that aren't documented? Create entries in the appropriate
-   collection.
+   components that aren't documented? Draft entries in the appropriate
+   collection, at the standing they earned: what the owner ruled is settled
+   prose; what the session inferred enters as a `> [!QUESTION]` (or an entry
+   marked agent-inferred), never as settled rule.
 4. **Trace `why:` chains.** New docs need `why:` frontmatter pointing to their
    motivation. Existing docs that gain new responsibilities need updated `why:`
    references. Follow chains to verify they connect back to goals/mission.
-5. **Fix, don't flag.** Rectify stale docs directly. Only ask the user when
-   the correction requires a design decision.
+5. **Fix, don't flag.** Rectify stale descriptive docs directly. Minting or
+   tightening normative text is a design decision: draft it marked (step 3),
+   don't enact it.
 6. **Promote listing entries.** An entry with a plural filename or
    listing-heavy content (e.g. `patterns.md`, `alternatives.md`) wants to
    become a sub-`.kb/`. See `Skill(llm-kb)` promotion signals.
