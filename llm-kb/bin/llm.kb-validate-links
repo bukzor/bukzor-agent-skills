@@ -144,15 +144,24 @@ def body_links(md_file: Path, *, lax: bool) -> Iterator[tuple[str, str]]:
             yield 'body', span
 
 
-def broken_links(md_file: Path, *, lax: bool) -> list[str]:
-    """Return one error string per link that doesn't resolve to a real file/dir."""
+def broken_links(md_file: Path, *, lax: bool) -> tuple[int, list[str]]:
+    """Return (links examined, one error string per link that doesn't resolve).
+
+    The count is reported, not just the errors, because a file count cannot
+    fall when coverage narrows. This checker once matched eight frontmatter
+    field names and read a `---` with a trailing comment as no frontmatter at
+    all; it printed the same green `N files` line throughout. A link count
+    would have gone down.
+    """
+    checked = 0
     errors = []
     for field_name, link in chain(frontmatter_links(md_file, lax=lax), body_links(md_file, lax=lax)):
+        checked += 1
         target = (md_file.parent / link).resolve()
         exists = target.is_dir() if link.endswith('/') else target.is_file()
         if not exists:
             errors.append(f"{field_name}: {link} -> {target} (missing)")
-    return errors
+    return checked, errors
 
 
 def main() -> None:
@@ -170,10 +179,12 @@ def main() -> None:
         files.extend([p] if p.is_file() else sorted(p.glob('**/*.md')))
 
     file_count = 0
+    link_count = 0
     error_count = 0
     for md_file in files:
         file_count += 1
-        errors = broken_links(md_file, lax=lax)
+        checked, errors = broken_links(md_file, lax=lax)
+        link_count += checked
         if errors:
             error_count += 1
             print(f"❌ {md_file}")
@@ -181,7 +192,7 @@ def main() -> None:
                 print(f"    {e}")
 
     icon = "✅" if error_count == 0 else "❌"
-    print(f"{icon} {file_count} files, {error_count} with broken links")
+    print(f"{icon} {link_count} links in {file_count} files, {error_count} files with broken links")
     sys.exit(0 if error_count == 0 else 2)
 
 

@@ -28,6 +28,23 @@ Repo-level list. Skill-scoped work lives in each skill's own
       looks like (ledger-qualified?), and whether `llm-claims-kb-graph`
       draws one drawing across ledgers or leaves the seam undrawn by
       design
+- [ ] A tool a skill names must be reachable by the name it is written
+      as — on `$PATH`, or written with its path. Two live violations,
+      both of which produced real blindness: `llm.kb-validate-links`
+      (found only because someone went looking) and `wsjf-rank`, which
+      `llm-subtask/SKILL.md` names bare while it lives in
+      `~/repo/github.com/bukzor/2026-05-19--task-archeology/`. Both fix
+      cheaply; the convention is mechanically checkable (backticked
+      tokens in a SKILL.md vs `command -v`), which makes it a good
+      first plug-in under the item below
+- [ ] A schema property that a tool reads should name that tool in its
+      description, the way `meta-reasoning`'s `why:` says "Walked by
+      `.claude/todo-rank.py`". Cheap per property, and it forces the
+      question that prevents a duplicate axis: what else reads a
+      quantity like this? Written down after `meta-reasoning` minted a
+      second cost axis its own checks all passed and the fleet ranker
+      could not see. Scope: machine-read properties only, not every
+      field
 - [ ] `llm.kb-validate` has no way for a specialized check to plug in,
       so every checker beside it is a separate command a caller has to
       know by name — brief:
