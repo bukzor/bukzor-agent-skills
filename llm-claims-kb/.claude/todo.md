@@ -2,6 +2,12 @@
 managed-by: Skill(llm-subtask)
 ---
 
+- [ ] `llm-claims-kb-flatten` drops list blocks from claim bodies —
+      a first paragraph ending in a colon renders as a dangling
+      fragment and the bullets vanish (e.g. a struck claim's quoted
+      vetoes). Claim-body guidance mandates bulleted enumerations,
+      so the fix is in flatten: render list items as continuation
+      lines or inline.
 - [x] Record the scoped-bare-`claims.kb` naming convention in SKILL.md
       ("Layout" and "What this is not"): when a ledger lives in a
       subject's sub-scope (e.g. `sources.kb/X.kb/claims.md` +
