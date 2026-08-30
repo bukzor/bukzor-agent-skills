@@ -1,36 +1,48 @@
 ---
 label: COHORT
-standing: open
+standing: user
+authority: "@bukzor 2026-08-29, opening the session that executed it: 'It's time to modernize llm-design-kb ... using llm-claims for ideation and review, llm-claims-kb for persistence, but retaining its existing ontology, just under claim-kb governance.'"
 why:
   - when-does-the-reform-execute.md
 ---
 
 # Which Other Skills Want the Same Reform?
 
-`llm-discourse-graph` is the fleet's first extension of
-`/llm-claims`, not necessarily its only one. @bukzor: "There may be
-one or two other skills that are slated for the same kind of
-treatment. Has `/llm-design-kb` undergone this transformation? I'm
-pretty sure it should."
+`/llm-design-kb` is the second extension of `/llm-claims`, reformed
+2026-08-29. It is the same reform as `llm-discourse-graph`'s in
+structure -- BASIS, MIGRATE, GUIDE_HOME and SUCCESSOR all applied
+unchanged -- and a different one in warrant.
 
-`/llm-design-kb` has not. It carries `principles.kb/`, `jsonschema/`,
-and `references/`, and no ledger of any kind -- so its own design
-commitments are unrecorded, and it cannot be an extension of a
-notation it does not use.
+The distinction this question raised was real and survives the ruling.
+`llm-discourse-graph` was reformed because its ontology is what the
+claims format supersedes. `/llm-design-kb`'s `why:` is cited as prior
+art *by* the claim schema, so it was an ancestor, and its rungs were
+never in competition with the notation: what the reform removed was
+the parallel document format grown around them, and what it kept is
+the stratification, now expressed as theories. An ancestor can still
+want the reform -- it simply keeps more.
 
-Two questions, and only the second is open:
+The reform's shape, per cell:
 
-- Should `/llm-design-kb` keep a ledger? Yes, on the same warrant as
-  every other skill that has one, and `llm-kb` just took that step
-  itself. That much needs no ruling.
-- Is that the same reform? Not obviously. `llm-discourse-graph` is
-  being reformed because its *ontology* -- five node types, a
-  truth-valued `status:`, a stored `likelihood` -- is what the claims
-  format supersedes. `/llm-design-kb`'s `why:` is cited as prior art
-  by the claim schema itself, so it may be an ancestor rather than a
-  candidate for replacement.
+- **Placement** -- the tower moves to `docs/dev/claims.kb/design.kb/`;
+  `070-future-work.kb/` and "Alternatives Considered" obviate into
+  standing; `principles.kb/` moves to `skill.kb/`.
+- **Name** -- `llm-design-kb` unchanged, on SUCCESSOR's warrant. One
+  rung renames, `design` to `architecture`.
+- **Route** -- `llm-design-kb/skill.kb/must-read.kb/when/meeting-a-numbered-design-kb-tower.md`,
+  which is trigger and guide in one file; the legacy schemas stay.
+- **Schedule** -- executed in one pass, 2026-08-29; no instance
+  migrates on a schedule.
 
-Rule this: does `/llm-design-kb` become an extension of
-`/llm-claims`, or does it merely gain a ledger like any other skill
-and keep its own shape? And name the "one or two other skills" if
-there are more.
+Two more skills are named by the reform rather than by survey, and
+both are follow-ups, not open questions:
+
+- **`llm-collab`** ships the superseded pattern to every consumer --
+  `skeleton/docs/dev/design/` and a *copied*
+  `technical-policy.jsonschema.yaml`. Tracked as a todo.
+- **`formalize` / `deformalize` / `llm-kb`** keep ledgers at
+  `<skill>/claims.kb/` and need no reform at all; PLACE explicitly
+  leaves them where they are.
+
+No further survey was run, and none is owed: an extension is proposed
+by the skill that wants one, not found by sweeping the fleet.

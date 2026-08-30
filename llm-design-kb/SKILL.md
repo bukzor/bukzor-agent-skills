@@ -1,152 +1,150 @@
 ---
 name: llm-design-kb
-description: "Layered design documentation -- design.kb/ collections ordered mission, goals, requirements, design, future work. Agent MUST load when creating a design.kb/, when writing, moving, or splitting a document within one, or when deciding which layer a design statement belongs in."
+description: "A project's design record, kept as a claim ledger -- mission, goals, requirements, architecture, components, deliverables. Agent MUST load when starting or extending a project's design documentation, when writing down what a system is for or must do, when deciding which rung a design statement belongs on, when recording a design decision together with the options it beat, or when meeting a numbered design tower (010-mission.kb/ and siblings)."
 ---
 
 # Design Knowledge Bases
 
-Layered design documentation using `.kb/` collections. Each layer justifies
-the one below and realizes the one above, linked via `why:` frontmatter.
+A design record is a claim ledger whose theories are the rungs of a
+why/how chain. The notation is `Skill(llm-claims)`; persisting it to
+disk is `Skill(llm-claims-kb)`. This skill adds one thing to them: the
+stratification, and the discipline of keeping a design statement on
+the rung whose question it answers.
 
-## Layers
+> **IMPERATIVE:**
+>
+> Your FIRST action when this skill loads MUST be:
+> `Bash("ls -RF skill.kb/must-read.kb/")`
+>
+> Each filename names the occasion to read it. Walk the listing while
+> planning and read every entry whose trigger matches the work.
 
-Each layer answers a question that motivates the layer below:
+## The rungs
 
-| Layer | Answers | Motivates |
-|---|---|---|
-| `010-mission.kb/` | What problem are we solving? Who benefits? | goals |
-| `020-goals.kb/` | How do we accomplish the mission? | requirements |
-| `030-requirements.kb/` | How do we validate goals are achieved? | design |
-| `040-design.kb/` | How do we satisfy requirements? | components |
-| `050-components.kb/` | How do we implement the design? | deliverables |
-| `060-deliverables.kb/` | How do we build the components? | — |
-| `070-future-work.kb/` | What ideas are deferred? | — |
+Six theories, each answering a question that motivates the next:
 
-All layers are optional. Create as needed.
+| Rung | The question it answers |
+|---|---|
+| `mission` | What problem are we solving? Who benefits? |
+| `goals` | How do we accomplish the mission? |
+| `requirements` | How do we validate the goals are achieved? |
+| `architecture` | How do we satisfy the requirements? |
+| `components` | How do we implement the architecture? |
+| `deliverables` | How do we build the components? |
 
-Auxiliary collections that don't occupy a why/how rung -- content
-relevant to the design but not itself motivated-by/motivating a
-numbered layer -- get an unnumbered `.kb/` (e.g. `use-cases.kb/`,
-`background.kb/`). Only number a collection if it actually sits in the
-why/how chain (something's `why:` points at it, and its own `why:`
-points at the layer above).
+They are a **default the skeleton seeds, not a law this skill
+enforces**. A project drops a rung it does not argue about and adds
+one it does, by revising its own `design.md` -- the rung set is that
+claim's `ontology:`, so restratifying is an ordinary edit under
+ordinary governance, and it takes the standing of whoever ruled it.
 
-`070-future-work.kb/` captures ideas worth remembering but not worth pursuing
-now.
+Two consequences of rungs being theories rather than folders:
 
-Entries link via `why:` frontmatter to their motivation — a list of
-file-relative path references, usually to a higher layer (e.g. a
-requirement lists the goals it serves), or to a same-layer entry when
-the motivating concept naturally lives at the same layer and promoting
-it would introduce hierarchy with no other content.
+- **Priors are a DAG.** A claim's `why:` names whatever claims it
+  would be revisited over -- one rung up, four rungs up, or sideways.
+  The ladder is the common shape, not a constraint, so a design claim
+  citing a goal directly is an ordinary long edge, not an error.
+  Content the design assumes but does not argue -- background, prior
+  art, use cases -- is an auxiliary theory beside the rungs.
+- **No numeric prefixes.** Order lives once, in the `why:` arrows; a
+  digit in the filename is a second copy that drifts, and inserting a
+  rung between two numbers would rename every reference on file.
 
-```yaml
----
-why:
-  - ../020-goals.kb/site-agnostic-capture.md
----
+The discipline the rungs buy is **confinement**: a word a rung
+stipulates is that rung's, and its siblings may not use it.
+`llm-claims-kb-ownership --trespass` reports a mechanism word coined
+in `architecture` and spoken in `requirements` -- which is the
+state-properties-not-mechanisms rule, mechanized.
+
+## Encode: draft the design as a ledger
+
+Render the design in chat as `Skill(llm-claims)` notation before
+writing any file -- rungs as theories, claims nested under the rung
+whose question they answer, `<-` for what each rests on, a sigil on
+every line. What the user ruled signs `!`; what you inferred signs
+`+`; what nobody has settled signs `?` and says what would settle it.
+
+Design records lead implementation as often as they trail it, so
+**every claim declares its tense**. Mission, goals, and requirements
+are aspirational by nature and take no mark. From architecture down, a
+claim describing something not yet built takes the `todo:` token:
+
+    * CACHE! todo: the resolver caches by content hash, not by path
+
+Write it as declarative future-state prose, never as an imperative
+task: when the state lands, dropping the token leaves a sentence that
+is already true. A claim with no `todo:` is a claim about what is, and
+a mismatch with the code is a bug in the claim.
+
+## Review: rung by rung
+
+Present each rung as you finish it rather than the whole tower at the
+end -- a mission the user would have redirected is a tower built on
+sand, and the cost of finding out is one message.
+
+Review is a veto point, not a gate: silence persists every claim at
+its honest sigil. Integrate what comes back, keeping each ruling's
+words attached to its label -- at the persist beat they become the
+claim's `authority:`.
+
+A rejected option is not deleted. It stays as a struck claim carrying
+`verdict:` and its ground, filed beside the winner: without it the
+next session re-proposes the dead idea and re-pays the whole argument.
+At the **second contending answer** the question takes the
+decision-point shape (`Skill(llm-kb)`): `$ITEM.md` poses the question,
+`$ITEM.kb/` holds one file per candidate, chosen and declined alike.
+
+## Persist: copy the skeleton, then file
+
+The default home is `docs/dev/claims.kb/`, which leaves room for the
+several ledgers a project accumulates. Bootstrap it by copying this
+skill's `skeleton/` wholesale:
+
+```bash
+cp -r <this-skill>/skeleton/docs/dev/claims.kb docs/dev/
 ```
 
-## Alternatives Considered
+That lands `design.md` beside `design.kb/`, the six rung theories with
+their questions and `why:` arrows, a `technical-policy.kb/` for
+cross-cutting imperatives, and a bound schema for each collection. The
+rungs arrive `standing: open` -- they are the questions, not answers,
+and answering them is the first act. Each empty collection holds a
+`.keepme` explaining itself; delete it when the first claim lands, and
+delete any rung the project does not want.
 
-Design entries often surface the options weighed at decision time. Three
-shapes, in order of growth:
-
-- **Inline "Why not X".** Short bolded-phrase paragraphs under the chosen
-  approach. Works for 1-3 alternatives with brief rationale.
-- **Parallel list.** A numbered or tabled enumeration of alternatives, with
-  selection stated outside the listing (or in a sibling entry). Works for
-  design-space surveys where several options stay on the table.
-- **Sub-kb.** When alternatives accrue per-item content, metadata, or
-  lifecycle, promote the entry to a `.kb/` per `Skill(llm-kb)` promotion
-  signals. Each alternative becomes its own file; selection can live in
-  entry frontmatter or be called out in the sub-kb's CLAUDE.md / synthesis file.
-
-Forward-facing: the design entry describes what the system *is*. Alternatives
-are a footnote on the design space, not a historical log. If extensive
-rationale or historicity matters, write an ADR instead
-(see `Skill(llm-collab)`).
-
-## Doc-Driven Development
-
-Design docs lead implementation as often as they trail it -- writing the doc
-first is cheaper, higher-level, and easier to review than tests are under TDD.
-A behavior-describing doc therefore carries two kinds of prose, demarcated:
-
-- **Undecorated prose is descriptive** -- shipped, verifiable behavior. A
-  mismatch with ground truth is a doc bug: fix it.
-- **`> [!TODO]` blocks are normative** -- decided behavior not yet
-  implemented. A mismatch with ground truth is the point: implement toward it,
-  never "correct" it to match the code.
-- **`> [!QUESTION]` blocks are open** -- undecided behavior or design. Never
-  implement one: an agent that builds an open question has shipped an
-  unratified guess.
-
-Both markers take a one-line title after the bracket -- a reminder at
-checkbox-line grain, so a bare grep reads like a todo list:
-
-```markdown
-> [!TODO] island rule becomes `***`
-> The island rule is `***`; lands with a `divider()` change plus
-> regenerated goldens.
-
-> [!QUESTION] is the island rule `***` or `---`?
-> Pandoc accepts both; settles on checking what our other renderers
-> accept.
-```
-
-Write a decided block as declarative future-state prose ("The rule is X"),
-not an imperative task ("Switch to X"): landing it is then pure markup
-removal — the prose is already the descriptive sentence. Write a question's
-body to name what would settle it (operator ratification, prototype
-evidence, prior art); it resolves by marker swap to a decided `[!TODO]`,
-directly to descriptive prose, or by deletion.
-
-The markers are Obsidian-callout-shaped (prior art: Obsidian's built-in
-`[!todo]` and `[!question]` types); GitHub renders them as plain blockquotes
-containing the literal bracket text -- acceptable, since browsers are a
-tertiary consumer and the fallback is legible. Grep `[!TODO]` to enumerate a
-doc's unimplemented surface, `[!QUESTION]` its undecided surface. The
-terminal state of both is unmarked prose: when behavior lands or a question
-settles, remove the callout markup (or the whole block, if surrounding prose
-already says it). There is no `[!DONE]` or `[!ANSWER]` -- markers flag
-deviation from ground truth, and a closed item's record is git.
-
-Layers 010-030 are aspirational by nature and need no marker; the convention
-applies where prose could be mistaken for a claim about current behavior
-(040 and below, technical-policy, contract docs).
+Then file the reviewed ledger per `Skill(llm-claims-kb)`: one claim
+per file, standing in frontmatter, arrows as `why:`. The operation
+ends at a commit.
 
 ## Maintenance
 
-After any session that changes code or design understanding in a project with
-`design.kb/`:
+After a session that changed the code or the design understanding,
+hold the record to what is now true:
 
-1. **Find affected docs.** Which design.kb files relate to what changed this
-   session? Read each one.
-2. **Check claims against ground truth.** Look for stale assertions — things
-   that were true when written but no longer are. `> [!TODO]` and
-   `> [!QUESTION]` blocks are normative/open, never stale; instead, unwrap
-   any TODO whose behavior landed this session, and resolve any QUESTION
-   that settled.
-3. **Capture new concepts.** Did discussion surface goals, requirements, or
-   components that aren't documented? Draft entries in the appropriate
-   collection, at the standing they earned: what the owner ruled is settled
-   prose; what the session inferred enters as a `> [!QUESTION]` (or an entry
-   marked agent-inferred), never as settled rule.
-4. **Trace `why:` chains.** New docs need `why:` frontmatter pointing to their
-   motivation. Existing docs that gain new responsibilities need updated `why:`
-   references. Follow chains to verify they connect back to goals/mission.
-5. **Fix, don't flag.** Rectify stale descriptive docs directly. Minting or
-   tightening normative text is a design decision: draft it marked (step 3),
-   don't enact it.
-6. **Promote listing entries.** An entry with a plural filename or
-   listing-heavy content (e.g. `patterns.md`, `alternatives.md`) wants to
-   become a sub-`.kb/`. See `Skill(llm-kb)` promotion signals.
+- **Descriptive claims are checked against ground truth and fixed
+  directly.** A claim carrying `todo:` is exempt -- it is normative,
+  and a mismatch is the point; drop the token instead, if the state
+  landed this session.
+- **New understanding enters at the standing it earned.** What the
+  user ruled is a signed claim; what you inferred is `+`; what surfaced
+  and stayed unsettled is `?`. Enacting an inference as settled rule is
+  the failure this skill exists to prevent.
+- **`why:` arrows are traced, not assumed.** A new claim needs its
+  arrows; a claim that gained a responsibility needs them updated.
+  `llm-claims-kb-graph` finds the arrow that points nowhere, the claim
+  that never joined the graph, and the citation cycle.
+- **Confinement is a grep.** `llm-claims-kb-ownership --trespass`
+  reports a rung speaking another rung's stipulated word -- usually a
+  misfiled claim, sometimes a missing import.
 
-## References
+## In unledgered prose
 
-- `references/how-to-document-design-knowledge.md` — Full creation guidance,
-  relationship to ADRs/devlogs/CLAUDE.md, background.kb and technical-policy.kb
-- `principles.kb/` — reusable rules for authoring design.kb content
-  well, distinct from any one project's own goals/requirements. Read
-  before or during a design.kb authoring session.
+Documents outside the ledger -- READMEs, contracts, synthesis files --
+carry the same tense distinction as callouts: `> [!TODO]` for decided
+but unbuilt, `> [!QUESTION]` for undecided, undecorated prose for what
+ships today. Never implement a `[!QUESTION]`: an agent that builds an
+open question has shipped an unratified guess.
+
+They are the ledger's poor relation, and a churning callout is the
+signal to promote the document's claims into the ledger, where they
+gain a judge and a ground.

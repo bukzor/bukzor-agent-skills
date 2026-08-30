@@ -84,24 +84,37 @@ maintenance affordances (schemas, validation, self-audit passes).
   - [ ] `live-claim-on-struck-premise`, `support-rings`,
         `stale-certified-checks` (lint-backed)
 
-### llm-design-kb (owned by that skill's scope; tracked here as plan legs)
+### llm-design-kb — DONE 2026-08-29
 
-- [ ] Rewrite the skill as a discipline over the ledger: canonical
-      theory chain mission → goal → requirement → design → component →
-      deliverable (theories with declared priors); future-work layer
-      dissolves into `?` claims; background becomes a literature theory
-- [ ] The interpolation rule: a design claim citing a goal directly is
-      a lint warning — mint the mediating operator-verifiable property
-      claim and route through it
-- [ ] Absorb doc-driven-development markers: `[!QUESTION]` → `?`;
-      `[!TODO]` → `verify`-not-runnable; callout blocks demoted to
-      unledgered prose docs only (synthesis files, contracts), with
-      churning blocks a promotion signal to ledger-ize
-- [ ] Design-kb self-audit passes: `goal-cited-directly`,
-      `mechanism-in-requirement-theory` (confinement grep)
-- [ ] Migration story: `aliases:` frontmatter bridges labels both
-      directions; existing towers adopt claim semantics lazily,
-      entry-by-entry as files get touched
+Executed as its own reform; the record is
+`llm-design-kb/docs/dev/claims.kb/design.kb/`, and COHORT
+(`docs/dev/claims.kb/design.claims.kb/extension.kb/which-other-skills-want-the-same-reform.md`)
+rules it the fleet's second extension of `/llm-claims`.
+
+- [x] Rewrite the skill as a discipline over the ledger: rungs are
+      theories with declared priors (STRATA/THEORY); `070-future-work`
+      dissolves into `?` / `todo:` / struck claims filed under the rung
+      they concern (DEFER); background becomes an auxiliary theory
+- [~] The interpolation rule — **reversed, not dropped.** CHAIN ruled
+      priors a DAG: a design claim citing a goal directly is an ordinary
+      long edge, not a lint warning. The proposed lint could not tell a
+      missing requirement from a genuine long edge, and one that fires
+      on both teaches its reader to silence it
+- [x] Absorb doc-driven-development markers: `[!QUESTION]` → `standing:
+      open`, `[!TODO]` → `todo:` (CALLOUT). The `verify`-not-runnable
+      form named here was **rejected** — see DECIDED_UNBUILT, which this
+      reform closed: it is not greppable data and has no one-line chat
+      form
+- [x] Design-kb self-audit passes — housed in llm-design-kb's own
+      Maintenance section, not in `/llm-claims-kb`, which keeps only the
+      generic ledger audit. `mechanism-in-requirement-theory` is
+      `llm-claims-kb-ownership --trespass`, an existing tool, no new
+      pass needed. `goal-cited-directly` is obviated by CHAIN
+- [x] Migration story — `skill.kb/must-read.kb/when/meeting-a-numbered-design-kb-tower.md`
+      is trigger and guide in one file; old towers stay legal and nothing
+      migrates on a schedule (LEGACY). The proposed `aliases:`
+      frontmatter was **not needed**: labels are minted at conversion,
+      so there is no old label to bridge
 
 ### Instance work (owned by `~/claude/meta-reasoning/`)
 
@@ -115,8 +128,10 @@ maintenance affordances (schemas, validation, self-audit passes).
 
 ## Open Questions
 
-- Does the requirement theory become *mandatory* in the canonical
-  chain, or optional like all design-kb layers today?
+- ~~Does the requirement theory become *mandatory* in the canonical
+  chain?~~ **Closed 2026-08-29:** no rung is mandatory. SEED makes the
+  rung set the project's own `design.md` ontology, so dropping one is an
+  ordinary claim edit with an author.
 - File-per-claim frontmatter: does `standing` stay prose-sigil-primary
   with frontmatter as shadow, or frontmatter-primary? (Lint must
   reconcile either way.)

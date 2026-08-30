@@ -1,0 +1,3 @@
+Empty on purpose -- see ../design.kb/mission.kb/.keepme. Delete when the
+first policy lands here. If this project has no cross-cutting policy,
+delete the whole collection, its .md, and its .jsonschema.yaml.

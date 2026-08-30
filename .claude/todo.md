@@ -5,6 +5,12 @@ managed-by: Skill(llm-subtask)
 Repo-level list. Skill-scoped work lives in each skill's own
 `.claude/todo.md`; the breadcrumbs below point at every open list.
 
+- [ ] Rename the bare `claims.kb/` children to bare subject tokens
+      (`design.claims.kb/` -> `design.kb/`), six ledgers —
+      .claude/todo.kb/2026-08-29-000-Rename-the-bare-claims-kb-children-to-bare-subject-tokens.md
+- [ ] llm-collab's skeleton still ships the pre-ledger design tower and
+      a copied technical-policy schema —
+      .claude/todo.kb/2026-08-29-001-Update-llm-collab-skeleton-to-the-claims-ledger-form.md
 - [ ] persist-clarity: owner rulings pending on the redesign's open
       questions (return promised for 2026-08-30) —
       persist-clarity/.claude/todo.kb/2026-08-29-000-Rule-on-the-redesign-open-questions.md
