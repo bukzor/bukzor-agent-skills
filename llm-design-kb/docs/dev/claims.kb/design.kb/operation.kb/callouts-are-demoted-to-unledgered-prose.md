@@ -13,7 +13,7 @@ frontmatter to carry standing. Inside a record they are superseded:
 `[!QUESTION]` is `standing: open`, `[!TODO]` is `todo:`.
 
 One word now spans all three surfaces -- the callout's `[!TODO]`, the
-chat line's `XY! todo:`, and the file's `todo: true` -- which is what
+chat line's `(todo)`, and the file's `todo: true` -- which is what
 makes the demotion a translation rather than a loss.
 
 A callout that churns is a promotion signal: the document is

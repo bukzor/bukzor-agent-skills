@@ -6,8 +6,8 @@ files to walk and `Skill(llm-claims)`'s core notation is the whole system:
 carries structurally comes back as notation -- `standing:` as the sigil,
 `verdict:` as a strike through the label, `why:` as the arrows, each
 target's sigil computed at the reference site so the warrant-mix shows where
-the weight rests, `verify:` as `-- certified(CHECK)`, `todo:` as the
-pre-colon token of the same name, and the tree as indentation, each
+the weight rests, `verify:` as `-- certified(CHECK)`, `todo:` as a
+`(todo)` on the label it grades, and the tree as indentation, each
 theory's claims written under the claim that defines it.
 
 Siblings come in support order, so a line's premises stand above it as well
@@ -54,7 +54,9 @@ LEGEND = (
     " `+` the agent's (veto invited), `?` no one's yet, bare means none is"
     " needed -- and a struck label, `~~LABEL!~~`, is a judgment that took"
     " the claim out of force; `<-` names what the claim rests"
-    " on. Indentation nests: a claim"
+    " on, and `(todo)` on a label means decided but not yet built --"
+    " its text states a future state, not a present one."
+    " Indentation nests: a claim"
     " reads in every word stipulated above it, and a claim stipulating an"
     " `ontology:` is a theory -- what is indented under it is confined to"
     " those words. Union over the chat, last wins."
@@ -110,10 +112,10 @@ def claim_line(claim: Claim, root: Path, labels: Mapping[str, str]) -> str:
     notes += [f"authority: {claim.authority}"] if claim.authority else []
     suffix = "".join(f" -- {note}" for note in notes)
     gist = relabel(claim.gist, claim, root, labels)
-    # The pre-colon slot: neither the label nor the sigil, so the tense
-    # rides along without touching either.
-    tense = " todo" if claim.todo else ""
-    return f"{labels[claim.id]}{arrows(claim.why, labels)}{tense}: {gist}{suffix}"
+    # On the label, ahead of the arrows: past them it would read as a
+    # modifier of the last prior, whose own tense is its own business.
+    tense = " (todo)" if claim.todo else ""
+    return f"{labels[claim.id]}{tense}{arrows(claim.why, labels)}: {gist}{suffix}"
 
 
 def theory_block(

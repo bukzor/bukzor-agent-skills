@@ -40,6 +40,6 @@ the common shape, not a constraint.
 
 ```bash
 grep -rH '^standing:' docs/dev/claims.kb/     # who signed what
-grep -rl '^todo:'     docs/dev/claims.kb/     # decided, not yet built
+grep -rl '^todo: true' docs/dev/claims.kb/    # decided, not yet built
 llm-claims-kb-flatten docs/dev/claims.kb/design.kb   # the whole ledger as one text
 ```

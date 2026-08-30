@@ -93,15 +93,20 @@ $defs:
         type: string
       todo:
         description: >-
-          Present only on a claim that is decided but not yet built --
-          the body already states the future state, which is why this is
-          a marker and not a field restating it. Absent means the claim
-          describes what is; `const: true` because absent already means
-          false. In chat the same word rides the pre-colon slot:
-          `XY! todo: the island rule is ***`. When the state lands,
-          delete the key (and add `verify:` if a check now exists); the
-          label never moves. Scan: `grep -rl '^todo:'`.
-        const: true
+          Whether this claim is decided but not yet built. The body
+          already states the future state, so this grades the claim's
+          tense rather than restating it. Defaults false, so absent
+          means the claim describes what is and no claim on file needs
+          migration. In chat the tense rides a parenthesized token
+          after the label, before the arrows --
+          `XY! (todo) <- AB!: the island rule is ***` -- which is
+          neither the label (it must survive the day the state ships)
+          nor the sigil (spent on the judge), and does not read as a
+          modifier of the last prior. When the state lands, drop the
+          key and add `verify:` if a check now exists; the label never
+          moves. Scan: `grep -rl '^todo: true'`.
+        type: boolean
+        default: false
       ontology:
         description: >-
           Defining claims only: the words this theory coins. A word earns a

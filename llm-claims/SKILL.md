@@ -82,17 +82,18 @@ its place and stays visible where it stood: `~~XY~~: claim text`, so `grep
 XY` still finds it. The signatures need no verbose form; the sigil is the
 record.
 
-A claim decided but not yet built takes a pre-colon token:
+A claim decided but not yet built takes a `(todo)` on its label:
 
-    * XY! todo: the island rule is ***
+    * XY! (todo) <- AB!: the island rule is ***
 
-The body already states the future state, so the mark is one word, not a
-field restating it. The pre-colon slot is the only structured position
-that is neither the label (which must survive the ship date) nor the
-sigil (spent on the judge). When the state lands, drop the token; the
-line is already the descriptive sentence. Undecided stays plain `?`
-(an-open-question-needs-no-new-mark); in files the token is `todo: true`
-(`Skill(llm-claims-kb)`).
+The body already states the future state, so the mark grades the tense
+rather than restating it. It sits on the label and ahead of the arrows:
+past them it would read as a modifier of the last prior, whose tense is
+its own business. It touches neither the label -- which must survive the
+day the state ships -- nor the sigil, spent on the judge. When the state
+lands, drop the token; the line is already the descriptive sentence.
+Undecided stays plain `?` (an-open-question-needs-no-new-mark); in files
+the tense is `todo: true` (`Skill(llm-claims-kb)`).
 
 ## Theories
 

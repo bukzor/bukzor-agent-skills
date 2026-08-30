@@ -9,13 +9,13 @@ why:
 
 # How Decided-but-Unbuilt Intent Is Marked
 
-A claim decided but not yet built takes one word, in the pre-colon
-slot in chat -- `XY! todo: the island rule is ***` -- and as
+A claim decided but not yet built takes one word: `(todo)` on the
+label in chat -- `XY! (todo) <- AB!: the island rule is ***` -- and
 `todo: true` in frontmatter. The body already states the future
-state, so the mark restates nothing: when the state lands, drop the
-token and the line is already the descriptive sentence; on disk,
-delete the key (adding `verify:` if a check now exists) and the label
-never moves.
+state, so the mark grades the tense and restates nothing: when the
+state lands, drop the token and the line is already the descriptive
+sentence; on disk, drop the key (adding `verify:` if a check now
+exists) and the label never moves.
 
 Why each rejected shape lost:
 
@@ -30,14 +30,24 @@ Why each rejected shape lost:
 - **A structured suffix** (`-- built-when(CONDITION)`): everything
   past the first `:` is opaque prose, repeatedly ruled; and the
   condition would be a second copy of the body, drifting from it.
+- **A bare token before the colon** (`XY! <- AB! todo:`): sits past
+  the arrows, where adjacency makes it read as a modifier of the last
+  prior; and bare `todo` is not greppable, colliding with the word in
+  ordinary prose. Parens on the label fix both.
 - **A second frontmatter field** (`built-when:`): same duplication --
   the claim body *is* the "built when".
 - **`future: true`**: reads as a category, quietly re-minting the
   future-work bucket the design-kb reform dissolved; `todo` is one
   word across prose callout (`[!TODO]`), chat token, and frontmatter.
 
-`const: true`, not boolean -- absent already means false, so no claim
-on file needs migration (the same route `verdict:` shipped with).
+A boolean defaulting false, so absent means the claim describes what
+is and no claim on file needs migration (the same route `verdict:`
+shipped with). Not `const: true`, which was the first cut and was
+wrong: a schema describes the data a consumer receives, not the text
+an author types, and one that rejects the materialized form of its own
+default is incoherent -- `llm-design-kb/jsonschema/layer-entry.jsonschema.yaml`
+had already written that argument down for `why: []`.
+
 Undecided work needs none of this: it is a plain `?` claim
 (an-open-question-needs-no-new-mark.md), and scheduling remains
 `Skill(llm-subtask)`'s job. The `formalize/` pair that motivated the

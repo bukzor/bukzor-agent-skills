@@ -40,7 +40,7 @@ restated here; this skill maps it onto a directory.
 | a struck label, `~~XY~~` | `verdict:` -- present only where a judgment took the claim out of force; the strike says that much, the word says what they ruled |
 | `<-` arrows | `why:` -- file-relative paths; never a copied sigil, standing lives at the definition site |
 | `-- certified(CHECK)` | `verify:` |
-| the pre-colon token, `XY! todo:` (decided, not yet built) | `todo: true` -- deleted when the state lands, the label never moves |
+| `(todo)` on the label (decided, not yet built) | `todo:` -- boolean, default false; dropped when the state lands, the label never moves |
 | restating a label | editing the file; the git diff's `-` is the strikethrough |
 | a theory | a claim like any other -- `<theory>.md`, carrying `ontology:` and `stale-when:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
 | indentation | the tree: what a `.kb/` holds is nested under the claim naming it, at any depth |

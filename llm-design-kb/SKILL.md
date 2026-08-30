@@ -67,13 +67,13 @@ every line. What the user ruled signs `!`; what you inferred signs
 Design records lead implementation as often as they trail it, so
 **every claim declares its tense**. Mission, goals, and requirements
 are aspirational by nature and take no mark. From architecture down, a
-claim describing something not yet built takes the `todo:` token:
+claim describing something not yet built takes a `(todo)`:
 
-    * CACHE! todo: the resolver caches by content hash, not by path
+    * CACHE! (todo) <- SPEED!: the resolver caches by content hash, not by path
 
 Write it as declarative future-state prose, never as an imperative
 task: when the state lands, dropping the token leaves a sentence that
-is already true. A claim with no `todo:` is a claim about what is, and
+is already true. A claim with no `(todo)` is a claim about what is, and
 a mismatch with the code is a bug in the claim.
 
 ## Review: rung by rung
