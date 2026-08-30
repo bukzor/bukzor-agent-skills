@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: "https://json-schema.org/draft/2020-12/schema"
+title: policy claim frontmatter
+description: >
+  A policy is a claim that binds -- an imperative, not a description --
+  so it carries the claim schema plus one field: `force`, grading how
+  hard it binds. The conventional home for a project's policies is a
+  `technical-policy.kb/` theory in its ledger; any theory whose claims
+  are imperatives may bind this schema instead of the plain claim
+  schema. Consumers wanting only the grading borrow `#force`.
+
+  Prior art: llm-design-kb/jsonschema/technical-policy.jsonschema.yaml,
+  which defined `force` for the pre-ledger design-tower format and
+  stays in place for legacy towers; this file is the canonical
+  definition now.
+$defs:
+  force:
+    $anchor: force
+    description: >
+      Normative force of this policy, as RFC 2119 requirement levels.
+      Negation lives in the policy statement ("must not ..."), so there
+      is no separate must-not level. Omitted on open claims -- a
+      question binds nobody.
+    default: should
+    oneOf:
+      - const: must
+        description: >
+          Non-negotiable. Work that violates it is non-conforming;
+          there is no acceptable justification for deviating.
+      - const: should
+        description: >
+          Strong default. Deviation is permitted only with explicit,
+          recorded justification, weighed against the goal served.
+      - const: may
+        description: >
+          Preference / nice-to-have. Adopt when convenient; drop
+          without ceremony.
+  base:
+    $anchor: base
+    description: >
+      The extensible base: everything but the closure. Consumers that
+      add fields $ref this anchor and close themselves with
+      `unevaluatedProperties: false`; exact-conformance consumers $ref
+      the document root.
+    $ref: "claim.jsonschema.yaml#base"
+    properties:
+      force:
+        $ref: "#force"
+$ref: "#/$defs/base"
+unevaluatedProperties: false

@@ -2,29 +2,8 @@
 title: fleet-principles claim frontmatter
 description: >
   The claim schema plus one field: `force`, imported from
-  llm-design-kb/jsonschema/technical-policy.jsonschema.yaml. Principles
-  are imperatives; force grades how hard each one binds.
-$ref: "skill://llm-claims-kb/jsonschema/claim.jsonschema.yaml#base"
-properties:
-  force:
-    description: >
-      Normative force of this policy, as RFC 2119 requirement levels
-      (per llm-design-kb technical-policy). Negation lives in the
-      policy statement ("must not ..."), so there is no separate
-      must-not level. Omitted on open questions -- a question binds
-      nobody.
-    default: should
-    oneOf:
-      - const: must
-        description: >
-          Non-negotiable. Work that violates it is non-conforming;
-          there is no acceptable justification for deviating.
-      - const: should
-        description: >
-          Strong default. Deviation is permitted only with explicit,
-          recorded justification, weighed against the goal served.
-      - const: may
-        description: >
-          Preference / nice-to-have. Adopt when convenient; drop
-          without ceremony.
+  llm-claims-kb/jsonschema/policy.jsonschema.yaml. Principles are
+  imperatives; force grades how hard each one binds. Omitted on open
+  questions -- a question binds nobody.
+$ref: "skill://llm-claims-kb/jsonschema/policy.jsonschema.yaml#base"
 unevaluatedProperties: false
