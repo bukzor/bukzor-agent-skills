@@ -55,6 +55,7 @@ class Claim:
     verdict: str | None  # what was ruled, where a ruling took the claim out of force
     why: tuple[Prior, ...]  # what it rests on, in citation order
     verify: str | None  # the CHECK of `-- certified(CHECK)`
+    todo: bool  # decided but not yet built -- the pre-colon `todo:` token
     authority: str | None  # the act that settled the standing
     ontology: tuple[str, ...]  # the words stipulated -- defining claims only
     stale_when: str | None  # what voids the theory's stamp -- defining claims only
@@ -203,6 +204,7 @@ def read_claim(origin: Path, path: Path) -> Claim:
     label, standing, why = front["label"], front["standing"], front.get("why", [])
     verdict, verify = front.get("verdict"), front.get("verify")
     authority = front.get("authority")
+    todo = front.get("todo", False)
     ontology, stale_when = front.get("ontology", []), front.get("stale-when")
     # Renamed 2026-08-13. Reading past the old key would drop the line silently.
     assert "defeated-by" not in front, f"{path}: `defeated-by:` is now `stale-when:`"
@@ -212,6 +214,9 @@ def read_claim(origin: Path, path: Path) -> Claim:
     assert isinstance(why, list), why
     assert verify is None or isinstance(verify, str), verify
     assert authority is None or isinstance(authority, str), authority
+    # `const: true` in the schema: absent already means false, so the only
+    # honest value is True. A False here is a second way to say nothing.
+    assert todo is True or todo is False, todo
     assert isinstance(ontology, list), ontology
     assert stale_when is None or isinstance(stale_when, str), stale_when
     identity = claim_id(origin, path)
@@ -225,6 +230,7 @@ def read_claim(origin: Path, path: Path) -> Claim:
         why=tuple(prior(origin, path, str(entry)) for entry in cast(list[object], why)),
         verify=verify,
         authority=authority,
+        todo=bool(todo),
         ontology=tuple(str(word) for word in cast(list[object], ontology)),
         stale_when=stale_when,
         path=path,
