@@ -488,7 +488,8 @@ def report(theories: Sequence[Theory]) -> int:
             pass  # foreign doubles are legal: namespaces are per-ledger
     if failing:
         print(
-            "how to choose a repair: Skill(llm-claims-kb)"
+            "one entry may lose the word, or the word may be too coarse for"
+            " both -- how to choose a repair: Skill(llm-claims-kb)"
             " skill.kb/self-audit.kb/confinement.md"
         )
     print(census(theories))

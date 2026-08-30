@@ -217,7 +217,9 @@ llm-claims-kb-ownership --census     # the one-line summary
 The default scan judges each double by how the two stipulators
 relate. Two in one ledger contend: two owners for one word, an error
 charged to both entries, which fails the exit because only a person
-can decide which one loses it. A nested pair is inert, since the
+can decide -- which entry loses the word, or whether it is too coarse
+for both. `skill.kb/self-audit.kb/confinement.md` is how to choose.
+A nested pair is inert, since the
 outer entry owns and the inner restates it. A pair in different
 ledgers is out of jurisdiction -- namespaces are per-ledger -- and is
 counted, never reported.
@@ -226,8 +228,8 @@ counted, never reported.
 one of the owner's own siblings, with no import to license it,
 grouped per stipulation and ranked by force. It is a queue, not an
 error list -- every finding has four honest repairs (cull, move,
-admit, uniquify) and the scan picks none of them;
-`skill.kb/self-audit.kb/confinement.md` is how to choose. `--idle` is a queue
+admit, uniquify) and the scan picks none of them; the same audit
+chooses. `--idle` is a queue
 too: an import whose words go unsaid may still carry real support,
 and only reading the citing theory tells.
 
