@@ -87,9 +87,21 @@ $defs:
         description: >-
           Re-runnable check that certifies the claim -- the CHECK of
           `certified(CHECK)`; a certified claim's standing is bare, the
-          check standing where a judge would. A verify that cannot yet
-          run is acceptance debt: the claim is decided but unbuilt.
+          check standing where a judge would. A `verify:` must run
+          today; a claim decided but not yet built carries `todo:`
+          instead, and gains its `verify:` when it lands.
         type: string
+      todo:
+        description: >-
+          Present only on a claim that is decided but not yet built --
+          the body already states the future state, which is why this is
+          a marker and not a field restating it. Absent means the claim
+          describes what is; `const: true` because absent already means
+          false. In chat the same word rides the pre-colon slot:
+          `XY! todo: the island rule is ***`. When the state lands,
+          delete the key (and add `verify:` if a check now exists); the
+          label never moves. Scan: `grep -rl '^todo:'`.
+        const: true
       ontology:
         description: >-
           Defining claims only: the words this theory coins. A word earns a

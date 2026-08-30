@@ -82,6 +82,18 @@ its place and stays visible where it stood: `~~XY~~: claim text`, so `grep
 XY` still finds it. The signatures need no verbose form; the sigil is the
 record.
 
+A claim decided but not yet built takes a pre-colon token:
+
+    * XY! todo: the island rule is ***
+
+The body already states the future state, so the mark is one word, not a
+field restating it. The pre-colon slot is the only structured position
+that is neither the label (which must survive the ship date) nor the
+sigil (spent on the judge). When the state lands, drop the token; the
+line is already the descriptive sentence. Undecided stays plain `?`
+(an-open-question-needs-no-new-mark); in files the token is `todo: true`
+(`Skill(llm-claims-kb)`).
+
 ## Theories
 
 `<-` tracks support -- what a claim rests on. Theories track **sense** --
