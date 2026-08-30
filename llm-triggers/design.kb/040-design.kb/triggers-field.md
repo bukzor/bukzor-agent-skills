@@ -14,7 +14,7 @@ juncture-keyed condition with what to read:
 ```yaml
 triggers:
     - when: restructuring this ledger
-      read: Skill(llm-claims-kb)
+      read: skill://llm-claims-kb
     - before: committing
       read:
           - ./commit.md

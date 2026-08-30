@@ -5,7 +5,7 @@ description: "Agent MUST load for 'vitals'/'check-in'/'checkin' commands, wellne
 ---
 --- # workaround: anthropics/claude-code#13003
 triggers:
-    - read: Skill(llm-kb)
+    - read: skill://llm-kb
 default: vitals checkin
 ---
 

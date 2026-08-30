@@ -4,7 +4,7 @@ description: "Agent MUST load when a diagnosed bug belongs to someone else's pro
 ---
 --- # workaround: anthropics/claude-code#13003
 triggers:
-    - read: Skill(walled-web)
+    - read: skill://walled-web
 ---
 
 # Reporting upstream
