@@ -78,3 +78,19 @@
 - [ ] Tighten `--candidates`' own side: `phi`, `defeated`, `collapsed`,
       `wrestled` are false positives at floor 8. Candidates are 2/3
       precise today; the cull side is clean
+- [ ] USER (2026-08-30): reconsider `superseded-by[]` for out-of-force
+      claims — "I suspect that ruling is flawed or outdated." The
+      standing ruling is llm-claims-kb SKILL.md's "What this is not":
+      the graph's `superseded-by:` does not translate to the ledger
+      because "a ledger names [the successor] in the body, and the
+      successor's label is what `grep` finds." What prompted the
+      reconsideration: private.bukzor-llc's `strategy.jsonschema.yaml`
+      adopted path-valued `superseded-by` the same day, because on
+      unlabeled docs the field buys a machine check body prose cannot
+      (validator insists a superseded doc names an existing successor)
+      — the same argument may apply to `verdict: superseded` claims
+      (and the graph's `live: false`), where nothing today checks that
+      a replacement is actually named. The user's spelling
+      `superseded-by[]` suggests array-valued (one claim replaced by
+      several). Ruling lives in llm-claims-kb; filed here per the
+      user's pointer
