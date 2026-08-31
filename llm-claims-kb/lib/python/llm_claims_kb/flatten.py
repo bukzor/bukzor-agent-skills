@@ -203,7 +203,7 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
     )
     found += [
         (
-            f"label {one} is defined twice"
+            f"label {one} is defined twice; it stays with the claim whose contention it names"
             if one == other
             else f"label {one} prefixes {other}; `grep {one}` cannot tell them apart"
         )
