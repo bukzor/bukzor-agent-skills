@@ -201,15 +201,25 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
     names = sorted(
         claim.label for claim in (*ledger.claims, *imported(ledger).values())
     )
-    found += [
+    collisions = [
         (
-            f"label {one} is defined twice; it stays with the claim whose contention it names"
+            f"label {one} is defined twice"
             if one == other
             else f"label {one} prefixes {other}; `grep {one}` cannot tell them apart"
         )
         for one, other in combinations(names, 2)
         if other.startswith(one)
     ]
+    if collisions:
+        # A test each label takes on its own, not a verdict naming a squatter:
+        # two ledgers can each be named right and collide anyway, so the tip
+        # has to survive both labels passing it. Appended once however many
+        # pairs collided -- the advice does not vary per pair.
+        collisions.append(
+            "TIP: both labels should name their own claim's locus of contention,"
+            " not its conclusion; where both already do, one still uniquifies."
+        )
+    found += collisions
     return tuple(found)
 
 
