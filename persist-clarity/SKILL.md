@@ -10,15 +10,17 @@ rulings — usually persisted) and its **clarity** — the understanding
 that produced them, which evaporates at the context boundary. Fluency
 is not storable; its residues are. The operation has three beats, in
 order: **encode** the clarity as a claim ledger; **review** — present
-it, integrate rulings; **persist** the reviewed ledger into the
-project's homes.
+it, integrate rulings; **persist** — on the user's go — the reviewed
+ledger into the project's homes.
 
 ## Encode: the ledger is the clarity
 
 Render what this session now understands as a claim ledger —
 `Skill(llm-claims)` notation: one claim per line, the sigil signing
 the judge, `~~strikes~~` for what was killed, `<-` for what each
-rests on. If the session already kept a ledger, this is its final
+rests on. The render is a message, not a file: it mints nothing, so
+no session is too small for it — two bare facts owe a two-line
+ledger. If the session already kept a ledger, this is its final
 patch, not a rival. Inventory the whole session, not the recent
 tail — the early turns are the ones you've already half-forgotten,
 which is the signal they need persisting.
@@ -63,16 +65,18 @@ words attached to its label: at the persist beat they become the
 claim's `authority:`, never mined from the transcript after the
 fact.
 
-Review is a veto point, not a gate: silence persists every claim at
-its honest sigil — a `+` lands at agent standing, vetoable forever; a
-`?` lands open. The alternative to persisting unreviewed is
-evaporation, which no one gets to veto.
+Review is a veto point, not a gate — a `+` stands without an answer,
+vetoable forever; a `?` stays open — and it ends at the user's
+satisfaction: integrate until the ledger reads back what they would
+sign, or their silence leaves the render itself as the product.
 
-## Persist: after review
+## Persist: the user's call
 
-Read `skill.kb/persistence.md` and file the reviewed ledger into the
-project's homes. It carries the per-ecosystem strategies; the two
+A disk ledger past review is optional and recommended — offer it;
+the user decides, and the operation may end at the chat render. On
+go, read `skill.kb/persistence.md` and file the reviewed ledger into
+the project's homes. It carries the per-ecosystem strategies; the two
 residues no claim can hold — the **narrative address** (where the
 full story can be re-mined) and the **re-entry path** (a cold agent's
-reading order); and the filing anti-patterns. The operation ends at a
-commit, not before.
+reading order); and the filing anti-patterns. Elected, the filing
+ends at a commit, not before.

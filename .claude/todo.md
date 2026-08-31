@@ -11,9 +11,10 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] llm-collab's skeleton still ships the pre-ledger design tower and
       a copied technical-policy schema —
       .claude/todo.kb/2026-08-29-001-Update-llm-collab-skeleton-to-the-claims-ledger-form.md
-- [ ] persist-clarity: owner rulings pending on the redesign's open
+- [x] persist-clarity: owner rulings pending on the redesign's open
       questions (return promised for 2026-08-30) —
       persist-clarity/.claude/todo.kb/2026-08-29-000-Rule-on-the-redesign-open-questions.md
+      Ruled 2026-08-31; quotes in the entry
 - [ ] The homedir JSON-Schema survey is skill-scoped work now. Its six
       remaining lanes roll up under
       `llm-kb/.claude/todo.kb/2026-08-21-000-ref-rollout-beyond-todo-ideas.md`;

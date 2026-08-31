@@ -1,10 +1,10 @@
 # Persisting the reviewed ledger
 
-You arrive here with a reviewed ledger (`../SKILL.md`: encode, then
-review). This file maps it onto disk. The invariant: every claim,
-open, and residue ends the session in a home a cold agent will find,
-and the operation ends at a commit — uncommitted clarity is one crash
-from gone.
+You arrive here with a reviewed ledger and the user's go
+(`../SKILL.md`: persistence is theirs to elect). This file maps the
+ledger onto disk. The invariant: every claim, open, and residue ends
+the session in a home a cold agent will find, and the filing ends at
+a commit — uncommitted clarity is one crash from gone.
 
 ## Filing stance
 

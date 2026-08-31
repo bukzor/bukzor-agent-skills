@@ -1,6 +1,13 @@
 ---
 managed-by: Skill(llm-subtask)
-status: not-started
+status: done
+closeout: |
+  Read and ruled 2026-08-31. The mispriced render is answered in the
+  encode beat (MANDATE accepted: "the in-chat ledger mandatory,
+  yes"). The closing-condition repair was rejected — persist is now
+  user-elected ("the operation can end at chat-ledger"), so a late
+  mint belongs to the still-mandatory chat ledger and nothing
+  auto-lands on disk.
 ---
 
 # A run skipped encode and lost what review generated
@@ -47,7 +54,8 @@ that commit had nowhere to be.
 
 ## Success Criteria
 
-- [ ] The owner has read this and said whether it changes anything
+- [x] The owner has read this and said whether it changes anything —
+      it did; see closeout
 
 ## Address
 

@@ -43,11 +43,14 @@ The operation becomes three ordered beats:
    output format, not an orchestration of a peer). The four residues
    become the ledger's coverage test rather than filing instructions.
 2. **Review** — the render presented for rulings. A veto point, not a
-   gate: silence persists every claim at its honest sigil, because
-   the alternative to persisting unreviewed is evaporation.
-3. **Persist** — `skill.kb/persistence.md`, loaded after review,
-   carries the filing: per-ecosystem homes, per-residue landing
-   rules, the narrative address and re-entry path, verify-and-commit.
+   gate — no claim queues for sign-off — ending at the user's
+   satisfaction (owner, 2026-08-31).
+3. **Persist** — user-elected: "a disk-ledger is optional,
+   recommended, but user-decided" (owner, 2026-08-31), so the
+   operation may end at the chat render. On go,
+   `skill.kb/persistence.md` carries the filing: per-ecosystem homes,
+   per-residue landing rules, the narrative address and re-entry
+   path, verify-and-commit.
 
 The residue list is re-cut: **opens** join it (they were a separate
 "Open threads" section, but they are claim-shaped — `?` — and belong
@@ -85,10 +88,11 @@ found no external readers of any section, so no routes needed:
 
 ### Option B — make review blocking (require rulings before persist)
 - **Pros:** nothing lands at agent standing.
-- **Cons:** the skill fires at session end, often with no user
-  present; a blocked persist evaporates. And `Skill(llm-claims)`'s
-  own presentation rule forbids rendering `+` as a sign-off queue —
-  silence is consent. Declined.
+- **Cons:** `Skill(llm-claims)`'s own presentation rule forbids
+  rendering `+` as a sign-off queue — rulings cannot be required.
+  Declined as stated. The 2026-08-31 ruling then moved the persist
+  *trigger* to the user — "the operation can end at chat-ledger" —
+  so an unelected persist ends at the render, not in auto-filing.
 
 ### Option C — keep persistence in SKILL.md (one file)
 - **Pros:** one load; every full run reads the persist text anyway,
