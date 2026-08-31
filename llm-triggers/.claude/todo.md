@@ -15,3 +15,12 @@
       per-consumer `.claude/triggers.yaml` carries only adapter-grade
       delivery config (stores to walk, emission budget); the llc todo
       item carries the instance-side edit list
+- [ ] Candidate wake condition for the sweep (user-approved
+      2026-08-31): the sycophancy check — "a sitting closed with zero
+      substantive opposition on any invested position → run the
+      Advocate/Skeptic/Arbiter protocol at next session-start."
+      Judgment-only desc, obligation-age-flag-shaped. Known risk to
+      design against: an automatic skeptic invites performed
+      skepticism; the companion control is the grade-with-disconfirmer
+      gate in the must-read bank, which demands a named disconfirmer
+      rather than a posture
