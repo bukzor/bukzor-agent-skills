@@ -15,6 +15,14 @@ managed-by: Skill(llm-subtask)
       shared adapter, not per-tool: discovery should accept a directory
       named exactly `claims.kb` as well as `*.claims.kb`. Until then a
       silent pass on these two tools means nothing.
+- [ ] Awaiting the owner: do skeleton ledgers belong in the fleet?
+      57e1ca7's discovery matches by name, so
+      `llm-design-kb/skeleton/docs/dev/claims.kb` (template content)
+      now enters every sweep — its labels become fleet facts to
+      `llm-claims-kb-mentions` and its theories count in the census.
+      Default under silence: skeletons stay in. If ruled out, the
+      repair is one more exclusion in `ledger.ledger_roots`, which
+      already skips `.claude` and `trash/`
 - [ ] `llm-claims-kb-flatten` drops list blocks from claim bodies —
       a first paragraph ending in a colon renders as a dangling
       fragment and the bullets vanish (e.g. a struck claim's quoted

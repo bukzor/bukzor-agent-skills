@@ -5,6 +5,14 @@ managed-by: Skill(llm-subtask)
 Repo-level list. Skill-scoped work lives in each skill's own
 `.claude/todo.md`; the breadcrumbs below point at every open list.
 
+- [ ] Adjudicate the findings 57e1ca7 made visible: with bare-form
+      `claims.kb` ledgers discovered (13 roots now; 7 were invisible
+      before), the fleet sweeps surface 1 unimported mention
+      (design.claims.kb's COHORT names PLACE, defined at
+      llm-design-kb/docs/dev/claims.kb:MIGRATION), 3 new trespasses
+      (`llm-claims-kb-ownership --trespass`), 7 idle imports, and
+      1 inert double. Adjudicate by reading; repair menu in
+      llm-claims-kb/skill.kb/self-audit.kb/confinement.md
 - [ ] Rename the bare `claims.kb/` children to bare subject tokens
       (`design.claims.kb/` -> `design.kb/`), six ledgers —
       .claude/todo.kb/2026-08-29-000-Rename-the-bare-claims-kb-children-to-bare-subject-tokens.md
