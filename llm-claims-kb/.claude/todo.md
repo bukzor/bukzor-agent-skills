@@ -2,6 +2,19 @@
 managed-by: Skill(llm-subtask)
 ---
 
+- [ ] Ledger auto-discovery misses the scoped-bare form ruled below.
+      `mentions.py:43` and `ownership.py:70` both walk
+      `rglob("*.claims.kb")`, which cannot match a directory named
+      plainly `claims.kb` — so `llm-claims-kb-mentions` and
+      `llm-claims-kb-ownership` report clean on a ledger they never
+      opened. Found against `prototype.llm-postbox`, whose ledger is
+      `docs/dev/claims.kb/`: `--census` said "0 trespasses over 0
+      stipulations" while six theories with ontologies sat on disk, and
+      a hand-run scan then turned up five real trespasses. `graph` and
+      `flatten` are unaffected (explicit path argument). Fix in the
+      shared adapter, not per-tool: discovery should accept a directory
+      named exactly `claims.kb` as well as `*.claims.kb`. Until then a
+      silent pass on these two tools means nothing.
 - [ ] `llm-claims-kb-flatten` drops list blocks from claim bodies —
       a first paragraph ending in a colon renders as a dangling
       fragment and the bullets vanish (e.g. a struck claim's quoted
