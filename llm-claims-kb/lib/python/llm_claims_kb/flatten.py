@@ -212,12 +212,11 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
     ]
     if collisions:
         # A test each label takes on its own, not a verdict naming a squatter:
-        # two ledgers can each be named right and collide anyway, so the tip
-        # has to survive both labels passing it. Appended once however many
-        # pairs collided -- the advice does not vary per pair.
+        # two ledgers can each be named right and collide anyway. Appended
+        # once however many pairs collided -- the advice does not vary per
+        # pair.
         collisions.append(
-            "TIP: both labels should name their own claim's locus of contention,"
-            " not its conclusion; where both already do, one still uniquifies."
+            "TIP: both labels should name their own claim's locus of contention."
         )
     found += collisions
     return tuple(found)
