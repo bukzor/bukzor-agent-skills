@@ -48,6 +48,10 @@ CITE = re.compile(r"(?:\.\./)*(?:[a-z0-9-]+\.kb/)?[a-z0-9-]+\.md")
 # Enough notation to act on the paste without the skill loaded: a ledger's
 # own FRESH_READER and SELF_CONTAINED claims apply to the ledger's transport
 # form too.
+# Unconditional on purpose -- not pruned to the marks this ledger happens to
+# use. Its second job is to prime a zero-context reader on what a legal
+# addition looks like, and the mark missing from today's output is exactly
+# the one such a reader has no other way to learn.
 LEGEND = (
     "Notation (`Skill(llm-claims)`): one claim per line; `LABEL` names the locus"
     " of contention, a trailing sigil signs the judge -- `!` the user's call,"

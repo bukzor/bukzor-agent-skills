@@ -48,9 +48,14 @@ operation on one. What each operation *obliges* is a file apiece in
 ## Sigils
 
 The sigil trails the label, so the label stays a greppable prefix: `grep
-XY` finds `XY`, `XY?`, `XY!`, and every reference. Sigils travel with the
-label -- `XY <- AB! CD?` shows the warrant-mix exactly where weight rests
-on it.
+XY` finds `XY`, `XY?`, `XY!`, and every reference.
+
+A claim therefore has two renderings of its name. Its **definition
+site** -- the line stating it -- is fully qualified: label, sigil, and
+any `(todo)`. Everywhere else the bare label is licensed and usually
+reads better. An arrow clause may still carry sigils where the
+warrant-mix is the point (`XY <- AB! CD?`), at the price of a copy that
+goes stale when the claim is re-signed.
 
 Four marks exhaust the space. A signature records *residual choice*: if
 accepting every premise settles the claim, nothing was left to decide and

@@ -33,7 +33,10 @@ Why each rejected shape lost:
 - **A bare token before the colon** (`XY! <- AB! todo:`): sits past
   the arrows, where adjacency makes it read as a modifier of the last
   prior; and bare `todo` is not greppable, colliding with the word in
-  ordinary prose. Parens on the label fix both.
+  ordinary prose. Parens on the label fix both -- the chat scan is
+  `grep -nE '^[^:]*\(todo\)'`, anchored ahead of the first colon
+  because everything past it is opaque prose that may say "(todo)"
+  about something else entirely.
 - **A second frontmatter field** (`built-when:`): same duplication --
   the claim body *is* the "built when".
 - **`future: true`**: reads as a category, quietly re-minting the
