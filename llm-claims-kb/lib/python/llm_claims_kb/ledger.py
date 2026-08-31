@@ -263,11 +263,36 @@ def read_theory(origin: Path, collection: Path) -> Theory:
 
 
 def read_theories(origin: Path, collection: Path) -> tuple[Theory, ...]:
-    """Every theory inside a collection, and every theory inside those."""
+    """Every theory inside a collection, and every theory inside those.
+
+    A nested ledger root is not among them: it is a namespace of its own,
+    read as its own ledger, and folding it in here would count every theory
+    inside it twice."""
     return tuple(
         theory
         for nested in sorted(collection.glob("*.kb"))
+        if not is_ledger_root(nested)
         for theory in (read_theory(origin, nested), *read_theories(origin, nested))
+    )
+
+
+def is_ledger_root(path: Path) -> bool:
+    """A ledger by name: `<subject>.claims.kb`, or bare `claims.kb` where the
+    enclosing scope supplies the subject."""
+    return path.name == "claims.kb" or path.name.endswith(".claims.kb")
+
+
+def ledger_roots(under: Path = Path()) -> tuple[Path, ...]:
+    """Every ledger in the tree; worktree copies and scratch excepted -- a
+    copy's labels would collide with the originals they were branched from,
+    and `trash/` holds discarded drafts, not the fleet."""
+    return tuple(
+        sorted(
+            path
+            for pattern in ("claims.kb", "*.claims.kb")
+            for path in under.rglob(pattern)
+            if path.is_dir() and not {".claude", "trash"} & {*path.parts}
+        )
     )
 
 

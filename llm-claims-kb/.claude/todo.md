@@ -2,7 +2,7 @@
 managed-by: Skill(llm-subtask)
 ---
 
-- [ ] Ledger auto-discovery misses the scoped-bare form ruled below.
+- [x] Ledger auto-discovery misses the scoped-bare form ruled below.
       `mentions.py:43` and `ownership.py:70` both walk
       `rglob("*.claims.kb")`, which cannot match a directory named
       plainly `claims.kb` — so `llm-claims-kb-mentions` and

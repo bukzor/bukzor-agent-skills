@@ -27,23 +27,11 @@ import sys
 from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
 
-from .ledger import Claim, Ledger, Theory, read_ledger
+from .ledger import Claim, Ledger, Theory, ledger_roots, read_ledger
 
 # A label as prose wears it: sigils trail it, a verdict strikes it, and
 # `grep LABEL` has to keep finding it under both.
 MENTION = re.compile(r"(?<![A-Za-z0-9_])([A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*)(?![a-z0-9_])")
-
-
-def ledger_roots(under: Path = Path()) -> tuple[Path, ...]:
-    """Every ledger in the tree, worktrees excepted -- those are copies, and a
-    copy's labels would collide with the originals they were branched from."""
-    return tuple(
-        sorted(
-            path
-            for path in under.rglob("*.claims.kb")
-            if path.is_dir() and ".claude" not in path.parts
-        )
-    )
 
 
 def theory_index(ledgers: Iterable[Ledger]) -> Mapping[Path, Theory]:

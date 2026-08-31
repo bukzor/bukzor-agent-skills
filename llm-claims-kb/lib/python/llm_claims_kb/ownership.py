@@ -43,7 +43,7 @@ from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
 from pathlib import Path
 
-from .ledger import Theory, read_ledger
+from .ledger import Theory, is_ledger_root, ledger_roots, read_ledger
 
 
 def load_law():
@@ -62,17 +62,6 @@ def load_law():
 law = load_law()
 
 
-def ledger_roots(under: Path = Path()) -> tuple[Path, ...]:
-    """Every ledger under the working tree, worktree copies excepted."""
-    return tuple(
-        sorted(
-            path
-            for path in under.rglob("*.claims.kb")
-            if path.is_dir() and ".claude" not in path.parts
-        )
-    )
-
-
 def fleet() -> tuple[Theory, ...]:
     """Every theory in every ledger."""
     return tuple(
@@ -86,9 +75,9 @@ def site(theory: Theory) -> str:
 
 
 def ledger_of(theory: Theory) -> Path:
-    """The `*.claims.kb` the theory lives in -- itself, for a ledger's own."""
+    """The ledger root the theory lives in -- itself, for a ledger's own."""
     here = theory.path
-    return next(one for one in (here, *here.parents) if one.name.endswith(".claims.kb"))
+    return next(one for one in (here, *here.parents) if is_ledger_root(one))
 
 
 def address(theory: Theory) -> tuple[str, ...]:
