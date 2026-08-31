@@ -1,5 +1,5 @@
 ---
-label: STANCE
+label: BODY_FORM
 standing: agent
 authority: >-
   docs/dev/adr/2026-08-28-000-A-skill-states-a-stance--not-a-procedure.md
