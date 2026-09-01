@@ -70,8 +70,8 @@ references.kb/: [Categorized guides: file-types.kb/, guidelines.kb/, workflows.k
 **Problem:** Docs become stale and lie.
 
 **Pattern:** Use directory listings as the source of truth:
-- `docs/adr/` directory contains decisions—`ls -t` to see chronologically
-- `docs/devlog/` directory contains session history—directory itself is the index
+- `docs/dev/adr/` directory contains decisions—`ls -t` to see chronologically
+- `docs/dev/devlog/` directory contains session history—directory itself is the index
 - Avoid maintaining separate index files that can drift
 
 ### 6. Design Knowledge
