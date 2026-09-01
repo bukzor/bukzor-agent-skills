@@ -24,3 +24,13 @@
       skepticism; the companion control is the grade-with-disconfirmer
       gate in the must-read bank, which demands a named disconfirmer
       rather than a posture
+- [ ] `design.kb/use-cases.kb/` has no sibling schema, so
+      `llm.kb-validate .` fails at the repo root: "No schema found:
+      llm-triggers/design.kb/use-cases.jsonschema.yaml" — the repo's
+      only validation error, 1 of 624 files. The collection landed in
+      8cc06b7/99166b1 (2026-08-27..28) and its entries carry
+      frontmatter, so CANONICAL_PER_COLLECTION says write the schema
+      rather than strip the frontmatter. Noticed 2026-09-01 by a
+      session working elsewhere; left for whoever owns the use-case
+      inventory, since the right shape depends on where that design is
+      heading

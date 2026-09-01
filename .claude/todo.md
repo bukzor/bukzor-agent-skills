@@ -13,12 +13,43 @@ Repo-level list. Skill-scoped work lives in each skill's own
       (`llm-claims-kb-ownership --trespass`), 7 idle imports, and
       1 inert double. Adjudicate by reading; repair menu in
       llm-claims-kb/skill.kb/self-audit.kb/confinement.md
+      All 3 trespasses sit in llm-design-kb's own record, created by the
+      2026-08-31 reform, and all three are `stratification.kb` saying a
+      sibling's word: `legacy tower` and `route` (owned by
+      `migration.kb`), `skeleton` (owned by `operation.kb`). Likeliest
+      repair is admit-by-import — STRATA genuinely rests on both — but
+      that asserts support, so read before importing. A fourth,
+      `licensed` in notation.kb, was culled 2026-09-01: it meant
+      ordinary permission, not ownership.kb's licensing
 - [ ] Rename the bare `claims.kb/` children to bare subject tokens
       (`design.claims.kb/` -> `design.kb/`), six ledgers —
       .claude/todo.kb/2026-08-29-000-Rename-the-bare-claims-kb-children-to-bare-subject-tokens.md
 - [ ] llm-collab's skeleton still ships the pre-ledger design tower and
       a copied technical-policy schema —
       .claude/todo.kb/2026-08-29-001-Update-llm-collab-skeleton-to-the-claims-ledger-form.md
+- [ ] Three agent judgment calls from 2026-08-31 that shipped without a
+      ruling — all live in place, none blocking, each vetoable by editing
+      the file named:
+  - [ ] `BODY_FORM` is my coinage, not the owner's. They ruled the *method*
+        (decide naming conflicts by rationality, not seniority) and I
+        picked the label under it —
+        docs/dev/claims.kb/design.claims.kb/authorship.kb/stance-over-procedure.md
+  - [ ] LABEL_FORMATS carries a paragraph the owner never said: that the
+        permission to drop a sigil stops at the definition site, because
+        bare is a mark rather than silence. Offered for veto in chat, not
+        answered —
+        llm-claims/claims.kb/design.claims.kb/notation.kb/a-claim-has-two-name-renderings.md
+  - [ ] Proposed and held back, awaiting their word: welding the two halves
+        already adjacent in `claim.jsonschema.yaml`'s `label:` description
+        ("names the locus of contention" + "no label may be a prefix of
+        another") with a clause saying the locus decides a collision. The
+        file is `$ref`'d fleet-wide, so the wording is theirs to rule
+- [ ] `llm-kb/bin/llm.kb-validate-links` has been uncommitted since
+      2026-08-29 19:58 and reverts de23391 — it strips `link_count` back
+      out, docstring included, restoring the "N files" line that commit
+      replaced. Not this session's work; left untouched. Confirm whether
+      it is live work or an abandoned experiment before anyone commits or
+      reverts it
 - [x] persist-clarity: owner rulings pending on the redesign's open
       questions (return promised for 2026-08-30) —
       persist-clarity/.claude/todo.kb/2026-08-29-000-Rule-on-the-redesign-open-questions.md
@@ -206,9 +237,17 @@ Repo-level list. Skill-scoped work lives in each skill's own
       this change?"). Marked as [!QUESTION] in
       design-next.kb/040-design.kb/class-record.md; ADR_FATE
       (design.claims.kb/does-the-ledger-subsume-the-adr.md) leans on it
-- [ ] llm-design-kb/principles.kb charter: contents outgrew "design.kb
+- [ ] llm-design-kb principles.kb charter: contents outgrew "design.kb
       authoring" scope (evaluate-uses-independently, test-the-residue) —
       widen CLAUDE.md charter or rehome (user rated rehoming tier-4)
+      Half-done 2026-08-31 (76930e2): rehomed to
+      `llm-design-kb/skill.kb/principles.kb/` and the charter rewritten to
+      "reusable rules for writing a design record well". The mismatch
+      survives the rewrite — both outliers are rules for *judging* whether
+      a mechanism or artifact class should exist, not for authoring a
+      claim. Defensible either way: the trigger indexing them is
+      `when/deciding-what-a-design-claim-should-say.md`, under which they
+      read as pre-authoring lenses. Needs the owner's call, not more edits
 - [ ] .claude/todo.kb/2026-01-02-000-skill-evolution-for-chatfs-harmonization.md
 - [ ] .claude/todo.kb/2026-01-30-000-shared-code-between-skills.md
 - [ ] .claude/todo.kb/2026-08-09-000-engine-tower-incubator-follow-ups.md
@@ -302,10 +341,14 @@ Repo-level list. Skill-scoped work lives in each skill's own
       `name.startswith('.')` while its own comment gives `.template.md`
       as the example. Either the file wants the dot or the check wants
       the suffix its comment already names
-- [ ] `llm-design-kb/references/how-to-document-design-knowledge.md` is
+- [x] `llm-design-kb/references/how-to-document-design-knowledge.md` is
       the only file in any skill's `references/` with frontmatter
       (`requires:`, a must-read-style directive). One file; decide it on
       its own rather than making `references/` a collection fleet-wide
+      Dissolved 2026-08-31 by the llm-design-kb reform (76930e2): the
+      file was deleted and `llm-design-kb/references/` with it. Re-scanned
+      `*/references/*.md` — no file in any skill carries frontmatter now,
+      so `references/` stays a plain directory fleet-wide by default
 - [ ] Three `.claude/todo.jsonschema.yaml` outside this repo are not the
       canonical stub, though `llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md`
       reads `status: complete` over a scope naming the whole tree:

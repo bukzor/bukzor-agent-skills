@@ -10,13 +10,13 @@ why:
 
 # A Claim Has Two Name Renderings
 
-A claim's name renders two ways, and which one is licensed depends on
+A claim's name renders two ways, and which one is permitted depends on
 one thing: whether the name sits at the definition site.
 
 - The **qualified** rendering -- label, sigil, and any `(todo)` -- is
   required at the definition site, the line or file that states the
   claim. That is the one place the standing is not a copy.
-- The **bare** rendering -- the label alone -- is licensed everywhere
+- The **bare** rendering -- the label alone -- is permitted everywhere
   else, and is the recommended default for prose that merely names a
   claim.
 

@@ -1,7 +1,7 @@
 ---
 label: DECIDED_UNBUILT
 standing: user
-authority: "@bukzor 2026-08-29, during the llm-design-kb reform: the pre-colon token was his strawman here; the frontmatter form his proposal -- 'the claim body *is* the built when. I think future: true is more honest. Or even todo: true, for homoiconicity's sake.'"
+authority: "@bukzor 2026-08-29, during the llm-design-kb reform: the pre-colon token was their strawman here; the frontmatter form their proposal -- 'the claim body *is* the built when. I think future: true is more honest. Or even todo: true, for homoiconicity's sake.'"
 why:
   - ../notation.md
   - an-open-question-needs-no-new-mark.md
