@@ -22,8 +22,9 @@ own. What it fixes beyond the base spec:
   enforcement level.
 
 V1's `llm-must-read-kb` documents the working instance of this
-format (naming grammar, symlink aliasing, topical nesting,
-composition with `procedures.kb/`); those conventions carry forward
+format (naming grammar, the no-aliasing rule — one body, one filename
+— topical nesting, composition with `procedures.kb/`); those carry
+forward
 unless an entry here says otherwise, and that skill folds into this
 subsystem at the v2 build
 (`../../../design-next.kb/040-design.kb/core-and-classes.md`).

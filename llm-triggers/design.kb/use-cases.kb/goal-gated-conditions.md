@@ -4,27 +4,22 @@ status: proposal
 
 # Goal-Gated Conditions
 
-A condition is goal-gated when it names the behavior its payload exists
-to prompt. The trigger then fires only for agents already doing the
-thing — exactly the population that no longer needs the delivery — and
-stays silent at the juncture where the behavior is owed but not yet
-begun.
+A delivery that exists to *start* a behavior has to reach the agent
+that has not started it. A bank entry chaining to a worked
+side-by-side is the case in hand: whoever is about to redesign
+something needs the example, and whoever is already writing one has
+stopped needing it. The two populations are disjoint, and the
+condition has to select the first.
 
-Deployed instance, caught by the owner within hours (dotfiles d4a11f4,
-reverted a19d712): the redesign bank entry chains to a worked
-side-by-side, and the chain was narrowed to `when: writing the
-side-by-side`. The read's purpose is to prompt side-by-side writing;
-gating on that behavior inverted cause and effect. The ruling: "I want
-the trigger to *prompt* writing a side-by-side at appropriate
-junctures."
-
-The repair is to state the condition over the situation that makes the
-behavior owed — usually the carrier's own condition, so the entry goes
-bare and inherits it. A narrower juncture inside a conditional carrier
-is legitimate only when the target serves a genuine sub-situation of
-the carrier's, never when it serves the whole condition.
+Today: the phrasing that comes most naturally to an author names the
+behavior the payload exists to produce — `when: writing the
+side-by-side` — which selects the second population exactly. The
+entry is well-formed and it fires, so nothing looks wrong; it just
+fires after its own purpose is moot, and stays silent at the juncture
+it was written for. The author gets no signal, because a trigger that
+fires resembles a trigger that works.
 
 Satisficed when: authoring guidance
-(`../040-design.kb/trigger-desc.md`) rejects a condition that names its
-payload's intended effect, the way the evaluability rule already
+(`../040-design.kb/trigger-desc.md`) rejects a condition that names
+its payload's intended effect, the way the evaluability rule already
 rejects the payload-gated shape (`payload-gated-conditions.md`).

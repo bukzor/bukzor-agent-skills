@@ -7,11 +7,13 @@ that targets the wrong audience for this file.
 
 - Skip tool-flag semantics, common-usage commentary, restated
   definitions, moral framing ("don't be sloppy"). Brief a peer.
-- Identify *which* Claude. Architectural notes ("X runs in a
-  separate agent," "this could be extracted later") target a
-  maintainer; runtime triggers and procedures target the actor.
-  Misaddressed content is bloat at the wrong file even when it's
-  earning its keep at the right one.
+- Identify *which* Claude, and give each what it needs. The actor
+  needs the stance to take, the criteria that say it's done, and the
+  tools to get there. The maintainer needs the argument, the
+  provenance, and the failure that prompted the rule; that column
+  ships to `docs/dev/`. Editorial feedback arrives addressed to the
+  writer, so it belongs in the maintainer's column — relocate it and
+  let the actor's file carry the directive alone.
 
 ## Goal
 

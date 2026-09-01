@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://json-schema.org/draft/2020-12/schema
+$schema: "https://json-schema.org/draft/2020-12/schema"
+description: |
+  Schema for wake-shaped use cases in use-cases.kb/. Auxiliary and
+  unnumbered, so no layer-entry base and no `why:` -- a use case is a
+  validation target, not a design decision motivated by one. Frontmatter
+  is optional; the whole collection is prose today except where an entry
+  carries an open-item marker.
+type: object
+properties:
+  status:
+    description: |
+      Open-item marker, per this tower's CLAUDE.md. Absent = ratified:
+      the design owes this use case a concrete answer.
+      - `proposal`: awaits operator ratification as a validation target
+      - `rejected`: considered and not adopted as a use case
+    enum: [proposal, rejected]
+additionalProperties: false

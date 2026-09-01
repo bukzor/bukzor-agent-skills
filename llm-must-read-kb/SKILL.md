@@ -60,7 +60,7 @@ relationship to the named situation:
 |---|---|---|
 | `before/` | Hard precondition. Read MUST complete *and* prescribed actions MUST run before the named action. | `before/ANY-shell-commands.md` |
 | `after/` | Read on completion of the named event. Typically for cleanup, audits, or post-mortems. | `after/an-unexpected-Bash()-tool-call-failure.md` |
-| `when/` | Read when a situational predicate holds mid-task. Fuzzier triggers. | `when/evaluating-a-contested-or-subjective-position.md` |
+| `when/` | Read when a situational predicate holds mid-task. Fuzzier triggers. | `when/user-instructions-are-inconsistent.md` |
 
 `before/` creates an action dependency: the read is sequenced *before*
 the triggered action — not parallel, not deferred.
@@ -132,17 +132,29 @@ The juncture verb (`before`/`after`/`when`) stays at the top; nested
 dirs add a topic axis. Don't sub-nest `.kb/` directories — the trigger
 slug, not the directory shape, carries the categorization.
 
-## Aliasing
+## No aliasing
 
-When one body serves multiple triggers, symlink:
+Do not give one body multiple filenames, by symlink or copy. Every
+alias is its own row in the index: the scan surfaces each name, the
+agent reads each match, and the same body lands in context once per
+alias. Copies add drift on top of the duplication.
 
-```
-before/contradicting-a-previous-response.md
-  → ../when/evaluating-a-contested-or-subjective-position.md
-```
+When one body seems to serve several triggers:
 
-Both filenames remain individually scannable in the index; the body
-lives in one place. Prefer symlinks over duplication; duplication drifts.
+- **Broaden the canonical slug** until it names the whole family
+  (`before/modifying-production-data.md`, not per-variant delete/
+  update/insert names) — but only while it stays concrete. A slug of
+  action verbs fires; an abstract description of the situation gets
+  scanned past.
+- **Keep the name that fires.** When one variant's slug has proven to
+  trigger reads and the broader description hasn't, effectiveness
+  outranks incumbency: the proven name becomes canonical.
+- **Name the remaining occasions in the body's opening prose**, where
+  the H1 restates the trigger — the slug fires the read; prose
+  carries the variants a slug cannot.
+- **Two occasions with no honest broader name are two entries.** If
+  they share method, factor it into `procedures.kb/` (next section)
+  and keep each trigger file a thin pointer.
 
 ## Composition with `procedures.kb/`
 

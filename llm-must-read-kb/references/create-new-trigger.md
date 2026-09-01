@@ -67,9 +67,9 @@ Slug rules:
   same trigger with an additional directive, extend that file instead
   of creating a near-duplicate.
 - Check whether the same body should also fire under a *different*
-  phrasing (e.g., "before contradicting" and "when evaluating a
-  contested claim" can be the same underlying rule). If so, this is an
-  aliasing case — see Step 7 — not two independent files.
+  phrasing (e.g., "before contradicting" and "before retracting a
+  claim" can be the same underlying rule). If so it needs one name —
+  not two files, and not a symlink. See Step 7.
 
 ## Step 5: Write the body
 
@@ -125,17 +125,25 @@ requiring the repo's git conventions doc first). Creates a hard
 sequencing dependency, same strength as the `before/` juncture itself.
 Omit if the body is fully self-contained.
 
-## Step 7: Decide aliasing vs. new content
+## Step 7: Give the body exactly one name
 
 If Step 4 surfaced a case where the same body should fire under a
-second trigger phrase, symlink rather than duplicate:
+second trigger phrase, do not symlink and do not copy. Every alias is
+its own row in the index, so a matching agent reads the same body once
+per name (`SKILL.md`, "No aliasing"). Resolve it in the name and the
+prose instead:
 
-```bash
-ln -s ../when/existing-trigger.md before/new-alias-name.md
-```
-
-Both filenames stay independently scannable in `ls -RF` output; the
-body lives in one place and can't drift out of sync.
+1. **Broaden the slug** until it names the whole family — but only
+   while it stays concrete. Action verbs fire; an abstract description
+   of a situation gets scanned past.
+2. **Keep the name that fires.** Where one phrasing has proven to
+   trigger reads and a broader one hasn't, the proven name becomes
+   canonical, whatever the file is called today.
+3. **Name the remaining occasions in the opening prose**, right under
+   the H1 that restates the trigger.
+4. **No honest broader name means two entries.** Factor the shared
+   method into `procedures.kb/` and keep each trigger file a thin
+   pointer to it.
 
 ## Step 8: Verify
 
@@ -154,8 +162,8 @@ body lives in one place and can't drift out of sync.
 
 ## Success criteria
 
-- Exactly one new trigger file (or one new file + one new symlink, for
-  aliasing) exists at the chosen scope and juncture.
+- Exactly one new trigger file exists at the chosen scope and
+  juncture: one body, one name, no symlink and no copy.
 - The filename + juncture read as a grammatical trigger phrase (Step
   4's self-check).
 - The body matches the Step 5 template shape and is under ~50 lines.

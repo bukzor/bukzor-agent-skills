@@ -74,38 +74,13 @@ skimming, which is why the opens are open. Spend accordingly:
   itself goes below the decisions: it is audit trail, not payload,
   and must not stand between the owner and the rulings.
 
-Then one numbered section per decision -- heading short, assertive,
-quotable, the skeleton of the reply you want back:
-
-1. **The priors:** what the owner must know to rule, rebuilt in
-   place, in plain words, assuming nothing retained.
-2. **The decision:** one or two plain sentences -- the things it
-   touches, not the abstractions it instantiates; where it merely
-   codifies existing practice, say so. Say what silence does.
-3. **Alternatives:** the choices live at decision time, each with its
-   honest appeal and honest cost. A straw man voids the ruling.
-4. **If you reject:** daily-life fallout, dated -- "breaks now" vs
-   "recurs forever" vs "nothing today, because"; for a question, the
-   fallout of each live answer. Name the decisions that lean on this
-   one.
-5. **Your recommendation**, stated plainly, with its rationale -- a
-   survey with no position makes the owner do your job.
-
-Argue against yourself in place -- the caveat favoring an amendment,
-the law with no police yet -- inside the section, not after the
-ruling. Below the sections come the audit lists: the kills, then the
-leftovers that are NOT decisions, each with why: unforced, a work
-item, a fact already stated.
-
-## The close is uncapped
-
-The reply's value concentrates in what you failed to anticipate --
-amendments, counter-questions, missing decisions, better warrants --
-so the reply channel must admit the unanticipated. Never a menu,
-never AskUserQuestion: option boxes cap the reply at your own
-imagination, and a walkthrough tuned for easy yeses has failed even
-when it gets them. End open-ended, saying concretely what you will do
-with the ruling.
+Then one section per decision. Composing this turn is asking the
+user questions, and your trigger bank's entry for that juncture
+governs the form. Sweep-specific on top of it: say what silence
+does for each open, in its species' terms. Below the sections come
+the audit lists: the kills, then the leftovers that are NOT
+decisions, each with why: unforced, a work item, a fact already
+stated.
 
 ## The reply is a new sweep
 
@@ -120,6 +95,11 @@ courts:
   so re-present its decision once answered.
 - **Rationales** are warrants, often stronger than yours: file them
   into the work, credited.
+- **Principles** -- rulings often arrive as universals, not picks:
+  apply the principle back to this batch and show the picks it
+  entails, and file it where it governs -- never a devlog.
+  Entailments beyond the batch in hand are proposals: wait for the
+  call to action.
 - **Rulings** -- confirmations, rejections, partial ones included,
   amendments -- are the owner's court's output: file each in the
   substrate's own register, only on the owner's word. Nothing
@@ -137,14 +117,10 @@ Rulings land in whatever register the work already keeps: claim-ledger
 signings (`Skill(llm-claims)`: accepted claims re-sign `!`),
 file edits, an ADR, a todo entry. The skill assumes none.
 
-Where the register is files, it is also the *presentation* medium:
-write the survivors into it, one file per decision, and let the chat
-message carry the tally and the path and nothing else. Prose review
-makes the owner quote your text back in order to rule on it -- toil
-for them, and their multi-part reply arrives detached from what it
-answered. On disk every ruling has an address, and they rule by
-editing in place: the verdict, plus marginalia in their own words
-wherever a rationale is worth keeping.
+Where the register is files, it is also the *presentation* medium --
+the asking law's file register -- and the owner rules by editing in
+place: the verdict, plus marginalia in their own words wherever a
+rationale is worth keeping.
 
 In place means the address where each survivor will live: a new claim
 in the ledger whose ontology admits it (`standing: agent`), a question
