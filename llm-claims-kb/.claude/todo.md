@@ -45,7 +45,7 @@ managed-by: Skill(llm-subtask)
         proposed owning `single` (8 uses) for the ledger root.
         Candidate tokens should be checked against the components of
         existing ontology entries, not just against whole entries.
-- [ ] Awaiting the owner: do skeleton ledgers belong in the fleet?
+- [x] Awaiting the owner: do skeleton ledgers belong in the fleet?
       57e1ca7's discovery matches by name, so
       `llm-design-kb/skeleton/docs/dev/claims.kb` (template content)
       now enters every sweep — its labels become fleet facts to
@@ -53,6 +53,29 @@ managed-by: Skill(llm-subtask)
       Default under silence: skeletons stay in. If ruled out, the
       repair is one more exclusion in `ledger.ledger_roots`, which
       already skips `.claude` and `trash/`
+      Ruled 2026-09-01: "Skeleton is a valid albeit empty ledger, and
+      should continue to be" — skeletons stay discovered. The
+      label-pollution worry dissolves under NON_CLAIM_TOKENS
+      (llm-claims notation.kb): the fleet stops gating mentions and
+      becomes at most a "defined in X" hint
+- [ ] Build the mention-gate reform once its open policies rule —
+      policies in llm-claims `design.claims.kb/notation.kb/`:
+  - [ ] Mirror LABEL_MIN's two-character floor in `MENTION`
+        (`mentions.py`); the schema pattern now enforces it at write
+        time
+  - [ ] Invert the gate per NON_CLAIM_TOKENS/NON_CLAIM_FIELD: report
+        any unreachable label-shaped token unless listed in the
+        scope's `non-claim-tokens:`; reachability wins; demote the
+        fleet lookup to the "defined in X" hint. Seed list measured
+        2026-09-01: 21 tokens, most in one ledger. Blocked on the
+        ontology-cascade review (llm-claims/.claude/todo.md) only for
+        scope beyond the declaring theory's interior
+  - [ ] Settle BACKTICK_SCOPE (open) before touching the code-span
+        strip in `prose()`/`speech()`
+  - [ ] Close the census blindspot: `unimported()` iterates
+        `theory.claims` only, so defining-claim prose is never
+        checked (found 2026-09-01; `strata.claims.md` alone carries
+        ten label mentions no scan reads)
 - [ ] `llm-claims-kb-flatten` drops list blocks from claim bodies —
       a first paragraph ending in a colon renders as a dangling
       fragment and the bullets vanish (e.g. a struck claim's quoted

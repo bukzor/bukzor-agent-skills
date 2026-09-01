@@ -28,11 +28,13 @@ $defs:
       label:
         description: >-
           Stable ledger label -- names the locus of contention, not the
-          current conclusion, so it survives revision. Upper snake case;
-          no label may be a prefix of another, since sigils trail the
-          label and `grep LABEL` has to stay unambiguous.
+          current conclusion, so it survives revision. Upper snake case,
+          two characters at least (the bare label is the mention form,
+          and single capitals are prose); no label may be a prefix of
+          another, since sigils trail the label and `grep LABEL` has to
+          stay unambiguous.
         type: string
-        pattern: "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"
+        pattern: "^(?=..)[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"
       standing:
         description: >-
           The sigil, spelled out -- it signs the judge: bare (no judge

@@ -1,5 +1,17 @@
 # TODO
 
+- [ ] Review how ontology cascades — ruled vs wanted. The owner,
+      2026-09-01: "I don't think that's how ontology cascades, or not
+      how it should, at least." The ruled form is CONTAINMENT_ADMITS
+      (`design.claims.kb/ownership.kb/containment-admits-without-an-arrow.md`,
+      standing bare): a descendant reads every word its container
+      stipulates, no arrow needed; `ledger.py`'s `Theory.container`
+      docstring restates it and the ownership law computes with it.
+      Reconcile that against the owner's doubt. The outcome also sets
+      the scope rule for `non-claim-tokens:` — NON_CLAIM_FIELD
+      (`design.claims.kb/notation.kb/the-non-claim-list-rides-the-defining-claim.md`)
+      holds the minimal reading (declaring theory's interior) until
+      this rules
 - [ ] Wire design.claims.kb's `why:` edges: 27 claims carry only 3
       `why:` edges -- ccomps reports 25 components (found 2026-08-09 by
       the new llm-claims-kb/bin/llm-claims-kb-graph; its SKILL.md
