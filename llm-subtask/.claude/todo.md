@@ -2,13 +2,16 @@
 managed-by: Skill(llm-subtask)
 cost-benefit-sweh:
   timebox:
-    "@value": 2.5
+    "@value": 4.5
     rationale: |
       Three inline improvement items: bin/ script CWD-vs-path bug
       (~1h, same root cause as llm-collab bug), todo.kb/ideas.kb
       template boilerplate trim (~0.5h, both skills affected), tier
       selection guidance push toward lightest tier (~1h, requires
-      SKILL.md update with heuristic).
+      SKILL.md update with heuristic). Plus the schedule dimension
+      (~2h: placement ruling, duration shape, consumer updates in
+      wsjf-rank and claude-open-tasks-list), which is blocked on
+      lead-times promoting to a .kb/ and so may not start in window.
     confidence: tentative
   benefit-2w:
     "@value": 0.5
@@ -41,6 +44,37 @@ cost-benefit-sweh:
         todo took `Revisit once a remote exists — pushed is a fine
         check` with it, and the condition survived only because an
         unrelated session had quoted the doctrine into a devlog
+- [ ] Schedule dimension: the schema rates effort, never wall-clock.
+      `cost-benefit-sweh` carries `timebox`, `benefit-2w` and
+      `cost-of-delay-2w` — all effort or value, none calendar — so a
+      task with 1h of effort sitting behind a six-week government
+      process prices as cheap and reads as cheap. Three candidate
+      fields: a duration (`lead-time`) and two instants (`anchor`, when
+      the blocking process actually started, and `needed-by`, the
+      commitment). Projections stay derived rather than stored:
+      `needed-by − lead-time` is the latest start, `anchor + lead-time`
+      the finish. Raised 2026-09-02 against
+      `private.bukzor-llc/lead-times.md`, which holds the shared vendor
+      and government durations such a field would cite.
+  - [ ] Rule the placement: inside `cost-benefit-sweh` or beside it?
+        Beside, on the argument that lead time doesn't change priority
+        — a cheap task blocked on the world already ranks high under
+        WSJF, correctly. What's missing is the scheduling question
+        ("when must I start"), which is not the ranking question
+        ("what next")
+  - [ ] Shape the duration to accept either a reference into a shared
+        duration ledger, where a repo happens to keep one, or an
+        irreducibly local value ("how long until the owner decides"),
+        recording which — a derived number should recompute when its
+        ledger moves, a declared one shouldn't. Most repos will have no
+        ledger at all, so the reference form must be optional and the
+        declared form must lose nothing
+  - [ ] Make absent mean zero, and find another way to say "not
+        assessed". Most tasks have no lead time; the schema shouldn't
+        tax them for it
+  - [ ] Grep the consumers before minting anything — `wsjf-rank`,
+        `claude-open-tasks-list`, `task-list.md` — per the
+        field-minting rule already in this file
 - [x] Batch the three SKILL.md/skeleton UX-flow items below into one pass
   (same class of fix, each a small per-session tax; do together rather
   than as three separate touches — 2026-07-09 forward-looking review).
