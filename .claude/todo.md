@@ -44,6 +44,26 @@ Repo-level list. Skill-scoped work lives in each skill's own
         ("names the locus of contention" + "no label may be a prefix of
         another") with a clause saying the locus decides a collision. The
         file is `$ref`'d fleet-wide, so the wording is theirs to rule
+- [ ] The ad-hoc list above has a mechanical population behind it, found
+      2026-09-03 when the owner asked whether agent-authored claims stand
+      on merits or want more scrutiny. The checkable class: a claim at
+      `standing: agent` carrying an `authority:` line. That combination
+      says the owner ruled an instance and an agent generalized it into
+      standing law -- exactly what GRADUATE
+      (docs/dev/claims.kb/design.claims.kb/adjudication.kb/) says binds
+      nothing until the generalization is itself presented and ruled.
+      Twelve fleet-wide; none has been presented as a generalization.
+      Four are the staged, uncommitted adjudication theory itself, one
+      is `BODY_FORM` above. The scan is three lines over `ledger.py`
+      and belongs in `llm-claims-kb-ownership` or beside it, so the
+      backlog stays visible instead of being re-derived each time
+  - [ ] The other 131 agent claims are not covered by that test: 105
+        rest on priors with no owner act cited, 26 on neither. Whether
+        any of those is a stipulation wanting a ruling cannot be read
+        off the frontmatter -- a lexical pass for self-aware hedging
+        ("agent-picked", "deliberately unstated") found only 7, which
+        finds the honest ones and by construction misses the rest.
+        Needs a real criterion before it needs a tool
 - [ ] `llm-kb/bin/llm.kb-validate-links` has been uncommitted since
       2026-08-29 19:58 and reverts de23391 — it strips `link_count` back
       out, docstring included, restoring the "N files" line that commit
