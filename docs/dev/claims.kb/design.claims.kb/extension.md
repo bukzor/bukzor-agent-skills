@@ -3,6 +3,7 @@ label: EXTEND
 standing: agent
 why:
   - authorship.md
+  - ../../../../llm-design-kb/docs/dev/claims.kb/design.kb/migration.md
 ontology:
   - extension
   - basis

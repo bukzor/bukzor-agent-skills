@@ -7,6 +7,9 @@ why:
   - ../purpose.kb/forced-misrepresentation-is-the-failure-mode.md
   - a-verdict-names-what-the-judge-ruled.md
   - ../../../../docs/dev/claims.kb/strata.claims.kb/standing.md
+  - ../../../../docs/dev/claims.kb/strata.claims.kb/data-representation.md
+  - ../../../../docs/dev/claims.kb/design.claims.kb/principles.md
+  - ../../../../docs/dev/claims.kb/design.claims.kb/extension.kb/what-need-does-a-stored-likelihood-serve.md
 non-claim-tokens:
   - CACHE
   - CUT

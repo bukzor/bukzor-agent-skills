@@ -97,17 +97,27 @@ managed-by: Skill(llm-subtask)
         list to go on -- `non-claim-tokens:` is label-shaped tokens,
         and the trespass scan is a queue with four repairs, not an
         error list -- so it sits in the queue like the other seven
-- [ ] Five citations survived the seeded `non-claim-tokens:` lists —
-      real fleet labels named by theories that import nothing
-      reaching them, which is the finding the inverted gate exists to
-      surface. COHORT names PLACE (llm-design-kb MIGRATION); ENGINE,
-      the strata ledger's own defining claim, names PROVISIONAL
-      (llm-claims NOTATION); GRAIN names HEDGE_FORM, ON_DEMAND and
-      SUGAR across three docs/dev theories while importing only
-      strata's STANDING. Each has the three repairs and the tool picks
-      none — but an import is a theory-level dependency with ownership
-      consequences (it licenses word-taking and can turn idle), so
-      these want reading, not a bulk `why:` edit.
+- [x] Five citations survived the seeded `non-claim-tokens:` lists —
+      real fleet labels named by theories that import nothing reaching
+      them, which is the finding the inverted gate exists to surface.
+      Imported 2026-09-03 at the owner's word ("go ahead and add the
+      necessary why's", minimality to be reviewed separately): EXTEND
+      takes llm-design-kb's MIGRATION, ENGINE takes llm-claims'
+      NOTATION, and GRAIN takes DATA_REPRESENTATION, CONSTITUTION and
+      SCALAR. The scan reports zero findings fleet-wide
+- [ ] Repairing a mention on a *defining* claim always buys an idle
+      import. Two of the five above landed in the idle queue at once
+      (GRAIN -> DATA_REPRESENTATION, GRAIN -> SCALAR), and the cause is
+      structural, not a judgment about those imports:
+      `support_witnessed` excludes the taker's own defining claim,
+      since its citation *is* the import under adjudication — but a
+      defining claim is exactly where cross-theory citations
+      concentrate, so the sentence that motivated the import can never
+      witness it. Either the support lens should read a defining
+      claim's prose citations (which the mentions scan now computes
+      exactly), or IDLE_UNDECIDABLE should say outright that this
+      shape is expected. Idle entries are never errors, so this is a
+      queue-noise question, not a correctness one
 - [ ] `llm-claims-kb-flatten` drops list blocks from claim bodies —
       a first paragraph ending in a colon renders as a dangling
       fragment and the bullets vanish (e.g. a struck claim's quoted
