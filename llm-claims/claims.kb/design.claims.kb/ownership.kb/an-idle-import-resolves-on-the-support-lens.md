@@ -26,9 +26,10 @@ only the support half can save the arrow:
   mutual reach: the prior's prose referring back into the taker.
   A file-path cite is a reference, backticked or not; only the
   scan's exemptions are narrower than that, not the reading's.
-- **the support is real and at home**: keep the import; the unsaid
-  vocabulary is WHY_IS_FUSED's factoring smell, repaired by saying
-  a word or by nothing at all.
+- **the support is real and at home**: keep the import. The
+  vocabulary went unsaid to the scan, not to the reader -- the trace
+  is there, in prose naming the prior's claim labels -- and
+  WHY_IS_FUSED's factoring smell is repaired by saying a word.
 
 The strongest keep-tell -- interior claims citing the cited
 theory's claims in their own `why:` -- is machine-readable, and the
@@ -45,3 +46,8 @@ last entry resolved as a refiling -- the taker's one dependent
 sentence duplicated the migration plan's escrow ruling, and the
 prior's citing section was itself a restatement of a strata claim,
 extracted to a one-line application beside its consumers.
+
+Amended 2026-09-03 under WHY_IS_FUSED's sharpening: the third
+disposition once ended "or by nothing at all", which the author
+denies. A keep must be able to point at the trace, and until the scan
+reads the label channel, pointing at it is the reader's job.

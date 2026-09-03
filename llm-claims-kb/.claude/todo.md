@@ -105,19 +105,36 @@ managed-by: Skill(llm-subtask)
       takes llm-design-kb's MIGRATION, ENGINE takes llm-claims'
       NOTATION, and GRAIN takes DATA_REPRESENTATION, CONSTITUTION and
       SCALAR. The scan reports zero findings fleet-wide
-- [ ] Repairing a mention on a *defining* claim always buys an idle
-      import. Two of the five above landed in the idle queue at once
-      (GRAIN -> DATA_REPRESENTATION, GRAIN -> SCALAR), and the cause is
-      structural, not a judgment about those imports:
-      `support_witnessed` excludes the taker's own defining claim,
-      since its citation *is* the import under adjudication — but a
+- [ ] The support lens should read prose label mentions — proposal,
+      awaiting the owner's go-ahead. Repairing a mention on a
+      *defining* claim always buys an idle import: two of the five
+      above landed in the idle queue at once (GRAIN ->
+      DATA_REPRESENTATION, GRAIN -> SCALAR), because
+      `support_witnessed` excludes the taker's own defining claim —
+      its citation *is* the import under adjudication — while a
       defining claim is exactly where cross-theory citations
       concentrate, so the sentence that motivated the import can never
-      witness it. Either the support lens should read a defining
-      claim's prose citations (which the mentions scan now computes
-      exactly), or IDLE_UNDECIDABLE should say outright that this
-      shape is expected. Idle entries are never errors, so this is a
-      queue-noise question, not a correctness one
+      witness it. Filed here first as queue noise; the owner's
+      2026-09-03 sharpening of WHY_IS_FUSED makes that wrong. "A rests
+      on B logically, but mentions none of its claims, none of its
+      ontology? Sounds impossible, to me" — so an idle entry *means*
+      that case, and is always a cull-or-retarget; an entry the scan
+      cannot tell from a healthy import is a false positive, not
+      noise. Fix: fuse the taker's prose mentions of the prior's
+      labels into `support_witnessed`, which `mentions.py` now
+      computes exactly. Both GRAIN idles read healthy under that test
+      (the SUGAR sentence, the CUT/HEDGE_FORM sentence).
+      IDLE_UNDECIDABLE stands `open` until this lands
+- [ ] Nothing sees the owner's second case — A names a claim or word
+      of B and rests on none of it. The vocabulary lens fires on the
+      mention, so the import reads healthy by construction, and the
+      only queue is the trespass scan, which sees words and not
+      labels. A reading queue would be the mention channel minus the
+      support channel. The repairs are the owner's, in their order:
+      narrow B's ontology; move the cited claim to a theory A does
+      rest on; move the mention to a theory that does rest on B;
+      delete the mention (rarely the right thing). Proposal, same
+      go-ahead
 - [ ] `llm-claims-kb-flatten` drops list blocks from claim bodies —
       a first paragraph ending in a colon renders as a dangling
       fragment and the bullets vanish (e.g. a struck claim's quoted
