@@ -42,7 +42,7 @@ restated here; this skill maps it onto a directory.
 | `-- certified(CHECK)` | `verify:` |
 | `(todo)` on the label (decided, not yet built) | `todo:` -- boolean, default false; dropped when the state lands, the label never moves |
 | restating a label | editing the file; the git diff's `-` is the strikethrough |
-| a theory | a claim like any other -- `<theory>.md`, carrying `ontology:` and `stale-when:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
+| a theory | a claim like any other -- `<theory>.md`, carrying `ontology:`, `non-claim-tokens:` and `stale-when:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
 | indentation | the tree: what a `.kb/` holds is nested under the claim naming it, at any depth |
 | `claim list` | `ls`; the standing scan is `grep -rH '^standing:' <name>.claims.kb/`, recursive so theories answer too; the verdict scan is `grep -rl 'verdict:'` |
 
@@ -188,18 +188,23 @@ llm-claims-kb-mentions <name>.claims.kb     # findings in one ledger
 
 A mention resolves if the label is in the same ledger or in a theory
 this one imports, transitively -- a defining claim's `why:` is that
-import. Every ledger in the tree is read whichever are checked, since
-whether a token is a label at all is a fact about the fleet.
+import. Every label-shaped token that does not resolve is reported,
+whether or not any ledger defines it: a typo'd or unledgered citation
+is the case the scan exists to catch, so fleet membership is a hint on
+the finding -- "defined in X" -- and never a gate. Quotation is no
+exemption either; a backticked label is a label (BACKTICK_SCOPE).
 
-Two things are not citations and are never reported: a backticked
-name, which is a literal quoted from elsewhere -- another system's
-label, a field, a filename -- and a sibling skill named as a whole,
-which reaches into nothing. Reaching past the boundary for a label
-inside is what wants an import.
+What silences a token is the declaration, not the guess: list it in
+the scope's `non-claim-tokens:`, the frontmatter dual of `ontology:`
+(NON_CLAIM_TOKENS, NON_CLAIM_FIELD). A list covers the declaring
+theory's interior, and reachability wins -- the list is read only
+where a token resolves to nothing, so a listing cannot silence a live
+citation.
 
-A finding has two honest fixes, and the tool does not choose: import
-the theory that defines the label, or stop reaching for it -- usually
-by naming the file, which the sentence often already does.
+A finding has three honest fixes, and the tool chooses none: import
+the theory that defines the label, stop reaching for it -- usually by
+naming the file, which the sentence often already does -- or declare
+it no citation, which costs one line, once, visibly.
 
 ### llm-claims-kb-ownership
 

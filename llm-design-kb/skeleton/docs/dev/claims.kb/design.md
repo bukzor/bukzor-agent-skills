@@ -8,6 +8,8 @@ ontology:
   - architecture
   - components
   - deliverables
+non-claim-tokens:
+  - DAG
 stale-when: a rung nothing cites and nothing fills -- the chain was copied rather than chosen, and the stratification wants re-deriving from what this project actually argues about
 ---
 

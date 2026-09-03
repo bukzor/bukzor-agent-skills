@@ -8,6 +8,13 @@ ontology:
   - economics
   - extension
   - enforcement
+non-claim-tokens:
+  - ACS
+  - CLAIMS_ONLY
+  - GENERIC_BASE
+  - LEAST_FIX
+  - PRMS
+  - UNFORCED
 stale-when: a lower engine needing a higher vocabulary
 ---
 

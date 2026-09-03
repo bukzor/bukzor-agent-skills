@@ -1,6 +1,8 @@
 ---
 label: DESIGN
 standing: agent
+non-claim-tokens:
+  - SKILL
 stale-when: a design filed here that is not `/formalize`'s -- a second skill's commitments in this ledger
 ---
 

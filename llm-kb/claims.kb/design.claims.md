@@ -9,6 +9,10 @@ ontology:
   - stub
   - guard
   - positional binding
+non-claim-tokens:
+  - HOME
+  - SKILL
+  - YAML
 stale-when: frontmatter stops being where a file's data lives -- a harness that carries per-file metadata out of band leaves positional binding answering a question nobody asks
 ---
 

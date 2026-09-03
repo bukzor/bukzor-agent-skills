@@ -5,6 +5,8 @@ ontology:
   - basis
   - Layer 0
   - formal-theory-design-expert posture
+non-claim-tokens:
+  - ONEPAGE
 stale-when: a run of `/formalize` whose payoff is a use outside the six named here
 ---
 

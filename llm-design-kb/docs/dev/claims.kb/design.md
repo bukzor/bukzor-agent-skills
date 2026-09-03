@@ -6,6 +6,10 @@ ontology:
   - record
   - tower
   - stratification
+non-claim-tokens:
+  - ADR
+  - SKILL
+  - TODO
 stale-when: a design record in the wild that keeps rungs but abandons claim standing -- the reform's premise was that the two compose, and an instance proving otherwise voids it
 ---
 

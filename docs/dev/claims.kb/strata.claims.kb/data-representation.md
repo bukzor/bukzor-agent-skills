@@ -13,6 +13,8 @@ ontology:
   - partition
   - collation
   - realization
+non-claim-tokens:
+  - CAP
 stale-when: the target roster drifting from the targets actually in use -- a format adopted or retired re-derives every coverage row
 ---
 

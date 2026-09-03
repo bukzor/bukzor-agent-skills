@@ -58,7 +58,7 @@ managed-by: Skill(llm-subtask)
       label-pollution worry dissolves under NON_CLAIM_TOKENS
       (llm-claims notation.kb): the fleet stops gating mentions and
       becomes at most a "defined in X" hint
-- [ ] Build the mention-gate reform once its open policies rule —
+- [x] Build the mention-gate reform once its open policies rule —
       policies in llm-claims `design.claims.kb/notation.kb/`:
   - [x] Mirror LABEL_MIN's two-character floor in `MENTION`
         (`mentions.py`); the schema pattern now enforces it at write
@@ -75,22 +75,39 @@ managed-by: Skill(llm-subtask)
         Findings went 1 → 5, and all four new ones come from defining
         claims (`strata.claims.md`, and GRAIN, which defines a
         sub-theory of notation)
-  - [ ] Invert the gate per NON_CLAIM_TOKENS/NON_CLAIM_FIELD: report
+  - [x] Settle BACKTICK_SCOPE before touching the code-span strip.
+        Ruled 2026-09-03: a backtick exempts nothing, in both scans.
+        The owner returned it as a fact, not a choice -- "this was
+        decided by measurement already" -- since NON_CLAIM_TOKENS had
+        already priced a list entry at one line once, which makes the
+        comparison a computation. The claim is rewritten to its answer
+        (`a-backtick-does-not-exempt-a-token.md`, `standing: user`)
+  - [x] Invert the gate per NON_CLAIM_TOKENS/NON_CLAIM_FIELD: report
         any unreachable label-shaped token unless listed in the
         scope's `non-claim-tokens:`; reachability wins; demote the
-        fleet lookup to the "defined in X" hint. No longer blocked on
-        the ontology-cascade review: re-measured 2026-09-01 against
-        the repaired scanner, the seed list costs 38 entries at
-        NON_CLAIM_FIELD's minimal scope against 26 fleet-wide, so the
-        cascade ruling moves twelve entries, not the build. The list
-        itself is 26 tokens keeping the backtick strip, 41 dropping
-        it; the count is one walk of the fleet reporting every
-        unreachable token, so the inverted gate recomputes its own
-        seed list once BACKTICK_SCOPE rules
-  - [ ] Settle BACKTICK_SCOPE (open) before touching the code-span
-        strip in `prose()`/`speech()`. Put to the owner 2026-09-01
-        with the re-run census in the claim body; the agent
-        recommends dropping the exemption
+        fleet lookup to the "defined in X" hint. Built 2026-09-03 --
+        the field is on the schema and in `ledger.py`, a claim reads
+        its own theory's list and its containers' (the interior
+        NON_CLAIM_FIELD scopes it to), and the fleet lookup now only
+        decorates a finding
+  - [x] Drop the code-span strip in `speech()` too (ownership), per
+        the same ruling. Done 2026-09-03; the fleet went 7 → 8
+        trespasses, the new one the predicted false positive
+        (`principles.kb/` read as the word *principle*). It has no
+        list to go on -- `non-claim-tokens:` is label-shaped tokens,
+        and the trespass scan is a queue with four repairs, not an
+        error list -- so it sits in the queue like the other seven
+- [ ] Five citations survived the seeded `non-claim-tokens:` lists —
+      real fleet labels named by theories that import nothing
+      reaching them, which is the finding the inverted gate exists to
+      surface. COHORT names PLACE (llm-design-kb MIGRATION); ENGINE,
+      the strata ledger's own defining claim, names PROVISIONAL
+      (llm-claims NOTATION); GRAIN names HEDGE_FORM, ON_DEMAND and
+      SUGAR across three docs/dev theories while importing only
+      strata's STANDING. Each has the three repairs and the tool picks
+      none — but an import is a theory-level dependency with ownership
+      consequences (it licenses word-taking and can turn idle), so
+      these want reading, not a bulk `why:` edit.
 - [ ] `llm-claims-kb-flatten` drops list blocks from claim bodies —
       a first paragraph ending in a colon renders as a dangling
       fragment and the bullets vanish (e.g. a struck claim's quoted

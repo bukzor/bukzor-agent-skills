@@ -15,6 +15,8 @@ ontology:
   - namespace
   - recognition
   - idle import
+non-claim-tokens:
+  - RANK_STIPULATIONS
 stale-when: a shipped scan that disagrees with these laws -- the mentions or ownership lint enforcing a rule no claim here states
 ---
 

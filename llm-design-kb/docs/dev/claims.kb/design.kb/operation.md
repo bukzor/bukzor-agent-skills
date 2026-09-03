@@ -8,6 +8,10 @@ ontology:
   - beat
   - tense
   - skeleton
+non-claim-tokens:
+  - ITEM
+  - QUESTION
+  - README
 stale-when: a session that produced a design record without ever rendering it in chat first -- the encode beat would have been ceremony rather than the operation's substance
 ---
 

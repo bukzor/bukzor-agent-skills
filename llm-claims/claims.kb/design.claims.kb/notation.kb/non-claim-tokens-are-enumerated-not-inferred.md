@@ -31,6 +31,10 @@ finding, and a positive is always actionable, regardless of whether it
 is false: true, it is citation rot to repair; false, it costs one line
 added to the list, once, visibly. In a mature tree the false-positive
 rate goes to a long tail, because the list grows with new vocabulary,
-not with new prose. Measured on today's fleet, the whole burden past
-the LABEL_MIN floor is twenty-one tokens, most appearing once, in one
-ledger.
+not with new prose. Projected at twenty-one tokens before the scan was
+repaired; built 2026-09-03, once backticks were read through
+(BACKTICK_SCOPE), the whole burden past the LABEL_MIN floor is
+forty-one tokens over twenty-three lists, thirty-four of them confined
+to a single ledger. Five citations survived the seeding -- real labels
+in unimported theories, which is the finding the gate was inverted to
+surface.

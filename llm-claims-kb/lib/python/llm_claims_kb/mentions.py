@@ -6,19 +6,18 @@ if the label is in this ledger, which a flattened paste carries whole, or in a
 theory this one imports: a defining claim's `why:`, transitively. Otherwise
 the reader meets a name with nothing behind it.
 
-The test is exact, and deliberately has no threshold to tune. A token is
-reported only when it is a real label *somewhere in the fleet* and
-unreachable *here* -- an all-caps word nobody has made a label is not this
-tool's business, and a label that already resolves needs no import added.
+The test is exact, and deliberately has no threshold to tune: every
+label-shaped token that does not resolve here is reported, unless the scope
+has declared it a non-citation in `non-claim-tokens:` (NON_CLAIM_TOKENS,
+NON_CLAIM_FIELD). No oracle guesses which all-caps word is a claim name --
+not fleet membership, which would presume an unledgered or typo'd citation
+to be English, and not quotation, which the corpus never obeyed
+(BACKTICK_SCOPE). Reachability still wins: the list is consulted only where
+a token resolves to nothing, so a listing can never silence a live citation.
 
-Two things are not citations, and neither is reported. A backticked name is a
-literal quoted from elsewhere -- another system's label, a field, a filename
--- which is how a ledger cites a prototype it does not depend on. And naming
-a sibling skill as a whole reaches into nothing, so it needs no import; only
-reaching past the boundary for a label inside does.
-
-Every ledger in the tree is read regardless of which are checked: whether a
-token is a label at all is a fact about the fleet, not about one ledger.
+Every ledger in the tree is still read regardless of which are checked, but
+only to say where a reported label is defined -- a hint that turns a finding
+into an instruction, never a gate.
 """
 
 import argparse
@@ -32,9 +31,13 @@ from .ledger import Claim, Ledger, Theory, ledger_roots, read_ledger
 # A label as prose wears it: sigils trail it, a verdict strikes it, and
 # `grep LABEL` has to keep finding it under both. Two characters at least
 # (LABEL_MIN), mirroring the schema's `(?=..)`: a lone capital is the
-# sentence-initial `A` and the first-person `I`, not a citation.
+# sentence-initial `A` and the first-person `I`, not a citation. The
+# pluralizing `s` is the one lower-case letter a label may wear -- prose
+# says `ADRs`, and the token is ADR. It has to be spelled out rather than
+# left to a lower-case exclusion: under one, `ADRs` does not fail, it
+# backtracks, and the scan reports the label AD.
 MENTION = re.compile(
-    r"(?<![A-Za-z0-9_])((?=[A-Z][A-Z0-9_])[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*)(?![a-z0-9_])"
+    r"(?<![A-Za-z0-9_])((?=[A-Z][A-Z0-9_])[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*)s?(?![A-Za-z0-9_])"
 )
 
 
@@ -82,20 +85,33 @@ def reachable(
         return found
 
 
-def prose(body: str) -> str:
-    """The claim's text with code spans and blocks struck out.
-
-    A backticked name is a literal quoted from somewhere else, and quoting a
-    name is not citing a claim. The ledgers already write it this way: strata
-    says FREE_CONSERVE of its own claim and `CLAIMS_ONLY` of the prototype's.
-    """
-    return re.sub(r"```.*?```|`[^`]*`", " ", body, flags=re.DOTALL)
-
-
 def mentioned(claim: Claim) -> frozenset[str]:
     """Labels this claim's prose names, its own excepted -- a claim stating
-    its own label is titling itself, not citing anything."""
-    return frozenset(MENTION.findall(prose(claim.path.read_text()))) - {claim.label}
+    its own label is titling itself, not citing anything.
+
+    Backticks are read through: a quoted label is a label (BACKTICK_SCOPE),
+    and the three claims in strata quoting `CLAIMS_ONLY` from a prototype
+    they never import are exactly the citations the cutout used to hide.
+    """
+    return frozenset(MENTION.findall(claim.path.read_text())) - {claim.label}
+
+
+def disclaimed(theory: Theory, ledger: Ledger) -> frozenset[str]:
+    """Tokens a claim in this theory may wear without citing anything.
+
+    Its own list, and its containers' -- a nested theory reads in the outer
+    declarations the way it reads in the outer stipulations
+    (CONTAINMENT_ADMITS), which is the interior NON_CLAIM_FIELD scopes the
+    field to. Nothing wider: a sibling's acronym is the sibling's business,
+    and an import carries claims, not vocabulary disclaimers.
+    """
+    theories = {one.name: one for one in ledger.theories}
+    found: set[str] = set()
+    here: Theory | None = theory
+    while here:
+        found |= set(here.non_claim_tokens)
+        here = theories.get(here.container)
+    return frozenset(found)
 
 
 def homes(ledgers: Iterable[Ledger]) -> Mapping[str, tuple[str, ...]]:
@@ -112,20 +128,20 @@ def homes(ledgers: Iterable[Ledger]) -> Mapping[str, tuple[str, ...]]:
 def unimported(
     ledger: Ledger, fleet: Mapping[str, tuple[str, ...]], index: Mapping[Path, Theory]
 ) -> tuple[str, ...]:
-    """One line per mention this ledger cannot resolve.
+    """One line per label-shaped token this ledger neither resolves nor
+    disclaims -- the repair is an import, a correction, or a list entry.
 
     A theory's defining claim is read with the rest of them: it is the file
     that states the theory, so it is where the cross-theory citations
     concentrate, and it resolves against the same imports -- its own `why:`.
     """
     return tuple(
-        f"{claim.path}: {claim.label} names {label},"
-        f" defined in {'/'.join(fleet[label])}"
+        f"{claim.path}: {claim.label} names {label}"
+        + (f", defined in {'/'.join(fleet[label])}" if label in fleet else "")
         for theory in ledger.theories
-        for known in [reachable(theory, ledger, index)]
+        for known in [reachable(theory, ledger, index) | disclaimed(theory, ledger)]
         for claim in (*filter(None, [theory.defining]), *theory.claims)
         for label in sorted(mentioned(claim) - known)
-        if label in fleet
     )
 
 
@@ -154,7 +170,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     findings = [line for ledger in checked for line in unimported(ledger, fleet, index)]
     for line in findings:
         print(line)
-    print(f"{len(findings)} unimported mentions", file=sys.stderr)
+    print(
+        f"{len(findings)} tokens neither resolved nor disclaimed"
+        " -- import, correct, or list each in `non-claim-tokens:`",
+        file=sys.stderr,
+    )
     return 1 if findings else 0
 
 

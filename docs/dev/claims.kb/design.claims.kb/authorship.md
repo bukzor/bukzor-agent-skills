@@ -15,6 +15,10 @@ ontology:
   - domain
   - composition
   - token
+non-claim-tokens:
+  - MUST
+  - NOT
+  - SKILL
 stale-when: a skill format with per-audience channels (an author-facing file beside the invoker-facing body), or a harness whose retrieval consults neither names nor descriptions -- either dissolves the single-surface economics these claims price
 ---
 

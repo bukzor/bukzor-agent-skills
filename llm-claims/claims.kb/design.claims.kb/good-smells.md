@@ -11,6 +11,10 @@ ontology:
   - rendering
   - demo
   - migration
+non-claim-tokens:
+  - NC
+  - OP
+  - RR
 stale-when: a change in who uses the notation -- a ledger written and read by tools, where entry cost and rendering hazards both vanish
 last-updated: 2026-08-20
 ---

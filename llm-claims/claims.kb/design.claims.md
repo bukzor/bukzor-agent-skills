@@ -23,6 +23,11 @@ ontology:
   - warrant
   - judge
   - check
+non-claim-tokens:
+  - AB
+  - CD
+  - SKILL
+  - XY
 stale-when: a design that is not this notation's -- a second skill's commitments filed here
 ---
 

@@ -91,14 +91,13 @@ def address(theory: Theory) -> tuple[str, ...]:
 
 
 def speech(path: Path) -> str:
-    """The claim speaking: body only, code spans struck.
+    """The claim speaking: its body, frontmatter struck.
 
-    A backticked name is a literal quoted from elsewhere, not this claim
-    saying the word, so it never counts as speech -- the same cutout the
-    mentions scan makes.
+    Backticks are read through. Quoting a word is still saying it
+    (BACKTICK_SCOPE), and the exemption bought nothing here: dropping it
+    moves the fleet by one finding, a path read as the word inside it.
     """
-    body = re.sub(r"\A---\n.*?\n---\n", "", path.read_text(), flags=re.DOTALL)
-    return re.sub(r"```.*?```|`[^`]*`", " ", body, flags=re.DOTALL)
+    return re.sub(r"\A---\n.*?\n---\n", "", path.read_text(), flags=re.DOTALL)
 
 
 def prose(path: Path) -> str:

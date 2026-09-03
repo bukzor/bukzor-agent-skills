@@ -7,6 +7,10 @@ ontology:
   - rung
   - prior
   - confinement
+non-claim-tokens:
+  - DAG
+  - DIGITS
+  - INTERP
 stale-when: a project whose claims sort cleanly by graph depth alone -- then the rung names were carrying nothing the arrows did not already carry
 ---
 

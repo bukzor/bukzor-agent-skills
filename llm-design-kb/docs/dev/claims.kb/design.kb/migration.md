@@ -7,6 +7,8 @@ why:
 ontology:
   - legacy tower
   - route
+non-claim-tokens:
+  - RFC
 stale-when: a numbered tower that fails to validate against the retained layer-entry schema -- the promise that old records keep working would have quietly lapsed
 ---
 

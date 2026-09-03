@@ -58,6 +58,7 @@ class Claim:
     todo: bool  # decided but not yet built -- renders `(todo)` after the label
     authority: str | None  # the act that settled the standing
     ontology: tuple[str, ...]  # the words stipulated -- defining claims only
+    non_claim_tokens: tuple[str, ...]  # label-shaped, cites nothing -- defining only
     stale_when: str | None  # what voids the theory's stamp -- defining claims only
     path: Path  # the claim file, so a drawn node is a way in
     gist: str  # opening paragraph: the claim itself
@@ -127,6 +128,10 @@ class Theory:
     @property
     def ontology(self) -> tuple[str, ...]:
         return self.defining.ontology if self.defining else ()
+
+    @property
+    def non_claim_tokens(self) -> tuple[str, ...]:
+        return self.defining.non_claim_tokens if self.defining else ()
 
     @property
     def stale_when(self) -> str | None:
@@ -206,6 +211,7 @@ def read_claim(origin: Path, path: Path) -> Claim:
     authority = front.get("authority")
     todo = front.get("todo", False)
     ontology, stale_when = front.get("ontology", []), front.get("stale-when")
+    non_claim_tokens = front.get("non-claim-tokens", [])
     # Renamed 2026-08-13. Reading past the old key would drop the line silently.
     assert "defeated-by" not in front, f"{path}: `defeated-by:` is now `stale-when:`"
     assert isinstance(label, str), label
@@ -216,6 +222,7 @@ def read_claim(origin: Path, path: Path) -> Claim:
     assert authority is None or isinstance(authority, str), authority
     assert isinstance(todo, bool), todo
     assert isinstance(ontology, list), ontology
+    assert isinstance(non_claim_tokens, list), non_claim_tokens
     assert stale_when is None or isinstance(stale_when, str), stale_when
     identity = claim_id(origin, path)
     return Claim(
@@ -230,6 +237,9 @@ def read_claim(origin: Path, path: Path) -> Claim:
         authority=authority,
         todo=todo,
         ontology=tuple(str(word) for word in cast(list[object], ontology)),
+        non_claim_tokens=tuple(
+            str(token) for token in cast(list[object], non_claim_tokens)
+        ),
         stale_when=stale_when,
         path=path,
         gist=first_paragraph(body),

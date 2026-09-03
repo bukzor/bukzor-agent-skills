@@ -9,6 +9,9 @@ ontology:
   - ledger
   - ruling
   - ADR
+non-claim-tokens:
+  - ADR
+  - QUESTION
 stale-when: a commitment that binds one skill only -- it belongs in that skill's own ledger, not here
 ---
 

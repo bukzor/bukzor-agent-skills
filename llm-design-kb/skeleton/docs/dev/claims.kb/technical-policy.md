@@ -3,6 +3,8 @@ label: POLICY
 standing: open
 why:
   - design.kb/requirements.md
+non-claim-tokens:
+  - RFC
 ---
 
 # <project> -- technical policy

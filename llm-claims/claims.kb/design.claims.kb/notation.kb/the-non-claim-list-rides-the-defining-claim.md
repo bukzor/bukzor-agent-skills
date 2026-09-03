@@ -1,7 +1,6 @@
 ---
 label: NON_CLAIM_FIELD
 standing: agent
-todo: true
 why:
   - non-claim-tokens-are-enumerated-not-inferred.md
   - ../ownership.kb/containment-admits-without-an-arrow.md
@@ -20,9 +19,10 @@ its prose disclaims.
 - **Precedence:** reachability wins. The list is consulted only for a
   token that does not resolve, so a listing can never silence a live
   citation.
-- **Scope:** the declaring theory's own interior, at minimum. Whether
-  it reaches further is deliberately unstated: the owner doubts the
-  ruled ontology cascade
+- **Scope:** the declaring theory's own interior, and built at exactly
+  that -- a claim reads its own theory's list and its containers',
+  nothing wider. Whether it should reach further is deliberately
+  unstated: the owner doubts the ruled ontology cascade
   (`../ownership.kb/containment-admits-without-an-arrow.md`), that
   review is queued in `llm-claims/.claude/todo.md`, and this field
   takes no wider position until it rules.

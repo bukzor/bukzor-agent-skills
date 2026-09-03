@@ -15,6 +15,14 @@ ontology:
   - render
   - negation
   - mark
+non-claim-tokens:
+  - ACT_LOG
+  - CHECK
+  - CONDITION
+  - IOU
+  - PRMS
+  - RFC
+  - TODO
 stale-when: an inference relation cheap enough to check at entry
 ---
 
