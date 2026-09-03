@@ -60,22 +60,37 @@ managed-by: Skill(llm-subtask)
       becomes at most a "defined in X" hint
 - [ ] Build the mention-gate reform once its open policies rule —
       policies in llm-claims `design.claims.kb/notation.kb/`:
-  - [ ] Mirror LABEL_MIN's two-character floor in `MENTION`
+  - [x] Mirror LABEL_MIN's two-character floor in `MENTION`
         (`mentions.py`); the schema pattern now enforces it at write
-        time
+        time. Done 2026-09-01 — the mention form carries the schema's
+        `(?=..)` as `(?=[A-Z][A-Z0-9_])`, since a bare lookahead
+        constrains the string ahead, not the match. No finding
+        changed: single capitals were already filtered out by the
+        fleet lookup, so the floor stays invisible until the gate
+        inverts
+  - [x] Close the census blindspot: `unimported()` iterates
+        `theory.claims` only, so defining-claim prose is never
+        checked. Fixed 2026-09-01 — the scan reads the defining claim
+        with the rest, resolving it against the theory's own `why:`.
+        Findings went 1 → 5, and all four new ones come from defining
+        claims (`strata.claims.md`, and GRAIN, which defines a
+        sub-theory of notation)
   - [ ] Invert the gate per NON_CLAIM_TOKENS/NON_CLAIM_FIELD: report
         any unreachable label-shaped token unless listed in the
         scope's `non-claim-tokens:`; reachability wins; demote the
-        fleet lookup to the "defined in X" hint. Seed list measured
-        2026-09-01: 21 tokens, most in one ledger. Blocked on the
-        ontology-cascade review (llm-claims/.claude/todo.md) only for
-        scope beyond the declaring theory's interior
+        fleet lookup to the "defined in X" hint. No longer blocked on
+        the ontology-cascade review: re-measured 2026-09-01 against
+        the repaired scanner, the seed list costs 38 entries at
+        NON_CLAIM_FIELD's minimal scope against 26 fleet-wide, so the
+        cascade ruling moves twelve entries, not the build. The list
+        itself is 26 tokens keeping the backtick strip, 41 dropping
+        it; the count is one walk of the fleet reporting every
+        unreachable token, so the inverted gate recomputes its own
+        seed list once BACKTICK_SCOPE rules
   - [ ] Settle BACKTICK_SCOPE (open) before touching the code-span
-        strip in `prose()`/`speech()`
-  - [ ] Close the census blindspot: `unimported()` iterates
-        `theory.claims` only, so defining-claim prose is never
-        checked (found 2026-09-01; `strata.claims.md` alone carries
-        ten label mentions no scan reads)
+        strip in `prose()`/`speech()`. Put to the owner 2026-09-01
+        with the re-run census in the claim body; the agent
+        recommends dropping the exemption
 - [ ] `llm-claims-kb-flatten` drops list blocks from claim bodies —
       a first paragraph ending in a colon renders as a dangling
       fragment and the bullets vanish (e.g. a struck claim's quoted

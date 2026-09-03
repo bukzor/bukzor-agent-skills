@@ -30,8 +30,12 @@ from pathlib import Path
 from .ledger import Claim, Ledger, Theory, ledger_roots, read_ledger
 
 # A label as prose wears it: sigils trail it, a verdict strikes it, and
-# `grep LABEL` has to keep finding it under both.
-MENTION = re.compile(r"(?<![A-Za-z0-9_])([A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*)(?![a-z0-9_])")
+# `grep LABEL` has to keep finding it under both. Two characters at least
+# (LABEL_MIN), mirroring the schema's `(?=..)`: a lone capital is the
+# sentence-initial `A` and the first-person `I`, not a citation.
+MENTION = re.compile(
+    r"(?<![A-Za-z0-9_])((?=[A-Z][A-Z0-9_])[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*)(?![a-z0-9_])"
+)
 
 
 def theory_index(ledgers: Iterable[Ledger]) -> Mapping[Path, Theory]:
@@ -108,13 +112,18 @@ def homes(ledgers: Iterable[Ledger]) -> Mapping[str, tuple[str, ...]]:
 def unimported(
     ledger: Ledger, fleet: Mapping[str, tuple[str, ...]], index: Mapping[Path, Theory]
 ) -> tuple[str, ...]:
-    """One line per mention this ledger cannot resolve."""
+    """One line per mention this ledger cannot resolve.
+
+    A theory's defining claim is read with the rest of them: it is the file
+    that states the theory, so it is where the cross-theory citations
+    concentrate, and it resolves against the same imports -- its own `why:`.
+    """
     return tuple(
         f"{claim.path}: {claim.label} names {label},"
         f" defined in {'/'.join(fleet[label])}"
         for theory in ledger.theories
         for known in [reachable(theory, ledger, index)]
-        for claim in theory.claims
+        for claim in (*filter(None, [theory.defining]), *theory.claims)
         for label in sorted(mentioned(claim) - known)
         if label in fleet
     )
