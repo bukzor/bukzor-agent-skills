@@ -96,6 +96,11 @@ notation's own design, kept in this form.
 
 ## Claim bodies
 
+Derive before extracting. The record is the cheapest court for a
+candidate claim: read what the priors already entail and cite it;
+file only what the instance adds beyond them, with `why:` naming
+those priors and `authority:` the instance.
+
 The body is cold text -- read to argue with, not on every load -- so
 shape it for extraction and for veto, not for brevity:
 
