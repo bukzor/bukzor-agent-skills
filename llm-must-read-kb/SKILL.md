@@ -33,6 +33,12 @@ to ignore*:
 4. On match, the agent reads that file's body and applies it before
    proceeding.
 
+A trigger binds from the moment its listing is in context. The `ls`
+that produces the listing therefore precedes every trigger in the
+bank — `before/ANY-shell-commands.md` included — and no entry needs
+to carve it out; a skill bank's triggers likewise bind once the
+skill's own `ls` has run.
+
 No tool-call hook, no startup tax beyond the `ls`. Bodies stay unloaded
 until their trigger fires. The directory IS the index.
 
