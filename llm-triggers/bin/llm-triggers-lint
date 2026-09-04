@@ -77,7 +77,7 @@ FIELD_RE = re.compile(rf'^({"|".join(DIRECTIVE_FIELDS)}):')
 # `skill://llm-kb`, `Command(commit)` -- a target named by handle, not by path.
 # `Skill(llm-kb)` is that URI's pre-migration spelling, still parsed as a handle
 # until the tree-wide rewrite lands.
-HANDLE_RE = re.compile(r'^(?:\w+://\S+|\w+\([^)]*\))$')
+HANDLE_RE = re.compile(r'^(?:[\w-]+://\S+|\w+\([^)]*\))$')
 
 
 class Trigger(NamedTuple):
