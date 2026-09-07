@@ -30,3 +30,13 @@ never prose naming the prior's claim labels, which
 `llm-claims-kb-mentions` now computes exactly. Today's queue therefore
 holds traced imports the scan cannot see. Fuse that third channel
 first; then rule this by editing `standing:`.
+
+Measured 2026-09-07, ahead of that ruling: fusing the label channel
+takes the queue from nine entries to seven, and the two it drops are
+the GRAIN imports whose citing sentences were read and found sound.
+Six of the seven that remain are the llm-design-kb skeleton, whose
+theories stipulate no words at all -- the artifact the `verify:`
+output already annotates -- so the substantive queue goes from three
+to one. The cost is symmetric and small: a mention that is not
+support would now silence an entry, which is the second direction,
+and nothing sees it either way today.
