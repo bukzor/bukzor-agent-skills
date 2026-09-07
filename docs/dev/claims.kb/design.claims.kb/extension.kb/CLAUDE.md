@@ -16,4 +16,4 @@ record of roads not taken.
 
 The successor skill's own design commitments -> its own
 `design.claims.kb/` once it exists. The historical record of a
-ruling -> `../../adr/`.
+ruling -> `../../../adr/`.
