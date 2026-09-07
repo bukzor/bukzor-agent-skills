@@ -105,6 +105,22 @@ managed-by: Skill(llm-subtask)
       takes llm-design-kb's MIGRATION, ENGINE takes llm-claims'
       NOTATION, and GRAIN takes DATA_REPRESENTATION, CONSTITUTION and
       SCALAR. The scan reports zero findings fleet-wide
+  - [ ] Owner reserved: are those five minimal? Evidence precomputed
+        2026-09-07 by dropping each and re-scanning. Four are
+        load-bearing — drop one and exactly its own token returns:
+        EXTEND->MIGRATION (PLACE), ENGINE->NOTATION (PROVISIONAL),
+        GRAIN->CONSTITUTION (ON_DEMAND), GRAIN->SCALAR (HEDGE_FORM).
+        The fifth, GRAIN->DATA_REPRESENTATION, is redundant *to the
+        scan*: drop it and SUGAR still resolves, through either of the
+        other two GRAIN imports, because `reachable()` grants an
+        imported theory's own priors transitively. Keeping it is still
+        arguable — reachability is scan convenience, while `why:`
+        states direct support (WHY_IS_FUSED), and GRAIN's SUGAR
+        sentence rests on DATA_REPRESENTATION itself, not on it by way
+        of SCALAR. The general point, worth a claim if the owner
+        agrees: an import's *scan* necessity and its *support*
+        necessity are different questions, so a minimal `why:` set is
+        the wrong target
 - [ ] The support lens should read prose label mentions — proposal,
       awaiting the owner's go-ahead. Repairing a mention on a
       *defining* claim always buys an idle import: two of the five
