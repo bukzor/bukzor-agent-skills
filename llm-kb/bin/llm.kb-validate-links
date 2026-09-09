@@ -148,10 +148,7 @@ def broken_links(md_file: Path, *, lax: bool) -> tuple[int, list[str]]:
     """Return (links examined, one error string per link that doesn't resolve).
 
     The count is reported, not just the errors, because a file count cannot
-    fall when coverage narrows. This checker once matched eight frontmatter
-    field names and read a `---` with a trailing comment as no frontmatter at
-    all; it printed the same green `N files` line throughout. A link count
-    would have gone down.
+    fall when coverage narrows.
     """
     checked = 0
     errors = []
