@@ -19,6 +19,8 @@ non-claim-tokens:
   - ACT_LOG
   - CHECK
   - CONDITION
+  - DRAFT
+  - FABLE
   - IOU
   - PRMS
   - RFC
