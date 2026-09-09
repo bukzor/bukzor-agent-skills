@@ -13,20 +13,19 @@ missing files do not.
 ## Procedure
 
 Run `../../bin/llm.kb-validate-links <path>`
-first -- it mechanically checks known frontmatter link fields (`why`,
-`depends`, `source`, `sources`, `candidate-resolutions`, `conclusion`,
-`premises`, `resolved`) and backtick-wrapped, dot-slash-prefixed relative
+first -- it mechanically checks every frontmatter field holding a
+path-shaped value, and backtick-wrapped, dot-slash-prefixed relative
 body links. Not wired into `llm.kb-validate` yet -- see
 `../../.claude/todo.kb/2026-06-03-000-validate-path-references.md` for
 status.
 
-The script only catches `../`/`./`-prefixed backtick paths in known fields.
 For each file you touched, additionally scan by hand for what it misses:
 
-- Bare relative paths without a `./`/`../` prefix (e.g. `foo.kb/bar.md`).
 - Markdown link syntax: `[text](path)`.
-- Frontmatter paths in fields other than the ones listed above (e.g.
-  `mitigated-by:`, `see-also:`, `eliminated-by:`).
+- Bare relative paths (e.g. `foo.kb/bar.md`), which the script passes
+  over by design. Decide which are links wanting a `./` prefix and
+  which are mentions wanting to stay bare -- see `../../SKILL.md` under
+  `llm.kb-validate-links`.
 
 For each found path, verify the target exists.
 

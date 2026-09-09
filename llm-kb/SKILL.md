@@ -310,9 +310,23 @@ no false positives, but blind to bare-relative refs like `foo.kb/bar.md`.
 recall, and CLI examples in prose will surface as hits to triage. Use
 it for a deliberate sweep, not as a per-commit gate.
 
+> [!DRAFT] agent-authored 2026-09-09, c388d0cc, vetoable
+>
+> Read the prefix as an authoring convention, not only as a precision
+> knob: write `../foo.md` to ask that it resolve, `foo.md` to mention
+> it. A backticked path can be a link, or a string quoted from
+> elsewhere -- a path another file's `why:` holds, a name a rename
+> retired and an ADR keeps as provenance. Only a link must resolve
+> here, and a quotation written as one is a defect in the prose, not
+> in the tool. Two of the three broken links in `docs/dev` on
+> 2026-09-09 were exactly that (commit `767d56a`), and a third of the
+> species -- a command example with a trailing placeholder -- is
+> already a regression case in
+> `./.claude/todo.kb/2026-07-25-000-Test-coverage-for-llm-kb-validate-links.md`.
+
 Checks frontmatter path fields and inline body links both. Folding it
 into `llm.kb-validate` proper is tracked in
-`.claude/todo.kb/2026-06-03-000-validate-path-references.md`.
+`./.claude/todo.kb/2026-06-03-000-validate-path-references.md`.
 
 ## References
 
