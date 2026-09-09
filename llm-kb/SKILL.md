@@ -1,6 +1,6 @@
 ---
 name: llm-kb
-description: "Conventions for structured multi-agent knowledge bases. Agent MUST load when creating a .kb/ collection, when adding, renaming, splitting, or removing files in one, or when explaining or repairing a .kb/ layout."
+description: "Conventions for structured multi-agent knowledge bases. Agent MUST load when creating a .kb/ collection, when adding, renaming, splitting, or removing files in one, when writing or changing a `*.jsonschema.yaml`, or when explaining or repairing a .kb/ layout."
 ---
 --- # workaround: anthropics/claude-code#13005
 setup: |
