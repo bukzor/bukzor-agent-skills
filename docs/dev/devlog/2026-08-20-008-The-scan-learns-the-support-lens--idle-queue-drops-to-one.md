@@ -10,7 +10,7 @@ run<-identification) carried machine-readable support the idle scan
 never read -- interior claims citing the prior's claims by
 file-relative path in their own `why:` (e.g.
 `identification.kb/an-identification-cashes-out.md` citing
-`../purpose.kb/a-structure-earns-its-place-by-what-it-pins-down.md`).
+`purpose.kb/a-structure-earns-its-place-by-what-it-pins-down.md`).
 The scan read only the vocabulary lens (words said), so support
 carried at claim level looked like idleness.
 

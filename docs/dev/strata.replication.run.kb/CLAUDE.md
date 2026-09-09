@@ -1,6 +1,6 @@
 # strata.replication.run.kb -- one run's record
 
-One file per stage of one run of `../strata.replication.kb`, named for
+One file per stage of one run of `../strata.replication.kb/`, named for
 the turn that asked for it, holding the subject's reply verbatim. The
 operator's verdict on a stage is its **commit message**: the file says
 what came back, the commit says whether it landed.

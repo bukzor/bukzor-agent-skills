@@ -58,7 +58,7 @@ itself (`grep -rl 'Skill(formalize)'` or a provenance scan) -- one
 step less convenient than a curated pointer.
 
 **Neutral:** existing `llm-*` skills already largely conform; the
-`llm-claim-ledger-kb` -> `../llm-claim-ledger/design.ledger.kb/`
+`llm-claim-ledger-kb` -> `llm-claim-ledger/design.ledger.kb/`
 pointer is within-family and stands under the exception.
 
 ## Related
