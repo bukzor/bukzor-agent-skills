@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import cast
 
 import yaml
+from llmd.frontmatter_validate import load_schema, validate_against_schema
 
 # The sigil each standing spells out.
 SIGIL = {"bare": "", "open": "?", "agent": "+", "user": "!"}
@@ -286,10 +287,44 @@ def read_theories(origin: Path, collection: Path) -> tuple[Theory, ...]:
     )
 
 
+# The least a claim file may say. A schema that admits this and rejects it
+# with either key missing requires `label:` and `standing:` -- the ledger's
+# mark, and the whole of what this reader needs to know about a collection.
+MINIMAL_CLAIM = {"label": "AB", "standing": "bare"}
+
+
+def declares_claims(collection: Path) -> bool:
+    """Whether the schema beside a collection requires `label:` and `standing:`.
+
+    Read from the declaration, never from the data: an empty ledger is still
+    a ledger, a malformed claim stays a claim-level error instead of quietly
+    un-ledgering its collection, and a discourse graph's `claims.kb/` -- whose
+    schema requires neither -- is left to its own tools. The validator
+    resolves the schema's `$ref` chain, stubs and `#base` extenders alike, so
+    nothing here walks it.
+    """
+    schema_file = collection.parent / f"{collection.name.removesuffix('.kb')}.jsonschema.yaml"
+    if not schema_file.is_file():
+        return False
+    schema = load_schema(schema_file)
+    if schema is None:
+        return False
+    else:
+        accepts = lambda front: validate_against_schema(front, schema) == []  # noqa: E731
+        return (
+            accepts(MINIMAL_CLAIM)
+            and not accepts({"label": "AB"})
+            and not accepts({"standing": "bare"})
+        )
+
+
 def is_ledger_root(path: Path) -> bool:
-    """A ledger by name: `<subject>.claims.kb`, or bare `claims.kb` where the
-    enclosing scope supplies the subject."""
-    return path.name == "claims.kb" or path.name.endswith(".claims.kb")
+    """A ledger by name and by declaration: `<subject>.claims.kb`, or bare
+    `claims.kb` where the enclosing scope supplies the subject, whose schema
+    requires what a claim carries. The name alone is no evidence -- a
+    discourse graph keeps a `claims.kb/` too."""
+    named = path.name == "claims.kb" or path.name.endswith(".claims.kb")
+    return named and declares_claims(path)
 
 
 def ledger_roots(under: Path = Path()) -> tuple[Path, ...]:
@@ -301,7 +336,9 @@ def ledger_roots(under: Path = Path()) -> tuple[Path, ...]:
             path
             for pattern in ("claims.kb", "*.claims.kb")
             for path in under.rglob(pattern)
-            if path.is_dir() and not {".claude", "trash"} & {*path.parts}
+            if path.is_dir()
+            and not {".claude", "trash"} & {*path.parts}
+            and is_ledger_root(path)
         )
     )
 
