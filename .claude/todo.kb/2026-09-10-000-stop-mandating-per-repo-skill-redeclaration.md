@@ -5,8 +5,8 @@ cost-benefit-sweh:
   timebox:
     "@value": 3
     rationale:
-      the discrimination rule is the whole job; once stated, the sweep across
-      ~20 skills and their consumer repos is mechanical. Stop if the rule turns
+      agreeing the sorting criterion is the whole job; once agreed, the sweep
+      across ~20 skills and their consumer repos is mechanical. Stop if it turns
       out to need per-skill judgement rather than one criterion
     confidence: tentative
   benefit-2w:
@@ -23,7 +23,7 @@ cost-benefit-sweh:
 # Stop mandating per-repo skill re-declaration
 
 **Priority:** Medium **Complexity:** Low mechanically, Medium in judgement (the
-discrimination rule below is the real work) **Context:** raised 2026-09-10 —
+sorting criterion is the real work) **Context:** raised 2026-09-10 —
 "that's a leftover from a pre-triggers world. And there's other skills with the
 same problem."
 
@@ -67,34 +67,34 @@ restore a declaration that was deliberately deleted.
 Confirmed downstream: `basedpyright-as-pyright` removed exactly this
 (commit `d28b932`, 2026-09-10) and is now non-conformant to those two audits.
 
-## The discrimination rule (state this first — it is the deliverable)
+## Requirement: a sorting criterion, before any edits
 
-> [!DRAFT] agent-authored 2026-09-10, `abb4c2bd`, vetoable
->
-> The three-way split below is the agent's formulation, not the owner's ruling.
-> It is the part a sweep would obey, so it wants a ruling before anything is
-> swept — reject it and the scope list below still stands, but its verbs change.
+Not every skill declaration in a consumer file is redundant, and no criterion
+for telling them apart exists yet. Agreeing one is prerequisite work, to be done
+with the owner — this file deliberately states requirements and terrain, not a
+procedure.
 
-Not every skill declaration in a consumer file is redundant. The sweep needs one
-criterion, applied per instance:
+Distinctions present in the population, as observed 2026-09-10:
 
-- **Redundant → delete.** The declaration's occasion is already named by the
-  skill's own `description:`. Nothing is lost; the description keeps routing it.
-- **Genuinely conditional → migrate to `triggers:`.** The occasion is *narrower
-  than*, or *different from*, what the description names — e.g. "before
-  committing **in this repo**", or a local convention the skill cannot know
-  about. Keep it, with a stated juncture.
-- **Not a directive at all → leave it alone.** Two sub-cases: a `triggers:`
-  entry whose `read:` is a file (`./commit.md`), and — the numerically larger
-  one — a `depends:` that is *domain data under a schema* rather than a
-  routing field. Touching the second corrupts a graph. See the collision item
-  under Scope.
+- Declarations naming an occasion the skill's own `description:` already names.
+  `when: creating or maintaining a .kb/ collection` is a verbatim abbreviation
+  of llm-kb's.
+- Possible declarations naming an occasion *narrower than* or *different from*
+  the description's — a repo-local convention the skill cannot know about. None
+  was confirmed; recorded so a sweep does not assume the case away.
+- Entries that are not skill declarations at all: a `triggers:` whose `read:` is
+  a file path (`./commit.md`), and — the numerically larger case — a `depends:`
+  that is domain data under a schema. See the collision item under Scope.
 
-The failure to avoid is treating the whole sweep as the deprecated-field
-migration (`requires:`/`depends:` → `triggers:`). That is a *separate axis*: a
-`requires:` entry can be both deprecated-in-form and redundant-in-substance, and
-the fix is deletion, not migration. Migrating it first makes a well-formed
-duplicate — which lints clean and is still wrong.
+Two constraints any criterion has to survive:
+
+- **Deprecated-form and redundant-substance are orthogonal axes.** A `requires:
+  Skill(X)` can be both at once. Migrating such an entry to `triggers:` yields a
+  well-formed duplicate: it lints clean and is still a second copy of a trigger
+  that already routes.
+- **The linter cannot see the difference.** It matches on field name and
+  consults no schema, so it separates none of the three cases above. A
+  `bare-unconditional` count is not a to-do list.
 
 ## Scope to sweep
 
@@ -103,7 +103,7 @@ duplicate — which lints clean and is still wrong.
       itself.
 - [ ] **Every skill's `description:`** — confirm each genuinely names its
       occasion. A description that does *not* is the one case where a consumer
-      declaration is load-bearing, and the fix belongs in the description.
+      declaration is load-bearing rather than duplicative.
 - [ ] **Other skills carrying the same guidance.** Raised as known-plural; only
       llm-kb was confirmed outside `trash/` on 2026-09-10. Sweep rather than
       trust that count:
@@ -119,12 +119,13 @@ duplicate — which lints clean and is still wrong.
       `SKILL.md:131` tells authors to add it. Both are current, so every
       discourse graph in the fleet lints dirty permanently, and that noise
       trains the eye off a red count — a failure this backlog already records
-      twice elsewhere. Decide who owns the name: rename one side, or teach the
-      linter that a key declared by the collection's own schema is data. Until
-      then a `bare-unconditional` count is not a to-do list.
+      twice elsewhere. Ownership of the name has to be settled before any
+      count from this linter can be trusted. Two exits are visible and neither
+      is chosen: rename one side, or give the linter a way to see that a key
+      declared by the collection's own schema is data.
 - [ ] **Consumer repos.** `template.python-project`'s 21 `bare-unconditional`
-      errors are two unrelated populations — a worked example of the
-      discrimination rule, and the reason to state it before sweeping. **Six**
+      errors are two unrelated populations — a worked example of why a criterion
+      has to precede the sweep. **Six**
       are `CLAUDE.md` carriers declaring a skill (`Skill(llm-subtask)` ×2,
       `Skill(llm-kb)`, `Skill(llm-discourse-graph)`, `Skill(llm-design-kb)` ×2);
       those are this defect. The other **fifteen** are `discourse.kb/` claims
@@ -135,8 +136,8 @@ duplicate — which lints clean and is still wrong.
 
 ## Success criteria
 
-- [ ] The discrimination rule is written down where the sweep's agents will read
-      it, not just applied once.
+- [ ] Whatever criterion is agreed is written down where the sweep's agents will
+      read it, not just applied once.
 - [ ] No skill's guidance instructs a consumer to re-declare that skill for an
       occasion its `description:` already names.
 - [ ] Running llm-kb's own self-audit against a conformant repo no longer
@@ -152,7 +153,8 @@ duplicate — which lints clean and is still wrong.
 The subsystem's own framing of the defect is
 `llm-triggers/design.kb/use-cases.kb/arrival-fired-directives.md`: a directive
 in a host `CLAUDE.md` is "a trigger carrying a directive with its condition
-deleted", firing on arrival for every agent whatever they came to do. The
-correction there is that the condition must travel with the directive — and when
-the skill's `description:` already carries it, travelling means *staying in the
-description*, not being restated per repo.
+deleted", firing on arrival for every agent whatever they came to do. Its stated
+correction is that the condition must travel with the directive. Whether a
+`description:` that already carries the condition satisfies that requirement
+without a per-repo restatement is exactly the open question above, not something
+that file settles.

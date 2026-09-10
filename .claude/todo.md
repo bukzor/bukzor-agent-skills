@@ -11,9 +11,9 @@ Repo-level list. Skill-scoped work lives in each skill's own
       frontmatter declaring this skill; the `description:` carries the
       trigger", while two of its own self-audits mandate exactly that, so a
       sweep re-adds what a repo deliberately removed. Known-plural across
-      skills; owner will address holistically. The deliverable is the
-      discrimination rule (delete when redundant vs migrate when genuinely
-      repo-specific), not the individual edits —
+      skills; owner will address holistically. The work starts with a sorting
+      criterion — undecided, and the owner's to settle — not with the
+      individual edits —
       .claude/todo.kb/2026-09-10-000-stop-mandating-per-repo-skill-redeclaration.md
 - [ ] Adjudicate the findings 57e1ca7 made visible: with bare-form
       `claims.kb` ledgers discovered (13 roots now; 7 were invisible
