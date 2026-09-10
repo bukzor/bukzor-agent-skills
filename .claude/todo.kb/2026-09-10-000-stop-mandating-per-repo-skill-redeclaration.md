@@ -69,6 +69,12 @@ Confirmed downstream: `basedpyright-as-pyright` removed exactly this
 
 ## The discrimination rule (state this first — it is the deliverable)
 
+> [!DRAFT] agent-authored 2026-09-10, `abb4c2bd`, vetoable
+>
+> The three-way split below is the agent's formulation, not the owner's ruling.
+> It is the part a sweep would obey, so it wants a ruling before anything is
+> swept — reject it and the scope list below still stands, but its verbs change.
+
 Not every skill declaration in a consumer file is redundant. The sweep needs one
 criterion, applied per instance:
 
