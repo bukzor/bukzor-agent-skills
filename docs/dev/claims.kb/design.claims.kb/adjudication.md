@@ -1,6 +1,7 @@
 ---
 label: ADJUDICATION
 standing: agent
+verdict: superseded
 why:
   - ../strata.claims.kb/fleet.md
   - ../strata.claims.kb/standing.md
@@ -13,6 +14,11 @@ stale-when: a second rulemaker -- any court besides the owner's whose word can b
 ---
 
 # adjudication -- how a ruling arrives, and how it becomes law
+
+> [!DRAFT] superseded 2026-09-09 by `commitment.md`, which derives the same
+> subject from the owner's rulings at their transcript addresses; the owner's
+> 2026-09-02 finding was that this collection was written upward from
+> anecdotes rather than downward from those rulings.
 
 The owner's court, as law: what counts as a ruling, the forms one may
 arrive in, and the one way an instance becomes standing law. A
