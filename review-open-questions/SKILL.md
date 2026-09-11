@@ -16,15 +16,21 @@ rulings on the record. Scope defaults to the current stretch of work.
 ## One law: the cheapest competent court
 
 Call anything that can settle an open a **court**, and order the
-courts by cost: the record, a check, a witness, and dearest of all
-the owner. Every open is settled in the cheapest court competent to
-settle it, and a settlement from the wrong court is void both ways:
-a fact ratified by the owner records a false judge; a stipulation
-defaulted by an agent is a veto still waiting, not a ruling.
+courts by cost: your own license, the record, a check, a witness,
+and dearest of all the owner. Every open is settled in the cheapest
+court competent to settle it, and a settlement from the wrong court
+is void both ways: a fact ratified by the owner records a false
+judge; a stipulation defaulted by an agent is a veto still waiting,
+not a ruling.
 
 So before presenting anything, exhaust the cheap courts -- expect
 them to settle most of the batch:
 
+- **By your own license.** First ask whether anything is open at all.
+  An act you may already perform -- reversible, in scope, no one-way
+  door -- awaits you, not the owner: do it, and report it. Filing it
+  as an open is void exactly as ratifying a fact is, and costs more:
+  the entry outlives the act, and every later sweep re-presents it.
 - **By the record.** Open lists rot, so test against the record, not
   your memory of it: the owner already ruled (cite it), intervening
   work dissolved it, or an existing ruling covers it -- then the real
