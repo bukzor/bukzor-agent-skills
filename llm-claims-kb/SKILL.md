@@ -264,7 +264,8 @@ weighted by how much rests on them -- the review queue the ledger's own
 
 ```bash
 llm-claims-kb-grounding <name>.claims.kb          # one JSON record per claim, weakest first
-bin/llm-claims-kb-grounding <name>.claims.kb      # the same, as a table
+bin/llm-claims-kb-grounding <name>.claims.kb          # the same, as a table
+bin/llm-claims-kb-grounding --json <name>.claims.kb   # the raw records, via the wrapper
 ```
 
 Each record carries the claim's `id`, `label`, `standing` and theory,

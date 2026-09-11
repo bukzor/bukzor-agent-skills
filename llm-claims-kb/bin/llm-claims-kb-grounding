@@ -1,6 +1,7 @@
 #!/bin/bash
 # The grounding ranking as a table: llm-claims-kb-grounding | jq | column.
-# Usage: llm-claims-kb-grounding <name>.claims.kb
+# Usage: llm-claims-kb-grounding [--json] <name>.claims.kb
+#   --json  the console script's raw JSONL, one record per claim, unformatted
 set -euo pipefail
 shopt -s failglob
 export DEBUG="${DEBUG:-0}"
@@ -13,16 +14,22 @@ onerror() {
 trap onerror ERR
 
 here="$(dirname -- "$(readlink -f -- "$0")")"
+# Absolute venv path: a script-to-script call shouldn't depend on the
+# caller's shell having .venv/bin on PATH.
+raw="$here/../../.venv/bin/llm-claims-kb-grounding"
 
 if (( DEBUG > 0 )); then
   set -x
 fi
 
-# Absolute venv path: a script-to-script call shouldn't depend on the
-# caller's shell having .venv/bin on PATH.
+if [[ "${1:-}" == --json ]]; then
+  shift
+  exec "$raw" "$@"
+fi
+
 {
   printf 'label\tstanding\trests\thops\tpriors\tforeign\tdangling\tuser_grounds\n'
-  "$here/../../.venv/bin/llm-claims-kb-grounding" "$@" |
+  "$raw" "$@" |
     jq -r '[
       .label, .standing, .rests_on_it, (.hops_to_user // "-"),
       .priors, .foreign, .dangling, (.user_grounds | join(","))
