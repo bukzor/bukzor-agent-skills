@@ -1,0 +1,30 @@
+#!/bin/bash
+# The grounding ranking as a table: llm-claims-kb-grounding | jq | column.
+# Usage: llm-claims-kb-grounding <name>.claims.kb
+set -euo pipefail
+shopt -s failglob
+export DEBUG="${DEBUG:-0}"
+
+onerror() {
+  error="$?"
+  echo >&2 "ERROR($error)"
+  exit "$error"
+}
+trap onerror ERR
+
+here="$(dirname -- "$(readlink -f -- "$0")")"
+
+if (( DEBUG > 0 )); then
+  set -x
+fi
+
+# Absolute venv path: a script-to-script call shouldn't depend on the
+# caller's shell having .venv/bin on PATH.
+{
+  printf 'label\tstanding\trests\thops\tpriors\tforeign\tdangling\tuser_grounds\n'
+  "$here/../../.venv/bin/llm-claims-kb-grounding" "$@" |
+    jq -r '[
+      .label, .standing, .rests_on_it, (.hops_to_user // "-"),
+      .priors, .foreign, .dangling, (.user_grounds | join(","))
+    ] | @tsv'
+} | column -t -s $'\t'

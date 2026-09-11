@@ -5,7 +5,7 @@ description: "Claim ledger kept as files. Agent MUST load when maintaining a led
 --- # workaround: anthropics/claude-code#13003
 setup: |
     `uv add llm-claims-kb` from within this workspace also puts
-    `llm-claims-kb-ownership`/`-dot`/`-flatten`/`-mentions` on `$PATH`
+    `llm-claims-kb-ownership`/`-dot`/`-flatten`/`-mentions`/`-grounding` on `$PATH`
     as installed console scripts (see Tools provided below) -- and code
     that imports `llm_claims_kb` directly gets the package too.
     `llm-claims-kb` is a workspace member, so `uv add` detects the
@@ -254,6 +254,31 @@ would signal a concerns violation; a word said across many theories
 is ambient vocabulary and owning it polices noise. Concentration is
 the measure, never rarity in English. `--floor` and `--ceiling` move
 the two thresholds.
+
+### llm-claims-kb-grounding
+
+Purpose: find the claims whose chain to the owner's word is weakest,
+weighted by how much rests on them -- the review queue the ledger's own
+`why:` graph implies. A quoted chat is not a ground here; only a
+`standing: user` claim is.
+
+```bash
+llm-claims-kb-grounding <name>.claims.kb          # one JSON record per claim, weakest first
+bin/llm-claims-kb-grounding <name>.claims.kb      # the same, as a table
+```
+
+Each record carries the claim's `id`, `label`, `standing` and theory,
+`rests_on_it` (transitive dependents), `hops_to_user` (shortest `why:`
+path to a user-standing claim; `null` when no path exists), the
+`user_grounds` it reaches, and how many of its priors are `foreign`
+(a file outside this ledger) or `dangling` (no file). Order is
+unreached first, then most-depended-on first, so the head of the
+output is what to put to the owner next.
+
+`null` hops with many dependents is the finding. It has two honest
+readings, and the record says which: `foreign` priors mean the ground
+is exported to another ledger and the audit continues there; none
+mean an agent's assertion is carrying the weight.
 
 ## What this is not
 

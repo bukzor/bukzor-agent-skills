@@ -12,6 +12,7 @@ llm-claims-kb-ownership = "llm_claims_kb.ownership:main"
 llm-claims-kb-dot = "llm_claims_kb.dot:main"
 llm-claims-kb-flatten = "llm_claims_kb.flatten:main"
 llm-claims-kb-mentions = "llm_claims_kb.mentions:main"
+llm-claims-kb-grounding = "llm_claims_kb.grounding:main"
 
 [build-system]
 requires = ["hatchling"]
