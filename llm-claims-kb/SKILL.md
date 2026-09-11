@@ -260,7 +260,7 @@ the two thresholds.
 Purpose: find the claims whose chain to the owner's word is weakest,
 weighted by how much rests on them -- the review queue the ledger's own
 `why:` graph implies. A quoted chat is not a ground here; only a
-`standing: user` claim is.
+`standing: user` claim is, or a bare claim with a `verify:` check.
 
 ```bash
 llm-claims-kb-grounding <name>.claims.kb          # one JSON record per claim, weakest first
@@ -268,18 +268,33 @@ bin/llm-claims-kb-grounding <name>.claims.kb          # the same, as a table
 bin/llm-claims-kb-grounding --json <name>.claims.kb   # the raw records, via the wrapper
 ```
 
-Each record carries the claim's `id`, `label`, `standing` and theory,
-`rests_on_it` (transitive dependents), `hops_to_user` (shortest `why:`
-path to a user-standing claim; `null` when no path exists), the
-`user_grounds` it reaches, and how many of its priors are `foreign`
-(a file outside this ledger) or `dangling` (no file). Order is
-unreached first, then most-depended-on first, so the head of the
-output is what to put to the owner next.
+A claim's `effective` standing is the fold over its `why:` graph, read
+the way `Skill(llm-claims)` reads a derivation (SIGNATURE). The fold
+stops at ground -- the owner's word (`user`), or a check (`certified`:
+`bare` with `verify:`) -- and passes through a bare claim that only
+follows from its premises. Anything else it meets is a judge whose
+ruling everything above is waiting on: `agent`, `open`, `struck` (a
+`verdict:`), `hidden` (bare, unchecked, resting on nothing), or
+`dangling` (a `why:` naming no file). A claim is as weak as the weakest
+judge it meets, however many owner rulings it also cites; a shortest
+path to a user claim is not the measure. A citation into another
+ledger is followed and the claim read there, so an import is graded by
+what it rests on, not by where it lives.
 
-`null` hops with many dependents is the finding. It has two honest
-readings, and the record says which: `foreign` priors mean the ground
-is exported to another ledger and the audit continues there; none
-mean an agent's assertion is carrying the weight.
+Each record carries `id`, `label`, `standing`, theory, `effective`,
+`is_judge` (the claim itself is what its dependents wait on),
+`weakest` (labels of the nearest judges beneath it; a ruling on each
+is what would ground it), `rests_on_it` (transitive dependents in this
+ledger), the `user_grounds` it reaches, and how many priors are
+`foreign` (a file outside this ledger) or `dangling`. Order is judges
+first, then claims weak through an ancestor, then the grounded, each
+group most-depended-on first -- so the head of the output is what to
+put to the owner next, and its `rests_on_it` is what that ruling
+carries.
+
+A ledger that signs its derivations `+` reads as fiat all the way up:
+every claim is its own judge, and no ruling grounds another. That is
+the notation's reading, not the tool's -- a derivation goes bare.
 
 ## What this is not
 
