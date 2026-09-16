@@ -158,13 +158,14 @@ def dot_claims(ledger: Ledger, rankdir: str) -> str:
     lines += [
         foreign_node(other, outside.get(other)) for other in foreign(ledger)
     ]
+    scopes = {claim.id: claim.scope for claim in ledger.claims}
     # Within a theory the arrows are the argument; across theories they
     # are the tower's shape -- drawn thinner. The distinction rides on
     # penwidth, not color, because `edgepaint` owns color downstream.
     lines += [
         (
             f'  "{prior.id}" -> "{claim.id}";'
-            if claim.scope and prior.id.rpartition("/")[0] == claim.scope
+            if claim.scope and scopes.get(prior.id) == claim.scope
             else f'  "{prior.id}" -> "{claim.id}" [penwidth=0.5];'
         )
         for claim in ledger.claims

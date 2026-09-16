@@ -78,6 +78,21 @@ tokens -- `claims.kb/design.md` + `design.kb/`, never
 `claims.kb/design.claims.kb/` -- because the container already supplied
 the word "claims" and a name repeats no token its container supplies.
 
+A claim may take a directory of its own: `<slug>/LABEL.md`, the slug
+kebab-case for the locus (llm-kb's self-describing name), the stem the
+label exactly, so one path shows both handles and a `why:` line reads as
+a citation without opening the file. A theory the same way,
+`<slug>/LABEL.md` beside `<slug>/LABEL.kb/` and `<slug>/LABEL.jsonschema.yaml`,
+its slug the ontology's locus rather than its label lowercased. A plain
+directory inside a collection is a prefix on the names of what it holds,
+never a boundary: the claim is named `<slug>/LABEL`, is confined to the
+collection above, and is governed by that collection's schema. The
+ledger's own root stays `claims.md` beside `claims.kb/` (or the
+`<name>.claims` pair): that name is llm-kb's type marker, saying a
+ledger starts here, and the rule governs what is inside. Both forms may
+share a ledger; a rename from one to the other is a rename like any
+other (below). Worked instance: `ideation.epistemics/kb-dynamics/docs/dev/`.
+
 `X.kb/` alone, with the `.md` not yet written, is legal and means one
 thing only: an **open theory**. It stipulates no words, so its claims
 are confined to what the collections above it admit, and it renders and

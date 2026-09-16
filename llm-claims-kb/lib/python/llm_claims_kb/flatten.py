@@ -191,24 +191,21 @@ def lints(ledger: Ledger) -> tuple[str, ...]:
     """What the flattening loses or blurs, for stderr.
 
     Labels are the only handle the chat form has -- paths are gone -- so a
-    label another label prefixes is a real collision here, however well the
-    files were telling those two claims apart. An imported label is in the
-    paste on the same terms and collides on them too: two ledgers may each
-    hold a STANDING and stay unambiguous, right up until one imports the
-    other.
+    label two claims share is a real collision here, however well the files
+    were telling those two claims apart. An imported label is in the paste
+    on the same terms and collides on them too: two ledgers may each hold a
+    STANDING and stay unambiguous, right up until one imports the other. A
+    label another label extends (`CONFLICT`, `CONFLICT_ARITY`) is no
+    collision: `grep -w` tells them apart, and `grep '\\<CONFLICT'` finds the family.
     """
     found = [f"dangling why: reference: {missing}" for missing in dangling(ledger)]
     names = sorted(
         claim.label for claim in (*ledger.claims, *imported(ledger).values())
     )
     collisions = [
-        (
-            f"label {one} is defined twice"
-            if one == other
-            else f"label {one} prefixes {other}; `grep {one}` cannot tell them apart"
-        )
+        f"label {one} is defined twice"
         for one, other in combinations(names, 2)
-        if other.startswith(one)
+        if one == other
     ]
     if collisions:
         # A test each label takes on its own, not a verdict naming a squatter:

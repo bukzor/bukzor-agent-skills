@@ -30,9 +30,12 @@ $defs:
           Stable ledger label -- names the locus of contention, not the
           current conclusion, so it survives revision. Upper snake case,
           two characters at least (the bare label is the mention form,
-          and single capitals are prose); no label may be a prefix of
-          another, since sigils trail the label and `grep LABEL` has to
-          stay unambiguous.
+          and single capitals are prose). Labels are distinct as whole
+          words, nothing more: `grep -w LABEL` finds one claim, and a
+          family that shares a head (`CONFLICT`, `CONFLICT_ARITY`) is
+          found by `grep '\\<CONFLICT'`. (Ruled 2026-09-16, dfc18e9d and
+          after: the older no-prefix rule dated from two-letter
+          initialisms and forbade the family it should have invited.)
         type: string
         pattern: "^(?=..)[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"
       standing:

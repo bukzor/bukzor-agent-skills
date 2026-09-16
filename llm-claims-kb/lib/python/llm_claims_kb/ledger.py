@@ -11,6 +11,12 @@ defines that theory, a `.md` alone is a claim -- so the shape nests without
 limit, and the ledger itself is the outermost instance of it:
 `<name>.claims.md` is the defining claim of `<name>.claims.kb/`.
 
+A plain directory inside a collection is a prefix on the names of what it
+holds, not a boundary: `<slug>/LABEL.md` is one claim named `<slug>/LABEL`,
+and a `.kb/` under a plain directory is a theory of the collection above.
+A file there is named for its label, so the path shows both handles at
+once. One git ignores is scratch and not read.
+
 The `llm-claims-kb-*` tools all read a ledger through here, so the schema has
 one parser and the tools disagree only about rendering.
 
@@ -28,7 +34,7 @@ from pathlib import Path
 from typing import cast
 
 import yaml
-from llmd.frontmatter_validate import load_schema, validate_against_schema
+from llmd.frontmatter_validate import corpus, load_schema, validate_against_schema
 
 # The sigil each standing spells out.
 SIGIL = {"bare": "", "open": "?", "agent": "+", "user": "!"}
@@ -90,20 +96,15 @@ class Theory:
     path: Path  # the collection itself -- an id is not a path, only a handle
     defining: Claim | None  # absent until someone writes `<name>.md`
     claims: tuple[Claim, ...]  # confined to it; its sub-theories' are their own
+    # The theory this one sits inside; empty for the ledger's own theory.
+    # Containment admits: a nested theory reads in every word its container
+    # stipulates, which is why nesting needs no `why:` to say so.
+    container: str
 
     @property
     def stem(self) -> str:
         """The collection's own name, for a reader who has the tree in view."""
         return self.name.rpartition("/")[2]
-
-    @property
-    def container(self) -> str:
-        """The theory this one sits inside; empty for the ledger's own theory.
-
-        Containment admits: a nested theory reads in every word its container
-        stipulates, which is why nesting needs no `why:` to say so.
-        """
-        return self.name.rpartition("/")[0]
 
     @property
     def label(self) -> str:
@@ -176,6 +177,27 @@ def claim_id(origin: Path, path: Path) -> str:
     return "/".join([*directories, relative.stem])
 
 
+def collection_of(origin: Path, path: Path) -> Path | None:
+    """The collection a file of this ledger is a member of, or None for the
+    ledger's own defining claim, which sits beside the root.
+
+    Read from the nearest `.kb/` above, through any plain directories
+    between: those are prefixes on their members' names, not boundaries.
+    """
+    for parent in path.parents:
+        if parent.name.endswith(".kb"):
+            return parent
+        if os.path.normpath(parent) == os.path.normpath(origin):
+            return None
+    return None
+
+
+def scope_of(origin: Path, path: Path) -> str:
+    """The id of the theory a file is confined to: its collection's defining claim."""
+    collection = collection_of(origin, path)
+    return claim_id(origin, defining_claim(collection)) if collection else ""
+
+
 def prior(origin: Path, source: Path, entry: str) -> Prior:
     """One `why:` entry resolved -- entries are file-relative, so they join to
     the directory of the claim doing the citing."""
@@ -234,10 +256,12 @@ def read_claim(origin: Path, path: Path) -> Claim:
     assert isinstance(ontology, list), ontology
     assert isinstance(non_claim_tokens, list), non_claim_tokens
     assert stale_when is None or isinstance(stale_when, str), stale_when
-    identity = claim_id(origin, path)
+    if not path.parent.name.endswith(".kb") and collection_of(origin, path) is not None:
+        # Under a plain directory the path is the label's home: `<slug>/LABEL.md`.
+        assert path.stem == label, (path, label)
     return Claim(
-        id=identity,
-        scope=identity.rpartition("/")[0],
+        id=claim_id(origin, path),
+        scope=scope_of(origin, path),
         stem=path.stem,
         label=label,
         standing=standing,
@@ -271,15 +295,47 @@ def read_theory(origin: Path, collection: Path) -> Theory:
     defining = defining_claim(collection)
     confined = [
         md
-        for md in sorted(collection.glob("*.md"))
-        if md.name != "CLAUDE.md" and not (collection / f"{md.stem}.kb").is_dir()
+        for md in members(collection)
+        if md.name != "CLAUDE.md"
+        and not md.name.startswith(".")
+        and not (md.parent / f"{md.stem}.kb").is_dir()
     ]
     return Theory(
         name=claim_id(origin, defining),
         path=collection,
         defining=read_claim(origin, defining) if defining.exists() else None,
         claims=tuple(read_claim(origin, md) for md in confined),
+        container=scope_of(origin, defining),
     )
+
+
+def plain_directories(collection: Path) -> tuple[Path, ...]:
+    """The subdirectories that are neither collections nor conventions
+    (dotted), less what git ignores."""
+    plain = sorted(
+        child
+        for child in collection.iterdir()
+        if child.is_dir()
+        and not child.name.endswith(".kb")
+        and not child.name.startswith(".")
+    )
+    return tuple(corpus(collection, plain))
+
+
+def members(collection: Path) -> tuple[Path, ...]:
+    """Every `.md` a collection holds, directly or under plain directories."""
+    found = sorted(collection.glob("*.md"))
+    for plain in plain_directories(collection):
+        found += members(plain)
+    return tuple(found)
+
+
+def collections_in(collection: Path) -> tuple[Path, ...]:
+    """Every `.kb/` a collection holds, directly or under plain directories."""
+    found = sorted(collection.glob("*.kb"))
+    for plain in plain_directories(collection):
+        found += collections_in(plain)
+    return tuple(found)
 
 
 def read_theories(origin: Path, collection: Path) -> tuple[Theory, ...]:
@@ -290,7 +346,7 @@ def read_theories(origin: Path, collection: Path) -> tuple[Theory, ...]:
     inside it twice."""
     return tuple(
         theory
-        for nested in sorted(collection.glob("*.kb"))
+        for nested in collections_in(collection)
         if not is_ledger_root(nested)
         for theory in (read_theory(origin, nested), *read_theories(origin, nested))
     )

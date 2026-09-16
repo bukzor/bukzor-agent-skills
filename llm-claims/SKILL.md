@@ -47,8 +47,10 @@ operation on one. What each operation *obliges* is a file apiece in
 
 ## Sigils
 
-The sigil trails the label, so the label stays a greppable prefix: `grep
-XY` finds `XY`, `XY?`, `XY!`, and every reference.
+The sigil trails the label, so the label stays a greppable word: `grep -w
+XY` finds `XY`, `XY?`, `XY!`, and every reference, and not `XY_Z`. Labels
+are distinct as whole words and no more; a family sharing a head
+(`CONFLICT`, `CONFLICT_ARITY`) is found by `grep '\<CONFLICT'`.
 
 A claim therefore has two renderings of its name. Its **definition
 site** -- the line stating it -- is fully qualified: label, sigil, and

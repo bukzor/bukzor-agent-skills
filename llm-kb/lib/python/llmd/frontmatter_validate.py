@@ -131,8 +131,12 @@ class ValidationResult:
                 raise AssertionError(self.kind)
 
 
-def validate_one_file(md_file: Path, schema_override: Path | None, depth: int) -> Iterator[ValidationResult]:
-    """Validate one file, yielding output. Skips non-data files."""
+def validate_one_file(md_file: Path, schema_override: Path | None, depth: int, text: str | None = None) -> Iterator[ValidationResult]:
+    """Validate one file, yielding output. Skips non-data files.
+
+    `text` is how the file is listed; a member under a plain directory is
+    listed by the path that names it (`slug/LABEL.md`), a loose file by name.
+    """
     # Skipped because their location is forced, not because their frontmatter
     # is uninteresting: a maintenance guide governs the collection it sits in,
     # and a dotfile (e.g. .template.md) states the collection's conventions, so
@@ -141,7 +145,7 @@ def validate_one_file(md_file: Path, schema_override: Path | None, depth: int) -
     if md_file.name == 'CLAUDE.md' or md_file.name.startswith('.'):
         return
     errors = validate_file(md_file, schema_override)
-    yield ValidationResult(depth, 'file', md_file.name, errors=tuple(errors))
+    yield ValidationResult(depth, 'file', text or md_file.name, errors=tuple(errors))
 
 
 def glob_prune(paths: Iterable[Path]) -> Iterator[Path]:
@@ -233,9 +237,40 @@ def is_kb_dir(path: Path) -> bool:
     return path.is_dir() and (path.name.endswith(SUFFIX) or HIVE_PARTITION_MARKER in path.name)
 
 
+def plain_subdirs(path: Path) -> Iterator[Path]:
+    """Subdirectories that are neither collections nor conventions (dotted).
+
+    A plain directory inside a collection is a prefix on the names of what it
+    holds -- `slug/ITEM.md` is one member named `slug/ITEM` -- so the walk
+    passes through it, as it does a hive partition. What git ignores is
+    scratch and is not corpus.
+    """
+    plain = [d for d in sorted(path.iterdir()) if d.is_dir() and not is_kb_dir(d) and not d.name.startswith('.')]
+    return corpus(path, plain)
+
+
 def kb_subdirs(path: Path) -> list[Path]:
-    """Get .kb/ and hive partition subdirectories."""
-    return [d for d in sorted(path.iterdir()) if is_kb_dir(d)]
+    """Get .kb/ and hive partition subdirectories, through plain directories."""
+    found = [d for d in sorted(path.iterdir()) if is_kb_dir(d)]
+    for plain in plain_subdirs(path):
+        found += kb_subdirs(plain)
+    return found
+
+
+def members(collection: Path) -> Iterator[Path]:
+    """Every `.md` a collection holds, directly or under plain directories."""
+    yield from sorted(collection.glob('*.md'))
+    for plain in plain_subdirs(collection):
+        yield from members(plain)
+
+
+def enclosing_collection(path: Path) -> Path | None:
+    """The `.kb/` a path is a member of, through any plain or hive
+    directories between -- those subdivide a collection without ending it."""
+    for parent in path.parents:
+        if parent.name.endswith(SUFFIX):
+            return parent
+    return None
 
 
 def roll_up_of(collection: Path) -> Path | None:
@@ -246,7 +281,7 @@ def roll_up_of(collection: Path) -> Path | None:
     summary goes unread. A *nested* collection's roll-up needs no finding:
     it is already a member of the collection above and is validated there.
     """
-    if is_kb_dir(collection.parent):
+    if enclosing_collection(collection) is not None:
         return None
 
     candidate = collection.parent / f"{collection.name.removesuffix(SUFFIX)}.md"
@@ -268,8 +303,8 @@ def validate_paths(paths: Iterator[Path], schema_override: Path | None = None, d
 
             yield ValidationResult(depth, 'dir', p.name)
 
-            for md_file in sorted(p.glob('*.md')):
-                yield from validate_one_file(md_file, schema_override, depth + 1)
+            for md_file in members(p):
+                yield from validate_one_file(md_file, schema_override, depth + 1, str(md_file.relative_to(p)))
 
             yield from validate_paths(corpus(p, kb_subdirs(p)), schema_override, depth + 1)
 
@@ -334,9 +369,9 @@ def schema_for(md_file: Path) -> Path | None:
     """The schema a file's location puts it under, or None if none does.
 
     A file in `X.kb/` is governed by `X.jsonschema.yaml` beside that
-    directory. A hive partition (`year=2026/`) subdivides a collection
-    without renaming it, so the walk up passes through any number of them
-    to reach the `.kb/` they partition.
+    directory. A hive partition (`year=2026/`) or a plain directory
+    subdivides a collection without renaming it, so the walk up passes
+    through any number of them to reach the `.kb/` they subdivide.
 
     `X.md` beside `X.kb/` -- the collection's roll-up, and in a claims
     ledger its defining claim -- is governed by that same schema. Only
@@ -344,14 +379,11 @@ def schema_for(md_file: Path) -> Path | None:
     data, so the collection's silence leaves it the ordinary loose-file
     verdict rather than demanding a schema into existence.
     """
-    directory = md_file.parent
-    while HIVE_PARTITION_MARKER in directory.name:
-        directory = directory.parent
-
     sibling_schema = md_file.parent / f"{md_file.stem}.jsonschema.yaml"
-    if directory.name.endswith(SUFFIX):
-        category = directory.name.removesuffix(SUFFIX)
-        return directory.parent / f"{category}.jsonschema.yaml"
+    collection = enclosing_collection(md_file)
+    if collection is not None:
+        category = collection.name.removesuffix(SUFFIX)
+        return collection.parent / f"{category}.jsonschema.yaml"
     elif (md_file.parent / f"{md_file.stem}{SUFFIX}").is_dir() and sibling_schema.exists():
         return sibling_schema
     else:

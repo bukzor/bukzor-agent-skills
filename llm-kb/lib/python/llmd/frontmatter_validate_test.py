@@ -420,3 +420,52 @@ class DescribeCollectionRollUp:
         results = list(fv.validate_paths(iter([tmp_path / "notes.kb"])))
 
         assert [result.text for result in results] == ["notes.kb", "entry.md"], results
+
+
+LABELED_SCHEMA = "type: object\nrequired: [label]\nproperties:\n  label: {type: string}\n"
+
+
+class DescribePlainDirectories:
+    """A plain directory inside a collection is a prefix on its members' names,
+    not a boundary: `slug/ITEM.md` is a member named `slug/ITEM`, governed by
+    the collection's schema, and a `.kb/` under a slug is a nested collection."""
+
+    def _write_collection(self, root: Path) -> Path:
+        _ = (root / "things.jsonschema.yaml").write_text(LABELED_SCHEMA)
+        _ = (root / "things.kb").mkdir()
+        return root / "things.kb"
+
+    def it_governs_a_member_under_a_plain_directory_by_the_collection_schema(self, tmp_path: Path):
+        collection = self._write_collection(tmp_path)
+        _ = (collection / "a-slug").mkdir()
+        _ = (collection / "a-slug" / "ITEM.md").write_text("---\nlabel: ITEM\n---\n\n# Item\n")
+        _ = (collection / "b-slug").mkdir()
+        _ = (collection / "b-slug" / "BAD.md").write_text("---\nnot-label: x\n---\n\n# Bad\n")
+
+        results = [r for r in fv.validate_paths(iter([tmp_path])) if r.kind == "file"]
+
+        assert {r.text: bool(r) for r in results} == {"a-slug/ITEM.md": True, "b-slug/BAD.md": False}
+
+    def it_finds_a_nested_collection_under_a_plain_directory(self, tmp_path: Path):
+        collection = self._write_collection(tmp_path)
+        _ = (collection / "a-slug").mkdir()
+        _ = (collection / "a-slug" / "INNER.md").write_text("---\nlabel: INNER\n---\n\n# Inner\n")
+        _ = (collection / "a-slug" / "INNER.jsonschema.yaml").write_text(LABELED_SCHEMA)
+        _ = (collection / "a-slug" / "INNER.kb").mkdir()
+        _ = (collection / "a-slug" / "INNER.kb" / "leaf.md").write_text("---\nlabel: LEAF\n---\n\n# Leaf\n")
+
+        results = list(fv.validate_paths(iter([tmp_path])))
+
+        assert _collections(results) == ["things.kb", "INNER.kb"]
+        assert [r.text for r in results if r.kind == "file"] == ["a-slug/INNER.md", "leaf.md"]
+        assert all(results)
+
+    def it_skips_a_plain_directory_git_ignores(self, tmp_path: Path):
+        _init_repo(tmp_path)
+        collection = self._write_collection(tmp_path)
+        _ = (collection / "trash").mkdir()
+        _ = (collection / "trash" / "scratch.md").write_text("---\nnot-label: x\n---\n\n# Scratch\n")
+
+        results = list(fv.validate_paths(iter([tmp_path])))
+
+        assert [r.text for r in results if r.kind == "file"] == []
