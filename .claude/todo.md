@@ -54,6 +54,32 @@ Repo-level list. Skill-scoped work lives in each skill's own
         ("names the locus of contention" + "no label may be a prefix of
         another") with a clause saying the locus decides a collision. The
         file is `$ref`'d fleet-wide, so the wording is theirs to rule
+- [ ] Three agent judgment calls from 2026-09-16 (the `VOICE`/`JUSTIF_ORDER`
+      pass) — all live in place, none blocking, each vetoable by editing
+      the file named:
+  - [ ] `JUSTIF_ORDER` is the agent's formulation. The owner ruled both
+        halves (discovery-order residue is retconned; history is
+        sometimes the justification itself); the stance's wording, its
+        cost paragraph, and the declined alternative are mine —
+        llm-claims/claims.kb/design.claims.kb/stance.kb/an-account-owes-the-order-of-justification.md
+  - [ ] `VOICE`'s definition of *sensatim* is the agent's. The owner
+        supplied the word and ruled that the standard is a condition
+        rather than a synonym for "verbatim"; the condition's wording,
+        the borrowed vocabulary (silent emendation, accidentals against
+        substantives, immaterial variance), and the coinage note are mine —
+        llm-claims/claims.kb/design.claims.kb/notation.kb/the-owners-word-is-quoted-sensatim-with-an-address.md
+  - [ ] That file's *name* carries the coinage. The plainer
+        `the-owners-word-is-quoted-in-substance-with-an-address.md` was
+        offered in chat and not answered; one `git mv` either way
+- [ ] `llm-claims-kb-graph` cannot run in this environment: `edgepaint`
+      core-dumps inside the pipeline, so `neato -n2` receives no `pos`
+      and the render dies with `graph ... has missing "pos" information`.
+      Reproduces on ledgers nobody edited today (`deformalize/claims.kb`),
+      so it predates this session and is not content-dependent. Cost is
+      silent: llm-claims-kb SKILL.md's Renames procedure says to re-run
+      the graph before committing a rename, and nobody has been able to
+      for an unknown span. Either drop `edgepaint` (its colour is
+      decoration) or repair the graphviz install
 - [ ] The ad-hoc list above has a mechanical population behind it, found
       2026-09-03 when the owner asked whether agent-authored claims stand
       on merits or want more scrutiny. The checkable class: a claim at
