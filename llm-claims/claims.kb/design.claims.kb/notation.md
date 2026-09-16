@@ -4,6 +4,7 @@ standing: agent
 why:
   - good-smells.md
 ontology:
+  - sensatim
   - node type
   - veto
   - signature

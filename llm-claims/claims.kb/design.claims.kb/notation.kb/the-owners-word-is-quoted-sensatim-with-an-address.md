@@ -4,25 +4,28 @@ standing: agent
 authority: >-
   @bukzor 2026-09-09, f9bdf6f0#L109, proposed the callout; the address
   requirement and the single agent form are the agent's additions, veto
-  invited
+  invited; the fidelity standard is the owner's, a29c9a99
 why:
   - the-sigil-signs-the-judge.md
   - agent-fiat-gets-its-own-sigil.md
   - ../ownership.md
 ---
 
-# The Owner's Word Is a Faithful Span With an Address
+# The Owner's Word Is Quoted *Sensatim*, With an Address
 
 In prose, the owner's voice takes one form: a `> [!@bukzor] <address>`
-callout whose body is faithful to the owner's meaning at that address:
-the words as typed, with typos mended and renamed labels retconned to
-their current names, never a paraphrase that changes what was meant.
-The address is what lets a reader check the retcon against the record. An agent's composition
-in prose -- a paraphrase, a derivation, law elicited from the owner's
-answers -- takes one form, `> [!DRAFT] <address>`, and names the
-`[!@bukzor]` spans it derives from. An address is a transcript record
-(`<session>#L<n>`) or a commit the owner authored. Nothing else in a
-body speaks for the owner.
+callout quoting the owner *sensatim* at that address -- the words as
+typed, silently emended only where they would now mislead. A typo, and
+a label renamed since, are the standing instances and not the
+definition: the test is whether the unmended token would transmit
+something the owner did not send, and it is the reader's test, not the
+editor's. What no emendation licenses is paraphrase. An agent's
+composition in prose -- a paraphrase, a derivation, law elicited from
+the owner's answers -- takes one form, `> [!DRAFT] <address>`, and names
+the `[!@bukzor]` spans it derives from. An address is a transcript
+record (`<session>#L<n>`) or a commit the owner authored. Nothing else
+in a body speaks for the owner. The address is what lets a reader check
+an emendation against the record.
 
 > [!@bukzor] f9bdf6f0#L109
 > That's partly wrong in spirit, partly wrong in word. In spirit, I want
@@ -40,11 +43,41 @@ window credited the owner with sentences an agent wrote; the sitting
 that proposed this claim carried an agent's "the collection dissolves"
 as the owner's verdict. The failing case is never a missing marker.
 The digest that was misread had every role labeled. Paraphrase drops
-the label, and only a faithful span with an address survives paraphrase,
+the label, and only a span with an address survives paraphrase,
 because a checker can then confirm the span sits at that record with
 the owner's role -- the quote half of `claude-code-holistics/verify.py`
 already does this for digests. The marker is for the reader; the
 address is what makes the marker true.
+
+The standard is borrowed; only the word for it is new. Textual editing
+calls the act **silent emendation**, and splits a text into
+*accidentals* -- spelling, pointing, the token -- against
+*substantives*, the readings that carry the author's meaning: an editor
+may regularize the first and never the second. Law states it as a negative, *no material change*, and prices
+the gap as *immaterial variance*, a departure between what was said and
+what is reported that does not touch the substance. Latin marks the two
+ends of the axis: *ipsissima verba*, the very words, against *ipsissima
+vox*, the very voice. This claim sits on the vox side and close to its
+edge -- the meaning is held, and the only wording freedom is repair.
+
+*Sensatim* is a coinage, minted here and not found in the lexica, on the
+model of *verbatim* and the authority of Jerome's rule for translators
+(*Ep.* 57): *non verbum e verbo, sed sensum de sensu* -- not word from
+word, but sense from sense. The `-atim` suffix is distributive, which is
+the point: it names the unit at which fidelity is owed, word by word or
+sense by sense. Two shapes stand nearby and mean other things: *sensim*
+is attested and means "gradually", and late Latin's *sensatus*
+("sensible") is why a Romance ear may hear "sensibly" -- neither
+survives the contrast with *verbatim*, which is the only place the word
+is ever used.
+The word is wanted because English has no positive term for the
+relation: only negations (*no material change*) and phrases (*in
+substance*, *to the same effect*).
+
+The first sentence of this claim is the word's definition, and the only
+one anywhere. A use too far from it to read it writes *sensatim*
+(rather than verbatim), which carries the contrast that is the whole
+content, and cites this claim for the rest.
 
 What was in the wild before this claim, counted across `~/repo` and
 `~/.claude` outside trash: `[!@bukzor]` 272, `[!@claude]` 49,
@@ -101,16 +134,20 @@ which is the point.
 > [!@bukzor] dfc18e9d
 > I think it's less-incoherent to retcon the verbatim quotes than to say those aren't labels.
 > Please hold "user, verbatim" slightly more lightly. I care much more about the meaning than the words.
-> Perhaps we need to substitute out the word "verbatim" with another word...
 
-> [!DRAFT] dfc18e9d
-> "Verbatim" was the word until 2026-09-16, when a renamed label inside
-> a quoted ruling forced a choice between editing the owner's words and
-> disclaiming the old label as no citation; the owner chose the edit.
-> "Faithful" is the agent's substitute, vetoable: it keeps the address
-> requirement and the ban on paraphrase, and licenses exactly two edits,
-> typos and retconned labels. A checker that compares the span to the
-> record therefore compares meaning-preserving edits, not bytes.
+> [!@bukzor] a29c9a99
+> I want "user authority" to have this kind of property. *meaning* held
+> tightly, but *wording* held more loosely.
+> [...] that's an enumeration where we have no certainty it's exhaustive.
+> Instead, name the category.
+> [...] sensatim, as in sensum de sensu, as distinct from verbatim, as in
+> verbum e verbo
+
+> [!DRAFT] a29c9a99
+> The standard is a condition, not a synonym for "verbatim": an
+> enumeration of licensed edits cannot be shown exhaustive, and a test
+> can. So a checker compares the span's sense against the record rather
+> than its bytes, and has an answer for edits nobody enumerated.
 
 Not built: a checker that walks every `[!@bukzor]` in a ledger to its
 address and role. `verify.py` in `claude-code-holistics` is the
