@@ -83,8 +83,28 @@ $defs:
           The act that settled this claim's standing, where the sigil
           alone is too coarse -- who or what one would appeal to: a named
           ruling, literature (with citation), ... Meaningless on open
-          claims.
-        type: string
+          claims. Two forms. A string, free text, is the legacy form and
+          stays legal. An object carries the same act normalized, so a
+          scan can read the address and the owner's words without
+          parsing prose (agent-authored 2026-09-16 on @bukzor's sketch
+          in dfc18e9d, vetoable): `address` is where the act sits, in
+          the form the body's callouts use (`<session>#L<n>`, a bare
+          session prefix, or an owner commit); `words` is the owner's
+          verbatim phrase that constitutes the ruling; `about` names what
+          was ruled on, which is what makes "seems good enough to me"
+          legible as a ruling on a draft rather than on a content.
+        oneOf:
+          - type: string
+          - type: object
+            required: [address]
+            additionalProperties: false
+            properties:
+              address:
+                type: string
+              words:
+                type: string
+              about:
+                type: string
       verify:
         description: >-
           Re-runnable check that certifies the claim -- the CHECK of

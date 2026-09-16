@@ -220,6 +220,15 @@ def read_claim(origin: Path, path: Path) -> Claim:
     assert verdict is None or isinstance(verdict, str), verdict
     assert isinstance(why, list), why
     assert verify is None or isinstance(verify, str), verify
+    if isinstance(authority, dict):
+        # The normalized form (schema: `authority` as an object); the reader
+        # projects it to the legacy string so every consumer keeps one type.
+        assert set(authority) <= {"address", "words", "about"}, authority
+        assert isinstance(authority.get("address"), str), authority
+        words, about = authority.get("words"), authority.get("about")
+        authority = ", ".join(
+            filter(None, [authority["address"], f'"{words}"' if words else None, about])
+        )
     assert authority is None or isinstance(authority, str), authority
     assert isinstance(todo, bool), todo
     assert isinstance(ontology, list), ontology

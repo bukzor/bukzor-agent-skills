@@ -41,7 +41,7 @@ restated here; this skill maps it onto a directory.
 | `<-` arrows | `why:` -- file-relative paths; never a copied sigil, standing lives at the definition site |
 | `-- certified(CHECK)` | `verify:` |
 | `(todo)` on the label (decided, not yet built) | `todo:` -- boolean, default false; dropped when the state lands, the label never moves |
-| the user's words, quoted | `> [!@bukzor] <address>` in the body, verbatim at that address (`<session>#L<n>` or an owner commit); the agent's own composition is `> [!DRAFT] <address>`, naming the callouts it derives from |
+| the user's words, quoted | `> [!@bukzor] <address>` in the body, faithful to the owner's meaning at that address (`<session>#L<n>` or an owner commit; typos mended, renamed labels retconned, never paraphrased); the agent's own composition is `> [!DRAFT] <address>`, naming the callouts it derives from |
 | restating a label | editing the file; the git diff's `-` is the strikethrough |
 | a theory | a claim like any other -- `<theory>.md`, carrying `ontology:`, `non-claim-tokens:` and `stale-when:`, beside the `<theory>.kb/` its words admit; `why:` are its priors |
 | indentation | the tree: what a `.kb/` holds is nested under the claim naming it, at any depth |
@@ -111,7 +111,7 @@ shape it for extraction and for veto, not for brevity:
 - argument after the commitment, its declined alternative named;
 - at most one aphorism; cites inline where the weight rests,
   mirrored in `why:`;
-- the owner's voice only as `> [!@bukzor] <address>`, verbatim there;
+- the owner's voice only as `> [!@bukzor] <address>`, faithful to the record there;
   a paraphrase in the owner's voice is a misattribution, however
   faithful -- write it as `> [!DRAFT]` naming what it derives from.
 

@@ -11,10 +11,13 @@ why:
   - ../ownership.md
 ---
 
-# The Owner's Word Is a Verbatim Span With an Address
+# The Owner's Word Is a Faithful Span With an Address
 
 In prose, the owner's voice takes one form: a `> [!@bukzor] <address>`
-callout whose body is verbatim at that address. An agent's composition
+callout whose body is faithful to the owner's meaning at that address:
+the words as typed, with typos mended and renamed labels retconned to
+their current names, never a paraphrase that changes what was meant.
+The address is what lets a reader check the retcon against the record. An agent's composition
 in prose -- a paraphrase, a derivation, law elicited from the owner's
 answers -- takes one form, `> [!DRAFT] <address>`, and names the
 `[!@bukzor]` spans it derives from. An address is a transcript record
@@ -37,7 +40,7 @@ window credited the owner with sentences an agent wrote; the sitting
 that proposed this claim carried an agent's "the collection dissolves"
 as the owner's verdict. The failing case is never a missing marker.
 The digest that was misread had every role labeled. Paraphrase drops
-the label, and only a verbatim span with an address survives paraphrase,
+the label, and only a faithful span with an address survives paraphrase,
 because a checker can then confirm the span sits at that record with
 the owner's role -- the quote half of `claude-code-holistics/verify.py`
 already does this for digests. The marker is for the reader; the
@@ -94,6 +97,20 @@ check it. That is the honest residue, not a second rule.
 Renders everywhere: GitHub styles only its five fixed callout types, and
 any other type degrades to a blockquote showing the literal marker,
 which is the point.
+
+> [!@bukzor] dfc18e9d
+> I think it's less-incoherent to retcon the verbatim quotes than to say those aren't labels.
+> Please hold "user, verbatim" slightly more lightly. I care much more about the meaning than the words.
+> Perhaps we need to substitute out the word "verbatim" with another word...
+
+> [!DRAFT] dfc18e9d
+> "Verbatim" was the word until 2026-09-16, when a renamed label inside
+> a quoted ruling forced a choice between editing the owner's words and
+> disclaiming the old label as no citation; the owner chose the edit.
+> "Faithful" is the agent's substitute, vetoable: it keeps the address
+> requirement and the ban on paraphrase, and licenses exactly two edits,
+> typos and retconned labels. A checker that compares the span to the
+> record therefore compares meaning-preserving edits, not bytes.
 
 Not built: a checker that walks every `[!@bukzor]` in a ledger to its
 address and role. `verify.py` in `claude-code-holistics` is the
