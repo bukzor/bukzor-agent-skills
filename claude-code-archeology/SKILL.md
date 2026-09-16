@@ -28,6 +28,25 @@ hit. Use the tools below; they decode first.
 | `claude-jsonl-display < FILE`                 | render a transcript readably -- **on stderr**; stdout carries only a machine-oriented `result.result` line, if any, so `\| tail`/`\| grep` on stdout alone will not see it |
 | `claude-jsonl-to-log < FILE`                   | same rendering, captured to a `.log` file beside it           |
 
+## What it cost
+
+> [!DRAFT] agent-authored 2026-09-16, vetoable.
+
+`claude-tokens | claude-tokens-cost` writes one costed row per API
+request. `claude-tokens-wire` reads the same calls off a mitmproxy
+capture instead -- same schema, and it sees ~11% more requests than any
+transcript does. `-histogram` groups them; `-params` fits the estimator
+constants.
+
+Dedupe on `(requestId, message.id)` is load-bearing, and is why these
+totals can be added up at all: the CLI writes one record per content
+block, each repeating that response's whole `usage`.
+
+What the numbers mean -- the pricing multipliers, what the corpus cost,
+how to estimate a task before running it -- is a body of findings with
+its own standing, kept as a claim ledger rather than restated here:
+`~/.claude/docs/dev/claims.kb/attention-costs.md`.
+
 Library behind them: `claude_code_archeology.{session,search,inventory,
 tree,format_short,branch_extract}` -- import it rather than re-parsing
 when a question needs custom analysis:
@@ -44,12 +63,19 @@ Every module is doctested; `uv run pytest` in that repo runs them.
 
 - **The file is a forest, not a log.** Records carry `uuid` and
   `parentUuid`; a rewind writes new records as *siblings* of the old
-  continuation, and each compaction starts a new root (its
-  `compact_boundary` record has no parent). `--resume` and the rewind
-  picker walk back from the newest record only, so abandoned branches
-  and every pre-compaction era are unreachable in the UI -- extraction
-  is the only way back -- but fully present in the file. That's where
-  "we tried that and it didn't work" lives.
+  continuation, and each compaction starts a new root. `--resume` and the
+  rewind picker walk back from the newest record only, so abandoned
+  branches and every pre-compaction era are unreachable in the UI --
+  extraction is the only way back -- but fully present in the file.
+  That's where "we tried that and it didn't work" lives.
+- **A compaction root's parent is in a second field.** Its
+  `compact_boundary` record has a null `parentUuid` and names the era it
+  summarised in **`logicalParentUuid`**. Walk `parentUuid` alone and every
+  pre-compaction era reads as abandoned -- which is right for the rewind
+  picker and wrong for anything measuring what was thrown away. All 294
+  boundaries here carry the field; missing it overstated abandoned-branch
+  spend sevenfold, reporting 7.3% as 54%
+  (`~/.claude/docs/dev/claims.kb/`, COMPACT_PARENT).
 - **The `projects/<slug>/` name is not invertible.** The slug maps both
   `/` and `.` to `-`, so `prototype.chatfs/docs` and
   `prototype-chatfs-docs` collide. Read `cwd` from the records
