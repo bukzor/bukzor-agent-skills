@@ -71,8 +71,15 @@ So the bullets moved to
 fires when a claim is being written and already framed the reader who
 was not there. Most of them landed as clauses in paragraphs that were
 already there -- that file had already named the *revision scar*, which
-is `JUSTIF_ORDER`'s instance for negations. Net: fourteen lines off
-every `llm-claims-kb` load, five onto a file read only on the occasion.
+is `JUSTIF_ORDER`'s instance for negations.
+
+Measured after the fact, because I asserted it before measuring: the
+manual loses 9 lines (-16/+7) and the trigger file gains 17. Stored text
+therefore *grew* by 8 lines; what shrank is the part every reader pays
+for. The commit message (`b0d3f28`) says "fourteen off, five on", which
+was an estimate I should have run `git show --stat` against before
+writing it down. The behavioural argument is unaffected; the token
+claim, as stated there, is wrong.
 
 `notation.kb/CLAUDE.md` had already routed instructions this way ("the
 reasoning is a tax on them and the point for you"). A parallel session
