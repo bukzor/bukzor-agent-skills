@@ -17,5 +17,6 @@ stale-when: a stopping point that is a truth rather than an act
 A regress in this ledger stops at an act: someone authors the stopping
 point and is answerable for it, and no oracle is waiting behind them. A
 distinction earns its place the same way -- by the judgments it makes
-available to an author, not by carving the world at a joint. This theory
-is prior to every other here and cites none.
+available to an author, not by carving the world at a joint. What is
+written down is owed in the order that justifies it, not the order it
+was found. This theory is prior to every other here and cites none.

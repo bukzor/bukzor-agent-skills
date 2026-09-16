@@ -22,7 +22,8 @@ something the owner did not send, and it is the reader's test, not the
 editor's. What no emendation licenses is paraphrase. An agent's
 composition in prose -- a paraphrase, a derivation, law elicited from
 the owner's answers -- takes one form, `> [!DRAFT] <address>`, and names
-the `[!@bukzor]` spans it derives from. An address is a transcript
+the `[!@bukzor]` spans it derives from: the proposal and what would
+overturn it, its route only where the veto turns on it. An address is a transcript
 record (`<session>#L<n>`) or a commit the owner authored. Nothing else
 in a body speaks for the owner. The address is what lets a reader check
 an emendation against the record.

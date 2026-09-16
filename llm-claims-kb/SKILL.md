@@ -103,18 +103,22 @@ file only what the instance adds beyond them, with `why:` naming
 those priors and `authority:` the instance.
 
 The body is cold text -- read to argue with, not on every load -- so
-shape it for extraction and for veto, not for brevity:
+shape it for the reader who was not there and must act without asking
+(`FRESH_READER`): under-statement is the fault, not length
+(`SELF_CONTAINED`).
 
 - the commitment first, in one or two quotable sentences;
 - enumerations as parallel bullets, never a semicolon chain -- a
   ruling points at a bullet;
-- argument after the commitment, its declined alternative named;
+- argument after the commitment, its declined alternative named, in the
+  order that justifies the claim rather than the order it was found
+  (`JUSTIF_ORDER`): history earns its lines where it does justificatory
+  work, and is scaffolding otherwise;
 - at most one aphorism; cites inline where the weight rests,
   mirrored in `why:`;
-- the owner's voice only as `> [!@bukzor] <address>`, quoted *sensatim*
-  (rather than verbatim) from the record there; a paraphrase in the
-  owner's voice is a misattribution however close -- write it as
-  `> [!DRAFT]` naming what it derives from.
+- the owner's voice only as `> [!@bukzor] <address>`, an agent's only
+  as `> [!DRAFT]` (`VOICE`); a paraphrase in the owner's voice is a
+  misattribution however close.
 
 ## Renames
 
