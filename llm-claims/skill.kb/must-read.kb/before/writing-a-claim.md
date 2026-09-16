@@ -15,14 +15,28 @@ Both cost one line. Only the second survives the context that produced
 it. Under-statement is the failure mode to watch for, not verbosity: a
 thin line reads fine to you, who still remember.
 
+## Commitment first, argument after
+
+The commitment leads, in one or two quotable sentences a ruling can
+point at; the argument follows, naming the alternative it declined.
+Enumerations are parallel bullets, never a semicolon chain -- a ruling
+points at a bullet. At most one aphorism, and cites inline where the
+weight rests, mirrored in the arrows (`why:` on disk).
+
+Write it in the order that justifies the claim, not the order you found
+it (`JUSTIF_ORDER`). History earns its lines where it does justificatory
+work -- an alternative eliminated, a stipulation's provenance, an expiry
+condition -- and is scaffolding otherwise.
+
 ## Prefer the positive statement
 
 Treat any impulse to write "not", "rather than", or another negation as
 a warning. It earns its place only where the contrast carries direct,
 context-free utility -- naming a declined alternative the reader would
-otherwise reach for. Everywhere else it is a revision scar: the line
-records the argument that produced it in place of the state it reached,
-and the next reader pays for a debate they were not in.
+otherwise reach for. Everywhere else it is the commonest scar of the
+kind above: the line records the argument that produced it in place of
+the state it reached, and the next reader pays for a debate they were
+not in.
 
 The same failure at claim scale is a claim about an absence.
 `NO_STOP+: the procedure has no stopping rule` catalogues what is

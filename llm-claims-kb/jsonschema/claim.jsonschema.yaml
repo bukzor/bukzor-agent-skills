@@ -94,8 +94,8 @@ $defs:
           the form the body's callouts use (`<session>#L<n>`, a bare
           session prefix, or an owner commit); `words` is the owner's
           phrase constituting the ruling, quoted sensatim (rather than
-          verbatim); `about` names what
-          was ruled on, which is what makes "seems good enough to me"
+          verbatim); `about` names what was ruled on, which is what
+          makes "seems good enough to me"
           legible as a ruling on a draft rather than on a content.
         oneOf:
           - type: string

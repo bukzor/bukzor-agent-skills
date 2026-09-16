@@ -117,23 +117,14 @@ candidate claim: read what the priors already entail and cite it;
 file only what the instance adds beyond them, with `why:` naming
 those priors and `authority:` the instance.
 
-The body is cold text -- read to argue with, not on every load -- so
-shape it for the reader who was not there and must act without asking
-(`FRESH_READER`): under-statement is the fault, not length
-(`SELF_CONTAINED`).
+A body is cold text -- read to argue with, not on every load -- which is
+what makes how it is written worth rules. They are the notation's, and
+they fire when you write one, not when you load this:
+`Skill(llm-claims)`'s `skill.kb/must-read.kb/before/writing-a-claim.md`.
 
-- the commitment first, in one or two quotable sentences;
-- enumerations as parallel bullets, never a semicolon chain -- a
-  ruling points at a bullet;
-- argument after the commitment, its declined alternative named, in the
-  order that justifies the claim rather than the order it was found
-  (`JUSTIF_ORDER`): history earns its lines where it does justificatory
-  work, and is scaffolding otherwise;
-- at most one aphorism; cites inline where the weight rests,
-  mirrored in `why:`;
-- the owner's voice only as `> [!@bukzor] <address>`, an agent's only
-  as `> [!DRAFT]` (`VOICE`); a paraphrase in the owner's voice is a
-  misattribution however close.
+The file form adds one. The owner's voice appears only as
+`> [!@bukzor] <address>`, an agent's only as `> [!DRAFT]` (`VOICE`); a
+paraphrase in the owner's voice is a misattribution however close.
 
 ## Renames
 
