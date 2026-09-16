@@ -209,6 +209,8 @@ Applies to `$CATEGORY` and `$ITEM` identifiers (directory and file names).
 
 - Use kebab-case
 - Be descriptive -- agent must know roughly the content from the filename
+- Name what the item is about, so the name stays true as the content
+  is edited
 - Prepend digits if inherently ordered (e.g., `001-setup.md`, `002-config.md`)
 - Zero-pad to twice the digits you expect to need
 - Dated items (events): `YYYY-MM-DD-NNN-slug.md` -- see

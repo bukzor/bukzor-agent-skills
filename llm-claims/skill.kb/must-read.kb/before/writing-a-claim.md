@@ -29,6 +29,13 @@ The same failure at claim scale is a claim about an absence.
 missing, and there is no end to that catalogue. What was meant is a
 question: `STOP?: what is the correct stopping rule?`
 
+## Name it for what it is about
+
+The label, and on disk the file name, say what the claim is about, in
+words that stay true through every amendment of the body. Test the name
+by amending the body in your head: change the count, the order, the
+answer. A name that still reads true is the locus (`NAME_LOCUS`).
+
 ## An open question carries `?`
 
 Undone work enters the ledger as a claim signed `?`, its text naming
