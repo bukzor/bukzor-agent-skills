@@ -18,16 +18,16 @@ account's content is its commitments and their support, and neither
 moves when the sequence does.
 
 > [!@bukzor] a29c9a99
-> elide historicity that will be useful in no possible use case
-> feel free to retcon a simpler history free of misteps
+> Where faithful historicity is useful to exactly zero plausible future
+> use cases, I'd prefer a simplifying retcon -- elide historicity that
+> will be useful in no possible use case; feel free to retcon a simpler
+> history free of missteps.
 >
-> notice we have a similar problem to solve with historicity.
-> Where faithful historicity is useful to exactly zero plausible future use cases, i'd prefer a simplifying retcon.
->
-> those are both overly narrow and overly normative:
+> [A rule banning history is] both overly narrow and overly normative:
 >
 > - history is not the only thing that is best retconned for rationality
-> - sometimes recording history is how we best write for the reader; there exist use cases where historicity plays a part
+> - sometimes recording history is how we best write for the reader;
+>   there exist use cases where historicity plays a part
 
 What the rewrite costs is the search path, and with it the evidence of
 what was already attempted. So the test is never whether a passage is
