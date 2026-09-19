@@ -233,6 +233,21 @@ personal home, `.` for a project. `must-read://` finds `must-read.kb/` or
 `.claude/must-read.kb/` beneath it. `llm-must-read-ls` does not yet ship
 with this skill; `ls -RF $SCOPE/must-read.kb` lists the same index.
 
+### Schema
+
+Beside the bank, a one-line `must-read.jsonschema.yaml` binds entries to
+the canonical schema, so `llm.kb-validate` checks their frontmatter
+(`Skill(llm-kb)`, positional binding):
+
+```yaml
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema
+$ref: "skill://llm-must-read-kb/jsonschema/must-read.jsonschema.yaml"
+```
+
+The canonical (`jsonschema/must-read.jsonschema.yaml`) admits `triggers:`
+only; `name:`/`description:` are SKILL.md fields, and a bank entry's
+trigger is its filename.
+
 ### Skill scope
 
 A skill has no host CLAUDE.md in the consumer's context — its `SKILL.md`
