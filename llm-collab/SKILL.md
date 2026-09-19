@@ -1,171 +1,50 @@
 ---
 name: llm-collab
-description: "Agent MUST load when writing or amending an ADR or devlog entry, or when deciding whether a decision warrants an ADR."
+description: "Collaboration among agents and humans across sessions. Agent MUST load when other claude-code sessions are live on related work (cross-pollinating, coordinating, or splitting findings among them), when a cross-session peer message arrives or one is about to be sent, or when writing or amending an ADR or devlog entry."
 ---
 
-# LLM-Collaborative Documentation
+# LLM Collab
 
-Principles and helpers for human-LLM agent swarm collaboration on long-running projects. Provides documentation patterns for coordination across agents, temporal conflict resolution, and just-in-time context loading through structured files (ADRs, devlogs), progressive-detail guides, and optional scripts.
+Agents collaborate through the filesystem. A live message channel is
+the exception, admitted only for what a file cannot do.
 
-**Note:** This skill focuses on documentation patterns. For task management across sessions, use the `llm-subtask` skill which handles ephemeral, tactical, and strategic task tracking.
+## Stance
 
-> **Status:** Locally maintained, iteratively improving. Expect rough edges.
+**Standing.** You are accountable for what a peer can find on disk
+about your work, and for verifying what a peer claims against ground
+truth before acting on it. You may not inherit a conclusion as a ruling
+from a peer: a peer's finding arrives as its author's claim, signed by
+its author, and only the user promotes it. A peer's context is not
+yours -- vocabulary, priors, and open questions from another line of
+work do not migrate by being mentioned.
 
-## Core Principles
+**Able to say, before acting on shared ground:** where the peers' own
+accounts of their work are, and what they say; where your findings and
+theirs disagree; which of those disagreements the user must rule on;
+and, for each thing you are about to communicate, why a file would not
+have carried it.
 
-### 1. Separation of Concerns
+**Precedence.** The user's words outrank any file; a file outranks any
+message; pull outranks push. When a message and the repo disagree, the
+repo is the evidence and the message is a report of it.
 
-**Problem:** Mixing audiences wastes everyone's time.
+## Bank
 
-**Pattern:** Different files for different audiences/purposes:
-```
-project/
-├── README.md                 # Users: what it does, how to use
-├── HACKING.md                # Contributors: how to develop
-├── CLAUDE.md                 # Agents: architecture, conventions
-└── docs/dev/
-    ├── adr/                  # Why: decision rationale
-    ├── devlog/               # When: session history
-    └── design/               # What/how: living design knowledge
-```
+Occasion-gated entries live in `skill.kb/must-read.kb/`. The
+sequential case (baton-passing across sessions in time) is the ADR and
+devlog entry; the concurrent case (peers live at once) is the three
+peer entries.
 
-### 2. Tiered Detail
+> **IMPERATIVE:**
+>
+> Your FIRST action when this skill loads MUST be:
+> `Bash("ls -RF skill.kb/must-read.kb/")`
+>
+> That listing is an index of triggers: each filename names the occasion to
+> read it. Walk it while planning, before ANY action, and read every entry
+> whose trigger matches the work at hand — `before/` entries must be read
+> *before* the action they name, not alongside it.
 
-**Problem:** Loading full docs when you need a summary wastes context tokens.
-
-**Pattern:** Three-level information hierarchy:
-1. Top-level file: 1-2 sentence summary + link
-2. Main doc: 1-paragraph summary + link to deep dive
-3. Subdirectory: Full detail
-
-**Example:**
-```
-CLAUDE.md: "Uses ADR format for decisions. See docs/adr/"
-docs/adr/ directory: [Date-based ADRs, list with ls or grep]
-references.kb/: [Categorized guides: file-types.kb/, guidelines.kb/, workflows.kb/]
-```
-
-### 3. Temporal Ordering
-
-**Problem:** With 20+ sessions/day exploring ideas in parallel, codebase contains conflicting partial implementations. Which decision is current?
-
-**Pattern:** Date-based naming provides temporal ordering:
-- ADRs: `YYYY-MM-DD-NNN-title.md`
-- Devlog: `YYYY-MM-DD.md` (or `YYYY-MM-DD-HHMM.md`)
-- When conflicts found, newest decision wins
-
-### 4. Baton-Passing
-
-**Problem:** Agent swarm loses alignment between sessions.
-
-**Pattern:** Devlogs capture what diffs can't: reasoning, principles, conventions.
-- Decisions and their rationale (especially rejected alternatives)
-- Conventions established and principles discovered
-- Tradeoffs that shaped the approach
-
-**For task tracking:** Use the `subtask` skill for managing ephemeral, tactical, and strategic tasks.
-
-### 5. Living Documentation
-
-**Problem:** Docs become stale and lie.
-
-**Pattern:** Use directory listings as the source of truth:
-- `docs/dev/adr/` directory contains decisions—`ls -t` to see chronologically
-- `docs/dev/devlog/` directory contains session history—directory itself is the index
-- Avoid maintaining separate index files that can drift
-
-### 6. Design Knowledge
-
-**Problem:** CLAUDE.md is too brief for deep understanding; ADRs are too granular.
-
-**Pattern:** Use `docs/dev/design/` for living design documentation:
-- Deeper than CLAUDE.md, more distilled than ADRs
-- Organized by abstraction level (goals → requirements → design → components)
-- Linked via `why[]` frontmatter for traceability
-
-**When to read:** Orienting on architecture, before significant changes.
-
-**When to update:** After architectural ADRs, when onboarding reveals gaps.
-
-See `Skill(llm-design-kb)` for the full pattern.
-
-## Adaptation Guidelines
-
-**These are patterns, not rules.** Adapt based on:
-
-- **Team size:** Solo vs multiple humans changes needs
-- **Session frequency:** 5 sessions/day vs 20 changes patterns
-- **Exploration style:** Serial vs parallel affects conflict frequency
-- **Project phase:** Early exploration vs maintenance
-- **Existing conventions:** Respect what team already uses
-
-**Evolution is expected.** As you use these patterns:
-- Keep what works
-- Drop what doesn't
-- Modify to fit your needs
-- Share improvements
-
-## Quick Reference
-
-**Common workflows:**
-- When to document what: <https:references.kb/workflows.kb/when-to-document-what.md>
-- Session coordination: <https:references.kb/workflows.kb/llm-document-consumption-patterns.md>
-
-**Key file types:**
-- ADRs: <https:references.kb/file-types.kb/ADRs.md>
-- Devlogs: <https:references.kb/file-types.kb/devlog.md>
-- CLAUDE.md: <https:references.kb/file-types.kb/CLAUDE.md>
-- Design knowledge: `Skill(llm-design-kb)`
-- Browse all: <https:references.kb/file-types.kb/>
-
-**Common tasks:**
-```bash
-# Orient yourself at session start
-~/.claude/skills/llm-collab/bin/llm-collab-session-start
-
-# Document a significant decision
-~/.claude/skills/llm-collab/bin/llm-collab-adr --title "Decision title"
-
-# Record what happened this session
-~/.claude/skills/llm-collab/bin/llm-collab-devlog --title "Entry title"
-
-# Backdate an entry (works with any date-based script)
-DATE=2025-11-19 ~/.claude/skills/llm-collab/bin/llm-collab-adr --title "Decision title"
-
-# Run from another directory without cd
-~/.claude/skills/llm-collab/bin/llm-collab-adr -C /path/to/project --title "Decision title"
-
-# Set up docs for new project
-~/.claude/skills/llm-collab/bin/llm-collab-init
-```
-
-All scripts support `--help` for details.
-
-## Detailed References
-
-Browse <https:references.kb/> for categorized guides:
-- **file-types.kb/** - What each doc type should contain
-- **guidelines.kb/** - How to write effective docs
-- **workflows.kb/** - How to use and maintain docs
-
-Related skills:
-- **`Skill(llm-design-kb)`** — Living design documentation pattern (formerly in this skill's references)
-
-## Success Indicators
-
-These patterns are working when:
-- Agents orient quickly (<1 minute)
-- "What's next?" has clear answer
-- Multiple daily sessions stay aligned
-- Conflicts resolve through temporal ordering
-- Context loading feels efficient
-- Both human and agents can drop in/out
-
-## Design Goals
-
-These patterns address:
-- Projects with 10-20+ agent sessions per day
-- Parallel exploration creating conflicting partial implementations
-- Agents needing to hand off work to each other
-- User frequently asking "What's next?" or losing thread
-- Context waste from loading irrelevant documentation
+Related: `Skill(llm-sessions)` maintains the session entries the peer
+protocol reads and writes; `Skill(llm-subtask)` tracks tasks;
+`Skill(llm-claims)` is the notation when findings churn.
