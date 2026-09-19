@@ -37,11 +37,20 @@ lines, paid in full on every load.
    - `when/peer-sessions-work-overlapping-ground.md` -- the digest is
      the `sessions.kb/` entry; pull at checkpoints; contradictions go
      to the user; fan-in for dense overlap.
-   - `before/sending-a-peer-message.md` -- three admissible kinds
-     (pointer, conflict, hand-off); one per peer per checkpoint;
-     delivery is not uptake.
-   - `after/receiving-a-peer-message.md` -- ticket, not conversation.
-3. The description names the founding occasions in the owner's words:
+3. Two peer occasions arise without intent and cannot wait for a
+   skill load: a message arrives, or one is about to go. A trigger
+   binds at the scope where its occasion can arise; the method belongs
+   to the domain that owns it. So the methods ship as
+   `skill.kb/procedures.kb/send-a-peer-message.md` (three admissible
+   kinds: pointer, conflict, hand-off; one per peer per checkpoint;
+   delivery is not uptake) and `receive-a-peer-message.md` (ticket,
+   not conversation), and the triggers are thin pointers in the
+   always-installed bank -- `~/.claude/must-read.kb/before/sending-a-peer-message.md`
+   and `after/receiving-a-peer-message.md`, each a `triggers: read:`
+   of its procedure. The skill's own bank carries no copy: the same
+   occasion in two installed banks is aliasing across scopes, read
+   twice by any session that loaded the skill.
+4. The description names the founding occasions in the owner's words:
    related sessions live, cross-pollinating, a peer message arriving
    or about to be sent, and the ADR/devlog clause unchanged.
 
@@ -65,11 +74,15 @@ lines, paid in full on every load.
   reading either. `claude-` prefix is wrong too: only the mechanics
   section is Claude-Code-specific, and it is named as situational.
 
-### Personal `~/.claude/must-read.kb/` entries, no skill
-- **Pros:** binds every session without a load.
-- **Cons:** not portable to the fleet; the 2026-08-13 session named
-  this home and it never happened, which is evidence the personal bank
-  is not where the fleet's protocols get written.
+### Peer-message bodies in the personal bank only, no skill
+- **Pros:** binds every session without a load; one file per occasion.
+- **Cons:** the method leaves the domain that owns it -- `when/`
+  overlapping-ground would point out of the skill for its own send
+  rule -- and an adopter gets nothing.
+
+### Peer-message triggers in both banks, bodies in the skill
+- **Cons:** the same occasion twice in one session's index; read twice
+  by any session that loaded the skill. Aliasing across scopes.
 
 ### A new digest file format for peers
 - **Cons:** `sessions.kb/` entries already are the per-session digest
@@ -88,7 +101,9 @@ lines, paid in full on every load.
   signed claims, overlap, wants) that `sessions.kb/CLAUDE.md` and
   `.template.md` do not yet mention. Follow-up in that repo.
 - `ListAgents`, `SendMessage`, `notify_when_idle` are named in the
-  bank; a consumer on another harness reads them as situational.
+  procedures; a consumer on another harness reads them as situational.
+- An adopter of the skill gets the peer methods but not their
+  triggers; the SKILL.md names the two pointers to install.
 
 ## Related
 

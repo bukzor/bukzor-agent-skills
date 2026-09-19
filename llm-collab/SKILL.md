@@ -30,10 +30,18 @@ repo is the evidence and the message is a report of it.
 
 ## Bank
 
-Occasion-gated entries live in `skill.kb/must-read.kb/`. The
+Occasion-gated entries live in `skill.kb/must-read.kb/`: the
 sequential case (baton-passing across sessions in time) is the ADR and
-devlog entry; the concurrent case (peers live at once) is the three
-peer entries.
+devlog entry; the concurrent case (peers live at once) is the
+overlapping-ground entry.
+
+Two peer occasions arise without intent -- a message arrives, or one
+is about to go -- and a trigger that binds only once this skill is
+loaded would miss them. Their methods live in `skill.kb/procedures.kb/`
+(`send-a-peer-message.md`, `receive-a-peer-message.md`); the triggers
+that fire them belong at a scope installed every session. The owner's
+`~/.claude/must-read.kb/{before,after}/*-a-peer-message.md` are those
+pointers; an adopter installs the same two.
 
 > **IMPERATIVE:**
 >

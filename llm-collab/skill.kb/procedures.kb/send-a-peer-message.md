@@ -1,4 +1,4 @@
-# Before sending a peer message
+# Procedure: send a peer message
 
 You are about to `SendMessage` to another session -- not a sub-agent
 you spawned, and not the user.

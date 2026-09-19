@@ -25,7 +25,8 @@ theirs.
 
 At each checkpoint, read the peers' entries and record in your own
 what you adopt and what you contradict. Reading is free for the peer;
-a message costs them a turn. Between checkpoints, do not watch for
+a message costs them a turn, and passes only as pointer, conflict, or
+hand-off (`../../procedures.kb/send-a-peer-message.md`). Between checkpoints, do not watch for
 changes -- if you genuinely depend on a peer finishing,
 `notify_when_idle` is a one-shot subscription that costs them nothing.
 
