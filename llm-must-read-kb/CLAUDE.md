@@ -16,10 +16,14 @@ files" prose in SKILL.md, that's a signal to add a
 
 ## What changes warrant which artifact
 
-- **ADR** (`docs/dev/adr/`): any change to user-observable contracts —
-  juncture semantics (`before/`/`after/`/`when/`), filename slug rules,
-  the "Required Reading" stanza wording, the directory name itself,
-  what `setup:` instructs consumers to do.
+- **Claim ledger** (`claims.kb/design.claims.kb/`): any change to
+  user-observable contracts — juncture semantics
+  (`before/`/`after/`/`when/`/`while/`), filename slug rules, the
+  "Required Reading" stanza wording, the directory name itself, what
+  `setup:` instructs consumers to do — lands as a claim, edited in
+  place, with the alternative it beat named in the body
+  (`Skill(llm-claims-kb)`). Owner's ruling 2026-09-19: design claims,
+  not ADRs.
 - **Devlog** (`docs/dev/devlog/`): non-trivial sessions, especially
   ones that surfaced edge cases or rejected alternatives. Subsequent
   agents need to find the reasoning.
