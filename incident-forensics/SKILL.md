@@ -6,6 +6,7 @@ description: "Agent MUST load when diagnosing a system failure whose evidence is
 triggers:
     - read:
         - Skill(llm-kb)
+        - Skill(llm-sessions)
         - Skill(llm-subtask)
         - Skill(upstream-reporting)
         - Skill(walled-web)
@@ -22,16 +23,31 @@ cold, and that pays out upstream.
 ## Start the kb before the first command
 
 Not after the first finding -- before the first capture, because the
-first capture is the one that expires. Copy the skeleton:
+first capture is the one that expires.
+
+> [!@bukzor] ruled 2026-09-23, recorded 2026-09-23, sensatim -- "Incident
+> forensics are recorded into ~/.claude/sessions.kb/, as a companion kb
+> to the relevant session entry."
+
+The skeleton is never free-standing at some ad hoc path; it nests inside
+the sessions.kb entry this investigation belongs to (`Skill(llm-sessions)`).
+Find or start that entry first -- `~/.claude/sessions.kb/$(hostname
+-s).kb/SESSION-SLUG.md`, from `.template.md` if none exists yet -- then
+copy the skeleton into its companion kb, one subdirectory per incident:
 
 ```bash
-cp -r ~/.claude/skills/incident-forensics/skeleton/. ./INCIDENT-SLUG/
+H=$(hostname -s)
+cp -r ~/.claude/skills/incident-forensics/skeleton/. \
+  ~/.claude/sessions.kb/$H.kb/SESSION-SLUG.kb/SUBJECT-YYYY-MM-DD/
 ```
 
 Directory name: `SUBJECT-YYYY-MM-DD` (the incident date, not today's).
-Then fill the root `CLAUDE.md` incident paragraph and start capturing.
-The eight collections and their boundaries are documented in the
-skeleton's own `CLAUDE.md` files -- read those, not this list:
+Then fill the root `CLAUDE.md` incident paragraph, point the session
+entry's `## Addenda` at the new directory, and start capturing. Worked
+example: `pnpm-11-tooling-and-cron-health.kb/pnpm-corepack-cjs-mjs-2026-09-12/`
+in `~/.claude/sessions.kb/penguin.kb/`. The eight collections and their
+boundaries are documented in the skeleton's own `CLAUDE.md` files -- read
+those, not this list:
 
 | collection        | holds                                        |
 | ----------------- | -------------------------------------------- |
