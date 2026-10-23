@@ -131,8 +131,9 @@ hold the record to what is now true:
   the failure this skill exists to prevent.
 - **`why:` arrows are traced, not assumed.** A new claim needs its
   arrows; a claim that gained a responsibility needs them updated.
-  `llm-claims-kb-graph` finds the arrow that points nowhere, the claim
-  that never joined the graph, and the citation cycle.
+  `skill://llm-claims-kb/bin/llm-claims-kb-graph` finds the arrow that
+  points nowhere, the claim that never joined the graph, and the
+  citation cycle.
 - **Confinement is a grep.** `llm-claims-kb-ownership --trespass`
   reports a rung speaking another rung's stipulated word -- usually a
   misfiled claim, sometimes a missing import.

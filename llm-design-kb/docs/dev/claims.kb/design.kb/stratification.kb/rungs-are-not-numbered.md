@@ -18,7 +18,7 @@ same rename-cascade objection that defeated a `-TODO` label suffix in
 `skill://llm-claims/claims.kb/design.claims.kb/notation.kb/how-decided-but-unbuilt-intent-is-marked.md`.
 
 What the digits bought was reading order from `ls`. The route for that
-is `llm-claims-kb-graph`, which topologically sorts the arrows and
+is `skill://llm-claims-kb/bin/llm-claims-kb-graph`, which topologically sorts the arrows and
 cannot disagree with them; at six rungs the order is also cheap to
 read off the `why:` lines directly.
 
