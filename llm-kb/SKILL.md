@@ -18,9 +18,9 @@ setup: |
     uv add --editable ../relative/path/to/bukzor-agent-skills/llm-kb
     ```
 
-    Editable matters: without it, `uv sync` snapshot-builds llm-kb once
-    and later edits to its source don't reach the consumer until the
-    next sync. `[tool.uv.sources] llm-kb = { path = "...", editable =
+    Editable is enforced: without it, `uv sync` snapshot-builds llm-kb once
+    and later edits to its source never reach the consumer, so
+    `llm.kb-validate` refuses to run from such a copy. `[tool.uv.sources] llm-kb = { path = "...", editable =
     true }` is the resulting/equivalent manual form.
 ---
 

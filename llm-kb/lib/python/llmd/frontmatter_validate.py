@@ -12,6 +12,7 @@ import argparse
 import functools
 import subprocess
 import sys
+import sysconfig
 import urllib.parse
 from collections.abc import Iterable, Iterator
 from dataclasses import dataclass
@@ -419,7 +420,31 @@ def validate_file(md_file: Path, schema_override: Path | None = None) -> list[st
     return validate_against_schema(data, schema)
 
 
+def is_snapshot_copy(module_file: Path, install_dirs: Iterable[Path]) -> bool:
+    """Whether `module_file` is a copy installed into one of `install_dirs`.
+
+    An editable install leaves the code in its source checkout; a plain one
+    copies it into site-packages, where it keeps validating the corpus by the
+    walk it had on the day of the copy -- and reports clean for what that
+    walk cannot see.
+    """
+    return any(module_file.is_relative_to(d) for d in install_dirs)
+
+
+SNAPSHOT_REFUSAL = (
+    "llm.kb-validate: refusing to run from a copy of llm-kb in site-packages"
+    " ({where}); a stale copy reports clean for what it cannot see."
+    " Reinstall editable: `uv add --editable <path to llm-kb>`"
+    " (see skill://llm-kb/SKILL.md)."
+)
+
+
 def main() -> None:
+    install_dirs = {Path(sysconfig.get_paths()[key]).resolve() for key in ('purelib', 'platlib')}
+    module_file = Path(__file__).resolve()
+    if is_snapshot_copy(module_file, install_dirs):
+        sys.exit(SNAPSHOT_REFUSAL.format(where=module_file.parent))
+
     parser = argparse.ArgumentParser(
         description='Validate markdown frontmatter against JSON schema'
     )

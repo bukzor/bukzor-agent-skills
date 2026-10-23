@@ -469,3 +469,19 @@ class DescribePlainDirectories:
         results = list(fv.validate_paths(iter([tmp_path])))
 
         assert [r.text for r in results if r.kind == "file"] == []
+
+
+class DescribeSnapshotInstall:
+    """A validator running from a copy in site-packages checks whatever the
+    tree looked like when it was copied, and reports that as clean: refuse."""
+
+    def it_recognizes_a_copy_inside_an_install_dir(self, tmp_path: Path):
+        site = tmp_path / "site-packages"
+
+        assert fv.is_snapshot_copy(site / "llmd" / "frontmatter_validate.py", [site])
+
+    def it_accepts_a_source_checkout_outside_every_install_dir(self, tmp_path: Path):
+        site = tmp_path / "site-packages"
+        checkout = tmp_path / "llm-kb" / "lib" / "python" / "llmd" / "frontmatter_validate.py"
+
+        assert not fv.is_snapshot_copy(checkout, [site])
