@@ -66,9 +66,9 @@ if [ ! -d ".claude" ]; then
   exit 1
 fi
 
-# Ensure todo.kb/ exists with CLAUDE.md
+# Ensure todo.kb/ exists; seed CLAUDE.md only if missing (keep local edits)
 mkdir -p .claude/todo.kb
-cp "$SKELETON/todo.kb/CLAUDE.md" .claude/todo.kb/CLAUDE.md
+[ -e .claude/todo.kb/CLAUDE.md ] || cp "$SKELETON/todo.kb/CLAUDE.md" .claude/todo.kb/CLAUDE.md
 
 DATE=${DATE:-$(date +%Y-%m-%d)}
 LAST=$(find .claude/todo.kb -maxdepth 1 -name "$DATE-*" -print0 2>/dev/null | xargs -r0 -n1 basename | sort | sed -n '$p' || echo "")
@@ -93,7 +93,8 @@ fi
 
 # Copy skeleton template with substitutions
 CONTENT=$(<"$SKELETON/todo.kb/YYYY-MM-DD-000-example-task.md")
-CONTENT=${CONTENT//"Example Task Title"/$TITLE}
+CONTENT=${CONTENT/"# Task Title"/"# $TITLE"}
+CONTENT=${CONTENT/"status: template"/"status: not-started"}
 CONTENT=${CONTENT//YYYY-MM-DD/$DATE}
 printf '%s\n' "$CONTENT" > "$FILE"
 

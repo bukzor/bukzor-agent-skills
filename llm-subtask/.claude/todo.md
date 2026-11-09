@@ -90,6 +90,11 @@ cost-benefit-sweh:
         "Cross-Repo Ownership" section in SKILL.md, citing the
         breadcrumb-checkbox pattern
 
+- [ ] Skeleton `todo.md` ships placeholder tasks (`- [ ] First task`, `- [ ] subtask 3`),
+      which show up as 2 open tasks now that `llm-subtask-init` writes `status: open`
+      instead of `template`. Make the skeleton list empty (or prose-only).
+      Found by <https:../../.claude/todo.kb/2026-11-09-000-llm-subtask-creators-birth-files-as-template.md>
+
 ## Later
 
 - [ ] todo.kb/2026-02-10-000 (Milestone/phase planning pattern gap) — discussion invited

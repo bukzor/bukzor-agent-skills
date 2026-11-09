@@ -68,7 +68,7 @@ if [ ! -d ".claude" ]; then
 fi
 
 mkdir -p .claude/ideas.kb
-cp "$SKELETON/.claude/ideas.kb/CLAUDE.md" .claude/ideas.kb/CLAUDE.md
+[ -e .claude/ideas.kb/CLAUDE.md ] || cp "$SKELETON/.claude/ideas.kb/CLAUDE.md" .claude/ideas.kb/CLAUDE.md
 
 DATE=${DATE:-$(date +%Y-%m-%d)}
 LAST=$(find .claude/ideas.kb -maxdepth 1 -name "$DATE-*" -print0 2>/dev/null | xargs -r0 -n1 basename | sort | sed -n '$p' || echo "")
@@ -92,7 +92,8 @@ if (( DRY_RUN )); then
 fi
 
 CONTENT=$(<"$SKELETON/.claude/ideas.kb/YYYY-MM-DD-000-example-idea.md")
-CONTENT=${CONTENT//"Example Idea Title"/$TITLE}
+CONTENT=${CONTENT/"# Idea Title"/"# $TITLE"}
+CONTENT=${CONTENT/"status: template"/"status: open"}
 CONTENT=${CONTENT//YYYY-MM-DD/$DATE}
 printf '%s\n' "$CONTENT" > "$FILE"
 

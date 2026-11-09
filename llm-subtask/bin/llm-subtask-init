@@ -55,15 +55,15 @@ fi
 
 # Create todo.md (only if missing - contains user content)
 if [ ! -f .claude/todo.md ]; then
-  cp "$SKELETON/todo.md" .claude/todo.md
+  CONTENT=$(<"$SKELETON/todo.md")
+  printf '%s\n' "${CONTENT/"status: template"/"status: open"}" > .claude/todo.md
 fi
 
-# Create todo.kb/ with CLAUDE.md
+# Create todo.kb/ and ideas.kb/; seed CLAUDE.md only if missing (keep local edits)
 mkdir -p .claude/todo.kb
-cp "$SKELETON/todo.kb/CLAUDE.md" .claude/todo.kb/CLAUDE.md
+[ -e .claude/todo.kb/CLAUDE.md ] || cp "$SKELETON/todo.kb/CLAUDE.md" .claude/todo.kb/CLAUDE.md
 
-# Create ideas.kb/ with CLAUDE.md
 mkdir -p .claude/ideas.kb
-cp "$SKELETON/ideas.kb/CLAUDE.md" .claude/ideas.kb/CLAUDE.md
+[ -e .claude/ideas.kb/CLAUDE.md ] || cp "$SKELETON/ideas.kb/CLAUDE.md" .claude/ideas.kb/CLAUDE.md
 
 echo "$PWD/.claude/todo.md"
