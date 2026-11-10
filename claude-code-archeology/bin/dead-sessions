@@ -1,0 +1,104 @@
+#!/usr/bin/env python3
+"""Triage Claude Code sessions killed by a crash/reboot: what each was doing, what never finished.
+
+Reads ~/.claude/sessions/<pid>.json (the live-session registry; entries survive a crash)
+and each dead session's transcript under ~/.claude/projects/. Read-only.
+
+Usage: claude-code-archeology/bin/dead-sessions [--days N]   (default 14; ignores older registry entries)
+"""
+import json
+import sys
+import time
+from collections.abc import Iterator, Mapping
+from pathlib import Path
+
+CLAUDE = Path.home() / ".claude"
+
+
+def is_alive(entry: Mapping[str, object]) -> bool:
+    """Same pid *and* same start tick: pids get reused after a reboot."""
+    stat = Path(f"/proc/{entry['pid']}/stat")
+    if not stat.exists():
+        return False
+    fields = stat.read_text().rsplit(")", 1)[1].split()
+    return fields[19] == str(entry.get("procStart"))
+
+
+def text_of(content: object) -> str:
+    if isinstance(content, str):
+        return content
+    assert isinstance(content, list), content
+    return " ".join(b.get("text", "") for b in content if b.get("type") == "text")
+
+
+def is_human_prompt(e: Mapping[str, object]) -> bool:
+    if e.get("type") != "user" or e.get("isMeta"):
+        return False
+    text = text_of(e.get("message", {}).get("content", "")).strip()
+    return bool(text) and not text.startswith(("<command-", "<local-command", "<system-reminder"))
+
+
+def dangling_tool_uses(entries: list[Mapping]) -> list[str]:
+    uses, results = {}, set()
+    for e in entries:
+        content = e.get("message", {}).get("content")
+        for b in content if isinstance(content, list) else ():
+            if b.get("type") == "tool_use":
+                uses[b["id"]] = f"{e.get('timestamp', '')[:19]} {b['name']} {json.dumps(b['input'])[:150]}"
+            elif b.get("type") == "tool_result":
+                results.add(b.get("tool_use_id"))
+    return [v for k, v in uses.items() if k not in results]
+
+
+def unfinished_subagents(transcript: Path) -> Iterator[str]:
+    for meta in sorted((transcript.with_suffix("") / "subagents").glob("*.meta.json")):
+        m = json.loads(meta.read_text())
+        if not m.get("finished"):
+            log = meta.with_name(meta.name.replace(".meta.json", ".jsonl"))
+            last = time.strftime("%m-%dT%H:%M", time.gmtime(log.stat().st_mtime))
+            yield f"{m.get('description')!r} ({m.get('requestShape')}, last write {last}Z, {log.name})"
+
+
+def load_entries(transcript: Path) -> list[Mapping]:
+    return [json.loads(line) for line in transcript.open() if line.strip()]
+
+
+def report(reg: Mapping, transcript: Path) -> str:
+    entries = load_entries(transcript)
+    prompts = [e for e in entries if is_human_prompt(e)]
+    replies = [e for e in entries if e.get("type") == "assistant" and text_of(e["message"]["content"]).strip()]
+    lines = [
+        f"## {reg.get('name')}  {reg['sessionId']}  status={reg.get('status')}  tmux={reg.get('tmux')}",
+        f"   cwd: {reg.get('cwd')}",
+        f"   resume: (cd {reg.get('cwd')} && claude --resume {reg['sessionId']})",
+    ]
+    if prompts:
+        lines.append(f"   first prompt: {text_of(prompts[0]['message']['content'])[:200]!r}")
+        p = prompts[-1]
+        lines.append(f"   last prompt [{p['timestamp'][:16]}]: {text_of(p['message']['content'])[:300]!r}")
+    if replies:
+        r = replies[-1]
+        lines.append(f"   last reply [{r['timestamp'][:16]}]: …{text_of(r['message']['content'])[-400:]!r}")
+    lines += [f"   DANGLING tool call: {d}" for d in dangling_tool_uses(entries)[-3:]]
+    lines += [f"   UNFINISHED sub-agent: {s}" for s in unfinished_subagents(transcript)]
+    return "\n".join(lines)
+
+
+def main() -> None:
+    days = int(sys.argv[sys.argv.index("--days") + 1]) if "--days" in sys.argv else 14
+    cutoff_ms = (time.time() - days * 86400) * 1000
+    print(f"uptime: {float(Path('/proc/uptime').read_text().split()[0]) / 60:.0f} min")
+    regs = [json.loads(p.read_text()) for p in (CLAUDE / "sessions").glob("*.json")]
+    regs = [r for r in regs if r.get("sessionId") and r.get("updatedAt", 0) > cutoff_ms]
+    alive = {r["sessionId"] for r in regs if is_alive(r)}
+    for reg in sorted(regs, key=lambda r: r.get("updatedAt", 0), reverse=True):
+        if reg["sessionId"] in alive:  # also hides a stale entry of an already-resumed session
+            if is_alive(reg):
+                print(f"(alive) {reg.get('name')} pid={reg['pid']} {reg['sessionId']}")
+            continue
+        found = list((CLAUDE / "projects").glob(f"*/{reg['sessionId']}.jsonl"))
+        print(report(reg, found[0]) if found else f"## {reg['sessionId']}: no transcript")
+
+
+if __name__ == "__main__":
+    main()

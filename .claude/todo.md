@@ -106,6 +106,13 @@ Repo-level list. Skill-scoped work lives in each skill's own
       replaced. Not this session's work; left untouched. Confirm whether
       it is live work or an abandoned experiment before anyone commits or
       reverts it
+- [ ] claude-code-archeology's tools are missing on `wsl-buck-win10`:
+      `bukzor-tools` (home of `claude-inventory`, `claude-search`,
+      `claude_code_archeology`) is not cloned anywhere under `~/repo`, so
+      only `claude-code-archeology/bin/dead-sessions` runs there. Install it,
+      then decide whether `dead-sessions` moves into that library beside
+      `inventory` (it duplicates `text_of`/user-record filtering) or stays
+      stdlib-only so recovery works on a bare machine
 - [x] persist-clarity: owner rulings pending on the redesign's open
       questions (return promised for 2026-08-30) —
       persist-clarity/.claude/todo.kb/2026-08-29-000-Rule-on-the-redesign-open-questions.md

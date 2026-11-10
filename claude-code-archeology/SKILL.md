@@ -145,11 +145,36 @@ resumes, clearing a `stoppedByUser` refusal in the meta.json -- is
 
 ## Recovery after a crash or freeze
 
-1. `claude-inventory --days 2 --sh` -- every resumable session, newest
-   first, as paste-ready `(cd DIR && claude --resume ID)` commands.
-2. Hand the list to the user, who resumes what still matters. Don't
-   resume anything yourself.
-3. When a session's useful work is on an abandoned branch,
+`bin/dead-sessions` (beside this file; stdlib only, read-only) lists what
+the crash killed. `~/.claude/sessions/<pid>.json` is the live-session
+registry: an entry outlives a crash, and pid plus `procStart` tell a dead
+session from a reused pid. For each dead session it prints the cwd, the
+resume command, the last prompt and reply, tool calls that never got a
+result, and sub-agents whose `meta.json` lacks `finished`.
+`claude-inventory --days 2 --sh` casts a wider net: every recent session,
+registered or not.
+
+1. Sort the sessions into three kinds:
+   - *interrupted*: `busy`, a tool call with no result, or an unfinished
+     sub-agent;
+   - *idle with uncommitted work*: its last reply says so;
+   - *clean*.
+
+   Run `git status` and `git log` in each cwd: a dead sub-agent may have
+   left partial edits, or none.
+2. Resume the interrupted ones in new tmux windows, sending no prompt:
+   `tmux new-window -d -n NAME -c CWD`, then
+   `tmux send-keys -t NAME 'claude --resume ID' Enter`. Check that each one
+   came up with `tmux capture-pane -p -t NAME`. Never send a message to a
+   resumed session: a coordinator may relaunch sub-agents that have side
+   effects. Give the user a suggested message instead, saying what died,
+   when, and the state of the tree.
+3. A dead sub-agent's result never reaches its parent, so the parent has to
+   relaunch it. The CLI says so on resume ("didn't finish before the
+   previous session ended").
+4. The crash time is the newest write across the transcripts and
+   `~/.claude/backups/`, not the boot time (`/proc/uptime`).
+5. When a session's useful work is on an abandoned branch,
    `claude-branch-list` it and extract the branch rather than hunting
    through the live chain.
 
