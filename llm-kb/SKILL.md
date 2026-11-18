@@ -134,6 +134,9 @@ defining claim does). Prevents drift between files in the same collection.
 - Required if any content files in that collection use frontmatter
 - Optional if content files are prose-only
 - Skips CLAUDE.md files (maintenance guides don't need frontmatter)
+- Is a component of `$CATEGORY.kb/`, though it sits beside it: moving,
+  renaming, or removing the collection moves, renames, or removes the
+  schema too. [!@bukzor] 2026-11-18
 
 Create when you want structured metadata on content files. Omit for prose-only
 collections.

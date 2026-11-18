@@ -101,8 +101,8 @@ from `templates/CLAUDE.md`, and start each brief from `templates/brief.md`.
    flight. Relaunch each with "Resume the task in {{path}}".
 8. **Close:** when the plan's success criteria pass and the user is fully
    satisfied on review, record the plan's commit range in the plan, then
-   `git rm -r {{plan}}.kb/`. Its record stays in git
-   (`git log -- {{plan}}.kb/`).
+   `git rm -r {{plan}}.kb/ {{plan}}.jsonschema.yaml`. Its record stays in
+   git (`git log -- {{plan}}.kb/`).
 
 ## Pitfalls
 
