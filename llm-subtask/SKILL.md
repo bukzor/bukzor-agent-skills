@@ -1,6 +1,7 @@
 ---
 name: llm-subtask
-description: "Agent MUST load on 'subtask'/'todo' commands, on multi-task work or mid-task questions, or when adding or amending an entry in a todo.kb/ or ideas.kb/"
+# [!@bukzor] 2026-11-20 -- the handoff occasion, as a preference not a MUST.
+description: "Agent MUST load on 'subtask'/'todo' commands, on multi-task work or mid-task questions, or when adding or amending an entry in a todo.kb/ or ideas.kb/. When leaving work for a later session (a handoff, next-session note, or 'what's next'), prefer its .claude/todo.md to a new file."
 ---
 --- # workaround: anthropics/claude-code#13005
 setup: |
