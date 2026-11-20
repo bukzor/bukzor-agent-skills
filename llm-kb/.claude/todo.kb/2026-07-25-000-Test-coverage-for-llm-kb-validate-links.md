@@ -34,7 +34,10 @@ heuristic) has no safety net.
 
 ## Proposed Solution
 
-New `bin/llm.kb-validate-links_test.py` (or move the script's logic
+Extend `lib/python/llmd/validate_links_test.py` (created 2026-11-20 for markdown
+link destinations; its `_check()` helper runs the script as a subprocess over a
+`tmp_path` tree, which settles the "test the `bin/` script directly" question
+below). Or move the script's logic
 into `lib/python/llmd/` first -- see the blocked-on integration effort
 -- and test there instead, avoiding testing a `bin/`-resident script
 directly). Cover:
@@ -43,7 +46,7 @@ directly). Cover:
   prefixed string, rejects the same string bare (no prefix); lax
   additionally accepts `x/`, `x.kb/y`, `x.md`; whitespace disqualifies
   in both modes regardless of prefix.
-- `frontmatter_links`: only `LINK_FIELDS` keys are read; list and
+- `frontmatter_links`: every field is read (no whitelist); list and
   scalar field values both yield; non-string values are skipped.
 - `body_links`: backtick spans are filtered by `_is_path_shaped`;
   non-backtick prose is ignored.
@@ -86,3 +89,9 @@ directly). Cover:
 
 Surfaced during the 2026-07-23 session-end claim-ledger flush as an
 open, undischarged claim (script has real behavior with zero tests).
+
+Already covered by `validate_links_test.py`: markdown link destinations (inline,
+reference, wrapped), URL/anchor skipping, `--strict`/`--lax` gating of
+destinations. Still uncovered: `_is_path_shaped`'s whitespace rule,
+`frontmatter_links`, backtick spans, the `/`-suffix directory rule, and both
+2026-07-23 regression cases.

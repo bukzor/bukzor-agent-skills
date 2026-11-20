@@ -87,3 +87,16 @@ Separable from `./2026-07-09-000-body-markdown-path-link-checker.md`, and not
 blocked by it: that entry's open question is which prose spans count as
 references at all. A markdown link destination is a reference by syntax, so
 none of that judgment applies.
+
+> [!DRAFT] agent-authored 2026-11-20, vetoable -- defaults chosen while
+> implementing, none ruled on by the owner:
+>
+> - Destinations are de-duplicated per file, so "links examined" counts distinct
+>   destinations, not link occurrences (a reference used twice counts once).
+> - A destination with a trailing `#anchor` is reported under its stripped path
+>   (`../gone.md`, not `../gone.md#x`).
+> - Percent-escapes are decoded before resolving (`a%20b.md` -> `a b.md`).
+> - The whole file is parsed as markdown, frontmatter included, matching how the
+>   backtick scan already read it.
+> - `markdown-it-py` is a root `pyproject.toml` dependency, because `uv sync`
+>   does not install a workspace member's dev group.
