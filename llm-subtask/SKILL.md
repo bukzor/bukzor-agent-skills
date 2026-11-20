@@ -1,6 +1,6 @@
 ---
 name: llm-subtask
-description: "Agent MUST load on 'subtask'/'todo' commands, on multi-task work or mid-task questions, or when adding or amending an entry in a todo.kb/ or ideas.kb/"
+description: "Agent MUST load on 'subtask'/'todo' commands, on multi-task work or mid-task questions, or when recording work for later: a todo, an idea, or what the next session should pick up"
 ---
 --- # workaround: anthropics/claude-code#13005
 setup: |
