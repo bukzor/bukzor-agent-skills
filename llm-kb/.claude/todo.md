@@ -73,6 +73,11 @@ cost-benefit-sweh:
 - [x] Commit current working tree (CLEAN-KITCHEN)
 - [ ] Pin pyright for member-cwd runs: llm-kb declares no basedpyright dep, so `uv run pyright` from llm-kb/ falls through to ambient PATH (2026-08-08 field case: resolved to prototype.chatfs's venv shim — same basedpyright version by luck). Add basedpyright-as-pyright to llm-kb's dev group (workspace source lives at root pyproject) or document root-only invocation. The config side is already cwd-safe (fd492ad pins stubPath)
 
+- [x] todo.kb/2026-11-20-000-Check-markdown-link-destinations-in-llm-kb-validate-links.md --
+      `llm.kb-validate-links` reads only backtick spans, so inline and
+      reference-style markdown links (the house style) go unchecked while it
+      reports clean
+
 ## Later
 
 - [ ] todo.kb/2026-07-13-000-cross-kb-cooperation-conventions.md (cross-kb references, symlink conventions, maintenance-traversal scope; llm-design-kb layer-crossing rider) -- consumer: prototype.chatfs graduation, proceeding on interim conventions meanwhile

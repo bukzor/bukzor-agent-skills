@@ -1,11 +1,11 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.10"
-# dependencies = ["pyyaml"]
+# dependencies = ["markdown-it-py", "pyyaml"]
 # ///
 """
-Check that path-valued frontmatter fields and inline body links in .kb/
-markdown files resolve to real files on disk.
+Check that path-valued frontmatter fields, backticked body paths, and markdown
+link destinations in .kb/ markdown files resolve to real files on disk.
 
 Born out of the Abby's Craft design.kb breakdown (2026-07-09): sanity-checking
 ~150 hand-written why:/depends:/candidate-resolutions:/... cross-references
@@ -48,8 +48,11 @@ import sys
 from collections.abc import Iterator
 from itertools import chain
 from pathlib import Path
+from urllib.parse import unquote, urlsplit
 
 import yaml
+from markdown_it import MarkdownIt
+from markdown_it.token import Token
 
 # An opening delimiter may carry a trailing comment -- `--- # workaround:
 # anthropics/claude-code#13003` is common in CLAUDE.md frontmatter.
@@ -136,12 +139,44 @@ def frontmatter_links(md_file: Path, *, lax: bool) -> Iterator[tuple[str, str]]:
             yield field_name, value
 
 
+def _link_hrefs(tokens: list[Token]) -> Iterator[str]:
+    for token in tokens:
+        if token.type == 'link_open':
+            yield str(token.attrs['href'])
+        if token.children:
+            yield from _link_hrefs(token.children)
+
+
+def markdown_destinations(text: str) -> Iterator[str]:
+    """Yield each distinct file-path destination of a markdown link, in order.
+
+    Parsed as CommonMark, so a prose line that merely starts `[LABEL]: text`
+    is not a definition and links inside code blocks are not links. Reference
+    definitions are read from the parser's table rather than from their uses,
+    so an unused definition is still checked. A link used by reference is
+    visited once per use, hence the de-duplication.
+
+    URLs and bare `#anchor` destinations are not file paths and are dropped;
+    a trailing `#anchor` is stripped so the rest can resolve.
+    """
+    env: dict[str, dict[str, dict[str, str]]] = {}
+    tokens = MarkdownIt().parse(text, env)
+    definitions = (ref['href'] for ref in env.get('references', {}).values())
+    hrefs = chain(definitions, _link_hrefs(tokens))
+    for href in dict.fromkeys(unquote(h) for h in hrefs):
+        parts = urlsplit(href)
+        if not (parts.scheme or parts.netloc):
+            yield parts.path
+
+
 def body_links(md_file: Path, *, lax: bool) -> Iterator[tuple[str, str]]:
-    """Yield ('body', path) for every backtick span that looks like a relative link."""
-    for match in BACKTICK_SPAN_RE.finditer(md_file.read_text()):
-        span = match.group(1)
-        if _is_path_shaped(span, lax=lax):
-            yield 'body', span
+    """Yield ('body', path) for every backtick span or markdown link destination
+    that looks like a relative link."""
+    text = md_file.read_text()
+    spans = (m.group(1) for m in BACKTICK_SPAN_RE.finditer(text))
+    for candidate in chain(spans, markdown_destinations(text)):
+        if _is_path_shaped(candidate, lax=lax):
+            yield 'body', candidate
 
 
 def broken_links(md_file: Path, *, lax: bool) -> tuple[int, list[str]]:

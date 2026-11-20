@@ -329,7 +329,12 @@ it for a deliberate sweep, not as a per-commit gate.
 > already a regression case in
 > `./.claude/todo.kb/2026-07-25-000-Test-coverage-for-llm-kb-validate-links.md`.
 
-Checks frontmatter path fields and inline body links both. Folding it
+Checks three sources: frontmatter path fields, backticked body paths,
+and markdown link destinations (inline `[t](../x.md)` and reference
+definitions `[label]: ../x.md`, wrapped or not). URLs and bare `#anchor`
+destinations are skipped; a trailing `#anchor` is stripped before
+resolving. Destinations pass the same `--strict`/`--lax` shape gate as
+backticked paths. Folding it
 into `llm.kb-validate` proper is tracked in
 `./.claude/todo.kb/2026-06-03-000-validate-path-references.md`.
 
