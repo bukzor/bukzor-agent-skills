@@ -5,11 +5,62 @@ description: "Session log kept as files. Agent MUST load when reading or maintai
 
 # LLM Sessions
 
-A `sessions.kb/` collection tracks claude-code sessions -- in flight,
-planned, or recently relevant -- so many parallel lines of work stay
-findable. One entry per session or per host; entries carry the session
-uuid (which is also the transcript name under `~/.claude/projects/`),
-when it ran, and what it was for.
+A `sessions.kb/` collection tracks lines of work that span claude-code
+sessions -- in flight, planned, or recently relevant -- so many parallel
+lines stay findable from any cwd. Each entry carries the uuids of the
+sessions that worked it (also their transcript names under
+`~/.claude/projects/`), when it started, and what it is for.
+
+## What belongs
+
+- A planned line of work not yet started (empty `session.uuid`)
+- An in-flight one worth finding from other contexts
+- A recently finished one whose follow-ups are still live
+
+Not here: per-task todos (the project's `.claude/todo.kb/`,
+Skill(llm-subtask)), per-session devlogs (the project, Skill(llm-collab)),
+concept definitions or principles (their skill's kb).
+
+## Entry shape
+
+- `$slug.md` -- frontmatter from `template.md` beside this file, `$(...)`
+  placeholders substituted. The body is live status (plan, blocked,
+  decisions): edited in place, never appended.
+- `$slug.kb/` -- one file per pickup write-up, reading like a devlog
+  entry, named per Skill(llm-kb)'s `references/dated-slug-filename.md`.
+  Start it once a pickup's write-up outgrows a one-line status update;
+  close `$slug.md` with an `## Addenda` section pointing at it.
+- Slug: kebab-case, purpose guessable from the name, unnumbered. When a
+  taskfile exists, match its slug exactly (strip `CLAUDE.`/`.Task.`/`.md`).
+- Open work is `- [ ]`. Bare `-` bullets are invisible to
+  `claude-open-tasks-list` and silently lost (Skill(llm-subtask)).
+
+## Start of session
+
+Find the entry this session continues -- by the brief's basename if
+there is one, else `grep -Rl "^cwd: $PWD"` over the collection. One
+match: read it and append `$CLAUDE_CODE_SESSION_ID` to `session.uuid`.
+None: create one if the work warrants it (below). Several: ask.
+
+## Mid-session
+
+Create an entry the moment a separate line of work is identified: a
+tangent recognized as its own scope, follow-ups surfaced, the user
+saying "that's another session". It earns one when the work is complex,
+will take more than a couple of hours, has already spanned a day, or the
+context is past ~100k tokens.
+
+## End of session
+
+1. Find this session's entry: `grep -Rl "$CLAUDE_CODE_SESSION_ID"`, else
+   by `cwd:`.
+2. Update `$slug.md`'s status in place; file this pickup's findings per
+   [Entry shape](#entry-shape).
+3. Propose one new entry per distinct line of follow-up work surfaced.
+4. Delete entries whose follow-ups are absorbed elsewhere or no longer
+   worth keeping at hand. Set `ended:` only when no further session is
+   expected, never because this conversation ended.
+5. Commit as the collection's own `CLAUDE.md` directs.
 
 ## Schema
 
@@ -30,8 +81,13 @@ The schema declares the llm-kb dialect for its `instant`/`date` types, and
 `$ref`s `cost-benefit-sweh` across to Skill(llm-subtask) rather than
 restating it -- a session and a task rate their cost the same way.
 
-## Worked example
+## Local bindings
 
-`~/.claude/sessions.kb/` is the live collection; its `CLAUDE.md` is the
-maintenance guide for that particular log (naming, what earns an entry,
-how host sub-collections are organized).
+Rewrite this section, rather than dropping it, when porting.
+
+- The collection is `~/.claude/sessions.kb/`, entries under
+  `<hostname>.kb/`. Its `CLAUDE.md` covers that repo's host layout and
+  commit cadence.
+- Optionally, an entry tightly coupled to one project's artifacts may live
+  at `<project>/.claude/sessions.kb/<slug>.md`, symlinked from the host
+  directory. Prefer the default.
