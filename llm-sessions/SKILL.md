@@ -37,9 +37,10 @@ concept definitions or principles (their skill's kb).
 
 ## Start of session
 
-Find the entry this session continues -- by the brief's basename if
-there is one, else `grep -Rl "^cwd: $PWD"` over the collection. One
-match: read it and append `$CLAUDE_CODE_SESSION_ID` to `session.uuid`.
+Find the entry this session continues -- `grep -Rls` the collection for
+the brief's basename if there is one, else for `^cwd: $PWD` (`-s`: other
+hosts' symlinked entries dangle here). One match: read it and append
+`$CLAUDE_CODE_SESSION_ID` to `session.uuid`.
 None: create one if the work warrants it (below). Several: ask.
 
 ## Mid-session
