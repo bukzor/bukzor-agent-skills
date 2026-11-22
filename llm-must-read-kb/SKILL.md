@@ -120,6 +120,13 @@ Rules:
   pairs with gerunds (`making-code-changes`), `after/` with nouns or
   past events (`an-unexpected-Bash-failure`), `when/` with predicates
   (`user-instructions-are-inconsistent`).
+- Name the locus, not the decision.
+
+  > [!@bukzor] 2026-11-22: the slug names where the directive applies
+  > (`before/dotfiles-repo/committing.md`), never what it decides
+  > (`committing--hold-till-session-end.md`), so changing the directive
+  > never renames the trigger. A `--` separates alternate titles for one
+  > occasion (`spawning-a-sub-agent--delegating-a-task.md`).
 
 ## Nesting
 
