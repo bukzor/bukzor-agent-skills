@@ -15,5 +15,8 @@ that survive this filter are stipulations: decisions only the user
 can make. Present those few, each with what would make the user agree
 or disagree.
 
+Refer back to a claim by its label, never by position ("the first and
+third"): a label survives re-rendering, and the reader can grep it.
+
 See SIGNATURE, PROVISIONAL (`../../../claims.kb/design.claims.kb/notation.kb/`);
 incident: session "over-veto", 2026-08-09.
