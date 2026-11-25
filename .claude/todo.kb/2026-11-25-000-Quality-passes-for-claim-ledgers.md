@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: not-started
+status: open
 ---
 
 # Quality passes for claim ledgers
@@ -28,6 +28,7 @@ under three names in three skills.
 - [ ] Wave 1, mechanical: apply
       `llm-kb/migrations.kb/2026-11-25-001-skill-kb-quality-passes-and-reference-kb.md`,
       with its `migrate.sh` and `validate.sh`.
+  - [ ] [000-apply-skill-kb-layout-migration](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-000-apply-skill-kb-layout-migration.md)
 - [ ] Wave 2, `llm-claims-kb`: `skill.kb/must-read.kb/` entries for the
       `OCCASION_LADDER` occasions, each pointing at its passes; a tiered sweep,
       `skill.kb/procedures.kb/run-quality-passes.md`, that runs `llm-kb`'s
