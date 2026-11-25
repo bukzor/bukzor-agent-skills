@@ -15,6 +15,7 @@ ontology:
   - domain
   - composition
   - token
+  - quality pass
 non-claim-tokens:
   - MUST
   - NOT

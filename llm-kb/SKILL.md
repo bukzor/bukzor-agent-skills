@@ -145,8 +145,10 @@ collections.
 
 A directory holding homogeneous content files -- **same type of thing**.
 
-- Each item is one file
-- All files share the same schema (if using frontmatter)
+- Each item is one file, or a kb of its own: "kb" is a type, so a directory of
+  kbs about one subject (`skill.kb/`, `claims.kb/`) is homogeneous too
+- All items share the same schema (if using frontmatter) -- strict where the
+  type is (claims), thin where it is not (kbs)
 - Related by type, not by tool/subject
 
 Create when you have multiple items of the same kind. Use the `.kb/` suffix to
