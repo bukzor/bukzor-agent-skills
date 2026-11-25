@@ -270,8 +270,8 @@ the two thresholds.
 ### llm-claims-kb-grounding
 
 Purpose: find the claims whose chain to the owner's word is weakest,
-weighted by how much rests on them -- the review queue the ledger's own
-`why:` graph implies. A quoted chat is not a ground here; only a
+weighted by how much rests on them -- the order the ledger's own `why:`
+graph implies for review, whenever review comes. A quoted chat is not a ground here; only a
 `standing: user` claim is, or a bare claim with a `verify:` check.
 
 ```bash

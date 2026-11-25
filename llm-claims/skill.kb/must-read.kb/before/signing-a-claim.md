@@ -19,5 +19,6 @@ opposite motion -- the user's judgment is already spent, and
 recording it is what makes it reusable.
 
 Never accept your own output. `claim accept` is the user's call --
-sign your own judgments `+` and let them stand until the user rules
+sign your own judgments `+` and let them stand: a resting state, which
+the user's veto changes and no signature is owed
 (`../when/you-notice-an-underdetermined-choice.md`).

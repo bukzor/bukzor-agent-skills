@@ -1,15 +1,16 @@
 # Corollaries
 
-A rule that follows from others is on file legitimately only as a corollary: it
-cites its premises and names the miss that earned it ([DERIVED_RECORD]).
+A rule that follows from others is on file legitimately as a corollary: it cites
+its premises and names the occasion that needs it ([DERIVED_RECORD]).
 
 - **Premises.** A rule that follows from others but carries no `why:` to them
   stands as if it grounded itself, and will not be revisited when they change.
   Add the arrows.
-- **Receipt.** A corollary that names no miss reads as restatement, and a bloat
-  pass will rightly strip it. Name the miss, or let it go.
-- **Before stripping.** A restatement found by a bloat pass is first asked
-  whether practice missed it. If so, it stays as a corollary.
+- **Occasion.** A corollary naming no occasion reads as restatement, and a
+  bloat pass will rightly strip it. Name the occasion, observed or foreseen, or
+  let it go.
+- **Before stripping.** A restatement a bloat pass finds is first asked whether
+  an occasion needs it. If one does, it stays, naming that occasion.
 
 [DERIVED_RECORD]:
-  ../../../docs/dev/claims.kb/design.claims.kb/principles.kb/a-derivable-rule-is-written-where-practice-missed-it.md
+  ../../../docs/dev/claims.kb/design.claims.kb/principles.kb/a-derivable-rule-is-written-at-the-occasion-that-needs-it.md

@@ -22,8 +22,8 @@ The few timeless design rules the fleet's decisions derive from, one
 imperative per file, each graded `force:`: `must` filters the design
 space -- violating work is non-conforming; `should` sorts it --
 deviation takes recorded justification. A decision a principle
-motivates needs no record of its own until practice misses it
-(`DERIVED_RECORD`); a recurring decision no principle motivates is a
+motivates needs no record of its own unless an occasion needs it that
+derivation will not reach (`DERIVED_RECORD`); a recurring decision no principle motivates is a
 missing principle.
 
 Extracted from the 2026-08-16/17 batch by an alignment census
