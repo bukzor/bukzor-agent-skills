@@ -113,6 +113,16 @@ Repo-level list. Skill-scoped work lives in each skill's own
       then decide whether `dead-sessions` moves into that library beside
       `inventory` (it duplicates `text_of`/user-record filtering) or stays
       stdlib-only so recovery works on a bare machine
+- [ ] claude-code-archeology: `dead-sessions` found nothing after the
+      2026-11-22 penguin VM crash. By the time it ran, `~/.claude/sessions/`
+      held only the 3 sessions started after reboot; the dead sessions'
+      `<pid>.json` entries were gone, presumably pruned when those new
+      sessions started (unverified). Recovery fell back to transcript mtimes:
+      all 12 sessions live at the crash had an mtime in the crash minute
+      (13:46), and each one that had exited earlier kept its exit-time mtime.
+      Verify the pruning cause, then teach `dead-sessions` (or the skill's
+      "Recovery after a crash" section) that fallback. Session `05284fd8`
+      has the evidence.
 - [x] persist-clarity: owner rulings pending on the redesign's open
       questions (return promised for 2026-08-30) —
       persist-clarity/.claude/todo.kb/2026-08-29-000-Rule-on-the-redesign-open-questions.md
