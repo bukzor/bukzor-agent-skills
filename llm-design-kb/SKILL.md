@@ -43,7 +43,8 @@ Two consequences of rungs being theories rather than folders:
 - **Priors are a DAG.** A claim's `why:` names whatever claims it
   would be revisited over -- one rung up, four rungs up, or sideways.
   The ladder is the common shape, not a constraint, so a design claim
-  citing a goal directly is an ordinary long edge, not an error.
+  citing a goal directly is an ordinary long edge, not an error. What
+  the graph must keep is reach: every claim gets to the mission.
   Content the design assumes but does not argue -- background, prior
   art, use cases -- is an auxiliary theory beside the rungs.
 - **No numeric prefixes.** Order lives once, in the `why:` arrows; a

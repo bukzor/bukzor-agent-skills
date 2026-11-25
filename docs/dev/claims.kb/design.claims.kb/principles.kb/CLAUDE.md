@@ -8,8 +8,8 @@ llm-design-kb's technical-policy schema). The grade names the kind
 violating work is non-conforming; `should` is a heuristic and sorts
 it -- deviation takes recorded justification. A file that bundles
 both kinds is two files. Derive before adding: a candidate that
-follows from an existing principle is not a new file, and a specific
-decision a principle motivates needs no record at all.
+follows from an existing principle is not a new file here; whether it
+is written down at all is `../principles.md`'s question.
 
 ## What does NOT belong here
 

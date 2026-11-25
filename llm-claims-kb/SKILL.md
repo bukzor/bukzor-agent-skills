@@ -55,7 +55,8 @@ claims are imperatives (conventionally `technical-policy.kb/`) binds
 
 A claims.kb is a `.kb`: `Skill(llm-kb)`'s audits and maintenance
 rules apply to it wholesale. The audits in `skill.kb/self-audit.kb/`
-here are the ledger-specific additions, not replacements.
+here are the ledger-specific additions, not replacements: run the
+ones whose names match the edit before committing a batch of claims.
 
 ## Layout
 

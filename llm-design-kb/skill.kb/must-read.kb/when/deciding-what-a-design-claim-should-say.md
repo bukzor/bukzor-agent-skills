@@ -1,10 +1,13 @@
 # When deciding what a design claim should say
 
-Five authorship lenses, in `../../principles.kb/`. They are about how
+Six authorship lenses, in `../../principles.kb/`. They are about how
 any design record is written, not about what any one project decided,
 so they apply to a record you did not write as readily as to one you
 are drafting. Read the ones whose occasion you are in:
 
+- **`each-rung-says-only-what-its-question-asks.md`** -- you are writing any
+  claim, highest rungs first, and reaching for detail its question does not
+  ask.
 - **`state-properties-not-mechanisms.md`** -- you are writing a
   requirement or an architecture claim and reaching for *how* it works.
   The rung below is where mechanism goes; confinement will report it

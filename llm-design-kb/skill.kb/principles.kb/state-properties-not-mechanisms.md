@@ -12,3 +12,5 @@ carefully the prose below hedges it.
 The mechanism still needs documenting — it belongs in the specific,
 lower-layer entry that actually implements the property, referenced
 by name from the property-level entry, never restated there.
+
+The general rule, for every rung: `each-rung-says-only-what-its-question-asks.md`.

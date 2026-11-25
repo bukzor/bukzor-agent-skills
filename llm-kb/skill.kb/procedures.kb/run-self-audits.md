@@ -31,6 +31,7 @@ Findings addressed, not deferred.
 | `../self-audit.kb/collection-homogeneity.md` | a `.kb/` had items added or edited |
 | `../self-audit.kb/filename-discipline.md` | any file created or renamed |
 | `../self-audit.kb/bloat.md` | any file written or edited |
+| `../self-audit.kb/one-home.md` | any kb file written, edited, or cut |
 | `../self-audit.kb/claudemd-enumeration.md` | a `CLAUDE.md` was touched |
 | `../self-audit.kb/claudemd-completeness.md` | a `CLAUDE.md` was touched |
 | `../self-audit.kb/enumeration-completeness.md` | a collection was created or extended |
