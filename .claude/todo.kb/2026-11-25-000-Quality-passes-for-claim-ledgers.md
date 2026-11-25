@@ -33,6 +33,8 @@ under three names in three skills.
       `OCCASION_LADDER` occasions, each pointing at its passes; a tiered sweep,
       `skill.kb/procedures.kb/run-quality-passes.md`, that runs `llm-kb`'s
       sweep first and cites it; `quality-passes.md` as the index.
+      Runs beside wave 3.
+  - [ ] [001-llm-claims-kb-occasions-sweep-and-index](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-001-llm-claims-kb-occasions-sweep-and-index.md)
 - [ ] Wave 3: write `skill.kb/quality-passes.kb/smoothing.md` (`SMOOTHING`).
       Each node is walked against: its rung's question (`llm-design-kb`'s
       each-rung lens), its `why:` (`REACH`, `corollaries`), its siblings
@@ -41,6 +43,7 @@ under three names in three skills.
       `llm-claims-kb-ownership --trespass` reports "0 stipulations", which
       59b55f01 mistook for a broken tool and replaced with a hand check that
       missed 6 trespasses.
+  - [ ] [002-smoothing-pass](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-002-smoothing-pass.md)
 - [ ] Wave 4: the same layout in `llm-design-kb` (its folded passes, a sweep
       that runs `llm-claims-kb`'s first) and in `llm-claims` for chat ledgers.
 - [ ] Wave 5: deliver `FROM_NOW_ON` -- `SKILL.md` of `llm-claims-kb` names the
@@ -52,6 +55,8 @@ under three names in three skills.
       by link (my-own-shadertoy: `technical-policy.kb/consolidation-sessions.md`).
 - [ ] Wave 6, receipt: run the sweep and smoothing on
       `my-own-shadertoy/docs/dev/claims.kb/`; record what they found.
+      The run is blind: its brief links neither this plan nor 59b55f01's
+      findings, and the coordinator checks it against Success Criteria.
 
 ## Open Questions
 
