@@ -27,6 +27,19 @@ no `standing:`. A directive has no standing to contest; the decision it
 implements does, and that decision is a claim in
 `../claims.kb/design.claims.kb/notation.kb/`.
 
+## Quality passes live in `Skill(llm-claims-kb)`
+
+> [!DRAFT] agent-authored 2026-11-25, vetoable
+
+No `quality-passes.kb/`, no sweep (`LAYOUT`, fleet `authorship.kb/`).
+A pass that judges the notation (standing honesty, ruling fidelity,
+corollaries, confinement) is `llm-claims-kb`'s, and a bank entry here
+links it at the occasion due. A chat-only quality is a lens in the
+entry for its one occasion. Add a collection only for a chat-only pass
+that two occasions here need. A chat has no scans to tier, so
+`before/presenting-claims-to-the-user.md` does the sweep's job. Flush
+moves claims into files, where `llm-claims-kb`'s sweep fires.
+
 ## What does NOT belong here
 
 - Notation a reader must decode in place — sigils, statuses, arrows,
