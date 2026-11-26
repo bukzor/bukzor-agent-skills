@@ -55,7 +55,8 @@ The discipline the rungs buy is **confinement**: a word a rung
 stipulates is that rung's, and its siblings may not use it.
 `llm-claims-kb-ownership --trespass` reports a mechanism word coined
 in `architecture` and spoken in `requirements` -- which is the
-state-properties-not-mechanisms rule, mechanized.
+quality pass `skill.kb/quality-passes.kb/state-properties-not-mechanisms.md`,
+mechanized.
 
 ## Encode: draft the design as a ledger
 
@@ -115,7 +116,7 @@ delete any rung the project does not want.
 
 Then file the reviewed ledger per `Skill(llm-claims-kb)`: one claim
 per file, standing in frontmatter, arrows as `why:`. The operation
-ends at a commit.
+ends at a commit, after the sweep `skill.kb/procedures.kb/run-quality-passes.md`.
 
 ## Maintenance
 
@@ -132,12 +133,10 @@ hold the record to what is now true:
   the failure this skill exists to prevent.
 - **`why:` arrows are traced, not assumed.** A new claim needs its
   arrows; a claim that gained a responsibility needs them updated.
-  `skill://llm-claims-kb/bin/llm-claims-kb-graph` finds the arrow that
-  points nowhere, the claim that never joined the graph, and the
-  citation cycle.
-- **Confinement is a grep.** `llm-claims-kb-ownership --trespass`
-  reports a rung speaking another rung's stipulated word -- usually a
-  misfiled claim, sometimes a missing import.
+- **The sweep runs before the commit.**
+  `skill.kb/procedures.kb/run-quality-passes.md` runs
+  `Skill(llm-claims-kb)`'s sweep -- the graph and confinement scans --
+  then this skill's quality passes.
 
 ## In unledgered prose
 
