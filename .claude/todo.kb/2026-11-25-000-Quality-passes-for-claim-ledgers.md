@@ -47,7 +47,7 @@ under three names in three skills.
 - [ ] Wave 4: the same layout in `llm-design-kb` (its folded passes, a sweep
       that runs `llm-claims-kb`'s first) and in `llm-claims` for chat ledgers.
   - [ ] [003-llm-design-kb-passes-and-sweep](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-003-llm-design-kb-passes-and-sweep.md)
-  - [ ] [004-llm-claims-chat-ledger-passes](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-004-llm-claims-chat-ledger-passes.md)
+  - [x] [004-llm-claims-chat-ledger-passes](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-004-llm-claims-chat-ledger-passes.md)
 - [x] Wave 5: deliver `FROM_NOW_ON` -- `SKILL.md` of `llm-claims-kb` names the
       sweep before a batch of claims is committed and smoothing at
       consolidation; drop the fleet claims' `todo:` as each lands.
@@ -69,6 +69,12 @@ under three names in three skills.
 
 ## Open Questions
 
+- [ ] Move notation-level passes from `llm-claims-kb` down to `llm-claims`,
+      with `llm-claims-kb` citing them: `confinement.md` (`llm-claims`'
+      `SKILL.md` Theories section already condenses it: two homes) and
+      `ruling-fidelity.md`, reworded without file-form terms; then
+      `standing-honesty.md` cites `llm-claims` for the shared rule. Proposed
+      by unit 004 (its Open Questions); a follow-up unit once ruled.
 - [ ] A scan for `REACH` (every claim reaches the mission): a lint in
       `llm-claims-kb-graph`, or a pass only?
 - [ ] Does each `stale-when:` get evaluated by the periodic sweep, and how?

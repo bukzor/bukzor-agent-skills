@@ -106,3 +106,8 @@
       `superseded-by[]` suggests array-valued (one claim replaced by
       several). Ruling lives in llm-claims-kb; filed here per the
       user's pointer
+- [ ] Seven files under `claims.kb/design.claims.kb/` link the skill's
+      `skill.kb/` or `SKILL.md` one level short (`../skill.kb/` from
+      `design.claims.kb/CLAUDE.md` resolves to `claims.kb/skill.kb`).
+      `llm-kb/bin/llm.kb-validate-links llm-claims` lists them. Broken
+      before 2026-11-25; found by the quality-passes burn-down, unit 004.
