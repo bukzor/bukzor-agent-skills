@@ -29,13 +29,13 @@ under three names in three skills.
       `llm-kb/migrations.kb/2026-11-25-001-skill-kb-quality-passes-and-reference-kb.md`,
       with its `migrate.sh` and `validate.sh`.
   - [x] [000-apply-skill-kb-layout-migration](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-000-apply-skill-kb-layout-migration.md)
-- [ ] Wave 2, `llm-claims-kb`: `skill.kb/must-read.kb/` entries for the
+- [x] Wave 2, `llm-claims-kb`: `skill.kb/must-read.kb/` entries for the
       `OCCASION_LADDER` occasions, each pointing at its passes; a tiered sweep,
       `skill.kb/procedures.kb/run-quality-passes.md`, that runs `llm-kb`'s
       sweep first and cites it; `quality-passes.md` as the index.
       Runs beside wave 3.
-  - [ ] [001-llm-claims-kb-occasions-sweep-and-index](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-001-llm-claims-kb-occasions-sweep-and-index.md)
-- [ ] Wave 3: write `skill.kb/quality-passes.kb/smoothing.md` (`SMOOTHING`).
+  - [x] [001-llm-claims-kb-occasions-sweep-and-index](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-001-llm-claims-kb-occasions-sweep-and-index.md)
+- [x] Wave 3: write `skill.kb/quality-passes.kb/smoothing.md` (`SMOOTHING`).
       Each node is walked against: its rung's question (`llm-design-kb`'s
       each-rung lens), its `why:` (`REACH`, `corollaries`), its siblings
       (`one-home`), the rulings it quotes (`ruling-fidelity`), and
@@ -43,9 +43,11 @@ under three names in three skills.
       `llm-claims-kb-ownership --trespass` reports "0 stipulations", which
       59b55f01 mistook for a broken tool and replaced with a hand check that
       missed 6 trespasses.
-  - [ ] [002-smoothing-pass](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-002-smoothing-pass.md)
+  - [x] [002-smoothing-pass](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-002-smoothing-pass.md)
 - [ ] Wave 4: the same layout in `llm-design-kb` (its folded passes, a sweep
       that runs `llm-claims-kb`'s first) and in `llm-claims` for chat ledgers.
+  - [ ] [003-llm-design-kb-passes-and-sweep](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-003-llm-design-kb-passes-and-sweep.md)
+  - [ ] [004-llm-claims-chat-ledger-passes](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-004-llm-claims-chat-ledger-passes.md)
 - [ ] Wave 5: deliver `FROM_NOW_ON` -- `SKILL.md` of `llm-claims-kb` names the
       sweep before a batch of claims is committed and smoothing at
       consolidation; drop the fleet claims' `todo:` as each lands.

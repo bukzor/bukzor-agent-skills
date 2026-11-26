@@ -174,3 +174,9 @@ managed-by: Skill(llm-subtask)
         `skill.kb/reference.kb/frontmatter-outside-a-collection.md` already state
         it; this SKILL.md half-says it ("its entry point, carrying the
         poset") and should say it outright.
+- [ ] `bin/llm-claims-kb-graph` fails on a bare container ledger: run on
+      `docs/dev/claims.kb` it dies with `graph claims.kb has missing "pos"
+      information`, while each child (`docs/dev/claims.kb/design.claims.kb`)
+      draws. The sweep's Tier 1 row (`skill.kb/procedures.kb/run-quality-passes.md`)
+      hits it on every bare-container ledger; until fixed, graph each child.
+      Found 2026-11-25 by the quality-passes burn-down, unit 001.

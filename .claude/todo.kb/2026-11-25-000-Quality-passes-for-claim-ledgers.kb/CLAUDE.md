@@ -58,6 +58,9 @@ copies them.
   `index.lock` collision, retry. Don't push; the coordinator does.
 - Finish with `llm.kb-validate` and `llm-kb/bin/llm.kb-validate-links` (not
   on PATH) on the trees you touched, no new errors.
+- `bin/llm-claims-kb-graph` fails on a bare `claims.kb/` container
+  (`missing "pos" information`); graph each child ledger instead
+  (`llm-claims-kb/.claude/todo.md`).
 - Run builds and checks in the foreground. Never end your turn waiting on a
   background job or monitor: if a sibling must land first, say so in your
   report and stop; the coordinator resumes you.
