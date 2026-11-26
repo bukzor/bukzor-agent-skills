@@ -5,7 +5,7 @@ cost-benefit-sweh:
     "@value": 1.5
     rationale: |
       File-level estimate for a 2-item rollup. Write
-      references/create-new-trigger.md procedure + a small side item.
+      skill.kb/reference.kb/create-new-trigger.md procedure + a small side item.
       The procedure itself unblocks the /must-read slash command.
   benefit-2w:
     "@value": 1.5

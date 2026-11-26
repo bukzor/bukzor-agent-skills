@@ -53,8 +53,8 @@ claims are imperatives (conventionally `technical-policy.kb/`) binds
 `jsonschema/policy.jsonschema.yaml` instead -- the claim schema plus
 `force:` (RFC 2119), whose `#force` anchor is borrowable alone.
 
-A claims.kb is a `.kb`: `Skill(llm-kb)`'s audits and maintenance
-rules apply to it wholesale. The audits in `skill.kb/self-audit.kb/`
+A claims.kb is a `.kb`: `Skill(llm-kb)`'s quality passes and maintenance
+rules apply to it wholesale. The quality passes in `skill.kb/quality-passes.kb/`
 here are the ledger-specific additions, not replacements: run the
 ones whose names match the edit before committing a batch of claims.
 
@@ -103,7 +103,7 @@ a collection whose claims need no words of their own belongs in its
 parent.
 
 On disk a theory costs a directory and a header, so the
-split-for-the-reader move (`skill.kb/theories.md` in
+split-for-the-reader move (`skill.kb/reference.kb/theories.md` in
 `Skill(llm-claims)`) is even cheaper here than in chat:
 auxiliary theories that simplify a citing theory's claims are
 encouraged, not exceptional.
@@ -161,7 +161,7 @@ the path, leaving the `.dot` beside it. `llm-claims-kb-dot` is
 the emitter underneath, if you want the DOT on stdout.
 
 How to read the drawing, and the rots it catches:
-`skill.kb/self-audit.kb/graph-health.md`.
+`skill.kb/quality-passes.kb/graph-health.md`.
 
 ### llm-claims-kb-flatten
 
@@ -244,7 +244,7 @@ The default scan judges each double by how the two stipulators
 relate. Two in one ledger contend: two owners for one word, an error
 charged to both entries, which fails the exit because only a person
 can decide -- which entry loses the word, or whether it is too coarse
-for both. `skill.kb/self-audit.kb/confinement.md` is how to choose.
+for both. `skill.kb/quality-passes.kb/confinement.md` is how to choose.
 A nested pair is inert, since the
 outer entry owns and the inner restates it. A pair in different
 ledgers is out of jurisdiction -- namespaces are per-ledger -- and is

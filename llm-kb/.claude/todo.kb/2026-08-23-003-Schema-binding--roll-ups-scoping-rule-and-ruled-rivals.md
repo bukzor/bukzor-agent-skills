@@ -3,7 +3,7 @@ managed-by: Skill(llm-subtask)
 status: open
 related-effort: ./2026-08-21-000-ref-rollout-beyond-todo-ideas.md
 required-reading:
-  - ~/.claude/skills/llm-kb/references/frontmatter-outside-a-collection.md
+  - ~/.claude/skills/llm-kb/skill.kb/reference.kb/frontmatter-outside-a-collection.md
 cost-benefit-sweh:
   timebox:
     "@value": 2.5
@@ -56,7 +56,7 @@ Three candidate answers, and picking is the work:
    e.g. reports it as unbound rather than failing.
 3. The roll-ups are simply wrong to carry frontmatter. `Skill(llm-kb)`
    already says a synthesis file carries none, and
-   `references/frontmatter-outside-a-collection.md` says strip it.
+   `skill.kb/reference.kb/frontmatter-outside-a-collection.md` says strip it.
 
 Option 3 is the cheapest and the most consistent with the written rule,
 so the burden is on 1 and 2 -- but the reader sweep it depends on has
@@ -124,7 +124,7 @@ One sentence prevents the next instance.
 ## Delegation
 
 - **Sole writer of:** `llm-kb/lib/python/llmd/`, `llm-kb/tests/`,
-  `llm-kb/migrations.kb/2026-05-15-000-*/`, `llm-kb/references/`,
+  `llm-kb/migrations.kb/2026-05-15-000-*/`, `llm-kb/skill.kb/reference.kb/`,
   `llm-discourse-graph/SKILL.md`, and the six `*/.claude/todo.md`
   roll-ups in this repo.
 - **Not parallel-safe with any other lane.** Every other lane verifies

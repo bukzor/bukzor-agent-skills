@@ -21,7 +21,7 @@ cost-benefit-sweh:
 governs the *what* (file shape, juncture, placement); a slash command
 governs the *invocation* — parse free-text into a trigger file.
 
-**Blocker:** `references/create-new-trigger.md` must exist first (see
+**Blocker:** `skill.kb/reference.kb/create-new-trigger.md` must exist first (see
 `.claude/todo.md`). Both manual and command paths share that procedure
 so they produce identical artifacts.
 
@@ -70,4 +70,4 @@ Map trigger phrasing to juncture:
   file at the right scope and juncture.
 - The new file fires its trigger on the next session.
 - Manual creation (without the command) produces an identical-shape
-  artifact, because both paths read `references/create-new-trigger.md`.
+  artifact, because both paths read `skill.kb/reference.kb/create-new-trigger.md`.

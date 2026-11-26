@@ -27,7 +27,7 @@ concept definitions or principles (their skill's kb).
   placeholders substituted. The body is live status (plan, blocked,
   decisions): edited in place, never appended.
 - `$slug.kb/` -- one file per pickup write-up, reading like a devlog
-  entry, named per Skill(llm-kb)'s `references/dated-slug-filename.md`.
+  entry, named per Skill(llm-kb)'s `skill.kb/reference.kb/dated-slug-filename.md`.
   Start it once a pickup's write-up outgrows a one-line status update;
   close `$slug.md` with an `## Addenda` section pointing at it.
 - Slug: kebab-case, purpose guessable from the name, unnumbered. When a

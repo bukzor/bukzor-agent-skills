@@ -174,7 +174,7 @@ Rules this tooling mechanizes:
 
 - `SKILL.md` — sigil table and claim-line grammar; the
   `grep -nE '[A-Z_][?+]'` scan that `-attention` productizes
-- `skill.kb/theories.md` — confinement and conservativity; the
+- `skill.kb/reference.kb/theories.md` — confinement and conservativity; the
   placement rule `-lint` checks the mechanical slice of
 - `design.claims.kb/good-smells.kb/enforceable-invariants-win.md`,
   `.../survives-dumb-media-and-tools.md` — the criteria this tooling
@@ -188,7 +188,7 @@ Related work:
   `bin/llm.kb-validate-links` — prior art for validator UX (recursive
   discovery, per-file ✅/error report, schema auto-detection); their
   dotted naming predates the exact-prefix ruling above
-- `~/.claude/skills/llm-kb/references/creating-a-new-kb.md` — the
+- `~/.claude/skills/llm-kb/skill.kb/reference.kb/creating-a-new-kb.md` — the
   quality-pass workflow these commands slot into
 
 ## Notes

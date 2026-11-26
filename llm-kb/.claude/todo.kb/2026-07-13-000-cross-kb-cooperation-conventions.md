@@ -78,8 +78,8 @@ prototype.chatfs's graduation umbrella.
 
 - Does the "one home per fact" rule need tooling (duplication
   detection), or does convention + review suffice? The convention is
-  now fleet law (`ONE_HOME`) and has an audit
-  (`skill.kb/self-audit.kb/one-home.md`); tooling is still open.
+  now fleet law (`ONE_HOME`) and has a quality pass
+  (`skill.kb/quality-passes.kb/one-home.md`); tooling is still open.
 
 ## Success Criteria
 

@@ -12,7 +12,7 @@ consumers writing a project's own design record).
   first.
 - `skill.kb/must-read.kb/when/` — the trigger bank. Each filename
   names its own occasion; the file is the payload, never a redirect.
-- `skill.kb/principles.kb/` — design-authorship lenses for consumers.
+- `skill.kb/quality-passes.kb/` — design-authorship lenses for consumers.
   Adding one means adding its occasion to the trigger that indexes them.
 - `docs/dev/claims.kb/` — this skill's own design record, kept in the
   form it recommends.

@@ -26,4 +26,4 @@ nobody gets to veto.
 The maintenance passes are this skill's, not its basis's: the
 descriptive-claim ground-truth check, the standing-on-entry rule, the
 arrow trace, and the confinement grep are all about *design* records.
-`Skill(llm-claims-kb)` keeps only the generic ledger self-audit.
+`Skill(llm-claims-kb)` keeps only the generic ledger quality passes.

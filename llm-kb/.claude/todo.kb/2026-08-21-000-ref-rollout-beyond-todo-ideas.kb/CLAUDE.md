@@ -13,7 +13,7 @@ the date and kind live in the filename.
 ## What does NOT belong
 
 - New work items -> `../` (todo.kb) or `.claude/ideas.kb/`
-- Durable pattern documentation -> `references/schema-reuse.md`
+- Durable pattern documentation -> `skill.kb/reference.kb/schema-reuse.md`
 - Migration state -> `migrations.kb/`
 - Open-task bullets: never use `- [ ]` here -- these files sit under
   `todo.kb/` and the open-task inventory scans them for that marker;

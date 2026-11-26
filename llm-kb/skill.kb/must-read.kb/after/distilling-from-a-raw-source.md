@@ -18,7 +18,7 @@ devlog, ADR, or incident report.
   existing one, add `see-also:` or merge. Two entries describing the
   same thing under different names is the failure mode this prevents.
 
-## Generic audits
+## Generic passes
 
 Distillation writes and edits multiple kb files at once -- run the
-full sweep: `../../procedures.kb/run-self-audits.md`.
+full sweep: `../../procedures.kb/run-quality-passes.md`.

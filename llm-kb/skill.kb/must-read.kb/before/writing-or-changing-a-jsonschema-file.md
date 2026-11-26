@@ -4,8 +4,8 @@ You're about to create or edit a `*.jsonschema.yaml` -- a new
 collection's schema, a field added to an existing one, or a copy you
 found and want to de-duplicate.
 
-**Read `references/schema-reuse.md` first.** Add
-`references/schema-design.md` when the question is what one file should
+**Read `skill.kb/reference.kb/schema-reuse.md` first.** Add
+`skill.kb/reference.kb/schema-design.md` when the question is what one file should
 say rather than how files share.
 
 The belief that most often goes stale in the wild: every published

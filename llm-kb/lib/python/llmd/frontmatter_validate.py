@@ -96,7 +96,8 @@ HIVE_PARTITION_MARKER = '='
 # that recited the current reach would teach it as the rule.
 NO_SCHEMA_FOUND = (
     "No schema found for this frontmatter."
-    " Resolutions: skill://llm-kb/references/frontmatter-outside-a-collection.md"
+    " Resolutions:"
+    " skill://llm-kb/skill.kb/reference.kb/frontmatter-outside-a-collection.md"
 )
 # git's wording for the absence of a repository, stable since forever. Should
 # it ever change, the tests below fail rather than users.

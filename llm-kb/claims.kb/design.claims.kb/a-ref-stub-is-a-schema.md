@@ -10,7 +10,7 @@ why:
 "Has no schema" means no sibling `X.jsonschema.yaml` exists. It does
 not mean the file present is shorter than the one a sweep would have
 written. A two-line `$ref` stub is the *preferred* form, per
-`references/schema-reuse.md`, so a sweep acting on
+`skill.kb/reference.kb/schema-reuse.md`, so a sweep acting on
 CANONICAL_PER_COLLECTION writes only where the sibling file is absent
 and stops at every file it finds.
 

@@ -12,7 +12,7 @@ situation calls for them. Multi-step methods that change state.
 ## What does NOT belong here
 
 - Proactive quality checks (one question + one recovery)
-  -> `../self-audit.kb/`.
+  -> `../quality-passes.kb/`.
 - Procedures specific to maintaining the llm-kb skill itself
   -> `../../docs/dev/procedures.kb/`. That's the skill-internal kb;
   this is the consumer-facing one.

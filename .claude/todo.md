@@ -9,7 +9,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       own `description:` already names the occasion — a pre-triggers leftover.
       llm-kb contradicts itself: SKILL.md says a root CLAUDE.md "needs no
       frontmatter declaring this skill; the `description:` carries the
-      trigger", while two of its own self-audits mandate exactly that, so a
+      trigger", while two of its own quality passes mandate exactly that, so a
       sweep re-adds what a repo deliberately removed. Known-plural across
       skills; owner will address holistically. The work starts with a sorting
       criterion — undecided, and the owner's to settle — not with the
@@ -22,7 +22,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
       llm-design-kb/docs/dev/claims.kb:MIGRATION), 3 new trespasses
       (`llm-claims-kb-ownership --trespass`), 7 idle imports, and
       1 inert double. Adjudicate by reading; repair menu in
-      llm-claims-kb/skill.kb/self-audit.kb/confinement.md
+      llm-claims-kb/skill.kb/quality-passes.kb/confinement.md
       All 3 trespasses sit in llm-design-kb's own record, created by the
       2026-08-31 reform, and all three are `stratification.kb` saying a
       sibling's word: `legacy tower` and `route` (owned by
@@ -310,11 +310,11 @@ Repo-level list. Skill-scoped work lives in each skill's own
       this change?"). Marked as [!QUESTION] in
       design-next.kb/040-design.kb/class-record.md; ADR_FATE
       (design.claims.kb/does-the-ledger-subsume-the-adr.md) leans on it
-- [ ] llm-design-kb principles.kb charter: contents outgrew "design.kb
+- [ ] llm-design-kb skill.kb/quality-passes.kb charter: contents outgrew "design.kb
       authoring" scope (evaluate-uses-independently, test-the-residue) —
       widen CLAUDE.md charter or rehome (user rated rehoming tier-4)
       Half-done 2026-08-31 (76930e2): rehomed to
-      `llm-design-kb/skill.kb/principles.kb/` and the charter rewritten to
+      `llm-design-kb/skill.kb/quality-passes.kb/` and the charter rewritten to
       "reusable rules for writing a design record well". The mismatch
       survives the rewrite — both outliers are rules for *judging* whether
       a mechanism or artifact class should exist, not for authoring a
@@ -382,7 +382,7 @@ Repo-level list. Skill-scoped work lives in each skill's own
 - [ ] 13 collection roll-ups report `No schema found` since 31eeb7c, so
       the live tree reads `540 files, 13 errors`. Resolve each against
       the three ways out in
-      `llm-kb/references/frontmatter-outside-a-collection.md`, per file
+      `llm-kb/skill.kb/reference.kb/frontmatter-outside-a-collection.md`, per file
       -- that work has not been done, and this session asserted a gap in
       the three without doing it. The facts to start from: six are
       `.claude/todo.md` (`managed-by`, mostly `cost-benefit-sweh`),

@@ -5,7 +5,7 @@ Everything past the core block is optional until its occasion arrives:
 - bare labels first;
 - sigils once standing starts to matter;
 - verbose statuses once routes and checks matter;
-- theories once the list outgrows one screen (`../../theories.md`);
+- theories once the list outgrows one screen (`../../reference.kb/theories.md`);
 - flush only at a context boundary (`the-context-or-session-is-ending.md`).
 
 Reaching for a layer before its occasion costs entry — and a notation

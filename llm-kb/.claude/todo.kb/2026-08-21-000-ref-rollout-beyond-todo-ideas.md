@@ -2,7 +2,7 @@
 managed-by: Skill(llm-subtask)
 status: open
 required-reading:
-  - ~/.claude/skills/llm-kb/references/schema-reuse.md
+  - ~/.claude/skills/llm-kb/skill.kb/reference.kb/schema-reuse.md
   - ~/.claude/skills/llm-kb/migrations.kb/2026-07-07-000-schema-copies-to-ref-stubs.md
 suggested-reading:
   - ~/.claude/skills/llm-kb/.claude/todo.kb/2026-02-09-000-schema-reuse-with-ref.md
@@ -40,7 +40,7 @@ cost-benefit-sweh:
 # Finish the `$ref` rollout beyond todo/ideas
 
 The 2026-02-09 effort (now `done`) built `$ref` resolution, wrote the
-house rules in `references/schema-reuse.md`, and swept exactly two
+house rules in `skill.kb/reference.kb/schema-reuse.md`, and swept exactly two
 categories: `todo` and `ideas`. This is its sequel, not a reopening.
 
 A 2026-08-21 homedir survey (`uv run homedir-archeology jsonschemas`, 309
@@ -160,7 +160,7 @@ the target is decided, so it stays todo work that unblocks a later one.
       `REPO=` backport in the script itself.
 - [x] Rename the coined term "symlink farm" where it leaked into the
       codebase: `llm-kb/lib/python/llmd/frontmatter_validate.py:68`,
-      `llm-kb/references/schema-reuse.md:107`,
+      `llm-kb/skill.kb/reference.kb/schema-reuse.md:107`,
       `llm-kb/.claude/todo.kb/2026-02-09-000-schema-reuse-with-ref.md:63`,
       `design-next.kb/070-future-work.kb/v1-migration-bridge.md:14`. It
       is agent-coined, never user-sanctioned, and after migration D it
@@ -170,12 +170,12 @@ the target is decided, so it stays todo work that unblocks a later one.
       missed. The replacement is a plain description of skill
       installation, not another coinage.
 - [x] Write the template-uses-`$ref` policy into
-      `references/schema-reuse.md`. Ratified 2026-08-21 ("template should
+      `skill.kb/reference.kb/schema-reuse.md`. Ratified 2026-08-21 ("template should
       use `$ref` unless there's an excellent reason to the contrary") but
       never written down, which is how `template.python-project` came to
       mint six stale snapshots.
       Done 2026-08-21 (`deda3d9`), as a new section in
-      `references/schema-reuse.md`.
+      `skill.kb/reference.kb/schema-reuse.md`.
 - [x] Widen `migrations.kb/2026-05-15-000-schema-propagation-from-canonical`
       from todo/ideas to every category with a published canonical.
       Unblocked by the judgment pass and done 2026-08-21. Three things

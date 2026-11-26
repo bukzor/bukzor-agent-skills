@@ -18,9 +18,9 @@ fires it. Format and naming are `Skill(llm-must-read-kb)`. If a reader
 can decode a ledger line without it, it belongs there rather than in
 `SKILL.md`.
 
-Beside the bank, only vocabulary a *reader* needs and `SKILL.md` links
-directly — `theories.md` is the sole instance, and a second one wants
-justifying.
+Beside the bank, `reference.kb/` holds only vocabulary a *reader* needs
+and `SKILL.md` links directly — `theories.md` is the sole instance, and
+a second one wants justifying.
 
 Directives, not claims. These files carry no frontmatter — no `label:`,
 no `standing:`. A directive has no standing to contest; the decision it

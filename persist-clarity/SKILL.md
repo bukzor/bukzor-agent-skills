@@ -74,7 +74,7 @@ sign, or their silence leaves the render itself as the product.
 
 A disk ledger past review is optional and recommended — offer it;
 the user decides, and the operation may end at the chat render. On
-go, read `skill.kb/persistence.md` and file the reviewed ledger into
+go, read `skill.kb/reference.kb/persistence.md` and file the reviewed ledger into
 the project's homes. It carries the per-ecosystem strategies; the two
 residues no claim can hold — the **narrative address** (where the
 full story can be re-mined) and the **re-entry path** (a cold agent's

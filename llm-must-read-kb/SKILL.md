@@ -178,11 +178,11 @@ deserve its own file, factor it out:
 skill.kb/
 ├── must-read.kb/
 │   ├── before/marking-kb-work-done.md   ─ "run the validation pass"
-│   └── after/creating-or-editing-kb-files.md  ─ "run the audit pass"
+│   └── after/creating-or-editing-kb-files.md  ─ "run the quality passes"
+├── quality-passes.kb/
+│   ├── claudemd-enumeration.md
+│   └── per-file-scope.md
 └── procedures.kb/
-    ├── self-audit.kb/
-    │   ├── audit-claudemd-enumeration.md
-    │   └── audit-per-file-scope.md
     └── validation.md
 ```
 

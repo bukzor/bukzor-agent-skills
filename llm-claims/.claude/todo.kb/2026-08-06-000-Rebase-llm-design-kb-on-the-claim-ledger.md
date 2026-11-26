@@ -30,7 +30,7 @@ maintenance affordances (schemas, validation, self-audit passes).
 
 - Tower ≅ quotient of ledger: `why:` links are `<-` arrows restricted
   to inter-layer edges; layers are theories with declared priors
-  (`skill.kb/theories.md` already provides the machinery).
+  (`skill.kb/reference.kb/theories.md` already provides the machinery).
 - Perfect bijection observed: `?` claims ↔ `070-future-work.kb/`
   entries; `~~struck~~` ↔ "why not X" notes.
 - The tower's one genuinely new layer is requirements
@@ -76,8 +76,8 @@ maintenance affordances (schemas, validation, self-audit passes).
 - [ ] Literature-authority convention: `authority: literature (citation)`
       for field facts; lint the category errors (`+` on a field fact —
       nothing to veto; bare project choice — missing standing)
-- [ ] Port the self-audit/must-read practice from llm-kb
-      (`skill.kb/self-audit.kb/` + trigger files); seed passes:
+- [ ] Port the quality-pass/must-read practice from llm-kb
+      (`skill.kb/quality-passes.kb/` + trigger files); seed passes:
   - [ ] `missing-generalization` — the abstraction pass: ≥2 claims
         instantiating an unstated generalization → mint it as `+`
         citing the instances

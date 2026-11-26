@@ -1,5 +1,5 @@
 ---
-status: planning
+status: complete
 scope: |
   Every skill's `skill.kb/` in bukzor-agent-skills, and every reader of the
   paths below:
@@ -30,6 +30,12 @@ bootstrap and mentions, `must-read.kb/` entries, `procedures.kb/run-self-audits.
 (renamed `run-quality-passes.md`), relative links inside the moved files, the
 fleet ledger's citations, and `~/.claude/must-read.kb` entries.
 
+`migrate.sh` does the moves and rewrites each live reader's path literal
+(`old_paths.py`; frozen records -- devlogs, ADRs, case studies, other
+migrations, done todos, checked-off items -- are left as written); the
+vocabulary ("self-audit" to "quality pass") is edited by hand.
+
 `validate.sh`: no `self-audit` path, no root `references/`, and no loose file
-other than `CLAUDE.md` or a collection's synthesis file in any `skill.kb/`;
+other than `CLAUDE.md`, a collection's synthesis file, or a schema sibling
+(`*.jsonschema.yaml`) in any `skill.kb/`;
 `llm.kb-validate-links` clean.

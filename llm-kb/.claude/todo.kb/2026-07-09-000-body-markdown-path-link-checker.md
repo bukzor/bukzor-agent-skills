@@ -23,7 +23,7 @@ semantics (file-relative, `~`, `skill://`) and its
 ## Problem Statement
 
 kb body prose is full of path-like references ("see
-`references/schema-design.md`") that nothing checks. Once frontmatter
+`skill.kb/reference.kb/schema-design.md`") that nothing checks. Once frontmatter
 `path`-typed fields are validated (the related-effort file), body
 prose is the remaining rot surface.
 

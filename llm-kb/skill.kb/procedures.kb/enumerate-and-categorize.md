@@ -32,6 +32,6 @@ paragraph-length explanation).
 
 ## When invoked
 
-- `references/creating-a-new-kb.md`
-- `../self-audit.kb/enumeration-completeness.md` (re-run afresh
+- `skill.kb/reference.kb/creating-a-new-kb.md`
+- `../quality-passes.kb/enumeration-completeness.md` (re-run afresh
   against existing content)

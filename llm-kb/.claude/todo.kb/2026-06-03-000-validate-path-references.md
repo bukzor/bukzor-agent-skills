@@ -21,7 +21,7 @@ cost-benefit-sweh:
 
 **Context:** kb files are full of path references -- frontmatter
 (`requires:`, `required-reading:`, `related-effort:`) and body prose
-("see `references/schema-design.md`"). Nothing checks they resolve, so
+("see `skill.kb/reference.kb/schema-design.md`"). Nothing checks they resolve, so
 they rot silently. Live example: `todo.kb/2026-02-09-000`'s
 `required-reading` points at `~/.claude/skills/llm.kb/...` -- the
 skill was renamed `llm-kb`.
@@ -42,8 +42,8 @@ but as a standalone script duplicating `extract_frontmatter`, not a
 jsonschema type/format and not wired into `bin/llm.kb-validate`. Step 1
 of the original 3-step integration plan (docs mention → fold into
 `frontmatter_validate.py` → handle forward-reference false positives)
-is done (`references/creating-a-new-kb.md`,
-`skill.kb/self-audit.kb/cross-references.md` both point at it now).
+is done (`skill.kb/reference.kb/creating-a-new-kb.md`,
+`skill.kb/quality-passes.kb/cross-references.md` both point at it now).
 This changes the remaining deliverable from "design from scratch" to
 "integrate/generalize this script."
 

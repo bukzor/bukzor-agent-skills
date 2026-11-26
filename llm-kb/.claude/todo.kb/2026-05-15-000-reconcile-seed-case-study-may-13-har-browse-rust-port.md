@@ -79,7 +79,7 @@ case-study. That procedure's steps drive the work below.
   procedure (the case-study no longer embeds the method)
 - [ ] Seed case-study has `status: reconciled` and aligned aliases
 - [ ] `bin/llm.kb-validate docs/dev/` clean
-- [ ] No orphan references (`skill.kb/self-audit.kb/cross-references.md`
+- [ ] No orphan references (`skill.kb/quality-passes.kb/cross-references.md`
   passes)
 
 ## Notes

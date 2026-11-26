@@ -171,6 +171,6 @@ managed-by: Skill(llm-subtask)
   - [x] Record the slot ruling with it: the `X.md` beside a ledger's
         `X.kb/` is both the roll-up and the defining claim — one file,
         claim frontmatter over roll-up prose. llm-kb's validator and
-        `references/frontmatter-outside-a-collection.md` already state
+        `skill.kb/reference.kb/frontmatter-outside-a-collection.md` already state
         it; this SKILL.md half-says it ("its entry point, carrying the
         poset") and should say it outright.

@@ -86,7 +86,7 @@ disagreements, each with live data on both sides:
 5. Are per-project extras (`tags`, `aliases`, design-next's
    `status`/`blocked-on`/`superseded-by` lifecycle) canonical or
    extensions?
-6. Whether to canonicalize at all. `references/schema-reuse.md` warns
+6. Whether to canonicalize at all. `skill.kb/reference.kb/schema-reuse.md` warns
    about the extraction floor: a definition a reader can restate from
    memory costs more as a reference than as a copy, and
    `why: {type: array, items: {type: string}}` is arguably below it. That

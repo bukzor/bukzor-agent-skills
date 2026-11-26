@@ -47,9 +47,9 @@ complete-example/
 ```
 
 Docs referencing `.d/`:
-- references/pattern-guide.md
-- references/splitting-large-docs.md
-- references/complete-example.md
+- skill.kb/reference.kb/pattern-guide.md
+- skill.kb/reference.kb/splitting-large-docs.md
+- skill.kb/reference.kb/complete-example.md
 - docs/documentation-conventions.md
 
 ## Implementation Steps

@@ -478,7 +478,7 @@ def report(theories: Sequence[Theory]) -> int:
         print(
             "one entry may lose the word, or the word may be too coarse for"
             " both -- how to choose a repair: Skill(llm-claims-kb)"
-            " skill.kb/self-audit.kb/confinement.md"
+            " skill.kb/quality-passes.kb/confinement.md"
         )
     print(census(theories))
     return 1 if failing else 0
@@ -529,7 +529,7 @@ def main() -> int:
             f" {len(rows)} stipulations -- cull, move, admit, or uniquify each;"
             f" {len(skipped)} contended words skipped as undecidable;"
             f" how to choose a repair: Skill(llm-claims-kb)"
-            f" skill.kb/self-audit.kb/confinement.md"
+            f" skill.kb/quality-passes.kb/confinement.md"
         )
         return 0
     elif args.candidates:

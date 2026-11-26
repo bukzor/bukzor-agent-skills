@@ -16,8 +16,8 @@ of exactly two means:
 - **mechanistically**, in python: the ownership scan
   (`llm-claims-kb/bin/llm-claims-kb-ownership`), which fails on
   sibling doubles and queues the rest;
-- **agentically**, in documented procedures: the confinement audit
-  in `llm-claims-kb/skill.kb/self-audit.kb/confinement.md`, and the
+- **agentically**, in documented procedures: the confinement quality pass
+  in `llm-claims-kb/skill.kb/quality-passes.kb/confinement.md`, and the
   adjudication procedure filed beside this claim (DOCKET, PLAIN,
   TRIAGE, IDLE_TEST) for what the scan can only queue.
 

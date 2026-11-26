@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: open
+status: done
 required-reading:
   - CLAUDE.md
   - ../../../llm-kb/migrations.kb/CLAUDE.md
@@ -62,8 +62,61 @@ untracked; the migration entry and its sibling directory.
 
 ## Steps
 
+- [x] Moves (`git mv`): the three `self-audit`/`run-self-audits` paths,
+      `principles.kb`, three skills' `references/`, three loose reference files
+- [x] `CLAUDE.md` in each of the six new `reference.kb/`
+- [x] Readers: SKILL.md, must-read entries, CLAUDE.md files, in-file relative
+      links, `skill://` and code strings, fleet ledger, open todos
+- [x] Vocabulary: "self-audit" to "quality pass" where it names the collection
+- [x] `migrate.sh`, `validate.sh`, `old_paths.py` written and run
+- [x] Entry `status:` to `complete`; checks run; committed
+
 ## Decisions
+
+- `complete`, not `verified`: `validate.sh` exits 1 on one finding that predates
+  this unit and lies outside the brief's scope (Open Questions).
+- `old_paths.py` is the one definition of "live reader", shared by
+  `migrate.sh` (rewrite) and `validate.sh` (report), so a clean report is
+  `rewrite`'s postcondition. Not live: devlogs, ADRs, case studies, other
+  migrations, the replication run, this kb and the parent plan, the fleet
+  ledger's note on the declined name `self-audit.kb`, todos with
+  `status: done` (and the `.kb/` beside them), `- [x]` items with their
+  continuation lines.
+- Relative links: `skill.kb/` renames keep depth; files moved into
+  `reference.kb/` gained one level (`creating-a-new-kb.md`, `persistence.md`).
+- `llm-must-read-kb/SKILL.md`'s layout sketch put `self-audit.kb/` under
+  `procedures.kb/` with `audit-` filename prefixes; redrawn as a sibling,
+  prefixes dropped.
+- `llm-kb/skill.kb/CLAUDE.md`: deleted "does not belong: references ->
+  `references/`" (the collection now lives inside `skill.kb/`). `align`'s
+  `skill.kb/CLAUDE.md` no longer calls the moved file a procedure.
 
 ## Open Questions
 
+- `llm.kb-validate-links` flags
+  `llm-collab/skill.kb/must-read.kb/before/writing-an-ADR-or-devlog-entry.md`
+  (backticked `../../..`, a directory without trailing slash, read as a file).
+  Out of scope; `../../../` clears the last `validate.sh` finding and lets the
+  entry reach `verified`.
+- Untouched, dirty before I started: `llm-kb/docs/dev/adr/2026-05-18-000-skill-uri-scheme.md`,
+  `subagent-handoffs/*`; neither held an old path that needed a change.
+
 ## Final report
+
+New homes: `llm-kb/skill.kb/quality-passes.kb/` (+ `quality-passes.md`,
+`procedures.kb/run-quality-passes.md`), `llm-claims-kb/skill.kb/quality-passes.kb/`,
+`llm-design-kb/skill.kb/quality-passes.kb/`, and `skill.kb/reference.kb/` in
+`llm-kb`, `llm-subtask`, `llm-must-read-kb`, `align`, `llm-claims`,
+`persist-clarity`. Scripts: `llm-kb/migrations.kb/2026-11-25-001-skill-kb-quality-passes-and-reference-kb/`.
+
+Checks: `llm.kb-validate` 855 files 0 errors; `llm-triggers-lint llm-kb` clean;
+link check shows no new errors (43 files with older broken links, none from
+this move; one in a `skill.kb/` tree, above). Tests: `llm-claims-kb` 19 pass;
+`llm-kb` 39 pass, 2 fail on `=` in the sandbox tmp path, unrelated.
+
+Out-of-repo readers (not edited): `~/repo/github.com/bukzor/ideation.epistemics/`
+`background.kb/prior-art.kb/bukzor.kb/llm-subtask-marker-commands.md:26` and
+`acs-counterfactual.kb/incumbent-inventory.md` (cites `llm-kb/references/*`,
+`run-self-audits.md`, `self-audit.kb/`); frozen devlogs in
+`private.meta-reasoning-corpus` (`2026-08-29-002-*`) and `prototype.llm-postbox`
+(`2026-08-31-000-*`). Nothing in `~/.claude/` outside `skills/` and history.

@@ -34,10 +34,10 @@ setup: |
 > whose trigger matches the work at hand — `before/` entries must be read
 > *before* the action they name, not alongside it.
 
-The must-read entries link to audits in `skill.kb/self-audit.kb/` and
+The must-read entries link to quality passes in `skill.kb/quality-passes.kb/` and
 procedures in `skill.kb/procedures.kb/`; follow those links when triggers
 fire. When adding new kb content of your own, browsing
-`skill.kb/self-audit.kb/` directly is a cheap proactive check for relevant
+`skill.kb/quality-passes.kb/` directly is a cheap proactive check for relevant
 quality concerns.
 
 # llm.kb Pattern
@@ -202,10 +202,10 @@ Recognize non-canonical instances by the same shape, regardless of
 starting form: a directory of homogeneous items missing the `.kb`
 suffix, a sibling pointer file, or the parent scope's naming convention
 (a date-prefixed sibling in `todo.kb/` implies the promoted collection
-keeps that prefix -- `references/dated-slug-filename.md`) is this
+keeps that prefix -- `skill.kb/reference.kb/dated-slug-filename.md`) is this
 pattern in the wrong shape. Bring it into
 shape the same way you'd promote a flat file -- growth-signal checklist
-and mechanical steps: `skill.kb/self-audit.kb/promotion-signals.md`,
+and mechanical steps: `skill.kb/quality-passes.kb/promotion-signals.md`,
 `skill.kb/procedures.kb/promote-to-collection.md`.
 
 ## Naming
@@ -219,7 +219,7 @@ Applies to `$CATEGORY` and `$ITEM` identifiers (directory and file names).
 - Prepend digits if inherently ordered (e.g., `001-setup.md`, `002-config.md`)
 - Zero-pad to twice the digits you expect to need
 - Dated items (events): `YYYY-MM-DD-NNN-slug.md` -- see
-  `references/dated-slug-filename.md`
+  `skill.kb/reference.kb/dated-slug-filename.md`
 
 ## When to Use
 
@@ -238,7 +238,7 @@ Poor fit:
 
 ## Creating a Collection
 
-When creating a `.kb` from scratch, **read `references/creating-a-new-kb.md`
+When creating a `.kb` from scratch, **read `skill.kb/reference.kb/creating-a-new-kb.md`
 before writing files.** It contains the full procedure and the four quality
 passes (enumerate-and-categorize, persistence, per-file scope, schema
 potential). The summary procedure here is for orientation only:
@@ -343,17 +343,17 @@ into `llm.kb-validate` proper is tracked in
 ## References
 
 When creating a `.kb` from scratch, you must read
-`references/creating-a-new-kb.md` before writing files.
+`skill.kb/reference.kb/creating-a-new-kb.md` before writing files.
 
 Other references, load as relevant:
 
-- `references/pattern-guide.md` - Complete pattern explanation
-- `references/schema-design.md` - Schema design guidance
-- `references/schema-reuse.md` - Sharing schema fields/files via `$ref`
-- `references/frontmatter-outside-a-collection.md` - The three fixes when a file's frontmatter is under no schema
-- `references/complete-example.md` - Worked example (birthday party planning)
-- `references/splitting-large-docs.md` - Splitting heuristics
-- `references/dated-slug-filename.md` - `$DATE-NNN-slug.md` naming, used by any dated collection
+- `skill.kb/reference.kb/pattern-guide.md` - Complete pattern explanation
+- `skill.kb/reference.kb/schema-design.md` - Schema design guidance
+- `skill.kb/reference.kb/schema-reuse.md` - Sharing schema fields/files via `$ref`
+- `skill.kb/reference.kb/frontmatter-outside-a-collection.md` - The three fixes when a file's frontmatter is under no schema
+- `skill.kb/reference.kb/complete-example.md` - Worked example (birthday party planning)
+- `skill.kb/reference.kb/splitting-large-docs.md` - Splitting heuristics
+- `skill.kb/reference.kb/dated-slug-filename.md` - `$DATE-NNN-slug.md` naming, used by any dated collection
 
 ## Methodology kb (self-applied)
 

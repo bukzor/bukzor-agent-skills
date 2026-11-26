@@ -1,7 +1,7 @@
 # Promote to Collection
 
-Flat `.md` → `.kb/`. Invoked from `../self-audit.kb/per-file-scope.md`
-and `../self-audit.kb/promotion-signals.md`.
+Flat `.md` → `.kb/`. Invoked from `../quality-passes.kb/per-file-scope.md`
+and `../quality-passes.kb/promotion-signals.md`.
 
 ## Procedure
 

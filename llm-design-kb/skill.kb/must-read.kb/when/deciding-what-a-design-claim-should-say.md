@@ -1,6 +1,6 @@
 # When deciding what a design claim should say
 
-Six authorship lenses, in `../../principles.kb/`. They are about how
+Six authorship lenses, in `../../quality-passes.kb/`. They are about how
 any design record is written, not about what any one project decided,
 so they apply to a record you did not write as readily as to one you
 are drafting. Read the ones whose occasion you are in:

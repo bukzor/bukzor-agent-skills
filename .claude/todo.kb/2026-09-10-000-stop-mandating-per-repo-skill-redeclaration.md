@@ -48,20 +48,20 @@ the only way to route a skill.
 > purpose. **It needs no frontmatter declaring this skill; the `description:`
 > carries the trigger.**
 
-Two of its own audits mandate the opposite, and are the stale side:
+Two of its own quality passes mandate the opposite, and are the stale side:
 
-- `llm-kb/skill.kb/self-audit.kb/claudemd-completeness.md:16` — "For a root
+- `llm-kb/skill.kb/quality-passes.kb/claudemd-completeness.md:16` — "For a root
   CLAUDE.md, also verify the frontmatter declares this skill via `triggers:`,
   with a stated condition".
-- `llm-kb/skill.kb/self-audit.kb/claudemd-enumeration.md:44` — the whole
+- `llm-kb/skill.kb/quality-passes.kb/claudemd-enumeration.md:44` — the whole
   "Frontmatter check (root CLAUDE.md only)" section, which supplies
   `when: creating or maintaining a .kb/ collection` as the default condition.
 
 That default string is a verbatim abbreviation of what llm-kb's `description:`
 already names ("Agent MUST load when creating a .kb/ collection, when adding,
-renaming, splitting, or removing files in one, …"). So the audit is not merely
+renaming, splitting, or removing files in one, …"). So the pass is not merely
 permitting the duplication — it **generates** it, in every kb-using repo, and
-re-generates it after removal: an agent running the self-audit sweep will
+re-generates it after removal: an agent running the quality-pass sweep will
 restore a declaration that was deliberately deleted.
 
 Confirmed downstream: `basedpyright-as-pyright` removed exactly this
@@ -140,7 +140,7 @@ Two constraints any criterion has to survive:
       read it, not just applied once.
 - [ ] No skill's guidance instructs a consumer to re-declare that skill for an
       occasion its `description:` already names.
-- [ ] Running llm-kb's own self-audit against a conformant repo no longer
+- [ ] Running llm-kb's own quality-pass sweep against a conformant repo no longer
       re-introduces the declaration.
 - [ ] `llm-triggers-lint` reaches 0 errors across the fleet — which needs the
       `depends:` collision settled first, since 15 of

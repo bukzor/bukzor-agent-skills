@@ -3,7 +3,7 @@ managed-by: Skill(llm-subtask)
 status: open
 related-effort: ./2026-08-21-000-ref-rollout-beyond-todo-ideas.md
 required-reading:
-  - ~/.claude/skills/llm-kb/references/schema-reuse.md
+  - ~/.claude/skills/llm-kb/skill.kb/reference.kb/schema-reuse.md
 cost-benefit-sweh:
   timebox:
     "@value": 6.0

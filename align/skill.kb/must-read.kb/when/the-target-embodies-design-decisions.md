@@ -6,7 +6,7 @@ plain prose or inventory.
 
 ## Directive
 
-Read and apply `../../sort-goals-into-four-bins.md` during the
+Read and apply `../../reference.kb/sort-goals-into-four-bins.md` during the
 Extract step: every extracted goal lands in exactly one of the four
 bins, rules presented first.
 

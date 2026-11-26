@@ -207,9 +207,9 @@ Suggest `todo clear` when `[x]` items outnumber `[ ]` items in todo.md.
 
 ## References
 
-Deep dives available in references/:
-- [four-tier-system.md](references/four-tier-system.md) - Full explanation of all four tiers
-- [marker-commands.md](references/marker-commands.md) - How marker commands work (unusual pattern)
+Deep dives available in `skill.kb/reference.kb/`:
+- [four-tier-system.md](skill.kb/reference.kb/four-tier-system.md) - Full explanation of all four tiers
+- [marker-commands.md](skill.kb/reference.kb/marker-commands.md) - How marker commands work (unusual pattern)
 
 ## Architecture Decisions
 

@@ -153,7 +153,7 @@ arguing in one vocabulary instead of two. Never because the list of
 claims got long.
 
 Auxiliary theories, naming, and words that recur across theories:
-`skill.kb/theories.md`.
+`skill.kb/reference.kb/theories.md`.
 
 ## Commentary
 

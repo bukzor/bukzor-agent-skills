@@ -15,7 +15,7 @@ conventions:
   `validators-outlive-migrations`.
 
 v1's devlog (session log) does not survive as a sub-type here: the
-residue test (`llm-design-kb/principles.kb/test-the-residue-not-the-bundle.md`)
+residue test (`llm-design-kb/skill.kb/quality-passes.kb/test-the-residue-not-the-bundle.md`)
 found every section of a real devlog entry already better-homed
 elsewhere — narrative-of-failure → incident, decisions/alternatives →
 design entries, conventions established → principles/procedures, open
