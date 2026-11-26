@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: open
+status: done
 blocked-by:
   - 2026-11-25-005-consolidate-my-own-shadertoy-ledger.md
 required-reading:
@@ -55,8 +55,68 @@ names; this handoff file.
 
 ## Steps
 
+- [x] Findings 1, 2, 12, 13: footers, ONE_HOME, POLICY, minor items
+- [x] Finding 3: TUTORIAL_READING and its bank entry
+- [x] Findings 4, 5: WEBGPU_TYPES_PACKAGE move; DEPENDENCY_DIRECTION split
+- [x] Findings 6-9, 11, goals trespass: confinement and one-home repairs
+- [x] Smoothing walk over the changed frontier, until it is empty
+- [x] Final sweep; scan-disposition table; final report; commit
+
 ## Decisions
+
+- **Finding 3:** moved to `technical-policy.kb/tutorial-reading.md` with `force: should`. Once `todo:` was dropped, nothing on the deliverables rung was left (no build order, no occasion), and an imperative on Claude and bukzor belongs to policy, per `design.kb/CLAUDE.md`.
+- **Finding 5:** split three ways, not two:
+  - `DEPENDENCY_DIRECTION` drops `todo:`, since the direction holds today;
+  - a new `WEBGPU_CALL_SITES` (todo) in architecture;
+  - a new `WEBGPU_CALL_LINT` (todo) tripwire in deliverables.
+  The lint claim keeps the signed occasion word for word ("the first WebGPU call found outside ... adds a lint rule"). It then adds why that trips at 1.2: both pages already call WebGPU from `apps/`, which makes the two occasions agree without rewording the ruling. Its bank entry now names both pages, not only gpu-info's demos.
+- **Finding 9:** the first-uses routing ("leave it off `first-uses:`, fix it, handle it as the overreach entry says") moved to `after/a-milestone-lands.md`. That is the occasion that needs it (`DERIVED_RECORD`), not a cut. Every qualifier in the quotes is kept: "relevant", "new to bukzor" (learning), throwaway parts after the first instance, and that the trailer cannot be the check.
+- **The goals trespass: dismissed, against the brief.** `goals.kb/bite-sized-increments.md:9` is inside `authority.words:`, bukzor's own wording quoted, and lines 21-22 quote the same words in the body. Saying "increment" there would put words in the owner's mouth. Confinement offers no repair for a quote.
+- Standing kept `user` on every reworded claim. Each edit keeps the signed meaning: a word swapped to its higher-rung synonym, or signed text moved or partitioned. The new claims are signed `user` for the same reason, since every sentence in them is signed text or follows directly from it. Say so if you would rather they be signed `agent`.
+- Left alone: `DEPENDENCY_DIRECTION` and `WEBGPU_TYPES_PACKAGE` name tools (pnpm, `@webgpu/types`) on the architecture rung. With the components rung dropped, architecture is the lowest rung that describes the build. `DESIGN`'s `stale-when:` watches for this.
 
 ## Open Questions
 
+- Should `llm-claims-kb-ownership` exempt quoted text, both `authority.words:` and `[!@...]` callouts? Without that, an owner's quote is a trespass the scan can never clear.
+
 ## Final report
+
+Done. Commits in my-own-shadertoy (unpushed, each passed pre-commit):
+1. "BREADCRUMBS: restore each design rung's skill footer"
+2. "Ledger: ONE_HOME states its claim; addresses and roll-up made accurate"
+3. "TUTORIAL_READING: the spent tripwire goes; the practice moves to policy"
+4. "DEPENDENCY_DIRECTION splits in three; WEBGPU_TYPES_PACKAGE is architecture"
+5. "Confine milestone and program to their rungs; FIRST_INSTANCE states a property"
+6. "Smoothing walk: two missing premises, one rationale on the wrong rung"
+
+The smoothing walks:
+- Walk 1, over every claim touched and its neighbours, found three things:
+  - `MILESTONE_LADDER` lacked a `why:` to `FIRST_INSTANCE`, now that it is the only home of the first-uses record;
+  - `WEBGPU_TYPES_PACKAGE` lacked a `why:` to `WEBGPU_CALL_SITES`;
+  - `PROGRAM_AS_DATA`'s "extracted, not designed ahead" is build order, so it moved to `MILESTONE_1_2` (each-rung).
+- Walk 2, over those four and their neighbours, found nothing, so the frontier is empty.
+
+Final sweep:
+
+| Check | Result |
+|---|---|
+| `llm.kb-validate` | 66 files, 0 errors |
+| links | 101, 0 broken |
+| triggers-lint, ledger and bank | 0 errors |
+| graph | acyclic, no dangling `why:` |
+| mentions | 0 |
+| ownership | 0 contending |
+| bare claims | none without a ground |
+
+| Scan finding (005's run) | Disposition |
+|---|---|
+| mentions `DERIVED_RECORD`, `TBD` in `ONE_HOME` | repaired (descriptive link text; `TBD` added to `non-claim-tokens:`) |
+| trespass `milestone`: requirements (2 claims) | repaired ("increment") |
+| trespass `milestone`: architecture (3 claims) | repaired (parentheticals cut; the tripwire moved to deliverables) |
+| trespass `tripwire`: architecture | repaired (`WEBGPU_CALL_LINT` in deliverables) |
+| trespass `program`: requirements | repaired (`SWAP_SURVIVES` reworded) |
+| trespass `pass`: requirements | dismissed: the verb ("tests still pass", "passes") |
+| trespass `milestone`: goals | dismissed: the owner's quote (Decisions) |
+| idle imports ×2, dev-process scaffold | dismissed: out of scope, an empty open scaffold |
+| grounding: `NAMES_SHOW_STRUCTURE+` weakest (28 rest on it) | put to the owner (coordinator) |
+| graph: `ASSERT_LIBRARY` reaches the mission only through policy | dismissed: a foreign `why:`, reach intact |
