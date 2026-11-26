@@ -1,7 +1,6 @@
 ---
 label: REFERENCE_KB
 standing: agent
-todo: true
 why:
   - skill-kb-is-a-collection-of-kbs.md
 ---

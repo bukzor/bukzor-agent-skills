@@ -1,7 +1,6 @@
 ---
 label: SMOOTHING
 standing: user
-todo: true
 why:
   - quality-passes-run-at-occasions.md
 authority:

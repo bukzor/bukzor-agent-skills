@@ -48,13 +48,17 @@ under three names in three skills.
       that runs `llm-claims-kb`'s first) and in `llm-claims` for chat ledgers.
   - [ ] [003-llm-design-kb-passes-and-sweep](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-003-llm-design-kb-passes-and-sweep.md)
   - [ ] [004-llm-claims-chat-ledger-passes](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-004-llm-claims-chat-ledger-passes.md)
-- [ ] Wave 5: deliver `FROM_NOW_ON` -- `SKILL.md` of `llm-claims-kb` names the
+- [x] Wave 5: deliver `FROM_NOW_ON` -- `SKILL.md` of `llm-claims-kb` names the
       sweep before a batch of claims is committed and smoothing at
       consolidation; drop the fleet claims' `todo:` as each lands.
       Consolidation is a project's occasion, not a skill's: give
       `llm-claims-kb` a `must-read.kb/when/` entry for a consolidation
       session, and have each project's consolidation policy name smoothing
       by link (my-own-shadertoy: `technical-policy.kb/consolidation-sessions.md`).
+      Done by the coordinator: the `SKILL.md` sweep sentence landed in wave 2;
+      the occasion is `llm-claims-kb/skill.kb/must-read.kb/when/a-session-consolidates-a-ledger.md`,
+      reached through the bank `SKILL.md` installs. Not done: the project link.
+      `CONSOLIDATION` is `standing: user`, so the bullet waits for bukzor.
 - [ ] Wave 6, receipt: run the sweep and smoothing on
       `my-own-shadertoy/docs/dev/claims.kb/`; record what they found.
       The run is blind: its brief links neither this plan nor 59b55f01's
