@@ -1,7 +1,6 @@
 ---
 label: LAYOUT
 standing: user
-todo: true
 why:
   - quality-passes-run-at-occasions.md
   - the-pass-collection-is-quality-passes.md

@@ -10,10 +10,11 @@ consumers writing a project's own design record).
   Editing it changes what every future record starts as, so a change
   here is a design decision: file the claim in `docs/dev/claims.kb/`
   first.
-- `skill.kb/must-read.kb/when/` — the trigger bank. Each filename
-  names its own occasion; the file is the payload, never a redirect.
-- `skill.kb/quality-passes.kb/` — design-authorship lenses for consumers.
-  Adding one means adding its occasion to the trigger that indexes them.
+- `skill.kb/` — the consumer's runtime kbs: `must-read.kb/` (the trigger
+  bank; each filename names its own occasion; the file is the payload,
+  never a redirect), `quality-passes.kb/` with
+  its index `quality-passes.md`, `procedures.kb/run-quality-passes.md` (the
+  sweep), and `reference.kb/`. Each has its own `CLAUDE.md`.
 - `docs/dev/claims.kb/` — this skill's own design record, kept in the
   form it recommends.
 - `jsonschema/` — retained for legacy numbered towers only

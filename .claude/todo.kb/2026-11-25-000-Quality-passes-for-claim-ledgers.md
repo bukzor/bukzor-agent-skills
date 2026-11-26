@@ -44,9 +44,9 @@ under three names in three skills.
       59b55f01 mistook for a broken tool and replaced with a hand check that
       missed 6 trespasses.
   - [x] [002-smoothing-pass](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-002-smoothing-pass.md)
-- [ ] Wave 4: the same layout in `llm-design-kb` (its folded passes, a sweep
+- [x] Wave 4: the same layout in `llm-design-kb` (its folded passes, a sweep
       that runs `llm-claims-kb`'s first) and in `llm-claims` for chat ledgers.
-  - [ ] [003-llm-design-kb-passes-and-sweep](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-003-llm-design-kb-passes-and-sweep.md)
+  - [x] [003-llm-design-kb-passes-and-sweep](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-003-llm-design-kb-passes-and-sweep.md)
   - [x] [004-llm-claims-chat-ledger-passes](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-004-llm-claims-chat-ledger-passes.md)
 - [x] Wave 5: deliver `FROM_NOW_ON` -- `SKILL.md` of `llm-claims-kb` names the
       sweep before a batch of claims is committed and smoothing at
@@ -69,6 +69,11 @@ under three names in three skills.
 
 ## Open Questions
 
+- [ ] `llm-design-kb/CLAUDE.md` says a bank entry "is the payload, never a
+      redirect"; unit 003's `after/editing-a-design-record.md` and
+      `before/committing-design-claims.md` point at the sweep, as
+      `Skill(llm-must-read-kb)`'s "Composition with procedures.kb/" allows,
+      and so do `llm-kb`'s and `llm-claims-kb`'s. Which rule yields?
 - [ ] Move notation-level passes from `llm-claims-kb` down to `llm-claims`,
       with `llm-claims-kb` citing them: `confinement.md` (`llm-claims`'
       `SKILL.md` Theories section already condenses it: two homes) and

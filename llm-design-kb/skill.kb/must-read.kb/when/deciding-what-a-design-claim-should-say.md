@@ -3,7 +3,7 @@
 > [!DRAFT] agent-authored 2026-11-25, vetoable: the split into passes and
 > decision lenses, and the pointer to the file form's passes.
 
-The lenses in `../../quality-passes.kb/` are about how any design record is
+The lenses here, in `../../quality-passes.kb/` and `../../reference.kb/`, are about how any design record is
 written, not about what any one project decided, so they apply to a record you did not write as readily as to
 one you are drafting. The file form's own passes are `Skill(llm-claims-kb)`'s
 [writing-a-claim-file]; this skill adds three, due while you write:
@@ -31,6 +31,6 @@ record:
 [each-rung]: ../../quality-passes.kb/each-rung-says-only-what-its-question-asks.md
 [state-properties]: ../../quality-passes.kb/state-properties-not-mechanisms.md
 [regression-proof]: ../../quality-passes.kb/regression-proof-with-principles-not-narrative.md
-[evaluate-uses]: ../../quality-passes.kb/evaluate-uses-independently.md
-[shared-shape]: ../../quality-passes.kb/shared-shape-separate-semantics.md
-[residue]: ../../quality-passes.kb/test-the-residue-not-the-bundle.md
+[evaluate-uses]: ../../reference.kb/evaluate-uses-independently.md
+[shared-shape]: ../../reference.kb/shared-shape-separate-semantics.md
+[residue]: ../../reference.kb/test-the-residue-not-the-bundle.md
