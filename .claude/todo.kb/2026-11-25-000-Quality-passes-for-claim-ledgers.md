@@ -59,13 +59,13 @@ under three names in three skills.
       the occasion is `llm-claims-kb/skill.kb/must-read.kb/when/a-session-consolidates-a-ledger.md`,
       reached through the bank `SKILL.md` installs. Not done: the project link.
       `CONSOLIDATION` is `standing: user`, so the bullet waits for bukzor.
-- [ ] Wave 6, receipt: run the sweep and smoothing on
+- [x] Wave 6, receipt: run the sweep and smoothing on
       `my-own-shadertoy/docs/dev/claims.kb/`; record what they found.
       The run is blind: its brief links neither this plan nor 59b55f01's
       findings, and the coordinator checks it against Success Criteria.
       Its brief asks for the consolidation, not for the passes, so it tests
       the second criterion too.
-  - [ ] [005-consolidate-my-own-shadertoy-ledger](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-005-consolidate-my-own-shadertoy-ledger.md)
+  - [x] [005-consolidate-my-own-shadertoy-ledger](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-005-consolidate-my-own-shadertoy-ledger.md)
 
 ## Open Questions
 
@@ -87,7 +87,14 @@ under three names in three skills.
 ## Success Criteria
 
 - [x] `migrations.kb/2026-11-25-001-...` is `verified`.
-- [ ] Editing a ledger in a fresh session fires the passes without being told.
+- [x] Editing a ledger in a fresh session fires the passes without being told.
+      Receipt 005: `llm-claims-kb`'s description, then its bank's
+      `when/a-session-consolidates-a-ledger.md`, then smoothing, then the sweep.
 - [ ] The receipt run finds the 6 trespasses 59b55f01 left in my-own-shadertoy
       (`llm-claims-kb-ownership --trespass` from its root, 2026-11-25), and no
       fault 59b55f01 had fixed by hand.
+      Partly met (coordinator's grading, 2026-11-25). The receipt ran the scan
+      and saw all 6. It repaired 4 (findings 5c, 6, 7, 8), rightly dismissed
+      `pass` in `requirements.kb` as the verb, and gave no disposition to
+      `milestone` in `goals.kb/bite-sized-increments.md:9`. None of its
+      findings re-raises a fault 59b55f01 fixed; each cites current text.
