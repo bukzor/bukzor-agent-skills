@@ -66,9 +66,9 @@ under three names in three skills.
       Its brief asks for the consolidation, not for the passes, so it tests
       the second criterion too.
   - [x] [005-consolidate-my-own-shadertoy-ledger](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-005-consolidate-my-own-shadertoy-ledger.md)
-- [ ] Apply the receipt's repairs, here and now (bukzor, 2026-11-25): smooth
+- [x] Apply the receipt's repairs, here and now (bukzor, 2026-11-25): smooth
       my-own-shadertoy's ledger to a fixpoint.
-  - [ ] [006-apply-the-shadertoy-ledger-repairs](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-006-apply-the-shadertoy-ledger-repairs.md)
+  - [x] [006-apply-the-shadertoy-ledger-repairs](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-006-apply-the-shadertoy-ledger-repairs.md)
 
 ## Open Questions
 
@@ -99,5 +99,7 @@ under three names in three skills.
       Partly met (coordinator's grading, 2026-11-25). The receipt ran the scan
       and saw all 6. It repaired 4 (findings 5c, 6, 7, 8), rightly dismissed
       `pass` in `requirements.kb` as the verb, and gave no disposition to
-      `milestone` in `goals.kb/bite-sized-increments.md:9`. None of its
+      `milestone` in `goals.kb/bite-sized-increments.md:9`. That one sits in
+      `authority.words:`, bukzor's quote, so it has no repair; the gap was the
+      missing dismissal (unit 006 supplied it). None of its
       findings re-raises a fault 59b55f01 fixed; each cites current text.

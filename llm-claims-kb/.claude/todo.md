@@ -180,3 +180,9 @@ managed-by: Skill(llm-subtask)
       draws. The sweep's Tier 1 row (`skill.kb/procedures.kb/run-quality-passes.md`)
       hits it on every bare-container ledger; until fixed, graph each child.
       Found 2026-11-25 by the quality-passes burn-down, unit 001.
+- [ ] `llm-claims-kb-ownership --trespass` counts words inside an owner's
+      quote (`authority.words:`, `> [!@...]` callouts) as trespasses, which
+      no repair can clear: confinement cannot reword a quote. Exempt quoted
+      text, or report it as its own class. Found 2026-11-25 by the
+      quality-passes burn-down, unit 006 (my-own-shadertoy's
+      `goals.kb/bite-sized-increments.md`).
