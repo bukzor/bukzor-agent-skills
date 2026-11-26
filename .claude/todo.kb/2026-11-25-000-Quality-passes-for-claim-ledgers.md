@@ -66,6 +66,9 @@ under three names in three skills.
       Its brief asks for the consolidation, not for the passes, so it tests
       the second criterion too.
   - [x] [005-consolidate-my-own-shadertoy-ledger](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-005-consolidate-my-own-shadertoy-ledger.md)
+- [ ] Apply the receipt's repairs, here and now (bukzor, 2026-11-25): smooth
+      my-own-shadertoy's ledger to a fixpoint.
+  - [ ] [006-apply-the-shadertoy-ledger-repairs](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-006-apply-the-shadertoy-ledger-repairs.md)
 
 ## Open Questions
 
