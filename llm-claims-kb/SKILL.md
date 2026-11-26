@@ -25,6 +25,16 @@ setup: |
     editable = true }` is the resulting/equivalent manual form.
 ---
 
+> **IMPERATIVE:**
+>
+> Your FIRST action when this skill loads MUST be:
+> `Bash("ls -RF skill.kb/must-read.kb/")`
+>
+> That listing is an index of triggers: each filename names the occasion to
+> read it. Walk it while planning, before ANY action, and read every entry
+> whose trigger matches the work at hand — `before/` entries must be read
+> *before* the action they name, not alongside it.
+
 # llm-claims-kb
 
 The file form of a claim ledger. The notation -- labels, sigils,
@@ -55,8 +65,10 @@ claims are imperatives (conventionally `technical-policy.kb/`) binds
 
 A claims.kb is a `.kb`: `Skill(llm-kb)`'s quality passes and maintenance
 rules apply to it wholesale. The quality passes in `skill.kb/quality-passes.kb/`
-here are the ledger-specific additions, not replacements: run the
-ones whose names match the edit before committing a batch of claims.
+here are the ledger-specific additions, not replacements. Before
+committing a batch of claims, run the sweep,
+`skill.kb/procedures.kb/run-quality-passes.md`, which runs
+`Skill(llm-kb)`'s first.
 
 ## Layout
 

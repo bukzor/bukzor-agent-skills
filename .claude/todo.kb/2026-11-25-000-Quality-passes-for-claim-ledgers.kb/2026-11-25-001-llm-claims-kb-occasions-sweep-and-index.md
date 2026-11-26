@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: open
+status: done
 blocked-by:
   - 2026-11-25-000-apply-skill-kb-layout-migration.md
 required-reading:
@@ -63,8 +63,48 @@ waited on. It wasn't: `llm-design-kb` and `llm-claims` are wave 4.
 
 ## Steps
 
+- [x] `skill.kb/must-read.kb/`: while-writing, after-edit, before-commit entries
+- [x] `skill.kb/procedures.kb/run-quality-passes.md`, the tiered sweep
+- [x] `skill.kb/quality-passes.md`, the index
+- [x] `SKILL.md`: bootstrap block; the before-commit sentence names the sweep
+- [x] `skill.kb/CLAUDE.md`: what each collection holds
+- [x] validate, commit
+
 ## Decisions
+
+- `description:` unchanged. Every new occasion is reached after the skill
+  has loaded, and the description already fires on maintaining a ledger
+  directory; no occasion needs a new trigger word.
+- While-writing entry is `before/writing-a-claim-file.md`: it points at
+  `Skill(llm-claims)`'s `before/writing-a-claim.md` for the body and adds
+  only the frontmatter passes (corollaries, standing-honesty,
+  ruling-fidelity).
+- After-edit is lighter than the sweep (graph-health, ruling-fidelity,
+  confinement on what was touched); before-commit is the full sweep. The
+  ladder distinguishes the two rungs, so the entries do.
+- Schema validation is not a separate row: `llm-kb`'s Tier 1
+  `llm.kb-validate` is that check; the sweep says so instead of running it
+  twice.
+- Tier 1 `llm-claims-kb-ownership` blocks only on a contention the edit
+  introduced: the scan is fleet-wide, and one pre-existing contention
+  (outside any edit) would otherwise block every commit.
+- New standing text is marked `[!DRAFT] agent-authored 2026-11-25`.
 
 ## Open Questions
 
+- [ ] `bin/llm-claims-kb-graph docs/dev/claims.kb` (a bare container
+      ledger) fails: `graph claims.kb has missing "pos" information`. On
+      `docs/dev/claims.kb/design.claims.kb` it works. Tool bug, out of
+      scope; the sweep's Tier 1 row will hit it on bare-container ledgers.
+
 ## Final report
+
+`llm.kb-validate llm-claims-kb`: 13 files, 0 errors.
+`llm.kb-validate-links llm-claims-kb`: 28 links, 0 broken
+(`quality-passes.kb/smoothing.md` had landed, so nothing dangles).
+No deviations from the brief beyond the Decisions above.
+
+- Occasions: `llm-claims-kb/skill.kb/must-read.kb/{before/writing-a-claim-file,after/editing-a-claims-kb,before/committing-a-batch-of-claims}.md`
+- Sweep: `llm-claims-kb/skill.kb/procedures.kb/run-quality-passes.md`
+- Index: `llm-claims-kb/skill.kb/quality-passes.md`
+- Bootstrap and before-commit sentence: `llm-claims-kb/SKILL.md`
