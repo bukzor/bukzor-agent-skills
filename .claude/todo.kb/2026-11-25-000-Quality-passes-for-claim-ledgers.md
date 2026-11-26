@@ -63,6 +63,9 @@ under three names in three skills.
       `my-own-shadertoy/docs/dev/claims.kb/`; record what they found.
       The run is blind: its brief links neither this plan nor 59b55f01's
       findings, and the coordinator checks it against Success Criteria.
+      Its brief asks for the consolidation, not for the passes, so it tests
+      the second criterion too.
+  - [ ] [005-consolidate-my-own-shadertoy-ledger](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-005-consolidate-my-own-shadertoy-ledger.md)
 
 ## Open Questions
 
