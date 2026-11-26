@@ -1,5 +1,5 @@
 ---
-status: complete
+status: verified
 scope: |
   Every skill's `skill.kb/` in bukzor-agent-skills, and every reader of the
   paths below:

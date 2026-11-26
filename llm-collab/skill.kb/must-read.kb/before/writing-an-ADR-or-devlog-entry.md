@@ -3,7 +3,7 @@
 Also: before deciding whether a decision warrants an ADR, and before
 laying out a project's `docs/dev/` for the first time.
 
-Paths below are relative to the skill root (`../../..` from this file).
+Paths below are relative to the skill root (`../../../` from this file).
 
 ## Core Principles
 

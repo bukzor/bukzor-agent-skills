@@ -25,10 +25,10 @@ under three names in three skills.
 
 ## Implementation Steps
 
-- [ ] Wave 1, mechanical: apply
+- [x] Wave 1, mechanical: apply
       `llm-kb/migrations.kb/2026-11-25-001-skill-kb-quality-passes-and-reference-kb.md`,
       with its `migrate.sh` and `validate.sh`.
-  - [ ] [000-apply-skill-kb-layout-migration](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-000-apply-skill-kb-layout-migration.md)
+  - [x] [000-apply-skill-kb-layout-migration](2026-11-25-000-Quality-passes-for-claim-ledgers.kb/2026-11-25-000-apply-skill-kb-layout-migration.md)
 - [ ] Wave 2, `llm-claims-kb`: `skill.kb/must-read.kb/` entries for the
       `OCCASION_LADDER` occasions, each pointing at its passes; a tiered sweep,
       `skill.kb/procedures.kb/run-quality-passes.md`, that runs `llm-kb`'s
@@ -66,7 +66,7 @@ under three names in three skills.
 
 ## Success Criteria
 
-- [ ] `migrations.kb/2026-11-25-001-...` is `verified`.
+- [x] `migrations.kb/2026-11-25-001-...` is `verified`.
 - [ ] Editing a ledger in a fresh session fires the passes without being told.
 - [ ] The receipt run finds the 6 trespasses 59b55f01 left in my-own-shadertoy
       (`llm-claims-kb-ownership --trespass` from its root, 2026-11-25), and no
