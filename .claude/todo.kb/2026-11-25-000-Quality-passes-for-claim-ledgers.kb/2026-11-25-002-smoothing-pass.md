@@ -1,6 +1,6 @@
 ---
 managed-by: Skill(llm-subtask)
-status: open
+status: done
 blocked-by:
   - 2026-11-25-000-apply-skill-kb-layout-migration.md
 required-reading:
@@ -60,8 +60,40 @@ its findings into the pass.
 
 ## Steps
 
+- [x] Read required reading, sibling passes, 59b55f01's method (archeology, ~5 min)
+- [x] Write `smoothing.md`
+- [x] Validate; commit
+
 ## Decisions
+
+- **Stopping rule: a frontier, not a cap or the ledger's size.** After the
+  first full walk, re-judge only nodes whose context changed (self, a premise,
+  a dependent, a sibling, the theory's `ontology:`); those are all the four
+  questions read, so an unchanged node with unchanged context cannot yield a
+  new finding. Done when the frontier is empty. Added: an undo of an earlier
+  walk's change is a tie, put to the owner (the one way the fixed point can
+  fail to arrive). No cap: it would end on a known-rough ledger silently; a
+  sitting that ends first records its frontier instead.
+- **REACH stays design-tower-only.** It is `llm-design-kb`'s claim about the
+  mission; generic reachability to the ledger's top is graph-health's
+  single-component lint, reached through the sweep.
+- **Top-down/bottom-up given a reason each** (down: against settled premises;
+  up: against dependents). 59b55f01 ran pass 1 down, pass 2 up against
+  neighbours and lints, then a validation pass; the brief named both
+  directions without saying why.
+- **One `[!DRAFT]` callout** marks the agent-authored parts (the per-direction
+  reading, the stopping rule); the walk itself is `SMOOTHING`'s.
+- **Sweep run before and after the walks**, since its scans are the walk's
+  input; the scans themselves are only pointed at.
 
 ## Open Questions
 
+- `[SWEEP]` (`../procedures.kb/run-quality-passes.md`) dangles until unit 001
+  lands; `llm.kb-validate-links` reports it as the only broken link.
+
 ## Final report
+
+`llm-kb/bin/llm.kb-validate` on `llm-claims-kb/skill.kb`: 7 files, 0 errors.
+`llm.kb-validate-links`: 1 broken link, the expected `[SWEEP]` above. No
+deviation from scope. Result:
+`llm-claims-kb/skill.kb/quality-passes.kb/smoothing.md`.
